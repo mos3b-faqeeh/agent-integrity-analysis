@@ -36,7 +36,10 @@ root = cc.prepare()
 import json  # noqa: E402
 m = json.load(open(root / 'manifest.json'))
 m.update(total_submissions=1, total_evaluations=4, total_rubric_sessions=8,
+         model_order=[key], papers=[paper], repeats_selected=[1, 2, 3, 4],
          scope=f'Single submission {agent_dir}/paper{paper}, four repeats; same inputs as the Codex judge.')
+# scope_order(m) (rescope/launch dispatch) rebuilds ids from model_order x papers x repeats_selected and
+# requires them to equal the job list, hence the three keys above.
 json.dump(m, open(root / 'manifest.json', 'w'), indent=2)
 s = json.load(open(root / 'status.json')); s['total'] = 4
 json.dump(s, open(root / 'status.json', 'w'), indent=2)
