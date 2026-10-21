@@ -1,11 +1,26 @@
 # Misreporting, not fabrication: an independent analysis of AI research agents' integrity failures
 
-Independent secondary analysis of the released judge verdicts and agent trajectories from
-**Into the Unknown: Benchmarking AI agents on open scientific research problems**
-(Kim et al., 2026, arXiv:2610.19159; code: github.com/prometheus-eval/into-the-unknown;
-data: huggingface.co/datasets/prometheus-eval/into-the-unknown).
+**Mosab Alfaqeeh, PhD** — Kingston, Ontario, Canada · [Google Scholar](https://scholar.google.com/citations?user=Ewi0-RgAAAAJ)
 
-Author: Mosab Alfaqeeh, PhD. Status: work in progress, preprint forthcoming.
+Independent analysis of how AI research agents fail integrity checks, using the released judge verdicts
+and agent trajectories of the *Into the Unknown* benchmark (Kim et al., 2026). Findings so far: agents
+misreport rather than fabricate; run length does not explain integrity, agent identity does; the
+benchmark's harness behaved differently per agent. Preprint forthcoming.
+
+## Cite this work
+
+If you use these analyses, derived tables, scripts or the second-judge verdicts, please cite:
+
+```bibtex
+@misc{alfaqeeh2026misreporting,
+  author = {Alfaqeeh, Mosab},
+  title  = {Misreporting, not fabrication: an independent analysis of AI research agents' integrity failures},
+  year   = {2026},
+  howpublished = {\url{https://github.com/mos3b-faqeeh/agent-integrity-analysis}},
+  note   = {Preprint forthcoming; arXiv identifier will be added here}
+}
+```
+GitHub's **"Cite this repository"** button (from `CITATION.cff`) gives the same reference in APA/BibTeX.
 
 ## What this repository contains
 
@@ -43,10 +58,11 @@ python scripts/04_trajectory_features.py     hfdata data/derived/trajectory_feat
 
 Benchmark snapshot used: commit `612cdca` of prometheus-eval/into-the-unknown (2026-10-19).
 
-## Citation of the benchmark
+## Acknowledgement
 
-Kim, S., Geng, J., Lee, Y.-J., ... Asai, A., Neubig, G., Welleck, S. (2026).
-*Into the Unknown: Benchmarking AI agents on open scientific research problems.* arXiv:2610.19159.
+The underlying benchmark, tasks, agent papers and official verdicts are the work of Kim et al. (2026),
+*Into the Unknown: Benchmarking AI agents on open scientific research problems*, arXiv:2610.19159
+(github.com/prometheus-eval/into-the-unknown). This repository redistributes none of it; see above.
 
 ## License
 
