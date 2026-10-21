@@ -49,27 +49,26 @@ judge_one(){ # $1 agent  $2 paper
   [ -f "$OUT/$tag/DONE" ] && { log "skip $tag (done)"; return; }
   log "stage $tag"; stage "$a" "$p"
   cd "$BENCH"
-  local root; root="$(python3 src/grader/run_claude_code_judge.py prepare --agents "$a" --papers "$p" | sed -n 's/^BATCH_DIRECTORY=//p')"
-  [ -n "$root" ] || { echo "prepare printed no BATCH_DIRECTORY"; exit 1; }
+  local root; root="$(BENCH="$BENCH" python3 "$REPO_DIR/judge2/prepare_one.py" "$a" "$p" | sed -n 's/^BATCH_DIRECTORY=//p' | tail -1)"
+  [ -n "$root" ] || { echo "prepare_one printed no BATCH_DIRECTORY"; exit 1; }
   python3 src/grader/run_claude_code_judge.py rescope --root "$root" --reason "full view"
-  python3 src/grader/run_claude_code_judge.py launch  --root "$root"
-  # launch returns when the batch is complete or paused; loop on resume until complete
-  until python3 src/grader/run_claude_code_judge.py status --root "$root" | grep -q '"complete": *true'; do
-    if [ -f "$root/PAUSE.json" ]; then log "paused: $(cat "$root/PAUSE.json")"; sleep 900; python3 src/grader/run_claude_code_judge.py resume --root "$root" || true
+  python3 src/grader/run_claude_code_judge.py launch  --root "$root" || true
+  # wait until all 4 cells report complete; resume after pauses (quota windows)
+  until [ "$(grep -l '"status": *"complete"' "$root"/*/P*/repeat_*/state.json 2>/dev/null | wc -l | tr -d ' ')" = "4" ]; do
+    if [ -f "$root/PAUSE.json" ]; then
+      log "paused: $(tr -d '\n' < "$root/PAUSE.json" | cut -c1-160)"; sleep 900
+      rm -f "$root/PAUSE.json"; python3 src/grader/run_claude_code_judge.py resume --root "$root" || true
     else sleep 300; fi
   done
   mkdir -p "$OUT/$tag"
-  # grade every repeat with the frozen grader and archive judgments + grades
-  for rep in "$root"/*/repeat_*; do
-    [ -d "$rep" ] || continue
-    for jf in "$rep"/*judged*.json "$rep"/judged_bundle.json; do
-      [ -f "$jf" ] && python3 "src/grader/eval_artifacts/paper$p/grading.py" "$jf" > "$rep/grade.json" || true
-    done
-    cp -r "$rep" "$OUT/$tag/"
+  for cell in "$root"/*/P*/repeat_*; do
+    [ -d "$cell" ] || continue
+    local rep; rep="$(basename "$cell")"; mkdir -p "$OUT/$tag/$rep"
+    for f in verdicts judgment_bundle.json grade.json state.json; do [ -e "$cell/$f" ] && cp -r "$cell/$f" "$OUT/$tag/$rep/"; done
   done
-  cp "$root"/manifest.json "$OUT/$tag/" 2>/dev/null || true
+  cp "$root/manifest.json" "$OUT/$tag/" 2>/dev/null || true
   date -u +%FT%TZ > "$OUT/$tag/DONE"
-  rm -rf "$SOG_SUBMISSIONS/$a/paper$p" "$root/snapshots"
+  rm -rf "$SOG_SUBMISSIONS/$a/paper$p" "$root/snapshots" "$root"/*/P*/repeat_*/workspace_*
   log "done $tag"
 }
 
