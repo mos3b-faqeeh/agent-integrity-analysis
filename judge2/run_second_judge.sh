@@ -53,12 +53,22 @@ judge_one(){ # $1 agent  $2 paper
   [ -n "$root" ] || { echo "prepare_one printed no BATCH_DIRECTORY"; exit 1; }
   python3 src/grader/run_claude_code_judge.py rescope --root "$root" --reason "full view"
   python3 src/grader/run_claude_code_judge.py launch  --root "$root" || true
-  # wait until all 4 cells report complete; resume after pauses (quota windows)
-  until [ "$(grep -l '"status": *"complete"' "$root"/*/P*/repeat_*/state.json 2>/dev/null | wc -l | tr -d ' ')" = "4" ]; do
+  # wait until all 4 cells are complete at the TOP level of state.json (not a stage's status) and have grade.json
+  cells_done(){ python3 - "$root" <<'PY'
+import json,sys,glob,os
+root=sys.argv[1]; n=0
+for st in glob.glob(f"{root}/*/P*/repeat_*/state.json"):
+    try: s=json.load(open(st))
+    except Exception: continue
+    if s.get("status")=="complete" and os.path.exists(os.path.join(os.path.dirname(st),"grade.json")): n+=1
+print(n)
+PY
+  }
+  until [ "$(cells_done)" = "4" ]; do
     if [ -f "$root/PAUSE.json" ]; then
       log "paused: $(tr -d '\n' < "$root/PAUSE.json" | cut -c1-160)"; sleep 900
       rm -f "$root/PAUSE.json"; python3 src/grader/run_claude_code_judge.py resume --root "$root" || true
-    else sleep 300; fi
+    else sleep 120; fi
   done
   mkdir -p "$OUT/$tag"
   for cell in "$root"/*/P*/repeat_*; do
