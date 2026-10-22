@@ -42,6 +42,20 @@ def load(root, model, paper):
     return {k: maj(c) for k, c in votes.items()}, {g: maj(c) for g, c in gvotes.items()}
 
 
+
+def load_repeats(root, model, paper):
+    """List of {node: status}, one per repeat (raw grader output or released tree)."""
+    d = os.path.join(root, model, f'paper{paper}')
+    if not os.path.isdir(d): d = os.path.join(root, f'{model}__paper{paper}')
+    out = []
+    for r in sorted(p for p in os.listdir(d) if p.startswith('repeat_')):
+        gp = os.path.join(d, r, 'grade.json')
+        if not os.path.exists(gp): continue
+        g = json.load(open(gp))
+        items = g['nodes'].items() if 'nodes' in g else ((f"{n['rubric']}:{n['node_id']}", n) for n in g.get('node_audit', []))
+        out.append({k: v['status'] for k, v in items if v.get('role') in COUNTED})
+    return out
+
 def kappa(a, b):
     a, b = np.array(a), np.array(b); po = (a == b).mean()
     cats = set(a) | set(b); pe = sum((a == c).mean() * (b == c).mean() for c in cats)
@@ -65,6 +79,23 @@ sub = pd.DataFrame(rows); nd = pd.DataFrame(node_rows)
 if nd.empty: sys.exit('no overlapping judgments found')
 
 print(f'=== {len(sub)} submissions, {len(nd)} shared counted nodes ===')
+# PRIMARY: each second-judge repeat vs the official consensus (fair for any number of repeats)
+pr = []
+for m, p in sub[['model', 'paper']].values:
+    na, _ = load(A, m, int(p))
+    for rep in load_repeats(B, m, int(p)):
+        for k in set(na) & set(rep):
+            pr.append(dict(model=m, vendor=VENDOR[m], g1=k.startswith('integrity'), a=na[k], b=rep[k]))
+pr = pd.DataFrame(pr)
+if not pr.empty:
+    g1r = pr[pr.g1]
+    print(f'PER-REPEAT agreement, all nodes: {(pr.a == pr.b).mean():.1%}  kappa={kappa(pr.a, pr.b):.3f}')
+    print(f'PER-REPEAT agreement, G1 nodes:  {(g1r.a == g1r.b).mean():.1%}  kappa={kappa(g1r.a, g1r.b):.3f}')
+    t = g1r.assign(af=g1r.a == 'fail', bf=g1r.b == 'fail', ag=g1r.a == g1r.b).groupby('vendor').agg(
+        n=('ag', 'size'), agree=('ag', 'mean'), astra_fail=('af', 'mean'), second_fail=('bf', 'mean'))
+    t['second_minus_astra'] = t.second_fail - t.astra_fail
+    print('PER-REPEAT G1 by vendor:'); print(t.round(3).to_string()); print()
+print('Majority-vote comparison (strict >half; with 2 repeats a split counts as fail -- secondary):')
 print(f'node-level agreement: {(nd.a == nd.b).mean():.1%}   kappa={kappa(nd.a, nd.b):.3f}')
 g1 = nd[nd.node.str.startswith('integrity')]
 print(f'G1 nodes only:        {(g1.a == g1.b).mean():.1%}   kappa={kappa(g1.a, g1.b):.3f}')

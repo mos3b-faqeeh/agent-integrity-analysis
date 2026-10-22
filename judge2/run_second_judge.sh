@@ -16,6 +16,8 @@ WORK="${WORK:-$HOME/itu-judge}"; REPO_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 SAMPLE="$REPO_DIR/judge2/stratified_sample.csv"; OUT="$REPO_DIR/judge2/verdicts"
 BENCH="$WORK/bench"; export SOG_SUBMISSIONS="$WORK/runs" SOG_JUDGE_RUNS="$WORK/judge_runs"
 PIN=612cdca4409cdd37578f52b09f01b3674fbd8f7e
+export REPEATS="${REPEATS:-1,2}"   # judge repeats per submission; 4 for the first two, 2 thereafter (quota)
+NREP=$(echo "$REPEATS" | tr ',' '\n' | wc -l | tr -d ' ')
 log(){ printf '[%s] %s\n' "$(date +%H:%M:%S)" "$*"; }
 
 setup(){
@@ -53,7 +55,7 @@ judge_one(){ # $1 agent  $2 paper
   [ -n "$root" ] || { echo "prepare_one printed no BATCH_DIRECTORY"; exit 1; }
   python3 src/grader/run_claude_code_judge.py rescope --root "$root" --reason "full view"
   python3 src/grader/run_claude_code_judge.py launch  --root "$root" || true
-  # wait until all 4 cells are complete at the TOP level of state.json (not a stage's status) and have grade.json
+  # wait until all $NREP cells are complete at the TOP level of state.json (not a stage's status) and have grade.json
   cells_done(){ python3 - "$root" <<'PY'
 import json,sys,glob,os
 root=sys.argv[1]; n=0
@@ -64,7 +66,7 @@ for st in glob.glob(f"{root}/*/P*/repeat_*/state.json"):
 print(n)
 PY
   }
-  until [ "$(cells_done)" = "4" ]; do
+  until [ "$(cells_done)" = "$NREP" ]; do
     if [ -f "$root/PAUSE.json" ]; then
       log "paused: $(tr -d '\n' < "$root/PAUSE.json" | cut -c1-160)"; sleep 900
       rm -f "$root/PAUSE.json"; python3 src/grader/run_claude_code_judge.py resume --root "$root" || true

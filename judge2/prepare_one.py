@@ -13,6 +13,7 @@ import sys, os
 from pathlib import Path
 
 agent_dir, paper = sys.argv[1], int(sys.argv[2])
+REPEATS = [int(x) for x in os.environ.get('REPEATS', '1,2').split(',')]
 bench = Path(os.environ.get('BENCH', os.getcwd())).resolve()
 sys.path.insert(0, str(bench / 'src' / 'grader'))
 os.chdir(bench)
@@ -26,7 +27,7 @@ if key is None:
 
 _ds, _mj = astra.discover_sources, astra.make_jobs
 astra.discover_sources = lambda keys=None, papers=None: _ds((key,), [paper])
-astra.make_jobs = lambda keys=None, papers=None, repeats=None: _mj((key,), [paper], repeats)
+astra.make_jobs = lambda keys=None, papers=None, repeats=None: _mj((key,), [paper], REPEATS)
 # the parity check compares job lists against an existing Codex batch; skip by hiding Codex batches
 astra.PREFIX = astra.PREFIX + '__none__'
 # some code paths read base.JUDGE_RUNS.glob(astra.PREFIX*) -- the renamed prefix matches nothing
@@ -35,12 +36,12 @@ root = cc.prepare()
 # fix the manifest's hard-coded totals so status/launch bookkeeping matches the one-submission batch
 import json  # noqa: E402
 m = json.load(open(root / 'manifest.json'))
-m.update(total_submissions=1, total_evaluations=4, total_rubric_sessions=8,
-         model_order=[key], papers=[paper], repeats_selected=[1, 2, 3, 4],
-         scope=f'Single submission {agent_dir}/paper{paper}, four repeats; same inputs as the Codex judge.')
+m.update(total_submissions=1, total_evaluations=len(REPEATS), total_rubric_sessions=2 * len(REPEATS), repeats=len(REPEATS),
+         model_order=[key], papers=[paper], repeats_selected=REPEATS,
+         scope=f'Single submission {agent_dir}/paper{paper}, repeats {REPEATS}; same inputs as the Codex judge.')
 # scope_order(m) (rescope/launch dispatch) rebuilds ids from model_order x papers x repeats_selected and
 # requires them to equal the job list, hence the three keys above.
 json.dump(m, open(root / 'manifest.json', 'w'), indent=2)
-s = json.load(open(root / 'status.json')); s['total'] = 4
+s = json.load(open(root / 'status.json')); s['total'] = len(REPEATS)
 json.dump(s, open(root / 'status.json', 'w'), indent=2)
 print(f'BATCH_DIRECTORY={root}', flush=True)
