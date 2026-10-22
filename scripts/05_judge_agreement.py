@@ -16,6 +16,7 @@ COUNTED = ('required', 'conditional', 'composite_member')
 def load(root, model, paper):
     """Return {node: status} and gates for a submission; prefer consensus.json, else majority over repeats."""
     d = os.path.join(root, model, f'paper{paper}')
+    if not os.path.isdir(d): d = os.path.join(root, f'{model}__paper{paper}')
     cp = os.path.join(d, 'consensus.json')
     if os.path.exists(cp):
         c = json.load(open(cp))
@@ -25,10 +26,18 @@ def load(root, model, paper):
     reps = sorted(p for p in os.listdir(d) if p.startswith('repeat_'))
     votes = collections.defaultdict(collections.Counter); gvotes = collections.defaultdict(collections.Counter)
     for r in reps:
-        g = json.load(open(os.path.join(d, r, 'grade.json')))
-        for k, v in g['nodes'].items():
+        gp = os.path.join(d, r, 'grade.json')
+        if not os.path.exists(gp): continue
+        g = json.load(open(gp))
+        # released GPT tree: g['nodes'] = {"<rubric>:<id>": {...}}; raw grader output (our run): g['node_audit'] = [...]
+        if 'nodes' in g:
+            items = g['nodes'].items()
+        else:
+            items = ((f"{n['rubric']}:{n['node_id']}", n) for n in g.get('node_audit', []))
+        for k, v in items:
             if v.get('role') in COUNTED: votes[k][v['status']] += 1
-        for gg in ('G1', 'G2', 'G3'): gvotes[gg][g['gates'][gg]['status'] if isinstance(g['gates'][gg], dict) else g['gates'][gg]] += 1
+        for gg in ('G1', 'G2', 'G3'):
+            x = g['gates'][gg]; gvotes[gg][x['status'] if isinstance(x, dict) else x] += 1
     maj = lambda c: c.most_common(1)[0][0] if c and c.most_common(1)[0][1] > sum(c.values()) / 2 else 'fail'
     return {k: maj(c) for k, c in votes.items()}, {g: maj(c) for g, c in gvotes.items()}
 
