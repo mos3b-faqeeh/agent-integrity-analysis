@@ -242,15 +242,19 @@ PCT_CTX = re.compile(r'(percent|pct|%)', re.I)
 
 
 def build_lookup(rows):
-    """bucket evidence by magnitude; each entry remembers how it was scaled ('id', 'x100', 'd100')"""
-    lk = collections.defaultdict(list)
-    for i, (v, *_rest) in enumerate(rows):
-        for vv, how in ((v, 'id'), (v * 100, 'x100'), (v / 100, 'd100')):
-            if vv != 0 and math.isfinite(vv): lk[_bucket(vv)].append((i, vv, how))
+    """Sorted value arrays for binary search: one per scaling ('id', 'x100', 'd100'), each with row indices."""
+    import numpy as np
+    vals = np.fromiter((r[0] for r in rows), dtype=float, count=len(rows))
+    idx = np.arange(len(rows))
+    lk = {}
+    for how, scale in (('id', 1.0), ('x100', 100.0), ('d100', 0.01)):
+        v = vals * scale; ok = np.isfinite(v) & (v != 0)
+        o = np.argsort(v[ok], kind='stable')
+        lk[how] = (v[ok][o], idx[ok][o])
     return lk
 
 
-def _bucket(v):
+def _bucket(v):  # kept for compatibility
     return round(math.copysign(math.log10(abs(v)), v), 1) if v else 0
 
 
@@ -258,17 +262,20 @@ def matches(claim, rows, lk):
     """Value equal at the claim's reported precision. Scaling is allowed only where it is meaningful:
     x100 when the claim is a percentage (evidence stored as a proportion); /100 when the evidence context says
     percent and the claim is not one."""
+    import numpy as np
     v, dec = claim['value'], claim['dec']
-    tol = 0.5 * 10 ** (-dec) + 1e-12
+    tol = 0.5 * 10 ** (-dec) * (1 + 1e-9)          # relative float slack; an absolute epsilon swamps tiny values
     pct = bool(claim.get('pct'))
-    out = []
-    for b in (_bucket(v) - 0.1, _bucket(v), _bucket(v) + 0.1):
-        for i, ev, how in lk.get(round(b, 1), []):
-            if how == 'x100' and not pct: continue
-            if how == 'd100' and (pct or not PCT_CTX.search(rows[i][1] + ' ' + rows[i][2])): continue
-            if abs(ev - v) <= tol:
-                out.append(i)
-    return sorted(set(out))
+    out = set()
+    for how in ('id', 'x100', 'd100'):
+        if how == 'x100' and not pct: continue
+        if how == 'd100' and pct: continue
+        arr, ix = lk[how]
+        lo, hi = np.searchsorted(arr, v - tol, 'left'), np.searchsorted(arr, v + tol, 'right')
+        for i in ix[lo:hi].tolist():
+            if how == 'd100' and not PCT_CTX.search(rows[i][1] + ' ' + rows[i][2]): continue
+            out.add(i)
+    return sorted(out)
 
 
 def provenance_score(claim, row):
@@ -292,8 +299,10 @@ def _shift(claim, k):
 def best_score(claim, rows, lk, nonbulk_only=True):
     m = [i for i in matches(claim, rows, lk) if not (nonbulk_only and rows[i][4])]
     if not m: return 0.0, None, 0
+    n = len(m)
+    if n > 2000: m = m[:: n // 2000 + 1]
     sc, i = max((provenance_score(claim, rows[i]), i) for i in m)
-    return sc, i, len(m)
+    return sc, i, n
 
 
 def verdict(claim, rows, lk, tau):
