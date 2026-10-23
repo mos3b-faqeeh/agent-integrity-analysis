@@ -238,12 +238,15 @@ def evidence_index(sub: Path):
 
 
 # ----------------------------------------------------------------------------------------------- matching
+PCT_CTX = re.compile(r'(percent|pct|%)', re.I)
+
+
 def build_lookup(rows):
-    """bucket evidence by rounded magnitude for fast candidate retrieval"""
+    """bucket evidence by magnitude; each entry remembers how it was scaled ('id', 'x100', 'd100')"""
     lk = collections.defaultdict(list)
     for i, (v, *_rest) in enumerate(rows):
-        for vv in (v, v * 100, v / 100):
-            if vv != 0 and math.isfinite(vv): lk[_bucket(vv)].append((i, vv))
+        for vv, how in ((v, 'id'), (v * 100, 'x100'), (v / 100, 'd100')):
+            if vv != 0 and math.isfinite(vv): lk[_bucket(vv)].append((i, vv, how))
     return lk
 
 
@@ -252,11 +255,17 @@ def _bucket(v):
 
 
 def matches(claim, rows, lk):
+    """Value equal at the claim's reported precision. Scaling is allowed only where it is meaningful:
+    x100 when the claim is a percentage (evidence stored as a proportion); /100 when the evidence context says
+    percent and the claim is not one."""
     v, dec = claim['value'], claim['dec']
     tol = 0.5 * 10 ** (-dec) + 1e-12
+    pct = bool(claim.get('pct'))
     out = []
     for b in (_bucket(v) - 0.1, _bucket(v), _bucket(v) + 0.1):
-        for i, ev in lk.get(round(b, 1), []):
+        for i, ev, how in lk.get(round(b, 1), []):
+            if how == 'x100' and not pct: continue
+            if how == 'd100' and (pct or not PCT_CTX.search(rows[i][1] + ' ' + rows[i][2])): continue
             if abs(ev - v) <= tol:
                 out.append(i)
     return sorted(set(out))
