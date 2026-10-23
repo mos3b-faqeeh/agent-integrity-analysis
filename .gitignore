@@ -5,3 +5,6 @@ hfdata/
 __pycache__/
 .env
 *.key
+
+# checker verdicts for the labelling sample stay out of the repo until labelling is done (blinding)
+labels/*_KEY.csv
