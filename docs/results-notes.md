@@ -116,3 +116,5 @@ Reading:
 - Naive matching (L1) accepts almost every wrong-source number. This confirms the decoy result (89% of fake numbers match) with human labels.
 - Calibrated matching is a high-precision *certifier*: when it says "supported", a human agrees ~97% of the time. It misses about half to two-thirds of truly traceable claims, so "unsupported" must never be read as "fabricated".
 - Paper wording: the checker gives a lower bound on traceability. It cannot accuse.
+
+**Frozen.** The evaluation above is frozen at commit 8401c4d (local tag `eval-v1-frozen`). Any later recall tuning uses the tune split only. Final numbers will come from a new, untouched confirmation sample, because the test split has now been looked at (twice: v0 and v1).
