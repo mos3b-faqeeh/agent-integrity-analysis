@@ -118,3 +118,28 @@ Reading:
 - Paper wording: the checker gives a lower bound on traceability. It cannot accuse.
 
 **Frozen.** The evaluation above is frozen at commit 8401c4d (local tag `eval-v1-frozen`). Any later recall tuning uses the tune split only. Final numbers will come from a new, untouched confirmation sample, because the test split has now been looked at (twice: v0 and v1).
+
+## Recall experiment (tune split only, 2026-10-24)
+
+**Why the strict checker misses claims.** On the tune split there are 37 claims labelled traceable that the checker rejected:
+- 13: the right entry was found and it beat every decoy, but the context-overlap score was under τ = 0.12.
+- 6: the context matched, but neighbouring decoy values matched equally well (dense grids of similar numbers).
+- ~18: the wrong entry or a junk file (e.g. timers in `heartbeat.log`) scored best.
+
+This is a checker limitation, not a labelling problem, so no labels were changed.
+
+**Alternative scorers** (set cosine; evidence-key coverage) gave no gain over v1, so v1 is kept. The binding constraint is the fixed τ, not the scorer.
+
+**Operating points** were frozen in `checker/operating_points.json`. The decoy column is the held-out offset-7 false-match rate over all 1,539 dev claims.
+
+| Setting | Rule | Tune precision | Tune recall | Test precision | Test recall | Decoy false-match |
+|---|---|---|---|---|---|---|
+| strict | τ ≥ 0.12 and p ≤ 0.1 | 0.99 | 0.34 | 0.97 [0.82, 1.00] | 0.39 [0.23, 0.54] | 1.3% |
+| balanced | p ≤ 0.1 only | 0.95 | 0.54 | 0.84 [0.58, 0.96] | 0.49 [0.38, 0.84] | 3.8% |
+| broad | p ≤ 0.2 only | 0.96 | 0.68 | 0.86 [0.61, 0.98] | 0.71 [0.58, 0.91] | 8.7% |
+
+Precision and recall are population-weighted, with cluster-bootstrap 95% CIs.
+
+- The recall gains transfer to test, but with a precision cost of about 10 points that the tune split did not show. The decoy false-match rate rises in the same way, giving an independent signal.
+- Strict stays the default verifier. Balanced and broad are reported as the precision–coverage trade-off.
+- All final numbers will come from the fresh confirmation sample.
