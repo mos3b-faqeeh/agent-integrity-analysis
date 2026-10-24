@@ -282,10 +282,20 @@ def matches(claim, rows, lk):
     return sorted(out)
 
 
+SCORER = 'v1'                                   # v1 = original; cos = set cosine; cov = share of evidence-key tokens found in the claim context
+GENERIC = {'proposal', 'logs', 'log', 'json', 'jsonl', 'csv', 'tsv', 'txt', 'out', 'code', 'results', 'data', 'stdout'}
+
+
 def provenance_score(claim, row):
     ct = set(tokens(claim['context'])); et = set(tokens(row[1])) | set(row[3].split())
     if not ct or not et: return 0.0
-    return len(ct & et) / len(ct | et) ** 0.5 / len(ct) ** 0.5     # cosine-like overlap on token sets
+    if SCORER == 'v1':
+        return len(ct & et) / len(ct | et) ** 0.5 / len(ct) ** 0.5     # cosine-like overlap on token sets
+    et = et - GENERIC
+    if not et: return 0.0
+    if SCORER == 'cos':
+        return len(ct & et) / (len(ct) * len(et)) ** 0.5
+    return len(ct & et) / len(et)                                      # 'cov'
 
 
 CAL_OFFSETS = (-10, -8, -6, -4, -2, 2, 4, 6, 8, 10)   # calibration decoys, in units of the last reported digit
@@ -319,6 +329,9 @@ def verdict(claim, rows, lk, tau):
     return ('supported' if s >= tau and p <= 1 / 10 else 'unattributed'), s, i, p
 
 
+EXTRA_SCORERS = os.environ.get('CLAIMCHECK_EXTRA') == '1'
+
+
 def check(sub: Path, tau=0.12):
     units, meta = paper_units(sub)
     claims = extract_claims(units)
@@ -343,6 +356,14 @@ def check(sub: Path, tau=0.12):
         c['decoy_L1'] = bool(dm); c['decoy_L1nb'] = bool(dnb)
         c['decoy_L2ctx'] = bool(dnb) and ds >= tau
         c['decoy_L2'] = verdict(dcl, rows, lk, tau)[0] == 'supported'
+        if EXTRA_SCORERS:                                                  # sensitivity / operating-point analysis
+            global SCORER
+            for sc_name in ('v1', 'cos', 'cov'):
+                SCORER = sc_name
+                _, s3, _, p3 = verdict(c, rows, lk, tau); _, ds3, _, dp3 = verdict(dcl, rows, lk, tau)
+                c[f'{sc_name}_s'] = round(s3, 4); c[f'{sc_name}_p'] = round(p3, 4)
+                c[f'{sc_name}_dec_s'] = round(ds3, 4); c[f'{sc_name}_dec_p'] = round(dp3, 4)
+            SCORER = 'v1'
     meta.update(n_claims=len(claims), n_evidence_values=len(rows), n_bulk=sum(r[4] for r in rows))
     return claims, meta
 

@@ -1,0 +1,6 @@
+{
+  "_note": "Chosen on the TUNE split only (2026-10-24), before looking at test-split results for these settings. Scorer v1 throughout. p = per-claim decoy-calibration p-value.",
+  "strict":   {"scorer": "v1", "tau": 0.12, "pmax": 0.1},
+  "balanced": {"scorer": "v1", "tau": 0.0,  "pmax": 0.1},
+  "broad":    {"scorer": "v1", "tau": 0.0,  "pmax": 0.2}
+}
