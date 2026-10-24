@@ -200,11 +200,15 @@ def evidence_index(sub: Path):
         if not p.is_file() or p.suffix.lower() not in EVIDENCE_EXT or (set(p.parts) & SKIP_DIRS):
             continue
         rel = str(p.relative_to(sub)); fctx = ' '.join(tokens(rel))
+        if 'rendered' in p.relative_to(sub).parts:      # text extracted from the agent's own paper -- not evidence
+            continue
         try:
             raw = p.read_bytes()[:MAX_EVIDENCE_BYTES].decode('utf-8', errors='ignore')
         except OSError:
             continue
         suf = p.suffix.lower()
+        if suf == '.log' and re.match(r'\s*This is (pdf|Xe|Lua|e-)?TeX', raw[:200]):   # LaTeX build log of the paper
+            continue
         try:
             if suf == '.json':
                 for v, ctx, b in walk_json(json.loads(raw)): rows.append((v, ctx, rel, fctx, b))

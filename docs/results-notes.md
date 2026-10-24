@@ -87,3 +87,32 @@ model change or a logging change is not determinable from the release.
   fixed template; rubric families are the taxonomy.
 - Parsing the Codex, OpenHands, Kimi and DeepSeek harness logs into comparable features: formats differ
   (Codex `item` objects, OpenHands `ActionEvent` lines, raw stdout for the two CLIs). Not attempted yet.
+
+## Human validation of the claim checker (labels complete, 2026-10-24)
+
+Annotator: Mosab Alfaqeeh. 184 numeric claims from 10 dev submissions (C011–C194; C001–C010 were practice and are excluded).
+Labels: 112 traceable, 35 wrong source, 4 not found, 33 not a claim (settings, grid values, extraction errors; about 8% of claims after reweighting).
+Files: `labels/mosab_labels.csv`, `labels/recheck.csv`, `data/derived/checker_vs_human.csv`, `analysis/score_checker.py`.
+
+**Intra-annotator consistency.** 20 earlier claims were re-labelled blind and renamed:
+- 4-way agreement 15/20 = 75%, κ = 0.56;
+- traceable vs. not: 17/20 = 85%, κ = 0.69.
+
+All 5 changes went *towards* "wrong source" (stricter on the second pass), so the "traceable" class is, if anything, generous.
+
+**Checker v1.** This version excludes the agent's own paper text (`rendered/`) and LaTeX build logs as evidence. The fix was identified during labelling, before scoring. Test-split numbers are identical to v0.
+
+Population-weighted results (reweighted for the 40%-supported stratified sample), with cluster-bootstrap 95% CIs over submissions:
+
+| Level | Precision | Recall | Specificity |
+|---|---|---|---|
+| L1 (value appears anywhere) | 0.80 [0.60, 0.92] | 1.00 | 0.05 [0.00, 0.12] |
+| L2ctx (+ context overlap) | 0.98 [0.86, 1.00] | 0.52 [0.26, 0.60] | 0.96 [0.89, 1.00] |
+| L2 (+ per-claim decoy calibration) | 0.98 [0.87, 1.00] | 0.36 [0.17, 0.42] | 0.98 [0.95, 1.00] |
+
+Held-out test split, L2: precision 0.97 [0.81, 1.00], recall 0.39 [0.24, 0.54].
+
+Reading:
+- Naive matching (L1) accepts almost every wrong-source number. This confirms the decoy result (89% of fake numbers match) with human labels.
+- Calibrated matching is a high-precision *certifier*: when it says "supported", a human agrees ~97% of the time. It misses about half to two-thirds of truly traceable claims, so "unsupported" must never be read as "fabricated".
+- Paper wording: the checker gives a lower bound on traceability. It cannot accuse.
