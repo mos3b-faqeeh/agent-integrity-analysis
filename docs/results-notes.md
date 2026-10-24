@@ -148,7 +148,7 @@ Precision and recall are population-weighted, with cluster-bootstrap 95% CIs.
 
 **Sample.** 8 unused submissions, one per agent (astra-6 was drawn but its checker run did not finish in time and was dropped before any of its claims were seen). 9 claims each were drawn with the same 40%-supported stratification: 72 claims, ids N001–N072.
 - Annotator A (Mosab) labelled all 72.
-- Annotator B labelled 48 of them (6 per submission) blind, in chat, from the same guide, with Mosab present but silent.
+- Annotator B (a master's student at Binghamton University, State University of New York) labelled 48 of them (6 per submission) blind, in chat, from the same guide, with Mosab present but silent.
 
 **Inter-annotator agreement (48 claims, final labels).** 4-way 45/48 = 93.8%, κ = 0.89; traceable vs. not 97.9%, κ = 0.96.
 
