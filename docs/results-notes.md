@@ -143,3 +143,31 @@ Precision and recall are population-weighted, with cluster-bootstrap 95% CIs.
 - The recall gains transfer to test, but with a precision cost of about 10 points that the tune split did not show. The decoy false-match rate rises in the same way, giving an independent signal.
 - Strict stays the default verifier. Balanced and broad are reported as the precision–coverage trade-off.
 - All final numbers will come from the fresh confirmation sample.
+
+## Final confirmation on fresh data (2026-10-24)
+
+**Sample.** 8 unused submissions, one per agent (astra-6 was drawn but its checker run did not finish in time and was dropped before any of its claims were seen). 9 claims each were drawn with the same 40%-supported stratification: 72 claims, ids N001–N072.
+- Annotator A (Mosab) labelled all 72.
+- Annotator B labelled 48 of them (6 per submission) blind, in chat, from the same guide, with Mosab present but silent.
+
+**Inter-annotator agreement (48 claims, final labels).** 4-way 45/48 = 93.8%, κ = 0.89; traceable vs. not 97.9%, κ = 0.96.
+
+Four of A's labels (N007, N012, N026, N057) were changed after Claude pointed out they conflicted with A's own stated rules. B, labelling independently, chose the corrected label for all four. Using A's pre-correction labels: 4-way κ = 0.75, binary κ = 0.83.
+
+**Frozen operating points vs. human reference** (population-weighted, cluster-bootstrap 95% CIs; `data/derived/confirmation_results.csv`):
+
+| Reference | Setting | Precision | Recall |
+|---|---|---|---|
+| A (n=60 real claims) | strict | 0.95 [0.85, 1.00] | 0.34 [0.24, 0.47] |
+| A | balanced | 0.88 [0.70, 0.98] | 0.51 [0.33, 0.68] |
+| A | broad | 0.89 [0.74, 0.98] | 0.55 [0.41, 0.71] |
+| A = B consensus (n=36) | strict | 0.94 [0.81, 1.00] | 0.40 [0.27, 0.61] |
+| A = B consensus | balanced | 0.89 [0.63, 1.00] | 0.54 [0.30, 0.70] |
+| A = B consensus | broad | 0.91 [0.69, 1.00] | 0.62 [0.45, 0.74] |
+
+Naive L1 vs. A: precision 0.69, recall 1.00, specificity 0.13. Not-a-claim share: 13.6%.
+
+**Conclusion.** The dev-set picture replicates on untouched data:
+- naive matching cannot separate wrong-source numbers;
+- the strict calibrated checker is a ~95%-precision certifier covering about a third of traceable claims;
+- relaxing it buys recall at a ~5–10 point precision cost.
