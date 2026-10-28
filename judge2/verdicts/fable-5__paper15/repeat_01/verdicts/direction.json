@@ -1,0 +1,743 @@
+{
+  "nodes": {
+    "deliverables.report_pdf_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "proposal/report.pdf is a full 26-page rendered paper. It contains an abstract, Introduction, Theory (section 2), Methods (3), Results (4.1-4.6), Mechanism (5), What did not work (6), Related work (7), Limitations and Conclusion (8-9), references and an appendix. It embeds 10 figures and Tables 1-2. It is not a placeholder.",
+      "evidence": [
+        "proposal/report.pdf (pypdf: 26 pages; figure XObjects on pp. 7, 9, 10, 11, 13, 15, 17, 19)",
+        "proposal/report.tex inputs sections/abstract, intro, theory, methods, results, results2, mechanism, failure, related, discussion, appendix"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.logs_directory_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "proposal/logs/ holds usable per-run records:\n- 181 cascade JSON+trace pairs\n- 16 f-scan JSON+trace pairs\n- calibration_main.json plus 6 sensitivity variants\n- switch_accuracy.json, mechanism.json, mechanism_convergence.json, mechanism_exactcheck.json\n- equilibrium.json, global_lambda.json, switch_verification.json, tb_model.json\n- provenance/ raw LAMMPS logs\n- generated numbers.tex and table_main.tex",
+      "evidence": [
+        "proposal/logs/cascades/*.json (181 files: fef 44, fefb 16, sig05 44, sig50 24, gs 45, eam 32 by energy)",
+        "proposal/logs/fscan/ (feff010..feff100 r0/r1, sigscan r0/r1)",
+        "proposal/logs/provenance/log.example_cascade (ends CASCADE_DONE)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.method_plan_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "method_plan.md declares every required element before runs:\n- the FEF functional form (section 2a-2c)\n- the selection principle (section 2d)\n- the lambda calibration: a 21-value blend sweep over an 11-point Te grid with closed-form minimiser, a validation gate and a citation-anchored fallback (sections 3b-3d)\n- the recoil/stability sweep: {0.5,1,2,5,10,20} keV, 8 reps, the >25% rule operationalised (section 5)\n- baseline T* values 0.5 and 5.0 eV (1.25 eV if compute allows) with sigma=T*/14 and the eV-to-K conversion\n\nThe recorded pre-registration time is 2026-08-07T10:46:38Z. The only earlier artifacts are the declared throughput benchmarks (scratch/bench, 10:34-10:39Z UTC). The first post-registration file is scratch/sw_test_fef.lmp at 10:50:08Z, and the equilibrations start from 10:51Z.\n\nThe calibration grid is declared against a tight-binding surrogate, because section 3a states data/dft_reference was absent.",
+      "evidence": [
+        "proposal/code/method_plan.md lines 93-165 (form), 155-165 (principle), 184-262 (calibration, gate, fallback), 318-376 (ladder, reps, stability rule, baselines)",
+        "proposal/logs/method_plan_timestamp.txt: 2026-08-07T10:46:38Z",
+        "workdir_outside_proposal/scratch/bench (UTC 10:34-10:39); scratch/sw_test_fef.lmp 10:50:08Z; scratch/equil from 10:51Z"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.switching_function_code_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "make_switch.py generates the LAMMPS atom-style per-atom lambda variables (v_psht = lambda_i, v_psgs = 1 - lambda_i) for the FEF switch and the logistic baseline. They are consumed by pair_style hybrid/scaled in in.cascade. The block a production cascade actually loaded is archived in provenance/switch_fef.lmp.",
+      "evidence": [
+        "proposal/code/cascade/make_switch.py lines 83-121 (lammps_fef, lammps_sig)",
+        "proposal/code/cascade/in.cascade lines 27-37",
+        "proposal/logs/provenance/switch_fef.lmp (f=0.14, theta_x=0.1, p=0.2581)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.baseline_sigmoid_runs_logged": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "Reproduced logistic runs with sigma=T*/14 are logged at two of the paper's T* values:\n- T*=0.5 eV (5802 K, sigma 414 K): 8/8/8/12 runs at 0.5/1/2/5 keV\n- T*=5.0 eV (58022 K): 8/8/8 runs at 0.5/1/2 keV\n\nEach record carries its parameters and observables. Caveats: only 2 of the paper's 6 T* values were run, and T*=5.0 eV was dropped at 5 keV (a disclosed reduction). Logged reproduced-sigmoid runs at paper T* values do exist, so the 'no logged baseline runs' condition does not apply.",
+      "evidence": [
+        "proposal/logs/cascades/sig05_E*_r*.json and sig50_E*_r*.json (params Tstar_K 5802.0 / 58022.0)",
+        "proposal/code/cascade/make_switch.py lines 73-79, 112-121 (sigma = Tstar/14)",
+        "proposal/attempts_log.md section K (sig50 dropped at 5 keV)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.proposed_runs_logged": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "Proposed FEF runs are logged:\n- deployed f=0.14, theta_x=0.1, p=0.2581: 8/8/8/12 cascades at 0.5/1/2/5 keV\n- an f=0.25 variant: 8/8 runs\n- 14 f-scan runs\n\nEvery record has Frenkel pairs, V_peak/V_series, chi, eta and a trace. The declared 10 and 20 keV rungs were never run. That sweep truncation is assessed under validation_completeness.recoil_sweep_complete; the executed proposed runs themselves are completely recorded.",
+      "evidence": [
+        "proposal/logs/cascades/fef_E{0.5,1,2,5}_r*.json, fefb_E{0.5,1}_r*.json",
+        "proposal/logs/fscan/feff*.json",
+        "proposal/logs/cascade_summary.json groups"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.calibration_data_logged": {
+      "value": "no",
+      "confidence": "medium",
+      "reason": "The node requires DFT-error-versus-Te calibration logged for both switching functions. What is logged is blended-potential error against a self-built orthogonal d-band tight-binding surrogate, not the provided VASP Te=0.1 eV set:\n- calibration_main.json: 21-value lambda sweep over 11 Te, both channels\n- switch_accuracy.json: FEF and logistic errors versus Te\n\nThe report states the DFT tarballs were absent from the workspace. The judge cannot verify this because data/ was not staged. Either way, the task says the accuracy comparison uses the provided DFT sets only, so a surrogate substitute does not satisfy the DFT requirement.",
+      "evidence": [
+        "proposal/logs/calibration_main.json (tb block, channels energy/force, 94 configs)",
+        "proposal/logs/switch_accuracy.json (schemes vs TB reference)",
+        "proposal/sections/methods.tex lines 39-47 ('Those files were not available to us')",
+        "task_spec.md line 111 (no new DFT; accuracy comparison uses these provided sets only)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.cascade_runs_logged": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Cascade outputs are logged for all four comparison cases at 0.5, 1, 2 and 5 keV: FEF, the reproduced logistic (T*=0.5 eV at all four; T*=5.0 eV at three), ground-state-only and Marinica EAM. Each record contains OVITO Wigner-Seitz vacancies/interstitials, the spike-volume series and peak at three probe radii, chi/eta and the energy excursion. Aggregates are in cascade_summary.json, and raw LAMMPS logs/outputs are in scratch/campaign/runs.",
+      "evidence": [
+        "proposal/logs/cascades/{fef,sig05,sig50,gs,eam}_E*_r*.json (181)",
+        "proposal/logs/cascade_summary.json",
+        "workdir_outside_proposal/scratch/campaign/runs/sig05_E2_r3/log.sig05_E2_r3 (CASCADE_DONE, final.data present)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.main_results_table_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "There is a main cascade results table comparing the switching functions: Table 2, with Frenkel pairs, V_peak, chi, eta_peak and failure flags per method and energy. There is also an accuracy table, Table 1, with blend fraction and energy/force error at 0.1 eV and integrated over Te.",
+      "evidence": [
+        "proposal/sections/results2.tex lines 4-29 with proposal/logs/table_main.tex",
+        "proposal/sections/results.tex lines 191-223 (Table 1)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.accuracy_vs_te_data_present": {
+      "value": "no",
+      "confidence": "medium",
+      "reason": "The yes criterion requires accuracy versus intermediate Te reported for both switching functions against DFT. Fig. accuracy and Table 1 report FEF and logistic error versus Te against the tight-binding surrogate instead. DFT appears only as the two cited optimum blend fractions (0.2/0.35) overlaid on Fig. calibration, which are not DFT error curves. Substitutes do not satisfy the DFT requirement.",
+      "evidence": [
+        "proposal/sections/results.tex lines 284-292 (Fig. accuracy: 'against the finite-electronic-temperature reference')",
+        "proposal/sections/results.tex lines 83-100 (Fig. calibration overlay of reported optima)",
+        "proposal/logs/switch_accuracy.json"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.stability_range_data_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Stable-range data are reported for both FEF and the sigmoid:\n- Table 2 flag column: per-energy failures, 2/12 for the logistic at 5 keV\n- Fig. stability right panel: failing fraction against the 25% threshold\n- cascade_summary.json stability block: highest_stable_keV 5.0 for both fef and sig05 and 2.0 for sig50; first_unstable null",
+      "evidence": [
+        "proposal/logs/table_main.tex",
+        "proposal/sections/results2.tex lines 59-132",
+        "proposal/logs/cascade_summary.json 'stability'"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.codebase_notes_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "codebase_notes.md documents inspection and reuse of:\n- LAMMPS/PACE: the pre-built binary, pair_hybrid_scaled.cpp read in full and used unchanged, compute ave/sphere/atom, the example input used as template\n- FitSNAP: pace writer and VASP2JSON read; no fitting\n- DAKOTA: EGO/SOGA documentation inspected, deliberately not used, with reason\n- OVITO usage\nIt also lists everything written from scratch.",
+      "evidence": [
+        "proposal/codebase_notes.md sections 1-6"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.attempts_log_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "attempts_log.md exists and is substantive (747 lines, sections A-V). It records the rejected driver maps, the data-availability problem, post-registration changes, implementation failures, work not attempted, the ladder extension, and the verification passes.",
+      "evidence": [
+        "proposal/attempts_log.md"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.methodology_section_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Section 2 ('What a switching function has to do') states the switch (Eqs. calib, driver, fef) and its selection principle. Section 3 ('Methods') gives potentials, driver, implementation, reference, sweep, cascade protocol and baselines.",
+      "evidence": [
+        "proposal/sections/theory.tex lines 145-249",
+        "proposal/sections/methods.tex lines 1-187"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.criterion_committed": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The free-energy-fraction principle is stated explicitly in method_plan section 2d before any production run: lambda equals the realised fraction of the electronic free-energy distortion, with Te taken from ionic overheating through one partition slope. The plan also commits the parameter-fixing rules:\n- least-squares fit of (theta_x, p) to lambda*(Te)\n- a pre-declared citation-anchored fallback if the validation gate fails\n- f fixed by a declared chi-matching scan\nThe paper restates the same principle.",
+      "evidence": [
+        "proposal/code/method_plan.md lines 155-165, 200-205, 242-249, 306-314",
+        "proposal/sections/theory.tex lines 232-235"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.switching_function_form_stated": {
+      "value": "fully_specified",
+      "confidence": "high",
+      "reason": "Every component is defined precisely:\n- the switch: lambda_i = S(Lambda(theta_e(T_i))), with S(x) = x(1+x^n)^(-1/n), n=32\n- the calibration curve: Lambda(theta) = (g(theta)-g(theta_gs))/(g(theta_ht)-g(theta_gs)), g = theta^2/(1+(theta/theta_x)^(2-p)), with theta_gs=0.001 and theta_ht=0.5 eV\n- the driver map: theta_e = theta_gs + f kB sp(T_i - T0), sp(x) = w ln(1+e^(x/w)), w=200 K, T0 = the 1000 K bath\n- deployed values: theta_x=0.100 eV, p=0.2581, f=0.14\n- the driver T_i: compute ave/sphere/atom, 5.28 A cutoff, COM-corrected c_lavg[2]",
+      "evidence": [
+        "proposal/sections/theory.tex lines 181-186, 212-216, 226-229",
+        "proposal/sections/results.tex lines 9-10",
+        "proposal/sections/methods.tex lines 19-24",
+        "proposal/logs/provenance/switch_fef.lmp"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.driver_defined": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The driver is the centre-of-mass-corrected local atomic temperature from LAMMPS compute ave/sphere/atom (5.28 A cutoff, with comm_modify cutoff 5.28), shared by all switches. The derived electronic-temperature estimate theta_e(T_i) is given explicitly in Eq. driver, with its rectifier width and partition slope.",
+      "evidence": [
+        "proposal/sections/methods.tex lines 19-24",
+        "proposal/sections/theory.tex lines 203-221",
+        "proposal/code/cascade/make_switch.py lines 100-104"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.parameter_selection_principled": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The deployed parameters come from pre-declared procedures, not hand-tuning:\n- (theta_x, p): the surrogate failed its declared gate (force r=0.18, endpoint lambda*=0.136), so they were fixed by the pre-registered fallback. The curve is pinned to the published DFT force-optimal blend lambda(0.1 eV)=0.35 plus exact endpoints, which matches the task's own 'anchored by the three provided temperatures' concept. The second shape condition (theta_x = 0.1 eV) is a disclosed post-registration refinement, because one anchor cannot fix two parameters.\n- f: set by the declared chi-matching scan against the T*=0.5 eV logistic (7 f values; interpolated match 0.133, deployed 0.14).\n\nCaveats: the theta_x choice is conventional, and the deployed parameters do not follow from the principle's own measured calibration.",
+      "evidence": [
+        "proposal/code/method_plan.md lines 242-249, 306-314",
+        "proposal/attempts_log.md section D.3, G, H",
+        "proposal/sections/results.tex lines 294-317",
+        "proposal/logs/fscan/"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.recovers_correct_limits": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "In the cold limit lambda is effectively zero: lambda(0 K)=2.3e-6 and lambda(1000 K bath)=4.3e-4 (small but nonzero, disclosed). In the hot limit lambda -> 1: lambda(1e7 K)=1.0 through the smooth saturation S. Both limits are correct for practical purposes and are documented in the text.",
+      "evidence": [
+        "proposal/logs/switch_verification.json fef_selftest (lambda_at_0K 2.29e-6, lambda_at_bath 4.29e-4, lambda_at_1e7K 1.0)",
+        "proposal/sections/theory.tex lines 237-243"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.no_spontaneous_toggling": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The switch is C-infinity: the maximum one-sided derivative jump is 2.1e-11 per K, and it is monotone on a 1 K grid to 200,000 K. In 20 ps of 1000 K equilibrium MD (16,000 atoms, 336,000 samples), the mean lambda was 4.07e-4 and the maximum 5.26e-3, with zero samples above 0.01. The equilibrium temperature tail (max 1689 K) therefore does not toggle atoms.",
+      "evidence": [
+        "proposal/logs/equilibrium.json (fef lambda_max 0.00526, frac_above_0p01 0.0)",
+        "proposal/logs/switch_verification.json (monotone true, max_derivative_jump_per_K 2.07e-11)",
+        "proposal/sections/results.tex lines 12-32"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "principle_soundness.derivation_traceable": {
+      "value": "mostly_traceable",
+      "confidence": "medium",
+      "reason": "Several steps follow from stated assumptions:\n- the least-squares projection lambda* = <D,Delta>/<Delta,Delta>, from linearity of the blend\n- the Sommerfeld theta^2 onset, from the Mermin free energy\n- the exact non-conservation identity\n\nOther steps are asserted modelling choices without derivation:\n- the two-parameter interpolant g(theta) ('we therefore adopt')\n- the linear partition-slope driver with a softplus rectifier of width 200 K\n- the saturation S with n=32\n- the deployed anchor convention theta_x = 0.1 eV\n\nThe chain is followable, but more than one step is asserted.",
+      "evidence": [
+        "proposal/sections/theory.tex lines 148-170 (projection), 171-201 (family adopted), 203-221 (driver model), 223-229 (saturation)",
+        "proposal/attempts_log.md D.3"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "principle_soundness.derivation_correct": {
+      "value": "minor_errors",
+      "confidence": "medium",
+      "reason": "The core mathematics is correct:\n- The identity d(K+U_gs)/dt = sum_j lambda_j dF_j.v_j and the uniform/irreducible split check algebraically.\n- They match the implemented per-atom force scaling (fsum[i] += sc[i]*f[i] in the provided pair_hybrid_scaled.cpp).\n- The Sommerfeld limit -(pi^2/6)theta^2 N(EF) and the logistic peak slope 3.5/T* are right.\n\nThere are small slips that do not change the function:\n- Eq. (2) gives the framework force as the gradient of per-atom-lambda-weighted per-atom energies. That is inconsistent with Eq. (3), with the code, and with the source paper's Eq. 5.\n- The hysteresis-loop prediction (iii) is contradicted by the measured lambda traversal (acknowledged).\n- The heuristic slope argument (ii) is first-order only.\n\nThe gate failed and the deployed function follows the pre-registered fallback rather than the principle's own calibration. That is a documented validation failure, not an error that invalidates the principle.",
+      "evidence": [
+        "proposal/sections/theory.tex lines 17-24 (Eq. 2) vs 48-54 (Eq. 3) and 59-64 (identity)",
+        "workdir_outside_proposal/code/lammps/src/pair_hybrid_scaled.cpp lines 189-199",
+        "proposal/sections/mechanism.tex lines 91-96",
+        "paper.md line 73 (source Eq. 5)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "principle_soundness.derivation_reproducible": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "A reader can rebuild the switch:\n- Scripts: code/derivation/make_ensemble.py, eval_ace.py, tb_finite_te.py, calibrate_lambda.py, tb_sensitivity.py; code/analysis/switch_compare.py; code/cascade/make_switch.py.\n- The ensemble data are staged in scratch/ensemble, and every parameter value is stated.\n\nCaveat: switch_compare.py's anchor routine picks the median of 200 solutions (theta_x=0.012, p=0.623), not the deployed pair. The deployed pair can be rebuilt from the stated rule: theta_x=0.1 eV and Lambda(0.1)=0.35 give p=0.2581. A read-only check confirms lambda(0.1)=0.3500.",
+      "evidence": [
+        "proposal/code/derivation/*.py",
+        "proposal/code/analysis/switch_compare.py lines 117-142",
+        "proposal/logs/switch_accuracy.json anchor_force {theta_x 0.01197, p 0.6226}",
+        "proposal/attempts_log.md D.3; read-only recomputation: S(Lambda(0.1; 0.1, 0.2581)) = 0.3500"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_verification.sigmoid_baseline_valid": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The reproduced T*=0.5 eV logistic matches the paper's qualitative behaviour:\n- It reduces surviving Frenkel pairs versus ground-state-only (pooled -28+/-8%, z=-3.54).\n- Its series does not terminate through 5 keV, consistent with the paper's T*=0.5 eV series running to 15 keV.\n\nThe gaps are documented:\n- The spike-volume reduction is not resolved (-3+/-3%) and is shown to depend on probe radius.\n- The unthermostatted energy excursion is 0.1047 vs the paper's 0.02 eV/atom, explicitly called 'not a close' reproduction. The offered explanation ('our cell is smaller and our recoil lower') conflicts with the stated identical 2000-atom/1 keV protocol, but the gap itself is acknowledged.\n- Absolute defect counts and chi are declared non-comparable.",
+      "evidence": [
+        "proposal/logs/numbers.tex poolSigLowFP -28, Sem 8, Z -3.54; poolSigLowV -3+/-3",
+        "proposal/logs/cascade_summary.json stability sig05 highest_stable 5.0",
+        "proposal/sections/mechanism.tex lines 9-15, 45-54; paper.md line 498",
+        "proposal/sections/results2.tex lines 186-211"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_verification.potentials_used_unchanged": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Both provided ACE potentials (W_pot_T0.0.yace, W_pot_T0.5.yace) are used as-is with the example's ZBL core at scale 1.0. No refitting, rebasing or substitution was done. The only change is the recursive PACE evaluator, which is bit-identical to 'product' and is an evaluation-algorithm choice. The endpoint DFT sets were not used for anything.",
+      "evidence": [
+        "proposal/code/cascade/in.cascade lines 33-45",
+        "proposal/codebase_notes.md section 2 ('No fitting was performed')",
+        "proposal/attempts_log.md A, F ('Refitting either potential... not attempted')",
+        "proposal/logs/provenance/log.example_cascade (pair_coeff with data/ace_potentials/*.yace)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_verification.framework_algebra_preserved": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The runs use pair_style hybrid/scaled 1.0 zbl / v_psgs pace(U_gs) / v_psht pace(U_ht) with psgs = 1 - psht. Per-atom force scaling goes through the provided, unmodified hybrid/scaled extension. The partition error is 0 on the verification snapshot, so U_tot = lambda U_ht + (1-lambda) U_gs is blended on forces exactly as in the framework.",
+      "evidence": [
+        "proposal/code/cascade/in.cascade line 34",
+        "proposal/code/cascade/make_switch.py lines 107-108, 119-120",
+        "proposal/logs/switch_verification.json max_abs_partition_error 0.0",
+        "workdir_outside_proposal/code/lammps/src/pair_hybrid_scaled.cpp lines 189-199"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "two_baseline_reporting.paper_as_reported_cited": {
+      "value": "no",
+      "confidence": "medium",
+      "reason": "The paper quotes source values with only a general citation of Wood et al. or 'the original supplemental material':\n- the 15/200 keV series endpoints\n- lambda ~ 0.2/0.35 at 0.1 eV\n- 0.02 eV/atom energy excursion\n\nNo figure or table of the source is ever identified. A search of all sections finds no 'Fig.'/'Supplemental Fig.'/'Table' anchors to the original. The paper-as-reported Frenkel-pair, spike-volume and chi values versus T* are not quoted at all; they are declared non-comparable. The only table reference ('the original's own table') concerns potential properties, not sigmoid results.",
+      "evidence": [
+        "proposal/sections/intro.tex lines 24-34",
+        "proposal/sections/discussion.tex line 11",
+        "proposal/sections/methods.tex lines 171-172 (claims 'quoted with the figure or table they come from')",
+        "proposal/sections/failure.tex lines 87-93"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "two_baseline_reporting.reproduced_sigmoid_logged": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "Both baselines are reported, and the reproduced logistic sits next to the paper's anchors in prose:\n- energy excursion 0.1047 vs 0.02 eV/atom\n- reproduced series not terminating through 5 keV vs the paper's 15/200 keV endpoints\n- reproduced logistic lambda(0.1 eV) ~ 0 vs the reported optima 0.2/0.35\n- reproduced FP reduction -28+/-8% vs the reported reduction\n\nThe anchors are not tabulated or figure-cited, which is assessed separately.",
+      "evidence": [
+        "proposal/sections/mechanism.tex lines 45-51",
+        "proposal/sections/failure.tex lines 79-85; results2.tex lines 107-113",
+        "proposal/sections/results.tex lines 230-270 and Table 1",
+        "proposal/sections/results2.tex lines 145-158"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "two_baseline_reporting.divergence_documented": {
+      "value": "no_divergence_or_documented",
+      "confidence": "medium",
+      "reason": "Each divergence from the paper is documented, and its consequences are drawn:\n- smaller cells and the 0.5-5 keV ladder make absolute FP and chi non-comparable\n- the spike-volume reduction is not reproduced and is shown to be probe-radius dependent\n- the energy excursion is 5x larger\n- the paper's instability regime (15 keV+) is unreachable, so the stability conclusion is called unresolved\n\nOne weakness: the stated reason for the 5x excursion gap contradicts the identical 2000-atom/1 keV protocol.",
+      "evidence": [
+        "proposal/sections/methods.tex lines 147-166",
+        "proposal/sections/results2.tex lines 186-211",
+        "proposal/sections/mechanism.tex lines 45-54",
+        "proposal/sections/discussion.tex lines 29-37, 51-68"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "validation_completeness.accuracy_calibration_complete": {
+      "value": "no",
+      "confidence": "medium",
+      "reason": "The yes criterion requires the declared lambda sweep run against the Te=0.1 eV reference, with NotConverged/ excluded. That reference is the provided VASP set. The 21-value sweep was run over 11 Te against the tight-binding surrogate instead, and no DFT configurations were evaluated, so the NotConverged/ exclusion never arises. The required intermediate-Te DFT calibration is therefore absent. The report says the files were not available, which the judge cannot verify.",
+      "evidence": [
+        "proposal/logs/calibration_main.json (tb block; 94 MD-generated configs)",
+        "proposal/code/method_plan.md lines 171-180",
+        "proposal/sections/methods.tex lines 39-47",
+        "task_spec.md lines 44, 111, 139"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "validation_completeness.recoil_sweep_complete": {
+      "value": "no",
+      "confidence": "high",
+      "reason": "Declared recoil energies are missing results:\n- The ladder was declared as {0.5,1,2,5,10,20} keV, with the extreme logistic pair 'run at every ladder energy'.\n- Only 0.5-5 keV were run.\n- 10 and 20 keV were never attempted (cost).\n- The T*=5.0 eV logistic was dropped at 5 keV.",
+      "evidence": [
+        "proposal/code/method_plan.md lines 330-333, 338-349",
+        "proposal/logs/cascades/ (energies 0.5,1,2,5 only; no sig50_E5)",
+        "proposal/attempts_log.md sections F, K",
+        "proposal/sections/failure.tex lines 77-85"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "validation_completeness.eval_uses_heldout_te": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "Accuracy is evaluated at the intermediate Te=0.1 eV (Table 1 'at 0.1 eV' columns) and over intermediate grid points between the 0.001 and 0.5 eV training endpoints, not only at the endpoints. The task explicitly allows anchoring at the 0.1 eV optimum. That the reference is a TB surrogate rather than DFT is assessed in other nodes.",
+      "evidence": [
+        "proposal/sections/results.tex lines 191-223",
+        "proposal/logs/switch_accuracy.json te_grid and E_at_0p1/F_at_0p1"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "validation_completeness.multi_rep_runs": {
+      "value": "fewer_with_doc",
+      "confidence": "high",
+      "reason": "There are 8 paired repetitions per method and energy, extended to 12 at 5 keV (13 for ground state), against the paper's 25. The reduced count and its compute rationale are declared in the pre-registration and the Methods. Completed counts appear in Table 2, and means with SEM are reported.",
+      "evidence": [
+        "proposal/code/method_plan.md line 88",
+        "proposal/sections/methods.tex lines 159-166",
+        "proposal/logs/table_main.tex (flag column n/N)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "validation_completeness.stability_criterion_applied": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The paper's >25% increasing-spike-volume termination rule is used unchanged and through identical code for every method. It was operationalised before runs as a 2-sigma positive slope of V(t) over 5 ps after adaptive stepping, and a series terminates when more than a quarter of repetitions are flagged. It flags 0 of 181 runs. A total-energy divergence detector (1 eV/atom) was added after a run diverged. That addition is disclosed, applied identically to both functions, uses the same >25% threshold, and is reported separately.",
+      "evidence": [
+        "proposal/code/method_plan.md lines 361-369",
+        "proposal/code/analysis/cascade_analysis.py lines 148-166",
+        "proposal/sections/results2.tex lines 59-88",
+        "proposal/attempts_log.md section M"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "switching_quality.accuracy_improved_vs_sigmoid": {
+      "value": "regresses",
+      "confidence": "low",
+      "reason": "No energy or force error against the Te=0.1 eV DFT reference was measured. The only measured comparison of the deployed (anchored) switch, against the TB surrogate, is worse than the sigmoid in both channels at 0.1 eV:\n- energy 5.70 vs 1.62 meV/atom\n- force 0.107 vs 0.0197 eV/A\n\nIts integrated force error is also worse: 0.193 in the table, 0.204 when recomputed for the deployed parameters, vs 0.093. The non-deployed surrogate-calibrated variant improves energy (0.93 vs 1.62) but regresses on force (0.0259 vs 0.0197).\n\nThe task target, strictly lower integrated energy and force error versus DFT at 0.1 eV, is not demonstrated. 'Regresses' is the evidence-supported ordinary failing value. Confidence is low because no DFT-based errors exist.",
+      "evidence": [
+        "proposal/sections/results.tex lines 191-223 (Table 1), 243-257",
+        "proposal/logs/switch_accuracy.json schemes FEF-anchored E_at_0p1 5.697, F_at_0p1 0.1066; logistic T*=0.5 1.617, 0.01975",
+        "read-only recomputation from calibration_main.json parabolas for deployed (0.1, 0.2581): intE 10.85, intF 0.2036"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "switching_quality.stability_range_extended": {
+      "value": "comparable",
+      "confidence": "medium",
+      "reason": "Under the declared criterion, FEF and the T*=0.5 eV logistic are both stable through the top tested energy (5 keV); neither series terminates. The logistic shows 2/12 numerical divergences vs 0/12 for FEF, but Fisher p=0.48, and that rate is below the >25% rule. The exposure match is also imperfect: FEF/logistic chi is 1.1-1.8x on the anneal-integrated convention and 0.56-0.59x on the adaptive-integrated one. No higher stable recoil energy is demonstrated.",
+      "evidence": [
+        "proposal/logs/cascade_summary.json stability (fef and sig05 highest_stable_keV 5.0, first_unstable null); head_to_head sig05 divergence_fisher_p 0.478",
+        "proposal/sections/results2.tex lines 90-113",
+        "proposal/logs/numbers.tex fefEfiveChiAd 131.78 vs sigZeroFiveEfiveChiAd 233.74"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "switching_quality.physical_effect_preserved": {
+      "value": "no",
+      "confidence": "medium",
+      "reason": "The Frenkel-pair half of the signature holds: FEF has fewer FP than ground-state-only at all four energies, pooled -34+/-9% (z=-3.94).\n\nThe thermal-spike-volume reduction is not retained across the bulk of the tested spectrum. Paired dV versus ground-state is:\n- -0.01+/-0.29 at 0.5 keV\n- +0.58+/-0.61 at 1 keV\n- +0.31+/-1.20 at 2 keV\n- -2.25+/-1.45 at 5 keV\nThe pooled change is -2+/-3% (z=-0.81).\n\nThe report itself says half of the reported signature is not reproduced. The tested spectrum (0.5-5 keV) is also only a small low-energy slice of the paper's 1-200 keV, so the shortfall is not the documented high-energy edge case.",
+      "evidence": [
+        "proposal/logs/numbers.tex poolFefFP -34/9/-3.94; poolFefV -2/3/-0.81; fefE{half,one,two,five}dV",
+        "proposal/sections/results2.tex lines 145-146, 186-211",
+        "proposal/sections/discussion.tex lines 51-56"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "switching_quality.not_lambda_collapse": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "FEF keeps substantial U_ht usage:\n- anneal-integrated chi of 38.8/90.2/210.6/597.4 atoms.ps vs 21.3/53.2/152.5/537.6 for the T*=0.5 eV logistic\n- on the adaptive convention 0.56-0.59x of the logistic\n- eta_peak of 98-802\n- far above the T*=5.0 eV logistic (chi 1.2-4.8)\n\nFP reduction versus ground-state is retained. The behaviour is not a lambda -> 0 collapse.",
+      "evidence": [
+        "proposal/logs/table_main.tex (chi, eta_peak)",
+        "proposal/logs/numbers.tex fefE*ChiAd vs sigZeroFiveE*ChiAd",
+        "proposal/sections/results2.tex lines 223-231"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "switching_quality.falsifiable": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The comparison is set up so FEF could lose:\n- The pre-registration states explicit falsification conditions for each claim.\n- The accuracy test spans 11 Te in both channels, and FEF did lose in the force channel and at 0.1 eV in its anchored form.\n- The declared recoil ladder extended to 20 keV, spanning the paper's 15 keV instability onset.\n- FEF was run on the same configurations where the logistic diverged, so it could have failed there too.",
+      "evidence": [
+        "proposal/code/method_plan.md lines 380-391, 338-341",
+        "proposal/sections/results.tex lines 191-223, 258-268"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "mechanism_analysis.subsection_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Section 5, 'Mechanism: where the instability comes from', analyses why FEF behaves as it does, using an exact identity and unthermostatted measurements.",
+      "evidence": [
+        "proposal/sections/mechanism.tex lines 1-129"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "mechanism_analysis.depth": {
+      "value": "deep",
+      "confidence": "medium",
+      "reason": "The analysis links switch shape to outcomes with supporting evidence:\n- It derives and checks an exact non-conservation identity: uniform corners are conservative to integrator precision, and identity tracking converges with sampling rate (mechanism_convergence.json).\n- It decomposes the injected work into uniform and irreducible parts.\n- It measures, with non-overlapping repetitions, a 1.9x smaller lambda spatial spread (0.0385 vs 0.0719) and a halved energy excursion (0.0546 vs 0.1047 eV/atom).\n- It ties these to the switch's slope and shape.\n- Results 4.3 separately ties shape to accuracy: a logistic cannot be nonzero at about 1160 K while being zero at the bath.\n\nLimits: the irreducible-work ratio is unresolved (3 reps, one of opposite sign), the hysteresis picture is contradicted, and the link to a stable-range outcome is not established.",
+      "evidence": [
+        "proposal/sections/mechanism.tex lines 17-114",
+        "proposal/logs/mechanism.json (runs: etot_max_dev_eV_per_atom, lambda_spatial_sd_mean, work_inhomogeneous_eV)",
+        "proposal/logs/mechanism_convergence.json; mechanism_exactcheck.json",
+        "proposal/sections/results.tex lines 272-282"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "mechanism_analysis.instability_mechanism_explained": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The analysis traces the instability to the non-conservative per-atom force blend. Its exact injected power is set by the spatial contrast of lambda, and so by the switch slope; the paper argues this rather than bare U_ht residency is what matters. It characterises the observed failure mode: divergence during the anneal, the cell energy moving by 50 and 2 eV/atom, decreasing spike volume. It then links this to the logistic's concentrated slope.",
+      "evidence": [
+        "proposal/sections/theory.tex lines 37-143",
+        "proposal/sections/mechanism.tex lines 108-114",
+        "proposal/sections/results2.tex lines 68-88"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_analysis.subsection_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Section 6, 'What did not work', covers:\n- the gate failure\n- the calibration disagreement\n- rejected driver maps\n- an implementation failure\n- unreachable regimes\nSection 8 (Limitations) adds further limits.",
+      "evidence": [
+        "proposal/sections/failure.tex lines 1-93",
+        "proposal/sections/discussion.tex lines 1-79"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_analysis.regimes_identified": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "Concrete failure regimes are identified with data:\n- Force channel: endpoint lambda* 0.136 with r=0.18, collapsing to r=0.015 in molten configurations.\n- The deployed anchored switch is the worst row at 0.1 eV against the surrogate.\n- Spike-volume reduction is unresolved at every tested energy.\n- Stability above 5 keV could not be reached.\n- The divergence mode is not caught by the declared criterion.",
+      "evidence": [
+        "proposal/sections/results.tex lines 113-135, 243-257",
+        "proposal/logs/calibration_main.json by_regime hot force_corr 0.015",
+        "proposal/sections/results2.tex lines 68-76, 186-211",
+        "proposal/sections/failure.tex lines 77-85"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_analysis.regimes_explained_coherently": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The failures are explained coherently in terms of the framework and the switch:\n- The force-channel failure is attributed either to the d-band surrogate's crudeness or to a non-electronic fitting component in U_ht - U_gs (the two models have different radial bases), noting the two-potential basis spans one direction only.\n- The calibration gap is explained as Sommerfeld-quadratic versus linear Te dependence.\n- Divergence is tied to the non-conservative blend.\n- The spike-volume null is tied to the measure's probe-radius sensitivity.",
+      "evidence": [
+        "proposal/sections/failure.tex lines 25-51",
+        "proposal/sections/results.tex lines 128-135",
+        "proposal/sections/mechanism.tex lines 108-114"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "differentiators.generalization": {
+      "value": "single_use_case",
+      "confidence": "medium",
+      "reason": "The work is shown only on tungsten displacement cascades. It neither demonstrates nor argues use with another driver mapping (such as radiative decay) or the extrapolation-mitigation layering. The related-work discussion contrasts with adaptive precision rather than extending to it, and the identity's generality is only noted in passing. This is an optional differentiator.",
+      "evidence": [
+        "proposal/sections/related.tex lines 41-57",
+        "proposal/sections/theory.tex lines 66-67",
+        "proposal/sections/discussion.tex lines 81-122"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "differentiators.theoretical_grounding": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The functional form rests on the Mermin electronic free energy and the Sommerfeld expansion (D -> -(pi^2/6)theta^2 N(EF), hence a quadratic onset), with DOS-structure arguments for the crossover. It is not purely empirical.",
+      "evidence": [
+        "proposal/sections/theory.tex lines 148-201",
+        "proposal/sections/methods.tex lines 76-83"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "differentiators.conservative_force_addressed": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The non-conservative force blend is quantified exactly (identity and uniform/irreducible split) and measured in unthermostatted NVE runs. FEF halves the energy excursion. Its role in instability is discussed, along with a conservative Hamiltonian alternative (conservative APIP).",
+      "evidence": [
+        "proposal/sections/theory.tex lines 37-143",
+        "proposal/sections/mechanism.tex",
+        "proposal/sections/related.tex lines 41-57; discussion.tex lines 70-79"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "originality_and_literature.contribution_originality": {
+      "value": "meaningful_extension",
+      "confidence": "medium",
+      "reason": "The FEF switch is a new switching rule for the layered framework. It combines:\n- a projection-defined lambda(Te) calibration, extending the source's own fixed-lambda study\n- a Sommerfeld-onset interpolant\n- a one-slope local partition driver\n- an exact per-atom force-blend non-conservation identity\n\nThe identity's slowly-varying limit is acknowledged to match the H-AdResS drift term, and the ingredients are natural combinations of known physics. It adds scientific content but with limited novelty, and it is not a replication of a published method.",
+      "evidence": [
+        "proposal/sections/theory.tex lines 145-249",
+        "proposal/sections/related.tex lines 19-39, 41-49, 59-67"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "originality_and_literature.literature_engagement": {
+      "value": "thorough",
+      "confidence": "medium",
+      "reason": "The paper engages the relevant literatures and positions its contribution against each:\n- two-temperature models and TTM-MD: Kaganov, Anisimov, Duffy, Rutherford, Zarkadoula\n- electronic stopping and SRIM\n- electron-phonon coupling in W: Lin, Daraszewicz, Fujimoto\n- Te-dependent potentials: Ackland, Khakshouri, Srinivasan, Zhang TDDPMD, Ben Mahmoud\n- adaptive-resolution force/energy blending: AdResS, H-AdResS, QM/MM, APIP and conservative APIP\n- concurrent work: Kummel 2026",
+      "evidence": [
+        "proposal/sections/related.tex lines 1-67",
+        "proposal/report.bib"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "originality_and_literature.spec_independence": {
+      "value": "minor_leakage",
+      "confidence": "medium",
+      "reason": "The paper mostly uses its own terminology: 'free-energy-fraction (FEF) switch', 'logistic', 'partition slope', 'blend fraction', 'excited-state exposure'. Its section structure is original. It does echo spec phrasing in places:\n- 'matched aggressiveness'\n- 'Every comparison carries two references... as-reported logistic... reproduced logistic'\n- 'the accuracy, stability and physical-effect tests that the layered framework demands'\n- 'the framework's signature'\n- 'held-out intermediate electronic temperature'",
+      "evidence": [
+        "proposal/sections/results.tex line 294",
+        "proposal/sections/methods.tex lines 171-174",
+        "proposal/sections/intro.tex lines 75-77",
+        "proposal/sections/results2.tex line 134"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.journal_quality_structure": {
+      "value": "reasonable",
+      "confidence": "medium",
+      "reason": "The paper has a clear thesis paragraph, a logical structure, prose throughout and careful citation of related work. It is uneven relative to journal standard:\n- The abstract runs about 550 words and spills onto page 2, densely hedged ('Four results cut against the construction...').\n- The main text is about 23 pages.\n- The prose carries audit-log asides ('we flag it rather than leave it to be discovered', 'we state it').\n- Source-paper results are not cited to specific figures.",
+      "evidence": [
+        "proposal/report.pdf pp. 1-2 (abstract)",
+        "proposal/sections/abstract.tex lines 1-56",
+        "proposal/sections/results2.tex lines 18-24, 41-52"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.limitations_discussion_present": {
+      "value": "substantive",
+      "confidence": "high",
+      "reason": "Section 8 discusses, with specifics and consequences:\n- the missing reference sets\n- surrogate limitations, especially force-direction resolution\n- cell and recoil limits\n- the model-dependent partition slope and the W electron-phonon uncertainty\n- the unreproduced spike-volume half and the existence-proof-only stability evidence\n- residual non-conservation and the Hamiltonian route",
+      "evidence": [
+        "proposal/sections/discussion.tex lines 1-79"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.rendered_pdf_clean": {
+      "value": "yes",
+      "confidence": "low",
+      "reason": "Page images could not be rendered here (pdftoppm is not installed), so figure interiors were not visually inspected. The compile log and the PDF itself point to a clean render:\n- report.log has no Overfull boxes and no undefined references or citations; only Underfull and a siunitx deprecation warning.\n- pypdf text of all 26 pages contains no '??'.\n- 10 figure XObjects are present, and Tables 1-2 extract with every column intact.",
+      "evidence": [
+        "proposal/report.log (grep: Underfull only; no Overfull/undefined)",
+        "proposal/report.pdf via pypdf (26 pages, no '??', XObjects pp. 7, 9, 10, 11, 13, 15, 17, 19)",
+        "limitation: no PDF rasterizer available in judging environment"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.main_results_table_complete": {
+      "value": "no",
+      "confidence": "medium",
+      "reason": "The question asks for proposed vs reproduced sigmoid vs paper-as-reported across accuracy and stability. The paper-as-reported comparison case appears in neither table. Table 2 (cascades/stability) has no accuracy axis. Table 1 (accuracy) has no stability axis. The T*=5.0 eV logistic is also missing at 5 keV.",
+      "evidence": [
+        "proposal/logs/table_main.tex",
+        "proposal/sections/results.tex lines 191-223"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.experiment_completeness.all_paper_experiments_logged": {
+      "value": "not_satisfied",
+      "confidence": "low",
+      "reason": "Almost every experiment the paper describes has log records:\n- calibration and its 7 sensitivity variants\n- the accuracy comparison\n- equilibrium toggling, global-lambda and switch-verification checks\n- the f-scan, 181 cascades, probe radii and FP-vs-time\n- the mechanism runs, convergence and exact checks\n- lattice constants, throughput and evaluator speed-up (provenance)\n\nThe shortfall is narrow but real:\n- The stated check that TB analytic forces match finite differences 'to six significant figures' has no logged output. Only scratch/tbtest.py, which prints to stdout, exists.\n- Table 1's '(deployed)' integrated accuracy row is logged only for a different anchored curve (theta_x=0.012, p=0.623). Recomputed for the deployed parameters it is intE 10.85, intF 0.2036, vs the reported 10.5/0.1934.",
+      "evidence": [
+        "proposal/sections/methods.tex lines 73-74",
+        "workdir_outside_proposal/scratch/tbtest.py lines 21-28 (print only; no log)",
+        "proposal/code/analysis/switch_compare.py lines 117-142; proposal/logs/switch_accuracy.json anchor_force",
+        "proposal/logs/cascades/*.json params (deployed th_x 0.1, p 0.2581)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.md_execution_integrity.defect_counts_from_pipeline": {
+      "value": "satisfied",
+      "confidence": "medium",
+      "reason": "Frenkel pairs and spike volumes come from the actual OVITO pipeline applied to executed LAMMPS trajectories:\n- Frenkel pairs: OVITO WignerSeitzAnalysisModifier on each run's final configuration against the ideal lattice.\n- Spike volume: PTM non-bcc selection, then an alpha-shape ConstructSurfaceModifier (filled_volume) over cascade and anneal dumps.\n- Per-run JSON records hold vacancies, interstitials and V_series.\n- Raw LAMMPS logs with CASCADE_DONE and final.data files survive in scratch/campaign/runs and provenance.\n\nDumps were deleted after analysis by design.",
+      "evidence": [
+        "proposal/code/analysis/cascade_analysis.py lines 65-128, 218-236",
+        "proposal/code/cascade/run_campaign.py lines 216-251",
+        "workdir_outside_proposal/scratch/campaign/runs/sig05_E2_r3/ (log, .out CASCADE_DONE, final.data)",
+        "proposal/logs/cascades/sig05_E5_r1.json (vacancies 219, V_series)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.effort_evidence.attempts_log_when_partial_work_claimed": {
+      "value": "satisfied",
+      "confidence": "medium",
+      "reason": "The paper claims partial and unresolved work: the gate failed, the stability comparison is unresolved, the ladder stops at 5 keV, the spike-volume half is unresolved, and the 5 keV extension stopped at 13 of 48 runs. attempts_log.md records the approaches tried and why each was set aside or changed:\n- two rejected driver maps (with reasons)\n- the surrogate path forced by the absent data, then its gate failure and anchored fallback\n- DAKOTA not used (reason)\n- higher energies not attempted (cost)\n- the f=0.25 variant\n- the extension that moved against the authors\n- implementation failures and their fixes\n\nThe task sets no minimum count. One stale entry (section G says a surrogate-calibrated cascade ablation 'is run'; no such runs exist) is a documentation inaccuracy and does not undo the coverage.",
+      "evidence": [
+        "proposal/attempts_log.md sections B, C, D, F, G, I, K, M, V",
+        "proposal/sections/failure.tex; discussion.tex lines 51-68"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "evidence_completeness.quantitative_sources_documented": {
+      "value": "not_satisfied",
+      "confidence": "low",
+      "reason": "Measured quantities are very well sourced: 1,077 macros are generated from logs by make_numbers.py, and verification_summary.md maps claims to records. Two task-required elements are incomplete:\n- Source-paper values (15/200 keV endpoints, lambda 0.2/0.35, 0.02 eV/atom) carry only a general citation, with no figure/table anchors, although the task requires paper-as-reported values to be cited from specific figures/tables.\n- A few measured statements have no log entry: the TB analytic-vs-finite-difference force agreement 'to six significant figures', and the 'typical force magnitude of about 1.7 eV/A'.",
+      "evidence": [
+        "proposal/logs/numbers.tex; proposal/code/analysis/make_numbers.py; proposal/logs/verification_summary.md",
+        "proposal/sections/intro.tex lines 24-34; discussion.tex line 11",
+        "proposal/sections/methods.tex lines 73-74; results.tex lines 108-109",
+        "task_spec.md lines 88, 137"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "evidence_completeness.required_reporting_coverage": {
+      "value": "not_satisfied",
+      "confidence": "high",
+      "reason": "Several required reporting elements are missing or reduced:\n- No accuracy calibration against the Te=0.1 eV DFT reference (TB surrogate only).\n- Paper-as-reported FP, spike volume, chi and stability-range results versus T* are not reported with figure/table citations; FP/V/chi are not reported at all.\n- The declared recoil ladder is incomplete (10 and 20 keV missing; T*=5.0 eV missing at 5 keV).\n- FP and spike-volume curves versus ground-state cover only 0.5-5 keV, with 8-12 rather than 25 repetitions (documented).\n\nMeans with SEM, all completed runs, both error channels and the attempts are reported.",
+      "evidence": [
+        "task_spec.md lines 84-96, 158",
+        "proposal/code/method_plan.md lines 330-349",
+        "proposal/logs/cascades/ (energies 0.5-5 only)",
+        "proposal/sections/methods.tex lines 39-47, 147-166"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    }
+  },
+  "context": {
+    "both_accuracy_channels_improved": {
+      "value": false,
+      "reason": "No DFT-referenced errors exist. Against the TB surrogate, the deployed anchored FEF is worse than the sigmoid at 0.1 eV in both channels: energy 5.70 vs 1.62 meV/atom, force 0.107 vs 0.0197 eV/A. Integrated over Te, only energy improves: 10.5 in the table (10.85 for the deployed parameters) vs 11.6, while force worsens: 0.193 (0.204) vs 0.093. The non-deployed surrogate-calibrated FEF improves energy only (0.93 vs 1.62) and worsens force (0.0259 vs 0.0197).",
+      "evidence": [
+        "proposal/sections/results.tex lines 191-223 (Table 1)",
+        "proposal/logs/switch_accuracy.json schemes"
+      ]
+    },
+    "partial_work_claimed": {
+      "value": true,
+      "reason": "The paper explicitly reports partial, failed or unresolved work:\n- the validation gate failed and the calibration was replaced by the anchored fallback\n- the two calibration references disagree and could not be adjudicated\n- the stability comparison is unresolved (criterion never fires; divergence difference p=0.48)\n- the recoil ladder stops at 5 keV\n- the spike-volume reduction is not resolved\n- the 5 keV extension stopped at 13 of 48 runs",
+      "evidence": [
+        "proposal/sections/abstract.tex lines 23-28, 38-56",
+        "proposal/sections/failure.tex lines 4-23, 77-85",
+        "proposal/sections/discussion.tex lines 51-68",
+        "proposal/attempts_log.md sections F, V"
+      ]
+    }
+  }
+}

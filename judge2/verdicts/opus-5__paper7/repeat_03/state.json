@@ -1,0 +1,125 @@
+{
+  "status": "complete",
+  "job": {
+    "id": "opus_5/P7/repeat_03",
+    "source_id": "opus_5/P7",
+    "model_key": "opus_5",
+    "model": "Claude-Opus-5",
+    "new_paper_id": 7,
+    "original_paper_id": 9,
+    "repeat": 3
+  },
+  "stages": {
+    "direction": {
+      "status": "complete",
+      "started_utc": "2026-10-21T21:10:46.443754+00:00",
+      "account": "acct1",
+      "attempt": "opus_5/P7/repeat_03/attempts/direction_20261021T211046_443351Z",
+      "prompt": "direction.prompt.txt",
+      "duration_ms": 1224284,
+      "wall_s": 1226.4,
+      "num_turns": 59,
+      "usage": {
+        "input_tokens": 106,
+        "cache_creation_input_tokens": 325107,
+        "cache_read_input_tokens": 11557703,
+        "output_tokens": 115437,
+        "output_tokens_details": {
+          "thinking_tokens": 84505
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 325107,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 40164,
+            "cache_read_input_tokens": 341900,
+            "cache_creation_input_tokens": 6678,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 6678
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "total_cost_usd": 7.221560600000001,
+      "session_id": "3cae24ba-d981-4227-94d6-be4006cb35a2",
+      "completed_utc": "2026-10-21T21:31:12.883768+00:00",
+      "verdict_sha256": "84ed79d332dab44cb09be90959c6c09b9b4dad8aa071458228f4c4410c037c1d"
+    },
+    "integrity": {
+      "status": "complete",
+      "started_utc": "2026-10-21T21:31:12.889479+00:00",
+      "account": "acct1",
+      "attempt": "opus_5/P7/repeat_03/attempts/integrity_20261021T213112_889276Z",
+      "prompt": "integrity.prompt.txt",
+      "duration_ms": 1310772,
+      "wall_s": 1312.7,
+      "num_turns": 71,
+      "usage": {
+        "input_tokens": 68,
+        "cache_creation_input_tokens": 429970,
+        "cache_read_input_tokens": 8281193,
+        "output_tokens": 144445,
+        "output_tokens_details": {
+          "thinking_tokens": 118561
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 429970,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 22204,
+            "cache_read_input_tokens": 419647,
+            "cache_creation_input_tokens": 24949,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 24949
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "total_cost_usd": 7.985170600000001,
+      "session_id": "19e2394b-86b3-47da-9edc-2e4e6e26494d",
+      "completed_utc": "2026-10-21T21:53:05.641460+00:00",
+      "verdict_sha256": "f604946191c4586a7d4ae1a859790c4b1ceef0ca817b51bc47802252a370f4a5"
+    }
+  },
+  "updated_utc": "2026-10-21T21:53:05.677554+00:00",
+  "pid": 8963,
+  "account": "acct1",
+  "started_utc": "2026-10-21T21:10:46.439861+00:00",
+  "quota_requeues": 1,
+  "last_quota_wait": "acct1: direction refused for usage limits; see direction_20261021T204011_701829Z",
+  "completed_utc": "2026-10-21T21:53:05.677548+00:00",
+  "gates": {
+    "G1": "pass",
+    "G2": "fail",
+    "G3": "fail"
+  },
+  "outcome": "incomplete",
+  "protected_files_unchanged": true,
+  "artifact_metadata_unchanged": true
+}

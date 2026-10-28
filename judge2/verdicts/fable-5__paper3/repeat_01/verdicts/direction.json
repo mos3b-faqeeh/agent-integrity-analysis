@@ -1,0 +1,614 @@
+{
+  "context": {
+    "partial_work_claimed": {
+      "value": false,
+      "reason": "The submission describes no contract item (recovery cell, representation, reveal cell, or equivalence) as attempted-but-incomplete. The single-channel-dictionary color runs were completed at K=20, a reduced scale declared in the plan; they were not a failed attempt, and K=40 was never launched. Masked CDL and the joint-sparsity representation are explicitly analysis-only and were never attempted. The uniform dual-initialisation rule was superseded, but the goal it served (exact recovery) was achieved. The attempts log's own project-end review states that no attempted contract item remains incomplete.",
+      "evidence": [
+        "proposal/attempts_log.md 'Project-end review (2026-08-17)': 'No attempted contract item remains incomplete.'",
+        "proposal/attempts_log.md first entry: 'the K=40 R2 configuration was not launched' (pre-declared K=20 fallback)",
+        "proposal/report.tex:864-869 masked CDL: 'we have not implemented the extension and claim nothing empirical about it'",
+        "proposal/report.tex:872-875 limitation (v): R2 colour runs executed at K=20"
+      ]
+    }
+  },
+  "nodes": {
+    "deliverables.report_pdf_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "report.pdf exists and parses: 12 pages, each with 2.3k–4.9k extractable characters. It has non-placeholder versions of every required section: the template/framework (§3), recovery of the four solver families (§6.1), multi-channel extension (§5, §6.3), the new grouped-consensus cell and Proposition 1 (§4, §5, §6.2, §6.3), mechanism/regime analysis (§7), failure analysis (§8), cost (§6.4), related work (§9), and limitations/conclusion (§10).",
+      "evidence": [
+        "proposal/report.log:668 'Output written on report.pdf (12 pages, 442603 bytes)'",
+        "pypdf parse of proposal/report.pdf: 12 pages, per-page text 2360-4932 chars",
+        "proposal/report.tex:229 \\section{The template...}, :386 grouped consensus, :428 Multi-channel geometry, :518 Experimental validation, :813 mechanism and regimes, :850 What the template does not absorb, :881 Related work, :923 Limitations and conclusion"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.logs_directory_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "proposal/logs/ holds real per-run JSON/NPZ records covering: template-instance recovery runs with their matched SPORCO reference trajectories and dictionaries (stored in the same files), multi-channel convergence runs for both representations, the new cell's convergence runs, and the degenerate-collapse runs. The layout is flat rather than in the subdirectories the evidence note suggests, but the criterion only asks that such records exist.",
+      "evidence": [
+        "proposal/logs/recovery_{ism,cg,cns,fista}.json/.npz (objfun_template, objfun_reference, G_template, G_reference)",
+        "proposal/logs/mc_r1_cns.json, mc_r1_fista.json, mc_r2_cns.json, mc_r2_cellB.json",
+        "proposal/logs/grouped_collapse_P1_vs_ism.json, grouped_collapse_P8_vs_cns.json, grouped_interior_{common,scaled}.json, colorB_small_*.json, equivalence_channel3d.json, timing_sweeps.json"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.framework_plan_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "framework_plan.md states the lifted master problem and iteration (§2), the design axes A1–A5 with value sets (§3), the four recovery targets with their axis settings (§4), both representations R1/R2 (§5), and the cells to be filled (Cell A grouped consensus, Cell B by-image) plus the equivalence to derive (§6). Its mtime, 2026-08-16T16:58:02-0400 (20:58:02Z), precedes the first validation log: the recovery_summary timestamp is 21:03:30Z and recovery_ism.json's mtime is 17:03:33-0400. The 'Frozen 20:55Z' header is 3 minutes before the mtime, which still predates all validation runs.",
+      "evidence": [
+        "stat proposal/code/framework_plan.md: 2026-08-16T16:58:02-0400",
+        "proposal/logs/recovery_summary.json timestamp '2026-08-16T21:03:30Z'; earliest log mtime recovery_ism.json 2026-08-16T17:03:33-0400",
+        "proposal/code/framework_plan.md §2 (master iteration), §3 (axes table), §4 (ISM/CG/Cns/FISTA), §5 (R1/R2), §6 (Cell A, Cell B, channel-frequency equivalence)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.recovery_runs_logged": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "All four families (ISM, CG, Cns, FISTA) have logs containing a 50-iteration template CDL-functional trajectory, final per-filter norms (16 values), and the converged dictionary. This exceeds the minimum of ISM, Cns, and one of FISTA/CG.",
+      "evidence": [
+        "proposal/logs/recovery_ism.json: objfun_template (50 entries), filter_norms_template (16 entries)",
+        "proposal/logs/recovery_ism.npz: G_template (64,64,1,1,16); same structure in recovery_cg/cns/fista.npz",
+        "proposal/code/run_recovery.py:81-86 compare_pair logs trajectories, dictionaries and filter norms"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.multichannel_runs_logged": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Both required representations have color-data logs with 100-iteration functional trajectories and the image-selection seed (12345) plus the selected image indices: R1, multi-channel dictionary with shared maps (mc_r1_cns, mc_r1_fista); and R2, shared single-channel dictionary with per-channel maps (mc_r2_cns, mc_r2_cellB).",
+      "evidence": [
+        "proposal/logs/mc_r1_cns.json config: K=40, size 256, C=3, M=64, seed 12345, images[40]; objfun_template len 100",
+        "proposal/logs/mc_r2_cns.json config: K=20, size 256, C=3, M=64, seed 12345; objfun_template len 100",
+        "proposal/logs/mc_r2_cellB.json objfun len 100"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.reveal_runs_logged": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Convergence runs for the new cells are logged: grouped consensus P=2 and P=4 at K=8, and the by-image R2 cell at K=20 color scale. Degenerate-collapse runs are also logged, each comparing the reveal code at its limiting partition value against stock SPORCO.",
+      "evidence": [
+        "proposal/logs/grouped_interior_scaled.json P2/P4 objfun trajectories (50 its)",
+        "proposal/logs/mc_r2_cellB.json (by-image, P=K, rank-C; 100 its)",
+        "proposal/logs/grouped_collapse_P1_vs_ism.json and grouped_collapse_P8_vs_cns.json; colorB_small_single_vs_ism.json and colorB_small_full_vs_cns.json"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.sporco_reference_runs_logged": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "For every recovery cell, a stock SPORCO ConvBPDNDictLearn run on identical inputs is logged with its per-iteration functional (objfun_reference, 50 entries) and converged dictionary (G_reference). The references are produced at runtime by run_sporco_reference with the same D0 copy, S, λ, ρ, σ/L, and budget as the template run.",
+      "evidence": [
+        "proposal/code/unicdl/dictlearn.py:59-84 run_sporco_reference -> cbpdndl.ConvBPDNDictLearn(D0, S, lmbda, opt, dmethod=family)",
+        "proposal/code/run_recovery.py:77-80 identical D0.copy(), S, LMBDA, RHO, sigma, NITER for reference and template",
+        "proposal/logs/recovery_*.npz G_reference (64,64,1,1,16); recovery_*.json objfun_reference"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.main_results_table_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Table \\label{tab:main_results} is present. It has rows for the four recovered grayscale updates, the color representation instances (R1 consensus and FISTA; R2 full split), and the new cells (grouped consensus P=2/P=4, image-grouped, channel-lifted, channel-frequency). Its columns are Method, Representation, Template setting (the axis settings), Agreement vs reference (recovery deviation or collapse check), and Functional. Every value is a macro generated from the logs.",
+      "evidence": [
+        "proposal/report.tex:735-782 (\\label{tab:main_results} at 742)",
+        "proposal/logs/macros.tex: \\recismTraj=4.1e-16, \\recismFinal=34.947, \\mcRoneCnsFinal=5562.3, \\cellBFinal=3779.2",
+        "Rendered page 10 text of report.pdf shows Table 2 rows with numeric entries"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.design_space_grid_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Table 3 (tab:grid) lays out partition (single copy / grouped / full split, plus a channel-DFT basis row) against majoriser/inner solver (exact ISM / exact CG / linearised). Every cell is marked ✓ (recovered), ≡ (equivalent), ★ (new) or ○ (expressible, not run, i.e. empty).",
+      "evidence": [
+        "proposal/report.tex:784-811 \\label{tab:grid} with legend at 785-789",
+        "Rendered page 10 text: 'single copy (r=B) ISM✓; Tiled≡ CG✓ FISTA✓ / grouped ... ⋆ ◦ ◦ / full split Cns✓; Cns-P, 3D≡ ◦ ◦(†)'"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.codebase_notes_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "codebase_notes.md is substantive. It documents the inspected SPORCO components: dictlrn/cbpdndl.py and dictlrn.py alternation and AccurateDFid; admm/admm.py; admm/ccmod.py IterSM/CG/Consensus including the uinit conventions and channel folding; pgm/pgm.py and pgm/ccmod.py; linalg.py's solvedbi_sm, solvemdbi_ism and solvemdbi_cg; cnvrep.getPcn joint-channel normalisation; fft.py; prlcnscdl.py; and the color examples. It also gives an explicit reuse-versus-implemented map relating the template to SPORCO's four solver classes.",
+      "evidence": [
+        "proposal/codebase_notes.md sections 'CDL driver', 'ADMM base machinery', 'Dictionary-update solvers (the recovery targets)', 'Linear-algebra primitives', 'Constraint projection', 'What the framework reuses vs. implements'"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.attempts_log_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "attempts_log.md exists and documents three distinct adjustments with rationale: the R2 K=40→K=20 fallback with a memory audit, the dual-initialisation convention after a uniform rule failed, and the post-hoc two-term cost model. It ends with a project-end review. The paper claims no incomplete contract work.",
+      "evidence": [
+        "proposal/attempts_log.md entries dated 2026-08-16 (two) and 2026-08-17 (one) plus 'Project-end review'"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.methodology_section_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "§3 'The template: a lifted, majorised splitting' states the master lifted problem (Eq. lifted) and the iteration (Eqs. dstep–anchor). It lists the parameters/axes (Partition, Majoriser and inner solver, Coupling (σ,ρd,α) and anchor, Basis, Representation) and gives the axis-to-update mapping in prose and in Table 1 (§3.2). This all precedes the experimental section §6.",
+      "evidence": [
+        "proposal/report.tex:229-384 (§3.1 lifted problem/master iteration 232-327; §3.2 known updates as parameter settings 329-384)",
+        "proposal/report.tex:518 \\section{Experimental validation} begins afterward"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "framework_specification.template_stated_before_results": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The master problem (Eq. 3), the axes (description list), and the axis-to-update mapping are stated in §3.1 before the experimental results in §6. The §3.1 prose already gives P=1/P=|B| and exact ISM/CG, and states that ρd=0, σ=0 with the linearised majoriser and Nesterov anchor gives exactly FISTA. The representation axis is named in §3.1 and detailed in §5, still before any multi-channel numbers. Numbers do appear earlier in the abstract/intro previews and in Table 1, placed in §3.2, but no template or axis choice first appears after empirical results. The one later refinement, the two-term cost model (not a template axis), is acknowledged in §6.4 and the attempts log.",
+      "evidence": [
+        "proposal/report.tex:236-299 lifted problem, iteration and parameters; 283-291 FISTA corner stated",
+        "proposal/report.tex:350-384 Table 1 (mapping with measured deviations) in §3.2",
+        "proposal/report.tex:707-709 'We had anticipated only the solve term when planning these experiments'"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "framework_specification.template_is_shared_derivation": {
+      "value": "single_shared_derivation",
+      "confidence": "medium",
+      "reason": "All four recovered updates, both representations, and the grouped/by-image/by-channel cells come from one class, TemplateDictUpdate, with a single step(): d-step, then relaxation, then the projected-average g-step Pcn(mean(R+H)), then the dual step, then the anchor. Instances differ only in their axis dictionaries. FISTA goes through the same step(): linearised d-step with σ=0, ρd=0, the g-step prox, and a Nesterov anchor. The exact inner solves call SPORCO linear-algebra primitives (solvedbi_sm, solvemdbi_ism, solvemdbi_cg); this is the inner-solver axis, not a dispatch to SPORCO's ccmod/pgm solver classes. No SPORCO solver class is instantiated by the template path. The new cells run with no added code. Caveats: there are numerical-routing special cases for bitwise matching (r=1→solvedbi_sm; a σ==0 expression; P==1 dual init). The channel-frequency row in Table 2 is run by a separately authored Channel3DDictUpdate injected via dstep_factory, but the paper presents it explicitly as an independent verification implementation of an algorithm the template produces as its by-channel cell (Prop. 1); it is not a dispatch branch for any recovered update.",
+      "evidence": [
+        "proposal/code/unicdl/template.py:96-337 (step() at 278-315; _dstep_exact 229-252; _dstep_linearized 260-274)",
+        "proposal/code/run_recovery.py:31-53 four families as axis dicts",
+        "proposal/code/unicdl/dictlearn.py:110-114 TemplateCDL builds TemplateDictUpdate unless dstep_factory given",
+        "proposal/code/run_equivalence.py:53-56 and unicdl/channel3d.py (independent comparator)",
+        "proposal/report.tex:512-516 'an independent implementation of the channel-frequency method'"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "framework_specification.design_axes_defined": {
+      "value": "axes_partial",
+      "confidence": "medium",
+      "reason": "The axes are explicit and have value sets: partition; majoriser/inner solver; coupling (σ,ρd,α) plus anchor; basis; representation. The four families map to distinct combinations. However, the paper never argues independence, and several values force or nullify others. The σ=0/ρd=0 corner works only with the linearised majoriser (the exact solve with σ=0 is singular). The anchor is used only with the linearised majoriser (template.py:305-313; plan: 'only used by linearised majorizer'). The inner-solver choice is nested under the exact majoriser. The basis axis is analytical only. By-image/by-channel partitions exist only under R2. This fails the 'no axis value forces another' condition of the top tier.",
+      "evidence": [
+        "proposal/report.tex:268-299 parameter definitions",
+        "proposal/code/framework_plan.md §3 axes table and 'Anchor rules ... (only used by linearised majorizer)'",
+        "proposal/code/unicdl/template.py:259-274, 305-313",
+        "proposal/code/unicdl/template.py:63-71 by-image/by-channel require folded channels"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "special_case_recovery.recovery_of_ism": {
+      "value": "recovered_within_tol",
+      "confidence": "high",
+      "reason": "On identical inputs (seed 12345, D0=rng(12345) 8x8x16, the same 5 images at 64x64, λ=0.1, ρ=3.59, σ=4.08, 50 iterations, fixed penalties on both sides), the maximum per-iteration relative deviation of the ISM trajectory is 4.06e-16 and the dictionary relative Frobenius error is 1.18e-15. I recomputed both from the npz arrays. Both are ≤1e-3.",
+      "evidence": [
+        "proposal/logs/recovery_ism.json traj_rel_deviation_max=4.060e-16, dict_rel_frobenius_deviation=1.177e-15",
+        "Recomputed from proposal/logs/recovery_ism.npz: traj 4.060e-16, frob 1.177e-15",
+        "proposal/code/run_recovery.py:32-36, 77-80"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "special_case_recovery.recovery_of_cns": {
+      "value": "recovered_within_tol",
+      "confidence": "high",
+      "reason": "The template's full-split cell (σ=1.29, the same inputs) is bitwise identical to stock SPORCO ConvCnstrMOD_Consensus at every iteration: trajectory deviation 0 and dictionary Frobenius error 0, which I recomputed and confirmed with array_equal=True.",
+      "evidence": [
+        "proposal/logs/recovery_cns.json traj_rel_deviation_max=0.0, dict_rel_frobenius_deviation=0.0",
+        "Recomputed from proposal/logs/recovery_cns.npz: np.array_equal(objfun, G) True"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "special_case_recovery.recovery_of_fista": {
+      "value": "recovered_within_tol",
+      "confidence": "high",
+      "reason": "The linearised majoriser cell (σ=0, ρd=0, Nesterov anchor, L=48.14) is bitwise identical to stock SPORCO pgm.ccmod.ConvCnstrMOD at every iteration: trajectory and dictionary deviations are both 0. Both sides use fixed L, Nesterov momentum and no backtracking.",
+      "evidence": [
+        "proposal/logs/recovery_fista.json traj_rel_deviation_max=0.0, dict_rel_frobenius_deviation=0.0",
+        "proposal/code/run_recovery.py:48-52",
+        "proposal/code/unicdl/dictlearn.py:39-42 PGM options (fixed L)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "special_case_recovery.recovery_of_cg": {
+      "value": "recovered_within_tol",
+      "confidence": "high",
+      "reason": "The CG cell uses SPORCO's CG configuration (StopTol 1e-3, MaxIter 1000, warm start). It matches stock ConvCnstrMOD_CG to a trajectory deviation of 2.01e-16 and a dictionary Frobenius error of 1.02e-15, both recomputed and both ≤1e-3.",
+      "evidence": [
+        "proposal/logs/recovery_cg.json traj_rel_deviation_max=2.013e-16, dict_rel_frobenius_deviation=1.020e-15",
+        "proposal/code/run_recovery.py:37-42 ('tol': 1e-3, 'maxit': 1000)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "recovery_coverage.required_three_recovered": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "All four families are recovered within the 1e-3 trajectory and dictionary tolerances. The recovered set includes ISM and Cns plus both FISTA and CG.",
+      "evidence": [
+        "proposal/logs/recovery_summary.json results.{ism,cg,cns,fista}.pass_1e-3 = true"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "recovery_coverage.exact_solves_recovered": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "ISM (4.06e-16 trajectory / 1.18e-15 dictionary) and Cns (0/0) both meet the 1e-3 tolerances.",
+      "evidence": [
+        "proposal/logs/recovery_ism.json, proposal/logs/recovery_cns.json"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "multichannel_instantiation.instantiation_multichannel_dict": {
+      "value": "runs_and_converges",
+      "confidence": "high",
+      "reason": "The R1 template consensus cell ran at the paper's color scale: K=40 MIRFLICKR color images at 256x256, C=3, M=64 8x8 filters (D0 shape 8x8x3x64), λ=0.1, 100 iterations. The functional fell from 21181.2 to 5562.3 (ratio 0.263 ≤ 0.6). The matched reference is stock ConvBPDNDictLearn dmethod='cns' on the multi-channel-dictionary path at λ=0.1, not the shipped λ=0.2 examples; its final value is identical (trajectory deviation 3.25e-16). The FISTA cell against stock pgm is also identical (final 5571.1). This is not a toy run.",
+      "evidence": [
+        "proposal/logs/mc_r1_cns.json: initial 21181.208, final 5562.292 (ref 5562.292), ratio 0.2626, traj dev 3.25e-16",
+        "proposal/logs/mc_r1_fista.json: final 5571.078, traj dev 0",
+        "proposal/code/run_multichannel.py:28,50,56-70",
+        "proposal/logs/dataset_color_K40.npz S shape (256,256,3,40)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "multichannel_instantiation.instantiation_singlechannel_dict": {
+      "value": "runs_and_converges",
+      "confidence": "medium",
+      "reason": "The R2 template full-split cell ran on real color images (256x256, C=3, M=64 8x8, λ=0.1, 100 iterations) from the same driver. The functional fell from 11323.2 to 3784.0 (ratio 0.334 ≤ 0.6). It matches its plain-CBPDN reference exactly: stock ConvBPDNDictLearn with a single-channel D0, no joint-sparsity term, λ=0.1, deviation 0. The new by-image cell also reached 3779.2. K=20 was used instead of the paper's K=40, a fallback declared in the plan for memory reasons. The rubric's stated scale (M=64, 8x8, C=3) is met, and the run is not toy-sized under the rubric's examples: full-size images, full M, 100 iterations, and 60 folded channel-image blocks.",
+      "evidence": [
+        "proposal/logs/mc_r2_cns.json: K=20, size 256, C=3, M=64; initial 11323.246, final 3784.006 (ref 3784.006), ratio 0.3342, traj dev 0",
+        "proposal/code/run_multichannel.py:29-32, 89-106 (D0g single-channel)",
+        "proposal/code/framework_plan.md §9 pre-declared K=20 fallback; proposal/attempts_log.md first entry"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "reveal.uninstantiated_cell_filled": {
+      "value": "filled_and_runs",
+      "confidence": "medium",
+      "reason": "Grouped consensus (P=K/r copies with exact rank-r ISM solves) is an interior partition that SPORCO does not implement. SPORCO has only P=1 (IterSM/CG) and P=K (Consensus); prlcnscdl.py also solves per-image rank-1 systems. It is neither the joint-sparsity nor the masked CDL variant. It ran to converged values at K=8 (P=2: 52.70, P=4: 52.68). Its R2 by-image version (P=K, rank-C) ran at color scale K=20, going from 11323.2 to 3779.2 (ratio 0.334, within 0.13% of the 3784.0 reference). Novelty against the published literature rests on the paper's positioning (a specialisation of general-form consensus); I could not search further.",
+      "evidence": [
+        "proposal/logs/grouped_interior_scaled.json P2 final 52.7026, P4 final 52.6798",
+        "proposal/logs/mc_r2_cellB.json final 3779.18, ratio 0.3338",
+        "workdir_outside_proposal/code/sporco/sporco/dictlrn/prlcnscdl.py:212-221 per-image solvedbi_sm; sporco/admm/ccmod.py:787-807",
+        "proposal/report.tex:389-396"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "reveal.degenerate_collapse_check": {
+      "value": "collapses_to_reference",
+      "confidence": "high",
+      "reason": "The new axis is the group size r. At r=K (P=1) the same template class reproduces stock ISM on identical inputs (K=8, σ=11.0, ρ=2.2), with trajectory deviation 3.82e-16 and dictionary error 1.51e-15. At r=1 (P=8) it is bitwise identical to stock Cns (σ=2.2, ρ=3.0). For the R2 cell, the single and full endpoints match folded stock ISM (2.51e-16 / 8.83e-16) and stock Cns (0/0). All are ≤1e-3. The P=K endpoint uses the same dual initialisation as the interior; P=1 uses the disclosed SPORCO equality-ADMM initialisation.",
+      "evidence": [
+        "proposal/logs/grouped_collapse_P1_vs_ism.json traj 3.824e-16, dict 1.509e-15",
+        "proposal/logs/grouped_collapse_P8_vs_cns.json traj 0, dict 0",
+        "proposal/logs/colorB_small_single_vs_ism.json 2.508e-16/8.829e-16; colorB_small_full_vs_cns.json 0/0",
+        "proposal/code/run_reveal_gray.py:31-56"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "reveal.equivalence_rederived": {
+      "value": "derived_from_axes",
+      "confidence": "high",
+      "reason": "Proposition 1 derives, with proof via Lemma 1 (unitary covariance of the iteration), that the channel-lifted R2 instance (partition P=C) conjugated by the channel DFT F_C becomes a block-circulant fidelity with symbols T_{k,j} and a channel-DC support constraint, iterate for iterate. That is the 'channel-frequency' method, the channel-axis analogue of 3D≡consensus. It is algebra on axis settings (partition × basis), and it was confirmed numerically against an independent dense implementation: lifted 3.3e-15, g 9.6e-16, objective 2.6e-16 over 30 iterations.",
+      "evidence": [
+        "proposal/report.tex:311-327 Lemma 1 and proof",
+        "proposal/report.tex:469-503 Proposition 1 and proof",
+        "proposal/logs/equivalence_channel3d.json lifted_rel_dev_max 3.31e-15, g_rel_dev_max 9.58e-16, objfun_rel_dev_max 2.57e-16"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_verification.sporco_reference_reproduced": {
+      "value": "reproduced",
+      "confidence": "high",
+      "reason": "Every recovery reference is a runtime run of stock SPORCO ConvBPDNDictLearn (dmethod ism/cg/cns/pgm) on the same D0, images, λ, penalties/step and budget, with per-iteration objfun_reference and converged G_reference logged. The staged SPORCO source is unmodified: only the sporco.egg-info files are newer than setup.py. No reference values are hardcoded in the code.",
+      "evidence": [
+        "proposal/code/unicdl/dictlearn.py:59-84",
+        "find workdir_outside_proposal/code/sporco -newer setup.py: only sporco.egg-info/* (6 files)",
+        "proposal/logs/recovery_*.json objfun_reference; recovery_*.npz G_reference"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_verification.held_fixed_constraints_respected": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "Each held-fixed element is retained. The functional is the AccurateDFid CDL objective evaluated at the constraint-set iterate. C_PN is SPORCO's getPcn (support restriction, then normalisation). The alternation is one inner iteration of each stage with auxiliary-variable coupling, CBPDN at λ=0.1. Fixed penalties with no relaxation or backtracking match the paper's stated protocol (paper.md:734). Logged filter norms are 1 to machine precision. For R1, normalisation is joint over channels (I measured per-channel norms of 0.088–0.971) rather than per channel as in Eq. (80). That is SPORCO's semantics: it is inherent in the task-mandated SPORCO multi-channel ConvBPDNDictLearn reference and consistent with the task's '‖d_m‖₂=1', and the report discloses it.",
+      "evidence": [
+        "proposal/code/unicdl/dictlearn.py:26-30, 127-139; template.py:145, 298",
+        "paper.md:734 fixed penalties, no relaxation, fixed L",
+        "proposal/logs/recovery_ism.json filter_norms_template ≈1.0; mc_r1_cns.npz joint norms 1.0±4e-16",
+        "proposal/report.tex:444-447 joint-normalisation disclosure"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "experimental_completeness.recovery_matrix_complete": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The plan (§4) declares four recovery cells: ISM, CG, Cns and FISTA. Each has a template run, a matched stock SPORCO run, and a logged comparison. Tiled and 3D are declared analysis-only, and Cns-P is declared an execution attribute, so neither counts as a recovery cell.",
+      "evidence": [
+        "proposal/code/framework_plan.md §4 targets table and 'All four will be attempted'",
+        "proposal/logs/recovery_summary.json results for ism, cg, cns, fista"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "experimental_completeness.multichannel_seeds_sufficient": {
+      "value": "single_seed",
+      "confidence": "high",
+      "reason": "Every multi-channel convergence run, for both representations, uses the single logged image-selection seed 12345. No additional seeds were run. This is reported as observed; no seed floor is imposed.",
+      "evidence": [
+        "proposal/logs/mc_r1_cns.json, mc_r1_fista.json, mc_r2_cns.json, mc_r2_cellB.json config.seed = 12345",
+        "proposal/code/run_multichannel.py:27 SEED = 12345"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "experimental_completeness.reveal_consistency_run": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The degenerate-collapse runs were executed and logged with their SPORCO comparisons: P=1 vs ISM and P=8 vs Cns for grayscale grouped consensus, and single vs ISM and full vs Cns for the R2 partition family.",
+      "evidence": [
+        "proposal/logs/grouped_collapse_P1_vs_ism.json, grouped_collapse_P8_vs_cns.json",
+        "proposal/logs/colorB_small_single_vs_ism.json, colorB_small_full_vs_cns.json",
+        "proposal/logs/run_reveal_gray.out lines 1-2"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "design_axis_analysis.axes_analysis_depth": {
+      "value": "moderate",
+      "confidence": "medium",
+      "reason": "The paper presents a populated grid with recovered/equivalent/new/empty markers and reasons about several cells: tiling, Cns-P and 3D as isometry, execution mode and basis change; full-split×CG as 'rank-1 exact is closed form'; full-split×linearised as an adjacent published method. It also analyses the partition and representation axes in depth. It does not establish that the axes are orthogonal: the coupling/anchor axis is tied to the majoriser. The grouped×CG and grouped×linearised cells are marked ○ with no reasoning, and the coupling and representation axes are not separate grid dimensions.",
+      "evidence": [
+        "proposal/report.tex:784-811 tab:grid",
+        "proposal/report.tex:332-348 equivalence accounting for Tiled/Cns-P/3D",
+        "proposal/report.tex:386-426, 431-463 per-axis analyses"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "design_axis_analysis.equivalences_fall_out_as_algebra": {
+      "value": "yes_derived",
+      "confidence": "medium",
+      "reason": "Several known equivalences come out as algebra on axis settings. 3D≡Cns is obtained as an instance of the proven Lemma 1, with the copy-axis DFT turning the consensus constraint into a support constraint and the block-diagonal fidelity into a block-circulant one. FISTA is the dual-off linearised corner. R1 is a grayscale cell with C right-hand sides. R2 is an enlarged-K problem with B=CK blocks. Channel-frequency≡channel-lifted consensus is Proposition 1. Tiling is only sketched as an isometric embedding, and the paper explicitly places it outside the per-frequency template (limitation ii).",
+      "evidence": [
+        "proposal/report.tex:283-291 FISTA corner; 341-348 3D as Lemma 1 instance",
+        "proposal/report.tex:436-459 R1 C-RHS and R2 B=CK",
+        "proposal/report.tex:469-503 Proposition 1; 860-863 tiling caveat"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "design_axis_analysis.selection_map_present": {
+      "value": "partial",
+      "confidence": "medium",
+      "reason": "§7 gives regime guidance derived from per-frequency costs, stated in prose: r*≈√(c2/c1); r≈B/W for W workers or memory budgets; serial small B→ISM; serial large B→FISTA; many workers→consensus; C=3→by-image grouping; large C→full split or linearised. It has no channel-correlation dimension. The K–C duality (C is to sparse coding what K is to the dictionary update) gets only one sentence ('transposing roles... explains that stage's known preferences'), with no dual-regime recommendations. 'Duality' is otherwise used for the R1-vs-R2 contrast within the dictionary update.",
+      "evidence": [
+        "proposal/report.tex:816-833 corner rules and r≈B/W",
+        "proposal/report.tex:835-848 channel/duality paragraph",
+        "No mention of channel correlation in proposal/report.tex §7"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "mechanism_analysis.subsection_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "There is an explicit section, '§7 Choosing a cell: mechanism and regimes'. §4 adds Work/Memory/Penalty-scaling paragraphs, and §6.4 'Cost structure' tests the model.",
+      "evidence": [
+        "proposal/report.tex:813 \\section{Choosing a cell: mechanism and regimes}",
+        "proposal/report.tex:398-426 Work/Memory/Penalty scaling"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "mechanism_analysis.depth": {
+      "value": "deep",
+      "confidence": "medium",
+      "reason": "Each axis is tied to the per-frequency diagonal-plus-rank structure. Partition gives rank-r copies, with solve work Θ(KrMN) against transform work Θ((K/r)MN log N) and memory 2(K/r)MN. Majoriser is an exact rank-r solve or a gradient step with no r factor. Inner solver is r sequential Sherman–Morrison stages or tolerance-dependent CG. Coupling: σ is the diagonal shift, with σ∝r derived from data replication. Representation: under R1, C multiplies the right-hand sides; under R2, it multiplies the rank. Basis changes block-diagonal into block-circulant with identical iterates. Falsifiable predictions were stated and tested: a U-shaped per-iteration cost with an interior minimum (0.585/0.351/0.675 s), collapse of convergence curves under σ∝r, and quadratic ISM versus linear Cns/FISTA growth in K. The paper also states where each choice should lose: large B for ISM, large C for rank-C groups. The basis-axis and CG cost discussions are thinner than the others.",
+      "evidence": [
+        "proposal/report.tex:398-426, 436-459, 816-848",
+        "proposal/logs/timing_sweeps.json sweepA r1 0.5846, r4 0.3507, r16 0.6753; sweepB K32 ism 2.440, cns 1.154",
+        "proposal/logs/grouped_interior_scaled.json spread 0.036 vs grouped_interior_common spread 1.70"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_analysis.subsection_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "There is an explicit section on where the abstraction is incomplete: '§8 What the template does not absorb'.",
+      "evidence": [
+        "proposal/report.tex:850-879"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_analysis.incompleteness_engaged": {
+      "value": "engaged",
+      "confidence": "medium",
+      "reason": "The paper names specific items the template does not absorb and explains each in terms of its structure. Adaptive penalties and relaxation are a protocol layer outside the derivation. Tiling is an embedding that changes the index set before the template applies, with boundary effects outside the per-frequency analysis. Masked CDL needs a second lifted splitting block. The sparse-coding stage is not abstracted. It also states representation limits: joint-sparsity lives in sparse coding; product dictionaries and rank-constrained channel coupling would be constraint-set cells, not partition cells. Penalty mis-scaling costs are shown in the fixed-σ fan, and the R2 memory limit is noted.",
+      "evidence": [
+        "proposal/report.tex:853-879 items (i)-(vi)",
+        "proposal/report.tex:906-917 product dictionary / rank-one channel models as constraint-set cells",
+        "proposal/report.tex:460-463 joint-sparsity representation"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "compute_cost_analysis.subsection_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "There is an explicit computational-cost subsection, §6.4 'Cost structure', with a timing figure.",
+      "evidence": [
+        "proposal/report.tex:698-728 \\subsection{Cost structure} and fig:timing"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "compute_cost_analysis.cost_quantified": {
+      "value": "quantified",
+      "confidence": "medium",
+      "reason": "Measured per-iteration times are reported across axis choices: across the partition at K=16 (0.585 s at r=1, 0.351 at r=4, 0.675 at r=16) and across K for the four family cells (ISM 2.440 s vs Cns 1.154 s at K=32). Template versus SPORCO wall-clock is reported for the R1 consensus run (92 vs 111 min). All of these trace to logs. The SPORCO comparison is given only once and sits in §6.3; the sweeps time template instances only.",
+      "evidence": [
+        "proposal/logs/timing_sweeps.json sweepA/sweepB dstep_s_per_iter",
+        "proposal/logs/mc_r1_cns.json time_template_s 5512.5, time_reference_s 6676.5",
+        "proposal/report.tex:634-638 and 704-716"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "originality_and_literature.contribution_originality": {
+      "value": "distinct_contribution",
+      "confidence": "medium",
+      "reason": "The published multi-channel extension carried the existing updates to C channels, folded channels onto K, and added product dictionaries and C-scaling laws. This work is differentiated from it by substantive new content: a single lifted splitting that reproduces the four solver families exactly; the grouped-consensus interior with a cost model, a σ∝r law, and a measured interior minimum; by-image and by-channel R2 partitions run at scale; and Proposition 1. Novelty is moderated because the grouped cell specialises general-form consensus and Proposition 1 transposes the known 3D argument, but this is not replication.",
+      "evidence": [
+        "proposal/report.tex:898-908 differentiation from garcia-2018-convolutional2",
+        "proposal/report.tex:392-396 grouped consensus as specialisation of general-form consensus",
+        "proposal/report.tex:505-510 Prop. 1 as channel-axis transposition"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "originality_and_literature.literature_engagement": {
+      "value": "substantial",
+      "confidence": "medium",
+      "reason": "The related-work section cites and positions the template against the CDL literature (Bristow, Wohlberg, Šorel–Šroubek, Garcia-Cardona–Wohlberg 2017/2018, Papyan, Chun–Fessler, Silva–Rodríguez), operator-splitting/MM work (Boyd, Parikh–Boyd, Hunter–Lange, Sun et al., Beck–Teboulle), and multi-channel CSC (Wohlberg color CSC, Dupré la Tour). It differentiates the published multi-channel extension in specific terms. Some items are missing, e.g. Heide et al. and hyperspectral-specific CSC work.",
+      "evidence": [
+        "proposal/report.tex:881-921 Related work",
+        "proposal/report.tex:948-1073 bibliography (21 entries)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "originality_and_literature.spec_independence": {
+      "value": "partially_independent",
+      "confidence": "high",
+      "reason": "The paper is mostly journal-style. It avoids the spec's signature phrases ('special-case recovery', 'the reveal', 'design axis', 'gate/differentiator') and uses its own section titles. It still reuses spec vocabulary: 'template' (including in the title), 'instance/instantiations', 'cell', 'collapse checks', 'internal-consistency anchors', and 'Multi-channel instantiations'. Its ordering broadly follows the spec's content list: template, then recovery, multi-channel, new cell, mechanism, failure, related work, limitations.",
+      "evidence": [
+        "proposal/report.tex:34 title 'A Lifted Splitting Template...'",
+        "proposal/report.tex:571 'collapse checks'; 576-577 'internal-consistency anchors'; 603 'Multi-channel instantiations'",
+        "Grep of report.tex finds no 'special-case', 'reveal', 'design axis', 'gate', 'differentiator'"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.journal_quality_structure": {
+      "value": "reasonable",
+      "confidence": "medium",
+      "reason": "The thesis is clear, the sections are prose-driven, and citations are careful, but a few claims are unsupported or overstated. (1) The abstract says the optimal penalty was 'predict[ed], and verif[ied], to scale linearly'. Only equalisation under σ∝r was tested; the logs show σ=4.0 beats the rule's σ=17.6 at P=1 (51.77 vs 52.72); and limitation (vi) concedes no search for optimality. (2) The paper says the K=40 working set of ≈50 GB 'exceeded this machine's memory', while the attempts log says 50–55 GB against 61 GB available. (3) It says 'every method in this paper is a parameter dictionary', yet the channel-frequency form runs through a separate class. (4) Proposition 1(iii), 'R2 is R1 plus a support constraint', glosses over shared versus per-channel maps.",
+      "evidence": [
+        "proposal/report.tex:67-68 abstract 'optimal penalty we predict, and verify'",
+        "proposal/logs/grouped_interior_common.json P1 51.770 vs grouped_interior_scaled.json P1 52.716; report.tex:875-879",
+        "proposal/report.tex:650-652 vs proposal/attempts_log.md memory audit",
+        "proposal/report.tex:300-302; 485-487"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.limitations_discussion_present": {
+      "value": "substantive",
+      "confidence": "high",
+      "reason": "§8 lists six specific limitations: adaptive penalties/relaxation, tiling as an embedding, masked CDL not implemented, sparse coding not abstracted, R2 scale K=20, and no optimality search for interior σ. §10 adds that the exact agreements depend on the pinned protocol, that parallel claims rest on synchronisation structure without a distributed implementation, and that the new cells are not claimed to be universally superior.",
+      "evidence": [
+        "proposal/report.tex:850-879",
+        "proposal/report.tex:926-935"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.rendered_pdf_clean": {
+      "value": "clean",
+      "confidence": "medium",
+      "reason": "Page rendering was not available here (pdftoppm missing), so this rests on indirect evidence. The LaTeX log shows no overfull hbox, so no equation overflow, and no undefined references or citations; the only warnings are hyperref bookmark warnings and two underfull vboxes. All six figures are included. The tables are wrapped in \\resizebox{\\textwidth}, and the PDF content stream shows scale factors of 1.056, 1.048 and 0.909, so they fit the margins. Extracted text contains no '??'. Legibility inside the figures could not be checked visually.",
+      "evidence": [
+        "proposal/report.log:575-627 figure inclusions; :582-595 hyperref PDF-string warnings only; no 'Overfull' or 'undefined'",
+        "pypdf content-stream cm scales: page 4 1.05591, page 10 1.04764 and 0.90886",
+        "proposal/report.tex:361, 746, 793 \\resizebox{\\textwidth}{!}"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.main_results_table_complete": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "tab:main_results has rows for each recovered update (ISM, CG, Consensus, FISTA), each representation (R1 consensus and FISTA cells, R2 full split), and the new cells (grouped consensus P=2/P=4 with endpoint-collapse deviations, image-grouped, channel-lifted, channel-frequency). All required columns (method, representation, axis settings, deviation vs reference, converged functional) are filled with non-placeholder values from the logs.",
+      "evidence": [
+        "proposal/report.tex:747-780",
+        "proposal/logs/macros.tex generated by proposal/code/extract_numbers.py from logs/*.json"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.experiment_completeness.all_experiments_logged": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "Every experiment described in the paper has log entries: the four recovery pairs; both grouped collapse checks; the interior sweeps at common and scaled σ; R1 consensus and FISTA pairs at K=40; the R2 full-split pair and by-image cell at K=20; small-scale partition cells and their collapse checks; the channel-frequency equivalence; the timing sweeps; and the dictionary figure from mc_r1_cns.npz. Report numbers are macros generated from these JSONs. Minor reproducibility note: template.py was last modified (17:25 EDT) after the recovery runs (17:03 EDT). Later runs that used the final version, R2 cns and the by-image cell, still match SPORCO exactly.",
+      "evidence": [
+        "proposal/code/extract_numbers.py loads recovery_*, grouped_*, colorB_small_*, equivalence_channel3d, mc_*, timing_sweeps",
+        "proposal/logs/ file list (42 entries)",
+        "stat: code/unicdl/template.py 2026-08-16T17:25:57-0400; logs/recovery_ism.json 17:03:33-0400; logs/mc_r2_cns.json 22:54:36-0400"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.effort_evidence.attempts_log_corroborates": {
+      "value": "not_applicable",
+      "confidence": "medium",
+      "reason": "This requirement is conditional (task rule 16: 'If any contract item is described as attempted-but-incomplete'), and the antecedent is absent. All recovery cells, both representations, the new cell and the equivalence are reported complete. R2 was completed at a K=20 scale declared in the plan; it was not attempted at K=40 and left incomplete. Masked CDL and the joint-sparsity representation were not attempted. The attempts log states no contract item remains incomplete.",
+      "evidence": [
+        "task_spec.md rule 16 (Effort evidence when partial work is claimed)",
+        "proposal/attempts_log.md 'Project-end review'",
+        "proposal/logs/mc_r2_cns.json (completed R2 run)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "evidence_completeness.quantitative_sources_documented": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "Every quantitative value in report.tex is a LaTeX macro auto-generated from named logs/*.json fields by extract_numbers.py. I re-derived the key ones from the logs and npz arrays: recovery deviations, color finals and ratios, timing, and collapse deviations. Source-paper values are attributed: penalties to the reference study's K=5 grid optima (matching paper.md Table II: 3.59/4.08/1.29/48.14), the ×3 L rule to its colour experiment, and the penalty-scaling laws to [4]. Run configurations are stored in each log.",
+      "evidence": [
+        "proposal/logs/macros.tex header 'Auto-generated by extract_numbers.py from logs/*.json'",
+        "paper.md:687-711 Table II values match report.tex:545-547",
+        "proposal/report.tex:624-626 L=3·14K stabilised rule of colour experiment"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "evidence_completeness.required_reporting_coverage": {
+      "value": "satisfied",
+      "confidence": "medium",
+      "reason": "Reporting covers every task-required experiment: the four recoveries; both representations, with R2 at the declared K=20 fallback; the new cell with its collapse checks; and the equivalence. It reports the required metrics: functional trajectories, per-iteration and Frobenius deviations, converged functionals, and per-filter norms. It includes the required results elements: the grid, recovery overlays, multi-channel curves and the new cell's convergence. The single completed seed (12345) is reported. Attempts are logged. The task requires neither uncertainty summaries nor a minimum seed count, and the runs are deterministic with one seed, so no uncertainty summary is missing.",
+      "evidence": [
+        "proposal/report.tex:521-538 protocol incl. seed 12345",
+        "proposal/report.tex figures fig:recovery, fig:grouped, fig:multichannel, fig:equivalence, fig:timing; tables tab:cells, tab:main_results, tab:grid",
+        "proposal/attempts_log.md"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    }
+  }
+}

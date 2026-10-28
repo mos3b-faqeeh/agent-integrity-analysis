@@ -1,0 +1,19 @@
+# raw benchmark data is NOT redistributed here -- see README
+data/raw/
+hfdata/
+*.npy
+__pycache__/
+.env
+*.key
+
+
+paper/*.aux
+paper/*.log
+paper/*.bbl
+paper/*.blg
+paper/*.fls
+paper/*.fdb_latexmk
+paper/*.out
+paper/*.spl
+paper/build.log
+paper/main_named.pdf

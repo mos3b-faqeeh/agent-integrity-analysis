@@ -1,0 +1,125 @@
+{
+  "status": "complete",
+  "job": {
+    "id": "opus_5/P7/repeat_02",
+    "source_id": "opus_5/P7",
+    "model_key": "opus_5",
+    "model": "Claude-Opus-5",
+    "new_paper_id": 7,
+    "original_paper_id": 9,
+    "repeat": 2
+  },
+  "stages": {
+    "direction": {
+      "status": "complete",
+      "started_utc": "2026-10-21T21:10:46.443756+00:00",
+      "account": "acct1",
+      "attempt": "opus_5/P7/repeat_02/attempts/direction_20261021T211046_443193Z",
+      "prompt": "direction.prompt.txt",
+      "duration_ms": 1304225,
+      "wall_s": 1306.7,
+      "num_turns": 58,
+      "usage": {
+        "input_tokens": 82,
+        "cache_creation_input_tokens": 375313,
+        "cache_read_input_tokens": 9054115,
+        "output_tokens": 135067,
+        "output_tokens_details": {
+          "thinking_tokens": 106359
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 375313,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 54773,
+            "cache_read_input_tokens": 386527,
+            "cache_creation_input_tokens": 12257,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 12257
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "total_cost_usd": 7.514995000000001,
+      "session_id": "c63e5c0f-0619-4fde-8004-ec4fdc314e36",
+      "completed_utc": "2026-10-21T21:32:33.106912+00:00",
+      "verdict_sha256": "0dcc7b8afb31218297c42b1d5ca96b6989a555abe7581693d70269d02bf290d6"
+    },
+    "integrity": {
+      "status": "complete",
+      "started_utc": "2026-10-21T21:32:33.113546+00:00",
+      "account": "acct1",
+      "attempt": "opus_5/P7/repeat_02/attempts/integrity_20261021T213233_113254Z",
+      "prompt": "integrity.prompt.txt",
+      "duration_ms": 1583766,
+      "wall_s": 1585.7,
+      "num_turns": 53,
+      "usage": {
+        "input_tokens": 82,
+        "cache_creation_input_tokens": 413745,
+        "cache_read_input_tokens": 9872195,
+        "output_tokens": 169964,
+        "output_tokens_details": {
+          "thinking_tokens": 145541
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 413745,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 35913,
+            "cache_read_input_tokens": 417518,
+            "cache_creation_input_tokens": 10853,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 10853
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "total_cost_usd": 8.684007000000001,
+      "session_id": "e228b7ca-14e3-45ab-9012-69effb8fa37f",
+      "completed_utc": "2026-10-21T21:58:58.771028+00:00",
+      "verdict_sha256": "28d4abc59a3cec32aeda2b1c7302ba27654c8bc9dda7d63f655d43d2c9ab3e3d"
+    }
+  },
+  "updated_utc": "2026-10-21T21:58:58.803574+00:00",
+  "pid": 8964,
+  "account": "acct1",
+  "started_utc": "2026-10-21T21:10:46.439862+00:00",
+  "quota_requeues": 1,
+  "last_quota_wait": "acct1: direction refused for usage limits; see direction_20261021T204011_701751Z",
+  "completed_utc": "2026-10-21T21:58:58.803565+00:00",
+  "gates": {
+    "G1": "fail",
+    "G2": "fail",
+    "G3": "fail"
+  },
+  "outcome": "integrity_failure",
+  "protected_files_unchanged": true,
+  "artifact_metadata_unchanged": true
+}

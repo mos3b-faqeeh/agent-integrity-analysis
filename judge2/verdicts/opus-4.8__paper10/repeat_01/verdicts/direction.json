@@ -1,0 +1,708 @@
+{
+  "nodes": {
+    "deliverables.report_pdf_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "proposal/report.pdf exists and is a full 8-page paper, not a placeholder. It has a setup/held-fixed section, a pre-stated noise-model/estimator/threshold-rule section (Methodology), a noiseless-anchor section, a results section with Table 1 and Figs. 1-2, a mechanism/failure/cost section with Fig. 3, related work, and limitations/conclusions. Text extraction gives 3-4.5k characters per page and no unresolved '??' references.",
+      "evidence": [
+        "report.log:631 'Output written on report.pdf (8 pages, 346451 bytes)'",
+        "report.tex:122,168,239,271,333,423,439 section headings (setup; noise model/estimator/threshold rule; noiseless anchor; noise-resilience thresholds; mechanism, failure, and cost analysis; related work; limitations and conclusions)",
+        "pypdf extraction of report.pdf: 8 pages, 0 occurrences of '??'"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.logs_directory_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "proposal/logs/ holds real run records for every required category: noiseless anchors (four anchor_*.pkl files with per-node trajectories plus anchor_summary.txt); per-noise-level sweeps (four sweep_*.json/.pkl files, 128 records each); sweep completion stdout; threshold extraction (thresholds.json); ED references embedded in the anchor, sweep and threshold records; and the figshare cross-check.",
+      "evidence": [
+        "logs/anchor_U0_nontrivial.pkl, anchor_U0_trivial.pkl, anchor_U10_nontrivial.pkl, anchor_U10_trivial.pkl; logs/anchor_summary.txt",
+        "logs/sweep_{U0,U10}_{nontrivial,trivial}.json/.pkl (nrec=128 each); logs/sweep_run_0.out '[SWEEP DONE] U0_nontrivial ... nrec=128 (275s)'",
+        "logs/thresholds.json; logs/figshare_crosscheck.txt"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.noiseless_anchor_logged": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "All four configurations (U=0/U=10 x trivial/nontrivial) have anchor logs. anchor_summary.txt records the noiseless phi_B, ED reference, circle deviation, max(1-f), AVQITE CNOT/infidelity and AVQDS N_theta/CNOT/depth. The pickles hold per-node traces with cnot, depth, infid, l2, n_theta, ops and thetas fields (1219/1404/9475/9325 nodes). Infidelity is recorded at every node for U=0 and every 20th node for U=10.",
+      "evidence": [
+        "logs/anchor_summary.txt lines 1-4 (e.g. 'U10_nontrivial ... phi_B=+0.9961pi ED=+1.0000pi |dev|=0.0123 ... max(1-f)=6.62e-02 ... AVQDS:N=134,CNOT=504,depth=51')",
+        "anchor_*.pkl traj node keys [Eloc,a,cnot,depth,dt_signed,dtheta,infid,l2,lam,n_theta,ops,thetas] (restricted-unpickler inspection)",
+        "code/run_anchor.py:44-59 fields written per anchor"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.noise_sweep_logged": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Each of the four sweeps logs 16 noise scalars x 8 shot counts. Every record carries the rates (p2q, p1q, ro, T1, T2), the shot count, n_seed=24, the ED reference, the exact-under-noise Berry phase and per-leg components, dev_mean/std/sem and the output infidelity. The pickles also hold the 24 per-seed phi_B and deviation values; these are distinct (e.g. 24 unique values at alpha=0.005, S=8192), so seed repeats are genuine.",
+      "evidence": [
+        "logs/sweep_U0_nontrivial.json records fields: alpha,p2q,p1q,ro,T1,T2,shots,n_seed,phiB_ed,phiB_exact_noise,qc_exact,g1_exact,g2_exact,dev_mean,dev_std,dev_sem,infidelity",
+        "sweep_*.pkl: nrec 128, alphas 16, shots [512..131072]; per-seed devs/phiBs length 24, 24 unique values",
+        "code/sweep.py:204-213 record construction; :258-260 grid and n_seed=24"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.threshold_analysis_logged": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "thresholds.json is produced by code/threshold.py using the pre-stated rule (first upward crossing of mean+SEM through eps_tol=0.1*pi at S_ref, linear interpolation). For all four configurations it records alpha_star, alpha_star_central, the alpha_star_band from the mean and mean-SEM crossings, p2q_star and p2q_star_hi, ro_star, T1_star and Sstar. That gives seed-derived uncertainty for both U=0 and U=10.",
+      "evidence": [
+        "logs/thresholds.json U0_nontrivial: alpha_star 0.02835, central 0.02917, band [0.02917,0.03001], p2q_star 1.418e-4, p2q_star_hi 1.500e-4, Sstar 512",
+        "logs/thresholds.json U10_nontrivial: alpha_star 0.00514, band [0.00550,0.00587], p2q_star 2.57e-5, Sstar 2048; U10_trivial alpha_star 0.00752, Sstar 1024",
+        "code/threshold.py:25-58 extraction rule"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.reference_ed_logged": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The ED Berry phases are computed at runtime from the agent's own JW Hamiltonian by a gauge-invariant Wilson-loop product over 400 lambda points. This is a pipeline independent of the AVQDS engine, and nothing is hardcoded. The values are logged per configuration (-1.0000pi, +0.0000pi, +1.0000pi, -0.0000pi) in anchor_summary.txt and as phiB_ed in the sweep and threshold logs.",
+      "evidence": [
+        "code/sshh.py:154-175 berry_phase_ed (Wilson loop); code/run_anchor.py:42 runtime call",
+        "logs/anchor_summary.txt 'ED=-1.0000pi', 'ED=+0.0000pi', 'ED=+1.0000pi', 'ED=-0.0000pi'",
+        "logs/thresholds.json phiB_ed per configuration (e.g. -3.14159 for U0_nontrivial, 1.8e-15 for U0_trivial)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.main_results_table_present": {
+      "value": "no",
+      "confidence": "medium",
+      "reason": "Table tab:main_results is present with all four configurations, each with a noiseless row and a last-accurate (just-below-threshold) row. Its columns are |phi_B|, |phi_B-phi_B^ED|, p2q* (device), Depth and N_CX, filled with logged values. The question and task_spec, however, require the extracted threshold WITH uncertainty in device units. The threshold column gives only bare point values (1.4e-4, 6.9e-4, 2.6e-5, 3.8e-5) with no seed-derived band, although the band is logged (p2q_star_hi) and numbers.tex defines \\UzNTpstarHi-style macros that report.tex never uses. Readout and T1 equivalents are also absent from the table. This required component of the table is missing.",
+      "evidence": [
+        "sections/table.tex:11-24 (label tab:main_results; threshold entries e.g. '$1.4{\\times}10^{-4}$' with no uncertainty)",
+        "sections/numbers.tex:27,47,67,87 define pstarHi macros; grep of report.tex finds no use of pstarHi",
+        "task_spec.md Deliverables: table must report 'the extracted threshold with uncertainty (in device-referenced units)'",
+        "logs/thresholds.json p2q_star_hi values (1.500e-4, 7.21e-4, 2.94e-5, 4.33e-5)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.noise_curves_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Fig. 1 plots the circle deviation against p2q at S_ref for both U=0 and U=10, covering both regimes. It shows seed-derived error bars, the eps_tol=0.1*pi line, and dotted verticals at the extracted thresholds, so the crossing is visible. Fig. 2 (left) shows phase-estimate std against shots, the shots-vs-uncertainty relationship at alpha=0. Fig. 2 (right) shows max output infidelity against p2q with the phase deviation overlaid. A minor caption/code mismatch: the caption says the error bars are the seed std, but the code plots the SEM. Both are seed-derived.",
+      "evidence": [
+        "report.tex:275-287 Fig. 1 caption; code/make_figures.py:50-76 (ax.errorbar yerr=dev_sem, axhline EPS_TOL, axvline p2q_star)",
+        "report.tex:311-323 Fig. 2; code/make_figures.py:79-121 (infidelity twin-axis; shots vs dev_std at alpha=0)",
+        "report.log:567-591 all four figure PDFs included"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.codebase_notes_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "codebase_notes.md is substantive. It documents the figshare tree and HDF5 schema (results*p0.h5 fields th1/th4/th3/ngates_list/layers/fidelity; exact*p0.h5; LOG*.h5), the phi_B reconstruction and fold convention taken from Fig3.py, and the CNOT/depth reconstruction. It records the cross-checks: spectrum vs incar (max|dlambda|=6.4e-14), ED phases, and resource comparisons at delta=-0.5/-0.9. It lists the external libraries used (OpenFermion JW, NumPy/SciPy, h5py, qiskit-aer for validation only) and what was not used.",
+      "evidence": [
+        "codebase_notes.md section 1 (schema and fold convention), section 2(a)-(c) (cross-checks), section 3 (external libraries), section 4 (archive artifacts not loaded)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.attempts_log_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "attempts_log.md documents distinct approaches with reasons: two failed AVQITE strategies and the line-search resolution; the derivative bug; the phi_G2 sign derivation; the simulator speed and aliasing fixes; the U=10 ansatz cap and the delta=+/-0.6 attempts that failed (trivial came out 0.70pi), leading to the switch to +/-0.9; and the failed direct-binning phi_G approach replaced by additive reconstruction.",
+      "evidence": [
+        "attempts_log.md sections A (Attempt 1, Attempt 2, Resolution), E (cap at 130; delta=+/-0.6 failed; delta=+/-0.9 chosen), F (binning failed at U=10; additive perturbation)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.methodology_section_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Section 3, 'Noise model, estimator, and threshold rule (pre-stated)', states the channels and their circuit mapping, the base rates and alpha scaling, the shot model, the Re+Im Hadamard estimator, the circle/branch policy, eps_tol=0.1*pi and the first-upward-crossing extraction rule. In report.tex it precedes the anchor and results sections. In the rendered PDF, Table 1 floats to the top of page 4 above the final Methodology paragraph, but the logical section order is Methodology before Results.",
+      "evidence": [
+        "report.tex:168-237 (Section 3 paragraphs: what carries noise, density-matrix channels, base device profile, phase estimator, accuracy criterion and threshold rule)",
+        "report.tex:239 and :271 later sections; report.tex:273 table input inside Section 5",
+        "pypdf page 4 text: Table 1 rendered above 'Accuracy criterion and threshold rule.'"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.noise_model_stated_before_results": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "Every channel and its circuit mapping are stated in Section 3 before any empirical number: 2q depolarizing per CNOT, 1q depolarizing per 1q gate, T1/T2 relaxation after every gate keyed to gate duration, and a readout bit-flip. So are the rates (p2q 5e-3, p1q 5e-4, ro 1e-2, T1=T2=100 us, 300/50 ns gates, 1 us measurement), the alpha scaling and the binomial/multinomial shot model for phi_qc and every phi_G-integrand measurement. Nothing is re-specified later in Results. Caveats that do not change the timing verdict: Table 1 floats to the top of page 4 in the PDF, and some stated details differ from the code (per-outcome rather than per-qubit readout flip; the 1 us measurement time is never applied).",
+      "evidence": [
+        "report.tex:187-211 channels, mapping, profile, alpha scaling, S_ref",
+        "report.tex:195-196 'Finite-shot noise is real binomial/multinomial sampling ... for the phi_qc readout and for every phi_G-integrand measurement'",
+        "code/noise.py:86 t_ro stored but never used; code/noise.py:326-335 single parity flip"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.noise_model_fully_specified": {
+      "value": "mostly_specified",
+      "confidence": "medium",
+      "reason": "The paper gives numeric rates, a stated device profile with gate durations, the alpha-scaling law (probabilities and relaxation rates proportional to alpha), S_ref=8192 and 24 seeds. Several elements needed to reproduce the study, however, appear only in code. The alpha grid (16 values from 0 to 2) and the shot grid (512 to 131072) are never stated. The phi_G-under-noise construction (96 equal-count bins, a representative node, an exact fine-grained noiseless leg plus a binned noise perturbation, a DTHETA_MIN=3e-3 filter) is not described. The phi_qc anchoring against a shot-sampled noiseless Hadamard reference is not described. The readout model is described as per-qubit bit flips but implemented as a single flip per Pauli outcome. The listed 1 us measurement duration is unused, and relaxation is keyed to gate time only, with no idle or depth-wise relaxation. The model is numeric, so it is not qualitative-only, but it is not fully reproducible from the paper.",
+      "evidence": [
+        "code/sweep.py:29-30 (K_BINS=96, DTHETA_MIN=3e-3), :130-164 (additive reconstruction, qc_0 sampled), :258-259 (alpha and shot grids) - none stated in report.tex",
+        "report.tex:194 vs code/noise.py:326-335 (readout model)",
+        "report.tex:207-208 '... measurement 1 us' vs code/noise.py:86 (t_ro unused)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.estimator_specified": {
+      "value": "well_conditioned_estimator",
+      "confidence": "high",
+      "reason": "The Methodology states that both the real and imaginary parts of the Hadamard overlap are measured (Im via S-dagger on the ancilla) and that phi_qc=atan2(Im,Re), which stays well-conditioned at 0 and pi where the real-part readout has zero slope. The code runs both circuits and draws binomial shots for each.",
+      "evidence": [
+        "report.tex:213-217 phase-estimator paragraph",
+        "code/noise.py:388-410 hadamard_overlap_noisy (re and im parts, S-dagger then H)",
+        "code/noise.py:413-423 phi_qc_from_probs (binomial Re and Im, arctan2)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.accuracy_criterion_prestated": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "Section 3 states the tolerance eps_tol=0.10*pi (0.314 rad), applied to the seed-mean circle deviation plus SEM. It also states the extraction rule: the largest alpha at S_ref meeting the criterion, by linear interpolation to the first upward crossing, with uncertainty from the mean+/-SEM crossings over 24 seeds. The branch policy is explicit: continuous accumulation of phi_G, one principal-value fold of phi_B, and circle distances throughout, including the U=10 +/-pi target. All of this precedes the results sections in report.tex. The rule's wording ('largest alpha ... first upward crossing') is resolved by the explicit first-crossing clause.",
+      "evidence": [
+        "report.tex:217-223 circle distances and branch policy",
+        "report.tex:225-237 accuracy criterion, threshold rule, shots floor, per-U rule",
+        "code/config.py:35 EPS_TOL=0.10*pi; code/threshold.py:25-35 first-crossing interpolation"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.method_held_fixed": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The AVQITE+AVQDS framework is kept, and the contribution is a noise characterization, not a new algorithm. The engine keeps the projected McLachlan EOM with RK4 at adaptive step dtheta_max=0.01, TETRIS disjoint-support growth driven by L^2 from M,V, the 616-operator UCCSD-like AVQITE pool, the Hamiltonian-string AVQDS pool (18/22), the time-reversed loop, and phi_B=phi_qc+phi_G with phi_G1/phi_G2. Departures in detail: the AVQITE reference is chosen from the ED ground state's max-weight configuration (disclosed); AVQITE uses a line search along the McLachlan direction (in attempts_log only); the phi_G2 sign convention is corrected. The U=10 growth cap is a hyperparameter-floor deviation and is assessed under held_fixed_constraints_respected.",
+      "evidence": [
+        "code/engine.py:154-160, 434-452, 503-546 (McLachlan EOM, RK4 loop, sign-flipped return half), 237-286 (TETRIS growth)",
+        "code/pools.py:10-39 (616-op pool; Hamiltonian pool N_H=18/22)",
+        "report.tex:141-166 held-fixed description and disclosed choices; attempts_log.md sections A and C"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_verification.noiseless_berry_phase_reproduced": {
+      "value": "reproduced_one_regime",
+      "confidence": "medium",
+      "reason": "Judged after the principal-value fold and circle distance. U=0 gives -0.9979pi (dev 0.0064 rad) and +0.0023pi (dev 0.0073 rad), about 2e-3 in units of pi and within the archive's own 0.997-1.000pi spread at delta=-0.5. So U=0 reproduces the quantized values at roughly the paper's precision. U=10 gives +0.9961pi (dev 0.0123 rad) and +0.0197pi (dev 0.0618 rad); the trivial deviation is 2% of pi, far outside the ~1e-3 criterion. These U=10 results come from a capped ansatz whose L^2 sits far above L^2_cut. The quantized assignment is correct in all four configurations, but the top tier's ~1e-3 accuracy is met only for U=0.",
+      "evidence": [
+        "logs/anchor_summary.txt (|dev| 0.0064, 0.0073, 0.0123, 0.0618)",
+        "logs/thresholds.json noiseless_dev values",
+        "logs/figshare_crosscheck.txt (archive |phiB|/pi 0.997-1.000 for converged delta=-0.5 runs)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_verification.resources_reproduced": {
+      "value": "mismatch",
+      "confidence": "medium",
+      "reason": "The rubric's dispositive ordering condition fails. At U=10 the nontrivial loop is cheaper than the trivial one (CNOT 504 vs 648, depth 51 vs 62), inverting the required nontrivial>trivial ordering; the paper itself remarks on the 'shallower U=10 nontrivial loop'. U=10>U=0 is preserved (51/62 vs 20/11 layers). All peak depths also fall below the paper-spanned bands (11 and 20 layers vs 47-106 for U=0; 51 and 62 vs 82-279 for U=10). The figshare cross-check is not at the agent's (delta,T): U=0 is compared to archive runs at T of about 2-6 instead of T=20, U=10 is about 2x below the archive's 834-1098 CNOT and 87-117 layers at delta=-0.9, and the trivial deltas are not cross-checked at all. The approximate tier needs both orderings preserved, so mismatch applies. I could not check the archive trace for trivial delta=+0.9 myself.",
+      "evidence": [
+        "logs/anchor_summary.txt (U10_nontrivial CNOT=504 depth=51; U10_trivial CNOT=648 depth=62; U0 220/20 and 108/11)",
+        "report.tex:305-306 'the shallower U=10 nontrivial loop (depth 51) breaks slightly before the deeper U=10 trivial one (depth 62)'",
+        "logs/figshare_crosscheck.txt (only delta=-0.5 U=0 at T<=10 and delta=-0.9/-0.6 U=10; no trivial-delta runs)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_verification.held_fixed_constraints_respected": {
+      "value": "no",
+      "confidence": "high",
+      "reason": "The L^2_cut=1e-4 floor is violated across essentially the whole U=10 loop. AVQDS growth is capped at 130 generators, and the cap is reached at lambda of about 0.037pi (nontrivial) and 0.061pi (trivial). After that, L^2 >= 1e-4 at 9443 of 9475 nodes (99.7%, median 2.85e-2, max 7.5e-2 at lambda of about 1.67pi) and at 9236 of 9325 nodes (99.0%, median 1.59e-2). In effect the cutoff is loosened by more than 100x, and the circuits are trimmed relative to the archive. The paper and attempts_log describe the excess as confined to 'the fast-growth window near lambda=0', which the logs contradict, and no uncapped comparison isolating the effect was run. U=0 also shows a small undisclosed transient: 3 of 1219 nodes exceed 1e-4 (max 6.3e-3), caused by the max_calls=2 growth limit. The other constraints hold: dtheta_max=0.01, N=4 on 8 qubits, twist on spin-up only, U in {0,10}.",
+      "evidence": [
+        "code/run_anchor.py:38 'n_cap = 130 if U >= 5 else 260'; code/engine.py:263 cap check, :509-510 max_calls=2",
+        "anchor_U10_nontrivial.pkl / anchor_U10_trivial.pkl traj l2 statistics (restricted-unpickler read)",
+        "report.tex:163-166 and :447-449 ('leaving the McLachlan distance above L^2_cut in the fast-growth window near lambda=0'); attempts_log.md section E",
+        "code/engine.py:460 dtheta_max=0.01; code/sshh.py:52-56 spin-up-only twist"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "experimental_completeness.both_u_regimes_run": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Noise sweeps and threshold extraction exist for both U=0 and U=10 (two configurations each). The U=10 runs use the capped ansatz.",
+      "evidence": [
+        "logs/sweep_U0_nontrivial.json, sweep_U0_trivial.json, sweep_U10_nontrivial.json, sweep_U10_trivial.json",
+        "logs/thresholds.json entries for all four keys"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "experimental_completeness.both_topological_regimes_run": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Within each U, both the nontrivial (delta<0) and trivial (delta>0) dimerizations were swept under noise: delta=-0.5/+0.5 at U=0 and -0.9/+0.9 at U=10. That covers all four required configurations.",
+      "evidence": [
+        "code/config.py:11-16 CONFIGS",
+        "logs/sweep_run_0..3.out completion lines for all four keys"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "experimental_completeness.seeds_with_error_bars": {
+      "value": "sufficient",
+      "confidence": "medium",
+      "reason": "Every (alpha, S) point is repeated over 24 seeds, which drive genuinely different binomial draws. The phase-error curves carry seed-derived error bars (SEM is plotted). The thresholds are defined through the seed SEM (mean+SEM crossing), and their seed-derived band is logged in thresholds.json. The paper does not print the numerical threshold band; that reporting gap is scored elsewhere.",
+      "evidence": [
+        "code/sweep.py:199-213 (24 seeds, dev_mean/std/sem); sweep pkl per-seed devs 24 unique values",
+        "code/make_figures.py:60 errorbar yerr=dev_sem",
+        "logs/thresholds.json alpha_star_band per configuration"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "experimental_completeness.noise_sweep_resolves_threshold": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The alpha grid has 16 points (0, 0.005, 0.01, 0.02, 0.035, 0.05, 0.075, 0.1, 0.15, 0.2, 0.3, 0.5, 0.75, 1, 1.5, 2) spaced roughly 1.5-2x apart, and each crossing is bracketed by adjacent points: U0 NT between 0.02 (0.235) and 0.035 (0.377); U0 T between 0.1 (0.238) and 0.15 (0.337); U10 NT between 0.005 (0.303) and 0.01 (0.698); U10 T between 0.005 (0.192) and 0.01 (0.434). The U=10 bracket (factor 2, only one nonzero sub-threshold point) is the coarsest. The logged exact-under-noise drift is linear in alpha there (U10 NT dphi_G2/pi = -0.101, -0.200, -0.396 at alpha=0.005, 0.01, 0.02), so linear interpolation is well founded. A shot axis of eight counts is swept at every alpha.",
+      "evidence": [
+        "code/sweep.py:258-259 grids",
+        "logs/thresholds.json dev_mean/dev_sem arrays",
+        "logs/sweep_U10_nontrivial.json g2_exact vs alpha"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "required_noise_sources.modeled_shot_sampling": {
+      "value": "faithfully_modeled",
+      "confidence": "medium",
+      "reason": "Finite-shot noise comes from real binomial draws of the noisy probabilities at the logged shot count. For the Re and Im Hadamard circuits the draws are made separately for each part. For <H>, each Pauli term gets its own S-shot draw. For each connection overlap, the draw is per mu per node. Seeds give distinct outcomes, and the alpha=0 spread follows 1/sqrt(S). Two minor quirks: phi_qc is anchored by subtracting a second, shot-sampled noiseless Hadamard estimate (qc_0), which adds non-physical variance; and connections whose aggregated |dtheta| per bin is 3e-3 or less (about 1% of the phi_G2 weight) are not sampled. Neither replaces sampling with an analytic variance.",
+      "evidence": [
+        "code/noise.py:326-335 sample_pauli (binomial with readout); :413-423 phi_qc_from_probs (binomial Re/Im)",
+        "code/sweep.py:138-158 shot path for dH, da and phi_qc (qc_0 sampled at :158)",
+        "computed coverage from anchor pickles: measured connections cover 99.0-99.8% of sum|a*dtheta|"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "required_noise_sources.modeled_two_qubit_gate": {
+      "value": "faithfully_modeled",
+      "confidence": "high",
+      "reason": "A two-qubit depolarizing channel acts on the actual density matrix after every CNOT. This covers the CNOT ladders of each compiled Pauli rotation and the ancilla-controlled CRz CNOTs, in both the 9-qubit Hadamard test and the 8-qubit phi_G-integrand circuits. The rate p2q=alpha*5e-3 is logged per record.",
+      "evidence": [
+        "code/noise.py:216-227 depol_2q; :264-269 _noise_2q after each apply_cnot; :247-252 and :371-380 ladders and CRz",
+        "logs/sweep_*.json records 'p2q' field",
+        "code/validate_noise.py:86 2q-depolarizing check against Kraus/kron"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "required_noise_sources.modeled_readout": {
+      "value": "present_but_flawed",
+      "confidence": "medium",
+      "reason": "Ancilla readout is modeled correctly as a bit flip on P(ancilla=0). For the system-qubit measurements, though, the readout error is applied as a single flip of each Pauli's +/-1 parity outcome, which is an attenuation of (1-2ro) whatever the Pauli weight. A per-qubit readout model gives about (1-2ro)^w. These are the measurements feeding <H> and the connection overlaps (weights 2-7). The paper states the readout is 'a classical bit-flip on the ancilla and measured system qubits', implying per-qubit flips. The implementation therefore under-represents readout error by a factor of roughly w on the most numerous measurements, which are the phi_G legs the paper identifies as limiting. The rates are logged.",
+      "evidence": [
+        "code/noise.py:277-284 prob_qubit0 (ancilla, correct)",
+        "code/noise.py:315-323 and :326-335 single (1-2ro) attenuation / flip per Pauli outcome; code/sweep.py:143,151",
+        "report.tex:194 'Readout error is a classical bit-flip on the ancilla and measured system qubits'"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "required_noise_sources.modeled_thermal_relaxation": {
+      "value": "faithfully_modeled",
+      "confidence": "medium",
+      "reason": "A genuine T1 amplitude-damping plus pure-dephasing Kraus channel, composed so that off-diagonals decay as exp(-t/T2), is applied on the density matrix after every gate. It uses t_1q=50 ns for single-qubit gates and t_2q=300 ns on both qubits of each CNOT. Rates scale with alpha and T1/T2 are logged per record. Simplifications: idle qubits do not relax, so depth enters only through each qubit's own gate count, and the 1 us measurement duration listed in the profile is never applied. Gate-attached relaxation is a standard convention, and the paper describes it accurately as keyed to gate duration.",
+      "evidence": [
+        "code/noise.py:53-65 thermal_kraus; :87-93 per-gate superoperators; :259-269 application after 1q and 2q gates",
+        "code/noise.py:86 t_ro stored, unused",
+        "report.tex:192-193 '... thermal relaxation ... keyed to the gate duration'; logs/sweep_*.json T1/T2 fields"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "noise_scope.phi_g_measurements_noised": {
+      "value": "noised",
+      "confidence": "high",
+      "reason": "Both phi_G integrands are re-estimated under the full channel set plus binomial shots along the frozen trajectory, at 96 integration nodes. <H> is measured per Pauli term on the noisy 8-qubit state at each node. The connection overlaps are measured as <A_mu> on the noisy partial states U_mu...U_1|Psi_0>, a distinct per-mu, per-node circuit family that is exactly equal to Im<Psi|d_mu Psi> noiselessly, and they cover about 99% of the phi_G2 weight. phi_qc comes from the noisy Re+Im Hadamard test. The threshold is extracted from the resulting noisy phi_B=phi_qc+phi_G1+phi_G2. The additive reconstruction (an exact fine-grained noiseless leg plus the binned noisy perturbation) keeps the noise contribution; phi_G is not held exact.",
+      "evidence": [
+        "code/sweep.py:76-88 _measure_bin; code/noise.py:290-312 propagate_ansatz partial-state snapshots",
+        "code/sweep.py:130-164 reconstruct (shot-sampled dH, da, phi_qc)",
+        "logs/sweep_U10_nontrivial.json g1_exact/g2_exact change with alpha (e.g. dphi_G2/pi=-0.101 at alpha=0.005)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "threshold_characterization.threshold_on_u0": {
+      "value": "rigorous_with_uncertainty",
+      "confidence": "medium",
+      "reason": "The pre-stated rule gives U0 thresholds with a seed-derived band. U0 nontrivial: alpha*=0.02835, p2q*=1.42e-4, band to 1.50e-4 from the mean and mean-SEM crossings. U0 trivial: alpha*=0.1386, p2q*=6.9e-4, band to 7.2e-4. Both are backed by a 16-point degradation curve that brackets the crossing. The paper prints only point values, not the band; that reporting gap is scored in the table and coverage nodes.",
+      "evidence": [
+        "logs/thresholds.json U0_nontrivial and U0_trivial (alpha_star, alpha_star_band, p2q_star_hi)",
+        "report.tex:275-287 Fig. 1; :291-295 threshold values",
+        "code/threshold.py:41-58"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "threshold_characterization.device_referenced_on_u0": {
+      "value": "device_referenced",
+      "confidence": "medium",
+      "reason": "The U=0 per-U threshold is stated as p2q* of about 1.4e-4 at S_ref=8192 shots. Using the profile's fixed ratios it is also given as T1* of about 3527 us (T2 scales identically, T1=T2) and readout 2.8e-4. A separate minimum-shots floor S*=512 is reported for U=0. Caveat: 512 is the smallest shot count in the grid, so the true floor is at or below 512 rather than bracketed.",
+      "evidence": [
+        "report.tex:292-295 (p2q* 1.4e-4, T1* 3527 us, readout 2.8e-4 at the base profile's fixed ratios)",
+        "report.tex:211, Table 1 caption (S_ref=8192); report.tex:317,327 (S*=512)",
+        "code/sweep.py:259 shot grid starts at 512"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "threshold_characterization.threshold_on_u10": {
+      "value": "rigorous_with_uncertainty",
+      "confidence": "low",
+      "reason": "By the tier criteria, U10 thresholds are extracted with the same pre-stated rule and a seed-derived band. U10 nontrivial: alpha*=0.00514, p2q*=2.57e-5, band to 2.94e-5. U10 trivial: alpha*=0.00752, p2q*=3.76e-5, band to 4.33e-5. Each is backed by a curve bracketing the crossing (alpha 0.005 to 0.01). Confidence is low for three reasons. The bracket is coarse, at the first nonzero grid points. The band reflects shot SEM only. And the U=10 trajectory comes from the capped ansatz with L^2 far above L^2_cut, so the threshold characterizes a shallower variant than the held-fixed method.",
+      "evidence": [
+        "logs/thresholds.json U10_nontrivial and U10_trivial (alpha_star, band, p2q_star_hi)",
+        "logs/thresholds.json U10 dev_mean+dev_sem: 0.129, 0.303, 0.698 (nontrivial) at alpha=0, 0.005, 0.01",
+        "anchor_U10_*.pkl L^2 statistics (cap reached at lambda of about 0.04-0.06pi)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "threshold_characterization.device_referenced_on_u10": {
+      "value": "abstract_units_only",
+      "confidence": "medium",
+      "reason": "The U=10 threshold is given as a two-qubit error rate at S_ref (p2q* of 2.6e-5 nontrivial and 3.8e-5 trivial) with T1* of about 19450 us. No separate minimum-shots floor S* for U=10 appears anywhere in the paper: only the U=0 value is quoted, although thresholds.json logs S*=2048 and 1024. No readout equivalent is stated for U=10 either. The rubric assigns abstract_units_only when the minimum-shots floor is missing, so the device_referenced tier is not met.",
+      "evidence": [
+        "report.tex:296-298 (U=10 p2q* and T1* only)",
+        "grep of report.tex: only UzNTSstar (U=0) is used at lines 317 and 327; UtNTSstar/UtTSstar unused",
+        "logs/thresholds.json U10_nontrivial Sstar 2048, U10_trivial Sstar 1024"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "topological_discrimination.distinguishes_phases_on_u0": {
+      "value": "distinguished_below_threshold",
+      "confidence": "medium",
+      "reason": "Both U=0 regimes were run under noise, and deviations are computed on the circle. Below the per-U threshold (alpha*=0.028), at alpha=0.02, the exact-under-noise phases are -0.931pi (nontrivial) and +0.017pi (trivial), a circular separation of about 0.95pi. Seed std is about 0.03 rad and SEM below 0.01 rad. The paper's construction (each regime within 0.1pi including SEM below the per-U threshold) guarantees a margin of at least 0.8pi. The margin is implied rather than computed as an explicit statistic: the MARGIN constant in config.py is unused.",
+      "evidence": [
+        "logs/sweep_U0_*.json alpha=0.02, S=8192: phiB_exact_noise -0.9309pi / +0.0173pi; dev_std 0.033 / 0.024",
+        "report.tex:217-223 circle margin; :236-237 per-U distinguishability rule; Table 1 rows",
+        "code/config.py:44-47 circle_dist; :36 MARGIN defined but unused"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "topological_discrimination.distinguishes_phases_on_u10": {
+      "value": "distinguished_below_threshold",
+      "confidence": "medium",
+      "reason": "Below the U=10 per-U threshold (alpha*=0.0051), at alpha=0.005 and S_ref, the phases are +0.900pi (nontrivial, dev 0.275+/-0.136 std) and -0.051pi (trivial, dev 0.172+/-0.098), a circular separation of about 0.95pi. Even the worst per-seed deviations (0.518 and 0.369 rad) leave at least 2.2 rad of separation. Circle distances handle the +/-pi branch at the nontrivial target. The margin is implied by the per-regime tolerance rather than reported explicitly.",
+      "evidence": [
+        "logs/sweep_U10_*.json alpha=0.005: phiB_exact_noise +0.8997pi / -0.0509pi",
+        "sweep_U10_*.pkl per-seed dev ranges 0.038-0.518 (nontrivial) and 0.022-0.369 (trivial)",
+        "report.tex:217-223, 236-237"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "mechanism_analysis.subsection_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Section 6, 'Mechanism, failure, and cost analysis', contains explicit mechanism paragraphs ('Does the noiseless cancellation survive noise?', 'Which noise source dominates.') and a leg-decomposition figure.",
+      "evidence": [
+        "report.tex:333-395",
+        "report.tex:335-348 Fig. 3 (fig_mechanism)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "mechanism_analysis.depth": {
+      "value": "deep",
+      "confidence": "low",
+      "reason": "The analysis splits the noise-induced drift into phi_qc, phi_G1 and phi_G2 (exact-under-noise, against p2q). This additive split is equivalent to noising one leg at a time. It identifies the leg that sets the threshold: phi_G1 for U=0 (+0.069pi vs -0.002pi at alpha=0.02) and phi_G2 for U=10 (-0.10pi at alpha=0.005), with phi_qc robust. It ties these to the algorithm's structure: the forward/return cancellation of the energy integral is broken by asymmetric noise accumulation; the large adaptive winding (about 8pi) amplifies fractional attenuation of the overlaps; the readout is a single circuit. It predicts fragility scaling with depth and winding, and where mitigation should be aimed. Weaknesses: the decomposition covers nontrivial configurations only, noise channels and depth are not isolated, and the U=10 nontrivial-vs-trivial ordering argument is weak. These keep confidence low.",
+      "evidence": [
+        "report.tex:350-384; Fig. 3 via code/make_figures.py:124-156",
+        "logs/sweep_U0_nontrivial.json and sweep_U10_nontrivial.json qc_exact/g1_exact/g2_exact vs alpha"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "mechanism_analysis.cancellation_robustness_engaged": {
+      "value": "mentioned",
+      "confidence": "medium",
+      "reason": "The paper treats phi_G1 as a distinct dynamical-phase leg whose forward/return cancellation breaks under noise, and backs the picture with a phi_qc vs phi_G1 vs phi_G2 decomposition. It also separates the deterministic gate-noise bias from 1/sqrt(S) shot noise. It does not make the required deterministic-vs-stochastic distinction, though. Nowhere does it state that the independent shot or incoherent fluctuations on the separate phi_qc, <H> and overlap circuits add in variance. Nor does it examine whether the shared-trajectory deterministic biases partially cancel. Instead it asserts that the bias 'accumulates rather than cancels' and calls it a 'stochastic, node-accumulated bias'. Its own logs show opposite-sign phi_G1/phi_G2 drifts in the trivial configurations (U10 trivial at alpha=0.005: +0.038pi vs -0.109pi; U0 trivial at alpha=0.1: +0.104pi vs -0.033pi), and these go undiscussed. The top-tier component is unmet.",
+      "evidence": [
+        "report.tex:325-331, 350-384 (no variance-addition or partial-cancellation argument)",
+        "logs/sweep_U10_trivial.json and sweep_U0_trivial.json g1_exact/g2_exact drifts"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "mechanism_analysis.dominant_source_identified": {
+      "value": "partial",
+      "confidence": "medium",
+      "reason": "The decomposition supports the claim that the single-ancilla readout is not the bottleneck and that the integrated phi_G legs are. The named dominant noise sources, however — 2q depolarizing plus T1/T2, with readout and 1q depolarizing called subdominant — rest on no isolating evidence: every logged sweep scales all channels together with alpha, and there are no per-channel runs. The circuit-property attribution (CNOT count and depth) is not isolated either, and the paper concedes the ordering 'is not a simple function of CNOT count'.",
+      "evidence": [
+        "report.tex:386-395 'Which noise source dominates' (no supporting data)",
+        "code/sweep.py:258-260 (single joint alpha sweep only); logs/ contains no per-channel runs",
+        "report.tex:304-309"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_analysis.subsection_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "An explicit 'Failure analysis.' paragraph-subsection in Section 6 discusses how and why the estimate degrades beyond threshold: smooth migration, variance blow-up near the maximally mixed state, wrap-around non-monotonicity at U=10, and confident-but-wrong outputs.",
+      "evidence": [
+        "report.tex:407-421"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_analysis.depth_dependence_engaged": {
+      "value": "engaged",
+      "confidence": "medium",
+      "reason": "The paper connects the roughly order-of-magnitude lower U=10 thresholds (2.6e-5 and 3.8e-5 vs 1.4e-4 and 6.9e-4) to the several-times-deeper U=10 circuits and their larger CNOT counts (depth 51/62 vs 20/11), through per-node attenuation, entangling-gate count and loop duration, together with the winding magnitude. This is supported by the threshold results. The discussion sits in the mechanism and results paragraphs of the same section rather than in the failure paragraph itself.",
+      "evidence": [
+        "report.tex:303-309, 374-377, 389-395",
+        "logs/thresholds.json p2q_star values; logs/anchor_summary.txt depths and CNOTs"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_analysis.patterns_explained_coherently": {
+      "value": "partial",
+      "confidence": "medium",
+      "reason": "Several patterns are coherently explained: U=10 non-monotonicity as wrap-around of the folded phase while phi_G2 drifts tens of radians; smooth migration with small seed variance until the state is nearly fully mixed; shot-limited vs gate-limited behavior; readout robustness. But the U=10 nontrivial-before-trivial ordering is attributed to 'the large geometric winding', even though both U=10 configurations have essentially the same winding (8.036pi vs 8.064pi). The logs instead point to partial phi_G1/phi_G2 cancellation and an opposite-sign noiseless offset in the trivial case, which are not discussed. Not every pattern is tied coherently to structure.",
+      "evidence": [
+        "report.tex:304-309, 392-395, 407-421",
+        "logs/anchor_summary.txt G2=+8.036pi (nontrivial) vs +8.064pi (trivial)",
+        "logs/sweep_U10_trivial.json alpha=0.005: dg1=+0.038pi, dg2=-0.109pi; anchor phi_B=+0.0197pi"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "compute_cost_analysis.subsection_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "An explicit 'Computational cost.' paragraph-subsection in Section 6 discusses the classical simulation cost of the noise characterization.",
+      "evidence": [
+        "report.tex:397-405"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "compute_cost_analysis.simulation_cost_discussed": {
+      "value": "mentioned",
+      "confidence": "medium",
+      "reason": "The paragraph gives only the structure of the cost: per point, (nodes ~O(10^2)) x (N_theta ~O(10^2)) noisy circuit evaluations, with the density matrix computed once per (configuration, alpha) and reused across shots and seeds. It reports no wall-clock times, no total number of sweep points or seeds (16x8x24 per configuration is never stated), and no count of circuit evaluations. The logged timings (sweeps 275 s and 677 s; anchors 518-768 s) are not used.",
+      "evidence": [
+        "report.tex:397-405",
+        "logs/sweep_run_0.out (275s), sweep_run_2.out (677s); logs/anchor_summary.txt runtimes 518-768 s"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "optional_extensions.noise_breadth": {
+      "value": "broad",
+      "confidence": "medium",
+      "reason": "Single-qubit depolarizing error (base 5e-4, scaled by alpha), which the rubric lists as an example channel, is modeled after every single-qubit gate in the density-matrix simulation and swept with the joint alpha. The reported thresholds include it. It is not isolated, and the paper's claim that it is subdominant is unsupported. Still, more than the four required sources are modeled, so required_only does not apply.",
+      "evidence": [
+        "code/noise.py:92, 259-262 (1q depolarizing composed with thermal on every 1q gate)",
+        "report.tex:192 'a single-qubit depolarizing channel on each single-qubit gate'; logs/sweep_*.json p1q field"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "optional_extensions.trotter_noise_comparison": {
+      "value": "absent",
+      "confidence": "high",
+      "reason": "No Trotterized baseline was run under noise. The only Trotter figures are the source paper's noiseless CNOT estimates, quoted in the abstract.",
+      "evidence": [
+        "logs/ contains no Trotter runs; code/ has no Trotter module",
+        "report.tex:40-43 (abstract quotes 10^5-10^6 CNOTs only)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "optional_extensions.error_mitigation": {
+      "value": "absent",
+      "confidence": "high",
+      "reason": "No error-mitigation technique is applied. Mitigation, such as zero-noise extrapolation of the dominant integrand, is discussed only as future work.",
+      "evidence": [
+        "report.tex:434-437, 462-468",
+        "logs/ contains no mitigation runs"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "optional_extensions.noisy_ansatz_construction": {
+      "value": "absent",
+      "confidence": "high",
+      "reason": "The trajectory and ansatz stay frozen at their noiseless values; M and V are never re-estimated under noise. The paper states this scope explicitly.",
+      "evidence": [
+        "report.tex:172-181, 441-445",
+        "attempts_log.md section G ('not attempted here')"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "originality_and_literature.contribution_originality": {
+      "value": "meaningful_extension",
+      "confidence": "low",
+      "reason": "The study adds new scientific content beyond the source paper: whole-method thresholds and the finding that the integrated phi_G legs, not the readout, limit accuracy, with the dominant leg depending on the regime. There is no sign it replicates a published follow-up. Its novelty is limited, however. It applies a standard noise model (depolarizing, T1/T2, readout, shots) and a tolerance-crossing threshold within a protocol largely laid down by the task, on a single 4-site chain, and the U=10 results are compromised by the ansatz cap. I could not check against post-2025 follow-ups without web access.",
+      "evidence": [
+        "report.tex:107-120 contributions; :423-437 positioning",
+        "report.tex:439-452 scope"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "originality_and_literature.literature_engagement": {
+      "value": "moderate",
+      "confidence": "medium",
+      "reason": "The paper cites 14 references across Berry-phase and topology algorithms (Murta, Tamiya, Xiao, Smith), adaptive variational dynamics (AVQDS, AVQITE, Zoufal error bounds) and mitigation and shot allocation (Cai, van Straaten). Related Work is a single paragraph positioning the study as orthogonal, with no substantive comparison to prior noise studies of variational dynamics or to hardware Berry-phase experiments.",
+      "evidence": [
+        "report.bbl (14 bibitems)",
+        "report.tex:423-437 Related work"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "originality_and_literature.spec_independence": {
+      "value": "transliterated",
+      "confidence": "high",
+      "reason": "The section sequence follows the spec's deliverable list one-to-one: motivation; 'The estimator being characterized and the held-fixed setup'; 'Noise model, estimator, and threshold rule (pre-stated)'; 'Noiseless anchor'; 'Noise-resilience thresholds'; 'Mechanism, failure, and cost analysis'; related work; 'Limitations and conclusions'. The text reuses spec phrasing: 'four required configurations', 'held-fixed', 'whole-method', 'noisy-construction study', 'per-U threshold'. The Limitations even say 'as the contract emphasizes characterization quality over system size', despite the spec's explicit prohibition on 'the contract'.",
+      "evidence": [
+        "report.tex:122,168,239,271,333,439 section titles vs task_spec.md Deliverables list",
+        "report.tex:136-137 'four required configurations'; :451 'as the contract emphasizes'"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.journal_quality_structure": {
+      "value": "reasonable",
+      "confidence": "medium",
+      "reason": "The prose is clear, with a sharp thesis and no bullet lists, but it lacks journal polish. There are unsupported claims: the dominant-noise-source paragraph, and the winding explanation for the U=10 ordering. There is an internal sign inconsistency: Eq. (pg) uses phi_G2=int Im[...] with Im<Psi|d_mu Psi>=-<A_mu> (line 182), while line 368 and the code use +int <A_mu> theta_dot. The Fig. 1 caption says the error bars are std, but the plotted bars are SEM. The threshold uncertainty is promised but never reported, and the structure and terminology mirror the spec.",
+      "evidence": [
+        "report.tex:150-154, 181-183 vs 368; code/engine.py:541",
+        "report.tex:280-281 vs code/make_figures.py:60",
+        "report.tex:386-395"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.limitations_discussion_present": {
+      "value": "substantive",
+      "confidence": "medium",
+      "reason": "An explicit Limitations section names the task-relevant scope limits and says which way each biases the results: the frozen trajectory (no noisy M,V), the partial-state connection primitive (a full generalized Hadamard test would be more pessimistic), the U=10 ansatz cap and its caveat for the interacting thresholds, and a single 4-site chain. It is brief and omits noise-model simplifications (idle relaxation, readout model) and the shot-only nature of the threshold band. Its accuracy about the cap's extent is an integrity matter, not scored here.",
+      "evidence": [
+        "report.tex:439-452"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.rendered_pdf_clean": {
+      "value": "clean",
+      "confidence": "low",
+      "reason": "The LaTeX log shows no overfull boxes and no undefined references (only three cosmetic underfull vboxes). All four figure PDFs are included at or below text width and were saved with tight bounding boxes, and text extraction shows no '??' and complete table text. Table 1 floats to the top of page 4 inside the Methodology section, a layout quirk rather than a defect. Visual page rendering was not possible here (no poppler), so figure-internal clipping could not be checked by eye.",
+      "evidence": [
+        "report.log grep: no 'Overfull'/'undefined'; Underfull vbox at lines 563, 584, 594",
+        "report.log:567-591 figure inclusions",
+        "pypdf extraction pages 1-8: 0 '??'; page 4 table text complete"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.main_results_table_complete": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The node's criteria are met. tab:main_results has rows for all four configurations, each with a noiseless and an at/just-below-threshold row, and columns for Berry phase, |phi_B-phi_B^ED|, threshold in device units (p2q* at S_ref), depth and N_CX, all filled with logged values and no placeholders. The missing threshold uncertainty, which the task requires, is scored under deliverables.main_results_table_present because that node's question explicitly includes it.",
+      "evidence": [
+        "sections/table.tex:13-24",
+        "code/make_table.py:35-55 (values pulled from sweep pkl and thresholds.json)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.variational_simulation_integrity.state_evolved_through_circuit": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "The variational state is built gate by gate through the parametrized circuit (partial_states via apply_exp). theta(t) follows the projected McLachlan EOM M_tilde theta_dot = V_tilde, integrated with adaptive RK4 on the time-reversed loop, and growth uses L^2 from M,V. ED is used only for the reference phase, infidelity diagnostics and reference-state selection; it never replaces the propagation.",
+      "evidence": [
+        "code/engine.py:57-68 (partial_states/apply_exp), :154-160 (M_tilde, V_tilde), :434-452 (theta_dot solve), :503-546 (RK4 loop)",
+        "code/engine.py:237-286 growth by L^2 reduction"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.variational_simulation_integrity.resources_from_logged_selections": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "CNOT counts (sum of 2(w-1)) and depth (disjoint-support layer packing) are computed from the agent's own appended operators. The operator list is logged at every trajectory node, and the archive's ngates/ansatz.h5 are used only in the cross-check script.",
+      "evidence": [
+        "code/engine.py:71-90 cnot_count/depth_layers over self.ops; :495-500 per-node ops/cnot/depth recorded",
+        "code/figshare_crosscheck.py (archive read for comparison only)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.experiment_completeness.all_experiments_logged": {
+      "value": "satisfied",
+      "confidence": "medium",
+      "reason": "Each enumerated experiment class in the paper has log entries: the four noiseless anchors (pkl plus summary), the per-(configuration, alpha, shots, seed) sweeps (JSON plus per-seed pkl), the threshold analysis (thresholds.json), the ED references (in anchor, sweep and threshold logs) and the archive cross-check (figshare_crosscheck.txt). The figures and tables are regenerated from these logs. The only unlogged items are the outputs of the simulator unit-validation script, which fall outside the enumerated experiment classes and are scored under quantitative_sources_documented.",
+      "evidence": [
+        "logs/ listing; code/finalize.sh regenerates numbers, table and figures from logs",
+        "code/make_numbers.py, make_table.py, make_figures.py read only logs/"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.effort_evidence.attempts_log_corroborates": {
+      "value": "satisfied",
+      "confidence": "medium",
+      "reason": "The paper describes one item as compromised and unresolved: the U=10 anchor run under a 130-generator cap, with uncapped runs 'left to larger compute'. attempts_log.md documents at least two distinct attempts with reasons for it: the capped delta=+/-0.6 runs that failed (trivial at 0.70pi, nontrivial dev 0.07pi), the switch to delta=+/-0.9 that the cap tracks, and why raising the cap was ruled out. Other multi-attempt items (AVQITE, phi_G binning) are documented too.",
+      "evidence": [
+        "report.tex:163-166, 447-450",
+        "attempts_log.md section E (cap rationale; delta=+/-0.6 attempt; delta=+/-0.9 choice; raising cap ruled out)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "evidence_completeness.quantitative_sources_documented": {
+      "value": "not_satisfied",
+      "confidence": "low",
+      "reason": "Core results are well sourced: the macros and the table are generated from the logs, and thresholds, anchor phases, resources, decompositions and archive comparisons all trace to logged values. Not every quantitative claim has a run or log source, though. The Methodology's simulator-validation figures (agreement to about 1e-16; compilation matching to 2.8e-16) cite only validate_noise.py, with no saved output. The hardware-context claims ('current two-qubit error rates ~5e-3', 'representative of current superconducting hardware') have no citation. The shortfall is narrow, but the task requires every quantitative claim to trace to a log entry.",
+      "evidence": [
+        "report.tex:196-200 validation numbers; no corresponding file in logs/",
+        "report.tex:203-205, 299 uncited hardware-rate context",
+        "sections/numbers.tex (auto-generated from logs) for the core results"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "evidence_completeness.required_reporting_coverage": {
+      "value": "not_satisfied",
+      "confidence": "medium",
+      "reason": "Reporting falls short of the task's required coverage. The thresholds' seed-derived uncertainty is never reported numerically, in the text or in the table. The U=10 minimum-shots floor S* and the U=10 readout equivalent are not reported. Of the swept shot axis, only the S_ref slice (all alpha) and the alpha=0 slice appear; the other seven shot counts at alpha>0 are logged but not shown, even though the paper makes claims about them (saturation at a gate-noise bias). Infidelity curves and the leg decomposition are shown for the nontrivial configurations only.",
+      "evidence": [
+        "logs/thresholds.json bands and Sstar values not in report.tex",
+        "report.tex:325-331 claim about increasing S at alpha>0 without a figure or table",
+        "code/make_figures.py:79-156 (infidelity and mechanism plots for nontrivial keys only)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    }
+  },
+  "context": {
+    "partial_work_claimed": {
+      "value": true,
+      "reason": "The paper describes an unresolved, compromised item: U=10 AVQDS growth is capped at 130 generators, and fully uncapped runs are 'left to larger compute'. attempts_log.md records failed attempts and disclosed compromises: two failed AVQITE strategies, the failed delta=+/-0.6 capped runs, and the failed direct phi_G binning at U=10.",
+      "evidence": [
+        "report.tex:163-166 disclosed U=10 cap deviation",
+        "report.tex:447-450 'fully uncapped runs are left to larger compute'",
+        "attempts_log.md sections A, E, F"
+      ]
+    }
+  }
+}

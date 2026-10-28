@@ -1,0 +1,233 @@
+{
+  "nodes": {
+    "number_traceability.observables_in_logs": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "All reported results come from saved JSON logs. build_artifacts.py writes every table and macro (logs/results_macros.tex, main_table.tex, spectra_table.tex, robustness_table.tex, cost_table.tex, convergence_table.tex), and number_traceability.json maps each macro to its source key. I checked each value against its source. (1) Main-table R_spin/R_PDE/error rows match sweep_summary.json results[0..5]: 0.014937/0.015000/0.42; 0.029869/0.030000/0.44; 0.059639/0.060000/0.60; 0.118240/0.120000/1.47; 0.227138/0.240000/5.36; 0.372638/0.480000/22.37. (2) RawShift 0.108880 and HZeroShift -0.009360 match results[3]. Their difference, 0.118240, is the tabulated rate. RawWeakError 62.82% = |0.005577-0.015|/0.015. (3) The 9.90% and 17.68% coarse-step deviations, typed directly in main.tex, match linear_summary.json max_nonzero_relative_shift_from_continuous_spectrum (0.09896, 0.17678). (4) LinearAccuracy 0.934% matches linear_refinement.json (0.009344). (5) LongError 71.74% and ModulatedError 3.42% match additional_summary.json. FrozenRateMismatch 2.15% matches mechanism.json (eps=1.6: 0.02154). (6) LeadingHorizon 1.30 reproduces analytically: sqrt(1/((3/20)*0.85*0.7)) = 1.296. (7) Cost table 16.79-44.02 ms matches aggregate.json cost_sizes, and 64 KiB / 6.31 MiB = 65536 / 6619136 bytes. The 3.75% bound = (5/8)*0.06 and is labelled as an analytic estimate. The convergence table matches numerical_checks.json. (8) The sweep, contrast, failure and linear_limit figures agree with the logged values. (9) report.pdf SHA-256 equals pdf_audit.json (604a0a1a...), and all code hashes equal source_manifest.json. The eps=0 row's 0.000000 R values are definitional: baseline_observable.json documents that the H0 calibration is divided by itself, so they are not a fabricated measurement. Limitation: I could not rerun Python on the .npz trajectories (tool denied). However, compare() in run_nonlinear.py computes the rates from the stored statevectors and PDE samples, and the code-to-JSON-to-macros-to-PDF chain is fully consistent. No fabricated, altered, or contradicted value was found.",
+      "evidence": [
+        "proposal/logs/main_table.tex rows vs proposal/logs/sweep_summary.json results[0..5] rate/pde_rate/relative_error (e.g. eps=0.4: rate 0.11824005, pde_rate 0.12000000, relative_error 0.014666)",
+        "proposal/logs/results_macros.tex and number_traceability.json (24 macros with source and key) vs aggregate.json/mechanism.json/additional_summary.json",
+        "proposal/sections/main.tex:140 '9.90% ... 17.68%' vs linear_summary.json lines 68 and 258 (0.09896367, 0.17678367)",
+        "proposal/logs/spectra_table.tex vs linear_summary.json full_vector_Ramsey_frequencies and linear_refinement.json Ramsey_frequencies",
+        "proposal/logs/baseline_observable.json: spin_rate 1.0e-21 and PDE_rate 0.0, by definition",
+        "proposal/figures/sweep.png and contrast.png annotated values match the table",
+        "shasum of report.pdf = pdf_audit.json pdf_sha256; shasum of code/* = logs/source_manifest.json"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "number_traceability.epsilon_values_in_logs": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The reported eps values match the pre-registered plan and the run logs exactly. method_plan.json lists primary_epsilon [0.05, 0.1, 0.2, 0.4], stress_epsilon [0.8, 1.6] and primary_dynamic_range 8.0. sweep_summary.json results contain exactly these six eps in order, and each run's coherent, tangent and baseline records carry the matching epsilon field. The paper's main table, Fig. 1 x-ticks and text ('eps/J=0.05,0.1,0.2,0.4; ... 0.8,1.6'; 'eightfold coupling range') report the same values. Additional checks use eps=0.2 for density, size and modulated runs and eps=0.4 for long-time and step-convergence runs, as declared in plan additional_checks. The linear controls use eps=0, with statevector difference to H0 = 0.0. Every run record carries plan_sha256 dece833b..., which matches method_plan.sha256. No altered or misattributed eps value was found.",
+      "evidence": [
+        "proposal/code/method_plan.json lines 20-30 (primary_epsilon, stress_epsilon, primary_dynamic_range 8.0) and additional_checks lines 83-117",
+        "proposal/logs/sweep_summary.json epsilon fields 0.05, 0.1, 0.2, 0.4, 0.8, 1.6 (lines 10, 408, 806, 1204, 1602, 2000)",
+        "proposal/logs/main_table.tex eps column",
+        "proposal/sections/main.tex:86 eps list; additional_summary.json and numerical_checks.json eps values",
+        "verify_artifacts.py:12 asserts the sweep eps list equals the plan's primary+stress lists; verification.json all_declared_sweep_points_reported true"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "no_hardcoded_values.no_hardcoded_observables": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The code contains no hardcoded growth rates, frequencies, transmission curves or simulation outputs standing in for computation. spin.py builds the full 2^N Hamiltonian and evolves statevectors. pde_reference.py integrates the NLSE with a Fourier split-step method. run_nonlinear.compare() extracts both rates by OLS from stored coherences and saved PDE samples. refine_linear.py evaluates the exact frequencies at runtime from sqrt(Delta^2+cos^2(l*pi/10)) and cross-checks them against eigh (analytic_vs_eigh_max_error ~1e-15). The only literal-derived numbers in mechanism.py are 6*0.15, 8*eps/Delta*rho and 5/8*I. The paper explicitly labels these as analytic estimates ('an analytic estimate of reference-model truncation, not an error measured by solving the full cold-fluid equations'). For the uniform case the PDE linear denominator is the constant sqrt(rho), which is the exact zero-coupling uniform solution. The numerator still comes from the integrated PDE field, so this does not substitute for the comparison. Statevector trajectories exist for all 88 runs. My enumeration of the log files matches verification.json: 14 main + 12 density + 16 size + 4 modulated + 4 long + 16 step + 1 single-excitation + 4 Ramsey + 9 propagation + 8 refined. No hardcoded result is presented as computed.",
+      "evidence": [
+        "proposal/code/spin.py lines 17-79 (Hamiltonian, layer, evolve, exact, observe)",
+        "proposal/code/pde_reference.py lines 6-22 (split-step solver, Fourier interpolation)",
+        "proposal/code/run_nonlinear.py lines 29-40 (rates fitted from stored coherences and PDE samples)",
+        "proposal/code/refine_linear.py lines 11-13 (frequency formula evaluated at runtime); linear_refinement.json analytic_vs_eigh_max_error 1.2e-15 and 2.1e-15",
+        "proposal/sections/main.tex:189 labels the 3.75% figure as an analytic estimate",
+        "proposal/logs/verification.json trajectory_count 88, every trajectory dimension 2^N"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "number_traceability.pde_reference_independent_in_logs": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Nothing shows the PDE-reference values being copied from or fitted to the emulation. (1) pde_reference.py imports only utilities and PLAN from spin.py and never loads emulation files. Its docstring reads 'never reads emulation outputs'. (2) pde_reference.json was created at 18:14:45Z, before the first sweep statevector run at 18:16:06Z; verify_artifacts.py asserts this chronology. (3) The PDE coefficients (D=1/(2*Delta)=0.0625, g=-2*eps) and the amplitude mapping |A|^2=(8*eps/Delta)|psi|^2 were fixed in method_plan.json at 18:10:45Z, and the hash is verified in every run record. (4) The logged R_PDE values equal 2*eps*rho to ~1e-15 (0.015, 0.03, 0.06, 0.12, 0.24, 0.48). That is what independent integration predicts; the analytic uniform-solution error is at most 2.0e-14. At eps=1.6 the PDE value (0.48) departs strongly from the spin value (0.3726), which is inconsistent with back-fitting. The g=2*eps coefficient comes from the analytic mean-field mapping with a stated field normalization, and the paper discloses this. Whether that mapping is scientifically independent belongs to the direction rubric; it is not copying or fitting to emulation outputs.",
+      "evidence": [
+        "proposal/code/pde_reference.py line 1 docstring and lines 24-44 (inputs are PLAN eps lists only)",
+        "proposal/logs/pde_reference.json created_utc 2026-10-03T18:14:45Z; per-run D 0.0625, g -2*eps, uniform_exact_solution_max_error up to 2.0e-14",
+        "proposal/logs/sweep_summary.json coherent_run created_utc 2026-10-03T18:16:06Z",
+        "proposal/code/method_plan.json lines 8-18 (PDE and amplitude normalization pre-registered)",
+        "proposal/code/verify_artifacts.py lines 19-20 (chronology asserts)",
+        "proposal/sections/main.tex:121 'No coefficient is fitted to the spin results'"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "pre_stated_method.hyperparameters_match_logs": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Every hyperparameter quoted in the paper matches the executed configurations in the logs. Nonlinear runs: the paper states N=12, Delta=8, rho=0.15 on odd sites, readout sites 5 and 7, T=1/J with 101 samples at 0.01/J, and second-order Suzuki splitting with delta=0.005/J. The coherent_run records show N 12, Delta [8.0]*12, initial_density 0.15 on one-based odd sites, dt 0.005, order 2, steps 200, dimension 4096, trajectory_shape [101, 4096] and readout_sites_one_based [5, 7]. Step checks: the paper states 0.01, 0.0025 and a sparse exponential, and numerical_checks.json has dt 0.01/0.005/0.0025 plus an exact run. PDE: the paper states 128 points, L=12a, dt 0.005, with a 256-point half-step check. pde_reference.json shows grid 128, dt 0.005, and refinement_fine grid 256, dt 0.0025. Linear: the paper states N=9, Delta=0 and J/4, step 0.8 first-order, times 0..9.6, refinements 0.05 and 0.025, packet (|1>+|2>)/sqrt2, sharp Delta=J from site 5, and Gaussian width 1.2. run_linear.py and linear_summary.json use t=arange(13)*0.8, evolve(dt=.8, order=1), ini[1]=ini[2], (j>=5) and width 1.2; linear_refinement.json uses dt 0.05 and 0.025. Modulated runs: the paper states 0.15[1+0.1cos(2*pi*x/12)] at eps=0.2, matching preparation() and the PDE solve(). Long runs use T=8 at eps=0.4. The cost-table caption ('200 Suzuki steps', 'eps=0.2J') matches the size runs. No material difference found.",
+      "evidence": [
+        "proposal/sections/main.tex:78-104 (protocol parameters) and appendix.tex:71,113,130",
+        "proposal/logs/sweep_summary.json coherent_run fields dt 0.005, order 2, steps 200, dimension 4096, trajectory_shape [101,4096]",
+        "proposal/logs/pde_reference.json grid 128, dt 0.005, refinement_fine grid 256, dt 0.0025",
+        "proposal/code/run_linear.py lines 17-22 and 47-50; linear_summary.json",
+        "proposal/logs/numerical_checks.json dt 0.01/0.005/0.0025 and exponential",
+        "proposal/logs/aggregate.json cost_sizes trotter_steps 200"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "test_set_integrity.pde_independent_of_emulation": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The PDE reference is not copied from or back-fit to emulation outputs. All PDE fields (pde_*.npz) were written at 18:14:45Z, before any spin trajectory existed (first at 18:16:06Z). The solver reads only the plan's coupling lists. The observable definition, the coefficient 2*eps, the readout positions x=4a,6a, the fit interval [0,1] and the 15% tolerance were all fixed in the hashed method_plan.json beforehand. The PDE rates for the spin residuals come solely from the saved PDE samples, using the same OLS definition (run_nonlinear.py lines 35-40). The double calibration subtracts the finite-density H0 phase; without it the error would be 62.82%. That calibration was already specified in the pre-run plan's observable string, and the paper reports the uncalibrated discrepancy, so it is not a post-hoc adjustment. The nonuniform PDE reference uses its own zero-coupling PDE field as denominator. That case's 3.42% error and the ~52-55% endpoint errors are reported, not tuned away.",
+      "evidence": [
+        "proposal/logs/pde_reference.json created_utc 18:14:45Z vs earliest run record 18:16:06Z (sweep_summary.json line 52)",
+        "proposal/code/method_plan.json line 19 (observable incl. S_0/L_0 calibration and PDE extraction rule)",
+        "proposal/code/run_nonlinear.py lines 34-40 (PDE rate from saved pde_*.npz only)",
+        "proposal/sections/main.tex:104 'All PDE reference fields were saved before evaluating spin residuals'",
+        "proposal/logs/spatial_phase.json endpoint relative_phase_errors 0.525 and 0.550 are reported"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_honesty.noiseless_simulation_from_own_runs": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The noiseless linear baseline comes from the agent's own executed statevector runs at eps=0. run_linear.py evolves 512-amplitude vectors for the Ramsey dispersion (Delta=0, J/4) and for the vacuum, sharp and Gaussian propagation cases. The outputs are logged in linear_summary.json and linear_*_{extended,H0,continuous}.npz, with an independent 9x9 logical-circuit reference (nonzero-mode relative agreement 4.2e-16; CoM difference 6.2e-15). The paper does not attribute numerical values to Sundar et al.'s noiseless simulation. It says the work is 'a logical-circuit and qualitative propagation reproduction, not a reconstruction of unavailable native-gate compilation parameters' and that 'no pointwise match to a digitized published curve is asserted'. It discloses that the delta=0.8 Ramsey slopes differ from the exact spectrum by up to 9.90% and 17.68%, and that the 0.934% figure comes from a later refined step. Its qualitative propagation claims match the logs. Vacuum: the packet first turns at the left boundary, then the CoM rises to 5.71 at t=9.6. Sharp step: peak 3.26 at t=7.2, then 2.10. Gaussian: peak 2.42 at t=6.4, then 1.12. No fabricated or falsely attributed baseline quantity.",
+      "evidence": [
+        "proposal/code/run_linear.py lines 16-71",
+        "proposal/logs/linear_summary.json max_nonzero_relative_error 3.3e-16/4.2e-16; maximum_CoM_difference_to_reference up to 6.2e-15; peak_CoM/final_CoM per profile",
+        "proposal/sections/main.tex:138-142 (scope and disclosure statements)",
+        "proposal/sections/appendix.tex:71-79 (spectra table caption and propagation disclosures)",
+        "proposal/figures/linear_limit.png"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_honesty.h0_contrast_from_own_runs": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The unextended-H0 contrast comes from the agent's own logged runs: main_N12_e0_r0.15_unextended_{coherent,tangent}.npz/.json (SpinChain extended=False, dimension 4096, created 18:16:07Z). Their fitted shift, H0_density_shift = -0.009360, appears in every sweep_summary.json row and is cited in the text ('H0 contributes -0.009360J'). The contrast figure plots baseline_phase and baseline_calibrated_signal from main_N12_e0.4_r0.15_comparison.npz, which compare() derives from those runs. The paper states that the zero-coupling controls are shared across sweep rows and are not independent experiments. At eps=0 the extended and unextended linear implementations give identical statevectors (maximum difference 0.0) and identical sparse matrices (epsilon_zero_matrix_max_difference 0.0). No baseline is fabricated or falsely attributed.",
+      "evidence": [
+        "proposal/logs/main_N12_e0_r0.15_unextended_coherent.json / _tangent.json (extended false)",
+        "proposal/logs/sweep_summary.json H0_density_shift -0.009360191 in all rows; baseline_coherent_run created_utc 18:16:07.128Z",
+        "proposal/code/run_nonlinear.py lines 29-33 and 49",
+        "proposal/sections/main.tex:102 and 125 (shared-control disclosure; RawShift/HZeroShift)",
+        "proposal/logs/linear_summary.json epsilon_zero_matrix_max_difference 0.0; maximum_statevector_difference_extended_vs_H0 0.0"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "code_paper_alignment.methodology_describes_code": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The Methodology and Appendix accurately describe the submitted code. (1) Hamiltonian: spin.py builds the diagonal as sum(m_j n_j) with m_j = -Delta_j(-1)^j, adds eps[(n_j+n_{j+2})/2 - n_j n_{j+2}] for j=1..N-2 (equal to -(eps/4)Z_jZ_{j+2} minus a scalar), and removes the scalar vacuum energy, all as stated. The hopping element iJ/2 matches -J/4(XY-YX), and derive.py checks it against an independent Kronecker-product build (difference 1.4e-17). (2) Integrators: the second-order product D/2, O/2, E, O/2, D/2 (evolve order=2) matches Appendix U_2, and the first-order U_D U_E U_O (order=1 and reference()) matches the linear description. (3) Observable: the mean coherence at zero-based sites 4 and 6, normalized at t=0 and divided by the dilute and H0 calibrations, then unwrapped and fitted by OLS with an intercept over 101 samples, matches the paper's observable equation. The dilute state's f_j is proportional to sqrt(rho_j) and normalized. (4) PDE: kinetic half-steps exp(-iDk^2*delta/2), nonlinear step exp(2i*eps|psi|^2*delta), Fourier interpolation at x=4,6, and the zero-coupling field as the nonuniform denominator all match Appendix C. (5) The full 2^N index array is used with no sector selection. Code hashes match source_manifest.json. run_nonlinear.py's mtime (18:39Z) is later than the sweep (18:16Z), but the logged result keys and computations match the current code, and attempts_log #8 discloses a diagnostics-only fix. A file timestamp alone does not establish a contradiction. No material mismatch.",
+      "evidence": [
+        "proposal/code/spin.py lines 22-31 (Hamiltonian), 41-46 (sparse), 47-69 (Suzuki/Trotter layers), 74-79 (observables), 81-97 (preparation, fit, calibration)",
+        "proposal/sections/main.tex:14-22, 88-104; appendix.tex:84-103",
+        "proposal/code/derive.py lines 12-33; logs/derivation.json independent_pauli_matrix_max_error 1.39e-17",
+        "proposal/code/pde_reference.py lines 6-22",
+        "proposal/logs/source_manifest.json hashes match shasum of proposal/code/*",
+        "proposal/attempts_log.md item 8"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "held_fixed_disclosure.deviations_disclosed": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The paper makes no compliance claim that the code or configuration contradicts. (1) H0 structure: spin.py keeps the Eq. (3) exchange and staggered field and adds H_ZZ separately. The scalar vacuum-energy removal and Delta=8 for the nonlinear runs are both disclosed. (2) Linear limit: eps multiplies H_ZZ. derivation.json has epsilon_zero_matrix_is_zero true, and linear_summary.json shows a zero matrix difference and statevector difference of exactly 0.0. (3) Trotter step: the linear demonstrations use the paper's delta=0.8 first-order product. The nonlinear runs use a smaller delta=0.005/J with second-order splitting, justified in main.tex:104. The refined linear steps (0.05, 0.025) are disclosed as post-diagnosis, with a separate timestamped plan. No run uses a step larger than 0.8. (4) Lattice size: N=9-12 only, asserted in verify_artifacts.py. (5) Single ZZ commitment: only the j-to-j+2 bond exists in the code, and all run records carry the single plan hash.",
+      "evidence": [
+        "proposal/sections/main.tex:22 (vacuum energy removal; 'No exchange term, staggered field, or boundary bond of H0 is changed')",
+        "proposal/sections/main.tex:78 (Delta=8) and 104 (smaller step, with justification)",
+        "proposal/code/linear_refinement_plan.json (created 18:24:12Z; reason states the coarse-step bias)",
+        "proposal/logs/derivation.json epsilon_zero_matrix_is_zero true; linear_summary.json epsilon_zero_matrix_max_difference 0.0",
+        "proposal/code/verify_artifacts.py line 27 (9<=N<=12)",
+        "proposal/code/spin.py lines 28-31 (single ZZ graph)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "integrity.execution_claims": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Every experiment, derivation and check the paper says it performed has consistent artifacts: (1) the six-point sweep with H0 and dilute controls (sweep_summary.json and 14 main_*.npz); (2) step convergence and the sparse-exponential comparison (numerical_checks.json, step_*.npz); (3) the single-excitation control (commutator_max 0.0, max_population_outside_sector_one 0.0); (4) density, size, modulated and long-time checks (additional_summary.json); (5) linear Ramsey and propagation runs, including the continuous-time expm controls and logged Floquet frequencies (linear_summary.json, linear_*_continuous.npz); (6) the refined linear steps (linear_refinement.json); (7) the SymPy derivation (derivation.json/.txt); (8) the frozen-hopping and connected-correlation analysis (mechanism.json, mechanism_*.npz); (9) rendering (rendered/page_01-12.png; the PDF hash matches pdf_audit.json). I enumerated the log files myself and got 88 full-vector trajectories, matching verification.json and attempts_log item 15. No explicit execution claim is contradicted.",
+      "evidence": [
+        "proposal/logs/numerical_checks.json lines 1202-1205 and 1659-1660",
+        "proposal/logs/linear_summary.json Floquet_frequencies and CoM_continuous; linear_vacuum/sharp/Gaussian_continuous.json/.npz",
+        "proposal/logs/derivation.json; mechanism.json; spatial_phase.json",
+        "proposal/logs/verification.json trajectory_count 88",
+        "proposal/rendered/page_01.png-page_12.png; logs/pdf_audit.json and visual_review.json"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "integrity.precommitment_claims": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The paper's precommitment claims match the records. Claims: 'The graph, couplings, readout, time interval and tolerance were fixed in a timestamped method record before any validation run'; 'All PDE reference fields were saved before evaluating spin residuals'; 'The readout sites were specified before evolution'. Records: method_plan.json has created_utc 18:10:45Z, identical to its file mtime. Its SHA-256 (dece833b...) matches method_plan.sha256, and that hash is embedded in every run record. Derivation followed at 18:14:32Z, the PDE at 18:14:45Z and the first sweep run at 18:16:06Z. The plan already specifies the eps grid, the 15% tolerance, the double-calibrated observable, readout sites 5 and 7, T=1 and the step sizes. The only later addition is linear_refinement_plan.json (18:24:12Z), written after the delta=0.8 linear results (18:17:42Z). The paper explicitly presents it as a subsequent refinement added 'after diagnosing that issue', not as pre-registered. There is no evidence of backdating or undisclosed post-result selection.",
+      "evidence": [
+        "proposal/code/method_plan.json lines 2-3 (created 2026-10-03T18:10:45Z; 'Locked before any Hamiltonian validation or dynamics run')",
+        "proposal/code/method_plan.sha256 = shasum of method_plan.json = dece833b...; plan_sha256 in sweep_summary.json and all run JSONs",
+        "proposal/logs/derivation.json 18:14:32Z; pde_reference.json 18:14:45Z; sweep_summary.json coherent_run 18:16:06Z",
+        "proposal/code/linear_refinement_plan.json 18:24:12Z vs linear_summary.json 18:17:42Z; disclosed at main.tex:140 and appendix.tex:77",
+        "proposal/sections/main.tex:86, 104; appendix.tex:118"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "selective_reporting.all_sweep_points_reported": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "All six declared couplings appear in the main table and Fig. 1, including the failing stress point eps=1.6 (22.37%) and the 5.36% stress point. Every additional check declared in the plan is reported in the robustness or convergence tables: density 0.05/0.15/0.3, N=9-12, the 10% modulation, the long-time T=8 failure (71.74%), and step sizes 0.01/0.005/0.0025 plus the exponential. Unfavorable results are kept: the full delta=0.8 linear spectra with their 9.90%/17.68% deviations are in the Appendix table, and the modulated-case endpoint errors (~52-55% at sites 1 and 11 in spatial_phase.json) are plotted and discussed. Two completed results get no numeric value in the paper: the continuous-time linear controls (stated as 'supplied') and the delta=0.025 refinement (described as 'halving it again reduces the error further'; 0.469% in attempts_log). Neither is unfavorable or hidden. There is no outcome-dependent selection.",
+      "evidence": [
+        "proposal/logs/main_table.tex (all six eps rows incl. 'stress, fail')",
+        "proposal/logs/robustness_table.tex and convergence_table.tex",
+        "proposal/logs/spectra_table.tex (delta=0.8 and 0.05 columns for all 18 modes)",
+        "proposal/logs/spatial_phase.json relative_phase_errors [0.525, 0.029, 0.020, 0.049, 0.019, 0.550]",
+        "proposal/code/verify_artifacts.py line 12; verification.json all_declared_sweep_points_reported true"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "selective_reporting.zz_structures_documented": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Only one ZZ coupling structure was implemented and run: the distance-two bond K_ij = -eps/4 for j-i=2, in spin.py lines 28-31. attempts_log.md items 1-2 record that nearest-neighbor ZZ (with modulational instability) and all-to-all ZZ were considered and rejected analytically before any simulation ('No numerical results were produced', 'No runs'). No log files or code paths exist for any other K_ij, and all 88 trajectory records carry the single plan hash. No completed alternative structure is hidden or favorably selected.",
+      "evidence": [
+        "proposal/code/spin.py lines 28-31",
+        "proposal/attempts_log.md items 1-3",
+        "proposal/code/method_plan.json K_convention",
+        "proposal/logs/ directory listing: no alternative-structure runs; verification.json requires plan_sha256 match for every trajectory"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "no_replication_of_published_method.not_a_known_method_replication": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The paper credits the prior work it relies on and does not present it as new. H0 and the linear protocols are attributed to Sundar 2026. The relativistic focusing NLSE is attributed to Akhiezer-Polovin 1956 and Siminos et al. 2014. The spin-to-field closure is described as 'the usual dilute spin-to-boson and classical closure ideas, related to the Holstein-Primakoff construction, rather than a new exact bosonization'. The free-fermion form of H0 is credited to Jordan-Wigner. The paper states: 'The classical envelope reduction and spin-to-boson closure are established techniques ... The additional content here is the component-local interaction, the explicit removal of its one-body shift and of H0 saturation, and measured limits'. It cites and differentiates Shi et al. 2024 and two 2026 follow-ups. No prior contribution is reproduced and presented as new without acknowledgment.",
+      "evidence": [
+        "proposal/sections/main.tex:73 (Holstein-Primakoff acknowledgment)",
+        "proposal/sections/main.tex:195-199 (related work and differentiation)",
+        "proposal/references.bib (sundar2026, siminos2014, akhiezer1956, holstein1940, jordan1928, shi2024, berntson2026, jemcov2026, schollwock2011)",
+        "proposal/codebase_notes.md line 8"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "no_external_code.no_undisclosed_external_code": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "codebase_notes.md states that all scientific Python was written during the run and that the provided code/ directory was empty. environment.json records initial_code_directory_files [], and workdir_outside_proposal/code is empty. The methodology code uses only NumPy, SciPy (sparse matrices, expm_multiply, expm, eigh), SymPy and Matplotlib, all allowed. PyMuPDF and PIL appear only in render_pdf.py for page rendering; they are not methodology code and are disclosed. The scripts are compact and specific to this project. literature_sources.json states 'No external implementation was obtained'. I found nothing showing copied external methodology code.",
+      "evidence": [
+        "proposal/codebase_notes.md lines 3-14",
+        "proposal/logs/environment.json initial_code_directory_files []",
+        "workdir_outside_proposal/code (empty)",
+        "proposal/code/*.py imports (numpy, scipy, sympy, matplotlib; pymupdf/PIL only in render_pdf.py)",
+        "proposal/logs/literature_sources.json scope"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    }
+  }
+}

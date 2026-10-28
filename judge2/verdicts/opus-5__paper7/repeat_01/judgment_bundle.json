@@ -1,0 +1,931 @@
+{
+  "schema_version": "science-gates-v1",
+  "paper_id": "P7",
+  "rubric_revision": "science-task-alignment-v2-scope",
+  "rubric_sha256": {
+    "direction": "66e282e32c4595df51e4b44483ca35050062ab0e786f01c1e6b2170c5d9b73f0",
+    "integrity": "f57834fae443dd11f26a03ca17bf8d8f659d16d3127c2f9a5010ec744398bd2e"
+  },
+  "context": {},
+  "direction": {
+    "deliverables.report_pdf_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "proposal/report.pdf exists (558,932 bytes), opens with 18 letter-size pages, and in-memory pypdf text extraction returns full text on every page (abstract, all sections, Tables 1-5, references).",
+      "evidence": [
+        "proposal/report.pdf: 18 pages, 612x792pt; page 1 extracts ~3,036 chars beginning 'Is perceptual diminishing-returns channel-organized...'",
+        "proposal/logs/build.out: '(18 pages', 0 undefined refs/citations"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.analysis_plan_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "analysis_plan.md exists, carries a UTC time stamp in its header, and states the model family M0/M1/M2/M3 with a five-basis panel, the gauge, the CV/model-comparison protocol, the identifiability plan, the confound plan, the gray anchor and pre-declared verdict rules.",
+      "evidence": [
+        "proposal/analysis_plan.md:3 'Written 2026-08-07T02:54:46Z (UTC), before any model-fitting code was written or run.'",
+        "analysis_plan.md §3 (model family + M3 panel), §4 (gauge), §5 (5-fold x10, selection-aware bootstrap), §6 (identifiability), §7 (confound), §10 (verdict rules)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.logs_directory_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "proposal/logs/ holds 69 substantive files. These include per-fit fit logs with seed/grad_norm/restart_gap/n_success, 17 model-comparison JSONs, the identifiability, confound, gray-replication, shapes and cone-conversion logs, per-stimulus cone coordinates, and test output. The .npz arrays named in code/README.md (heldout_<tag>.npz, recovery_curves.npz, etc.) are absent, but the directory is clearly non-trivial.",
+      "evidence": [
+        "logs/fitlog_chromatic_chord.csv (700 fits)",
+        "logs/modelcmp_chromatic_chord.json, modelcmp_joint_arc.json, 12 robustness modelcmp_*.json",
+        "logs/identifiability.json, confound_control.json, gray_replication.json, shapes.json, cone_conversion.json, cone_coordinates.csv, tests.out"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.code_directory_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "proposal/code/ contains the full pipeline: cone conversion, dataset loaders, pair coordinates, the model family with analytic gradients, the CV harness, the main comparison, identifiability, confound, gray replication, synthetic generation, and table/figure builders. A README gives the run order, and tests.py reports 8/8 checks passing.",
+      "evidence": [
+        "code/README.md script table",
+        "code/models.py, harness.py, run_main.py, run_identifiability.py, run_confound.py, run_gray_replication.py, colorspace.py, datasets.py, pair_coords.py",
+        "logs/tests.out '8/8 checks passed'"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.main_results_table": {
+      "value": "all_rows",
+      "confidence": "high",
+      "reason": "tab:main_results contains every required row:\n- gray replication: held-out f∘g vs g, the additivity ratio vs 2022, and D(15)/D(30) vs 2022;\n- M0/M1/M2 held-out rows;\n- five M3 rows (opponent, sRGB, CIE RGB, CIELAB, CIE LCh), labelled matched complexity at 16 parameters each;\n- M2−M1, and M2−best M3 naming the best control (CIELAB chord, cone-opponent arc);\n- an identifiability block: ridge separation, synthetic recovery, K2 coarse comparison vs M1 and vs the best matched K2, and power rows;\n- confound rows giving the DR and cone verdicts before and after the control.",
+      "evidence": [
+        "report.tex:398-406 \\label{tab:main_results} \\input{logs/tab_main.tex}",
+        "logs/tab_main.tex rows 7-9 (gray), 12-14 (M0/M1/M2), 17-21 (M3 panel), 23-25 (M2−M1, M2−best M3 'best: M3 CIELAB (chord), M3 cone-opponent (arc)'), 28-32 (identifiability), 35-38 (confound before/after)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.rendered_pdf_formatting_correct": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "Limitation: I could not render the pages visually (pdftoppm unavailable, and file writes are not permitted). The indirect evidence shows no gross formatting failure:\n- the build log reports 0 overfull boxes and 0 undefined refs;\n- all six figure XObjects sit inside the text block (x 108–504pt, y ≤720pt on 612×792 pages), so none is cut off at the page edge;\n- extracted Tables 1–5 have intact rows with wrapped p-columns, and the equations extract coherently.",
+      "evidence": [
+        "logs/build.out: '--- overfull --- 0', '--- undefined refs/citations --- 0'",
+        "pypdf XObject placement: /Im1-/Im6 at x 108.0..504.0, y 360.6..720.0",
+        "report.pdf pages 7, 12, 14, 17-18: table text extracted row-by-row"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "cone_conversion.reference_white_stated": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Reference whites are stated per dataset:\n- D65 for the sRGB-display gray data and for Wiebel;\n- Illuminant C for Helm and, as primary, for Ekman;\n- C/D65/E variants are re-run.\nThe code lists the illuminant xy chromaticities explicitly.",
+      "evidence": [
+        "report.tex:164-168 'Reference whites follow each dataset's own viewing condition: D65 ... Illuminant C for Helm ... and, as primary, for Ekman'",
+        "code/colorspace.py:24-28 WHITE_XY D65 (0.3127,0.3290), C (0.31006,0.31616), E",
+        "code/datasets.py:25 DEFAULT_WHITES"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "cone_conversion.lms_normalization_stated": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The paper states von-Kries-normalized cone contrast, c = LMS/LMS(white). It justifies the choice: the adapting white maps to (1,1,1) and the achromatic direction is exactly (1,1,1), which absorbs the unit-peak normalization of the distributed fundamentals. Whites are tied to each dataset's viewing condition, and per-axis unit-RMS standardization is described separately. The code implements the von Kries diagonal.",
+      "evidence": [
+        "report.tex:161-168 'We use von-Kries-normalized cone contrast, c = LMS/LMS(white) ... the unit-peak normalization of the distributed fundamentals is absorbed by this step'",
+        "code/colorspace.py:126-141 ConeSpace (D = diag(1/LMSw))",
+        "analysis_plan.md §2 'Von-Kries normalization'"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "cone_conversion.conversion_correctness": {
+      "value": "correct_and_verified",
+      "confidence": "high",
+      "reason": "Conversion path:\n- The XYZ1931→LMS2006 map is fit by least squares from the provided linss2_10e_1.csv and ciexyz31_1.csv. Three variants are reported, and a rule fixed before any responses were used selects ls_ybarw.\n- Ekman's monochromatic stimuli use exact fundamentals; Helm goes via xyY→XYZ→LMS.\n\nVerification on the white point:\n- D65, C and E whites all map to (1,1,1).\n\nVerification on chromatic references:\n- monochromatic 450, 550 and 600 nm lights: transform vs exact error ≤0.066 of full scale at 450 nm and ~0.01 at 550/600 nm;\n- sRGB primaries round-trip to ~1e-16;\n- tests.py checks pass.\n\nAll 75 stimulus coordinates are logged.",
+      "evidence": [
+        "code/colorspace.py:97-120 xyz_to_lms_matrix (lstsq over provided CMFs/fundamentals)",
+        "logs/cone_conversion.json verification: white_*_normalized [1,1,1]; mono_450/550/600nm_err_over_fullscale; srgb_*_roundtrip_max_abs_err ~1e-16; cmf_fit_R2 L 0.9985 M 0.9986 S 0.9719",
+        "logs/tests.out 'PASS reference whites map to (1,1,1)', 'PASS XYZ->LMS transform verified on monochromatic stimuli'",
+        "logs/cone_coordinates.csv (75 stimuli)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "gray_replication.gray_dr_reproduced": {
+      "value": "reproduced_clearly",
+      "confidence": "high",
+      "reason": "Adding the concave difference scaling to the additive perceptual-scale model (g+f vs g, the 2022 analogue of M1 over M0) improves held-out gray prediction:\n- Δaccuracy +0.0114 [0.0090, 0.0151];\n- Δll/trial +0.00593 [0.00437, 0.00788];\n- 100% of draws positive, over 10 held-out splits × 100 bootstraps.\n\nThe CIs exclude zero. In the model family itself, the joint M1−M0 (gray-dominated, trial-weighted) is also +0.0078 [0.0033, 0.0122].",
+      "evidence": [
+        "logs/gray_replication.json mle_paired_deltas 'g+f(spline) - g' acc mean 0.01143 lo 0.00897 hi 0.01505, ll 0.00593 [0.00437,0.00788], frac_positive 1.0",
+        "report.tex:431-436; tab_main.tex row 7",
+        "logs/modelcmp_joint_chord.json deltas_joint M1-M0 0.00777 [0.00333,0.01217]"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "gray_replication.magnitude_compared_to_2022": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The fitted magnitude is compared quantitatively with the 2022 report:\n- additivity ratio 0.760 [0.747, 0.772] vs the 2022 value of 0.757 (2.06/(2×1.36)), and 0.767 implied by the 2022 log fit;\n- D(ΔL*=15) = 1.34 and D(30) = 2.00 vs 1.36 and 2.06 in σ=1 units;\n- log amplitude 2.37 [2.30, 2.44] vs b = 2.34.",
+      "evidence": [
+        "report.tex:436-442",
+        "logs/gray_replication.json magnitude_comparison (additivity_ratio, D_step15_first, D_step30, fitted_log_amp, log_params_2022 a=5.34 b=2.34)",
+        "paper.md:329 (1.36, 2.06) and :346 (a=5.34, b=2.34)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "gray_replication.suprathreshold_scale_used": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The gray anchor uses the 2022 Thurstonian MLE pipeline on suprathreshold triads (ΔL* up to 30): a fitted perceptual map g, then a difference scaling f. It is supplemented by the Wiebel MLDS data, fit with its own CV in all 5 viewing contexts. No threshold/JND data are used.",
+      "evidence": [
+        "report.tex:387-393 (Thurstonian g then f, published CV design)",
+        "code/gray2022.py (perceptual map g, difference scaling f)",
+        "logs/gray_replication.json wiebel_replication (5 media, heldout_acc, additivity_ratio)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "model_comparison.all_four_models_fit": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The fit logs contain 50 fits (10 repeats × 5 folds) each for M0, M1, M2 and all five M3 bases (opponent, sRGB, CIE RGB, CIELAB, LCh). Each (repeat, fold) shares one seed across specs, which shows they ran on the same folds. The same holds for the arc, joint and robustness configurations.",
+      "evidence": [
+        "logs/fitlog_chromatic_chord.csv: Counter spec → 50 each for M0, M1, M2, M3-opponent, M3-srgb, M3-ciergb, M3-cielab, M3-hcl (+K2)",
+        "fitlog seeds: (repeat 0, fold 0, seed 1234) ×14 specs",
+        "code/harness.py:94-122 run_cv (fold_map shared across specs)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "model_comparison.held_out_comparison_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Models are compared by mean held-out log-likelihood per evaluation unit. The CV is pair-disjoint (dissimilarity sets) or triad-disjoint (2AFC sets), 5-fold repeated 10×. Training-fold parameters, including nuisances, are applied to the test fold.",
+      "evidence": [
+        "report.tex:261-266, 276-280",
+        "code/harness.py:86-122 (_one fits on tr, scores on te)",
+        "logs/modelcmp_chromatic_chord.json mean_ll / per_dataset; tests.out 'held-out uses training nuisances'"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "model_comparison.comparison_accounts_for_complexity": {
+      "value": "held_out_or_penalized",
+      "confidence": "high",
+      "reason": "M2 (16 parameters) is judged against M1 (4) and the M3 panel (16 each) only on held-out likelihood at matched folds. Its in-sample flexibility is never used as evidence. M2−M1 = +0.114 [−0.108, +0.327] is explicitly not claimed.",
+      "evidence": [
+        "report.tex:505-518, 688-695",
+        "logs/modelcmp_chromatic_chord.json config.n_par (M1 4, M2 16, M3-* 16)",
+        "analysis_plan.md §10 verdict rule (a)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "model_comparison.m2_genuinely_percone": {
+      "value": "genuine",
+      "confidence": "medium",
+      "reason": "The logs show M2's per-cone scalings are distinct and nonlinear, not a collapse to M1:\n- shape distinctness 0.938 [0.643, 0.9996];\n- nonlinearity 0.681 [0.479, 0.875];\n- pairwise M–S gap 0.938 [0.245, 0.998] and L–S gap 0.630 [0.310, 0.999].\n\nCaveat: the L channel's weight at the gauge reference is near zero (0.020, CI [0.000, 0.350]), so its normalized shape is weakly constrained. The M-vs-S distinctness alone still excludes collapse.",
+      "evidence": [
+        "logs/shapes.json M2_chromatic_chord: shape_distinctness, nonlinearity, pairwise_shape_gap, channel_weight_at_reference [0.020,0.232,0.747]",
+        "report.tex:505-518; Fig. 4c"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "model_comparison.m3_matched_complexity": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "M3 is a panel of five fixed, disclosed bases with the same spline/Box-Cox form and 16 parameters as M2:\n- opponent (L−M, S−(L+M), L+M);\n- linear sRGB (IEC primaries);\n- CIE RGB (700/546.1/435.8 nm);\n- CIELAB on its own (ΔL*, Δa*, Δb*);\n- LCh on (ΔL*, ΔC*, ΔH*) with the standard ΔH* = 2√(C1C2) sin(Δh/2).\n\nEvery axis of every basis is rescaled to unit RMS over the training design. None is a fitted rotation, and there is no per-stimulus linearization.",
+      "evidence": [
+        "report.tex:196-206, 233-242",
+        "code/models.py:174-189 SPECS; code/colorspace.py:153-212 basis_matrix, XYZ_to_Lab, lch_pair_coords",
+        "code/models.py:235-252 per-axis/per-dataset RMS standardization",
+        "logs/modelcmp_chromatic_chord.json config.n_par M2 16, M3-* 16"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "core_result.cone_alignment_tested": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "M2 is compared against the best member of the full five-basis panel on held-out data, selection-aware: the argmax is recomputed inside each of 2000 resamples, and the paired min_k is also reported. The result is −0.113 [−0.355, +0.007], best control CIELAB (chord), with per-control pairwise deltas also reported.",
+      "evidence": [
+        "code/run_main.py:70-90 (best_in = draws[:,P].max(axis=1); paired_min)",
+        "logs/modelcmp_chromatic_chord.json deltas_chromatic['M2-bestM3_selection_aware'] -0.1126 [-0.3554, 0.0066]; M3_pairwise_vs_M2",
+        "report.tex:520-533"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "core_result.verdict_supported_by_heldout": {
+      "value": "supported_conclusion",
+      "confidence": "medium",
+      "reason": "The held-out evidence supports a qualified negative on cone alignment:\n- M2 fails to beat the best non-cone control in all 16 specifications.\n- The selection-aware CI tops out at +0.007 in the primary chromatic run and +0.009 in arc coordinates. It excludes zero in the joint run (−0.225 [−0.379, −0.077]), joint-arc, m=6, both transform variants and both pre-transform rows.\n- The primary upper bound lies below the +0.040 median that a synthetic cone generator at fitted parameters produces.\n- The design separates an opponent generator 94% of the time.\n\nOther verdicts:\n- Anisotropy (M2−M1 +0.114 [−0.108, +0.327]) is correctly labelled 'not established'.\n- The mechanism question is explicitly declared not adjudicable.\n\nCaveats:\n- The primary CI touches zero.\n- Phrases such as 'the split is not there' / 'realistic size' outrun the paper's own note that the observed M2−M1 matches a fitted cone generator (+0.145).",
+      "evidence": [
+        "logs/tab_robust.tex (16 rows, all negative)",
+        "logs/identifiability.json C_power_full.M2 delta_target_minus_bestpanel median 0.040 [-0.012,0.086]; M3-opponent argmax 0.94",
+        "report.tex:598-612, 688-743, 905-907"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "core_result.verdict_has_uncertainty": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Both headline deltas carry 95% bootstrap CIs in the abstract, the results, Table 1 and the conclusion:\n- M2−best M3 = −0.113 [−0.355, +0.007];\n- M2−M1 = +0.114 [−0.108, +0.327].",
+      "evidence": [
+        "report.tex:44-46 (abstract), 506-523, 888-892",
+        "logs/tab_main.tex rows 23-25"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "identifiability.analysis_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "A dedicated analysis addresses which granularity is resolvable:\n- structural ridge geometry;\n- collinearity diagnostics;\n- synthetic recovery;\n- discrimination power under every panel generator;\n- a coarse two-channel comparison;\n- an orientation supplement.\nThe paper states the supported granularity and that the mechanism question cannot be adjudicated.",
+      "evidence": [
+        "report.tex:290-319 (Sec. 2.6), 567-636 (Sec. 4.4), 729-743 (Verdict c)",
+        "logs/identifiability.json sections A_collinearity, B_recovery, C_power_full, D_power_coarse, E_orientation"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "identifiability.gauge_fixed": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The gauge is fixed in advance and disclosed:\n- outer f is one-parameter Box-Cox with f(0)=0 and f'(0)=1;\n- inner g_k are monotone PCHIP with g_k(0)=0, carrying all flexible shape;\n- the scale gauge is Σ_k g_k(r_k)=1 at r_k=1 after unit-RMS standardization.\n\nThe code implements this through the S1 normalization, and tests confirm that M2 with linear inner functions equals M1.",
+      "evidence": [
+        "report.tex:218-245",
+        "code/models.py:144-149 f_boxcox, 294-303 control_values (S1 normalization), 315 D = f_boxcox(S/S1, rho)",
+        "logs/tests.out 'PASS M2 with linear inner scalings equals M1'"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "identifiability.collinearity_quantified": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The paper quantifies the design's collinearity in three ways:\n- variance on the top two singular directions of the pair-difference matrices: 99.78% (Helm), 100.00% (Ekman);\n- minimum cone ridge separation in the spanned plane: 6.3° [4.3, 8.0] (Helm) and 3.0° [2.9, 3.1] (Ekman);\n- the |ΔL| vs |ΔM| scatter (Fig. 2b).\n\nThe logs add corr(ΔL, ΔM) of −0.63 and 0.38 and condition numbers of 21.2 (Helm), 348.2 (Ekman) and 341.4 (pooled chromatic).",
+      "evidence": [
+        "report.tex:457-470; Fig. 2; tab_main.tex row 28",
+        "logs/cone_conversion.json design_diagnostics (condition_number, corr_dL_dM, corr_absdL_absdM)",
+        "logs/extra_cis.json ridge_separation_ci"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "identifiability.synthetic_recovery": {
+      "value": "rigorous",
+      "confidence": "medium",
+      "reason": "Recovery of distinct curves:\n- 200 seeded synthetic datasets at the real design and fitted noise, with distinct f_L, f_M, f_S (x^0.35, x^1, x^0.6);\n- per-curve error with intervals: f_L 0.022 [0.004, 0.078], f_M 0.034, f_S 0.026;\n- 95% recovery bands and band widths are logged;\n- the L–M contrast is recovered with the correct sign 100% of the time, and distances correlate 0.9994 with truth.\n\nM2-vs-M3 discrimination:\n- power simulations under every basis show 94% correct basis under the opponent generator;\n- the delta for each generator is reported with intervals.\n\nWhat is weakly resolvable is also quantified: K2-cone vs K2-opponent at 80% with CI [−0.012, +0.035], and the realistic fitted cone effect at +0.040 [−0.012, +0.086].\n\nWeaknesses:\n- recoverability of individual curves is shown only for a deliberately strong generator;\n- failure item (1) contradicts the recovery result.",
+      "evidence": [
+        "logs/identifiability.json B_recovery (n_sim 200, seed_base 90210, per_curve_median_rel_err, curve_band_width_at_half, LM_contrast_recovered sign_correct_frac 1.0, rho_recovery)",
+        "logs/extra_cis.json recovery_rel_err_ci",
+        "report.tex:567-614; Fig. 5a,b",
+        "report.tex:793-796 (failure item 1)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "identifiability.powered_channel_comparison": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "At the granularity the paper claims is resolvable (three-cone), M2 is compared with M1 and with the selection-aware best matched M3. Power is characterized by generator simulations at the real design.\n\nAt the coarse level, K2-cone is compared with M1 (+0.079 [−0.120, +0.292]) and with the best matched two-channel control (−0.184 [−0.413, +0.025]). Power there is characterized too: under a synthetic K2-cone generator, K2−M1 = +0.130 with 100% positive and the cone wins 80%; under a K2-CIELAB generator the delta is −0.244.",
+      "evidence": [
+        "logs/identifiability.json C_power_full and D_power_coarse",
+        "logs/modelcmp_chromatic_chord.json K2-cone-M1, K2-cone-bestK2_selection_aware",
+        "report.tex:614-619, 710-717; tab_main.tex rows 30-32"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "identifiability.m2_m3_discrimination_assessed": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "Discrimination between M3- and M2-generated data was simulated at the real design:\n- under the nearest (opponent) generator, the correct basis wins 94% and M2−best M3 = −0.051 [−0.112, −0.006];\n- under the fitted cone generator M2 wins 91%; under the strong cone generator, 100%;\n- the observed −0.113 lies outside the cone-generated range.\n\nOn normalization, Table 2 shows the M2−best M3 delta negative across all reference-white reassignments (Ekman D65/E, Helm D65, all-C) and all three XYZ→LMS variants, i.e., stable under the stated von-Kries normalization.\n\nLimits:\n- the power simulations used 1 repeat and 6 restarts rather than the main 10 and 10;\n- the normalization dependence of opponent/cone separability flagged in plan §6.2 is not discussed.",
+      "evidence": [
+        "logs/identifiability.json C_power_full (M3-opponent argmax 0.94; M2 0.91; M2_strong 1.0); power_config repeats 1, n_restarts 6",
+        "logs/tab_robust.tex rows Ekman white D65/E, Helm white D65, joint all-C, transform variants",
+        "report.tex:588-608"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "confound_control.confound_addressed": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "DR is explicitly separated from chord-vs-arc curvature: every comparison is rerun in arc-length coordinates, which are additive along the curved locus. A model-free comparison sets perceived subadditivity against what chord geometry alone produces.",
+      "evidence": [
+        "report.tex:321-349 (Sec. 2.7), 652-664 (Sec. 4.5)",
+        "code/pair_coords.py arc_coords / chord_coords",
+        "logs/confound_control.json"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "confound_control.control_method_rigor": {
+      "value": "rigorous_control",
+      "confidence": "high",
+      "reason": "Triad/gray data (near-collinear-triple restriction):\n- collinearity is verified (off-axis energy 5.6e-34 and 4.3e-34), retaining 100% of triads.\n\nPairwise hue-loop data (arc vs chord):\n- arc-length coordinates serve as the additive-metric curvature baseline;\n- all M0–M3/K2 comparisons are rerun in arc coordinates;\n- the model-free near-collinear restriction keeps 39 Helm and 272 Ekman triples;\n- DR/curvature aliasing is acknowledged.\n\nVerdicts are reported before and after.",
+      "evidence": [
+        "logs/confound_control.json achromatic_collinearity, arc_vs_chord_geometry, model_free_subadditivity (near_collinear), verdict_before_after_curvature_control",
+        "report.tex:323-349, 652-664, 816-822"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "confound_control.before_after_reported": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Verdicts before (chord) and after (arc) the control:\n- DR (M1−M0): +0.110 [−0.130, +0.362] → +0.346 [+0.152, +0.520];\n- cone verdict (M2−best M3): −0.113 [−0.355, +0.007] → −0.058 [−0.149, +0.009].\n\nThese appear in Table 1, Fig. 6c and the log.",
+      "evidence": [
+        "logs/tab_main.tex rows 37-38",
+        "logs/confound_control.json verdict_before_after_curvature_control",
+        "report.tex:666-674 (Fig. 6)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "statistical_rigor.confidence_intervals_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Model-comparison deltas carry 95% paired cluster-bootstrap CIs, including per-control pairwise deltas, every robustness row and the isotropy gains. Scaling parameters carry intervals:\n- ρ, e.g. −4.20 [−7.32, −2.38], a fold-percentile interval;\n- the gray additivity ratio and log amplitude;\n- shape distinctness and nonlinearity;\n- bootstrap bands on f_L, f_M, f_S.\n\nChannel weights are printed without CIs in the text, although the logs have them.",
+      "evidence": [
+        "logs/modelcmp_chromatic_chord.json deltas_chromatic (lo/hi)",
+        "logs/shapes.json (CIs on distinctness, nonlinearity, weights)",
+        "report.tex:497-499, 506-518; tab_main.tex; tab_robust.tex; tab_isotropy.tex"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "statistical_rigor.kfold_protocol_used": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The CV protocol is documented: 5-fold repeated 10× with different seeds, triad-disjoint for 2AFC sets and pair-disjoint for Helm/Ekman, with identical fold assignments for all models. tests.py verifies the folds are group-disjoint and complete.",
+      "evidence": [
+        "report.tex:276-280, 380-385",
+        "code/harness.py:58-83 make_folds/fold_map",
+        "logs/tests.out 'PASS folds are group-disjoint and complete'"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "statistical_rigor.bootstrap_or_posterior_documented": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The bootstrap procedures are documented:\n- a paired cluster bootstrap with 2000 resamples, clustered by the fold key, with selection-aware argmax recomputed inside each resample;\n- a training-fold cluster bootstrap for shapes (1000 refits).\n\nSeeds are recorded in the logs: deltas seed 99/1231/555/777, extra CIs 20260807, recovery seed_base 90210, Wiebel 808.",
+      "evidence": [
+        "report.tex:282-288",
+        "code/harness.py:160-200 cluster_bootstrap",
+        "logs/modelcmp_chromatic_chord.json deltas_chromatic n_boot 2000 seed 99; logs/extra_cis.json seed 20260807"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "statistical_rigor.fold_variation_reported": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The logs report across-CV variation:\n- every model in every configuration has an across-repeat SD and the 10 per-repeat values (e.g., chromatic chord M2 SD 0.092, M1 0.039);\n- the gray replication logs per-split held-out values;\n- Wiebel logs per-fold SDs and per-fold additivity ratios.\n\nThe paper itself prints no across-fold spread; only aggregate means with bootstrap CIs appear in report.tex.",
+      "evidence": [
+        "logs/modelcmp_chromatic_chord.json chromatic_across_repeats {mean, sd, per_repeat}",
+        "logs/gray_replication_cv.csv (cv, bs, model, acc, ll_per_trial)",
+        "logs/gray_replication.json wiebel_replication heldout_acc_sd, additivity_ratio_folds",
+        "report.tex: no across-fold SD reported (grep)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "novelty_positioning.related_work_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "A dedicated Related Work section (Sec. 6) covers the 2022 paper, both 2025 follow-ups, and the methodological and historical literature.",
+      "evidence": [
+        "report.tex:834-874 \\section{Related work}"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "novelty_positioning.engages_with_2025_followups": {
+      "value": "engages_substantively",
+      "confidence": "high",
+      "reason": "Stark et al. 2025 ('Now in Color') is discussed in substance:\n- two chromatic lines, DR on both, non-transfer and non-constancy;\n- the authors quoted on why per-cone decomposition is untestable;\n- why mere anisotropy restates their result.\n\nBujack et al. 2025 (CGF) is discussed in substance:\n- the induced Riemannian metric and path vs closest-point coincidence;\n- the 'dampening scaling function' remark;\n- the tension with Stark, and how this result bears on it.",
+      "evidence": [
+        "report.tex:72-86, 104-110, 843-867",
+        "references.bib / report.pdf p.16: Stark et al. 2025 doi 10.2312/evs.20251081; Bujack et al. 2025 CGF doi 10.1111/cgf.70136"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "novelty_positioning.contribution_distinct": {
+      "value": "clearly_distinct",
+      "confidence": "high",
+      "reason": "The paper attributes gray DR to 2022, chromatic DR and non-constancy to Stark 2025, and the geometry to CGF 2025. It states that mere anisotropy would restate non-constancy, and names cone alignment (M2 vs a matched non-cone panel) as the novel object.",
+      "evidence": [
+        "report.tex:104-110 'What is and is not novel here'",
+        "report.tex:843-853"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "novelty_positioning.significance_argued": {
+      "value": "argued_and_calibrated",
+      "confidence": "medium",
+      "reason": "The introduction argues significance on three points:\n- compact prediction of the whole space from few experiments;\n- pre- vs post-combination mechanism;\n- what a null or non-cone match implies.\n\nThe mechanism reading is then explicitly scaled back to the null ('These data therefore cannot adjudicate the mechanism question ... Any paper that reads a pathway-level mechanism off this record is over-reading it'). Some result-level phrasing is stronger than the evidence (e.g. 'the split is not there', 'realistic size'), but no biological mechanism is claimed.",
+      "evidence": [
+        "report.tex:88-102 'Why the answer matters'",
+        "report.tex:737-743 (Verdict c)",
+        "report.tex:902-913 (Conclusion)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "data_provenance.datasets_cited_with_licenses": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Experimental Setup cites each dataset with source and license:\n- Gray-2AFC: lanl/color, BSD-3;\n- Wiebel MLDS: OSF, CC BY 4.0;\n- Helm and Ekman: smacof, GPL-3, with stimulus colorimetry from Helm Table I;\n- cone fundamentals and CMFs: cvrl.org, citation-based terms, cited to Stockman & Sharpe 2000 and CIE 170.",
+      "evidence": [
+        "report.tex:354-378"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "data_provenance.per_dataset_observation_models": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Each dataset has its own observation model:\n- 2AFC gray and Wiebel: Thurstonian Φ(κ(D2−D1)), with one κ for gray and a per-observer κ for Wiebel;\n- Helm and Ekman: Gaussian with per-subject gain and SD profiled out.\n\nOnly the functional form of D is shared, and held-out likelihood is defined per dataset. There is no naive pooling.",
+      "evidence": [
+        "report.tex:247-266",
+        "code/models.py:319-376 loglik (triad2afc vs dissim branches)",
+        "analysis_plan.md §1 table"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_analysis.present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "An explicit 'Failure analysis: what could not be fitted or identified' paragraph lists nine items in the Analysis section.",
+      "evidence": [
+        "report.tex:792-832"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_analysis.specificity": {
+      "value": "specific",
+      "confidence": "medium",
+      "reason": "The items name concrete regimes with evidence:\n- weak cross-dataset identification;\n- Ekman's two-decade S-cone dynamic range;\n- the outer/inner trade, with ρ varying across bases;\n- CIs about ±0.2 nats on 45+91 pairs;\n- the untested L1 aggregation;\n- residual DR/curvature aliasing;\n- the inert CIELAB L* axis on chromatic data;\n- 6.0% multimodal fits.\n\nItem (1) ('f_L vs f_M unidentifiable by construction') contradicts the paper's own recovery result, but the section as a whole is concrete rather than boilerplate.",
+      "evidence": [
+        "report.tex:793-832",
+        "logs/modelcmp_chromatic_chord.json fit_diagnostics frac_multimodal 0.06"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.appendix_usage_minimized": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The model comparison, identifiability and confound analyses, with their figures and tables, are all in the main body (Secs. 2, 4, 5). The appendix holds only the full held-out panel and the coarse pairwise table.",
+      "evidence": [
+        "report.tex:488-683 (main results), 685-832 (analysis)",
+        "report.tex:934-968 (appendix: Tables 4-5 only)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.limitations_discussion_present": {
+      "value": "substantive",
+      "confidence": "high",
+      "reason": "The Limitations paragraph plus the nine-item failure analysis discuss task-relevant scope limits:\n- 45+91 pairs from two isoluminant loops measured decades apart;\n- 'not established' is not 'absent';\n- L1 aggregation;\n- Helm colorimetry transcription and the linear 1931/2006 approximation;\n- Ekman's unrecorded white;\n- the experiment needed to break isoluminance.",
+      "evidence": [
+        "report.tex:915-924",
+        "report.tex:792-832"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.independence_from_spec": {
+      "value": "no",
+      "confidence": "medium",
+      "reason": "Task-spec phrasing appears in the paper:\n- 'It is the ``per-dataset scale nuisance'' the setup permits' quotes the task's held-fixed allowance and refers to 'the setup' as an authority;\n- the spec's coinage 'earned null' is used in the title and repeatedly;\n- the spec phrase 'the binding case' also appears.",
+      "evidence": [
+        "report.tex:241 '``per-dataset scale nuisance'' the setup permits'",
+        "report.tex:20, 47, 131, 588, 701-703 ('earned null', 'the null is earned')",
+        "report.tex:304, 705 ('the binding case')"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.figures_and_tables_journal_quality": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "All six figures and five tables have informative captions, axis/column labels and units (nats/rating, deg, gauge units). Inferential quantities carry 95% CIs or bootstrap bands: Table 1, Table 2, Table 3 gains, Fig. 3c, Fig. 4, Fig. 5, Fig. 6.\n\nMinor gaps: Fig. 3a,b, Table 3's first column and appendix Table 4 show per-model levels without intervals.\n\nVisual legibility could not be checked because rendering was unavailable.",
+      "evidence": [
+        "code/make_figures.py:158-206 (_panel plots point estimates only; panel c errorbar with CIs)",
+        "report.tex:398-401, 541-565, 638-674 captions",
+        "report.pdf text extraction of figure axis labels/legends"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.experiment_completeness.every_paper_claim_has_logs": {
+      "value": "satisfied",
+      "confidence": "medium",
+      "reason": "Every number in the paper is a macro from logs/numbers.tex, generated by make_tables.py from the JSON logs. Spot checks match:\n- grAR 0.760;\n- cchMtwoBest −0.113;\n- pwOppCorrect 94;\n- isoHclVs +0.298;\n- Helm hue angles 90.8°/84.4° in cone_coordinates.csv.\n\nGap: the .npz arrays behind the figure bands and per-unit held-out values are missing from the submission. These affect only figure-level detail, not the logged quantitative claims.",
+      "evidence": [
+        "report.tex:17 \\input{logs/numbers.tex}; logs/make_tables.out 'wrote 782 macros'",
+        "logs/numbers.tex vs modelcmp_chromatic_chord.json, identifiability.json, gray_replication.json, isotropy_diagnostic.json",
+        "code/README.md lists heldout_<tag>.npz, recovery_curves.npz, shapes_<tag>.npz (absent from logs/)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.experiment_completeness.all_required_analyses_logged": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "Every required analysis has its own log:\n- conversion: cone_conversion.json and cone_coordinates.csv;\n- gray replication: gray_replication.json and gray_replication_cv.csv;\n- M0–M3 comparison: modelcmp_*.json and fitlog_*.csv for 4 primary and 12 robustness configs;\n- identifiability: identifiability.json and extra_cis.json;\n- confound: confound_control.json;\n- per-cone distinctness: shapes.json.",
+      "evidence": [
+        "logs/ directory listing",
+        "logs/stage2.out, stage3.out, stage4.out, run_*.out"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.statistical_inference_integrity.rng_seeds_logged": {
+      "value": "satisfied",
+      "confidence": "medium",
+      "reason": "Seeds in the logs:\n- each main CV fit logs its seed in fitlog_*.csv;\n- delta bootstraps log n_boot and seed;\n- recovery logs seed_base 90210;\n- the Wiebel CV logs seed 808, and extra CIs log 20260807.\n\nSeeds only in code (explicit, deterministic integers):\n- shape bootstrap 777000+1000·fold+b;\n- power sims 400000+977i+100003·off;\n- orientation 31337, confound 4242, isotropy 606.\n\nThe attempts log documents fixing a non-reproducible hash-based seed.",
+      "evidence": [
+        "logs/fitlog_chromatic_chord.csv column 'seed'",
+        "logs/modelcmp_chromatic_chord.json deltas_chromatic seed 99",
+        "logs/identifiability.json B_recovery seed_base 90210",
+        "code/run_shapes.py:56, run_identifiability.py:168, run_confound.py:117"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.statistical_inference_integrity.convergence_diagnostics_logged": {
+      "value": "satisfied",
+      "confidence": "medium",
+      "reason": "Every M0–M3/K2 fit in every configuration logs grad_norm, restart_spread, restart_gap and n_success. Summary diagnostics are in fit_diagnostics: 99.4% of fits had all restarts converge, 6.0% are multimodal, and ρ is summarized per spec.\n\nThe gray-replication, shape-bootstrap and power-simulation refits do not log convergence.",
+      "evidence": [
+        "logs/fitlog_chromatic_chord.csv columns grad_norm, restart_spread, restart_gap, n_success",
+        "logs/modelcmp_chromatic_chord.json fit_diagnostics (frac_all_restarts_converged 0.994, frac_multimodal 0.06)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.model_comparison_honesty.matched_folds_bootstrap": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "All specs share the same fold assignment per repeat and dataset (fold_map, seeded by repeat and dataset). The cluster bootstrap draws the same resampled clusters for every model, so all deltas are paired; the selection-aware argmax is taken within those same draws.",
+      "evidence": [
+        "code/harness.py:79-83 fold_map; 94-110 run_cv (same tr/te for every spec)",
+        "code/harness.py:160-200 cluster_bootstrap ('The same resampled clusters are used for every model')",
+        "code/run_main.py:52-90 deltas"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.pre_registration_integrity.plan_precedes_and_matches": {
+      "value": "satisfied",
+      "confidence": "medium",
+      "reason": "Timing: the plan exists with header time 02:54:46Z. Every log's recorded UTC time is later: cone conversion 03:16:26Z, pilot fit 03:21:10Z, main fit 03:22:39Z.\n\nThe plan's declared choices match what was run:\n- M0/M1/M2 and the five-basis M3 panel;\n- von-Kries normalization with the stated whites;\n- the Box-Cox/PCHIP gauge;\n- 5×10 matched-fold CV with selection-aware bootstrap;\n- recovery, power and confound plans.\n\nSeveral deviations are disclosed in attempts_log.md: per-dataset scaling, ρ bounds, knots, the orientation scope, Helm CVD exclusion.\n\nOthers are not disclosed:\n- restarts 8→10;\n- r_k median→1;\n- power n_sim 200→100;\n- the planned T2 coarse model redefined as K2;\n- the headline taken from the chromatic-only fit, although the plan names the joint fit as primary;\n- the BIC/AIC check never run.",
+      "evidence": [
+        "analysis_plan.md:3 timestamp; logs/*.json _meta.utc (earliest 2026-08-07T03:16:26Z)",
+        "analysis_plan.md §1 'Primary fit = joint'; §5 'n_restarts = 8', 'BIC/AIC'; §6.4 n_sim=200; §6.5 T2-cone definition",
+        "code/run_identifiability.py:24 N_SIM_POWER = 100; attempts_log.md §A"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.pre_registration_integrity.models_in_methodology_before_results": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "Section 2 (Methodology) states M0, M1, M2 and the M3 panel with their equations, nesting and matched complexity, plus the K2 coarse models. This comes before Section 4 (Experimental results).",
+      "evidence": [
+        "report.tex:174-216 (Sec. 2.2 Model family), 309-314 (K2)",
+        "report.tex:395 \\section{Experimental results}"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "evidence_completeness.quantitative_sources_documented": {
+      "value": "satisfied",
+      "confidence": "medium",
+      "reason": "Original measurements trace through macro names to specific JSON/CSV log entries. Source-paper values are cited specifically:\n- the 2022 Table 1 coefficients;\n- the 1.36/2.06 worked example;\n- log parameters a=5.34, b=2.34;\n- the quoted Stark 2025 passage.\n\nWeakness: the per-unit held-out and curve .npz arrays are absent, so the bootstrap CIs and figure bands cannot be recomputed from submitted files. The summary values are logged.",
+      "evidence": [
+        "logs/numbers.tex; code/make_tables.py",
+        "report.tex:423-442 (2022 values cited), 78-83 (Stark quote)",
+        "code/README.md vs logs/ (npz files absent)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "evidence_completeness.required_reporting_coverage": {
+      "value": "not_satisfied",
+      "confidence": "medium",
+      "reason": "Covered:\n- all task-required experiments, the attempts log, and the robustness specifications.\n\nNot covered, against the declared protocol:\n- the plan's penalized BIC/AIC cross-check ('Also reported: BIC/AIC at matched folds') was never computed or reported;\n- the declared n_sim = 200 per generator for discrimination power was completed at only 100, without being flagged as a deviation;\n- the per-unit held-out and recovery/shape/orientation .npz outputs listed in the README are missing;\n- across-fold variation appears only in the logs, not in the paper.",
+      "evidence": [
+        "analysis_plan.md:132-133 (BIC/AIC), :167 (n_sim = 200 per generating model)",
+        "code/run_identifiability.py:24 N_SIM_POWER = 100; logs/identifiability.json power_config n_sim 100",
+        "grep BIC/AIC: no code/log matches; code/README.md npz outputs absent from logs/"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    }
+  },
+  "integrity": {
+    "rh.number_traceability.main_table_values_traceable": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The main results table (tab:main_results) is not typed by hand. report.tex pulls it in from logs/tab_main.tex, and code/make_tables.py writes that file directly from the JSON logs. I recomputed or read back every row group and each matches its source. Held-out log-likelihood (LL) for M0/M1/M2 (-2.230/-2.120/-2.006) and its CIs come from extra_cis.json. The M3 panel values and the pairwise M2-minus-control deltas come from modelcmp_chromatic_chord.json deltas_chromatic. The anisotropy delta M2-M1 is +0.114 [-0.108,+0.327]. The selection-aware M2-best M3 delta is -0.113 [-0.355,+0.007], with best control M3-cielab. The coarse K2 rows, ridge separation (6.3/3.0 degrees), synthetic recovery (0.022 [0.004,0.078]), power rows (identifiability.json), confound rows (confound_control.json) and gray rows (gray_replication.json) all match. The 2022 comparison values are correctly cited or derived: 1.36 and 2.06 are from paper.md, and 0.757 = 2.06/(2*1.36). Two presentational issues do not amount to fabrication or contradiction. First, the caption says all intervals are 95% bootstrap CIs, but the recovery and power rows are percentile intervals over synthetic datasets. Second, three annotation strings are hardcoded ('2022 inside our CI', 'sig. only after control', 'sign unchanged'); I checked each against the computed values and all three are true.",
+      "evidence": [
+        "report.tex l.398-406: Table tab:main_results = \\input{logs/tab_main.tex}; make_tables.py l.344-467 builds every row from cch/car deltas, xci, idn, cf, gr JSON",
+        "logs/modelcmp_chromatic_chord.json deltas_chromatic: M2-M1 0.11379 [-0.10800,0.32684]; M2-bestM3_selection_aware -0.11262 [-0.35538,0.00664]; best_control M3-cielab; pairwise opponent +0.0315, srgb -0.0244, ciergb -0.0618, cielab -0.1126, hcl -0.0398",
+        "logs/extra_cis.json heldout_ll_ci_chromatic_chord: M0 -2.2295 [-2.518,-1.998], M1 -2.1197 [-2.345,-1.933], M2 -2.0059 [-2.269,-1.774]",
+        "logs/gray_replication.json mle_paired_deltas 'g+f(spline) - g' acc 0.0114 [0.0090,0.0151]; magnitude_comparison additivity_ratio 0.760 [0.747,0.772], D_step15_first 1.341, D_step30 2.000; additivity_ratio_2022_worked_example 0.7574",
+        "logs/confound_control.json: Helm perceived ratio 0.723 [0.697,0.753], chord 0.841; Ekman 0.665 [0.652,0.678], chord 0.974; verdict before/after M1-M0 +0.110/+0.346",
+        "make_tables.py l.358, l.455, l.459: hardcoded annotations '2022 inside our CI', 'sig. only after control', 'sign unchanged' are each consistent with the adjacent computed values"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.number_traceability.parameter_estimates_traceable": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Every reported parameter estimate traces to a log entry with the same value. The M1 outer exponent rho is -4.20 [-7.32,-2.38] in chord coordinates and -2.13 [-3.01,-1.46] in arc. These are the median and 2.5/97.5 percentiles over the 50 cross-validation (CV) fold fits in fit_diagnostics.rho_by_spec. The M2 channel weights at the gauge reference are L=0.020, M=0.232, S=0.747. Shape distinctness is 0.938 [0.643,1.000] and nonlinearity 0.681 [0.479,0.875]; all come from shapes.json, which uses a training-fold bootstrap with n_boot=1000. The gray-axis logarithmic fit (a=3.871, amplitude 2.372 [2.302,2.442]) is in gray_replication.json. The synthetic generator (x^0.35, x^1.0, x^0.6, rho=0.6) is in synth.py and run_identifiability.py. The cited 2022 parameters (a=5.34, b=2.34) match paper.md. One labeling caveat: the rho bracket is an across-fold spread, and the paper writes it in the same bracket style as its CIs without saying so. The numbers themselves are accurate to the log, so this is not a fabricated or contradicted parameter.",
+      "evidence": [
+        "logs/modelcmp_chromatic_chord.json fit_diagnostics.rho_by_spec.M1 median -4.2021, lo -7.3189, hi -2.3832; modelcmp_chromatic_arc.json M1 median -2.1337",
+        "logs/shapes.json M2_chromatic_chord channel_weight_at_reference [0.0204,0.2324,0.7472]; shape_distinctness point 0.9379 [0.6430,0.9996]; nonlinearity 0.6813 [0.4790,0.8747]; n_boot 1000",
+        "logs/gray_replication.json magnitude_comparison fitted_log_a 3.871 [3.350,4.437], fitted_log_amp 2.372 [2.302,2.442]; log_params_2022 a=5.34 b=2.34 (paper.md Example section)",
+        "report.tex l.497-499: rho reported in brackets without stating the interval type",
+        "code/run_identifiability.py l.95 strong_cone_params(shapes=(0.35,1.0,0.6), rho=0.6) matches report.tex l.573-574"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.number_traceability.prose_claims_consistent": {
+      "value": "violation_detected",
+      "confidence": "medium",
+      "reason": "The numbers in the prose are macros generated from the logs, but several prose claims built on them are contradicted by those same logs. (a) The Analysis says 'the best model in this entire study is an isotropic compressive scaling of an additive metric on CIE LCh coordinates', which is M1-hcl at chromatic chord held-out LL -1.822. The paper's own appendix table, which it calls 'all four primary configurations', lists models with higher held-out LL on the same chromatic held-out ratings and folds. In arc coordinates: M3-opponent -1.722, M3-hcl -1.756, M2 -1.781. In the joint chord fit: M3-hcl -1.795. In the joint arc fit: M3-opponent -1.686 and M3-ciergb -1.764. The arc half of the same isotropy diagnostic, which the paper only points to by filename, shows the best model there is the per-axis opponent model, and CIELAB's isotropic metric is significantly worse than the cone one (-0.081 [-0.166,-0.001]). The paper calls this claim 'a stronger and cleaner statement of the null'. (b) The paper says the observed M2-best M3 value (-0.1126) lies 'inside the non-cone ones' (the synthetic reference intervals). It falls just outside two of the five: the opponent-generated interval [-0.1119,-0.0058] and the CIELAB-generated interval [-0.2776,-0.1153]. (c) For the coarse two-channel models the paper says the observed values fall 'inside the non-cone one'. The observed coarse-cone minus M1 delta (+0.079) is outside the interval generated under the coarse CIELAB model [-0.106,+0.019]. (d) The failure analysis says 'f_L versus f_M. Unidentifiable by construction on this stimulus set'. This contradicts the logged synthetic recovery (L-M contrast recovered at 0.198 [0.139,0.249] against a true 0.196, correct sign in 100% of runs) and the paper's own verdict that 'the resolvable granularity is the three-cone split'. None of this is fabrication. However, (a) and (d) are categorical claims about results that their underlying sources materially contradict.",
+      "evidence": [
+        "report.tex l.766-768: 'Put together: the best model in this entire study is an isotropic compressive scaling of an additive metric on \\isoBestBasis coordinates' (numbers.tex isoBestBasis=CIE LCh; isotropy_diagnostic.json chromatic_chord M1-hcl -1.8217)",
+        "logs/tab_panel.tex / modelcmp_chromatic_arc.json point_mean_ll: M3-opponent -1.7224, M3-hcl -1.7563, M2 -1.7806; modelcmp_joint_chord.json M3-hcl -1.7948; modelcmp_joint_arc.json M3-opponent -1.6862, M3-ciergb -1.7645 (all evaluated on chromatic held-out ratings per report.tex l.940-942)",
+        "logs/isotropy_diagnostic.json chromatic_arc: iso_vs_cone_cielab -0.0809 [-0.1662,-0.0010]; peraxis_gain_opponent +0.141 [-0.017,+0.295]",
+        "report.tex l.598-600 'lies below the entire 95% interval of the cone-generated reference distribution and inside the non-cone ones' vs identifiability.json C_power_full: M3-opponent [-0.11194,-0.00580], M3-cielab [-0.27761,-0.11528]; observed modelcmp_chromatic_chord.json M2-bestM3_selection_aware -0.11262",
+        "report.tex l.618-619 'again fall outside the cone-generated reference and inside the non-cone one' vs identifiability.json D_power_coarse.K2-cielab.delta_target_minus_M1 [-0.1061,+0.0186] and observed K2-cone-M1 +0.0786",
+        "report.tex l.793-796 '(1) f_L versus f_M. Unidentifiable by construction on this stimulus set' vs report.tex l.736 'the resolvable granularity is the three-cone split' and identifiability.json B_recovery LM_contrast_recovered median 0.198 [0.139,0.249], sign_correct_frac 1.0"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.no_hardcoded_values.no_hardcoded_fit_targets": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "No hardcoded result, fit target or comparison outcome stands in for a computation. Every reported inferential quantity is computed from the provided data by the logged pipeline: run_main.py, run_identifiability.py, run_shapes.py, run_gray_replication.py, run_confound.py and run_isotropy.py. make_tables.py then turns the JSON into LaTeX macros. The only literal numbers in the code fall into three groups, none of which substitutes for a computed result. (i) Cited 2022 reference values, used only as comparison targets and labeled as the 2022 report: the published Table 1 values, 1.36/2.06, and a=5.34, b=2.34. (ii) Fixed design choices: the synthetic generator shapes, the bounds, and the knot count. (iii) Three verdict annotation strings in the table, which I checked against the adjacent computed values and found accurate.",
+      "evidence": [
+        "code/run_gray_replication.py l.63-65 consensus_regression_2022_reported (cited, displayed only); l.174-179 a22,b22 and 2.06/(1.36+1.36) labeled as 2022 values",
+        "code/make_tables.py header: 'The paper never hard-codes a number'; numbers.tex macros are all mac(...) calls on JSON fields",
+        "code/synth.py strong_cone_params is used only for synthetic recovery/power (identifiability), not for human-data results",
+        "code/check_paper.py verifies every macro used in report.tex is defined in numbers.tex; logs/build.out '0' undefined refs"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.no_hardcoded_values.no_oracle_leakage": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "No oracle output feeds the human-data analysis. Known truth is used only inside the clearly separated synthetic identifiability analyses, where it is the legitimate recovery reference. Human-data held-out LL is computed from parameters fit on training folds, together with nuisances (per-subject gain and SD) profiled on training ratings only. tests.py check 8 confirms the held-out evaluation uses the training nuisances. The XYZ-to-LMS transform variant is chosen by a rule that uses no response data (smallest median error against the exact monochromatic Ekman cone excitations).",
+      "evidence": [
+        "code/models.py l.359-371: Gaussian nuisances (ka, sg) reused from training when nuis is supplied; harness._one fits on tr and evaluates heldout(prob,p,nuis,te)",
+        "logs/tests.out: 'PASS held-out uses training nuisances (never better than test-refit)'",
+        "code/run_cone_conversion.py l.26-41: variant chosen by median_rel_err_ekman (stimulus colorimetry only); cone_conversion.json selected_variant ls_ybarw",
+        "code/synth.py docstring 'SYNTHETIC DATA ONLY ... used exclusively for the identifiability analyses'"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.test_set_integrity.bootstrap_from_training_set": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Every bootstrap that refits a model draws only from training data. The shape and band bootstrap (run_shapes.py) resamples clusters drawn only from training-fold groups; test units get multiplicity 0 and are excluded from the fit mask. The gray-axis replication draws its 100 resamples of 48,000 trials from the training counts (n_tr, k_tr) after removing 50 held-out responses per triad. The bootstrap behind the held-out delta CIs resamples held-out per-unit log-likelihoods with no refitting, and the paper describes this openly. That is an evaluation-uncertainty procedure: no held-out observation enters any fit.",
+      "evidence": [
+        "code/run_shapes.py l.52-74: uq = np.unique(gg[tr[n]]); mult=0 for non-training units; Problem/fit on bm (training multiplicities only)",
+        "code/run_gray_replication.py l.77-89: k_te hypergeometric 50/triad held out; nb = multinomial(BS_SIZE, n_tr/n_tr.sum()), kb from k_tr/n_tr; fits on trb, scores on te",
+        "code/harness.py l.160-200 cluster_bootstrap: 'Parameters are never refit: only the held-out per-unit log-likelihoods are resampled'",
+        "report.tex l.282-288: held-out deltas via paired cluster bootstrap over held-out units; shapes via cluster bootstrap 'of the training fold'"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.test_set_integrity.test_set_for_evaluation_only": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Held-out folds do not influence fitting or hyperparameter choices. In models.Problem, knots, per-axis unit-RMS scaling and the per-dataset design scaling are all computed from training-fold pairs only. Nuisances are profiled on training units. Optimizer seeds are fixed integers, and folds are disjoint by triad or pair (tests.py check 7 confirms). Four choices could have been data-driven, and none used held-out data. (i) The transform variant is chosen without response data. (ii) The knot count (m=5) was fixed in the plan, and the alternatives are reported. (iii) The rho bound was widened because of in-sample bound activity in an early pilot. (iv) The best control is chosen on held-out data, but that is the required comparison itself, and the code recomputes the choice inside every bootstrap resample. Both the chromatic-only and joint fits are reported, so the choice of headline configuration involved no hidden test-set tuning.",
+      "evidence": [
+        "code/models.py l.231-268: self.tmask = train_pair_mask(ds, unit_masks); RMS scaling and _wquantile knots use X[n][self.tmask[n]] only",
+        "code/harness.py l.100-110: tr/te masks per fold; seeds seed0+17*rep+3*k",
+        "logs/tests.out 'PASS folds are group-disjoint and complete'",
+        "code/run_main.py l.71-82: argmax over panel computed inside each bootstrap draw (best_in = draws[:,P].max(axis=1))",
+        "attempts_log.md A.3: bound widening motivated by training-fit bound activity in a pilot"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.baseline_honesty.gray_replication_from_logs": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "No prior contribution is passed off as new. The gray-axis analysis is explicitly framed and credited as a replication of Bujack et al. (2022), and the paper says 're-deriving gray-axis DR is not a contribution'. Chromatic DR and non-constancy are credited to Stark et al. (2025), and the geometry to Bujack et al. (2025). The Python pipeline is described as a re-implementation of the authors' R code, and the shared interpolant (Fritsch-Carlson PCHIP) is acknowledged. The novel claim is confined to the cone-alignment test.",
+      "evidence": [
+        "report.tex l.104-110: 'DR on the gray axis is \\citet{bujack2022}. DR on chromatic lines, and its non-constancy ... is \\citet{stark2025}... The novel object here is cone-alignment'",
+        "report.tex l.837-841: 'reproduces that result quantitatively ... re-deriving gray-axis DR is not a contribution'",
+        "code/gray2022.py docstring: 'Faithful re-implementation of the 2022 gray-axis pipeline ... Mirrors code/color/.../gray_functions.R'",
+        "report.tex l.226-228: PCHIP 'the same interpolant as the 2022 reference code'"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.baseline_honesty.baseline_numbers_from_logs": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The baseline numbers come from the agent's own logged runs on the provided data. The M0 and M1 held-out LL values and CIs are in modelcmp_*.json and extra_cis.json. The gray-axis baseline, perceptual-map-only and full-model accuracies (0.8876/0.9079/0.9194) and the paired deltas are in gray_replication.json, from 10 splits x 100 bootstraps = 1000 rows in gray_replication_cv.csv. The 2022 values quoted for comparison match paper.md: beta_dbar=-0.005, t(60)=-5.566, R2=0.556, F(3,60)=25.00, 1.36/2.06 and b=2.34. The '0.757' the abstract calls 'published' is derived arithmetically from the published 1.36 and 2.06, and the results section makes that clear. The '0.767 implied by' the 2022 logarithmic parameters is labeled as an implied analytic estimate. Neither is a false attribution. The text calls the regression match 'essentially exact' (-0.0061 vs -0.005), which is generous, but the numbers are shown side by side.",
+      "evidence": [
+        "logs/gray_replication.json mle_heldout: baseline 0.8876, g 0.9079, g+f(log) 0.9189, g+f(spline) 0.9194 (n=1000 each)",
+        "logs/gray_replication.json consensus_regression.C_consensus_signed_dd: n_groups 64, df 60, dbar -0.0061, t -5.630, R2 0.549, F 24.39 vs consensus_regression_2022_reported (matches paper.md Table 1)",
+        "logs/modelcmp_chromatic_chord.json point_mean_ll M0 -2.2295, M1 -2.1197",
+        "report.tex l.426-442 lists ours vs published side by side"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.code_paper_alignment.methodology_matches_code": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "The Methodology matches the code on everything substantive: the model family and outer Box-Cox form; monotone PCHIP inner functions with knots at training-fold quantiles; unit-RMS axis scaling and per-dataset design scaling computed from training data; the gauge reference r_k=1; per-dataset observation models (Thurstonian with per-observer scale for Wiebel and a single scale for gray; Gaussian with profiled per-subject gain and SD for Helm and Ekman); 5-fold x 10-repeat folds disjoint by evaluation unit; the paired cluster bootstrap with argmax inside each resample; the arc and chord coordinates; and the gray pipeline. There are some inaccuracies of detail. (i) The paper twice says the power analysis 'ran the identical CV comparison'. The code uses repeats=1 and n_restarts=6, against 10 and 10 for the real run. The log's own note says 'identical CV protocol' while its config fields show the reduced settings. (ii) The Wiebel CV is called 'pair-disjoint' but is disjoint by triad. (iii) 'Every model comparison is run twice', yet the robustness variants are chord-only. (iv) '10 restarts per fit' holds for the main CV but not for the auxiliary fits. The models, fold type, metric and selection rule in the power analysis are the same as in the real run. Its reduced repeats widen the synthetic reference distributions, which makes the main power inferences conservative rather than inflated. I therefore judge these to fall short of a material contradiction.",
+      "evidence": [
+        "report.tex l.304-307 and l.588-590: 'run(s) the identical CV comparison' vs code/run_identifiability.py l.169-170 run_cv(..., repeats=1, n_restarts=6) and logs/identifiability.json power_config {K:5, repeats:1, n_restarts:6, note:'identical CV protocol to the real run'} vs modelcmp_chromatic_chord.json config repeats 10, n_restarts 10",
+        "report.tex l.446 'pair-disjoint 5-fold CV' (Wiebel) vs code/run_gray_replication.py l.220-228 fold key = unordered triad id",
+        "code/models.py, harness.py, pair_coords.py, datasets.py consistent with report.tex §2.2-2.7 (Box-Cox f_rho, PCHIP cumsum(softplus), training-fold knots, r_k=1 after unit-RMS, Phi(kappa(D2-D1)), profiled Gaussian nuisances)",
+        "logs/tests.out: gradients match FD (1.91e-06), M2 nests M1, rotation family nests M2"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.code_paper_alignment.models_in_paper_match_code": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The models named in the paper are exactly the models fit. models.SPECS defines M0 (linear inner, identity outer), M1 (linear inner, Box-Cox), M2 (spline inner on cone axes) and five M3 controls (opponent (L-M, S-(L+M), L+M); linear sRGB; CIE RGB from the provided CMFs at 700/546.1/435.8 nm; CIELAB on its own differences; LCh on (dL*, dC*, dH*) with the standard dH*). They also define the coarse K2 panel (achromatic singleton plus chromatic-magnitude group), the isotropic M0-b/M1-b panels and the rotation family R-phi. Parameter counts in the logs (3/4/16/16, and 11 for K2) match the paper. No control is a fitted free rotation or a data-adaptive linearization.",
+      "evidence": [
+        "code/models.py l.174-203 SPECS/M3_PANEL/K2_PANEL/ISO_SPECS/ROT_SPECS",
+        "code/colorspace.py l.153-169 basis_matrix opponent/srgb/ciergb; l.187-212 XYZ_to_Lab, lch_pair_coords with dH=2*sqrt(C1C2)*sin(dh/2)",
+        "code/pair_coords.py l.55-72 K2 grouping [[0],[1,2]]",
+        "logs/modelcmp_chromatic_chord.json config.n_par: M0 3, M1 4, M2 and all M3 16, K2 11 (report.tex l.383-385)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.code_paper_alignment.hyperparameters_match": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "The hyperparameters stated in the paper match the code and the run configurations: K=5 folds, 10 repeats, 10 restarts in the main CV, m+1=6 control points, ridge 1e-6, 2000 bootstrap resamples, 1000 pooled training-fold shape refits (200 per fold x 5), 200 recovery simulations, 100 power simulations per generator, and the 2022 replication design (10 splits, 50 held-out responses per triad, 100 bootstraps of 48,000). The outer exponent's bounds (-8, 3) are not stated in report.tex. The paper's phrase 'rho is free on both sides of 1' is about the test being two-sided, and the bounds are consistent with that. That is an omission, not a contradiction of a stated value. The false claim about the bound's activity appears in attempts_log.md, and I assess it under integrity.execution_claims.",
+      "evidence": [
+        "logs/modelcmp_chromatic_chord.json config: K 5, repeats 10, n_restarts 10, m_knots 5; numbers.tex cvK 5, cvRepeats 10, cvRestarts 10",
+        "code/models.py l.36-37 RHO_BOUNDS=(-8.0,3.0), RIDGE=1e-6; report.tex l.272-273 ridge 10^-6",
+        "code/run_shapes.py N_BOOT=200, K=5 -> shapes.json n_boot 1000 (report.tex l.287-288)",
+        "code/run_identifiability.py N_SIM_RECOVERY=200, N_SIM_POWER=100 (numbers.tex idNsimRec 200, idNsimPow 100)",
+        "code/run_gray_replication.py CV_N, BS_N, TEST_PER_TRIAD, BS_SIZE = 10, 100, 50, 48000 (report.tex l.390-392)",
+        "report.tex l.225 'rho is free on both sides of 1' (bounds not described)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.statistical_inference_integrity.simulation_clearly_labeled": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Synthetic observations are generated only by synth.simulate, inside run_identifiability.py, for parameter recovery and discrimination power. They are labeled as synthetic in the code, the logs, the paper text and the figure captions. Every human-data analysis (run_main, run_gray_replication, run_confound, run_isotropy, run_shapes) loads only the provided datasets, and no synthetic draw is pooled with or reported as human data.",
+      "evidence": [
+        "code/synth.py docstring 'SYNTHETIC DATA ONLY. Nothing produced here is human data'",
+        "logs/identifiability.json power_config.note 'synthetic data only'",
+        "report.tex l.641-642 Fig. identifiability caption '(synthetic data, clearly labelled)'; l.572 'Generating 200 synthetic datasets'; l.588 'We generated 100 synthetic datasets'",
+        "attempts_log.md D: 'No simulated participants except the clearly-labelled synthetic datasets used solely for parameter recovery and discrimination power'"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.identifiability_disclosure.no_overclaim_cone_specificity": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "The paper does not claim established cone specificity. Its verdict is negative, and it explicitly declines to adjudicate the mechanism question. The earned-null claim is consistent with the logged held-out, power and recovery results. The selection-aware M2-best M3 delta is negative in all 16 logged specifications, and its CI excludes zero in the joint fits. Under a generator built from the fitted cone parameters, the delta is +0.040 [-0.012,+0.086] and M2 wins the panel 91% of the time; the observed -0.113 lies below that range. Under the nearest (opponent) control generator, the correct basis wins 94% of the time. Recovery of distinct f_L, f_M, f_S succeeds, with median errors of 2-3% of range. The paper also states that its pair-resampling bootstrap CI ([-0.355,+0.007]) reaches the lower edge of the cone-generated range, and that the observed anisotropy matches what the fitted cone model would produce. The marginal 'inside the non-cone ones' misstatement and the stale 'unidentifiable' failure-analysis sentence are assessed under prose consistency. They do not turn the earned-null claim into a contradiction of the results.",
+      "evidence": [
+        "logs/tab_robust.tex: M2-best M3 negative in all 16 rows; joint fit -0.225 [-0.379,-0.077]",
+        "logs/identifiability.json C_power_full.M2 delta median +0.0398 [-0.0124,+0.0861], argmax M2 0.91; M3-opponent argmax 0.94; B_recovery per_curve errors and LM_contrast sign_correct_frac 1.0",
+        "report.tex l.598-612: discloses the distinction between the synthetic reference distribution and the pair-bootstrap interval, and that anisotropy is not excluded",
+        "report.tex l.739-743: 'These data therefore cannot adjudicate the mechanism question, and we make no claim about where in the visual pathway the compressive nonlinearity sits'"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.held_fixed_disclosure.deviations_disclosed": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "The paper's compliance claims for the held-fixed conditions match the execution. Only provided data are used (data/gray, data/chromatic, data/cone_fundamentals). The cone conversion uses the provided CIE 2006 fundamentals, with stated reference whites (D65/C/E) and von Kries normalization verified to (1,1,1). Ekman's cone excitations are taken directly from the fundamentals, and the paper discloses this. Each dataset has its own observation model and nuisances, with no naive pooling. Folds are 5-fold, disjoint by triad or pair, with training-only knots, scaling and nuisances. The gray-axis DR finding is reproduced. The deviations that are disclosed include the Helm colour-deficient exclusion, the Wiebel single viewing context, the per-dataset design scaling and the transform-variant selection. There are some plan deviations the paper does not list (for example the primary fit, restart count and coarse-model structure), but these concern the analysis plan, not the held-fixed parity constraints. I found no claimed parity compliance that the code or configuration contradicts.",
+      "evidence": [
+        "code/colorspace.py and datasets.py read only DATA/gray, DATA/chromatic, DATA/cone_fundamentals files",
+        "logs/cone_conversion.json verification white_*_normalized = [1,1,1]; tests.out 'reference whites map to (1,1,1) max err 1.1e-16'",
+        "report.tex l.247-266 per-dataset observation models; l.276-280 'Nothing about a test fold ... is computed from held-out data' (consistent with models.Problem tmask usage)",
+        "report.tex l.369-372 Helm colour-deficient exclusion disclosed; l.362-366 Wiebel plain context primary; l.233-242 per-dataset design scaling disclosed and re-run without it"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "integrity.execution_claims": {
+      "value": "violation_detected",
+      "confidence": "medium",
+      "reason": "The paper delegates deviation disclosure to attempts_log.md. That file's section A is headed '(all disclosed in the paper)'. Its item A.3 states: 'Bounds were widened to [-8, 3] before any reported run. In the reported runs the bound is inactive for M1 and M2; it is occasionally active at rho = 3 for the CIELAB/LCh controls in the joint configuration, which is logged in fitlog_*.csv and noted as a limitation.' The logged fits establish this inspection claim is false. M1's rho sits at the lower bound -8 in all 50 folds of the reported 'no per-dataset design scaling' specification. M2's rho hits a bound in 14 of the 16 reported configurations: 5/50 folds at -8 in the primary chromatic chord run, and 26/50 at +3 in joint arc. The bound activity among controls is understated: M3-opponent, the best control in joint arc, is at +3 in 46/50 folds; M3-cielab, the best control in the primary run, is at -8 in 13/50; M3-hcl is at +3 in 38/50 folds of joint chord. report.tex never mentions the rho bounds or their activity, so 'noted as a limitation' and 'all disclosed in the paper' are also false. These are explicit claims about the executed fits and about a disclosure, and the artifacts contradict them, not merely fail to support them. Two smaller procedural overstatements point the same way: 'ran the identical CV comparison' for the power runs (1 repeat and 6 restarts in practice), and 'none [of the paper's numbers] is typed by hand' (some descriptive values, such as d(434,674)=0.84 and hue angles of 90.8 and 84.4 degrees, are typed in).",
+      "evidence": [
+        "attempts_log.md l.8 '## A. Deviations from the pre-registered plan (all disclosed in the paper)'; l.29-34 A.3 text quoted above",
+        "logs/fitlog_chromatic_chord_nodsscale.csv: M1 rho = -8.0 in 50/50 fits (min = max = -8.0)",
+        "logs/fitlog_joint_arc.csv: M2 rho = 3.0 in 26/50, M3-opponent 46/50; fitlog_chromatic_chord.csv: M2 rho = -8.0 in 5/50, M3-cielab 13/50; fitlog_joint_chord.csv: M3-hcl rho = 3.0 in 38/50",
+        "logs/modelcmp_chromatic_chord.json fit_diagnostics.rho_by_spec.M2.lo = -8.0; logs/shapes.json M2_chromatic_chord rho_boot.lo = -8.0",
+        "report.tex: no occurrence of the rho bounds or their activity (grep 'bound'/'active' only hits the orientation analysis and l.757)",
+        "report.tex l.588-590 'ran the identical CV comparison' vs identifiability.json power_config repeats 1, n_restarts 6; report.tex l.928-929 'none is typed by hand' vs hand-typed l.347-348, l.343-344"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "integrity.precommitment_claims": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "The plan says it was written at 2026-08-07T02:54:46Z, before fitting. Every timestamped log comes later: cone conversion at 03:16:26Z (git 79f1bed), the pilot fit at 03:21:10Z and the primary chromatic chord fit at 03:22:39Z. The file timestamps converted to UTC also put every code and log file after the plan's stated time. The plan file's later modification time is attributed to disclosed cosmetic edits. The specific claims of advance commitment hold. The transform-variant rule (smallest median Ekman error, no response data) was applied as written, even though the selected variant has a worse maximum error (108.5%), which the paper reports. The verdict rules (a) and (b) and the three identifiability strands appear in the plan and were applied. Several deviations from the plan are undisclosed: the plan names the joint fit as primary while the paper's headline is chromatic-only; restarts went from 8 to 10; the gauge reference changed from the median to r_k=1; the planned 3-channel coarse model became the 2-channel K2; power simulations went from 200 to 100; and BIC/AIC and the achromatic-only fit were never run. However, the 2-channel K2 and 10 restarts already appear in the first logged full run, so they were in place from the first full fit. The headline switch makes the null weaker, not stronger: joint gives -0.225 [-0.379,-0.077] versus -0.113 [-0.355,+0.007] for chromatic-only, and the pre-declared verdicts are the same under both. No dated evidence shows post-result selection or backdating. The git history is not in the snapshot, so I could not verify the plan's original content.",
+      "evidence": [
+        "analysis_plan.md l.3 'Written 2026-08-07T02:54:46Z (UTC), before any model-fitting code was written or run'",
+        "logs/*.json _meta.utc: cone_conversion 03:16:26Z, modelcmp_pilot1rep 03:21:10Z, modelcmp_chromatic_chord 03:22:39Z, modelcmp_joint_chord 03:27:58Z",
+        "analysis_plan.md l.40 'Primary fit = joint'; l.111-112 r_k = median; l.123 n_restarts=8; l.133 BIC/AIC; l.167 n_sim=200; l.171-174 T2-cone 3-channel; none listed in attempts_log.md A",
+        "logs/modelcmp_pilot1rep_chromatic_chord.json config.n_par K2-cone 11 (2-channel K2 already present in the first logged run)",
+        "logs/cone_conversion.json selection_rule and selected_variant ls_ybarw (max_rel_err 1.0846 reported in report.tex l.156-157)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.selective_reporting.model_variants_reported": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "Every model variant that was fit is reported: M0, M1, M2, the five M3 controls and the six K2 models in all four primary configurations (appendix panel table); the isotropic and additive models on every basis (isotropy table, chord version, with the arc version explicitly pointed to in the log); and the rotation family (orientation figure). Superseded runs are disclosed with their outcomes: the 1-repeat pilot (same signs as the final run), the pre-fix arc runs (-0.056 to -0.058, with the original printout kept in run_main_primary.out), the hash-seeded identifiability run, and the early pilot with rho bounded to [-2,3]. The planned SO(3) free rotation and 3-channel coarse model were never run, so they are not hidden completed results. Outcomes that run against the paper's verdicts (negative M2-M1 under the compressive pre-transforms; the orientation profile peaking at the cone frame) are reported.",
+      "evidence": [
+        "logs/tab_panel.tex: 14 models x 4 configurations; report.tex l.939-945 'so that nothing reported in aggregate elsewhere is hidden'",
+        "logs/run_main_primary.out l.20-27: original chromatic_arc M2-bestM3 -0.0559, matching attempts_log.md C bug-fix disclosure",
+        "attempts_log.md C: pilot kept in logs (modelcmp_pilot1rep_chromatic_chord.json: M2-M1 +0.040, M2-best M3 -0.167)",
+        "report.tex l.783-790 Table isotropy caption: 'The arc-coordinate version is in logs/isotropy_diagnostic.json'",
+        "report.tex l.621-636: orientation result favouring the cones reported 'because it cuts against our headline'"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.selective_reporting.all_specifications_reported": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "There are exactly 16 model-comparison specification logs (modelcmp_*.json, excluding the disclosed pilot), and all 16 appear in the robustness table with their M2-M1 and M2-best M3 CIs. The table includes specifications unfavourable to particular claims, such as negative M2-M1 under the compressive pre-transforms. run_main_robust.out matches the table row for row. The pre-transform combined with arc coordinates was not run, and the attempts log discloses this. Per-dataset (Helm vs Ekman) and equal-dataset-weight deltas exist only in the logs. The headline uses the pre-specified pooled chromatic, unit-weighted metric, and the unshown variants do not favour the paper's conclusion (for example, the equal-weight M2-best M3 delta is a stronger negative). I found no outcome-dependent hiding.",
+      "evidence": [
+        "logs/tab_robust.tex 16 rows = modelcmp_{chromatic_chord, chromatic_arc, joint_chord, joint_arc, _k4, _k6, _nodsscale, _ekmanD65, _ekmanE, _helmD65, joint_chord_allC, _var390, _var400, _pow043, _pow033, joint_chord_pow043}.json",
+        "logs/run_main_robust.out selection-aware values (-0.1344, -0.2020, -0.1114, ..., -0.2337) match tab_robust.tex",
+        "attempts_log.md B: pow+arc combination 'dropped' (not run); 'No specification was run and then dropped'",
+        "logs/modelcmp_chromatic_chord.json deltas_chromatic_equal_dataset_weight M2-bestM3 -0.113 [-0.351,-0.033] (stronger null; not shown)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.held_fixed_disclosure.data_sources_respected": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "All data access in the code points to the provided data directory: gray/gray_complete_data_release.csv, the gray/wiebel_mlds raw MLDS and matching CSVs, chromatic/helm_* and chromatic/ekman_* (dissimilarities and per-stimulus CIE tables), and cone_fundamentals/linss2_10e_1.csv and ciexyz31_1.csv. The code makes no network calls or downloads. The only external numbers are standard colorimetric definitions (D65/C/E white chromaticities and the IEC 61966-2-1 sRGB primaries), which are not colour-perception data, and the CIE RGB primaries are read from the provided CMFs. The 2022 published values serve only as comparison references.",
+      "evidence": [
+        "Grep over code/: every read_csv/glob targets DATA/gray, DATA/chromatic, DATA/cone_fundamentals; no http/urllib/requests/download",
+        "code/colorspace.py l.21-35 standard illuminant and primary chromaticities labeled 'definitions, not color-perception data'",
+        "attempts_log.md D: 'No externally sourced colour-perception data of any kind'",
+        "report.tex l.354-378 Datasets paragraph lists only the four provided datasets and cvrl fundamentals"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.data_provenance_integrity.only_provided_datasets": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "There is no affirmative evidence that any dataset beyond the provided sources was used. The loaders in datasets.py and run_gray_replication.py read only the provided gray, Wiebel, Helm and Ekman files and the provided cone fundamentals and colour-matching functions. Each dataset keeps its own identity and observation model, with no relabelling or naive pooling across response scales. The only data subsetting (Helm colour-normal records, the Wiebel 'plain' context in the main model) uses the provided files and is disclosed. The synthetic data are confined to the identifiability analyses.",
+      "evidence": [
+        "code/datasets.py load_gray/load_wiebel/load_helm/load_ekman read data/gray, data/gray/wiebel_mlds, data/chromatic files only",
+        "code/run_gray_replication.py l.30, l.205-208 read the provided gray CSV and Wiebel raw files",
+        "logs/cone_coordinates.csv: 75 stimuli logged across gray, wiebel, helm (10) and ekman (14)",
+        "report.tex l.369-372 Helm colour-deficient records excluded and disclosed"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    }
+  }
+}

@@ -1,0 +1,218 @@
+{
+  "nodes": {
+    "number_traceability.kernel_hyperparameters_in_logs": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Every kernel hyperparameter I checked traces to a log with the same value. The headline shifted f2 kernel uses gamma=4.4, c=0.4, kmax=14.5 and QSVT degree 58; the reference uses beta=0.7 at kmax=29 and QSVT-LCU degrees 162/163. These match logs/selection/H.json (frozen 14:06:19Z), runs/H/*/run_spec.json and the QuCF run.log. The P8 kmax pairs (9/2.5 through 46.5/21.5) and the c range 0.7 to 0.35 match results_main.jsonl and admissibility.txt. The search grids and alpha caps match kernel_plan.py. alpha_0.7=1.305 and alpha_0.9=2.01 match admissibility.txt. The f_jy (j,y,c) values match Low-Somma Table 3 and are credited to them. No altered or contradicted hyperparameter was found.",
+      "evidence": [
+        "logs/selection/H.json: variant kmax 14.5, c 0.4, gamma 4.4, deg 58; baseline kmax 29; beta0.7-qsvt deg 162",
+        "runs/H/f2-paired_nk7_t0.1_e3.00/run.log: 'LCHS-f2_g4.4_c0.4-re-neg', 'Polynomial parameter: 14.5', 'number of angles: 59'",
+        "logs/macros.tex: HvarGamma 4.4, HvarC 0.4, HvarKmax 14.5, HvarDeg 58, HbaseKmax 29, HbqDeg 162, PvarCfirst 0.7, PvarClast 0.35",
+        "logs/tables/p8_rows.tex kmax columns = runs/results_main.jsonl kmax fields",
+        "logs/kernel_derivation/admissibility.txt: beta 0.7 alpha 1.3050; beta 0.9 alpha 2.0124",
+        "code/kernel_plan.py grids and LS_TABLE3_FJY = lit/lowsomma_2508.19238.txt Table 3 (3.68,1.05,-0.206 etc.)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "number_traceability.emulator_metrics_in_logs": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The STMC counts, Q_A counters and ancilla counts printed by QuCF itself (run.log) equal results_*.jsonl and every table row I checked: all 33 P8 runs, 14 P6, 15 T, 3 H, and the nk=5 and nk=8 C runs. Errors and success probabilities in the tables equal the JSONL and the live batch_main.log. I read the raw HDF5 bytes of the headline variant output: it holds a real amplitude profile peaking at 0.2414, and its hand-summed squared norm is about 0.4383 against the logged 0.43836. The baseline file is consistent too (peak ratio 0.9965 vs sqrt of the probability ratio, 0.9968). The emulator-vs-model summary (n=174, max 1.55e-11, median 4.89e-12, flagged branch 3.99e-6) matches the paper's 1.6e-11, 4.9e-12 and 4.0e-6. Limitation: h5py was unusable here, so I could not recompute relative errors from the HDF5; nothing contradicts the logged values.",
+      "evidence": [
+        "runs/H/f2-paired_nk7_t0.1_e3.00/run.log: N-gates 284837, N-BE-calls 5436, na 19; runs/H/beta0.7-dirdec_nk7_t0.1_e3.00/run.log: N-gates 529927, N-BE-calls 10404, na 19 = logs/tables/main_results_rows.tex lines 1-2",
+        "P8 run.log N-gates (187546..834142 ref; 64552..433217 variant) = logs/tables/p8_rows.tex; T run.log (215773..3216781; 78325..838225) = logs/tables/t_rows.tex; C nk8 run.log = logs/tables/c_rows.tex",
+        "runs/results_H.jsonl: rel_error 0.000898005611, success_prob 0.4383625 (variant); 0.0009147531, 0.4355933 (reference)",
+        "logs/emulator_model_check.json summary: n 174, max 1.5529e-11, median 4.894e-12, max_flagged_branch 3.989e-6",
+        "od -t f8 -j 2 runs/H/f2-paired_nk7_t0.1_e3.00/lchs_OUTPUT.hdf5 offsets 30162-30658: real profile, hand sum of squares about 0.43831",
+        "runs/R_reproduction/*/run.log N-gates = workdir_outside_proposal/data/ade_opt_simulations/ADE-OPT/t08/*-OPT/slurm-*.out (2692135, 2752429, 2826923, 5325230, 5437664)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "number_traceability.scaling_fits_in_logs": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Every reported fit traces to logs/analyze_stdout.txt, which code/analyze.py produces by ordinary least squares on log-log data from the results JSONL. P8 gate exponents are 1.542+-0.057 (reference) and 2.167+-0.120 (variant); small-eps fits 1.554 and 1.276; Q_A exponents 1.599 and 2.126; T-sweep exponents 0.969+-0.036 and 0.845+-0.038. All equal logs/macros.tex. Hand checks agree: T endpoint slopes are 0.974 and 0.855; the prefactor ratio 27178/14766 = 1.84; the exponent difference is -0.124 with SE about 0.053. The bound-based scaling values (1.50, 1.54, 1.67 and the radius ratios) match logs/theory_scaling.txt. An earlier flawed version is kept as theory_scaling_v1 and disclosed in attempts A8; it is not used in the paper. The paper also reports the unfavourable result that the variant's fitted exponent is larger.",
+      "evidence": [
+        "logs/analyze_stdout.txt fits_P8 and fits_T",
+        "logs/macros.tex: PBaseGateExp 1.54, PVarGateExp 2.17, PVarGateExpSmall 1.28, TBaseGateExp 0.97, TVarGateExp 0.84, TprefRatio 1.84, TexpDiff -0.12",
+        "code/analyze.py powerfit (lines 99-110) and use at lines 354-363 and 452-458",
+        "logs/theory_scaling.txt: 'beta 0.7: window exponent 1.50', 'f2 (closed contour term) ... 1.54', 'f2 (numeric contour term) ... 1.67'",
+        "attempts_log.md A8; logs/theory_scaling_v1.json kept"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "no_hardcoded_values.no_hardcoded_emulator_targets": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "I found no hardcoded result standing in for computation. The exact reference is computed at run time with scipy expm. Emulator output is normalised only by nominal circuit constants (G_init, G_AA_nominal, alpha_d, out_scale); the exact solution is used only to measure error. Gate, Q_A and ancilla counts come from QuCF output; the Q_A counter is computed in the patched QSP constructor. A search of code/*.py for key result values (529927, 284837, 10404, 5436, 834142, 433217, 2692135, 0.000898) found nothing. All macros and tables are auto-generated by analyze.py. The reused QSP selector phases are byte-identical copies of supplied files, are disclosed, and are not outputs.",
+      "evidence": [
+        "code/lchs_kernels/common.py lines 55-60: exact_solution uses expm(-A t)",
+        "code/lchs_kernels/post.py lines 59-81: norm_const from spec constants; rel_error vs exact_solution",
+        "logs/qucf_patch_QCircuit.diff lines 104-117: counter n_be_calls_selector += 2(N_angles-1)nt",
+        "Grep of code/*.py for result literals: no matches",
+        "logs/macros.tex header: 'generated by code/analyze.py from runs/*.jsonl'",
+        "cmp: code/qsp_segments/QSP_tau1245.000000_N2719.hdf5 identical to supplied QuCF-OPT-LCHS/simulations/LCHS/ADE-OPT/t08/nk10_kmax40-OPT/QSP_t1244p3_eps12.hdf5"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "pre_stated_method.hyperparameters_match_logs": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The settings quoted in Method and Setup match the code and the run specs that produced the reported results. These include the normalisation eta_conv = 4 sqrt(3/2) kmax (2D/dx^2 + c/t) with eta = sum(tau)/(2t); |P| <= 0.95; the 2% degree slack; the 1e-12 angle-finder stop; the grids; the alpha caps 1.295 and 3; N_AA_init = 2; first-lobe N_AA for the brute-force path; t=0.1; nx=6. For example, the H variant spec has eta_conv 5922.92 and tau_total 1245, so eta = 6225 = 1245/(2*0.1). The H reference N_AA_w = 7 equals the published nk7 value. A hand check reproduces NJ's printed block-encoding constants from the be_angles formulas. No material mismatch was found.",
+      "evidence": [
+        "sections/setup.tex lines 27-29 vs code/lchs_kernels/segments.py lines 33-35 and 107-116",
+        "runs/H/f2-paired_nk7_t0.1_e3.00/run_spec.json selector: eta_conv 5922.915, tau_total 1245.0, eta 6225.0",
+        "code/lchs_kernels/qsvt_poly.py: P_CAP 0.95, stop 1e-12; code/kernel_plan.py QSVT_ERR_SLACK 1.02, ALPHA_CAP 1.295 and 3.0",
+        "runs/H/beta0.7-dirdec_nk7_t0.1_e3.00/run_spec.json N_AA_w 7 = published dc.oracle N_AA_w 7 (nk 7)",
+        "sections/method.tex lines 121-135 vs code/lchs_kernels/select.py choose_degree"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_honesty.baseline_source_distinction_preserved": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The paper keeps three baseline sources separate. (a) NJ's published outputs appear only in the reproduction table, under an explicit 'STMC (published)' column; those values equal the supplied slurm logs. (b) Re-runs of NJ's oracle files use the unmodified QuCF-OPT-LCHS build. (c) The agent's own reference-circuit emulations at t=0.1 are labelled 'ref.: reference circuit of [NJ]' in an emulator-measured table. Their deviations (time, eta rounding, first-lobe N_AA) are disclosed. NJ's ~0.2 success probability is identified as the published t=0.8 value, distinct from the 0.43-0.50 measured here. No source is falsely attributed to another.",
+      "evidence": [
+        "sections/appendix.tex Table repro caption ('Re-runs of five published oracle files ... unmodified build'); logs/tables/repro_rows.tex",
+        "workdir_outside_proposal/data/ade_opt_simulations/ADE-OPT/t08/nk7_kmax20-OPT/slurm-31186166.out 'N-gates: 2692135' = runs/R_reproduction/nk7_kmax20/run.log",
+        "build_deps/qucf_ref_build/build_ref.sh: SRC=$P/code/QuCF-OPT-LCHS (unmodified)",
+        "sections/results.tex Table main_results caption: 'Main results (emulator-measured) ... ref.: reference circuit of NJ'",
+        "sections/setup.tex deviations (i), (iv), (v)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "code_paper_alignment.methodology_describes_code": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The Method and Setup descriptions match the implementation. Real weights use one even QSVT on the SIN gate with exact amplitude amplification, and left/right preparations share flag qubits. Complex kernels use an LCU of even and odd QSVTs, with a Z on the LCU qubit for the left preparation. The block-encodings (U_BE_H, U_BE_m, U_BE) and the QSP selector are written verbatim from NJ's dc.oracle; only constants differ. The c/t shift enters only the diagonal term of the U_Bm angle formula. Q_A is 2(N_angles-1) per segment. Ancillas are nq-nx (19, 19 and 20 at nk=7). STMC is QuCF's N_gates for the whole circuit. The claimed 99.8% selector share checks out: 2687635/2692135.",
+      "evidence": [
+        "code/lchs_kernels/oracle.py lines 147-185 (real QSVT PREP, shared a_q/a_s), 186-254 (complex LCU), 326-364 (block-encoding and selector)",
+        "runs/H/f2-paired_nk7_t0.1_e3.00/lchs.oracle lines 99-126 = workdir_outside_proposal/data/.../nk7_kmax20-OPT/dc.oracle lines 178-224",
+        "code/lchs_kernels/segments.py be_angles: b_c = kmax(2D/dx^2 + c/t)",
+        "logs/qucf_patch_QCircuit.diff line 115 (Q_A counter)",
+        "runs/repro_check/nk7_kmax20_t08_modbin/run.log: N-gates 2692135, N-gates (selector) 2687635",
+        "sections/background.tex 'Cost accounting'; sections/method.tex Secs 3.2 and 3.4"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "code_paper_alignment.kernel_in_code_matches_paper": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The kernel formulas in the paper are implemented identically in the code. The f2 kernel xi = e^{c(1-ik)} e^{-(1+k^2)/4gamma^2}/(pi(1+ik)), its weight g = e^c e^{-ick} e^{-(1+k^2)/4gamma^2}/(pi(1+k^2)), and the shifted real form g0 appear in kernel_plan.py, in common.py, and in the new QuCF brute-force profiles. The ACL weight g_beta = exp(2^beta-(1+ik)^beta)/(2pi(1-ik)) equals Eq. (acl) divided by (1-ik). The f_jy form matches the paper and LS Eq. 6. Each has residue i/(2pi) at k=-i. QuCF logs label the runs 'LCHS-f2_g4.4_c0.4'. The emulator confirms the shift identity: the shifted and unshifted f2 circuits give errors 4.797373877605e-3 and 4.797373877139e-3.",
+      "evidence": [
+        "sections/method.tex Eq. (eq:f2) and (eq:shifted)",
+        "code/lchs_kernels/common.py lines 72-95 (g_beta, g_f2_real, g_f2_complex, g_fjy)",
+        "code/kernel_plan.py lines 17-40 (xi_beta, xi_f2, g0_f2, xi_fjy)",
+        "logs/qucf_patch_QCircuit.diff lines 20-66 (LCHS_weights_sin_f2_sqrt, _f2c_sqrt)",
+        "logs/verification/verification_summary.json: L_f2_dirdec 0.004797373877604762 vs L_f2c_dirdec 0.004797373877138636"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "held_fixed_disclosure.deviations_disclosed": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The paper says selector, quadrature, qubitisation and block-encoding are held fixed, and the generated oracles keep NJ's block-encoding, SIN and selector structure exactly (same alpha_k1_pih 1.583164801809 at nk=7). The one change to the block-encoding is the diagonal rotation for the c/t shift, disclosed in Setup (iii) and Proposition 1. The other deviations are disclosed too: t=0.1 instead of NJ's 0.4-2.4; eta rounded to available QSP segments (NJ themselves repeat a segment 5 times); first-lobe N_AA; success-probability parity via the one-norm rather than ~0.2. The accuracy-parity claims hold: H 8.98e-4 <= 9.15e-4, P8 11/11, T 5/5. The single P8 success-probability shortfall (0.5022 vs 0.5032) is disclosed. The test problem matches NJ: v=1, D=0.01, Gaussian at 0.5 with width 0.05, dx=1/(Nx-1).",
+      "evidence": [
+        "sections/setup.tex lines 56-66 'Deviations from the reference setup, disclosed'",
+        "runs/H/f2-paired_nk7_t0.1_e3.00/lchs.oracle lines 99-126 vs published dc.oracle lines 178-224; alpha_k1_pih identical",
+        "workdir_outside_proposal/data/.../nk7_kmax20-OPT/qsp_selector.qsvt: 'n_repeat 5'",
+        "paper.md lines 778 and 786 (v=1.0, D=0.01, dx=(Nx-1)^-1) vs code/lchs_kernels/common.py lines 23-44",
+        "sections/results.tex lines 61-64 (exception disclosed); attempts_log.md A9"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "integrity.execution_claims": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The explicit execution claims are backed by artifacts. '174 GPU emulations': batch_main.json lists 171 runs plus 3 in results_H, all with rc=0 and their own run directories. 'Verified before the sweeps': verification outputs date from 14:03-14:05Z, before the first sweep output at 14:06:59Z. Five published oracles re-run with the unmodified build: gate counts equal the published slurm logs, and a byte comparison shows only metadata and timestamps differ. '221 QSVT angle sets validated': qsvt_angles_summary.json. Admissibility checked for every f2 parameter set: admissibility.txt plus the lookup in analyze.py. The 26 QSP segments were re-validated. The claim that the modified binary reproduces the published output bit-for-bit has a run directory with a matching gate count but no separate comparison log; that is missing evidence, not contradicting evidence.",
+      "evidence": [
+        "runs/batch_main.log ends 'batch finished'; runs/results_main.jsonl 171 lines, all returncode 0",
+        "UTC mtimes: runs/verification/results.jsonl 14:04:36Z; logs/selection/H.json 14:06:19Z; runs/H/f2-paired.../lchs_OUTPUT.hdf5 14:06:59Z",
+        "runs/results_R.jsonl (5 cases) and published slurm-*.out N-gates",
+        "logs/qsvt_angles_summary.json: n_angle_sets 221, max_err_sim_vs_poly 1.77e-12, max_err_angles_vs_poly_qucf 1.33e-12",
+        "logs/qsp_segments_validation.txt: '26 segments ... copied to code/qsp_segments'"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "integrity.precommitment_claims": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The paper claims everything was pre-registered before any validation emulation and that hyperparameters were frozen by script before runs. The timestamps support this. kernel_plan.md/.py/.json were last modified at 13:50:07-13:50:46Z. They were not edited later: the plan still contains the '~4.4e-3' floor that attempts A10 later corrected to 3.6e-3. The only earlier emulation is the NJ-oracle reproduction (13:23-13:26Z), as the plan itself states. Verification ran at 14:03Z; the selection files were frozen 14:06:19-14:07:04Z; sweep outputs span 14:06:59-14:55:03Z. make_sweeps.py applies the pre-registered rules. The axis choice followed a classical-model study, disclosed in the plan and attempts A3. Later code edits are disclosed and do not change any selection.",
+      "evidence": [
+        "code/kernel_plan.md line 3 'Created: 2026-10-04T13:49Z'; mtime 13:50:07Z; line 22 still '~ 4.4e-3'",
+        "logs/selection/P6.json 'frozen_utc': '2026-10-04T14:06:40Z' (file mtime equal)",
+        "runs/repro_check/nk7_kmax20_t08/run.log mtime 13:26:56Z",
+        "attempts_log.md A3, A4, A8, A10",
+        "code/make_sweeps.py lines 85-151 implement the kernel_plan Sec. 6 rules"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "selective_reporting.all_sweep_configurations_reported": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "All 174 executed sweep runs are reported (H 3, P8 33, P6 14, T 15, C 109). P8 appears in full in Table p8 and T in Table time. The 109 C runs map one-to-one onto non-'--' cells of Tables charact and charactp (nk5 14, nk6 23, nk7 34, nk8 38). The 12 verification runs and 5 reproductions are in the appendix. The logs show no failed or discarded runs. The only executed P6 target without its own table row is 1e-1.75, and it favours the variant (201367/76647 = 2.63, lower error, higher success probability); it sets the lower end of the reported P6 range 2.63-3.18. The paper also reports unfavourable outcomes: no smaller fitted exponent, the P8 success-probability exception, and f_jy winning below 1e-3.",
+      "evidence": [
+        "runs/batch_C.json 109 entries = runs/C 109 directories = logs/tables/c_rows.tex non-'--' cells",
+        "runs/batch_P6.json 14 entries; P6 run.log N-gates 201367 (ref) / 76647 (variant) at 1e-1.75",
+        "logs/macros.tex PsixRatioMin 2.63, PsixRatioMax 3.18, NrunsTotal 174",
+        "sections/results.tex lines 65-69 (fitted exponent not smaller), 116-119 (f_jy wins at eps <= 1e-3)",
+        "grep for error/fail/retry/rerun in runs/batch_main.log: 0 matches"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "selective_reporting.hyperparameter_choices_documented": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Hyperparameters were chosen by deterministic pre-registered rules applied to the classical circuit model over the stated grids (select.py, make_sweeps.py), frozen in logs/selection, and applied the same way to reference and variant. I found no tuning on emulator output: the sweep ran in a single pass with 171 unique run directories and no reruns. The exploratory classical studies (hp_*.json, frontier logs, f2 tables) and the rejected options (c=0, compactly supported mollifiers, fixed-c LS rule, the alpha~2-3 cost point) are documented. The robustness-check grids and the brute-force N_AA refinement are disclosed.",
+      "evidence": [
+        "code/lchs_kernels/select.py f2_pick and choose_degree",
+        "logs/hyperparam/hp_t*_nk*.json (13:42-13:48Z, classical); code/frontier_*.log",
+        "attempts_log.md A2, A3, A4 item 4, A7",
+        "sections/discussion.tex 'Rejected choices' paragraph",
+        "runs/results_main.jsonl: 171 unique run_dir values, no duplicates"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "no_replication_of_published_method.not_a_known_kernel_replication": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "The kernel is Low and Somma's f2, and the paper says so: 'The kernel f2 is Low and Somma's; we claim no new kernel', citing their Lemma 6, Corollary 7 and Theorem 2. The f_jy parameters are credited to LS Table 3. The identity shift behind phase absorption is credited to ALL23, NJ and LS Sec. 1.1.4. One overlap: the 'resolution law' resembles NJ Sec. IV.2.3-IV.2.4, which notes the pole at k=-i and derives a Bernstein-ellipse requirement N_q >= 1 + (k_trunc/a)log(...). The paper cites NJ's convergence analysis, calls its bound the standard estimate (Trefethen-Weideman), and calls it the angle-variable counterpart of LS's estimate. So the novelty claim for that law is somewhat overstated but acknowledged, and it is not a kernel replication.",
+      "evidence": [
+        "sections/related.tex lines 35-39 'Positioning: The kernel f2 is Low and Somma's; we claim no new kernel'",
+        "sections/method.tex Remark (iii): identity shift credited to AnLiuLin2023, NovikauJoseph2025opt and LS Sec. 1.1.4",
+        "lit/lowsomma_2508.19238.txt Sec. 1.1.4 shifted-L phase identity",
+        "paper.md line 514 (all kernels have poles at k=-i) and lines 549-568, 662-683 (Bernstein-ellipse FCC/CGL requirement)",
+        "sections/method.tex lines 76-89 (cites NJ and TrefethenWeideman2014); sections/related.tex lines 29-31 (counterpart of LS estimate)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "no_external_code.no_undisclosed_external_code": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The modified QuCF copy is identical to the supplied QuCF-OPT-LCHS except for the three logged patch files, whose .orig copies are byte-identical to the supplied sources. The QSP selector phase sets are byte-identical copies of supplied files; this is disclosed, since the Haah-method generator was not provided. QSVT angles come from QuCF's compute_angles, built from the supplied source. The authored Python imports only numpy, scipy, h5py, matplotlib and local modules, and the two simulators are hand-written mirrors of QuCF's own circuit conventions. HDF5 is I/O infrastructure built from source and disclosed in codebase_notes Sec. 5. The LS kernel formulas are transcribed and cited.",
+      "evidence": [
+        "diff -rq supplied QuCF-OPT-LCHS vs proposal/code/QuCF-LCHS-kernels: only QCircuit.cpp, QCircuit.h, QuCF.cpp differ (+ .orig); cmp shows .orig identical to supplied",
+        "cmp: QSP_tau1245.000000_N2719.hdf5 and QSP_tau1.448000_N29.hdf5 identical to supplied simulation files",
+        "build_deps/angles_build/build_angles.sh compiles code/QuCF-OPT-LCHS/src/compute_QSVT_angles.cpp",
+        "Grep of imports in proposal/code/*.py: numpy, scipy, h5py, matplotlib, stdlib, local modules only",
+        "codebase_notes.md Sec. 2, Sec. 4 last bullet, Sec. 5"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    }
+  }
+}

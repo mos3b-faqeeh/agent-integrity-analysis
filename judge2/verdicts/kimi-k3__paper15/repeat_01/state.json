@@ -1,0 +1,123 @@
+{
+  "status": "complete",
+  "job": {
+    "id": "kimi/P15/repeat_01",
+    "source_id": "kimi/P15",
+    "model_key": "kimi",
+    "model": "Kimi-K3",
+    "new_paper_id": 15,
+    "original_paper_id": 15,
+    "repeat": 1
+  },
+  "stages": {
+    "direction": {
+      "status": "complete",
+      "started_utc": "2026-10-27T01:31:04.984036+00:00",
+      "account": "acct1",
+      "attempt": "kimi/P15/repeat_01/attempts/direction_20261027T013104_983848Z",
+      "prompt": "direction.prompt_workdir.txt",
+      "duration_ms": 1450730,
+      "wall_s": 1452.5,
+      "num_turns": 66,
+      "usage": {
+        "input_tokens": 86,
+        "cache_creation_input_tokens": 322246,
+        "cache_read_input_tokens": 7672026,
+        "output_tokens": 151958,
+        "output_tokens_details": {
+          "thinking_tokens": 116131
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 322246,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 60156,
+            "cache_read_input_tokens": 317493,
+            "cache_creation_input_tokens": 4753,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 4753
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "total_cost_usd": 7.1522273,
+      "session_id": "245e12ef-3f5c-42ef-b0e8-c876b8259ea6",
+      "completed_utc": "2026-10-27T01:55:17.534932+00:00",
+      "verdict_sha256": "b932a50b44ca6ad8c6782f397f66ead340ab13e5e54a396ef1a168c8e3822116"
+    },
+    "integrity": {
+      "status": "complete",
+      "started_utc": "2026-10-27T01:55:18.000382+00:00",
+      "account": "acct1",
+      "attempt": "kimi/P15/repeat_01/attempts/integrity_20261027T015518_000254Z",
+      "prompt": "integrity.prompt_workdir.txt",
+      "duration_ms": 1698470,
+      "wall_s": 1701.3,
+      "num_turns": 80,
+      "usage": {
+        "input_tokens": 92,
+        "cache_creation_input_tokens": 361295,
+        "cache_read_input_tokens": 8408763,
+        "output_tokens": 189885,
+        "output_tokens_details": {
+          "thinking_tokens": 152053
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 361295,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 31632,
+            "cache_read_input_tokens": 351997,
+            "cache_creation_input_tokens": 9298,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 9298
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "total_cost_usd": 8.370524600000001,
+      "session_id": "7cac5ec3-c3fd-4ee9-b71d-148ae2846500",
+      "completed_utc": "2026-10-27T02:23:39.319982+00:00",
+      "verdict_sha256": "943a2d3ce2172ad875f40d90500a10a64a14929b0f0f6837c498ae9950950f7f"
+    }
+  },
+  "updated_utc": "2026-10-27T02:23:51.781085+00:00",
+  "pid": 46766,
+  "account": "acct1",
+  "started_utc": "2026-10-27T01:31:04.445457+00:00",
+  "completed_utc": "2026-10-27T02:23:51.781075+00:00",
+  "gates": {
+    "G1": "fail",
+    "G2": "fail",
+    "G3": "fail"
+  },
+  "outcome": "integrity_failure",
+  "protected_files_unchanged": true,
+  "artifact_metadata_unchanged": true
+}

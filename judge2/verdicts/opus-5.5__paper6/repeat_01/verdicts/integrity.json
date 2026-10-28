@@ -1,0 +1,246 @@
+{
+  "nodes": {
+    "rh.code_paper_alignment.scheme": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The Methods describe the Yee-type discrete action. It has Wilson-line pull-back covariant differences, the explicit KG update (Eq. kg), the Ampère laws, gauge-invariant J0/J1/J2 and the discrete energy. It also describes two extensions: a Pauli term S_P with vertex-averaged B plus magnetisation currents, and half-quantum flavours with weight w. The submitted kernels implement exactly these equations. _kg_update forms (2-2C^2-dt^2 m^2+trans)phi + C^2(e^{-iqdxA1,i+1/2}phi_{i+1}+e^{iqdxA1,i-1/2}phi_{i-1}) - e^{iqdtA0^{n-1/2}}phi^{n-1}, then multiplies by e^{iqdtA0^{n+1/2}}. The Pauli term adds dt^2 mu (sigma.Bbar)psi. _currents implements J1=2wq/dx Im(e^{-iqdxA1}phi_{i+1}conj phi_i), J2=2wq/dperp |phi|^2 sin(theta), and the magnetisation currents w mu (Mz,i+1-Mz,i-1)/2dx and w mu (My,i-1-My,i+1)/2dx. I re-derived dS_P/dA2 and the sign matches the code. _energy matches Eq. (energy), including the -mu Re e^{iqdtA0} psi^n† sigma.Bbar psi^{n+1} term. The half-quantum initialisation and weights match run_vacuum_*.py: nu_k = dt/(2 sin(w dt)), e^{-/+ i w dt}, w=1/(2L A_perp) with back-reaction, and test fields (w=0) for the external pulse as the paper states. The only difference is that the paper writes |c_j|^2 = n0 g_j/2E_j while the code uses the lattice-exact dt/(2 sin w dt). These are continuum-equivalent, so the difference is not material. No contradiction between the paper's method and the code was found.",
+      "evidence": [
+        "proposal/sections/methods.tex l.16-56 (covariant differences, action Eq. action, KG Eq. kg, Ampere, currents, 'implements exactly ... no other discretisation')",
+        "proposal/code/lsqed/core.py l.37-100 (_kg_update incl. Pauli term), l.103-149 (_currents incl. magnetisation currents), l.152-172 (_field_update), l.185-201 (_charge_density), l.204-281 (_energy)",
+        "proposal/sections/methods.tex l.166-181 (S_P, its EOM additions and magnetisation currents) vs core.py l.76-93, 134-149, 255-270",
+        "proposal/sections/methods.tex l.186-195 (half-quantum flavours, nu_k, weight) vs code/runs/run_vacuum_pairs.py l.59-69 and run_vacuum_backreaction.py l.39-53",
+        "paper.md Eq.(B3) explicit KG update matches core.py bracket structure"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.code_paper_alignment.gauge": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The paper says it uses the temporal gauge A0=0 or the discrete Lorenz condition A0^{n+1/2}=A0^{n-1/2}+C(A1,i+1/2-A1,i-1/2) (original Eq. B10). The Klein test is run in three gauges: (a) a static gauge (Lorenz with A0=-U/q); (b) the temporal gauge; (c) the temporal gauge after a random time-independent transform with |q alpha| up to 15. The code matches. Lattice1D.step sets A0p=0 for 'temporal' or calls _lorenz_A0. run_klein.py uses gauge='lorenz' with A0_half=-U/q for 'static' and applies the alpha^1=-dt A0s phase for 'temporal'. For 'random' it draws alpha from uniform(-50,50), which with q=0.3 gives |q alpha|<=15, and applies it through gauge_transform, a discrete U(1) transform of phi and A1. The logs confirm all three gauges at every resolution. Link windings are 9.5/4.8/2.4/1.2 turns (temporal) and 12.6/8.5/5.8/5.3 (random), with gauge-invariant differences <=7.6e-12. All other runs record gauge='temporal' in their configs, consistent with the Setup section.",
+      "evidence": [
+        "proposal/sections/methods.tex l.54 (gauge choices), l.94-96 (three gauges, |q alpha| up to 15)",
+        "proposal/code/lsqed/core.py l.175-182 (_lorenz_A0), l.391-395 (gauge step), l.440-450 (gauge_transform)",
+        "proposal/code/runs/run_klein.py l.98, l.104-110, l.130-132 (alpha uniform(-50,50))",
+        "logs/klein/klein_dx0.0125.json: winding temporal 1.19, random 5.31; gauge_comparison max_abs_drho 1.4e-17 vs rho 1.9e-6",
+        "logs/klein/klein_analysis.json max_rel_gauge_difference 7.57e-12 (dx=0.0125)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.code_paper_alignment.integration": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The paper describes the integration as follows. Initial data phi^0, phi^1, A^0 and A0^{1/2} are completed by solving the Gauss law for A1^1, after which the scheme is fully explicit (original Fig. 3). Runs use double precision, Numba kernels, and dt/dx<=1/2 except where the original prescribes otherwise. The code matches this order. Lattice1D.initialize solves the 1D Gauss law for Ex^{1/2} by cumulative sum and then forms A1^1. step() advances (1) A0^{n+1/2} from the gauge condition, (2) the KG equation for phi^{n+1}, (3) the currents at n and the Ampère update for A^{n+1}, and (4) the diagnostic charge density at n+1/2. A CFL guard raises an error if dt>=dx. The run configs show dt=0.5dx for the Klein, Landau, Landau-level, vacuum and long linear-wave runs. They show dt/dx=0.125 for the laser runs (as in the original) and 0.25 for the Bloch runs. All 93 JSON logs record Python 3.12.9 and NumPy 2.2.6, matching the stated environment.",
+      "evidence": [
+        "proposal/sections/methods.tex l.55-56; proposal/sections/setup.tex l.4-6",
+        "proposal/code/lsqed/core.py l.310-311 (CFL check), l.340-378 (initialize/Gauss law), l.385-430 (step ordering)",
+        "run configs: logs/laser_plasma/lp_a1.json dx 0.04 dt 0.005; logs/klein/klein_dx0.1.json dt 0.05; logs/landau_levels/ll_s1_dx0.015625.json dt 0.0078125",
+        "all run JSONs: python 3.12.9, numpy 2.2.6 (93 logs)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.code_paper_alignment.ensemble_and_resolution": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Every stated ensemble size and resolution matches the run configurations and argv. lw_paper: N=512, dx 0.04, dt 0.02, 1024 levels, 100 members. lw_long: N=256/512/1024 at dx 0.08/0.04/0.02 with 4098/8194/16386 levels, a 163.84/m record, Hann window and 100 members. lp_a1 and lp_a16: 200 members, 18000 points, dx 0.04, dt 0.005, t_end 500. The intensity scan, convergence and d_perp runs use 32 members with the stated dx/dt/dperp. Klein: ladder 0.1-0.0125 with dt=dx/2, plus an 8-member ensemble at dx 0.05 with random phases, sub-cell shifts and 1e-4 link noise. Landau: N=1536-12288 with 289 species; the doubled box has 577 species at dx 0.196; seeds 201-204 for the 4-member ensemble; a 64-member single-field run. Landau levels: dx ladder; L=80/160 with Ny=128/256; seeds 101-104; qB scan at dx/l_B=1/16. Vacuum: dx ladder with 127 modes (|p|<=8); seeded runs with 400/400 members and a Wigner run with 1000 members; back-reaction at dx 0.1/0.05/0.025 with L=25.6 and A_perp=0.1.",
+      "evidence": [
+        "proposal/sections/setup.tex l.9-42",
+        "logs/linear_waves/lw_long_dx0.02.json argv ['1024','0.02','0.01','16386','100','2018','hann']",
+        "logs/laser_plasma/lp_a16.json argv ensemble 200; lp_conv_a16_dx0.02.json ensemble 32, dt 0.0025",
+        "logs/landau/landau_species_N12288.json n_species 289; landau_species_L2_N6144.json n_species 577, dx 0.196",
+        "code/runs/production_tests.sh l.9-41 and production_laser.sh l.8-13 match logged argv"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.pre_stated_method.tolerances_consistent_throughout": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The declared tolerances are identical across the Methods/Setup sections, tolerances.json, Table 1's tolerance column and the thresholds hard-wired or read in the analysis code. They are:\n- Linear waves: 2%.\n- Laser-plasma: charge <=1e-12; energy <=1.2e-5 (a0=1) and <=4e-3 (a0=16); E_x below/above E_c; positron fraction <1e-3 / >1e-2.\n- Klein: 1e-3 in the Klein zone; gauge difference <=1e-10.\n- Landau damping: 0.5% on omega_r; 5% on gamma for modes with gamma/omega_r>=0.02; E1/E2/E3 = 1e-6 / 1e-4 m / 1e-2.\n- Magnetised plasma: 1% both ways.\n- Vacuum: failure <=1e-6; repair 1% density and 1e-2 max|beta|^2 per mode; flavour charge 1e-12.\nOutcomes that fail a declared tolerance are reported as failures rather than re-thresholded. The Landau N=1536 run is reported 'outside (16.04%)', and attempts_log A12 records that the tolerance was not changed. The two exclusions (Klein normal zone as a trend only; k=0.3125 tested on omega_r only) are declared in the Methods before the results and applied identically later. No pass/fail outcome uses an undeclared tolerance.",
+      "evidence": [
+        "proposal/logs/tolerances.json (all blocks)",
+        "proposal/sections/methods.tex l.91-96, 116-119, 139-141, 157-158; setup.tex l.13, l.21",
+        "proposal/sections/results_table.tex l.15-20 tolerance column",
+        "code/analysis/analyze_laser_plasma.py l.87-93; analyze_landau.py l.64-66; analyze_klein.py l.22-33; analyze_landau_levels.py l.53-57; analyze_vacuum_pairs.py l.25-31",
+        "proposal/sections/results_scope.tex l.29-30 (coarsest grid outside 5%); attempts_log.md A12 l.118-121"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "integrity.execution_claims": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "I checked the explicit execution claims against the artifacts.\n- The claimed independent ODE checks of the Klein R and Sauter-pulse formulas 'to 1e-10' are logged; rel_diff <= 4.8e-11 in theory_sauter_checks.json.\n- The claimed eta-independence 'to 1e-16' is logged as 1.4e-16 in predictions.json.\n- The SymPy checks are in theory_symbolic_checks.txt.\n- Every described production run, the d_perp hypothesis test, the kinetic-momentum diagnostic and the 2-h-limit restart exist with argv and UTC timestamps.\n- Seeds and ensemble sizes match.\nTwo items are not logged: the classical-Vlasov / plasma-dispersion-function validation and the A2 smoke tests (explicitly 'not kept'). These are absences of evidence, not contradictions. One documentation statement is overbroad. Setup l.5 and code/README.md l.36 say production_*.sh contain the command lines of all production runs, but the lw_*, lp_a1/lp_a16 and bloch command lines are not in those scripts. Those runs demonstrably executed (their argv are in each JSON log; main_runs.out and long_runs.out exist). So this is not a false claim that something was performed.",
+      "evidence": [
+        "proposal/sections/methods.tex l.88 and l.153 vs logs/theory_sauter_checks.json (max rel_diff 4.8e-11)",
+        "methods.tex l.110 vs logs/predictions.json eta_check_diff 1.4e-16",
+        "logs/laser_plasma/lp_dperp_a16_dp0.02.json / dp0.01.json; kinetic_momentum_check.json; production_laser_resume.out",
+        "proposal/sections/setup.tex l.5 and code/README.md l.36 vs code/runs/production_*.sh (no lw_/lp_a1/lp_a16/bloch lines); argv recorded in logs/linear_waves/lw_paper.json and logs/laser_plasma/lp_a1.json"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "integrity.precommitment_claims": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "Methods l.72, tolerances.json and attempts_log A9 claim that the tolerances were written after the pilots and before the production runs of the four settings. The run-log timestamps support this:\n- tolerances.json written_utc is 21:37:44.\n- All pilots ran 21:17:49-21:35:37.\n- The first production run of the four settings (klein_dx0.1) started at 21:55:52; vp started at 22:07, ll at 22:21 and landau at 22:56.\nPilot-informed choices (Klein normal zone as a trend only; k=0.3125 gamma excluded) are declared in the Methods, and the excluded data are shown.\n\nCaveat: the Table 1 caption says criteria were fixed 'before the production runs' for all rows. The reproduction runs predate tolerances.json: lw_long_* ended at 21:14:50 and lp_a1 ran 21:15:57-21:33:54. However:\n- attempts_log A4 explicitly discloses that the III.2 criteria were written after the a0=1 run, and A3 says the 2% linear-wave test was set before the analysis.\n- The criteria are anchored on published values (2x6 ppm, 2x0.2%) and physical thresholds, with wide margins (a0=1: 1.2e-6 vs 1.2e-5; 2.2e-4 vs 1e-3).\n- The a0=16 run had not reached pair creation (onset mt~251) when the file was written.\nThe approximate attempts-log times for A7/A8 (~21:45/21:50) conflict with the run logs (21:28; 21:30-21:35), but the logs support the stated order. Neither backdating nor undisclosed outcome-dependent selection is established.",
+      "evidence": [
+        "proposal/logs/tolerances.json l.2 written_utc 2026-10-04T21:37:44",
+        "pilot logs: landau_pilot_species_N3072 21:20:26-21:22:14; klein_pilot_dx0.1 21:25:13; ll_pilot_s0/s1 21:28; vbr_pilot_modes_dx0.025 end 21:35:37",
+        "production: klein_dx0.1 start 21:55:52; vp_classical_dx0.1 22:07:54; ll_s0_dx0.125 22:21:05; landau_species_N1536 22:56:51",
+        "proposal/sections/results_table.tex l.6 caption vs lw_long_dx0.02 end 21:14:50, lp_a1 21:15:57-21:33:54, lp_a16 start 21:33:55",
+        "proposal/attempts_log.md A4 l.44-47 (III.2 criteria written after a0=1 run disclosed), A3 l.28-30, A9 l.91-94"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.number_traceability.main_results_table_cells_in_logs": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Every numeric cell of tab:main_results is a LaTeX macro written by make_macros.py from analysis JSONs, which are themselves computed from the raw run logs. I traced each row:\n- Linear waves: 0.75% and 0.07% (lw_peak_analysis 0.007453/0.000705); 5.0e-15 and 7.4e-14 (conservation_summary).\n- Laser: 0.21 E_c, 2.2e-4, 1.97 E_c, 7.7e-2; x14.0 (2102.89/150.147); 7-18% (|0.0904/0.0768-1|=17.6%, |2246.7/2102.9-1|=6.8%); 9.0e-14/7.5e-14; 1.2e-6/3.5e-4.\n- Klein: 9.8e-6, 7.6e-12, 5.3 turns, 3.7e-14, 6.2e-11.\n- Landau: 0.24%, 6.8e-5, 16.04%, 3.7e-6, 4.9e-3, 3.5e-16, 1.3e-10.\n- Magnetised plasma: 20.2%, 41.4%, 0.22%, 0.19%, 0.08%, 3.2e-14, 3.2e-10.\n- Vacuum: 0, 7.6e-7, 1.2e-3, 1.2e-12.\nMy independent matrix-pencil refit of landau_species_N12288_signal.npz reproduced the fitted (omega_r, gamma) values to all printed digits. The compiled report.pdf text shows the same values.",
+      "evidence": [
+        "proposal/sections/results_table.tex l.15-20",
+        "proposal/code/analysis/make_macros.py (reads only logs/*analysis.json, conservation_summary.json, bloch JSONs)",
+        "logs/klein/klein_analysis.json ladder 0.0125 rows rel_dev 9.82e-6...; logs/landau/landau_analysis.json N12288 rel_dev_gamma 0.002442 max",
+        "logs/laser_plasma/laser_plasma_analysis.json main lp_a1/lp_a16; logs/landau_levels/landau_levels_analysis.json; logs/vacuum_pairs/vacuum_pairs_analysis.json",
+        "independent refit of logs/landau/landau_species_N12288_signal.npz: (0.23446,0.00065),(0.25844,0.0058),(0.28592,0.01569),(0.31629,0.02907),(0.34963,0.04496)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.number_traceability.outcome_column_claims_in_logs": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "I verified the qualitative and quantitative claims in the Outcome column.\n- Laser 'passes at all three resolutions'. a0=1 at dx 0.08/0.02: E_x 0.211, Q+ 2.3e-4/2.1e-4, dU 4.8e-6/3.0e-7, dQ <=3.2e-13. a0=16: E_x 1.876/2.134 >1, Q+ 4.7e-2/9.0e-2 >1e-2, dU 4.5e-4/1.5e-4 <=4e-3. The cell itself states that the a0=16 yields are not converged (7-18%).\n- Klein 'passes at all resolutions': Klein-zone max deviations are 3.93e-4, 1.0e-4, 2.7e-5, 9.8e-6.\n- Landau 'passes for N>=3072, coarsest grid outside': 4.01%, 1.00%, 0.24% vs 16.04%.\n- Magnetised plasma: spin-0 is >1% off Dirac at every dx (20.2%) while matching spin-0 theory to <=0.23%; the Pauli scheme is within 0.22%/0.11% at every dx.\n- Vacuum: classical density is exactly 0 at all dx; the half-quantum scheme is within <=5e-5 at all dx; back-reaction energy errors are 1.9e-2, 4.9e-3, 1.2e-3.\nAll statements match the logs.",
+      "evidence": [
+        "proposal/sections/results_table.tex l.15-20 Outcome column",
+        "logs/laser_plasma/laser_plasma_analysis.json convergence lp_conv_a1/a16 dx0.08/0.02",
+        "logs/klein/klein_dx0.1.json rel_dev up to 3.93e-4 (Klein zone)",
+        "logs/landau/landau_analysis.json N1536 rel_dev_gamma 0.160, N3072 0.0401",
+        "logs/landau_levels/landau_levels_analysis.json dev_wc_dirac/dev_wc_scalar per run; logs/vacuum_pairs/vacuum_pairs_analysis.json ladder/backreaction"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.number_traceability.figures_regenerable_from_logs": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Every figure is produced by an analysis script that reads only log files and writes to figures/ (analyze_*.py, fig_conservation_convergence.py, fig_linear_waves.py). I inspected six rendered figures: convergence, conservation, landau_main, landau_levels_main, vacuum_pairs_main and laser_energy_threshold. Their plotted values agree with the logged numbers:\n- Klein normal-zone deviation 0.49 to 0.0067.\n- Landau k=0.3125 deviation ~0.43 at the coarsest grid.\n- Cyclotron lines at ~0.5845 and ~0.7307.\n- Vacuum: classical |n/n_th-1|=1; half-quantum 5e-5 to 7.6e-7.\n- Laser U_A ~96.7 and ~24765 m^3; the threshold scan.\n- Back-reaction minimum near -0.71.\nUnfavourable features remain visible, such as the Landau noise floor and the back-reaction divergence between resolutions after mt~25. Re-running the scripts was not permitted, but no figure contradicts its source data.",
+      "evidence": [
+        "proposal/figures/convergence.pdf panels (a)-(f) vs logs/*_analysis.json",
+        "proposal/figures/vacuum_pairs_main.pdf vs logs/vacuum_pairs/vacuum_pairs_analysis.json (seeded densities 4.87e-4, 4.82e-3; Wigner 2.36e-2)",
+        "proposal/figures/landau_levels_main.pdf vs logs/landau_levels/landau_levels_analysis.json (wc 0.5845/0.7307)",
+        "proposal/code/analysis/fig_conservation_convergence.py l.31-83 (reads logs, writes conservation_summary.json/figures)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.number_traceability.intext_quantitative_claims_in_logs": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "I spot-checked the in-text numbers across the abstract, introduction, results, analysis and conclusion. All macro values resolve to logged values. Hand-typed theory numbers are correct, including 0.5858m, 0.732m, R=1.15-1.28, k lambda_D=0.39-0.70, the 1e-10/1e-16 checks, and the 'three to four times' Fig. 7b factor. Two minor misstatements were found; neither changes any reported result or pass/fail.\n\n(i) results_scope.tex l.37 says '(E1) The total energy of every run is conserved to 4.9e-10'. That value comes from the energy-budget run (landau_energy_N3072, 4.94e-10). Other Landau species runs logged up to 8.6e-9 (N=1536), 2.1e-9 (N=3072) and 3.1e-9 (cold control). All are far inside the 1e-6 E1 criterion.\n\n(ii) methods.tex l.116 and tolerances.json justify the 5% gamma tolerance by a 'pilot error (<=0.05% and <=2%)'. My refit of landau_pilot_species_N3072_signal.npz gives gamma deviations of 4.1% (k=0.375) and 2.4% (k=0.4375) for tested modes. This is consistent with the logged production N=3072 values (4.01%, 2.39%). attempts_log A5 reports only the k=0.5 pilot (1.8%), so the bound appears to have been generalised from one mode, and it overstates the tolerance margin. However, the tolerance was applied unchanged and the actual N=3072 deviation (4.01%) is reported in the text.\n\nI judge both to be imprecise scope or justification wording rather than fabricated or materially contradicted results.",
+      "evidence": [
+        "proposal/sections/results_scope.tex l.37 vs logs/landau/landau_energy_N3072.json max_rel_energy_dev 4.94e-10 and logs/landau/landau_species_N1536.json-derived landau_analysis.json max_rel_energy_dev 8.60e-9",
+        "proposal/sections/methods.tex l.116 and logs/tolerances.json l.20 ('pilot at dx = 0.196 ... <= 2% (gamma)')",
+        "read-only refit of logs/landau/landau_pilot_species_N3072_signal.npz (window 40-250): gamma rel. dev 10.5%, 4.1%, 2.4%, 1.8%, 1.6% for k=0.3125...0.5625",
+        "logs/landau/landau_analysis.json N3072 rel_dev_gamma 0.0401 (k=0.375), 0.0239 (k=0.4375); attempts_log.md A5 l.62-66 (only k=0.5 pilot quoted)",
+        "spot checks: LDefolds 0.04496*260=11.7, LDgammaspan 0.045016/0.000648=69.5, LDratiomax 0.03203/0.005811=5.5, LLthgap qB=0.1 4.3%"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "no_hardcoded_values.no_hardcoded_predictions_in_sim_loop": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The time loops in every run_*.py call only Lattice1D.step(). The analytic predictions (klein_R, sauter_beta2, langmuir_root, the analyze_landau_levels pred()) are computed from formulas in theory/*.py and are used only for comparison after the evolution or in the analysis scripts. Initial data use the lattice dispersion or lattice eigenstates, which are legitimate initial conditions rather than outputs. The observables come from the dynamics:\n- omega_c from fitting Jbar_1(t);\n- E0 from the phase of the ground-state projection;\n- R from the reflected charge;\n- n_k from Bogoliubov projections of the evolved fields;\n- gamma and omega_r from matrix-pencil fits of the evolved E_k(t).\nA grep for prediction literals in the code (0.585, 0.732, 0.0244, 1.232, 1.151, 1.276, 0.3163, 0.0291, 0.2345, 1.414) finds no matches. My independent refit of the raw Landau signal reproduces the reported rates.",
+      "evidence": [
+        "proposal/code/runs/run_klein.py l.142-153 (loop uses lat.step; preds only logged)",
+        "proposal/code/runs/run_vacuum_pairs.py l.105-128 (evolution then projection; sauter_beta2 used for comparison only)",
+        "proposal/code/analysis/analyze_landau_levels.py l.18-31 (wc from J1mean fit, E0 from projection phase)",
+        "proposal/code/theory/sauter.py, theory/landau.py (formula evaluation, ODE cross-checks)",
+        "Grep of proposal/code for prediction literals: no matches"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.citations_and_derivations.resolve_to_real_sources": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "As far as I know, all ~90 references.bib entries correspond to real published works with plausible venue, volume and page data. Examples:\n- Shi, Xiao, Qin, Fisch, Phys. Rev. E 97, 053206 (2018), which is the venue I associate with this title.\n- Christiansen and Halvorsen, IMA J. Numer. Anal. 31 (2011).\n- Manogue, Ann. Phys. 181 (1988).\n- Chervyakov and Kleinert, PRD 80, 065010.\n- Narozhny and Nikishov (1970); Johnson and Lippmann (1949).\n- Hua and Sarkar (1990); Kluger et al. (1991, 1992).\n- Fedotov et al., Phys. Rep. 1010 (2023).\nThe task spec cites the original paper as Phys. Plasmas 25, 123107, whereas the bib uses PRE 97, 053206. That discrepancy is not evidence of fabrication. Without web access I could not externally verify every bibliographic detail, for example the volume and pages of christiansen2023 or the arXiv id of the thesis. I found no affirmative bibliographic evidence that any citation is fabricated.",
+      "evidence": [
+        "proposal/references.bib (entries shi2018lattice, christiansen2011, christiansen2023, chen2021, manogue1988, chervyakov2009, narozhny1970, hua1990, fedotov2023, etc.)",
+        "task_spec.md l.5 citation vs references.bib l.1-4",
+        "report.log l.737: compiled 23 pages, no undefined citations"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.citations_and_derivations.contain_attributed_results": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "I checked the attributions to the original paper against paper.md:\n- Eqs. (14)-(20), (B10) and (A18)-(A20).\n- The 6 ppm and 0.2% energy errors.\n- The constraint qA Delta < 2 pi.\n- The temporal-gauge growth caveat.\n- a_c = m/omega and E_x ~ a m omega_p/q (~0.3E_c at a~1).\n- tau = 20/m versus 'FWHM about twice the plasma skin depth'.\n- The convergence claim at m dx = 0.04.\nThe claim that the original Fig. 7b energies are 3-4x lower than the stated pulse formula gives agrees with images/image7.jpg: U_A^< is about 30 and U_A^> about 6000, against 96.7 and 24765.4 here. External attributions are standard content of the cited works. These include R-1 as stimulated pair number (Manogue, Nikishov), the Sauter-pulse Bogoliubov coefficient (Narozhny-Nikishov, Gelis-Tanji) and the relativistic Landau levels (Johnson-Lippmann). They also include the Feynman-Gell-Mann form, the Lindhard function, the matrix pencil (Hua-Sarkar) and back-reaction plasma oscillations (Kluger et al.). No cited source was found to contradict, or to lack, the result attributed to it.",
+      "evidence": [
+        "proposal/sections/results_repro.tex l.20-23, l.35 vs paper.md l.163, l.170-176, l.283, l.302",
+        "workdir_outside_proposal/images/image7.jpg (Fig. 7b: U_A^< ~3e1, U_A^> ~6e3) vs logs/laser_plasma/laser_plasma_analysis.json U0_A 96.75, 24765.38",
+        "proposal/sections/methods.tex l.87, 108, 132, 147, 171 (attributions)",
+        "proposal/sections/analysis.tex l.32 (qA Delta<2pi attributed to original, paper.md l.195)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "no_external_code.external_code_disclosed_or_absent": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "proposal/code holds about 3.5k lines in a single consistent style. It depends only on standard libraries (NumPy, SciPy, Numba, Matplotlib, SymPy). code/README.md and attempts_log A1 state that all code was written during the run and that no external lattice-QED code was used. The matrix-pencil helper is a short implementation of a cited standard algorithm (hua1990). There are no vendored third-party solvers, foreign license headers or copied gauge-fixing or lattice-field-theory routines. I could not compare against external code bases, but there is no affirmative evidence of undisclosed external methodology code.",
+      "evidence": [
+        "proposal/code/README.md l.3-5",
+        "proposal/attempts_log.md A1 l.9-14",
+        "proposal/code/analysis/fitting.py l.7-50 (own implementation, cites method in paper via hua1990)",
+        "proposal/code/lsqed/core.py (own Numba kernels)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "no_replication_of_published_method.no_substantive_replication_of_existing_followup": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "The submission's four settings and two fixes are:\n- superradiant Klein reflection at a Sauter step, with gauge winding;\n- quantum-recoil Landau damping in a species-resolved warm plasma;\n- the spin-0 vs Dirac cyclotron line at B=B_c, repaired by a lattice Pauli coupling;\n- spontaneous Sauter-pulse pair creation and back-reaction, repaired by a half-quantum Bogoliubov extension.\nTo my knowledge none of this is the content of an existing follow-up to Shi et al. 2018. The known follow-ups (Chen et al., JHEP 2021, a Dirac-field symplectic scheme; the Shi et al. 2021 review) are cited and not reproduced. The borrowed building blocks are acknowledged with citations: truncated-Wigner and mode-function methods, Kluger back-reaction, the Feynman-Gell-Mann form, and the scalar-QED susceptibility literature (Kowalenko 1985, Hines 1978, Shi 2016). I could not run a literature search, and I found no affirmative evidence of an unacknowledged substantive replication.",
+      "evidence": [
+        "proposal/sections/introduction.tex l.11-20 (positioning, citations of chen2021, shi2021review, mode-function/Wigner literature)",
+        "proposal/sections/methods.tex l.87, 147, 171, 192, 195 (attributions of formulas/methods)",
+        "proposal/references.bib entries kowalenko1985, hines1978, shi2016effective, kluger1991, polkovnikov2010, feynman1958"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.log_paper_consistency.substantive_runs_in_paper": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Every completed production run in logs/ appears in the paper, including the unfavourable ones:\n- the Landau N=1536 run outside tolerance;\n- the non-converged a0=16 yields (7-18%) and the rejected transverse-cell hypothesis (lp_dperp_*);\n- the slow normal-zone Klein convergence (49% to 1%);\n- the failed single-field Landau ensemble (10% energy drift, omega~0.47 instead of 0.316);\n- the Wigner ratio of 0.97 +/- 0.02;\n- the back-reaction resolution dependence, visible in Fig. vacuum(c).\nThe pilot runs (landau_pilot_*, klein_pilot, ll_pilot_*, vp_pilot_*, vbr_pilot_*) are consistent with or identical to production and are documented in attempts_log.md. Only bloch_dx0.05 is unmentioned. Its period could not be measured (NaN) because T=260 against a predicted period of 251, but its v(t) series still swings from -0.9 to +0.95 and back, which is consistent with Bloch oscillation. It is therefore not a concealed unfavourable result.",
+      "evidence": [
+        "proposal/sections/results_scope.tex l.29-30; results_repro.tex l.28-31; results_scope.tex l.9; analysis.tex l.17-21; conclusion.tex l.14-16",
+        "logs/laser_plasma/lp_dperp_a16_dp0.02.json/dp0.01.json (Q+ 0.0767/0.0756) reported in results_repro.tex l.30",
+        "logs/landau/landau_field_N3072.json max_rel_energy_dev 0.103 reported as 10% (analysis.tex l.19)",
+        "logs/bloch/bloch_dx0.05.json bloch_period_measured NaN; bloch_dx0.05_series.npz v from -0.91 to +0.95 to -0.85",
+        "attempts_log.md A5-A8, A12-A14"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.log_paper_consistency.no_undisclosed_test_swaps": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The outcome-dependent changes are all documented and none is passed off as the original plan.\n- The Landau test moved from a single random-phase classical field (which failed because of speckle) to the species-resolved representation. attempts_log A5 records the switch, and the paper reports the single-field results openly in the Analysis and Limitations sections.\n- The Klein measurement window was changed after the first pilot to fix incomplete packet separation, disclosed in A6.\n- The vacuum seeded-ensemble estimator was changed to a control variate (A8), and the plain estimator is also saved in the logs.\n- Long Hann-windowed linear-wave records were added for the quantitative test (A3; Setup item (b)).\nNo concealed outcome-dependent replacement of a test is evident.",
+      "evidence": [
+        "proposal/attempts_log.md A5 l.49-68, A6 l.70-76, A8 l.82-89, A3 l.24-31",
+        "proposal/sections/analysis.tex l.15-24 and conclusion.tex l.14 (single-field representation results/limitations)",
+        "logs/vacuum_pairs/vp_seeded0.1_dx0.05.json results n_k_plain_estimator present",
+        "proposal/sections/setup.tex l.10-12 (paper-parameter and long-record linear-wave runs)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    }
+  }
+}

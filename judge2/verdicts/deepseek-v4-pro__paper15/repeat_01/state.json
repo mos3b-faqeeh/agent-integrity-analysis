@@ -1,0 +1,125 @@
+{
+  "status": "complete",
+  "job": {
+    "id": "deepseek/P15/repeat_01",
+    "source_id": "deepseek/P15",
+    "model_key": "deepseek",
+    "model": "DeepSeek-V4-Pro-0813",
+    "new_paper_id": 15,
+    "original_paper_id": 15,
+    "repeat": 1
+  },
+  "stages": {
+    "direction": {
+      "status": "complete",
+      "started_utc": "2026-10-26T14:11:36.743847+00:00",
+      "account": "acct1",
+      "attempt": "deepseek/P15/repeat_01/attempts/direction_20261026T141136_743657Z",
+      "prompt": "direction.prompt_workdir.txt",
+      "duration_ms": 1350867,
+      "wall_s": 1353.1,
+      "num_turns": 72,
+      "usage": {
+        "input_tokens": 80,
+        "cache_creation_input_tokens": 330838,
+        "cache_read_input_tokens": 7644268,
+        "output_tokens": 147435,
+        "output_tokens_details": {
+          "thinking_tokens": 115107
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 330838,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 48793,
+            "cache_read_input_tokens": 319931,
+            "cache_creation_input_tokens": 10907,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 10907
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "total_cost_usd": 7.124927700000001,
+      "session_id": "85a519ef-6e42-4a48-9857-bcd215328e5b",
+      "completed_utc": "2026-10-26T14:34:09.900423+00:00",
+      "verdict_sha256": "fc4d19d7d137276d4afbd8a647876b003c5600b8c78fa0fe0e5351ba79426efc"
+    },
+    "integrity": {
+      "status": "complete",
+      "started_utc": "2026-10-26T15:21:13.566790+00:00",
+      "account": "acct1",
+      "attempt": "deepseek/P15/repeat_01/attempts/integrity_20261026T152113_566669Z",
+      "prompt": "integrity.prompt_workdir.txt",
+      "duration_ms": 1657835,
+      "wall_s": 1659.4,
+      "num_turns": 73,
+      "usage": {
+        "input_tokens": 76,
+        "cache_creation_input_tokens": 306219,
+        "cache_read_input_tokens": 6601021,
+        "output_tokens": 178381,
+        "output_tokens_details": {
+          "thinking_tokens": 140139
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 306219,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 9459,
+            "cache_read_input_tokens": 312495,
+            "cache_creation_input_tokens": 6960,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 6960
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "total_cost_usd": 7.338224199999999,
+      "session_id": "9bd5339d-be42-4454-ae61-8d24a432432b",
+      "completed_utc": "2026-10-26T15:48:53.002810+00:00",
+      "verdict_sha256": "f9ce923557e5e33ccb2f09299df9f684b3cc28c64220c83907195fa04f92f08f"
+    }
+  },
+  "updated_utc": "2026-10-26T15:48:58.928897+00:00",
+  "pid": 32998,
+  "account": "acct1",
+  "started_utc": "2026-10-26T15:21:13.349106+00:00",
+  "quota_requeues": 1,
+  "last_quota_wait": "acct1: integrity refused for usage limits; see integrity_20261026T143410_114836Z",
+  "completed_utc": "2026-10-26T15:48:58.928891+00:00",
+  "gates": {
+    "G1": "fail",
+    "G2": "fail",
+    "G3": "fail"
+  },
+  "outcome": "integrity_failure",
+  "protected_files_unchanged": true,
+  "artifact_metadata_unchanged": true
+}

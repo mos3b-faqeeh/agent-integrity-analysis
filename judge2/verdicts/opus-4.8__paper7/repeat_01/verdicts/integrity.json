@@ -1,0 +1,291 @@
+{
+  "nodes": {
+    "rh.number_traceability.main_table_values_traceable": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Every entry in tab:main_results is a macro from logs/numbers.tex, which make_numbers.py generates only from the JSON logs. I re-traced every row and each value matches its log after rounding. Gray q 0.67 [0.60,0.73] and ratio 1.59: gray_replication.json gray_N2 full_q 0.6657, q_ci [0.6049,0.7269], ratio 1.5864. Held-out R² M0 −0.470 [−1.155,−0.112], M1 0.476 [0.342,0.566], M2 0.484 [0.348,0.573], opponent 0.594 [0.460,0.677], sRGB 0.498 [0.351,0.590], CIE RGB 0.466 [0.307,0.563], CIELAB 0.372 [0.220,0.467], HCL 0.629 [0.507,0.712]: main_results_N2.json heldout_r2 and bootstrap.r2_ci. M2−M1 0.008 [−0.011,0.026]; M2−best M3 −0.153 [−0.256,−0.070] with best = CIE HCL (best_ctrl_freq 0.7995). cardinal2−M1 0.109 [0.032,0.182], vs rot2 0.199, discrimination accuracy 0.985: identifiability_N2.json. DR-chord−additive-arc 1.09 [0.65,1.69], P>0 = 1.00: confound.json. The compiled report.pdf (built 1 s after numbers.tex) shows the same values. The delta estimates are the logged bootstrap means (e.g., the selection-aware mean −0.153 vs the direct M2−HCL gap of −0.145), which is a legitimate disclosed statistic. One labeling imprecision: the caption attributes all CIs to the held-out cluster bootstrap, but the gray-q row comes from a full-data triad refit bootstrap. No value is fabricated, altered, or contradicted by its source.",
+      "evidence": [
+        "report.tex L17 (\\input{logs/numbers.tex}); L297-325 (tab:main_results uses only macros)",
+        "code/make_numbers.py L16-131: every macro is read from logs/*.json",
+        "logs/main_results_N2.json heldout_r2 {M0 -0.4702, M1 0.4759, M2 0.4839, M3_opponent 0.5938, M3_srgb 0.4981, M3_ciergb 0.4655, M3_cielab 0.3716, M3_hcl 0.6293}; bootstrap m2_m1 [-0.0114,0.0263,0.0080]; m2_bestM3 [-0.2562,-0.0703,-0.1526]",
+        "logs/gray_replication.json gray_N2 full_q 0.6657, q_ci [0.6049,0.7269], ratio_ci [1.5208,1.6551]",
+        "logs/identifiability_N2.json coarse.cardinal_vs_M1 [0.0320,0.1824,0.1089,0.9975]; discrimination.classification_accuracy 0.985",
+        "logs/confound.json DRchord_vs_addarc [0.6464,1.6927,1.0874,1.0]",
+        "fit_gray.py L115-126, L225: gray q CI comes from a full-data triad bootstrap (B=1000), not the held-out cluster bootstrap named in the caption (labeling imprecision only)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.number_traceability.parameter_estimates_traceable": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "All reported parameter estimates trace to logged fits. Gray outer exponent q = 0.67, CI [0.60,0.73] (full-data M1 fit plus a 1000-resample triad bootstrap). N1 q = 0.21 (0.2089). MLDS q = 0.36 (CV mean 0.3595). D(30)/D(15) = 2^q = 1.59 [1.52,1.66]. M2 effective exponents e_L/e_M/e_S = 0.10/0.37/0.32 = m2_exponents.e_mean [0.100,0.369,0.316], consistent with full_fit M2 p·q (0.441×0.227, 1.628×0.227, 1.393×0.227). Recovery values: e_S 0.20 [0.16,0.27], e_L 0.20 [0.16,0.25], e_M [0.32,0.97]. Bridge R² 0.999/0.999/0.978; blue S fraction 0.73; β_dbar −0.0061, t −5.73. One presentation caveat: in the full fit M2's L-cone weight is 0 (w = [0.0,0.676,0.324]), so e_L sits at its 0.10 bound and is effectively unidentified. The paper discloses that e_L 'rails to the compression floor' but does not mention w_L = 0. That is a scientific/presentation weakness; the value is computed, not fabricated or altered.",
+      "evidence": [
+        "logs/gray_replication.json gray_N2 {full_q 0.6657, q_ci [0.6049,0.7269], ratio_D30_D15 1.5864}; gray_N1 full_q 0.2089; mlds_N2 cv_summary M1 q 0.3595",
+        "logs/main_results_N2.json m2_exponents e_mean [0.1000,0.3686,0.3158], e_ci [[0.10,0.10],[0.358,0.379],[0.306,0.325]]; full_fit M2 w [0.0,0.676,0.324] p [0.441,1.628,1.393] q 0.227",
+        "logs/identifiability_N2.json recovery S_distinct e_hat_ci[2] [0.158,0.270]; L_distinct e_hat_ci [[0.161,0.254],[0.318,0.972],...]",
+        "logs/cone_conversion_verify.json bridge_info r2 0.9992/0.9992/0.9781; blue_S_dominant_ratio 0.7300",
+        "report.tex L263-272, L340-341, L374-378, L442 (e_L railing disclosed)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.number_traceability.prose_claims_consistent": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "Every number in the prose matches its log, including the cited 2022 example (1.36 vs 2.06, ≈1.5, from paper.md), the N1 gap −0.294, the log-family deltas, the collinearity r = 0.66 and condition number 21.7, and the confound deltas. Some qualitative statements are inconsistent with the logs:\n(i) The confound figure's embedded title says 'HCL ≈ arc-length', but confound.json gives hcl_vs_addarc = +1.24 [0.77,1.91] and the figure's bars show HCL 0.63 vs additive-arc −0.68. The Analysis text states the correct reading ('the curvature control shows the HCL edge is not simple arc-length additivity'), so the title looks like a leftover of the hypothesis in the confound.py docstring.\n(ii) The Fig. 1b caption says L−M is sampled richly and L+M weakly. The logged combined RMS is L−M 31.4 < L+M 33.9, and the text itself says L−M is the weakest direction.\n(iii) 'q = 0.67 sits in their ≈0.5–0.6 range'.\n(iv) 'crucially the additive-arc metric is worse than additive-chord' is stated without its CI (−0.08, CI [−0.30,0.12]).\nNone of these alters a reported quantitative value or underpins a headline verdict, and the correct values are shown alongside. They are interpretive or caption errors, not material contradictions of a reported number.",
+      "evidence": [
+        "figures/fig_confound.pdf title 'Curvature confound: DR-on-chords survives the additive-arc baseline; HCL ≈ arc-length' (code/figures.py L160) vs logs/confound.json hcl_vs_addarc [0.770,1.911,1.242,1.0] and r2 M3_hcl 0.633, add_arc -0.681",
+        "report.tex L445-449: 'the curvature control shows the HCL edge is not simple arc-length additivity' (text consistent with the logs)",
+        "report.tex L286-288 (Fig 1b caption) vs logs/identifiability_N2.json N2_combined rms_LmM 31.37, rms_LpM 33.86; report.tex L372-373 'the L−M direction the weakest'",
+        "report.tex L478-479 'q=0.67 sits in their ≈0.5–0.6 range'",
+        "report.tex L410-412 vs logs/confound.json addarc_vs_addchord [-0.297,0.119,-0.081,0.219]",
+        "report.tex L268 vs paper.md (1.36 and 2.06 perceived distances)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.no_hardcoded_values.no_hardcoded_fit_targets": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "No hardcoded result, target, or comparison outcome substitutes for computation. make_numbers.py reads every macro from the JSON logs. All fitters optimize likelihood or R² objectives on the provided data with seeded random restarts. The hardcoded constants are legitimate: illuminant chromaticities, the standard sRGB and CIE-RGB matrices, CIELAB constants, exponent bounds [0.10,1.60], and synthetic-truth exponents used only in the labeled recovery and power simulations. The 2022 magnitudes appear only as cited prose comparisons. The make_numbers fallback defaults (n_all 320, n_subjects_normal 11, sym_thresh 2.5) are not used, because the logs contain these keys with the same values.",
+      "evidence": [
+        "code/make_numbers.py L1-6 docstring and L16-125: macros come only from logs/*.json",
+        "code/fit_chromatic.py L98-132 (objective plus Nelder-Mead restarts); code/fit_gray.py L53-81",
+        "code/identifiability.py L128-133, L158-159: synthetic truths used only for simulation",
+        "logs/confound.json gray_N2 n_all 320, sym_thresh 2.5; logs/stimulus_cone_coordinates.json helm n_subjects_normal 11"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.no_hardcoded_values.no_oracle_leakage": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "No oracle outputs, reference-paper fitted parameters (e.g., the 2022 log-f a = 5.34, b = 2.34), or known answers enter any real-data fit. The synthetic generators' true parameters are by construction known and used only for the labeled recovery and discrimination simulations. _calibrate takes noise and scale from a real-data fit only to set the synthetic noise level. All real-data verdicts come from cross-validated fits of the submitted models.",
+      "evidence": [
+        "code/identifiability.py L72-89 gen_synthetic, L106-116 _calibrate, L124-147 workers (synthetic only)",
+        "code/run_main.py L47-73: real-data CV predictions from training-only fits",
+        "code/fit_gray.py L95-113: gray CV with no reference parameters"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.test_set_integrity.bootstrap_from_training_set": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "In every CV loop, the per-axis RMS standardizer, the α scale nuisances, and the model parameters are fit on training masks only. The model-comparison CIs come from resampling Helm subjects and Helm/Ekman pairs over the genuine out-of-fold predictions, with no refitting, and the paper says so explicitly ('on the genuine held-out predictions'). The refit bootstraps for parameter CIs (gray q: B = 1000 over all triads; M2 exponents: B = 800 resampling Helm subjects over all pairs) are full-data uncertainty estimates that feed no held-out metric. So no held-out observation enters a fitting step that produces a held-out evaluation, and no information flows from test data into any fit. Bootstrapping held-out predictions does depart from the task's literal 'bootstrap resamples come from training folds' and from analysis_plan §4 ('from training clusters'). The paper describes the alternative method accurately, which makes it a disclosed protocol/direction matter, not prohibited leakage.",
+      "evidence": [
+        "code/fit_chromatic.py L75-83 (_Dvals: rms from dh[tr_h], de[tr_e]); L98-112 (objective on training masks); L134-150 (alpha from training, evaluated on test)",
+        "code/run_main.py L47-73 (cv_predictions); L87-107 (cluster_bootstrap resamples stored held-out predictions, no refit); L35-44 (_boot_exp_worker full-data Helm-subject refit, B_exp=800)",
+        "code/fit_gray.py L103-112 (rms_tr and fits from training triads); L115-126, L225 (full-data q bootstrap, B=1000)",
+        "report.tex L209-212: 'cluster bootstrap ... on the genuine held-out predictions, and from a training-data refit bootstrap for the M2 exponents'",
+        "analysis_plan.md L68-70 ('Bootstrap ... from **training** clusters')"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.test_set_integrity.test_set_for_evaluation_only": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Held-out folds are used only for evaluation. Parameters, per-axis standardization, and the per-subject/per-dataset α are estimated on training masks in every CV routine: main, coarse, confound, log-robustness, gray, and MLDS. Held-out predictions are used only to compute R², accuracy, and log-likelihood, and for the task-mandated selection-aware argmax across controls inside the bootstrap; that is evaluation, not tuning. No hyperparameter or specification was chosen from held-out performance: the primary normalization (N2), the power outer family, and the selection-aware statistic are fixed in analysis_plan.md, which was saved at 06:44:45 UTC, before any fitting script.",
+      "evidence": [
+        "code/fit_chromatic.py L75-83, L98-112, L134-150",
+        "code/identifiability.py L208-218; code/confound.py L90-115; code/robustness_log.py L35-54, L71-84",
+        "code/fit_gray.py L103-112; L168-173 (MLDS rms from tr)",
+        "analysis_plan.md L27-30 (N2 primary), L71-73 (selection-aware); mtime analysis_plan.md 06:44:45 UTC < fit_gray.py 06:47:12 UTC"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.baseline_honesty.gray_replication_from_logs": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "No prior contribution is reproduced without credit. The gray-axis DR result is explicitly presented as a replication anchor of Bujack et al. (2022). Chromatic DR and non-constancy are credited to Stark et al. (2025), and the paper explicitly disclaims them as its contribution; the CGF geometry paper is also credited. The replication numbers come from the agent's own logged runs on the provided gray and MLDS data.",
+      "evidence": [
+        "report.tex L124-125 ('A faithful gray-axis DR replication anchoring the pipeline to Bujack et al.')",
+        "report.tex L259-272 (replication section); L459-462 ('we reuse their gray data and pipeline as our anchor and replicate their finding')",
+        "report.tex L75-78, L462-469 (Stark et al. credited; 'Re-presenting chromatic DR or non-constancy, or mere anisotropy, is not our claim')",
+        "logs/gray_replication.json (regression_complete, gray_N2, mlds_N2)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.baseline_honesty.baseline_numbers_from_logs": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The baseline quantities come from the agent's executed runs: chromatic M0/M1 held-out R² (−0.470/0.476), gray M0/M1 held-out accuracy (0.897/0.902; held-out log-likelihood also favors M1, −0.6565 vs −0.6530), and MLDS log-likelihood (−0.420/−0.413). The cited reference values are accurate against paper.md: the worked example 1.36/2.06, the concave f, and a negative significant β. The Stark et al. quotation matches task_spec. No baseline is fabricated or falsely attributed.",
+      "evidence": [
+        "logs/main_results_N2.json heldout_r2 M0 -0.4702, M1 0.4759",
+        "logs/gray_replication.json gray_N2 cv_summary M0 ho_acc 0.8968 ho_ll -0.6565; M1 ho_acc 0.9024 ho_ll -0.6530; mlds_N2 M0 ho_ll -0.4202, M1 -0.4133",
+        "report.tex L264-269 vs paper.md (1.36/2.06 example; β_dbar -0.005, p<0.001)",
+        "task_spec.md L28 vs report.tex L36 (Stark quote)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.code_paper_alignment.methodology_matches_code": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "The described core methodology matches the submitted code:\n- the least-squares XYZ→LMS bridge, von Kries to Illuminant C, and the N1 linear / N2 signed-cube-root normalizations;\n- Eq. 1 with the simplex-weight and geometric-mean gauge, implemented via bounded e_k (q = geomean(e), p = e/q);\n- the M0 ⊆ M1 ⊆ M2 nesting, and M3 with the identical form on fixed bases, with hue wrapping;\n- the per-dataset observation models (Thurstonian 2AFC for gray/MLDS with SD 1 and an α nuisance; dissimilarity with profiled no-intercept α);\n- pair- and triad-disjoint 10-fold CV with training-only standardization;\n- the held-out cluster bootstrap with the argmax recomputed inside each resample;\n- recovery, cone-vs-opponent discrimination, the cardinal-vs-rotated coarse comparison, and the arc-vs-chord confound control.\nRemaining discrepancies are minor and non-material: 'Gaussian NLL' is never computed (only R², an equivalent ranking under Gaussian noise); the 'consensus regression' is run on accuracy; the 'training-data refit bootstrap' is a full-data Helm-subject refit; and the blanket '≥2000 resamples' doesn't hold for the gray-q (1000) and M2-exponent (800) bootstraps. Explicit execution statements contradicted by the code (the color-deficient-subject variant reporting, 'convergence logged', 'Illuminant E as robustness') are assessed under integrity.execution_claims; they do not change how the described methods were implemented.",
+      "evidence": [
+        "code/cone_space.py L51-66, L97-114; code/spaces.py L62-87; code/model_core.py L29-58",
+        "code/fit_chromatic.py L32-60 (hue_wrap for HCL), L75-150",
+        "code/run_main.py L47-107; code/identifiability.py L56-70, L124-136, L200-242; code/confound.py L57-145",
+        "report.tex L130-234 (Methodology) consistent with the above",
+        "grep: no Gaussian NLL computed for the chromatic fits (only R²); report.tex L200, L254-255 mention it",
+        "code/fit_gray.py L128-153: regression on accuracy (report.tex L260 calls it 'consensus regression')"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.code_paper_alignment.models_in_paper_match_code": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Every model the paper names is fit in the code with the stated form and parameter count: M0 (K−1 simplex weights), M1 (weights plus a shared exponent q), M2 (weights plus 3 bounded effective exponents), and the five M3 controls (opponent L−M, S−(L+M), L+M; sRGB; CIE RGB; CIELAB; HCL with wrapped hue), each in the M2 form with 5 parameters. Also fit as described: cardinal2 and rot2 (identifiability.py), the log-outer variant (robustness_log.py), and the additive/DR on chord and arc models (confound.py). The logged model list (main_results_N2.json 'models') matches Table 1 and Fig. 2. The additional unreported lumchrom2 fit is a reporting omission, not a mismatch between named and fitted models.",
+      "evidence": [
+        "code/model_core.py L29-46 (M0/M1/M2 unpack, n_free)",
+        "code/spaces.py L62-90 (SPACES, M3_PANEL fixed maps)",
+        "code/run_main.py L21-22 MODELS; logs/main_results_N2.json models list",
+        "code/identifiability.py L56-70; code/robustness_log.py L24-43; code/confound.py L120-122",
+        "report.tex L170-187, L297-325"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.code_paper_alignment.hyperparameters_match": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "The stated K = 10 matches every CV routine (run_main Kf=10, fit_gray K=10, coarse Kf=10, confound Kf=10, log-robustness Kf=10). The stated ≥2000 cluster-bootstrap resamples match B = 2000 for the held-out cluster bootstraps (main, coarse, confound, log family). Two inaccuracies are minor and don't affect any estimate or verdict: (1) the Setup's blanket '≥2000 bootstrap resamples' doesn't hold for the gray-q refit bootstrap (B = 1000) or the M2-exponent refit bootstrap (B_exp = 800). (2) 'log all seeds': the base seed 20260725 is logged, but the per-model restart seeds add Python's per-process hash(m) % 97, which is not logged. These do not materially contradict the described configuration.",
+      "evidence": [
+        "report.tex L256-257 ('K=10 folds ..., ≥2000 bootstrap resamples, and log all seeds'); L209-210",
+        "code/run_main.py L109 (Kf=10, B_boot=2000, B_exp=800); L57 (seed + 100*f + hash(m) % 97)",
+        "code/fit_gray.py L225 (bootstrap_gray_q B=1000)",
+        "logs/main_results_N2.json {Kf 10, B_boot 2000, B_exp 800, seed 20260725}",
+        "code/identifiability.py L200 (B=2000); code/confound.py L117 (B=2000); code/robustness_log.py L88 (B=2000)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.statistical_inference_integrity.simulation_clearly_labeled": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Synthetic dissimilarities are generated only in identifiability.py (gen_synthetic) for parameter recovery and cone-vs-opponent discrimination. The paper labels them as synthetic in the setup, methods, results text, figure caption, and figure panel title. Every real-data result loads the provided human datasets through datasets.py. No synthetic observation is presented as real.",
+      "evidence": [
+        "report.tex L249-251 ('Synthetic data appears only, and clearly labeled, in the identifiability recovery/power analyses')",
+        "report.tex L222-226, L374-382; Fig. 3 caption L362-366; fig_exponents panel title 'Synthetic recovery (S-distinct truth)'",
+        "code/identifiability.py L72-89, L124-147",
+        "code/datasets.py L24-121 (real data loaders)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.identifiability_disclosure.no_overclaim_cone_specificity": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "The paper claims no cone specificity. It says cone-alignment is falsified, which matches the held-out results: M2−best M3 = −0.153 [−0.256,−0.070], M2−opponent = −0.111 [−0.167,−0.051], M2−M1 = 0.008 [−0.011,0.026], also under N1 (−0.294) and the log family (−0.127 [−0.203,−0.064]). The 'earned null' rests on a logged discrimination test (accuracy 0.985; cone wins under cone truth 0.973, opponent wins under opponent truth 0.997) and on recovery, and it is consistent with those results. The mechanism reading is explicitly hedged. One tension: the claim that L and M 'cannot be split' is partly contradicted by the L-distinct recovery (e_L [0.16,0.25] vs e_M [0.32,0.97]). That understates resolvability rather than overclaiming cone specificity, so it belongs to scientific interpretation. The discrimination test covering only one generator pair is a power/generalization weakness, not a contradiction.",
+      "evidence": [
+        "report.tex L45-58 (abstract), L343-350, L370-389, L431-437, L486-490",
+        "logs/main_results_N2.json bootstrap m2_bestM3 [-0.256,-0.070,-0.153], m2_vs_control M3_opponent [-0.167,-0.051,-0.111]; logs/main_results_N1.json m2_bestM3 mean -0.294",
+        "logs/robustness_logfamily.json m2_bestM3 [-0.203,-0.064,-0.127]",
+        "logs/identifiability_N2.json discrimination {classification_accuracy 0.985, p_cone_wins_under_cone 0.973, p_opp_wins_under_opp 0.997}; recovery L_distinct e_hat_ci [[0.161,0.254],[0.318,0.972],[0.311,0.547]]"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.held_fixed_disclosure.deviations_disclosed": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "The paper's held-fixed compliance claims match the implementation:\n- only provided data, no simulated participants;\n- the provided CIE 2006 fundamentals and CIE 1931 CMFs via a disclosed least-squares bridge, with stated whites and normalizations, verified on white and chromatic references;\n- per-dataset observation models with no naive pooling across response scales;\n- test folds never influencing fitting, standardization, or selection;\n- reproduction of gray DR (M1 > M0).\nThe bootstrap departs from the plan's 'training clusters' and the task's 'training folds', but the paper does not claim compliance; it accurately describes the actual held-out-prediction bootstrap. The K = 5 → 10 change is disclosed in attempts_log. attempts_log's blanket 'Everything else ... matches the plan' overstates plan correspondence, but it is not a paper claim of a held-fixed condition that the implementation materially contradicts.",
+      "evidence": [
+        "report.tex L131-151 (bridge disclosed as an approximation), L189-203, L207-209, L248-251",
+        "code/cone_space.py L43-66; logs/cone_conversion_verify.json (von Kries whites [1,1,1]; red L>M true)",
+        "code/fit_chromatic.py L75-112; code/fit_gray.py L95-113",
+        "attempts_log.md L74-83 (plan reconciliation; K=10 disclosed)",
+        "analysis_plan.md L68-70 vs report.tex L209-211 (actual bootstrap described accurately)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "integrity.execution_claims": {
+      "value": "violation_detected",
+      "confidence": "medium",
+      "reason": "The paper explicitly claims (report.tex L449-451): 'We report both normalizations, both outer families, and the with/without color-deficient-subject variants; the structural ordering is invariant.' attempts_log.md L42-44 adds that including the color-deficient subjects leaves 'the aggregate ordering ... unaffected.' The submitted artifacts contradict this:\n- The report contains no with-color-deficient result anywhere.\n- numbers.tex, which make_numbers.py builds from every JSON log, has no such macro, and no log file holds a color-deficient-variant run.\n- The only code path for it, fit_chromatic.build_data(include_cd=True), is never invoked: run_main.py, identifiability.py, confound.py and robustness_log.py all call fc.build_data(norm) with the default include_cd=False.\nSo the claim to report this variant is false on the report's own face, and the claimed invariance has no executed support in the pipeline that produced all logs. A second explicit claim, 'a training-data refit bootstrap for the M2 exponents (seeds and convergence logged)' (L211-212), is contradicted by run_main._boot_exp_worker, which returns only the exponents; no convergence is recorded for the 800 refits in main_results_N*.json. The Methodology's 'Illuminant E as robustness' (L142) likewise has no corresponding run, since no call uses ekman_white='E'. The headline numbers are unaffected, but these explicit execution and robustness claims are false.",
+      "evidence": [
+        "report.tex L449-451 (PDF p.7 L235-236): 'We report ... the with/without color-deficient-subject variants; the structural ordering is invariant.'",
+        "attempts_log.md L42-44: '(`include_cd` flag) -- the aggregate ordering is unaffected.'",
+        "code/fit_chromatic.py L32, L39 (include_cd defaults to False); code/run_main.py L25-27, L111; code/identifiability.py L121, L154; code/confound.py L118; code/robustness_log.py L89: all call fc.build_data(norm)",
+        "logs/numbers.tex (no color-deficient macro); logs/ (no color-deficient-variant output in any of the 15 files)",
+        "report.tex L211-212 '(seeds and convergence logged)' vs code/run_main.py L35-44 (_boot_exp_worker returns (p*q).tolist() only) and logs/main_results_N2.json m2_exponents (no convergence field)",
+        "report.tex L142 'Illuminant~E as robustness' vs no build_data/load_ekman call with white 'E' (only the white-point check in cone_conversion_verify.json)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "integrity.precommitment_claims": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "analysis_plan.md claims it was written before any fitting script (header 06:43 UTC). Its file mtime, 06:44:45 UTC, precedes fit_gray.py (06:47:12) and every other fitting script and fit log, so there is no evidence of backdating. The paper's one explicit pre-registration claim, the logarithmic outer family, matches plan §9. N2 as primary and the selection-aware statistic are also in the plan. Content deviations exist: K 5 → 10 (disclosed); the bootstrap method; the plan's 2022-style 50-response split and power curve not done; the coarse comparison realized as cardinal2 with the achromatic-vs-chromatic lumchrom2 left unreported. But no dated plan versions or other evidence show post-result selection behind an explicit 'fixed in advance' claim. attempts_log.md was last saved at 07:32:01 UTC, before robustness_logfamily.json (07:35:00 UTC), while already saying the log-family verdict 'is confirmed'. That mtime-only observation is not affirmative evidence of a backdated precommitment, and the paper's own claim was written afterwards and matches the log.",
+      "evidence": [
+        "analysis_plan.md L3 ('Timestamp (written before any fitting script): 2026-07-25 06:43 UTC')",
+        "file mtimes (UTC): analysis_plan.md 06:44:45; code/fit_gray.py 06:47:12; logs/gray_replication.json 06:53:16; code/identifiability.py 07:04:34; logs/identifiability_N2.json 07:15:06; attempts_log.md 07:32:01; logs/robustness_logfamily.json 07:35:00; report.tex 07:38:17",
+        "analysis_plan.md L117-120 (power and log outer families) vs report.tex L451-455 ('logarithmic outer family (pre-registered)')",
+        "attempts_log.md L74-83 (disclosed K and outer-family reconciliation)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.selective_reporting.model_variants_reported": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "All core model variants are reported, including those unfavorable to M2: M0, M1, M2 and all five M3 controls with CIs, the N1 and N2 normalizations, both power and log outer families, and the opponent and HCL wins. One completed model was left out of the paper and the attempts log: the cone-derived achromatic-vs-chromatic two-channel model lumchrom2. It reached held-out R² = 0.352 vs M1 0.476, although analysis_plan §6 listed 'achromatic-vs-chromatic (or LM-vs-S)'. I don't find that the evidence establishes outcome-dependent hiding of an unfavorable result. The identifiability code, last saved at 07:04:34 UTC, before the identifiability results were logged at 07:15 UTC, computes bootstrap deltas only for cardinal2 (vs M1, vs rot2), which points to cardinal2 being the planned focal comparison. And lumchrom2's failure is consistent with, not contrary to, the paper's specific claim that channel organization holds on the cardinal opponent axes. The omission is a completeness issue for the direction rubric.",
+      "evidence": [
+        "logs/identifiability_N2.json coarse.models {M1 0.4759, cardinal2 0.5836, rot2 0.3884, lumchrom2 0.3524}; logs/identifiability.out L5",
+        "code/identifiability.py L65-69 (lumchrom2 construction), L203 (fitted), L239-241 (deltas only for cardinal2)",
+        "report.tex L383-389 (only cardinal2 and rot2 reported); no 'lumchrom'/achromatic-vs-chromatic result in report.tex or attempts_log.md",
+        "analysis_plan.md L93-96",
+        "logs/main_results_N2.json and main_results_N1.json (all M0–M3 variants logged and reported)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.selective_reporting.all_specifications_reported": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "The specification families the task names are all reported or logged: both normalizations (N1 shown via M2−best M3 = −0.294 and gray q = 0.21, with full N1 logs present); both outer families (log-family deltas reported); all five control bases, none omitted; both gray data files (identical logged regression outcomes, noted in the attempts log); and all three recovery truths (logged). The verdicts hold under each reported specification: under N1, M2−M1 = 0.050 [−0.016,0.124] is not in the text but is logged and does not change verdict (a). The color-deficient-variant completeness claim concerns a variant with no evidence of ever being run. That is a false execution claim (handled under integrity.execution_claims), not a completed unfavorable specification hidden behind a completeness claim. lumchrom2 is discussed under model_variants_reported.",
+      "evidence": [
+        "logs/main_results_N1.json (M2−best M3 -0.294; m2_m1 [-0.016,0.124,0.050])",
+        "logs/robustness_logfamily.json; report.tex L451-455",
+        "logs/gray_replication.json regression_complete and regression_clean (both logged)",
+        "logs/identifiability_N2.json recovery {isotropic, S_distinct, L_distinct}",
+        "report.tex L270-272, L350, L449-451"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.held_fixed_disclosure.data_sources_respected": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "All data are read from the provided data/ directory: gray/gray_complete_data_release.csv and crowdsourced_clean_data.csv; the Wiebel MLDS raw files (MLDS and Matching); chromatic/helm_dissimilarities_long.csv, helm_stimuli_cie.csv, ekman_dissimilarities.csv and ekman_stimuli_cie.csv; and cone_fundamentals/linss2_10e_1.csv and ciexyz31_1.csv. No external color-perception data or simulated participants are used. The only external numbers are standard colorimetric constants: illuminant C/D65/E chromaticities, the fixed sRGB and CIE-RGB matrices, and CIELAB constants. The paper cites each dataset and its license.",
+      "evidence": [
+        "code/datasets.py L28-30, L52, L72, L93, L99, L108, L112 (paths under data/)",
+        "code/cone_space.py L44-48 (provided cone fundamentals and CMFs)",
+        "code/cone_space.py L75-79; code/spaces.py L31-37 (standard constants)",
+        "report.tex L238-251 (datasets, licenses, 'We use only these provided data')"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.data_provenance_integrity.only_provided_datasets": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Only the task's provided datasets are used: the 2022 gray trials, Wiebel MLDS, Helm and Ekman with their provided CIE tables, and the cvrl fundamentals and CMFs. No dataset's judgments are represented as another's: Helm color-normal per-subject data and the Ekman aggregate matrix are used as labeled, and Helm's color-deficient subjects are excluded and disclosed. Response scales stay separate: Thurstonian models for gray and MLDS, dissimilarity links with per-dataset α for Helm and Ekman. Dataset counts in the paper match the logged loaders.",
+      "evidence": [
+        "code/datasets.py L24-121",
+        "logs/stimulus_cone_coordinates.json (gray n 91896, 320 triads; wiebel 12000 trials, 10 observers; helm 10 stimuli, 11 normal subjects; ekman 14)",
+        "report.tex L238-251; code/fit_chromatic.py L32-60; code/fit_gray.py L27-47"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    }
+  }
+}

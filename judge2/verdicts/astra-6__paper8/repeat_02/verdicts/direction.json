@@ -1,0 +1,822 @@
+{
+  "nodes": {
+    "deliverables.report_pdf_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "proposal/report.pdf exists (466,550 bytes, valid %PDF-1.5 header and %%EOF trailer). The final LaTeX run records 'Output written on report.pdf (14 pages, 466550 bytes)', and the file's SHA-256 (f6256cb8...) matches the post-build audit record. The included section sources have full, non-placeholder content for every required part: motivation/introduction (Sec. 1), the specification encoder and IC representation (Sec. 2), experimental setup with splits, budget, references and delta (Sec. 3), results (Sec. 4), attribution and mechanism (Sec. 5), extrapolation/failure analysis (Sec. 6 and App. E), related work (Sec. 7), scope/limitations (Sec. 8), conclusion (Sec. 9) and appendices. Post-build text extraction shows the log-derived numbers expanded, not placeholders.",
+      "evidence": [
+        "proposal/logs/latex_final_stdout.log:185",
+        "proposal/report.tex:18-29",
+        "proposal/sections/introduction.tex:1-63",
+        "proposal/sections/protocol.tex:1-37",
+        "proposal/sections/results.tex:1-85",
+        "proposal/sections/discussion.tex:1-9",
+        "proposal/sections/appendix.tex:1-102",
+        "proposal/logs/report_text.txt:1-200",
+        "proposal/logs/final_audit.json pdf_sha256 = shasum of proposal/report.pdf"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.logs_directory_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "proposal/logs/ has per-run records for the coefficient-only baseline (coefficient_seed0-2), the raw-sensor control (raw_seed0-2) and the structured encoders (spectrum_seed0-2, clock_seed0-2). Each run has manifest.json (budget, parameter counts, plan hash, source hashes), training.jsonl, seen_validation_{5000..20000}.json and complete.json (adam_steps [20000]). Per-specification and aggregate errors are in per_specification.csv/json: 4,530 rows covering 151 specifications x seeds x methods x interventions, with rel-L2, MAE, Euclidean L2 and RMSE. aggregate.json adds seed aggregates, paired margins, budgets and run info.",
+      "evidence": [
+        "proposal/logs/clock_seed0/manifest.json",
+        "proposal/logs/coefficient_seed0/complete.json",
+        "proposal/logs/raw_seed0/manifest.json",
+        "proposal/logs/per_specification.csv (4530 rows)",
+        "proposal/logs/aggregate.json (summary, comparisons, nonregression, ablations, budgets, runinfo)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.plan_file_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "proposal/code/specification_encoder_plan.json carries registered_utc 2026-10-03T13:09:53Z, and the file mtime (09:09:53 local) agrees. Its SHA-256 ef245da9... matches logs/registration.json and the plan_sha256 in every training manifest and in evaluation_complete.json, so it was not edited after registration. The first comparison run (coefficient_seed0) starts at 13:16:00Z, the other arms at 13:18-13:24Z, and evaluation finishes at 13:30:01Z. The plan states: the encoder/representation (36-d input, 32 midpoint sensors, raw/spectrum/clock definitions, 150-150-150-50 widths); all 20 training and 151 evaluation specifications with axes (trained/held-out ICs, unseen families, recombined pairs, joint interpolation, width sweep); IC families; BC types (periodic only, heldout_bc empty, BC stretch 'not undertaken'); the PDE family (reaction); the reference source (unmodified systems.reaction_solution); loss weights (all 1) with a no-search validation protocol; and delta=0.005 with a pooled-SD rule.",
+      "evidence": [
+        "proposal/code/specification_encoder_plan.json:2 registered_utc",
+        "proposal/code/specification_encoder_plan.json:17-72 architecture/representation/budget",
+        "proposal/code/specification_encoder_plan.json:3011 validation; :3025 reference; :3035-3046 decision delta 0.005; :3060-3085 scope",
+        "proposal/logs/registration.json plan_sha256 ef245da9...",
+        "proposal/logs/coefficient_seed0/manifest.json start_utc 2026-10-03T13:16:00Z",
+        "sha256 of plan json recomputed = ef245da9098e6203..."
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.baseline_and_control_runs_logged": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The coefficient-only baseline (coefficient_seed0/1/2) and the raw-sensor naive control (raw_seed0/1/2) are logged with manifests and completion records (exactly 20,000 Adam steps each). Both are evaluated on every declared split (seen, ic_interpolation, shape_sinusoid, shape_polynomial, combination, coefficient_interpolation, joint_interpolation, width_shift) in per_specification.csv. The raw control also has constant and shuffled intervention rows.",
+      "evidence": [
+        "proposal/logs/coefficient_seed{0,1,2}/complete.json adam_steps [20000]",
+        "proposal/logs/raw_seed{0,1,2}/complete.json adam_steps [20000]",
+        "proposal/logs/per_specification.csv: coefficient 453 rows, raw 1359 rows across 8 axes"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.core_generalization_runs_logged": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The structured encoder (clock = Reaction Fourier, plus the spectrum arm) has logged three-seed evaluations on the unseen-IC-parameter set (ic_interpolation, 20 specifications), the unseen-IC-family sets (shape_sinusoid and shape_polynomial, 10 each) and the unseen-combination sets (combination: 5 unobserved coefficient/profile pairings; joint_interpolation: 16). These are recorded per specification and aggregated with paired differences in aggregate.json.",
+      "evidence": [
+        "proposal/logs/per_specification.csv axes ic_interpolation/shape_sinusoid/shape_polynomial/combination/joint_interpolation",
+        "proposal/logs/aggregate.json comparisons (clock vs coefficient and vs raw on all five axes)",
+        "proposal/logs/clock_seed{0,1,2}_predictions.npz"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.ablation_runs_logged": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The conditioning interventions are logged. per_specification.csv has condition in {correct, constant, shuffled} for raw, spectrum and clock (453 rows per method-condition) across all evaluation axes. 'Constant' replaces the IC descriptor with G0; 'shuffled' cyclically permutes descriptors within each query set. aggregate.json 'ablations' summarizes these, and ablation_table.tex and extra_numbers.tex are generated from them.",
+      "evidence": [
+        "proposal/logs/per_specification.csv condition counts ('clock','constant') 453, ('clock','shuffled') 453",
+        "proposal/logs/aggregate.json ablations",
+        "proposal/logs/ablation_table.tex:5-16",
+        "proposal/logs/extra_numbers.tex:1-10"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.generalization_boundary_runs_logged": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The only out-of-distribution work the paper claims is the registered width/rate sweep (A=0.75, w in {0.1..0.75}, rho in {1,3,5,7,10}) plus an exploratory clipping diagnostic. Both are logged: 1,500 width_shift rows across 4 methods x 3 seeds x interventions, failure_table.tex and clipping_diagnostic.json. The paper explicitly claims no fundamental boundary and says it did not expand encoder width, collocation or training duration. The fundamental-vs-undertrained discrimination was therefore neither attempted nor claimed, and this conditional-reporting node says absence of unattempted optional work is not a missing deliverable.",
+      "evidence": [
+        "proposal/logs/per_specification.csv width_shift 1500 rows",
+        "proposal/logs/failure_table.tex:5-14",
+        "proposal/logs/clipping_diagnostic.json",
+        "proposal/sections/results.tex:84",
+        "proposal/code/specification_encoder_plan.json:3084 fundamental_boundary_claim false"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.boundary_condition_runs_logged": {
+      "value": null,
+      "confidence": "high",
+      "reason": "The boundary-condition stretch is neither attempted nor claimed. The plan scope sets optional_bc_stretch 'not undertaken' with heldout_bc empty. Sec. 2 says only b=1 (periodic) occurs and 'It is therefore not an experiment on boundary-condition generalization', and no non-periodic solver exists. The question is conditional on a BC claim, and the rubric says absence is not a missing deliverable if the stretch is not attempted. 'yes' (runs across >=2 BC types logged) would be false, and 'no' (a claimed but unlogged deliverable) misdescribes an unattempted optional stretch, so no listed value applies.",
+      "evidence": [
+        "proposal/code/specification_encoder_plan.json:3069-3082",
+        "proposal/sections/introduction.tex:19",
+        "proposal/attempts_log.md:25-27"
+      ],
+      "requires_adjudication": true,
+      "adjudication_reason": "no_applicable_value"
+    },
+    "deliverables.pde_type_breadth_runs_logged": {
+      "value": null,
+      "confidence": "high",
+      "reason": "The PDE-type-breadth stretch is not attempted or claimed. Only the reaction family is trained and evaluated (plan trained_pde/evaluated_pde = reaction; optional_multifamily_stretch 'not undertaken'), and Sec. 8 states there is no joint support for multiple PDE families. The node is conditional on such a claim and the rubric says absence is then not a missing deliverable, so neither yes nor no applies.",
+      "evidence": [
+        "proposal/code/specification_encoder_plan.json:3076-3083",
+        "proposal/sections/discussion.tex:2",
+        "proposal/logs/aggregate.json breadth trained_pde_families 1, evaluated_pde_families 1"
+      ],
+      "requires_adjudication": true,
+      "adjudication_reason": "no_applicable_value"
+    },
+    "deliverables.main_results_table_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "results.tex defines the table labelled tab:main_results (input logs/main_table.tex). It reports relative L2 (top) and MAE (bottom), mean +/- sample SD over three seeds, for coefficient-only, raw sensors, Fourier and Reaction Fourier. Rows cover the original-profile seen setting, all training specifications and each held-out primary axis: Gaussian interpolation, sinusoidal, polynomial, recombined pairs, coefficient interpolation and joint interpolation. True Euclidean absolute L2 is in Table 6.",
+      "evidence": [
+        "proposal/sections/results.tex:6-12",
+        "proposal/logs/main_table.tex:1-14",
+        "proposal/logs/norm_table.tex"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.error_vs_specification_curves_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Figure 4 (width_sweep.pdf) plots rel-L2 against Gaussian width w/pi at rho=1,3,5 for coefficient-only, raw sensors, Fourier and Reaction Fourier. The training width interval is shaded and the curves continue into narrower and broader held-out widths. Figure 1 (generalization.pdf) plots error against reaction rate on four held-out axes for all four methods with seed-SD shading. Figure 5 shows every individual held-out query.",
+      "evidence": [
+        "proposal/sections/results.tex:29-33",
+        "proposal/sections/results.tex:78-82",
+        "proposal/sections/appendix.tex:58-62",
+        "proposal/tmp/check_page_8.png and check_page_5.png renders show all four methods"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.methodology_section_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Sec. 2 ('A specification encoder with a fixed neural field') specifies the encoder h_s=E([mu; psi(a); b]) in R^50, the three sensor-based IC representations with their dimensions and parameter counts, the BC indicator, and the fixed decoder/modvec pathway. Sec. 3 ('A registered evaluation across specifications') specifies splits, budget and loss, reference construction, metrics and aggregation, delta and the interventions. Appendices A-B add implementation details and split accounting.",
+      "evidence": [
+        "proposal/sections/introduction.tex:10-63",
+        "proposal/sections/protocol.tex:1-37",
+        "proposal/sections/appendix.tex:2-33"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.codebase_notes_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "codebase_notes.md documents what was inspected and reused, and how the extension relates to it. It covers: model.py (widths, modvec(5,50), 76,851 parameters; the extension subclasses P2INN_phase1 and grows only the first parameter layer to 36 inputs); Loss_f.py (PDE_cal imported); train.py (four equal-weight terms, MAE mislabelled as absolute L2); config.py (hardcoded widths, 20,000 epochs); dataloader.py (int casts avoided by float plumbing); utils.py (batch size 20,000); data_gen sampling; and systems.py (callable ICs through the unchanged function(), reaction_solution reused, RD routine not used). It also covers the authored experiment.py representations and library attribution.",
+      "evidence": [
+        "proposal/codebase_notes.md:5-15",
+        "proposal/codebase_notes.md:17-19",
+        "proposal/codebase_notes.md:21-23"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.attempts_log_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "proposal/attempts_log.md is present and documents the unresolved items the paper claims. It records the two fully executed structured-encoding attempts (ordinary Fourier and reaction-coordinate Fourier, 3 seeds x 20,000 updates each) and the registered axes they fail (polynomial, recombined pairs). It also covers the excluded engineering smoke runs (CUDA-graph off-by-one counter and its fix), the float64 latent-centering correction, the post-evaluation clipping diagnostic and the scope exclusions.",
+      "evidence": [
+        "proposal/attempts_log.md:3-8",
+        "proposal/attempts_log.md:10-17",
+        "proposal/attempts_log.md:19-27"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.encoder_stated_before_results": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The encoder and the IC/BC representation are fully specified in the pre-registered plan (13:09:53Z, before any comparison run). In the paper they appear in Sec. 2, which comes before the setup (Sec. 3) and the first results (Sec. 4).",
+      "evidence": [
+        "proposal/code/specification_encoder_plan.json:17-47",
+        "proposal/sections/introduction.tex:10-63",
+        "proposal/report.tex:21-23"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.representation_fully_specified": {
+      "value": "fully_specified",
+      "confidence": "high",
+      "reason": "The paper gives every detail needed to reimplement the representation. Sensors: M=32 midpoints x_j=2pi(j+1/2)/M. Raw: psi=y. Fourier: c_k=M^-1 sum_j y_j exp(-2 pi i jk/M) and F_R(y)=(c0, sqrt2 Re c_1:15, sqrt2 Im c_1:15, c16) in R^32. Reaction Fourier: psi_R=F_R(1/4 log(y~/(1-y~))) with clipping eps=1e-4. Encoder input: [mu; psi(a); b], 3+32+1=36 values, with b=1 the periodic indicator. Branch: 36-150-150-150-50 with tanh, 58,400 parameters. The code (experiment.py descriptors() and real_spectrum()) matches these definitions.",
+      "evidence": [
+        "proposal/sections/introduction.tex:29-43",
+        "proposal/code/experiment.py:40-55",
+        "proposal/code/specification_encoder_plan.json:36-47"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.injection_point_stated": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Eq. (2) states that h_s=E_theta([mu; psi(a); b]) in R^50 replaces only the parameter-branch input and enters the unchanged concatenation [h_s; c_theta(x,t)] that feeds the reference decoder. The text says the modvec shift receives only [mu; x; t] and that 'No IC descriptor enters that pathway', with the coordinate encoder, residual decoder and concatenation unchanged.",
+      "evidence": [
+        "proposal/sections/introduction.tex:21-27",
+        "proposal/sections/appendix.tex:4"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.hyperparameter_protocol_stated": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The paper states its protocol for introduced hyperparameters. The log-odds scale and clipping threshold (and the sensor and encoder settings) are fixed before training. Validation uses only seen (trained) pairs and is only monitored: 'No hyperparameters, checkpoints, or training budgets are selected from validation or test errors; all tables use the final update.' The plan repeats this (no hyperparameter search; validation on trained specifications only). Pre-registered fixed values with seen-only validation meet the requirement that no selection ever uses a held-out set; no tuning took place.",
+      "evidence": [
+        "proposal/sections/introduction.tex:41",
+        "proposal/sections/protocol.tex:21",
+        "proposal/code/specification_encoder_plan.json:3011",
+        "proposal/code/specification_encoder_plan.md:5"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.motivation_grounded_in_literature": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The case for conditioning is set against PINNs imposing the IC only through the loss (Raissi 2019) and coefficient-only P2INN (Cho 2024). The design is positioned relative to DeepONet's function-encoding branch, physics-informed DeepONets trained with IC/BC data, conditional PINNs, FNO's Fourier parameterization and functa/CORAL neural-field operators (Sec. 7). The specific log-odds choice rests on classical logistic algebra rather than prior ML work, but the conditioning design itself is grounded in the literature.",
+      "evidence": [
+        "proposal/sections/introduction.tex:2-8",
+        "proposal/sections/related.tex:2-4",
+        "proposal/references.bib"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_and_control.coefficient_only_reproduced": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The coefficient-only baseline is the unmodified P2INN_phase1 (3-150-150-150-50 encoder; verified equal to an unmodified reference instance to 1e-16). The agent trained it on the original gauss_pi_2 profile at rho=1..5 with the reference loss, 20,000 Adam updates and seeds 0-2. Its seen-specification rel-L2 is 0.0035 +/- 0.0021 (MAE 0.0024 +/- 0.0017), 0.0031-0.0041 per rate. This is consistent with the source paper's reaction 1~5 P2INN result (rel 0.0027, abs 0.0015).",
+      "evidence": [
+        "proposal/logs/main_table.tex:5",
+        "proposal/logs/anchor_table.tex:5-9",
+        "paper.md:281-282",
+        "proposal/logs/verification.json parity.coefficient reference_forward_inherited true, original_output_max_abs 1.1e-16",
+        "proposal/logs/coefficient_seed{0,1,2}/complete.json"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_and_control.naive_control_matched": {
+      "value": "matched",
+      "confidence": "high",
+      "reason": "The naive control ('raw sensors') appends the 32 sampled IC values and the periodic BC indicator to mu as raw extra encoder inputs. It uses the same 36-150-150-150-50 encoder (58,400 encoder / 81,801 total parameters) as the Fourier and Reaction Fourier arms, with the same injection, loss, collocation, epochs and seeds. It comes from the agent's own logged runs raw_seed0-2.",
+      "evidence": [
+        "proposal/code/experiment.py:45-55",
+        "proposal/code/experiment.py:65-67",
+        "proposal/logs/raw_seed0/manifest.json parameter_encoder 58400",
+        "proposal/logs/clock_seed0/manifest.json parameter_encoder 58400",
+        "proposal/sections/introduction.tex:43"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_and_control.held_fixed_respected": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "SpecificationModel subclasses the reference P2INN_phase1, inherits its forward pass unchanged, and for conditioned arms only replaces param_enc_layer_1 (3->150 becomes 36->150). The 50-d output, coordinate encoder (5,250 params), residual decoder with modvec (18,151 params) and concatenation are untouched. modvec receives eq = mu (3 coefficients) plus (x,t), with no IC/BC information. The hooks only batch unique descriptors; output, residual, loss and gradient parity is <=2.2e-16. The loss is cost_f+cost_u+cost_gt+cost_bd with weights 1 through the imported PDE_cal. Budgets are identical across arms: 1000/256/100 points per specification, 20 cells, Adam default lr 1e-3, exactly 20,000 steps, seeds 0-2. Encoder capacity equals the naive control's, and the manifests' reference-source hashes equal the provided files.",
+      "evidence": [
+        "proposal/code/experiment.py:57-79",
+        "proposal/code/experiment.py:107-118",
+        "workdir_outside_proposal/code/P2INN/model.py:12-33,57,75-78",
+        "proposal/logs/verification.json parity (all methods)",
+        "proposal/logs/*_seed*/manifest.json budget and source_sha256",
+        "proposal/code/train.py:29-30,79"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "core_result.joint_coeff_ic_generalization": {
+      "value": "clear",
+      "confidence": "medium",
+      "reason": "The test family is reaction, where the IC-to-solution map is non-linear and raw sensors are a genuine competitor (0.074 vs 0.414 for coefficient-only on Gaussian interpolation). On every core set, Reaction Fourier lowers mean rel-L2 by at least delta=0.005 against both references. Unseen IC parameters: 0.0461 vs raw 0.0740 (gain 0.0279) and vs coefficient 0.4140 (gain 0.3679). Recombined coefficient/profile pairs: 0.0987 vs 0.1167 (0.0180) and vs 0.6107 (0.5120). Joint coefficient+IC interpolation: 0.0570 vs 0.0813 (0.0243) and vs 0.3991 (0.3421). This node's 'clear' criterion is the mean delta reduction plus a non-trivial axis, and both hold. The recombined-pair gain over raw does lie inside the pooled seed SD (0.0180 < 0.0237); that shortfall is scored under statistical_rigor.core_margins_separated.",
+      "evidence": [
+        "proposal/logs/main_table.tex:7,10,12",
+        "proposal/logs/margin_table.tex:5,8,9",
+        "proposal/logs/aggregate.json comparisons clock ic_interpolation/combination/joint_interpolation",
+        "proposal/code/specification_encoder_plan.json:3036"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "core_result.unseen_ic_family_generalization": {
+      "value": "clear",
+      "confidence": "medium",
+      "reason": "Only Gaussians are trained. Sinusoidal profiles (0.55-0.35cos x, 0.50-0.45cos x) and polynomial (1-r^2)^2 profiles are held-out function families. On the sinusoidal family Reaction Fourier reaches 0.0519 +/- 0.0064 vs raw 0.0635 +/- 0.0053: gain 0.0116, above delta and above the pooled SD of 0.0058. Against the coefficient-only reachable prediction (0.1039) the gain is 0.0520 vs a pooled SD of 0.0047, and its mean error is below raw at all five rates. This meets the full criterion for an unseen IC function family, which is what the task requires. Caveats: the second declared family (polynomial) beats delta in mean (0.0115 vs raw, 0.0351 vs coefficient) but is not noise-separated against raw (pooled SD 0.0126, one seed reversed, worse at rho=5). The sinusoid paired 95% interval also includes zero. Pooling both held-out families still passes the pooled-SD rule (0.0115 vs 0.0087). A stricter all-families reading would downgrade this, hence medium confidence.",
+      "evidence": [
+        "proposal/logs/main_table.tex:8-9",
+        "proposal/logs/margin_table.tex:6-7",
+        "proposal/logs/interval_table.tex:6-7",
+        "proposal/logs/per_specification.csv shape_sinusoid per-rate means (clock < raw at rho 1-5)",
+        "proposal/sections/protocol.tex:6",
+        "task_spec.md:51 '(b) an unseen IC function family'"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "core_result.seen_spec_preserved": {
+      "value": "preserved",
+      "confidence": "high",
+      "reason": "On the original coefficient-only setting (G0 at rho=1..5), Reaction Fourier per-coefficient rel-L2 is 0.0053/0.0048/0.0042/0.0035/0.0028 against a baseline of 0.0041/0.0036/0.0036/0.0033/0.0031. The largest increase (0.0012) is well within the tolerance max(0.1*e_base, 0.005)=0.005 at every coefficient. The raw and Fourier arms also pass.",
+      "evidence": [
+        "proposal/logs/anchor_table.tex:5-9",
+        "proposal/logs/aggregate.json nonregression",
+        "proposal/logs/scientific_numbers.tex clock_nonregression_passes 5",
+        "proposal/sections/results.tex:35-36"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "conditioning_attribution.beats_naive_control": {
+      "value": "beats",
+      "confidence": "medium",
+      "reason": "Structured and matched raw-sensor encoders are compared head to head on every held-out IC set. Reaction Fourier beats raw by more than delta and the pooled seed SD on unseen Gaussian parameters (0.0279 vs SD 0.0050; 3/3 seeds; paired 95% CI [0.0045, 0.0513]), the sinusoidal family (0.0116 vs 0.0058) and joint interpolation (0.0243 vs 0.0153). A read-only pooled check over all 61 held-out IC/combination specifications gives a gain of 0.0208 vs pooled SD 0.0060, with paired 95% CI [0.0054, 0.0361]. So this is not a tie, and the gain is not just from adding raw inputs. It is not uniform, though: on the polynomial family (0.0115 vs SD 0.0126) and the recombined pairs (0.0180 vs 0.0237) the mean gain beats delta but stays within seed noise. The ordinary Fourier arm mostly ties raw, consistent with the paper's basis-equivalence result.",
+      "evidence": [
+        "proposal/logs/margin_table.tex:5-9",
+        "proposal/logs/interval_table.tex:5-9",
+        "proposal/logs/aggregate.json comparisons (clock vs raw; spectrum vs raw)",
+        "proposal/logs/per_specification.csv (pooled read-only recomputation)",
+        "proposal/sections/results.tex:14,24-27"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "conditioning_attribution.removed_conditioning_ablation": {
+      "value": "degrades_appropriately",
+      "confidence": "high",
+      "reason": "With weights and coefficients unchanged, replacing the Reaction Fourier IC descriptor by G0 (constant) or cyclically shuffling descriptors degrades held-out accuracy far beyond the pooled seed SD, toward the coefficient-only baseline. Gaussian interpolation: 0.046 -> 0.410 constant / 0.306 shuffled (baseline 0.414). Joint interpolation: 0.057 -> 0.405 / 0.309 (baseline 0.399). Sinusoids: 0.052 -> 0.102 / 0.123 (baseline 0.104). Polynomials: 0.072 -> 0.104 / 0.116 (baseline 0.107). Recombined pairs: 0.099 -> 0.606 / 0.352.",
+      "evidence": [
+        "proposal/logs/ablation_table.tex:13-16",
+        "proposal/logs/extra_numbers.tex:1-10",
+        "proposal/logs/main_table.tex:7-12",
+        "proposal/sections/results.tex:40-41"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "conditioning_attribution.non_degenerate": {
+      "value": "non_degenerate",
+      "confidence": "high",
+      "reason": "A direct latent diagnostic shows that distinct ICs map to distinct codes. At rho=3 the Reaction Fourier latent has mean pairwise training-profile distance 3.887 +/- 0.295 and minimum 2.196 +/- 0.420 (coefficient-only: exactly 0), effective rank 2.129 +/- 0.140, and leave-one-profile-out width-probe R^2 0.738 +/- 0.167. PCA plots place held-out profiles at distinct codes. Together with the strongly degrading ablation and preserved seen accuracy, this shows the encoding is neither collapsed nor ignored.",
+      "evidence": [
+        "proposal/logs/numbers.tex:452-458",
+        "proposal/logs/mechanism_table.tex:5-7",
+        "proposal/sections/results.tex:43-52",
+        "proposal/logs/representation.json"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "boundary_conditions.multi_bc_generalization": {
+      "value": "absent",
+      "confidence": "high",
+      "reason": "No boundary-condition conditioning or generalization is attempted. Only the periodic BC (constant indicator b=1) is trained and evaluated; there is no held-out BC configuration and no non-periodic solver. Both the paper and the plan say so explicitly. This is an optional differentiator, not a gate.",
+      "evidence": [
+        "proposal/sections/introduction.tex:19",
+        "proposal/code/specification_encoder_plan.json:3069-3082",
+        "proposal/sections/discussion.tex:2",
+        "proposal/attempts_log.md:25-27"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "boundary_conditions.reference_validated": {
+      "value": null,
+      "confidence": "high",
+      "reason": "This optional node applies only if the BC stretch is attempted, and it was not. No non-periodic reference solver was authored or used; every reference is the unmodified analytic reaction_solution. There is therefore no non-periodic reference that could be called 'validated' or 'unvalidated', and neither listed value describes the situation.",
+      "evidence": [
+        "proposal/codebase_notes.md:14",
+        "proposal/sections/protocol.tex:29",
+        "proposal/attempts_log.md:27"
+      ],
+      "requires_adjudication": true,
+      "adjudication_reason": "no_applicable_value"
+    },
+    "pde_type_breadth.multi_family_supported": {
+      "value": "absent",
+      "confidence": "high",
+      "reason": "No multi-PDE-family joint support is attempted. Each model is trained and evaluated only on the reaction family (breadth: 1 trained/evaluated PDE family), and the paper states there is no joint support for multiple PDE families. Optional differentiator.",
+      "evidence": [
+        "proposal/logs/aggregate.json breadth",
+        "proposal/code/specification_encoder_plan.json:3076-3083",
+        "proposal/sections/discussion.tex:2"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "pde_type_breadth.breadth_reported": {
+      "value": null,
+      "confidence": "high",
+      "reason": "This node applies only if the PDE-type-breadth stretch is attempted, and it was not. For the record, the paper does state its breadth ('three IC families, one boundary type, and one PDE family; only the Gaussian IC family is trained') and aggregate.json logs these counts. Scoring a non-attempted optional stretch as delivered or failed would misapply the conditional node.",
+      "evidence": [
+        "proposal/sections/discussion.tex:2",
+        "proposal/logs/aggregate.json breadth (trained_ic_families 1, evaluated_ic_families 3, bc types 1, pde families 1)"
+      ],
+      "requires_adjudication": true,
+      "adjudication_reason": "no_applicable_value"
+    },
+    "pde_type_breadth.held_out_transfer": {
+      "value": "not_evaluated",
+      "confidence": "medium",
+      "reason": "No S2 held-out combined-specification transfer is evaluated: there is no multi-family model, no BC variation and no held-out PDE type, and the stretch is declared not undertaken. The core recombined and joint coefficient x IC sets inside the single reaction family are core item (c), not the multi-family S2 composition. That interpretation is why confidence is medium.",
+      "evidence": [
+        "proposal/code/specification_encoder_plan.json:3083",
+        "proposal/sections/discussion.tex:2",
+        "proposal/sections/appendix.tex:102"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "statistical_rigor.multiple_seeds_with_error_bars": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Every headline comparison uses three completed seeds (0, 1, 2). Table cells give mean +/- sample SD, the margin table gives pooled SDs, the appendix gives paired 95% t intervals and per-seed sign counts, and the curves have seed-SD shading.",
+      "evidence": [
+        "proposal/logs/main_table.tex",
+        "proposal/logs/margin_table.tex",
+        "proposal/logs/interval_table.tex",
+        "proposal/sections/results.tex:31"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "statistical_rigor.core_margins_separated": {
+      "value": "within_noise",
+      "confidence": "high",
+      "reason": "The margin-vs-noise comparison is reported, and two required core margins against the naive control fall inside the pooled seed SD. Polynomial family: 0.0115 vs 0.0126, paired 95% interval [-0.0322, 0.0552]. Recombined coefficient/profile pairs: 0.0180 vs 0.0237, interval [-0.0145, 0.0506]. The polynomial per-rate curve also reverses at rho=5. Gaussian interpolation, sinusoids and joint interpolation pass the pooled-SD rule, and every margin over the coefficient-only baseline is separated.",
+      "evidence": [
+        "proposal/logs/margin_table.tex:5-9",
+        "proposal/logs/interval_table.tex:5-9",
+        "proposal/logs/aggregate.json comparisons passes false for shape_polynomial and combination vs raw",
+        "proposal/sections/results.tex:24-27"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "mechanism_analysis.subsection_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Sec. 5 ('Conditioning, geometry, and the limits of the mechanism') analyses what the encoder represents (latent distances, PCA geometry, effective rank, leave-one-profile-out probes), how error grows with distance to the training descriptor span, and why ordinary Fourier conditioning adds no expressivity (exact basis-change equivalence).",
+      "evidence": [
+        "proposal/sections/results.tex:38-72"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "mechanism_analysis.depth": {
+      "value": "deep",
+      "confidence": "medium",
+      "reason": "The analysis goes beyond restating errors. It links representation geometry to where generalization fails, quantitatively, using a diagnostic computed from the IC alone before any test errors are seen. Distance of a query descriptor to the affine span of the five training descriptors has Spearman 0.895 +/- 0.031 with Reaction Fourier width-sweep error (raw 0.838, Fourier 0.806), better than nearest-profile distance (0.584). Latent diagnostics (pairwise distances, effective rank ~2, width-probe R^2 0.738 vs 0.470 for raw) and an exact raw-to-Fourier weight conversion (max discrepancy 2.6e-15) show why a linear basis change cannot add expressivity. Limits: the predictive diagnostic uses 10 widths at a single rate, and it does not explain the method-specific interpolation advantage.",
+      "evidence": [
+        "proposal/sections/results.tex:45-72",
+        "proposal/logs/mechanism_table.tex:5-7",
+        "proposal/logs/numbers.tex:438-458",
+        "proposal/logs/basis_equivalence.json",
+        "proposal/logs/analysis_design.json"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "generalization_boundary.boundary_mapped": {
+      "value": "mapped",
+      "confidence": "medium",
+      "reason": "The registered width/rate sweep pushes two axes past the trained span until generalization fails, and locates the transition. Inside the trained widths (0.25-0.5) Reaction Fourier error is about 0.01-0.13; at rho=3 it rises to 0.16 at w=0.2, 0.42 at w=0.15 and 0.83 at w=0.10. Along the rate axis (trained 1-5) error is about 0.3 at rho=7 and about 0.6 at rho=10. Figure 4 plots these curves with the training interval shaded, and Table 9 tabulates representative points.",
+      "evidence": [
+        "proposal/sections/results.tex:74-82",
+        "proposal/logs/failure_table.tex:5-14",
+        "proposal/logs/per_specification.csv width_shift per-width means",
+        "proposal/sections/protocol.tex:8"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "generalization_boundary.failure_setting_designated": {
+      "value": "vague",
+      "confidence": "medium",
+      "reason": "Specific failing settings are named: narrow Gaussians w=0.10-0.15 and fast reaction rho=10 (Table 9; 'Narrow profiles remain difficult for every model'). But no failure criterion was stated before the result. The plan registers the width sweep only as a diagnostic, and its decision rules cover only the five superiority axes. 'designated' requires a pre-stated criterion, so the designation is incomplete.",
+      "evidence": [
+        "proposal/sections/results.tex:76,84",
+        "proposal/logs/failure_table.tex",
+        "proposal/code/specification_encoder_plan.json:3035-3046",
+        "proposal/sections/protocol.tex:8"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "generalization_boundary.failure_regime_meaningful": {
+      "value": "meaningful",
+      "confidence": "medium",
+      "reason": "The failing settings are plausible queries a modest step beyond the trained span, not strawmen. Gaussian widths of 0.15pi and 0.10pi (trained 0.25pi-0.5pi; the zoo has pi/4 and pi/2) are smooth, bounded in [0,1] and well resolved on the 256-point grid. rho=7-10 lies inside the source paper's standard reaction ranges (1~10, 1~20). No sub-grid, non-differentiable or nonsensical specification is used.",
+      "evidence": [
+        "proposal/logs/failure_table.tex:5-14",
+        "proposal/sections/protocol.tex:8",
+        "paper.md:283-286"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "generalization_boundary.fundamental_vs_undertrained_discriminated": {
+      "value": null,
+      "confidence": "high",
+      "reason": "This node applies only when the discrimination is attempted. The agent explicitly ran no capacity/epochs/collocation increase and claims no fundamental boundary ('We did not expand encoder width, collocation, or training duration; these are finite-budget failures'). It did rule out reference artifacts: an exact analytic reference, zero aligned-refinement discrepancy, a float64 residual of 2.1e-15 and a clipping diagnostic. 'confound_untested' presupposes a fundamental claim that is never made. The raw and Fourier arms share the narrow-width and rho=10 failures, which points to a shared failure, but the rubric's method-specificity clause also counts reaction-family axes as method-specific. No listed value fits an unattempted discrimination.",
+      "evidence": [
+        "proposal/sections/results.tex:84",
+        "proposal/code/specification_encoder_plan.json:3084",
+        "proposal/logs/failure_table.tex:5-14",
+        "proposal/logs/verification.json reference_validation, reaction_identity_max_residual 2.1e-15",
+        "proposal/attempts_log.md:27"
+      ],
+      "requires_adjudication": true,
+      "adjudication_reason": "no_applicable_value"
+    },
+    "generalization_boundary.failure_mechanism_explained": {
+      "value": "explained",
+      "confidence": "medium",
+      "reason": "The width-extrapolation failure is explained through the representation and distance in specification, consistently with the mechanism section. Error grows as the query descriptor leaves the affine span of the training descriptors (Spearman 0.895 for Reaction Fourier; similar for the other encoders, pointing to a shared descriptor-geometry limit). The log-odds clipping hypothesis is tested numerically: clipping-only error is 0.0019 vs 0.833 learned error at rho=3, w=0.10, so clipping is not the cause there, while at rho=10 it is 0.35, so it contributes. The rho=10 failure at wide profiles gets a less mechanistic account, and competing explanations (sparse coverage, finite training) are acknowledged.",
+      "evidence": [
+        "proposal/sections/results.tex:62-69,84",
+        "proposal/logs/failure_table.tex:5-14",
+        "proposal/logs/clipping_diagnostic.json",
+        "proposal/sections/appendix.tex:94-98"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_analysis.subsection_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Sec. 6 ('Extrapolation exposes a remaining limitation') and Appendix E ('Failure analysis and scope of the negative results') are explicit failure-analysis sections.",
+      "evidence": [
+        "proposal/sections/results.tex:74-84",
+        "proposal/sections/appendix.tex:86-102"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_analysis.patterns_identified": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Specific failure patterns are identified with numbers: narrow Gaussians (w<=0.15) fail for every model; Reaction Fourier is not the best extrapolator over the width/rate sweep (0.3052 vs 0.2380 Fourier and 0.2758 raw); fast reaction (rho=10) fails; polynomial transfer and unseen pairings do not separate from the raw control; rankings vary by rate (polynomial reverses at rho=5); and each held-out family has only two profiles.",
+      "evidence": [
+        "proposal/sections/results.tex:24-27,76",
+        "proposal/logs/failure_table.tex",
+        "proposal/sections/appendix.tex:100-102",
+        "proposal/sections/discussion.tex:2-4"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_analysis.patterns_explained_coherently": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The extrapolation failures are explained in terms of specification novelty and the representation: distance to the training descriptor span tracks error, log-odds clipping amplifies small tails at fast rates, and five-profile coverage is sparse. This is consistent with the mechanism claim that the encoder organizes the training profiles but does not learn their extension. The polynomial and recombination shortfalls are attributed to seed sensitivity and limited coverage, with less mechanistic depth.",
+      "evidence": [
+        "proposal/sections/results.tex:62-63,84",
+        "proposal/sections/discussion.tex:4-6",
+        "proposal/sections/appendix.tex:96-102"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "originality_and_literature.contribution_originality": {
+      "value": "meaningful_extension",
+      "confidence": "medium",
+      "reason": "Conditioning a PINN-style surrogate on sampled initial functions is established (DeepONet/PI-DeepONet, conditional PINNs), and the paper concedes this. What it adds: a controlled encoder-only comparison at a fixed P2INN interface; a physics-aligned log-odds Fourier IC representation motivated by the logistic linearization; an exact proof and numerical check that ordinary Fourier conditioning only reparameterizes raw sensors; and a descriptor-span diagnostic that predicts extrapolation error. This is a meaningful, independent extension, but it is narrow (one reaction family, small profile sets, mixed gains), so the novelty is limited rather than a distinct new method.",
+      "evidence": [
+        "proposal/sections/related.tex:2-4",
+        "proposal/sections/introduction.tex:45-62",
+        "proposal/sections/results.tex:62-72",
+        "proposal/logs/literature_sources.json novelty_scope"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "originality_and_literature.literature_engagement": {
+      "value": "adequate",
+      "confidence": "medium",
+      "reason": "The related work covers each main thread: conditional PINNs (Kovacs), coefficient-encoded P2INN (Cho), operator learning (DeepONet, physics-informed DeepONet with IC/BC data, FNO), conditional neural fields (functa, CORAL) and PINN failure modes. It positions the contribution accurately, for example not claiming that exposing ICs is new and noting that the Fourier transform is applied only to the specification. It is brief (two paragraphs, nine references) and omits other IC-conditioned or meta-learned PINN and parametric-ROM work, so it is adequate rather than strong.",
+      "evidence": [
+        "proposal/sections/related.tex:1-5",
+        "proposal/references.bib (9 entries)",
+        "proposal/logs/literature_sources.json"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "originality_and_literature.spec_independence": {
+      "value": "independent",
+      "confidence": "high",
+      "reason": "The paper reads as a self-contained study ('Reaction Coordinates for Specification-Conditioned Neural Fields') with its own organizing question: IC access vs basis change vs nonlinear coordinates. It uses natural terms ('coefficient-only', 'raw sensors', 'shape transfer', 'recombined pairs', 'input interventions'), avoids the spec's private terms ('naive control', 'held-out function family', gate/differentiator), and does not mirror the spec's section structure.",
+      "evidence": [
+        "proposal/report.tex:14-19",
+        "proposal/sections/introduction.tex:1-8",
+        "proposal/sections/results.tex:1-4"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.journal_quality_structure": {
+      "value": "strong",
+      "confidence": "medium",
+      "reason": "The structure is logical: motivation, method with derivations, registered protocol, results, mechanism, failure, related work, scope, conclusion and appendices. The prose is precise. Claims are consistently supported and carefully hedged: a pre-registered decision rule, paired intervals, explicit non-claims, and every number generated from the logs. Weaknesses are dense, terse prose, a short related-work section, and a small-font stacked main table.",
+      "evidence": [
+        "proposal/report.tex:18-29",
+        "proposal/sections/results.tex",
+        "proposal/sections/discussion.tex",
+        "proposal/logs/numbers.tex"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.limitations_discussion_present": {
+      "value": "substantive",
+      "confidence": "high",
+      "reason": "Sec. 8 ('Scope and implications') and Appendix E discuss task-relevant limitations concretely: a single PDE family and single periodic BC; only Gaussians trained; reaction is spatially decoupled, limiting relevance to transport and diffusion; centered, smooth profiles; two profiles per held-out family; five-profile probes; sensors are not resolution-independent; the log-odds transform is reaction-specific; no speed or accuracy claim over the exact solver; three-seed statistical limits; and the BC, multi-PDE and increased-budget studies that were not run.",
+      "evidence": [
+        "proposal/sections/discussion.tex:1-6",
+        "proposal/sections/appendix.tex:100-102",
+        "proposal/sections/protocol.tex:34"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.rendered_pdf_clean": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The final build log reports 14 pages with all eight figures included, no undefined references or citations, and no overfull boxes; the only notices are two underfull vboxes from float pages. Tables are scaled to the line width. The post-build text extraction contains no '??' markers. The one post-build page render (appendix p.10) and the agent's earlier renders of the same figures and tables show clean equations, tables and figures. Limitation: this environment has no PDF rasterizer, so I could not render the final PDF page by page myself. A minor cosmetic issue is crowded x-tick labels in the training-curve figure.",
+      "evidence": [
+        "proposal/logs/latex_final_stdout.log:185",
+        "proposal/report.log:563-631 (figures included; Underfull vbox at 590, 603 only)",
+        "proposal/logs/report_text.txt (no '??')",
+        "proposal/tmp/completion_check_page.png",
+        "proposal/tmp/page_4.png, page_6.png, page_7.png, check_page_8.png, appendix_final_11/13/14.png"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.neurips_style": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "report.tex loads usepackage[preprint]{neurips}. The bundled proposal/neurips.sty is byte-identical to the provided neurips.sty (SHA-256 0c1ad369...), and the build log shows it loaded (package neurips_2026).",
+      "evidence": [
+        "proposal/report.tex:2",
+        "sha256 proposal/neurips.sty = workdir_outside_proposal/neurips.sty = 0c1ad36961fcd919...",
+        "proposal/report.log:25-31"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.main_results_table_complete": {
+      "value": "no",
+      "confidence": "medium",
+      "reason": "tab:main_results covers all four declared methods, the single declared family (reaction, stated in the caption), the seen-specification row and every primary held-out axis, with both rel-L2 and MAE. It has no budget-matched column, which the rubric explicitly requires: matched budget is stated only in the caption ('identical point counts and 20,000 Adam updates'). The registered width/rate diagnostic sweep appears only in Tables 6 and 9.",
+      "evidence": [
+        "proposal/logs/main_table.tex:1-14 (columns: Query set, Coefficient only, Raw sensors, Fourier, Reaction Fourier)",
+        "proposal/sections/results.tex:8",
+        "task_spec.md:184-188 (skeleton with Budget matched? column)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.matched_budget.budget_and_capacity_matched": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "The executed configurations are identical across the coefficient-only, raw-sensor, Fourier and Reaction Fourier arms. Loss: four equal-weight terms via the imported PDE_cal. Points: 1,000 interior / 256 initial / 100 boundary pairs per cell over 20 cells (20,000/5,120/2,000 total), each in a single reference-sized batch; the baseline's four identical G0 copies per rate reproduce the original five-rate objective exactly. Optimizer: Adam with default lr 1e-3, betas and eps, and exactly 20,000 optimizer steps, asserted and logged. Seeds: 0-2. The raw, Fourier and Reaction Fourier encoders all have 58,400 parameters, with the coordinate encoder and decoder unchanged.",
+      "evidence": [
+        "proposal/logs/*_seed{0,1,2}/manifest.json budget",
+        "proposal/logs/*_seed{0,1,2}/complete.json adam_steps [20000]",
+        "proposal/code/train.py:29-30,79",
+        "proposal/code/experiment.py:90-118",
+        "proposal/logs/aggregate.json budgets",
+        "workdir_outside_proposal/code/P2INN/utils.py:164-166"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.environment_integrity.pde_definitions_and_construction_unaltered": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "The manifests' SHA-256 values for code/P2INN/model.py, Loss_f.py and data_gen/systems.py equal the provided files, so the residual and reference construction were not edited. The residual is the original PDE_cal. References come from the unmodified systems.reaction_solution, with new ICs passed as callables through the unchanged function() interface (string-vs-callable agreement 0.0 for the zoo Gaussians). The domain is x in [0,2pi), t in [0,1] on a 256x100 grid, scored on the reference sampler's 1,000 disjoint test points. Relative L2 is computed per specification and averaged as in the paper; the reference code's MAE is kept and labelled accurately, and true Euclidean L2 is added. There is no authored reference to validate.",
+      "evidence": [
+        "proposal/logs/clock_seed0/manifest.json source_sha256 (model.py b6e93587..., Loss_f.py e8a0bc00..., systems.py e71a4bba...)",
+        "sha256 of workdir_outside_proposal/code/P2INN files (identical)",
+        "proposal/code/experiment.py:81-88,120-126",
+        "proposal/logs/verification.json reference_validation string_vs_callable_max_abs 0.0",
+        "proposal/sections/protocol.tex:23-31"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.reference_solution_validity.new_references_validated": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "Every reference used is the unchanged closed-form logistic construction evaluated at new IC or coefficient arguments, which the task accepts. No authored or non-periodic solver is used, so refinement and periodic-overlap validation are not required. The agent still checked the references: string and callable profiles agree exactly, aligned refinement to 512x199 shows zero discrepancy at coinciding points for all registered references, and a float64 autodiff check gives a maximum logistic residual of 2.1e-15.",
+      "evidence": [
+        "proposal/logs/verification.json reference_validation (153 records), reaction_identity_max_residual 2.109e-15",
+        "proposal/logs/extra_numbers.tex:11 refinement_max_relative_l2 0",
+        "proposal/sections/protocol.tex:23-29",
+        "proposal/sections/appendix.tex:8"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.experiment_completeness.all_experiments_logged": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "Every experiment the paper describes has logs: 12 training runs (manifests, histories, seen validation, completion records, final checkpoints); all 151 specifications x 3 seeds x methods x interventions (per_specification.csv/json, prediction .npz files, evaluation_reference.npz); latent diagnostics (representation.json); basis equivalence (basis_equivalence.json); the clipping diagnostic (clipping_diagnostic.json); architecture, gradient and reference verification (verification.json); and the excluded smoke runs. BC-variation and multi-PDE experiments are not described as performed.",
+      "evidence": [
+        "proposal/logs/evaluation_complete.json rows 4530, specifications 151",
+        "proposal/logs/basis_equivalence.json",
+        "proposal/logs/clipping_diagnostic.json",
+        "proposal/logs/representation.json",
+        "proposal/logs/verification.json",
+        "proposal/logs/*_smoke/"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.effort_evidence.attempts_log_when_partial_work_claimed": {
+      "value": "satisfied",
+      "confidence": "medium",
+      "reason": "The paper reports unresolved or failed parts of its registered hypothesis: polynomial transfer and unseen pairings are not separated from the raw control, and extrapolation is not improved. attempts_log.md backs this with two distinct, fully executed attempts (ordinary Fourier and reaction-coordinate Fourier conditioning, three seeds x 20,000 updates each), with run-evidence paths and per-axis outcomes, plus the documented engineering attempts. The held-out-PDE-type sub-item was never attempted, so it needs no attempt records.",
+      "evidence": [
+        "proposal/attempts_log.md:10-17",
+        "proposal/attempts_log.md:3-6",
+        "proposal/logs/spectrum_seed{0,1,2}/",
+        "proposal/logs/clock_seed{0,1,2}/",
+        "proposal/sections/appendix.tex:100"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "evidence_completeness.quantitative_sources_documented": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "The paper's numbers are typeset from macros and tables that analyze.py and supplement.py generate from aggregate.json and per_specification.csv (numbers.tex, extra_numbers.tex, scientific_numbers.tex, *_table.tex). Recomputing from per_specification.csv reproduces the cited values: Gaussian interpolation 0.0740->0.0461; sinusoid 0.0635->0.0519; margins 0.0279/0.0116/0.0115/0.0180/0.0243 with pooled SDs 0.0050/0.0058/0.0126/0.0237/0.0153; width sweep 0.3052/0.2380/0.2758. Budget and timing figures (240,000 updates, 34.4 min) match aggregate.json. The only source-paper comparison is qualitative ('consistent in scale') and cites Cho et al.",
+      "evidence": [
+        "proposal/report.tex:9-13",
+        "proposal/logs/aggregate.json total_updates 240000, total_training_seconds 2065.8",
+        "proposal/logs/per_specification.csv (recomputed seed means)",
+        "proposal/sections/results.tex:4"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "evidence_completeness.required_reporting_coverage": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "Reporting covers everything the task and the registered protocol require. Arms: baseline, matched naive control and structured encoders. Held-out sets: unseen IC parameters, unseen IC families, unseen combinations and joint interpolation. Also reported: per-coefficient seen-specification non-regression; constant and shuffled interventions; latent non-degeneracy and mechanism diagnostics; error-vs-specification curves; breadth counts; the OOD sweep; all 151 specifications and three completed seeds; rel-L2 plus MAE and Euclidean absolute L2; SDs, pooled SDs and paired intervals; reference-validation records; budgets; and the attempts log. Failed axes and the ordinary-Fourier arm are reported, not dropped. The optional BC and multi-PDE stretches are declared not undertaken.",
+      "evidence": [
+        "proposal/logs/main_table.tex",
+        "proposal/logs/anchor_table.tex",
+        "proposal/logs/ablation_table.tex",
+        "proposal/logs/norm_table.tex",
+        "proposal/logs/interval_table.tex",
+        "proposal/logs/per_specification.csv",
+        "proposal/logs/aggregate.json breadth",
+        "proposal/attempts_log.md"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    }
+  },
+  "context": {
+    "bc_extension_attempted": {
+      "value": false,
+      "reason": "Only the periodic BC (a constant indicator b=1) is used. The plan declares heldout_bc empty and optional_bc_stretch 'not undertaken', the paper says it is not an experiment on boundary-condition generalization, and no non-periodic solver was written.",
+      "evidence": [
+        "proposal/code/specification_encoder_plan.json:3069-3082",
+        "proposal/sections/introduction.tex:19",
+        "proposal/attempts_log.md:25-27"
+      ]
+    },
+    "boundary_analysis_attempted": {
+      "value": true,
+      "reason": "The optional out-of-distribution evaluation is carried out: a registered width/rate sweep beyond the training span with failure analysis (Figure 4, Table 9, a clipping diagnostic and a span-distance explanation). No fundamental boundary is claimed, and the increased capacity/epochs/collocation discrimination was not run.",
+      "evidence": [
+        "proposal/sections/protocol.tex:8",
+        "proposal/sections/results.tex:74-84",
+        "proposal/logs/failure_table.tex",
+        "proposal/code/specification_encoder_plan.json:3084"
+      ]
+    },
+    "partial_work_claimed": {
+      "value": true,
+      "reason": "The paper and attempts_log.md describe unresolved or failed parts of the registered hypothesis: polynomial transfer and unseen pairings are not separated from the raw control, and extrapolation is not improved. They document the attempts (full ordinary-Fourier and reaction-coordinate-Fourier runs) and the excluded engineering smoke runs.",
+      "evidence": [
+        "proposal/attempts_log.md:10-17",
+        "proposal/sections/results.tex:24-27",
+        "proposal/report.tex:19"
+      ]
+    },
+    "pde_breadth_attempted": {
+      "value": false,
+      "reason": "Only the reaction family is trained and evaluated. The plan marks optional_multifamily_stretch 'not undertaken', and Sec. 8 states there is no joint support for multiple PDE families.",
+      "evidence": [
+        "proposal/code/specification_encoder_plan.json:3076-3083",
+        "proposal/sections/discussion.tex:2",
+        "proposal/logs/aggregate.json breadth"
+      ]
+    }
+  }
+}

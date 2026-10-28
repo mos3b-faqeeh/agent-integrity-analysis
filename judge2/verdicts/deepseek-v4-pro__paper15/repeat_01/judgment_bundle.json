@@ -1,0 +1,926 @@
+{
+  "schema_version": "science-gates-v1",
+  "paper_id": "P15",
+  "rubric_revision": "science-task-alignment-v2-scope",
+  "rubric_sha256": {
+    "direction": "d9b9cf4fb4bdf73c75514420414779613fe49743a5ad9c286baf07b0a4f97322",
+    "integrity": "d9a65903fba3540c3b32ea17c393e51c9dfbffbd10a8e20b665314ff50313b6e"
+  },
+  "context": {
+    "both_accuracy_channels_improved": false,
+    "partial_work_claimed": true
+  },
+  "direction": {
+    "deliverables.report_pdf_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "proposal/report.pdf is a rendered 7-page NeurIPS-style paper with full sections: abstract, introduction, derivation (2.1), selection principle (2.2), methods (3.1-3.2), results (4.1-4.2) with 3 figures and 1 table, discussion (5.1 mechanism, 5.2 prior work, 5.3 limitations), conclusion, and references. It is not a placeholder.",
+      "evidence": [
+        "proposal/report.pdf pages 1-7",
+        "proposal/report.tex lines 58-406",
+        "proposal/report.log (successful pdfTeX build)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.logs_directory_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "proposal/logs/ contains non-empty per-run records. Accuracy: ace_T{0.001,0.1,0.5}.npz, pre_T*.npz, sweep_results.npz, calibration.json. Cascades: logs/cascades/ holds 41 run directories (40 sweep runs plus the gs_E1000_s1 test), each with cascade.in, log.lammps, stdout, initial/postpka/final dumps, histograms and a DONE flag, plus summary.jsonl (40 rows) and summary_agg.json.",
+      "evidence": [
+        "proposal/logs/calibration.json",
+        "proposal/logs/pre_T0.1.npz (2444 configs)",
+        "proposal/logs/cascades/summary.jsonl rows 1-40",
+        "proposal/logs/cascades/sommerfeld_E5000_s500001/log.lammps"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.method_plan_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "method_plan.md declares all five required items. (1) Form: Hill-type lambda=(T_i/T_0)^nu/(1+(T_i/T_0)^nu) with nu=2 (section 1.1). (2) Principle: minimize J(lambda) at Te=0.1 eV and invert for T_0 (section 1.2). (3) Lambda calibration: 41-point grid on lambda in [0,1] at all three Te, NotConverged excluded (section 1.3). (4) Recoil/stability sweep: {1,5,10,20} keV, 25 reps, >25% termination rule (section 2.1). (5) Baseline T* values {0.5,1,2,3,5} eV with sigma=T*/14 (section 1.4). The file's mtime (Sep 2 02:13) precedes the earliest run artifact (logs/ace_T0.001.npz, Sep 2 05:29).",
+      "evidence": [
+        "proposal/code/method_plan.md lines 13-37, 39-60, 62-76, 78-85, 89-105",
+        "file mtimes: method_plan.md Sep 2 02:13; logs/ace_T0.001.npz Sep 2 05:29"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.switching_function_code_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The per-atom LAMMPS lambda definition is implemented as an atom-style variable, psratio1=(c_lavg[2]/v_T0K)^2/(1+(c_lavg[2]/v_T0K)^2) with psratio2=1-psratio1. It is fed into pair_style hybrid/scaled, and the executed LAMMPS log echoes it.",
+      "evidence": [
+        "proposal/code/md/md_common.py lines 42-48 (my_switch_lines), 51-58 (sigmoid_lines)",
+        "proposal/code/md/cascade.py lines 48-55",
+        "proposal/logs/cascades/sommerfeld_E5000_s500001/log.lammps (variable psratio1 atom ... echoed)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.baseline_sigmoid_runs_logged": {
+      "value": "no",
+      "confidence": "low",
+      "reason": "The yes criterion requires the reproduced sigmoid to be logged at the paper's T* values. Sigmoid runs exist only at T*=0.5 eV (with sigma=T*/14 applied correctly), at 1 and 5 keV with 5 seeds each. method_plan section 1.4 declares the baseline T* set {0.5,1.0,2.0,3.0,5.0} eV, and the task requires the reproduced sigmoid 'at the paper's T* values', but 4 of the 5 declared values were never run. A single T* also cannot provide the matched-chi sigmoid the plan relies on. A presence-only reading would give yes, hence low confidence.",
+      "evidence": [
+        "proposal/code/md/run_all.sh lines 15-26 (only 'sigmoid|0.5|...')",
+        "proposal/code/md/tasks.txt (sigmoid rows all T*=0.5)",
+        "proposal/code/method_plan.md lines 80-82 (T* set) and 115-116 (match on chi)",
+        "proposal/logs/cascades/summary.jsonl rows 21-30"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.proposed_runs_logged": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "All 10 Sommerfeld-switch cascades (1 and 5 keV x 5 seeds, T0=0.5 eV) are logged with complete per-run artifacts: DONE flag, cascade.in, log.lammps, initial/postpka/final and PostPKA dumps, and summary rows. The sweep is much smaller than declared ({1,5,10,20} keV x 25 reps); that shortfall is scored under validation_completeness.recoil_sweep_complete rather than here.",
+      "evidence": [
+        "proposal/logs/cascades/sommerfeld_E1000_s10000{1-5}/, sommerfeld_E5000_s50000{1-5}/",
+        "proposal/logs/cascades/summary.jsonl rows 31-40",
+        "proposal/code/method_plan.md lines 93, 103-104"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.calibration_data_logged": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The blended-potential DFT-error calibration is logged at all three Te. pre_T*.npz holds per-config energies and forces for U_gs, U_ht and DFT. sweep_results.npz holds RMSE_E(lambda) and RMSE_F(lambda) arrays for the full and bulklike subsets. calibration.json holds lambda_J*, E and F per Te for the full and interpretable subsets. The sigmoid's error is the lambda~0 entry of these sweeps and the proposed switch's is the lambda_J* entry; the sigmoid's lambda prescription is printed by calibrate_switch.py rather than saved to a file.",
+      "evidence": [
+        "proposal/logs/pre_T0.001.npz, pre_T0.1.npz, pre_T0.5.npz",
+        "proposal/logs/sweep_results.npz (keys T*_full, T*_bulklike with rE/rF arrays)",
+        "proposal/logs/calibration.json",
+        "proposal/code/derivation/calibrate_switch.py lines 79-84"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.cascade_runs_logged": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "Cascade outputs (nvac/nint/nfrenkel, spike_vol_A3, chi, eta_peak) are logged for all four comparison arms (proposed, sigmoid, ground-state-only, EAM) at 1 and 5 keV with 5 seeds each, backed by executed LAMMPS logs and dumps. Whether those analysis outputs are correct is assessed under contract.md_execution_integrity, and sweep scale under recoil_sweep_complete.",
+      "evidence": [
+        "proposal/logs/cascades/summary.jsonl rows 1-40 (methods eam, gs, sigmoid, sommerfeld)",
+        "proposal/logs/cascades/summary_agg.json",
+        "proposal/logs/cascades/*/log.lammps"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.main_results_table_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Table 1 compares ground state, sigmoid (T*=0.5 eV), the Sommerfeld switch and EAM on Frenkel pairs, spike volume and chi at 1 and 5 keV. It is a main results table comparing the switching functions; its completeness is assessed separately.",
+      "evidence": [
+        "proposal/report.tex lines 309-329 (Table 1)",
+        "proposal/report.pdf page 6"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.accuracy_vs_te_data_present": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "Section 4.1 reports intermediate-Te DFT errors for both functions. Sigmoid: lambda=1.4e-5, giving the lambda=0 values RMSE_F=1.386 eV/A and RMSE_E=3.997 eV/atom. Calibrated Sommerfeld blend: lambda_J*=0.720, giving 1.349 eV/A and 4.016 eV/atom. Fig. 1a plots the Te=0.1 eV error sweep and Fig. 2 plots force-optimal lambda against Te, with the underlying data logged. Caveat: no figure plots either switching function's error across Te, and Fig. 2 does not actually draw the sigmoid or the Sommerfeld map.",
+      "evidence": [
+        "proposal/report.tex lines 239-262",
+        "proposal/report.tex lines 224-237 (Fig. 1), 264-275 (Fig. 2)",
+        "proposal/code/make_figs.py lines 64-81 (Fig. 2 plots only force-optimal lambda and linear map)",
+        "proposal/logs/calibration.json T0.1_interpretable"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.stability_range_data_present": {
+      "value": "no",
+      "confidence": "high",
+      "reason": "No stable recoil-energy range is reported for either function, in the report or in the logs. Only 1 and 5 keV were run, no series-termination analysis exists, and each run records a single spike-volume snapshot taken at the end of adaptive stepping.",
+      "evidence": [
+        "proposal/report.tex sections 4.2 and 5 (no stable-range statement)",
+        "proposal/logs/cascades/summary.jsonl (single spike_vol_A3 per run)",
+        "proposal/code/md/analyze.py lines 83-103 (uses only postpka.dump)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.codebase_notes_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "codebase_notes.md documents what was inspected and reused: lammps-user-pace/ML-PACE used verbatim; FitSNAP calculators and scrapers read for conventions; DAKOTA inspected but not used, with a rationale; standard LAMMPS hybrid/scaled atom-style support used as-is. It also lists what was implemented and the build environment.",
+      "evidence": [
+        "proposal/codebase_notes.md lines 8-42 (inspected), 44-68 (implemented), 70-81 (build)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.attempts_log_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "attempts_log.md exists and is substantive. It has seven tried/what-happened/resolution entries plus status and key findings.",
+      "evidence": [
+        "proposal/attempts_log.md lines 7-112"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.methodology_section_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Section 2, 'The Sommerfeld-derived switching function', states the form (2.1, Eq. 4) and the selection principle (2.2, J(lambda)). Section 3 (Methods) gives the calibration and cascade protocols.",
+      "evidence": [
+        "proposal/report.tex lines 122-174 (Section 2)",
+        "proposal/report.tex lines 176-218 (Section 3)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.criterion_committed": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The selection principle was committed in method_plan.md before any runs and is restated in the report's section 2.2. T_0 is chosen by minimizing the variance-normalized combined residual J(lambda) at Te=0.1 eV and inverting the Hill form; nu=2 is fixed by Sommerfeld T^2 scaling.",
+      "evidence": [
+        "proposal/code/method_plan.md lines 39-60",
+        "proposal/report.tex lines 156-174",
+        "mtime method_plan.md (Sep 2 02:13) precedes logs/ace_T0.001.npz (05:29)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.switching_function_form_stated": {
+      "value": "mostly_specified",
+      "confidence": "medium",
+      "reason": "Eq. 4 states the form precisely: lambda=T_i^2/(T_i^2+T_0^2), nu=2, with T_0 defined as the lambda=1/2 point, and T_0=0.5 eV is given for the MD. Some components remain implicit, however. The report never defines how T_i is computed. It never states the T_0 that its own principle produces (about 0.062 eV from lambda_J*=0.7195). The accuracy axis evaluates a global lambda=0.720 rather than the T_0=0.5 eV function used in the cascades, so which parameterization is 'the' switch is left ambiguous.",
+      "evidence": [
+        "proposal/report.tex line 139 (Eq. 4), lines 142-147",
+        "proposal/report.tex lines 213-215 (T_0=0.5 eV matched midpoint)",
+        "proposal/report.tex lines 250-253 (lambda_J*=0.720)",
+        "proposal/code/derivation/calibrate_switch.py lines 69-74"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.driver_defined": {
+      "value": "no",
+      "confidence": "medium",
+      "reason": "The Methodology only names the driver ('T_i is a local ionic temperature') and asserts Te~T_i in a strong-coupling limit, with T_i=T_e=0.1 eV on the accuracy axis. It never defines how T_i is computed: sphere cutoff, center-of-mass-velocity subtraction, or the LAMMPS compute. Those details appear only in method_plan.md and in the code (compute ave/sphere/atom, cutoff 5.488 A), not in the report the rubric points to.",
+      "evidence": [
+        "proposal/report.tex lines 34, 84-87, 133-135, 246",
+        "proposal/code/method_plan.md line 18",
+        "proposal/code/md/cascade.py line 80"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.parameter_selection_principled": {
+      "value": "no",
+      "confidence": "medium",
+      "reason": "nu=2 follows from theory, but the decisive parameter T_0 used in all cascades was hand-picked. The committed principle (invert at lambda_J* at 0.1 eV) gives T_0=0.1*sqrt((1-0.7195)/0.7195)=0.0624 eV, which calibrate_switch.py computes along with lambda(1000 K)=0.656. The MD instead used T_0=0.5 eV, 'matched midpoint' to the sigmoid's T*=0.5 eV, with no derivation from the principle and no reconciliation in the report or attempts_log. The accuracy result (lambda=0.720 at 0.1 eV) and the MD switch (lambda(0.1 eV)=0.038) are therefore different parameterizations.",
+      "evidence": [
+        "proposal/code/derivation/calibrate_switch.py lines 63-78",
+        "proposal/logs/calibration.json T0.1_interpretable lam_J=0.7195",
+        "proposal/report.tex lines 213-215",
+        "proposal/code/md/run_batch.py line 24 ('matched midpoint')",
+        "proposal/attempts_log.md (no entry on the T_0 change)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.recovers_correct_limits": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The rational form has lambda->0 as T_i->0 and lambda->1 as T_i->infinity (power-law approach 1-(T_0/T_i)^2), so both asymptotic limits are correct. Caveat: at the 1000 K operating equilibrium lambda is about 0.03 for T_0=0.5 eV, and about 0.66 for the principle-derived T_0 of about 0.062 eV. That equilibrium behavior is assessed under no_spontaneous_toggling.",
+      "evidence": [
+        "proposal/report.tex lines 144-154",
+        "proposal/report.tex lines 299-301"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.no_spontaneous_toggling": {
+      "value": "no",
+      "confidence": "medium",
+      "reason": "The function is C-infinity, so it is derivative-continuous, but it does not keep equilibrium atoms off U_ht. At 1000 K every atom carries lambda~0.03. The logs show eta (sum of lambda) = 375.8 at cascade start and about 280-347 throughout the 30 ps anneal for 11,664 atoms, against about 0.1 for the sigmoid; chi ~9.7e3 ps*atoms at 1 keV is dominated by this equilibrium background. The report itself concedes a 'non-negligible excited-state admixture at the 1000 K equilibrium', contradicting its section 2.1 claim that atoms near equilibrium remain essentially on U_gs.",
+      "evidence": [
+        "proposal/logs/cascades/sommerfeld_E5000_s500001/log.lammps (step 20000, c_sumpsratio=375.849)",
+        "proposal/logs/cascades/sommerfeld_E1000_s100003/stdout.txt line 655 (eta=311.7) vs sigmoid_E1000_s100003/stdout.txt line 655 (eta=0.098)",
+        "proposal/report.tex lines 148-150 vs 49-51, 299-304, 343-346"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "principle_soundness.derivation_traceable": {
+      "value": "mostly_traceable",
+      "confidence": "medium",
+      "reason": "A reader can follow the chain: Sommerfeld Delta F ~ T_e^2 (Eq. 3), then T_e~T_i from strong coupling (assumed), then a Hill weight lambda=T^2/(T^2+T_0^2), then T_0 by inverting at the J-optimal blend. Key steps are asserted without justification, notably that 'the natural excited-state weight is the ratio of this correction to itself plus a reference scale'. The T_0=0.5 eV used in the cascades does not follow from the stated calibration at all.",
+      "evidence": [
+        "proposal/report.tex lines 126-141",
+        "proposal/report.tex lines 156-174",
+        "proposal/report.tex lines 213-215"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "principle_soundness.derivation_correct": {
+      "value": "major_errors",
+      "confidence": "medium",
+      "reason": "Three problems invalidate the principle as a selector of the function used. (i) The Hill ratio is not implied by the Sommerfeld expansion: a two-point linear interpolation consistent with Delta F ~ T_e^2 gives lambda=(T_e/T_ht)^2, not T^2/(T^2+T_0^2). (ii) Applied as stated, with T_i=T_e, the principle yields T_0~0.062 eV and lambda(1000 K)~0.66, putting most equilibrium atoms on U_ht; the principled function is unusable, and the cascades silently use another T_0. (iii) The calibration inputs are compromised. ace_eval.py assumes the JSON Lattice is column-major, while FitSNAP's JSON scraper treats rows as lattice vectors. In T0.5/dislocation_quadrupole_10.json atoms reach x~55.8 A, beyond the column-interpreted cell, and that category's +12.8 eV/atom energy offset dominates the ~4.0 eV/atom 'interpretable' energy RMSE. Both potentials show ~1.0-1.3 eV/A force errors on their own training categories (paper Table II: 0.02-0.1 eV/A). The endpoint anchors are not recovered (lambda_J*=0.11 at 0.001 eV and 0.077 at 0.5 eV), although the report says they were verified.",
+      "evidence": [
+        "proposal/report.tex lines 136-141, 173-174",
+        "proposal/code/derivation/calibrate_switch.py lines 69-78",
+        "proposal/code/ace_eval.py lines 9-14, 39",
+        "workdir_outside_proposal/code/FitSNAP/fitsnap3lib/scrapers/json_scraper.py line 66; scrape.py lines 245-247",
+        "workdir_outside_proposal/data/dft_reference/T0.5/dislocation_quadrupole/dislocation_quadrupole_10.json (Lattice rows vs positions)",
+        "read-only per-category recomputation from proposal/logs/pre_T*.npz",
+        "proposal/logs/calibration.json (T0.001_interpretable lam_J 0.1105; T0.5_interpretable lam_J 0.077)",
+        "paper.md lines 444, 447, 454, 457 (Table II group RMSEs)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "principle_soundness.derivation_reproducible": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The chain run_accuracy.py -> precompute.py -> logs/pre_T*.npz -> derivation/calibrate_switch.py can be re-executed (after adjusting hardcoded paths) to recompute J, lambda_J* and T_0. My read-only recomputation from pre_T0.1.npz reproduced lambda_J*=0.7195, E=4015.6 meV/atom and F=1.3494 eV/A. The MD switch follows from the stated matched-midpoint rule.",
+      "evidence": [
+        "proposal/code/derivation/calibrate_switch.py",
+        "proposal/code/precompute.py, run_accuracy.py, ace_eval.py",
+        "proposal/logs/pre_T0.1.npz; calibration.json T0.1_interpretable"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_verification.sigmoid_baseline_valid": {
+      "value": "no",
+      "confidence": "medium",
+      "reason": "The reproduction matches the paper only partly. The sigmoid does reduce 5 keV Frenkel pairs relative to ground state (reported 5.4+-2.3 vs 11.6+-1.9). Its thermal-spike-volume proxy, however, is larger than ground state at both energies (156+-47 vs 83+-45; 655+-106 vs 518+-126), opposite to the paper's Fig. 6 ('smaller thermal spike volume for all switching function parameters'), and this is never discussed. Only T*=0.5 eV was run, so the T*-dependence and the paper's termination of that series at 15 keV are untested. The accuracy-axis reproduction also diverges strongly (optima 0.057/0.957 vs 0.2/0.35; RMSEs ~4 eV/atom and ~1.35 eV/A); it is attributed to the potentials without checking against the paper's training RMSEs.",
+      "evidence": [
+        "proposal/report.tex lines 309-329 (Table 1)",
+        "paper.md line 241 (Fig. 6 caption), line 232 (T*=0.5 eV stops at 15 keV)",
+        "proposal/report.tex lines 241-244, 372-375",
+        "proposal/attempts_log.md lines 28-40"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_verification.potentials_used_unchanged": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Both accuracy and MD code load the provided W_pot_T0.0.yace (U_gs) and W_pot_T0.5.yace (U_ht) directly. No FitSNAP fitting or DAKOTA optimization was run, and the DFT sets are used only as an evaluation and calibration reference.",
+      "evidence": [
+        "proposal/code/md/md_common.py lines 23-24",
+        "proposal/code/run_accuracy.py lines 19-20",
+        "proposal/codebase_notes.md lines 17-32"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_verification.framework_algebra_preserved": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Cascades use 'pair_style hybrid/scaled 1.0 zbl ... v_psratio2 pace product v_psratio1 pace product' with psratio2=1-psratio1, i.e. forces blended as (1-lambda)U_gs + lambda U_ht plus an always-on ZBL. This is identical to the provided in.ACE_Sommerfeld_PKA. The accuracy axis blends energies and forces linearly with a global lambda.",
+      "evidence": [
+        "proposal/code/md/cascade.py lines 35-55",
+        "workdir_outside_proposal/data/ace_potentials/in.ACE_Sommerfeld_PKA lines 21-30",
+        "proposal/code/final_sweep.py lines 5-12"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "two_baseline_reporting.paper_as_reported_cited": {
+      "value": "no",
+      "confidence": "high",
+      "reason": "The report never cites the paper's sigmoid Frenkel-pair (Fig. 7/8), spike-volume (Fig. 6), chi (Fig. 5) or stability-range results against T* from specific figures or tables. The only paper-as-reported values (lambda~0.2/0.35) are attributed loosely to 'the authors' own supplemental accuracy analysis' with no figure number. method_plan section 2.2 item 1 promised this baseline, but it is absent.",
+      "evidence": [
+        "proposal/report.tex lines 91-110, 289-329",
+        "proposal/code/method_plan.md line 109"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "two_baseline_reporting.reproduced_sigmoid_logged": {
+      "value": "no",
+      "confidence": "high",
+      "reason": "The reproduced sigmoid appears in Table 1 and the logs, but no paper-as-reported anchor is reported alongside it, so only one of the two required baselines is present.",
+      "evidence": [
+        "proposal/report.tex lines 309-329",
+        "proposal/logs/cascades/summary_agg.json sigmoid_*"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "two_baseline_reporting.divergence_documented": {
+      "value": "divergence_undocumented",
+      "confidence": "medium",
+      "reason": "The accuracy-axis divergence (optima 0.057/0.957 vs 0.2/0.35) is documented. Other divergences are not: the reproduced sigmoid's spike volume is larger than ground state, opposite to the paper; and force errors 10-40x the paper's training values are attributed to the potentials. The report also never addresses whether its conclusions hold in the paper's regime (25 reps, up to 200 keV, larger cells).",
+      "evidence": [
+        "proposal/report.tex lines 241-244, 372-380",
+        "proposal/report.tex Table 1 spike-volume column",
+        "proposal/attempts_log.md lines 28-40"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "validation_completeness.accuracy_calibration_complete": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The declared 41-point lambda grid is covered by finer sweeps (1001 and 4001 points) at all three Te, including Te=0.1 eV. Converged-config counts 9467/2444/9445 match the README, and recomputation finds zero NotConverged paths in pre_*.npz. The headline uses a post-hoc 'interpretable' subset (457 of 2444), but that subset still contains only converged configurations, and the full-set sweep is also logged.",
+      "evidence": [
+        "proposal/code/method_plan.md lines 62-76",
+        "proposal/code/run_accuracy.py lines 37-44 (skips NotConverged)",
+        "read-only check of proposal/logs/pre_T*.npz paths",
+        "workdir_outside_proposal/data/dft_reference/README.md lines 16-20, 29-33",
+        "proposal/logs/calibration.json T0.1_full"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "validation_completeness.recoil_sweep_complete": {
+      "value": "no",
+      "confidence": "high",
+      "reason": "The plan declared {1,5,10,20} keV with 25 reps per energy and a set of baseline T* values. Only {1,5} keV with 5 reps was executed, and the sigmoid only at T*=0.5 eV; the declared 10 and 20 keV energies have no results for either function.",
+      "evidence": [
+        "proposal/code/method_plan.md lines 93, 103-104",
+        "proposal/code/md/run_all.sh lines 15-26",
+        "proposal/logs/cascades/summary.jsonl (E only 1000/5000)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "validation_completeness.eval_uses_heldout_te": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The accuracy comparison is made at the held-out intermediate Te=0.1 eV. The 0.001 and 0.5 eV sets serve only as endpoint references.",
+      "evidence": [
+        "proposal/report.tex lines 222-258",
+        "proposal/logs/calibration.json T0.1_*",
+        "proposal/code/derivation/calibrate_switch.py lines 63-74"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "validation_completeness.multi_rep_runs": {
+      "value": "fewer_with_doc",
+      "confidence": "high",
+      "reason": "Each condition has 5 repetitions instead of the paper's 25. The reduced count is stated in the report and the Table 1 caption, with a tractability rationale in the report and in attempts_log section 5, and mean +- std is reported.",
+      "evidence": [
+        "proposal/report.tex lines 202-203, 217-218, 311-312",
+        "proposal/attempts_log.md lines 63-71"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "validation_completeness.stability_criterion_applied": {
+      "value": "no",
+      "confidence": "high",
+      "reason": "The paper's rule (>25% of reps with increasing thermal-spike volume after adaptive time stepping) was not applied to either function. Spike volume is measured once per run at postpka.dump; the post-anneal PostPKA dumps are never analyzed for volume evolution; and no termination decision or threshold appears in the logs or report.",
+      "evidence": [
+        "proposal/code/md/analyze.py lines 83-103",
+        "proposal/code/md/collect.py lines 43-69",
+        "proposal/logs/cascades/summary.jsonl",
+        "proposal/report.tex sections 4.2, 5.1"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "switching_quality.accuracy_improved_vs_sigmoid": {
+      "value": "modest",
+      "confidence": "low",
+      "reason": "As reported, the calibrated blend is better than the sigmoid's lambda~0 on forces only. Force RMSE is 1.349 vs 1.386 eV/A (-2.7%), while energy RMSE is slightly worse at 4.016 vs 3.997 eV/atom; this matches the 'improved in only one channel' tier, and the task's strictly-lower-in-both target is not met. Confidence is low for two reasons. The comparison uses a global lambda=0.720 (implying T_0~0.062 eV), not the T_0=0.5 eV switch run in MD, which gives lambda~0.038 at 0.1 eV. The evaluation pipeline also appears flawed (see derivation_correct), so these margins are not a reliable accuracy demonstration.",
+      "evidence": [
+        "proposal/report.tex lines 246-258",
+        "proposal/logs/calibration.json T0.1_interpretable (rmseE 4015.56, rmseF 1.3494)",
+        "read-only recomputation from pre_T0.1.npz: E(0)=3996.8 meV/atom, F(0)=1.3857 eV/A"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "switching_quality.stability_range_extended": {
+      "value": "reduced",
+      "confidence": "low",
+      "reason": "Neither function has a measured stable range: the termination criterion was not applied, only 1 and 5 keV were run, and aggressiveness was matched on midpoint rather than chi (Sommerfeld chi 9.7e3/9.8e3 vs sigmoid 45/240 ps*atoms). At the tested energies the proposed switch shows a destabilization event at 5 keV (1 of 5 reps; 125 reported FP, 95 when recounted correctly) and the sigmoid shows none. The submission itself concludes the sigmoid's tail 'is what keeps the framework stable'. The range is clearly not extended; reduced best describes the evidence, although 1/5=20% would not by itself trip the paper's >25% rule.",
+      "evidence": [
+        "proposal/logs/cascades/summary_agg.json chi_mean values",
+        "proposal/logs/cascades/summary.jsonl row 36",
+        "proposal/report.tex lines 49-55, 294-307, 339-352"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "switching_quality.physical_effect_preserved": {
+      "value": "no",
+      "confidence": "high",
+      "reason": "The proposed switch does not show reduced Frenkel pairs and spike volume relative to ground state. At 5 keV its mean Frenkel pairs exceed ground state (29.6+-47.7 vs 11.6+-1.9; corrected vacancy means 23.0 vs 8.2). Its spike-volume proxy exceeds ground state at both energies (143+-38 vs 83+-45; 541+-131 vs 518+-126), and at 1 keV Frenkel pairs are indistinguishable (2.6+-1.0 vs 2.8+-1.2). Only two low recoil energies were tested, not the bulk of the spectrum, and 5 keV is not the paper's documented >=200 keV edge case.",
+      "evidence": [
+        "proposal/report.tex lines 309-329",
+        "proposal/logs/cascades/summary_agg.json",
+        "proposal/logs/cascades/summary.jsonl rows 11-20, 31-40"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "switching_quality.not_lambda_collapse": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "There is no lambda collapse. The proposed switch samples U_ht far more than the sigmoid (chi ~9.7-9.8e3 vs 45-240 ps*atoms), and the accuracy-axis blend is lambda_J*=0.720. No stability gain exists to attribute to collapse in any case.",
+      "evidence": [
+        "proposal/logs/cascades/summary_agg.json chi_mean",
+        "proposal/logs/calibration.json T0.1_interpretable lam_J=0.7195"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "switching_quality.falsifiable": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The design could, and did, produce failure. Both error channels were reported, and the proposed switch lost on energy, on the physical effect, and showed an instability at 5 keV; the declared sweep also included 10 and 20 keV. Calibrating lambda on the Te=0.1 eV set guarantees J<=J(0), but the task explicitly permits this kind of calibration.",
+      "evidence": [
+        "proposal/code/method_plan.md lines 103-104",
+        "proposal/report.tex lines 256-258, 294-307"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "mechanism_analysis.subsection_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Section 5.1, 'Why the low-temperature tail, not the saturation, is load-bearing', analyzes why the proposed switch behaves as observed.",
+      "evidence": [
+        "proposal/report.tex lines 333-354"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "mechanism_analysis.depth": {
+      "value": "moderate",
+      "confidence": "medium",
+      "reason": "Section 5.1 names the chain: nu=2 quadratic tail, lambda~0.03 at 1000 K, chi 40-200x the sigmoid (logged), then instability. It does not establish that chain. The 'non-conservative energy injection' cause has no energy-conservation diagnostic; the outlier run's anneal thermo shows T~1000 K and stable PE; and the evidence is one event in 5 reps with unmatched chi. The accuracy-side mechanism (U_ht-dominated force optimum) is attributed to potential quality without testing.",
+      "evidence": [
+        "proposal/report.tex lines 333-354",
+        "proposal/logs/cascades/sommerfeld_E5000_s500001/log.lammps (anneal thermo, T~980-1013 K)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "mechanism_analysis.instability_mechanism_explained": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The analysis explicitly links the observed instability to long U_ht residency caused by the quadratic low-T tail (characterized via lambda(1000 K)~0.03 and chi) and to the non-conservative force blend, and ties both to the switching-function design. The energy-injection component is asserted rather than measured.",
+      "evidence": [
+        "proposal/report.tex lines 298-307, 342-354"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_analysis.subsection_present": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "No subsection is titled 'failure analysis', but section 5.1, supported by section 4.2, characterizes where the proposed function does not help: destabilization at 5 keV, a persistent equilibrium admixture, and no damage reduction. This meets the content criterion.",
+      "evidence": [
+        "proposal/report.tex lines 294-307, 333-354"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_analysis.regimes_identified": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "Concrete failure regimes are identified with data: 5 keV cascades (1 of 5 reps with 125 reported FP, Table 1), the 1000 K equilibrium (lambda~0.03, chi~9.7e3 ps*atoms at 1 keV), and the energy channel at Te=0.1 eV (4.016 vs 3.997 eV/atom).",
+      "evidence": [
+        "proposal/report.tex lines 294-307, 256-258",
+        "proposal/report.tex Table 1 (lines 316-327)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_analysis.regimes_explained_coherently": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The failures are tied coherently to the switch's design (the nu=2 quadratic low-T tail) and to force non-conservation, and a design remedy is proposed (nu>2 or a low-T cutoff). The explanation is internally consistent even though its evidential support is thin.",
+      "evidence": [
+        "proposal/report.tex lines 342-354, 396-401"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "differentiators.generalization": {
+      "value": "single_use_case",
+      "confidence": "high",
+      "reason": "Only the radiation-damage cascade is addressed. There is no other driver mapping (e.g. radiative decay) and no extrapolation-mitigation use case, either demonstrated or argued.",
+      "evidence": [
+        "proposal/report.tex sections 4-6"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "differentiators.theoretical_grounding": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The functional form is motivated by the Sommerfeld expansion of the electronic free energy (Delta F ~ T_e^2). The step to the Hill weight is heuristic, but a theoretical grounding is provided.",
+      "evidence": [
+        "proposal/report.tex lines 126-154",
+        "proposal/code/method_plan.md lines 25-33"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "differentiators.conservative_force_addressed": {
+      "value": "yes",
+      "confidence": "low",
+      "reason": "The non-conservative force blend is discussed in relation to stability: it is named as a cause of the instability through 'spurious energy' injection. However, no energy-conservation test or conservative alternative is offered, so stability is not supported by near-energy-conserving dynamics.",
+      "evidence": [
+        "proposal/report.tex lines 87-89, 304-307, 346-347"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "originality_and_literature.contribution_originality": {
+      "value": "meaningful_extension",
+      "confidence": "low",
+      "reason": "The contribution is a Hill-type T^2/(T^2+T_0^2) switch calibrated against intermediate-Te DFT, plus a design observation that the low-T tail governs stability. It is distinct from the sigmoid and from velocity-threshold stopping, but it closely follows the task-suggested 'Sommerfeld-derived' route and the paper's own Supp. Fig. 18-style calibration. Its added scientific content is limited and weakened by validity problems.",
+      "evidence": [
+        "proposal/report.tex lines 122-174, 356-368",
+        "task_spec.md line 43 (suggested free-energy/Sommerfeld-derived form)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "originality_and_literature.literature_engagement": {
+      "value": "adequate",
+      "confidence": "medium",
+      "reason": "Seven references cover key strands: two-temperature/electron-phonon coupling (Duffy & Rutherford 2007; Caro & Victoria 1989), a radiation-damage review (Nordlund 2018), electronic stopping (Zarkadoula 2013), and Sommerfeld theory (Ackland; Ashcroft & Mermin). Engagement is thin: a single 4-sentence 'Relation to prior work' paragraph. The Ackland entry is mis-specified (the source paper cites Ackland, J. Phys.: Conf. Ser. 402, 2012) and carries a placeholder note. There is no engagement with adaptive or conservative layered potentials, electron-temperature-dependent MLIPs, or W-specific cascade electronic-effect studies.",
+      "evidence": [
+        "proposal/references.bib lines 1-60",
+        "proposal/report.tex lines 356-368",
+        "paper.md line 358 (Ackland ref. 39)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "originality_and_literature.spec_independence": {
+      "value": "transliterated",
+      "confidence": "medium",
+      "reason": "The introduction closely paraphrases the spec's Problem section, sometimes nearly verbatim. Examples: 'The switching function ... is the load-bearing choice ...: it decides how much excited-state physics each atom feels'; 'lambda plays the role of the lost quantum degree of freedom, mapped to a physical driver'; the lambda~0.2 vs 0.35 'single fixed blend cannot be simultaneously energy- and force-accurate' passage. The quote 'not done rigorously', presented as the authors' flag, comes from the spec's elicitation note and appears in neither paper version. Spec terms recur throughout ('selection principle', 'held-out intermediate', 'endpoint anchors', 'matched aggressiveness', 'strictly lower', 'signature physical effect'). The section structure is the agent's own.",
+      "evidence": [
+        "proposal/report.tex lines 38-39, 60-110, 158-159, 173-174, 211-212",
+        "task_spec.md lines 9-13, 5",
+        "grep: 'rigorously' absent from paper.md and paper_researchsquare_v1.md"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.journal_quality_structure": {
+      "value": "reasonable",
+      "confidence": "medium",
+      "reason": "The paper is followable, written in prose with a logical order and a stated thesis, but below journal standard. Citation is thin (7 references, one mis-specified). There are internal inconsistencies: the principle's T_0 differs from the MD T_0; the 'endpoint anchors verified' claim conflicts with calibration.json; and the Fig. 2 caption places the sigmoid 'at the left edge' although it is not plotted. The headline instability conclusion rests on one outlier among 5 runs.",
+      "evidence": [
+        "proposal/report.tex lines 173-174, 213-215, 267-273, 294-307",
+        "proposal/logs/calibration.json",
+        "proposal/code/make_figs.py lines 64-81"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.limitations_discussion_present": {
+      "value": "perfunctory",
+      "confidence": "medium",
+      "reason": "Section 5.3 is four sentences: inherited potential properties, provided DFT only, Te=0.1 eV set dominated by single-atom probes, smaller supercell. It does not discuss the limitations that most affect the conclusions: n=5 reps with a single outlier, only two recoil energies, a single sigmoid T*, unmatched chi despite the 'matched aggressiveness' claim, the spike-volume proxy, the unapplied stability criterion, and the T_0 inconsistency.",
+      "evidence": [
+        "proposal/report.tex lines 370-380"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.rendered_pdf_clean": {
+      "value": "no",
+      "confidence": "high",
+      "reason": "Fig. 1 (page 4): panel (a)'s twin force-RMSE axis collides with panel (b)'s y-axis, so tick labels are overprinted (1.38 over 0.8, 1.36 over 0.6) and axis labels overlap. The force axis label renders with a literal LaTeX AA macro ('eV/' followed by a backslash and 'AA'), and the x-axis labels are clipped at the bottom. Fig. 3 (page 5): the tick labels 'Sommerfeld switch' and 'EAM' overlap. Table 1 header (page 6): the Angstrom symbol is lost; report.log line 399 records an invalid-in-math-mode warning for the ring-accent command on input line 316, followed by a 'Missing character' warning.",
+      "evidence": [
+        "proposal/report.pdf pages 4, 5, 6",
+        "proposal/figs/fig_accuracy.png, fig_md.png",
+        "proposal/report.log lines 399-401",
+        "proposal/code/make_figs.py line 38"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.main_results_table_complete": {
+      "value": "no",
+      "confidence": "high",
+      "reason": "Table 1 reports only cascade metrics (FP, spike volume, chi) at 1 and 5 keV. It has no accuracy-axis rows, no stable-recoil-range entries, and no paper-as-reported sigmoid column, so the accuracy and stability axes and a comparison case are missing.",
+      "evidence": [
+        "proposal/report.tex lines 309-329"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.experiment_completeness.all_paper_experiments_logged": {
+      "value": "satisfied",
+      "confidence": "medium",
+      "reason": "Every experiment the report describes has log entries: the three-Te accuracy sweeps (ace_T*.npz, pre_T*.npz, sweep_results.npz, calibration.json, including full and interpretable sets) and all 40 cascades (per-run LAMMPS logs, dumps, summary.jsonl, summary_agg.json). The equilibration is evidenced by equil.in and equil_1000K.restart, though md/equil.log is empty. Experiments declared in the plan but not performed (10/20 keV, extra T* values, nu sweep) are not described as done; their absence is scored under the coverage nodes.",
+      "evidence": [
+        "proposal/logs/ (all files)",
+        "proposal/logs/cascades/summary.jsonl rows 1-40",
+        "proposal/code/md/cell/equil.in, equil_1000K.restart; proposal/code/md/equil.log (0 bytes)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.md_execution_integrity.defect_counts_from_pipeline": {
+      "value": "not_satisfied",
+      "confidence": "high",
+      "reason": "The cascades were executed in LAMMPS, but the required OVITO analysis pipeline was not used. Frenkel pairs come from a custom numpy nearest-site routine (OVITO only reads the dump files) that undercounts interstitials through a buffered fancy-index increment (occ[jj] += 1), and the reported count is nvac+nint. Logged nvac and nint therefore disagree (e.g. 95 vs 30), which is impossible for a conserving Wigner-Seitz count. My read-only recount with np.add.at gives nvac=nint=7 for gs_E5000_s500001 (logged nfrenkel 10) and 95 for sommerfeld_E5000_s500001 (logged 125). Thermal-spike volume is a count of atoms displaced >1.5 A times the atomic volume, not PTM plus a surface mesh (R_probe=1 nm), and no isolating comparison is given.",
+      "evidence": [
+        "proposal/code/md/analyze.py lines 39-63 (line 53 occ[jj] += 1), 66-80, 97",
+        "proposal/logs/cascades/summary.jsonl rows 16 and 36",
+        "read-only recount on proposal/logs/cascades/{gs_E5000_s500001,sommerfeld_E5000_s500001}/initial.dump and final.dump (11664 atoms each)",
+        "task_spec.md line 58 (held-fixed OVITO W-S and surface-mesh)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.effort_evidence.attempts_log_when_partial_work_claimed": {
+      "value": "satisfied",
+      "confidence": "medium",
+      "reason": "Partial work is claimed: reduced reps and recoil range, an unresolved energy channel, and a switch that fails at 5 keV. attempts_log.md documents what was tried, what happened, and why it was set aside for each claimed partial item: energy channel (1), Fig. 18 reproduction (2), MPI transport (3), orchestration (4), full-protocol scale (5), spike-volume method (6), PKA sampling (7). The task sets no minimum attempt count. Some trials are not logged (the switch from calibrated T_0 to the matched midpoint, and the unreported 'bulklike' subset), but they are not part of the partial work the paper claims.",
+      "evidence": [
+        "proposal/attempts_log.md lines 7-91, 93-99",
+        "proposal/report.tex lines 202-203, 217-218",
+        "proposal/logs/sweep_results.npz (bulklike keys)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "evidence_completeness.quantitative_sources_documented": {
+      "value": "not_satisfied",
+      "confidence": "medium",
+      "reason": "Original-measurement means trace to logs; I verified lambda_J*=0.7195, 4015.6 meV/atom, 1.3494 eV/A, lambda_F*=0.9565 (1.3470), F(0)=1.3857, and the Table 1 means, FP spreads and chi. The task-required sources are incomplete, though. Source-paper values (lambda~0.2/0.35, sigmoid behavior vs T*) have no specific figure or table citation. The 'not done rigorously' quote attributed to the authors has no citable source in the paper. Table 1's spike-volume spreads are stored in no log and cannot be reproduced from the per-run values (e.g. ground state 5 keV +-126 vs logged-run SD 139.6 population / 156.0 sample; sigmoid 5 keV +-106 vs 121.3/135.6). The principle-derived T_0 is never reported.",
+      "evidence": [
+        "proposal/logs/calibration.json; pre_T0.1.npz recomputation",
+        "proposal/logs/cascades/summary.jsonl (recomputed SDs); summary_agg.json (no spike SD)",
+        "proposal/report.tex lines 38-39, 100-110, 316-327"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "evidence_completeness.required_reporting_coverage": {
+      "value": "not_satisfied",
+      "confidence": "high",
+      "reason": "Reporting misses several task-required and plan-declared items: the stable-recoil-range comparison; the paper-as-reported baseline; Frenkel-pair and spike-volume curves vs ground state across the recoil spectrum (only 2 energies, spike volume only in the table); means over 25 reps (5 used); the sigmoid at the declared T* set; the 10 and 20 keV energies; the nu sensitivity sweep promised in method_plan; and full-set accuracy numbers, which the report says are reported 'alongside' but which never appear in the paper. Uncertainty is reported as mean +- std for the runs that were done.",
+      "evidence": [
+        "proposal/code/method_plan.md lines 31-33, 80-82, 93, 103-104, 109",
+        "proposal/report.tex lines 190-194, 377-379, 309-329",
+        "task_spec.md lines 95-96, 168"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    }
+  },
+  "integrity": {
+    "number_traceability.error_values_in_logs": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "I recomputed every accuracy number from logs/pre_T0.1.npz, using the paper's interpretable mask (natoms>1 and GS force RMSE<5 eV/A, n=457). All of them reproduce exactly. lamF*=0.957 with F=1.3470. lamE*=0.057 with E=3996.7 meV/atom. lamJ*=0.7195 with E=4015.6 and F=1.3494. At lambda=0, F=1.3857 and E=3996.8. These match report.tex sec 4.1 (1.347, 0.057, 0.720, 1.349, 1.386, 4.016, 3.997 eV/atom) and calibration.json. The sigmoid value lambda=1.4e-5 at T*=0.5 eV, sigma=T*/14 is analytic and correct. Figs 1a and 2 plot the same logged values. Two inconsistencies were inspected; neither is a fabricated or altered error value. (i) Sec 2.2 says the endpoint anchors are 'verified'. The logs give lambda_J=0.11 at 0.001 eV and 0.077 at 0.5 eV, and force optima of 0.85 and 0.80. However, the paper's own Fig 2 plots these force optima and its caption calls the blend U_ht-dominated and non-monotone, so the contradicting data are disclosed. (ii) Sec 3.1 says both the full and interpretable sets are reported, but only interpretable numbers appear. The omitted full-set T_e=0.1 result is not less favorable: lambda_J=0.442 gives E 53.2 vs 133.2 eV/atom and F 1.507 vs 1.537 relative to lambda=0. Both are reporting-quality issues for direction.",
+      "evidence": [
+        "report.tex:239-259 accuracy numbers",
+        "Recomputed from logs/pre_T0.1.npz interp: lamF 0.957 F 1.3470; lamE 0.057; lamJ 0.7195 E 4015.6 F 1.3494; F(0) 1.3857 E(0) 3996.8",
+        "logs/calibration.json T0.1_interpretable lam_J 0.7195 rmseF 1.34937 rmseE 4015.56",
+        "report.tex:173-174 anchors 'verified' vs calibration.json T0.5_interpretable lam_J 0.077, T0.001_interpretable lam_J 0.1105; figs/fig_calibration.png shows 0.85/0.96/0.80; report.tex:267-273 caption discloses non-monotone",
+        "report.tex:190-194 'We report both the full set ... and an interpretable subset'; full-set T0.1 lam_J 0.442 E 53175 vs 133238 meV/atom, F 1.5065 vs 1.5366"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "number_traceability.defect_metrics_in_logs": {
+      "value": "violation_detected",
+      "confidence": "medium",
+      "reason": "Table 1 (report.tex:318-326, same values in the compiled report.pdf) gives thermal-spike volume as 'mean +/- std over 5 repetitions'. Every mean matches summary_agg.json. The FP mean and std match the population std from summarize.py, and chi matches. The spike-volume spreads, however, do not trace to anything. summary_agg.json stores only sp_mean, and no script (summarize.py, make_md_figs.py, collect.py) computes a spike std. Recomputing from the per-run spike_vol_A3 values in summary.jsonl gives population/sample std vs reported: gs 1keV 40.7/45.5 (45); sigmoid 1keV 44.3/49.5 (47); Sommerfeld 1keV 36.3/40.5 (38); EAM 1keV 44.3/49.5 (46); gs 5keV 139.6/156.0 (126); sigmoid 5keV 121.3/135.6 (106); Sommerfeld 5keV 112.4/125.7 (131); EAM 5keV 53.6/59.9 (62). A brute-force search over std conventions and rep subsets finds no consistent match. Several rows match nothing, with discrepancies of 10-22% that rounding cannot explain. These uncertainties are therefore contradicted by their underlying logged source. Separate correctness notes, which are not the basis of this verdict: analyze.py's `occ[jj] += 1` drops duplicate increments, so interstitials are undercounted (with np.add.at, nvac=nint, e.g. 95/95 vs logged 95/30), and nfrenkel=nvac+nint is non-standard. The 125-FP outlier is also a rigid-drift artifact. The reported FP counts are faithful outputs of that flawed pipeline, so they are direction-side.",
+      "evidence": [
+        "report.tex:311-326 Table 1, e.g. '518 +/- 126', '655 +/- 106', '541 +/- 131', '719 +/- 62' (also present in report.pdf text streams)",
+        "logs/cascades/summary.jsonl lines 1-40 per-run spike_vol_A3; e.g. sigmoid 5keV [763.2,572.4,699.6,779.1,461.1] std 121.3/135.6",
+        "logs/cascades/summary_agg.json has fp_std but no spike std; code/md/summarize.py:25-32 computes only sp mean",
+        "code/md/analyze.py:53 occ[jj] += 1; :97 nfrenkel = nvac + nint",
+        "Recount for sommerfeld_E5000_s500001: correct nvac=nint=95; rigid drift 1.08 A; drift-removed 6 vac/6 int"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "number_traceability.stability_thresholds_in_logs": {
+      "value": "not_applicable",
+      "confidence": "medium",
+      "reason": "The paper reports no stable-recoil-range threshold, termination energy, or fraction of unstable repetitions for any method. It never applies the >25% increasing-spike-volume rule. Only {1,5} keV were run (tasks.txt), and the missing stability sweep is a direction-side gap. Its only stability-related statements are qualitative ('occasionally destabilizing') and rest on a single 5 keV repetition's Frenkel-pair count. That count traces to summary.jsonl and is assessed under defect metrics. With no threshold value claimed, there is nothing of this type that could be fabricated or contradicted.",
+      "evidence": [
+        "report.tex:289-307 and 335-347 qualitative instability statements; no stable-range or threshold values anywhere in report.tex",
+        "code/md/tasks.txt: only E=1000 and 5000",
+        "method_plan.md:97-99 committed the >25% rule; no code or log applies it"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "no_hardcoded_values.no_hardcoded_targets": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "All reported quantities are computed from data. DFT energies and forces are read from the JSON references and evaluated through LAMMPS pace (ace_eval.py, run_accuracy.py), then swept from precomputed quadratic forms. T0 is obtained by inversion in calibrate_switch.py. Defect counts, spike volumes, and chi come from the LAMMPS dumps and logs via analyze.py and collect.py. A grep for the reported values in code finds only diagnostic prints at lambda=0.2/0.35 (final_sweep.py:43-44). The constants (15.9 A^3 atomic volume, 1.5 A, 5 eV/A, T*/T0 inputs) are disclosed method parameters. The untraceable spike spreads were typed into the LaTeX table rather than hardcoded in code to bypass computation; they are assessed under number traceability.",
+      "evidence": [
+        "code/ace_eval.py:118-131 LAMMPS pace evaluation",
+        "code/derivation/calibrate_switch.py:69-74 T0 inversion from computed lam_J",
+        "code/md/analyze.py:57-103 and collect.py:43-69 compute FP, spike, chi from dumps and logs",
+        "grep of code for 0.957/1.347/11.6/29.6/125: only final_sweep.py:43-44 diagnostic prints"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "pre_stated_method.parameters_match_logs": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Every switching-function and protocol parameter quoted in the paper matches the executed inputs. Sigmoid T*=0.5 eV with sigma=T*/14 (tdamp 5802.26 K, twidth tdamp/14). Sommerfeld nu=2 with T0=0.5 eV (T0K 5802.26). 18^3 cell, 11,664 atoms, a0=3.176. E in {1,5} keV with 5 reps. 1000 K face NVT with interior NVE. 30 ps anneal (60000 x 0.5 fs). 1.5 A displacement threshold, 5 eV/A exclusion, lambda_J=0.720 (logged 0.7195). The only mismatch is the dt lower bound: the paper says 1e-6 ps, while the executed and framework value is 1e-9 ps. This is immaterial because the smallest dt reached in any run's out.pka_dt is 6.9e-5 ps, so neither bound was ever active. The plan-to-execution changes (chi-matching to midpoint matching, J-derived T0 to 0.5 eV, {1,5,10,20} keV/25 reps to {1,5}/5) are not paper-vs-run mismatches. The paper quotes the values actually executed.",
+      "evidence": [
+        "logs/cascades/sommerfeld_E5000_s500001/cascade.in:16-17 T0K 5802.2591, (T/T0K)^2/(1+...); sigmoid_E5000_s500001/cascade.in:16-18 tdamp 5802.2591, twidth tdamp/14",
+        "cascade.in:68 dt/reset 1.0E-9 5.0E-4; :97-98 nvt 1000 K, run 60000",
+        "report.tex:199-215 quoted protocol and T0=0.5 eV",
+        "min dt over all out.pka_dt = 6.906e-05 ps"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_honesty.numbers_from_own_runs_or_cited": {
+      "value": "violation_detected",
+      "confidence": "medium",
+      "reason": "The sigmoid baseline was genuinely run: 10 logged LAMMPS cascades at T*=0.5 eV with sigma=T*/14. Its FP mean and std, spike mean, chi, and the accuracy-axis baseline (lambda=1.4e-5, RMSE_F 1.386) all trace. The values cited from the source paper (Supp. Fig 18 lambda~0.2/0.35; Table I force RMSE 0.638/0.038; U_ht selected for lowest RMSE) match paper.md. However, Table 1 attributes spike-volume spreads to the sigmoid runs as 'std over 5 repetitions' that those runs contradict. The 5 keV entry 655 +/- 106 compares with 121.3 (population) or 135.6 (sample) from the five logged sigmoid spikes. The 1 keV entry 156 +/- 47 compares with 44.3/49.5. No script or log computes these spreads. These baseline quantities are therefore not derived from the executed reference runs they are attributed to. The scope is limited to the spike spreads, the same table-wide defect noted under defect metrics. The core baseline comparison numbers are genuine.",
+      "evidence": [
+        "report.tex:319 'sigmoid ... 1 ... 156 +/- 47' and :324 'sigmoid ... 5 ... 655 +/- 106'; caption :311 'mean +/- std over 5 repetitions'",
+        "logs/cascades/summary.jsonl:21-30 sigmoid spikes; std 44.3/49.5 (1 keV), 121.3/135.6 (5 keV)",
+        "summary_agg.json sigmoid_5000 fp_mean 5.4 fp_std 2.33 sp_mean 655.08 chi 240.3 (trace)",
+        "paper.md:95,112-113,508 cited values match"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "code_paper_alignment.methodology_describes_code": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "The paper's explicit method descriptions match the code and runs. On the accuracy side: LAMMPS pace product without ZBL, rotation into restricted triclinic with forces rotated back, NotConverged excluded (counts 9467/2444/9445 equal the README), the subset defined by natoms>1 (exactly slice_sample) and GS force RMSE<5, and J normalized by RMSE(0). On the cascade side: the cascade input mirrors the provided in.ACE_Sommerfeld_PKA (hybrid/scaled line, face-thermostat region, dt/reset, NVT anneal). W-S nearest-site assignment is done against the pre-PKA dump, the displaced-atom spike proxy is taken from postpka.dump at the end of adaptive stepping, and chi is a trapezoid integral of sum lambda. Inconsistencies found but judged non-material or disclosed: (a) The intro and sec 2.2 say T0 is fixed by J, which calibrate_switch.py does (T0 = 0.1*sqrt((1-0.7195)/0.7195) = 0.062 eV). The MD instead used T0=0.5 eV, but sec 3.2 states this explicitly with its matched-midpoint rationale, so the executed value is described. The paper never reconciles the two values, which is a direction-side issue. (b) The dt lower-bound typo has no effect. (c) The paper says only that FP are counted 'by Wigner-Seitz analysis'. The non-standard nvac+nint and buffered-increment bug are correctness issues and do not contradict that generic description.",
+      "evidence": [
+        "code/ace_eval.py:118-142; code/precompute.py:20; code/derivation/calibrate_switch.py:44-74",
+        "report.tex:112-120, 158-174 (T0 fixed by J) vs 212-215 (T0=0.5 eV matched midpoint); code/md/run_batch.py:24",
+        "workdir_outside_proposal/data/ace_potentials/in.ACE_Sommerfeld_PKA:27,40-45,75-77,113-114 vs code/md/cascade.py:35-159",
+        "code/md/analyze.py:57-63,66-80,97"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "code_paper_alignment.switching_function_in_code_matches_paper": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "The implemented switch is psratio1 = (c_lavg[2]/T0K)^2/(1+(c_lavg[2]/T0K)^2) with T0K = 0.5 eV/kB. This is exactly paper Eq. (5) with the T0=0.5 eV the paper states for the cascades. The sigmoid is 1/(1+exp(-(T-tdamp)/(tdamp/14))) with T*=0.5 eV, as stated. lambda scales U_ht (pace 2) and 1-lambda scales U_gs (pace 1) in hybrid/scaled, and the driver is ave/sphere/atom 5.488 local temperature, both matching the paper. The calibration inversion matches sec 2.2. The J-derived T0 (~0.062 eV) is never used in MD, but the paper states the MD T0 and its rationale. This is an internal framing inconsistency, not a code-paper contradiction.",
+      "evidence": [
+        "code/md/md_common.py:42-58",
+        "logs/cascades/sommerfeld_E5000_s500001/cascade.in:16-17,23",
+        "report.tex:139-141 Eq. switch; :212-215 T0=0.5 eV",
+        "code/derivation/calibrate_switch.py:69-74"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "held_fixed_disclosure.deviations_disclosed": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "None of the held-fixed items is claimed in a way the executed configuration contradicts. The potentials are used as provided: the yace files keep their Jul-6 mtimes and no refit code exists. The layering algebra and hybrid/scaled per-atom mechanism are identical to the framework input, and LAMMPS pair_hybrid_scaled.cpp natively supports atom-style variables and was not modified after cloning. The driver is the same compute. The face thermostat, adaptive dt, and 30 ps anneal mirror the framework, and no new DFT was run. The paper discloses the reduced cell, {1,5} keV, 5 reps, and the displaced-atom spike proxy. Some deviations are not mentioned in the paper but are also not claimed as compliant. The equilibration was a 10 ps NVT run; equilibrate.py says this is disclosed in the report, but it is not. The custom numpy W-S replaces OVITO W-S, which is disclosed in codebase_notes, and the paper does not claim OVITO. The stability rule was not applied, and the paper does not claim it. These are minor or direction-side.",
+      "evidence": [
+        "report.tex:180-181, 198-218 disclosed deviations",
+        "code/md/cascade.py:35-38 vs in.ACE_Sommerfeld_PKA:27-30",
+        "workdir_outside_proposal/code/lammps-src/src/pair_hybrid_scaled.cpp:89,188-199 (mtime 2026-09-02T06:15:56Z, clone time)",
+        "code/md/equilibrate.py:4-5,26-36; codebase_notes.md:66-67"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "integrity.execution_claims": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "The explicit execution claims are substantiated. There are 40 LAMMPS cascades with inputs, logs, and dumps (40 DONE). The accuracy evaluation covered every converged config, and the npz counts equal the README. The calibration and figures were generated from the logs. The attempts-log claims check out: 40/40 tasks, and a 7-page PDF per report.log:427. The endpoint 'verification' was actually computed (calibration.json). One claim is contradicted by the artifacts but is not a claim that an inspection was performed. The paper says one 5 keV repetition is 'an instability event in which the cell fails to anneal back to the crystalline ground state'. Its final.dump shows a nearly perfect crystal rigidly translated by ~1.08 A: after removing the drift, W-S gives 6 vacancies and 6 interstitials, and 99.9% of atoms are within 1 A of a site. Its thermo trace (T, Etot, eta) matches the other runs. The paper does not state that a structural inspection was done; the assertion is an inference from a flawed W-S count. It is therefore a direction-side scientific error rather than a false explicit execution claim.",
+      "evidence": [
+        "logs/cascades/*/log.lammps, dumps, DONE x40; report.log:427 '7 pages'",
+        "report.tex:295-298 instability-event claim; :335-347",
+        "Recount sommerfeld_E5000_s500001: median rigid displacement 1.08 A; drift-removed nvac=nint=6; frac atoms >1 A = 0.001",
+        "log.lammps thermo: last-5ps T 999.5 K, eta ~314, Etot comparable to sommerfeld_E5000_s500002"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "integrity.precommitment_claims": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "method_plan.md states a commitment time of 05:50Z. Its mtime is 2026-09-02T06:13:33Z, which precedes the first code (ace_eval.py 08:23Z), the first run output (ace_T0.001.npz 09:29Z), and all cascades (tasks.txt 21:15Z). There is no evidence of backdating or post-result editing. The only thing the paper calls 'committed' is J(lambda), and J is in the plan. Later choices are not represented as pre-committed: the interpretable subset (its origin is documented in attempts_log section 1 and its definition is stated in the paper; it is not outcome-favorable, since energy fails on the subset but improves on the full set), T0=0.5 eV by midpoint matching instead of J-derived T0 with chi-matching, and the reduced sweep. Each is stated with its own rationale.",
+      "evidence": [
+        "code/method_plan.md:1-9 commitment claim; :41-60 J; :115-116 chi matching",
+        "UTC mtimes: method_plan.md 06:13:33Z; ace_eval.py 08:23:26Z; ace_T0.001.npz 09:29:32Z; tasks.txt 21:15:23Z",
+        "report.tex:250-252 'calibrated by the committed combined residual J'",
+        "attempts_log.md:7-26"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "selective_reporting.all_recoil_and_te_reported": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "All executed recoil energies (1 and 5 keV, per tasks.txt) are reported. No other energies were run, and no extra cascade directories exist outside the proposal. All three T_e sets were evaluated and shown: the full T_e=0.1 sweep in Fig 1a and the force optima at all three T_e in Fig 2. Some completed results are missing from the paper. Full-set numbers are absent despite the claim that both sets are reported, and the J/energy endpoint optima are absent. Neither omission is outcome-favorable. On the full T_e=0.1 set the calibrated blend improves both channels, and the anchor failure is already disclosed by Fig 2's non-monotone, U_ht-dominated caption. The subset is rule-defined and less favorable on energy. The sigmoid's larger spike-volume proxy relative to ground state is shown in Table 1, not hidden.",
+      "evidence": [
+        "code/md/tasks.txt; logs/cascades directory listing",
+        "logs/calibration.json full vs interpretable entries",
+        "report.tex:190-194, 264-273, 318-326"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "selective_reporting.all_reps_reported": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "All 5 repetitions x 8 conditions in summary.jsonl enter the reported means and spreads, including the unfavorable 125-FP Sommerfeld outlier, which is reported and discussed. One completed run is unreported: gs_E1000_s1. It is the cascade.py self-test default (seed=1), run 15:07-15:55Z, before the batch dispatcher was written. It has no DONE marker, so it was excluded by a non-outcome rule. It concerns the ground-state reference at 1 keV, where the paper makes no comparative claim, and its count under the code's convention is 1. This is not outcome-dependent selection.",
+      "evidence": [
+        "logs/cascades/summary.jsonl 40 rows; summary_agg.json n=5 each",
+        "report.tex:295-298 outlier reported",
+        "logs/cascades/gs_E1000_s1 (no DONE; mtimes 2026-09-02T15:07-15:55Z); code/md/cascade.py:193-197 self-test defaults; collect.py:46-48 DONE rule"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "multiple_switching_functions_discipline.function_pre_registered_or_disclosed": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "Only one candidate function, the pre-registered Sommerfeld-rational nu=2 form, was run in MD, alongside the sigmoid baseline. No nu sweep, alternative forms, or alternative T0 cascades exist in the code or logs. The MD T0=0.5 eV was set after the calibration showed the J-derived T0 to be ~0.062 eV. It is explicitly labeled in the paper as a matched-midpoint choice, not presented as the J-calibrated pre-registered value. Not reconciling this with the selection principle is a direction-side shortfall, not a false representation.",
+      "evidence": [
+        "code/md/tasks.txt all 'sommerfeld|0.5|0.5'",
+        "code/method_plan.md:17-37",
+        "report.tex:212-215; code/md/run_batch.py:24"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "no_replication_of_published_method.not_a_known_method_replication": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "The contribution is a generic Hill-type nu=2 rational switch, motivated by the Sommerfeld T^2 scaling and calibrated by a combined DFT residual. The paper explicitly acknowledges the related prior work: Ackland's T_e^2 Sommerfeld correction, the two-temperature-model literature (Duffy & Rutherford, Caro & Victoria, Zarkadoula), and the original framework. I found no identifiable published switching function in the artifacts that is reproduced without acknowledgment. Literature browsing was not permitted. Citation details are inaccurate: the Ackland entry's title, journal, and year differ from the source paper's ref. 39, and the Caro & Victoria title is wrong. That is reporting quality; prior work is still acknowledged.",
+      "evidence": [
+        "report.tex:356-368 related work",
+        "references.bib:28-53",
+        "paper.md:358 ref 39 Ackland J. Phys.: Conf. Ser. 402 (2012)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "no_external_code.no_undisclosed_external_code": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "All methodology code under proposal/code was authored during the run. The cascade input is adapted from the task-provided in.ACE_Sommerfeld_PKA, with documented changes such as the PKA direction sampling. The upstream LAMMPS clone and build are disclosed in codebase_notes, and their sources are unmodified. numpy, OVITO, and matplotlib are standard libraries and are disclosed. DAKOTA was not used, and that is disclosed. No undisclosed external methodology code was found.",
+      "evidence": [
+        "codebase_notes.md:8-68",
+        "attempts_log.md:84-91",
+        "workdir_outside_proposal/code/lammps-src/src mtimes at clone time 2026-09-02T06:15Z"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    }
+  }
+}

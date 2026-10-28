@@ -1,0 +1,880 @@
+{
+  "context": {
+    "partial_work_claimed": {
+      "value": true,
+      "reason": "The paper explicitly describes non-wins/shortcomings and an abandoned backend check and points to the attempts log for them: square-lattice tie with naive, XY h_z=-0.7 depth regression vs routing-only (250->263), width-one routing worse than naive (784 vs 670), rho=0.5 worsening integrable Ising, and a terminated/replaced backend regression fixture. These are failed or unresolved items of the kind the task's effort-evidence clause covers.",
+      "evidence": [
+        "proposal/sections/analysis.tex:31-39 (failure analysis; 'All non-wins and the backend regression-fixture correction are recorded in the accompanying attempts log')",
+        "proposal/attempts_log.md A04 (backend fixture terminated and replaced), A06 (measured non-wins)",
+        "proposal/sections/conclusion.tex:7"
+      ]
+    }
+  },
+  "nodes": {
+    "deliverables.report_pdf_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "proposal/report.pdf exists (502,501 bytes, 17 pages). Its SHA-256 matches the hash in logs/pdf_validation.json. The source (report.tex plus sections/*.tex) and the rendered page previews contain full non-placeholder sections: Introduction, Methodology (§2), Experimental setup (§3), Experimental results (§4), Analysis with mechanism/failure/compute-cost/generalization subsections (§5), Conclusion (§6) and 75 references.",
+      "evidence": [
+        "proposal/report.pdf (sha256 39263ff2...aedac == logs/pdf_validation.json pdf_sha256)",
+        "proposal/report.tex:22-32 (\\input of introduction, method, setup, results, analysis, conclusion, references)",
+        "proposal/preview/page_01.png ... page_17.png"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.logs_directory_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "proposal/logs/ holds four per-benchmark directories (mfim0, mfim05, lsm_m07, lsm16). Each contains real run output: manifest.json, summary.json, trajectory.h5 (77–206 MB), compiled.h5, author_stdout.log, and the unconstrained, naive_*, restore_*, frontier*_*, rfg_* and rfg50_heavyhex circuit and audit files. Aggregate summary.csv/json, acceptance and integrity checks are also present.",
+      "evidence": [
+        "proposal/logs/mfim0/ (55 files incl. trajectory.h5 90 MB, rfg_heavyhex_audit.jsonl.gz, naive_heavyhex_source_and_circuit.json.gz)",
+        "proposal/logs/lsm16/, lsm_m07/, mfim05/ directory listings",
+        "proposal/logs/summary.json, summary.csv"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.unconstrained_avqds_runs_logged": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Unconstrained AVQDS is logged for all four configurations. Final values in summary.json: mfim0 f=0.999824, 140 CX, depth 106, 143 params; mfim05 0.999640/232/171/301; lsm_m07 0.999825/118/175/72; lsm16 0.999614/118/200/73. Per-step fidelity, CNOT, depth and N_theta are stored in the 'unconstrained' group of compiled.h5 (time/fidelity/cx/depth/n per time point, written by analyze.py:55-77) and in trajectory.h5 (fidelity, n, params). The per-step curves appear in Figs. 1–2. h5py could not load in the judging environment, so I confirmed the dataset names with strings.",
+      "evidence": [
+        "proposal/logs/{mfim0,mfim05,lsm_m07,lsm16}/summary.json method 'unconstrained'",
+        "proposal/logs/*/manifest.json 'unconstrained' block",
+        "proposal/code/analyze.py:29,55-77 (per-time-point table incl. cx, depth, n for 'unconstrained')",
+        "proposal/logs/mfim05/compiled.h5 (17 groups with time/fidelity/depth/swaps... datasets)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.naive_baseline_runs_logged": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "naive_square and naive_heavyhex audit and source_and_circuit logs exist for all four benchmarks (8 cells). The embedding choice is recorded in embeddings.json (selected_map, all tied maps, selection rule 'maximum coverage, minimum unweighted distance sum, lexicographic') and as initial/final mapping in each source_and_circuit record. Source logical labels are stored beside the SWAP-inserted gate list. The insertion strategy (persistent lexicographic shortest path) is defined in code and in setup.tex. A restoring variant is also logged for every cell.",
+      "evidence": [
+        "proposal/logs/*/naive_square_source_and_circuit.json.gz, naive_heavyhex_source_and_circuit.json.gz (source_labels + gates + initial_mapping)",
+        "proposal/logs/mfim0/embeddings.json (selected_map, tied_maps, selection)",
+        "proposal/code/routing.py:132-146 (naive)",
+        "proposal/sections/setup.tex:27"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.variant_runs_logged": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "RFG runs on square (A) and heavy-hex (B) are logged for all four benchmarks: rfg_square_* and rfg_heavyhex_* growth.json, circuits, audits, source_and_circuit, and summary rows. Per-step fidelity, CNOT, depth and N_theta are in compiled.h5 and trajectory.h5. The audit traces I parsed contain one record per time step with n_parameters and the full CNOT list (e.g. lsm16 rfg_heavyhex has 7353 records, final CX 164, n=76).",
+      "evidence": [
+        "proposal/logs/*/rfg_square_*, rfg_heavyhex_* files",
+        "proposal/logs/*/summary.json methods rfg_square, rfg_heavyhex",
+        "Judge re-parse of rfg_*_audit.jsonl.gz: steps 2949/2070/7335/7353 for mfim0/mfim05/lsm_m07/lsm16"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.topology_compliance_audits_present": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "Each of the 8 variant cells has its own per-step audit file (rfg_square_audit.jsonl.gz, rfg_heavyhex_audit.jsonl.gz). Every time step records the pair of every two-qubit gate, including the three CNOTs of each decomposed SWAP, with a per-pair 'verified' edge-set flag and an 'all_compliant' flag. The audit has no per-entry gate-name field. However, every two-qubit gate in this compilation is a CNOT, as documented, and the companion source_and_circuit files carry gate names, so the substance of (gate, pair, in-edge-set) is recorded.",
+      "evidence": [
+        "proposal/logs/mfim0/rfg_heavyhex_audit.jsonl.gz record step 2: pairs [[0,1],[0,1],[5,6],[5,6],[2,1],[1,2],[2,1],...] with verified flags",
+        "proposal/code/routing.py:175-179 (audit of every cx pair)",
+        "proposal/README.md:38",
+        "proposal/sections/setup.tex:34 ('Every CNOT pair is separately checked against its graph; SWAPs are already decomposed')"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.mfim_results_table_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "A table labeled tab:main_results_mfim has rows AVQDS (all-to-all), Naive Square, Naive Heavy-hex, RFG Square and RFG Heavy-hex. Its columns give f(%), N_cx and D for both h_z=0 and h_z=0.5. All values are numeric and match the summary logs.",
+      "evidence": [
+        "proposal/sections/table_mfim.tex:6 (\\label{tab:main_results_mfim}), :12-16 (5 rows)",
+        "proposal/preview/page_06.png Table 1"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.lsm_results_table_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "A table labeled tab:main_results_lsm mirrors the MFIM table, with five rows and f/N_cx/D for h_z=-0.7 and 1.6 at t=6. All values are numeric and match the logs.",
+      "evidence": [
+        "proposal/sections/table_lsm.tex:6, :12-16",
+        "proposal/preview/page_06.png Table 2"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.overhead_table_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "A table labeled tab:overhead reports Naive/AVQDS and RFG/AVQDS CNOT and depth multipliers for all 8 (benchmark × topology) cells, plus percentage saving versus naive.",
+      "evidence": [
+        "proposal/sections/table_overhead.tex:6 (\\label{tab:overhead}), :12-19 (8 rows)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.fidelity_curves_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Fig. 1 has a 4×2 grid covering all four benchmarks on Square (A) and Heavy-hex (B). Each panel overlays AVQDS, Naive and RFG fidelity versus time.",
+      "evidence": [
+        "proposal/sections/results.tex:15-20 (fig:fidelity)",
+        "proposal/preview/page_08.png",
+        "proposal/code/make_artifacts.py:158-173"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.cnot_curves_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Fig. 2 has a 4×2 grid of executable CNOT count versus time for all 8 cells, with AVQDS, Naive and RFG overlaid in each panel.",
+      "evidence": [
+        "proposal/sections/results.tex:21-26 (fig:cx)",
+        "proposal/preview/page_09.png"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.codebase_notes_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "codebase_notes.md is substantive. It identifies the reused components: ansatz.one_step (McLachlan equations, phase projection, residual, growth trigger, Tikhonov inverse, adaptive step, Euler update), get_minv with pinv(M+1e-6 I), add_ops_dyn (operator-pool trial and commit bookkeeping), generate_op_pools and model.py. It also documents the representation, label and driver adaptations.",
+      "evidence": [
+        "proposal/codebase_notes.md:5-9 (Reused core)",
+        "proposal/codebase_notes.md:11-19 (adaptations)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.attempts_log_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "attempts_log.md exists with entries A01–A10. They document source inspection, the predeclared method and settings, the abandoned and replaced backend test fixture, every measured non-win, the embedding controls, the validation steps and the derived-metric audit, each with rationale and evidence pointers.",
+      "evidence": [
+        "proposal/attempts_log.md A01-A10",
+        "proposal/sections/analysis.tex:39"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.variant_stated_before_results": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "All RFG choices appear in §2 Methodology and §3 Setup, before §4 Results. These cover: canonical pool unchanged; residual-budget admissible set (Eq. 5) with rho=0.9; selection and tie-break rule; incremental frontier enumerating all shortest paths and meeting edges with W=16, dedup and sort keys; embedding rule; CNOT and depth accounting; r_cut, xi, dt rule and shared mesh. The rho=0.5 sensitivity and the routing-only controls are also predeclared in §3. No variant choice is introduced or altered in Results.",
+      "evidence": [
+        "proposal/sections/method.tex:1-70",
+        "proposal/sections/setup.tex:26-27",
+        "proposal/report.tex:22-27 (section order)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.variant_fully_specified": {
+      "value": "fully_specified",
+      "confidence": "medium",
+      "reason": "There is no pseudocode, but equations plus rule-level prose make the method reimplementable without the code. The specification includes: EOM quantities (Eqs. 2–4); the exact source selector with its 1e-8 slack and velocity bound; the embedding rule (8! enumeration, max native bonds, min distance sum, lexicographic); frontier construction (every shortest path, every meeting edge, SWAP order, dedup key, sort key, W=16); cost c_P; the admissible set with 1e-12/1e-8 slacks; replacement only on strictly lower cost with (r_P, b_P, pool index) tie-break; depth model; CNOT=2N_2q+3N_SWAP; and the dt rule. I checked these against avqds_adapter.py:100-125 and routing.py:89-130 and they agree. The only external detail is the source pool order used for index tie-breaks, which belongs to the unchanged AVQDS baseline.",
+      "evidence": [
+        "proposal/sections/method.tex:28 (source selector), :31 (embedding), :33-37 (frontier), :40-51 (Eq. 5 and rule), :69 (integration)",
+        "proposal/code/avqds_adapter.py:100-125",
+        "proposal/code/routing.py:89-130"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.hyperparameters_listed_match_logs": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "The paper lists concrete values for every required hyperparameter: rho=0.9 (plus a predeclared 0.5 sensitivity), W=16, xi=1e-6, r_cut=5e-4 (enforcing L^2<=1e-3), velocity bound 1000, dt=min(0.05, 0.005/||u||_inf), numerical slacks 1e-8/1e-12, the embedding rule, and the reference-integrator tolerances. The run manifests record the same values.",
+      "evidence": [
+        "proposal/sections/method.tex:18,24,26,37,51,69",
+        "proposal/logs/mfim0/manifest.json:8-15 (xi 1e-6, rcut 5e-4, L2cut 1e-3, dphimax 0.005, dtmax 0.05, pthcut 1000, width 16, rho 0.9)",
+        "proposal/sections/setup.tex:32"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.core_avqds_held_fixed": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The authors' one_step (M/V formation with phase terms, residual, growth trigger, adaptive step) and get_minv (pinv(M+1e-6 I)) are imported unchanged. The trial algebra in add_ops_dyn is the source text, with only a post-loop route_choice hook that can replace ichoice. The overridden set_par_states, get_amat and get_cvec_phase compute the same tangents, metric and V via exact Pauli identities; regression errors are 1e-15 for state/tangent/metric and 5e-12 for one step, and these overrides are shared with the baseline. The driver applies the same Euler velocity with a step equal to the minimum of the methods' proposals, which satisfies each method's step bound and is the shared schedule the task's pairing rule requires. r_cut=5e-4 is a disclosed threshold choice matching the paper's L^2_cut convention, not a change to the formulation.",
+      "evidence": [
+        "proposal/code/avqds_adapter.py:1-4,50-57,74-92,127-152",
+        "proposal/code/selection_hook_generated.py:79-96",
+        "workdir_outside_proposal/code/AVQDS/avdynamics-avqds/avdynamics/ansatz.py:372-420,546-549",
+        "proposal/logs/validation.json (state 1.4e-15, tangent 6.8e-16, metric 7.2e-16, one_step 5.4e-12)",
+        "proposal/code/run_experiments.py:68-84"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.motivation_grounded_in_literature": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "§1.1 cites and positions RFG against routing and compilation work (SABRE, Cowtan et al. qubit routing, tket, integer-programming allocation/routing, NASSC) and hardware-aware adaptive variational methods (Weaving et al. subgraph-isomorphism-biased ADAPT, TETRIS-ADAPT, AVQDS(T), layering/subpool exploration, Umer & Angelakis). It states explicitly how RFG differs: a constraint on an evaluated McLachlan residual improvement plus the incremental cost of persistent layouts, with no pool truncation and no gradient proxy.",
+      "evidence": [
+        "proposal/sections/introduction.tex:10-15",
+        "proposal/sections/references.tex:135-153"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_verification.unconstrained_mfim_hz0_fidelity": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The unconstrained MFIM h_z=0 run reaches t=3.0 with final fidelity 0.9998241, which is at least 0.995.",
+      "evidence": [
+        "proposal/logs/mfim0/summary.json unconstrained fidelity 0.9998241265774085",
+        "proposal/logs/integrity_checks.json mfim0 final_time 3.0",
+        "proposal/logs/acceptance_checks.json mfim0 mfim_sanity true"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_verification.unconstrained_mfim_hz05_fidelity": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The unconstrained MFIM h_z=0.5 run reaches t=3.0 with final fidelity 0.9996399, which is at least 0.995.",
+      "evidence": [
+        "proposal/logs/mfim05/summary.json unconstrained fidelity 0.9996398830478992",
+        "proposal/logs/integrity_checks.json mfim05 final_time 3.0"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_verification.unconstrained_lsm_hzn07_qualitative": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The run reaches t=6 with final fidelity 0.99982. Energy and XX/YY correlations track exact evolution: maximum absolute energy error 0.011 on an energy range of roughly -14.5 to -9, and correlation errors at most 0.0073. Final N_cx=118 is near the paper's ~100–106. Figs. 4–5 show the overlay.",
+      "evidence": [
+        "proposal/logs/lsm_m07/summary.json unconstrained fidelity 0.9998249238",
+        "proposal/logs/observable_errors.json lsm_m07 unconstrained max_abs [0.0107, 0.0021, 0.0073, 0.0055, 0.0037, 0.0047]",
+        "proposal/preview/page_10.png (Fig. 4), page_11.png (Fig. 5)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_verification.unconstrained_lsm_hzp16_qualitative": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The run reaches t=6 with final fidelity 0.99961. Energy (maximum absolute error 0.033 on a scale of about -17.5 to -12.6) and correlations (errors at most 0.011) track exact evolution. Final N_cx=118.",
+      "evidence": [
+        "proposal/logs/lsm16/summary.json unconstrained fidelity 0.9996141429",
+        "proposal/logs/observable_errors.json lsm16 unconstrained max_abs [0.0327, 0.0023, 0.0083, 0.0112, 0.0040, 0.0083]",
+        "proposal/preview/page_10.png, page_11.png"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_verification.naive_uses_smart_embedding": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "On Topology A the selected map is (0,1,2,3,7,6,5,4), i.e. the Hamiltonian cycle 0-1-2-3-7-6-5-4-0, giving 8/8 (MFIM) and 7/7 (LSM) native bonds. On Topology B the map is chosen by exhaustive 8! enumeration: 5 native bonds, the proven maximum, and the minimum distance sum (14 for the ring, 9 for the chain). The rule and all tied maps are logged in embeddings.json. All 320 or 16 tied maps are additionally compiled and summarized. The chosen map sits mid-range, not worst-case (e.g. MFIM h_z=0: 398 versus a range of 344–440).",
+      "evidence": [
+        "proposal/logs/mfim0/embeddings.json square selected_map [0,1,2,3,7,6,5,4]; heavyhex maximum_coverage 5, distance_sum 14",
+        "proposal/code/routing.py:35-49",
+        "proposal/sections/table_embeddings.tex:11-14"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "experimental_completeness.all_variant_cells_run": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "rfg_square and rfg_heavyhex runs exist and complete for all four benchmarks (8 cells), reaching t=3 for MFIM and t=6 for LSM.",
+      "evidence": [
+        "proposal/logs/{mfim0,mfim05,lsm_m07,lsm16}/rfg_{square,heavyhex}_*",
+        "proposal/logs/integrity_checks.json final_time per benchmark",
+        "Judge audit re-parse: final_t 3.0/3.0/6.0/6.0"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "experimental_completeness.all_naive_cells_run": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "naive_square and naive_heavyhex runs exist for all four benchmarks (8 cells), with final CX 140/398, 232/670, 118/229 and 118/244.",
+      "evidence": [
+        "proposal/logs/*/summary.json naive_square, naive_heavyhex",
+        "proposal/logs/*/naive_*_audit.jsonl.gz"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "experimental_completeness.per_step_metrics_logged": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "For every variant run, compiled.h5 stores time, fidelity, cx, depth, n, swaps, total_gates and replay_error at every accepted time point (analyze.py appends one row per time index). trajectory.h5 holds per-step states, params, n and fidelity. The audits I re-parsed have one record per step (2949/2070/7335/7353) with n_parameters and the CNOT list. Figs. 1–2 plot these per-step series.",
+      "evidence": [
+        "proposal/code/analyze.py:60-77",
+        "proposal/code/run_experiments.py:117-125",
+        "proposal/logs/mfim05/compiled.h5 (17 groups each with time/fidelity/depth/... datasets)",
+        "proposal/preview/page_08.png, page_09.png"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "experimental_completeness.topology_audits_both_topologies": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Per-step audits exist for all 8 variant cells, in separate files per topology. Every two-qubit gate, including the three CNOTs of each SWAP, is recorded with its pair and an in-edge-set flag. My re-check found 0 out-of-edge-set pairs in all 8 cells.",
+      "evidence": [
+        "proposal/logs/*/rfg_square_audit.jsonl.gz, rfg_heavyhex_audit.jsonl.gz",
+        "proposal/logs/*/audit_summary.json (violations 0)",
+        "Judge re-parse vs spec edge sets: indep_violations 0, false_flags 0 for all 8 RFG cells"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "topology_compliance.compliance_on_a": {
+      "value": "fully_compliant",
+      "confidence": "high",
+      "reason": "On the square lattice, every audited CNOT in every step of all four RFG runs lies in E_A = {01,12,23,45,56,67,04,15,26,37}. I re-checked this against the spec edge set: 0 violations. No SWAPs are needed under the Hamiltonian-cycle embedding.",
+      "evidence": [
+        "proposal/logs/{mfim0,mfim05,lsm_m07,lsm16}/rfg_square_audit.jsonl.gz",
+        "proposal/code/routing.py:9",
+        "proposal/logs/acceptance_checks.json all_topology_violations 0"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "topology_compliance.compliance_on_b": {
+      "value": "fully_compliant",
+      "confidence": "high",
+      "reason": "On heavy-hex, every audited CNOT, including decomposed SWAPs, in every step of all four RFG runs lies in E_B = {01,12,13,35,45,56,67}. I re-checked this independently: 0 violations. Physical replay matches the logical state to 2.2e-14.",
+      "evidence": [
+        "proposal/logs/{mfim0,mfim05,lsm_m07,lsm16}/rfg_heavyhex_audit.jsonl.gz",
+        "proposal/code/routing.py:10",
+        "proposal/logs/paper_numbers.json MaxReplayError 2.23e-14"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "accuracy_preservation.preservation_on_mfim_hz0": {
+      "value": "preserved_both",
+      "confidence": "high",
+      "reason": "Baseline 0.9998241. On A, RFG is identical (0.9998241). On B, RFG is 0.9998146, a drop of 9.5e-6, far inside 0.01.",
+      "evidence": [
+        "proposal/logs/mfim0/summary.json unconstrained 0.9998241266, rfg_square 0.9998241266, rfg_heavyhex 0.9998145906"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "accuracy_preservation.preservation_on_mfim_hz0p5": {
+      "value": "preserved_both",
+      "confidence": "high",
+      "reason": "Baseline 0.9996399. On A, RFG is identical. On B, RFG is 0.9996035, a drop of 3.6e-5, well within 0.01.",
+      "evidence": [
+        "proposal/logs/mfim05/summary.json unconstrained 0.9996398830, rfg_heavyhex 0.9996034806",
+        "proposal/sections/table_mfim.tex:12-16"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "accuracy_preservation.preservation_on_lsm_hzn0p7": {
+      "value": "preserved_both",
+      "confidence": "high",
+      "reason": "Baseline 0.9998249. On A, RFG is identical. On B, RFG is 0.9997611, a drop of 6.4e-5, well within 0.01.",
+      "evidence": [
+        "proposal/logs/lsm_m07/summary.json unconstrained 0.9998249238, rfg_heavyhex 0.9997611037"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "accuracy_preservation.preservation_on_lsm_hzp1p6": {
+      "value": "preserved_both",
+      "confidence": "high",
+      "reason": "Baseline 0.9996141. On A, RFG is identical. On B, RFG is 0.9997371, higher than the baseline.",
+      "evidence": [
+        "proposal/logs/lsm16/summary.json unconstrained 0.9996141429, rfg_heavyhex 0.9997371404"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "overhead_quantification.overhead_on_a": {
+      "value": "near_unity",
+      "confidence": "high",
+      "reason": "On the square lattice, RFG CNOT and depth multipliers are exactly 1.000 on all four benchmarks (zero SWAPs, identical circuits), so both averages are at most 1.2x.",
+      "evidence": [
+        "proposal/sections/table_overhead.tex:12,14,16,18",
+        "proposal/logs/*/summary.json rfg_square cx_multiplier 1.0, depth_multiplier 1.0"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "overhead_quantification.overhead_on_b": {
+      "value": "modest",
+      "confidence": "high",
+      "reason": "On heavy-hex the per-benchmark RFG multipliers are: CNOT 1.464, 1.802, 1.407, 1.390 (mean 1.516); depth 1.377, 1.731, 1.503, 1.255 (mean 1.467). Both averages fall between 1.2x and 2.0x.",
+      "evidence": [
+        "proposal/sections/table_overhead.tex:13,15,17,19",
+        "proposal/logs/paper_numbers.json HeavyCxMean 1.5157, HeavyDepthMean 1.4666"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "margin_over_naive_baseline.margin_on_a": {
+      "value": "no_margin",
+      "confidence": "high",
+      "reason": "On the square lattice the smart-embedding naive baseline and RFG produce identical circuits (CNOT and depth multipliers both 1.000, saving 0.0% in every benchmark). The variant matches the baseline, which is the no_margin definition. The paper acknowledges this as an intentional negative control.",
+      "evidence": [
+        "proposal/sections/table_overhead.tex:12,14,16,18 (Saving 0.0)",
+        "proposal/sections/analysis.tex:33"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "margin_over_naive_baseline.margin_on_b": {
+      "value": "substantial_margin",
+      "confidence": "medium",
+      "reason": "Against the predeclared persistent shortest-path naive baseline on heavy-hex, RFG lowers CNOT/depth by 48.5%/54.7% (Ising 0: 398/322→205/146), 37.6%/42.0% (Ising 0.5: 670/510→418/296), 27.5%/16.8% (XY −0.7: 229/316→166/263) and 32.8%/23.9% (XY 1.6: 244/330→164/251). Mean per-benchmark reductions are 36.6% (CNOT) and 34.3% (depth). Via mean multipliers they are 37.7% and 38.1%; via pooled totals, 38.2% and 35.3%. Both averages are at least 30% and the gap is positive on every benchmark. Sensitivity: against the per-benchmark better of persistent/restoring naive the averages are still 34.0%/30.2%. Against a post-hoc best-of-tied-embeddings oracle (not the defined baseline) the depth margin would be about 28%, so the depth margin is close to the 30% threshold.",
+      "evidence": [
+        "proposal/sections/table_ablation.tex:11-16",
+        "proposal/sections/table_overhead.tex",
+        "proposal/logs/paper_numbers.json MeanCxSaving 36.6, NaiveCxMean 2.435, NaiveDepthMean 2.369",
+        "proposal/sections/table_embeddings.tex:11-14"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "modular_separation.code_isolates_variant_logic": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The topology-aware contribution is contained in three places: routing.py (embedding, frontier, decomposition, audit); a RoutedAnsatz subclass whose only behavioral change is an injected route_choice hook in a copy of the source add_ops_dyn generated from source text (saved as selection_hook_generated.py); and a frontier commit in update_ngates. one_step and get_minv are imported unchanged, and the module docstring and README state what is held fixed versus new.",
+      "evidence": [
+        "proposal/code/avqds_adapter.py:1-4,94-152",
+        "proposal/code/selection_hook_generated.py:1-2,79-96",
+        "proposal/code/routing.py:1",
+        "proposal/README.md:29-30"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "modular_separation.ablation_switch_present": {
+      "value": "no",
+      "confidence": "medium",
+      "reason": "Unconstrained AVQDS and RFG are run by instantiating different classes: FastAnsatz, which uses the source add_ops_dyn, versus RoutedAnsatz, which uses the generated hooked add_ops_dyn. RoutedAnsatz exposes no flag that disables route_choice; topology=None would fail because route_choice calls self.frontier.increment. The drivers have no CLI option for it either (run_experiments.py has only --benchmark/--limit/--workers). RFG on the square graph reproduces AVQDS exactly, but that is an inert-cost case, not a switch. Running unconstrained therefore uses a different code path.",
+      "evidence": [
+        "proposal/code/run_experiments.py:57-60,151-153",
+        "proposal/code/avqds_adapter.py:50-52,100-112,151-152"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "modular_separation.methodology_isolates_variant_logic": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "§2.1 ('Unchanged variational dynamics and candidate evaluation') states the held-fixed EOM, pseudoinverse, xi, trial computations and commit bookkeeping. §2.2 introduces the new layout and routing frontier. §2.3 defines RFG and says it is 'the only change to AVQDS's candidate-selection decision'. §3 lists the shared, non-topology-specific baseline adaptations.",
+      "evidence": [
+        "proposal/sections/method.tex:3-26,30-37,39-51",
+        "proposal/sections/setup.tex:30"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "mechanism_analysis.subsection_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "§5.1 is titled 'Mechanism analysis: routing reuse and tangent-space choices'.",
+      "evidence": [
+        "proposal/sections/analysis.tex:2-3"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "mechanism_analysis.depth": {
+      "value": "deep",
+      "confidence": "medium",
+      "reason": "The analysis isolates components by ablation: naive persistent/restoring, routing-only W=1/W=16 on the unchanged circuit, and RFG at rho=0.9/0.5. It splits savings into logical-rotation versus SWAP contributions (e.g. 398→278→205; 140→112 logical CNOTs; 46→31 SWAPs). It connects to routing theory through a proof that heavy-hex allows at most 5 native bonds and through tree-tour distance lower bounds (14 and 9) giving restoring full-sweep costs of 52 CNOTs. It predicts where the method helps: embeddable graphs act as an exact negative control (stated in the Methodology before results); the line-graph test confirms no gain for natively embeddable XY and gains for the Ising ring; depth gains are not guaranteed because cost is SWAP-prioritized.",
+      "evidence": [
+        "proposal/sections/analysis.tex:4-12",
+        "proposal/sections/method.tex:58",
+        "proposal/sections/analysis.tex:52",
+        "proposal/logs/integrity_checks.json graph_bounds"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "mechanism_analysis.structural_difference_engaged": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The paper argues that heavy-hex is a tree with two nonadjacent degree-3 vertices, so at most 5 of 7 edges can host native bonds: the ring has at least 3 nonnative bonds and the chain at least 2. The square ladder instead has a Hamiltonian cycle making the whole pool native. It explains that RFG is inert on the square lattice and reduces routing on heavy-hex, including traffic through the branching region (Fig. 7).",
+      "evidence": [
+        "proposal/sections/analysis.tex:4-7,12",
+        "proposal/sections/analysis.tex:33"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_analysis.subsection_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "§5.2 is titled 'Failure analysis: local savings do not define a global optimum'.",
+      "evidence": [
+        "proposal/sections/analysis.tex:31-32"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_analysis.patterns_identified": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The failure patterns are concrete and tied to specific benchmarks and topologies: the square lattice ties naive; heavy-hex keeps nontrivial overhead in every case; nonintegrable Ising has the largest multiplier, while the longer XY evolution does not; XY −0.7 shows a depth regression versus routing-only (250→263) with params 72→81; width-one routing is worse than naive on nonintegrable Ising (784 vs 670); rho=0.5 worsens integrable Ising (205→213) and lowers fidelity; persistent naive is worse than restoring on XY; line Ising h_z=0 shows a depth regression (177→185).",
+      "evidence": [
+        "proposal/sections/analysis.tex:33-39",
+        "proposal/sections/analysis.tex:52"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_analysis.patterns_explained_coherently": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Each pattern is tied to a structural cause. The square tie follows from all bonds being native, leaving no SWAP to remove. The depth regression follows from Eq. 5 prioritizing SWAP count with depth only secondary, plus extra single-site rotations changing the critical path. Width-one losses come from greedy meeting-edge choice discarding useful layouts. The rho=0.5 trade-off comes from a larger allowance unlocking cheap directions but forcing later work. Persistent versus restoring reflects layout reuse. The Ising cost reflects expressibility saturation and routing structure.",
+      "evidence": [
+        "proposal/sections/analysis.tex:33-39"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "compute_cost_analysis.subsection_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "§5.3 'Computational cost trade-off' discusses measured wall-clock time, routing-frontier cost, asymptotic classical complexity, factorial embedding enumeration, and quantum measurement cost.",
+      "evidence": [
+        "proposal/sections/analysis.tex:42-49"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "compute_cost_analysis.wall_clock_measured": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Table 9 reports per-run algorithmic wall-clock for AVQDS, Naive A/B and RFG A/B on each benchmark (e.g. Ising 0: 33.17 s vs RFG B 26.09 s), with an explicit B/base ratio (0.787, 1.066, 1.163, 1.011) and the routing-frontier time in ms. summary.json gives algorithm_time_multiplier for every method.",
+      "evidence": [
+        "proposal/sections/table_compute.tex:9-14",
+        "proposal/sections/analysis.tex:44",
+        "proposal/logs/mfim0/summary.json rfg_heavyhex algorithm_time_multiplier 0.7865"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "compute_cost_analysis.tradeoff_explicit": {
+      "value": "no",
+      "confidence": "medium",
+      "reason": "§5.3 reports that RFG time is 0.787–1.163x of unconstrained AVQDS and that frontier work is 48.6–336.3 ms. It attributes runtime differences to parameter count and gives complexity and measurement-cost remarks. It never connects these cost numbers to the CNOT/depth overhead reduction, nor states where RFG sits on the cost-versus-overhead trade-off relative to AVQDS and the naive baseline (e.g. whether the cost is worth the ~37% CNOT saving). That positioning is left implicit for the reader to assemble from separate sections.",
+      "evidence": [
+        "proposal/sections/analysis.tex:44-48",
+        "proposal/sections/conclusion.tex:1-4 (no cost statement)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "third_topology_generalization.third_topology_evaluated": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "A third topology, an 8-qubit line E_line={01,...,67}, is evaluated with the same four benchmarks. Results are in Tables 10–11 alongside A/B, and rfg_chain/naive_chain/restore_chain/frontier*_chain logs and audits exist for all four.",
+      "evidence": [
+        "proposal/sections/table_chain.tex:11-14",
+        "proposal/sections/table_line_ablation.tex:11-15",
+        "proposal/logs/*/rfg_chain_audit.jsonl.gz, naive_chain_*"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "third_topology_generalization.third_topology_quality": {
+      "value": "full",
+      "confidence": "medium",
+      "reason": "All four benchmarks are run on the line. Reported: RFG fidelity, to compare with the unconstrained baselines in Tables 1–2 (acceptance_checks chain accuracy is true for all four); naive CNOT/depth; RFG CNOT/depth with CNOT× and Depth× multipliers; routing ablations; and tied-embedding controls (Table 7). This is the same depth as the required topologies.",
+      "evidence": [
+        "proposal/sections/table_chain.tex",
+        "proposal/sections/table_line_ablation.tex",
+        "proposal/sections/table_remaining_embeddings.tex:12-13,15-16,18-19,21-22",
+        "proposal/logs/acceptance_checks.json accuracy.chain true"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "originality_and_literature.contribution_originality": {
+      "value": "meaningful_extension",
+      "confidence": "medium",
+      "reason": "RFG constrains AVQDS generator choice to candidates retaining at least rho of the source residual improvement, then minimizes incremental SWAP cost over a beam of persistent layouts. This is a sensible and novel-in-detail combination for McLachlan dynamics, with a local residual guarantee (Eq. 6) and an ablation showing growth contributes beyond routing. Its core ideas, cost-aware operator selection in adaptive ansätze (e.g. connectivity-biased ADAPT) and beam/frontier routing, are established, and the paper itself presents the frontier as a 'deliberately simple routing component'. The result is a meaningful extension with limited novelty rather than a distinct new method class.",
+      "evidence": [
+        "proposal/sections/introduction.tex:13-15",
+        "proposal/sections/method.tex:39-58",
+        "proposal/sections/analysis.tex:9-12"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "originality_and_literature.literature_engagement": {
+      "value": "substantial",
+      "confidence": "medium",
+      "reason": "The paper has 75 references (the original paper has 69). It discusses more than 8 directly relevant works across routing/compilation (SABRE, Cowtan, tket, Nannicini ILP, NASSC), hardware-aware adaptive variational methods (Weaving, TETRIS-ADAPT, AVQDS(T), layering/subpool, Umer & Angelakis) and variational dynamics (McLachlan, Yuan et al., ADAPT/qubit-ADAPT, p-VQD). It explicitly positions RFG against them. Many legacy references are cited only in passing.",
+      "evidence": [
+        "proposal/sections/introduction.tex:10-15",
+        "proposal/sections/references.tex:133-153",
+        "proposal/logs/pdf_validation.json reference_count 75"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "originality_and_literature.spec_independence": {
+      "value": "partially_independent",
+      "confidence": "medium",
+      "reason": "The title describes the contribution, and the prose uses physics naming (Ising/XY, square ladder/heavy-hex) and reads as self-contained. Some spec terminology is used verbatim, however: 'smart-embedding naive baseline', and the subsection titles 'Mechanism analysis', 'Failure analysis' and 'Computational cost trade-off'. 'Naive A/B' and 'one-percentage-point accuracy allowance' also echo the spec, which is partly expected given the mandated section structure.",
+      "evidence": [
+        "proposal/report.tex:14",
+        "proposal/sections/analysis.tex:2,31,42",
+        "proposal/sections/setup.tex:27",
+        "proposal/sections/results.tex:6"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.journal_quality_structure": {
+      "value": "journal_quality",
+      "confidence": "medium",
+      "reason": "The paper has a clear thesis (residual-budgeted growth versus routing-only), prose-driven sections with no bullet lists, claims traced to logged numbers that I spot-checked, careful scoping of claims ('not a claim of a globally optimal router'), and appropriate citations. The prose is dense and technical, and some validation detail reads like a methods appendix, but overall quality is journal-level.",
+      "evidence": [
+        "proposal/sections/introduction.tex:6-8",
+        "proposal/sections/results.tex",
+        "proposal/sections/analysis.tex"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.limitations_discussion_present": {
+      "value": "substantive",
+      "confidence": "high",
+      "reason": "Limitations are explicit and task-relevant: fixed Hamiltonian pool, noiseless gates, conditional LSM initialization with no state-preparation cost, no noisy-hardware fidelity claim, no Trotter, SABRE or tket comparison, no system-size scaling, factorial embedding enumeration, RFG initial-map sensitivity not established, depth not guaranteed, and single deterministic trajectories.",
+      "evidence": [
+        "proposal/sections/analysis.tex:27,46,52-56",
+        "proposal/attempts_log.md A08 (limitations paragraph)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.rendered_pdf_clean": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "I could not render the PDF in this environment (pdftoppm unavailable), so I inspected the solver's 17 page previews; the PDF's SHA-256 matches the solver's validation record. Equations fit the margins, tables fit the text width, all 7 figures render, and there are no '??' references. report.log shows no overfull boxes and no undefined references, only minor underfull warnings. The one cosmetic issue is that a few green logical-site labels in Fig. 7 are partly overlapped by thick edges.",
+      "evidence": [
+        "proposal/preview/page_01.png ... page_17.png",
+        "proposal/report.log (only Underfull at lines 544-619; no Overfull/undefined)",
+        "proposal/logs/pdf_validation.json"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.neurips_style": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "report.tex loads \\usepackage[preprint,nonatbib]{neurips}, and proposal/neurips.sty is byte-identical (cmp) to the supplied workspace neurips.sty.",
+      "evidence": [
+        "proposal/report.tex:2",
+        "cmp proposal/neurips.sty workdir_outside_proposal/neurips.sty -> IDENTICAL"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.main_results_tables_complete": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "tab:main_results_mfim and tab:main_results_lsm each have all five required rows (AVQDS, naive A, naive B, RFG A, RFG B) with fidelity, N_cx and depth for both h_z values. tab:overhead gives CNOT and depth multipliers for naive and RFG on all 8 cells. No placeholders.",
+      "evidence": [
+        "proposal/sections/table_mfim.tex:12-16",
+        "proposal/sections/table_lsm.tex:12-16",
+        "proposal/sections/table_overhead.tex:12-19"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.initial_state_seed_pairing.same_initial_state_and_seeds": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "Within each benchmark, the unconstrained, naive (a post-hoc compile of the same trajectory) and RFG runs share an identical initial_state_hash and time_hash in summary.json and manifest.json. The driver advances all methods on one shared adaptive mesh from the same initial state.",
+      "evidence": [
+        "proposal/logs/mfim0/summary.json time_hash 4bd3f730... and initial_state_hash f812f002... identical across all methods",
+        "proposal/logs/integrity_checks.json paired_time_hash/paired_initial_hash per benchmark",
+        "proposal/code/run_experiments.py:68-84"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.effort_evidence.attempts_log_when_partial_work_claimed": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "The paper describes non-wins and a terminated backend fixture. attempts_log.md documents each one with what was tried, observed and decided: A04 (fixture replaced); A06 (square tie, XY −0.7 depth regression, width-one worse than naive, rho=0.5 regression, persistent vs restoring, line depth regression); and A07 (embedding controls). The task sets no minimum number of attempts.",
+      "evidence": [
+        "proposal/attempts_log.md A04, A06, A07",
+        "proposal/sections/analysis.tex:39"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.experiment_completeness.all_paper_experiments_logged": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "Every experiment described has logs for all four benchmarks: unconstrained, naive and restoring on three graphs, routing-only W=1/16 on three graphs, RFG on three graphs, RFG rho=0.5 on heavy-hex, tied-embedding sensitivity, XY expm reference checks, the backend/routing regression (validation.json) and the graph bounds (integrity_checks.json).",
+      "evidence": [
+        "proposal/logs/{mfim0,mfim05,lsm_m07,lsm16}/ listings",
+        "proposal/logs/lsm_m07/expm_reference_check.json, lsm16/expm_reference_check.json",
+        "proposal/logs/*/embedding_sensitivity.json",
+        "proposal/logs/validation.json"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.hamiltonian_pool_faithfulness.uses_original_benchmarks": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "MFIM is built from the authors' zzxzmodel(nsite=8, hx=-2, hz∈{0,0.5}), whose loops over i in range(-1,7) include the periodic Z7Z0 bond, with initial state |0>^8. LSM uses xyzmodel(nsite=8, OBC bonds i=0..6, gi=1, gf=-1, J=1, hz∈{-0.7,1.6}) with an ED ground state.",
+      "evidence": [
+        "proposal/code/avqds_adapter.py:163-179",
+        "workdir_outside_proposal/code/AVQDS/avdynamics-avqds/avdynamics/model.py:80-88,242-280",
+        "proposal/sections/setup.tex:4-16"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.topology_subgraph_faithfulness.edge_sets_match_spec": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "routing.py EDGES['square'] contains exactly the spec's 10 edges, and EDGES['heavyhex'] = [(0,1),(1,2),(1,3),(3,5),(4,5),(5,6),(6,7)] matches the spec's 7 edges. These sets are used for routing and audits, and I re-checked the audits against the spec sets.",
+      "evidence": [
+        "proposal/code/routing.py:8-12",
+        "proposal/sections/setup.tex:19-22"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.lsm_protocol_faithfulness.ramp_protocol_matches_paper": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "gamma(t)=1−2t/3 on [0,3] is implemented as H(0)+min(t,3)·slope, linear in gamma from the authors' xyzmodel (gi=1, gf=-1, T=3). It is then held at gamma=−1 until t=6, giving total time 2T=6. Pauli-matrix XY prefactors −[(1+γ)XX+(1−γ)YY] match paper Eq. 11. The ED ground-state initial state is used and runs land exactly on t=3 and t=6.",
+      "evidence": [
+        "proposal/code/avqds_adapter.py:172-179",
+        "proposal/code/run_experiments.py:70-71",
+        "workdir_outside_proposal/code/AVQDS/avdynamics-avqds/avdynamics/model.py:109-140",
+        "proposal/logs/integrity_checks.json lsm final_time 6.0"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.naive_baseline_protocol_faithfulness.post_hoc_shortest_path_swap": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "The naive baseline compiles the recorded unconstrained AVQDS circuit, run through the authors' imported ansatz. Starting from the smart map, each nonlocal rotation takes the lexicographically first shortest path and inserts d−1 adjacent SWAPs, keeping the layout. The source labels and the SWAP-inserted circuit are logged side by side for every prefix. A restoring shortest-path variant is also reported, and RFG beats both.",
+      "evidence": [
+        "proposal/code/routing.py:132-146",
+        "proposal/code/analyze.py:31-32,51-52,78-82",
+        "proposal/logs/mfim0/naive_heavyhex_source_and_circuit.json.gz (source_labels beside gates; e.g. Z7Z0 routed via 4 SWAPs 7→6→5→3→1)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.selective_reporting.swap_insertion_strategy_documented": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "The persistent lexicographic shortest-path strategy is documented in Setup and code, and the same function is applied to every (benchmark × topology) cell. The alternative restoring strategy and all tied embeddings (320/16/28/2 maps) are reported, so neither the insertion rule nor the embedding is selectively chosen.",
+      "evidence": [
+        "proposal/sections/setup.tex:27",
+        "proposal/sections/table_ablation.tex:11-12",
+        "proposal/sections/table_embeddings.tex, table_remaining_embeddings.tex",
+        "proposal/attempts_log.md A02, A07"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.operator_pool_authorship.hamiltonian_pool_used_or_expansion_disclosed": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "All headline runs use the canonical Hamiltonian pools from the authors' generate_op_pools: Ising 16, ZZXZ 24 and XYZ 22 (8 Z + 14 XX/YY), confirmed by logged pool sizes. No expanded pool is used.",
+      "evidence": [
+        "proposal/logs/integrity_checks.json pool_size 16/24/22/22",
+        "proposal/code/avqds_adapter.py:59-72",
+        "proposal/sections/setup.tex:9,16"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.simulation_time_faithfulness.times_match_spec": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "All MFIM runs end at t=3.0 and all LSM runs at t=6.0. Final audit and summary rows are at those times.",
+      "evidence": [
+        "proposal/logs/integrity_checks.json final_time 3.0, 3.0, 6.0, 6.0",
+        "Judge audit re-parse final_t 3.0/3.0/6.0/6.0 for all RFG/naive cells"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.cnot_convention_consistency.unconstrained_uses_2cx_convention": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "Unconstrained counts come from logical(), which decomposes each two-site Pauli rotation as basis change–CX–Rz–CX, i.e. 2 CNOTs, with 0 for single-site rotations. For example, mfim0 has 140 CX from 70 two-site rotations. The variant uses the same rotation decomposition plus 3 CX per SWAP.",
+      "evidence": [
+        "proposal/code/routing.py:51-63,148-150",
+        "proposal/code/analyze.py:52",
+        "proposal/sections/setup.tex:34"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.noiseless_simulation_faithfulness.no_noise_model": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "All methods use exact statevector evolution and exact gate-level replay. The code contains no noise channels, and the paper explicitly excludes noise and shot sampling.",
+      "evidence": [
+        "proposal/code/routing.py:159-173 (exact statevector replay)",
+        "proposal/code/avqds_adapter.py:29-48",
+        "proposal/sections/setup.tex:34"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "evidence_completeness.quantitative_sources_documented": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "Tables and numeric macros are generated by make_artifacts.py from summary.json and manifests (paper_numbers.json, numbers.tex). I traced the in-text numbers to the logs: 46→31 SWAPs, 140→112 logical CX, 20 vs 16 and 22 vs 14 SWAPs, and the 52-CX bounds (integrity_checks graph_bounds). No source-paper numbers are presented as results.",
+      "evidence": [
+        "proposal/code/make_artifacts.py:36-153",
+        "proposal/logs/paper_numbers.json",
+        "proposal/logs/numbers.tex",
+        "proposal/logs/mfim0/summary.json frontier16_heavyhex swaps 46, rfg_heavyhex swaps 31"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "evidence_completeness.required_reporting_coverage": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "Reporting covers every required item: all required cells (4×{unconstrained} + 8 naive + 8 variant), per-step fidelity, infidelity, CNOT, depth and N_theta, Loschmidt echo, energy, correlations, audits, embedding logs, ablations, timing, and attempts. The runs are deterministic single trajectories, which is stated explicitly, so no seed aggregation is required. Hyperparameters were predeclared, as documented in A02, with the rho=0.5 sensitivity fully reported.",
+      "evidence": [
+        "proposal/sections/setup.tex:34-36",
+        "proposal/logs/*/summary.json (infidelity field)",
+        "proposal/attempts_log.md A02, A05"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "evidence_completeness.auxiliary_observables_and_topology_figures": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "All required auxiliary figures are present. Fig. 3: Loschmidt echoes for both MFIM cases (exact, AVQDS, heavy-hex RFG; square and naive are identical states and omitted with explanation). Fig. 4: energy for both LSM cases. Fig. 5: XX/YY correlations for (0,1) and (0,7) in both LSM cases. Fig. 7: per-topology physical edge use with initial logical labels for A and B. Fig. 6 and Table 5 give component ablations.",
+      "evidence": [
+        "proposal/sections/results.tex:33-47",
+        "proposal/sections/analysis.tex:15-24",
+        "proposal/preview/page_10.png, page_11.png, page_12.png"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    }
+  }
+}

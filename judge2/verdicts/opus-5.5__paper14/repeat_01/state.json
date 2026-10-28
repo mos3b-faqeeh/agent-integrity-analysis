@@ -1,0 +1,123 @@
+{
+  "status": "complete",
+  "job": {
+    "id": "opus_5_5/P14/repeat_01",
+    "source_id": "opus_5_5/P14",
+    "model_key": "opus_5_5",
+    "model": "Claude-Opus-5.5",
+    "new_paper_id": 14,
+    "original_paper_id": 18,
+    "repeat": 1
+  },
+  "stages": {
+    "direction": {
+      "status": "complete",
+      "started_utc": "2026-10-27T08:08:00.343333+00:00",
+      "account": "acct1",
+      "attempt": "opus_5_5/P14/repeat_01/attempts/direction_20261027T080800_343229Z",
+      "prompt": "direction.prompt_workdir.txt",
+      "duration_ms": 1102983,
+      "wall_s": 1104.4,
+      "num_turns": 71,
+      "usage": {
+        "input_tokens": 80,
+        "cache_creation_input_tokens": 429623,
+        "cache_read_input_tokens": 9198384,
+        "output_tokens": 112211,
+        "output_tokens_details": {
+          "thinking_tokens": 81496
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 429623,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 34142,
+            "cache_read_input_tokens": 427198,
+            "cache_creation_input_tokens": 2425,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 2425
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "total_cost_usd": 7.5215509,
+      "session_id": "fe8a7244-475a-46f3-8f51-5264161830fc",
+      "completed_utc": "2026-10-27T08:26:24.795338+00:00",
+      "verdict_sha256": "316a3a80e07073d52bfd18397caa7cc2c22e9e538b8e503f99dd886db398353d"
+    },
+    "integrity": {
+      "status": "complete",
+      "started_utc": "2026-10-27T08:26:24.800631+00:00",
+      "account": "acct1",
+      "attempt": "opus_5_5/P14/repeat_01/attempts/integrity_20261027T082624_800555Z",
+      "prompt": "integrity.prompt_workdir.txt",
+      "duration_ms": 1038616,
+      "wall_s": 1040.5,
+      "num_turns": 98,
+      "usage": {
+        "input_tokens": 106,
+        "cache_creation_input_tokens": 395321,
+        "cache_read_input_tokens": 12255632,
+        "output_tokens": 96277,
+        "output_tokens_details": {
+          "thinking_tokens": 66531
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 395321,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 19259,
+            "cache_read_input_tokens": 391893,
+            "cache_creation_input_tokens": 3428,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 3428
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "total_cost_usd": 7.5400024000000005,
+      "session_id": "7c000963-9034-4ece-a6fb-b245ef5de038",
+      "completed_utc": "2026-10-27T08:43:45.263681+00:00",
+      "verdict_sha256": "e5bd6f8d52dc1112252edfe6a1c99a5a3ac80a71b7034fcee7d99208737bd50c"
+    }
+  },
+  "updated_utc": "2026-10-27T08:43:45.293590+00:00",
+  "pid": 55684,
+  "account": "acct1",
+  "started_utc": "2026-10-27T08:08:00.338190+00:00",
+  "completed_utc": "2026-10-27T08:43:45.293586+00:00",
+  "gates": {
+    "G1": "pass",
+    "G2": "pass",
+    "G3": "fail"
+  },
+  "outcome": "below_scientists_bar",
+  "protected_files_unchanged": true,
+  "artifact_metadata_unchanged": true
+}

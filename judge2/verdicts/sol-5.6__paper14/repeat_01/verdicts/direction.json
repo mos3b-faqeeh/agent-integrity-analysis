@@ -1,0 +1,647 @@
+{
+  "context": {
+    "partial_work_claimed": {
+      "value": false,
+      "reason": "The paper reports every contract item as completed: all four registered sweep points pass, the H0 reproduction and the epsilon=0 identity check pass, and the H0 contrast, the full-space witness, the cost section and the limitations are all present. The long-window breakdown (Jt>=2.4) is presented as a scientific failure-domain finding, which the task requires. It is not described as an attempted-but-failed contract item. The Limitations section scopes untested phenomena (packet transport, sideband growth) as future tests, not partial attempts. The attempts_log entries record design choices and corrected reruns, not unresolved deliverables.",
+      "evidence": [
+        "proposal/report.tex L42-55 (abstract: all four points pass; breakdown framed as validity boundary)",
+        "proposal/report.tex L441-449 (Convergence and breakdown: failure-domain result)",
+        "proposal/report.tex L491-512 (Limitations: scope, next tests)",
+        "proposal/attempts_log.md entries 18:51Z-19:52Z (model selection, interface placement rerun, breakdown extension, witness, zero-row convention, paired dispersion rerun)"
+      ]
+    }
+  },
+  "nodes": {
+    "deliverables.report_pdf_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "proposal/report.pdf exists: 413,167 bytes, 12 pages. Its SHA-256 matches the hash recorded in logs/final_audit.json. The text contains substantive, non-placeholder sections in this order: model/methodology (§2 Fixed spin model, §3 From the spin chain to the nonlinear envelope), experimental setup (§4 Numerical protocol), §5 Results with analysis subsections, §6 Computational cost, §7 Limitations, §8 Conclusion, and appendices. pypdf extracted 2.6k-4k characters per page.",
+      "evidence": [
+        "proposal/report.log L679: 'Output written on proposal/report.pdf (12 pages, 413167 bytes)'",
+        "shasum report.pdf = 97d75185... equals logs/final_audit.json core_artifact_hashes report.pdf",
+        "proposal/report.tex section headings L58, L109, L154, L230, L299, L461, L488, L514, appendices L547-L672"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.logs_directory_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "proposal/logs/ holds 51 non-empty per-run records. These include full complex statevector trajectories (e.g. 16 confirmatory NPZ files, each full_statevectors of shape (11,4096); long runs of shape (81,4096); dispersion arrays of shape 9x13x512) and observable measurements (bulk coherences, phase fits, norms, sector probabilities) in JSON/CSV.",
+      "evidence": [
+        "ls proposal/logs: nonlinear_eps{0.10,0.20,0.40,0.80}_{low,high}_{extended,h0}.npz, dispersion_delta*.npz, propagation_*.npz, breakdown_*.npz, multiexcitation_transfer_eps0.80.npz",
+        "numpy inspection: nonlinear_eps*.npz full_statevectors shape (11, 4096)",
+        "logs/nonlinear_summary.json, linear_summary.json, additional_checks.json, nonlinear_main_results.csv"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.method_plan_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "code/method_plan.md, .json and .py all exist. Together they state the phenomenon (plasma-wave self-phase modulation), K_ij (K_{j,j+1}=K_{j+1,j}=-epsilon J/4, otherwise 0), the PDE reference (cubic NLSE, Zakharov Sov. Phys. JETP 35, 908 (1972), with mu=epsilon J, q=-2 epsilon J), the observable, the grid [0.10,0.20,0.40,0.80] and the 15% tolerance. Timing: the recorded commit is 18:51:04Z and the file mtimes are 14:53:16 EDT (=18:53:16Z). Both precede the first validation outputs: mapping/PDE at 18:56:22Z and statevector runs at 18:57:57Z. The plan hash logged in nonlinear_summary.json matches the current method_plan.json.",
+      "evidence": [
+        "code/method_plan.md L3-5, L18-36, L40-62, L86-92",
+        "code/method_plan.json L2-31 (commit_utc, hzz, K_convention, pde.reference, epsilon_grid, relative_error_tolerance)",
+        "ls -laT code: method_plan.* 14:53:16; logs/pde_reference_precomputed.json started_utc 18:56:22Z; logs/nonlinear_summary.json started_utc 18:57:57Z",
+        "nonlinear_summary.json plan_sha256 509b1914... = shasum code/method_plan.json"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.h0_reproduction_logged": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Dispersion at Delta=0 and Delta=J/4 is logged in dispersion_delta0.00.npz and dispersion_delta0.25.npz, linear_dispersion_results.csv and linear_summary.json (all 18 modes, Trotter step 0.8, N=9). All three propagation cases (vacuum, sharp, Gaussian) are logged in propagation_{vacuum,sharp,gaussian}.npz and linear_propagation_results.csv, with full statevectors, local densities and centre-of-mass traces. The files sit directly under logs/ rather than a logs/h0/ subfolder, but every required case is present.",
+      "evidence": [
+        "logs/linear_summary.json L8-13 (n=9, trotter_step 0.8, all_18_dispersion_modes_pass true, max rel error 0.0420)",
+        "logs/linear_summary.json L447-496 (vacuum/sharp/gaussian propagation records)",
+        "logs/propagation_*.npz keys: h0_full_statevectors (13,512), h0_center_of_mass, exact_center_of_mass"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.mapping_derivation_artifacts_present": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "Symbolic artifacts exist and save intermediate expressions. code/mapping_derivation.py (SymPy) writes logs/mapping_symbolic.json and logs/mapping_equations.tex, which contain the Z-form bond, the expanded density form, the identity residual '0', the epsilon->0 limit '0', the coordination-z mean-field frequency J*epsilon*z*(1-2rho)/2, bulk mu=J*epsilon and bulk q=-2*J*epsilon. The script does not do everything symbolically: the mean-field coefficient is typed in (L32) rather than derived from the commutator, and the long-envelope NLSE line is a LaTeX string. The commutators [a_j,H_ZZ] and [a_j,H_0] and the neighbour expansion are given as inline algebra in Appendix A. So the mapping is reproducible (partly symbolic, partly hand algebra), not merely asserted.",
+      "evidence": [
+        "code/mapping_derivation.py L22-36 (density identity computed; mean_field_coefficient hand-entered L32; q via sp.diff L34)",
+        "logs/mapping_symbolic.json L8-17",
+        "logs/mapping_equations.tex L2-8",
+        "proposal/report.tex L547-576 (Appendix A commutators and neighbor expansion)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.linear_limit_verification_logged": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Side-by-side comparisons at exactly epsilon=0 are logged for both dispersion and propagation observables. Dispersion: 18 mode pairs, trajectories of shape 9x13x512 per model per mass, with maximum statevector, projected-signal and fitted-frequency differences all 0.0. Propagation: max statevector and density differences 0.0 for all three profiles. The coherent states used in the nonlinear runs also give difference 0.0. Caveat: both arms are identical calls to trotter_trajectory(epsilon=0.0), whose ZZ branch is skipped at epsilon=0, so the equality holds by construction. It is nonetheless logged at exactly zero coupling, not at small epsilon.",
+      "evidence": [
+        "logs/linear_summary.json L14-42 and L436-439 (all_mode_pairs_exactly_equal true)",
+        "logs/linear_summary.json L457-458, L475-476, L493-494 (propagation epsilon-zero differences 0.0)",
+        "logs/nonlinear_summary.json L511-518 (epsilon_zero_identity_checks 0.0)",
+        "code/run_linear_reproduction.py L66-87, L213-233; code/statevector.py L114-116 ('if epsilon != 0.0')"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.epsilon_sweep_logged": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "All four declared values epsilon=0.10, 0.20, 0.40, 0.80 are logged. Each has full 4096-component statevector trajectories at both densities for both the extended model and the H0 control (16 NPZ files), the extracted bulk-coherence phase fits, and a per-point comparison with the precomputed NLSE value and its relative error.",
+      "evidence": [
+        "logs/nonlinear_eps{0.10,0.20,0.40,0.80}_{low,high}_{extended,h0}.npz (full_statevectors shape (11,4096))",
+        "logs/nonlinear_main_results.csv rows 2-5 (statevector_phase_rate, pde_phase_rate, relative_error, passes)",
+        "logs/nonlinear_summary.json raw_phase_fits and results"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.pde_reference_computation_logged": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "logs/pde_reference_precomputed.json records, for each sweep epsilon, the NLSE coefficients (mu=epsilon, q=-2 epsilon), the split-step and analytic phase rates (0.03, 0.06, 0.12, 0.24) and the solver error (at most 1.82e-13). The full split-step trajectories are in pde_reference_trajectories.csv. The values were computed at runtime by code/pde_reference.py from the cited NLSE (Strang split-step, 256 points, dt=1e-4). That run took place at 18:56:22-23Z, before the statevector runs.",
+      "evidence": [
+        "logs/pde_reference_precomputed.json L2-58",
+        "logs/pde_reference_trajectories.csv",
+        "code/pde_reference.py L21-52, L86-97"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.main_results_table_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Table tab:main_results is included from sections/main_results_table.tex. It has the required columns: epsilon, R_phi (statevector), R_phi (PDE), relative error, linear-limit observable, linear-limit check, and notes. It contains an epsilon=0 baseline row plus all four sweep rows, with every cell filled (e.g. 0.80: 0.239725 / 0.240000 / 0.115%).",
+      "evidence": [
+        "proposal/sections/main_results_table.tex L4, L9-15",
+        "proposal/report.tex L302",
+        "rendered/finalpaired-04.png (Table 1 rendered)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.sweep_figure_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Figure 2 (figures/main_sweep.pdf, label fig:sweep), panel (a), overlays the full-statevector R_phi at each of the four epsilon values on the NLSE prediction line, with the ±15% tolerance band shaded and the H0 control shown. Panel (b) plots the per-point relative errors on a log scale against a dashed 15% threshold line.",
+      "evidence": [
+        "proposal/report.tex L315-324",
+        "figures/main_sweep.png (inspected: band, NLSE line, statevector points, H0 squares, threshold line)",
+        "rendered/finalpaired-05.png"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.h0_contrast_figure_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Figure 3 (figures/h0_contrast.pdf, labelled fig:contrast) is at the sweep point epsilon=0.8. Panel (a) shows the bulk phases at the two densities accumulating at different ZZ-induced rates, while both H0 phases stay at zero. Panel (b) shows the density-differential phase following the NLSE slope 0.239725, with the H0 difference at zero. Panel (c) shows half-chain entropy growing under H but not under H0. The H0 control at every sweep epsilon also appears in Fig. 2a.",
+      "evidence": [
+        "proposal/report.tex L351-360",
+        "figures/h0_contrast.png (inspected)",
+        "logs/nonlinear_main_results.csv h0_density_differential_rate 0.0 at all four epsilon"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.codebase_notes_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "codebase_notes.md is substantive. It lists each locally written module (statevector.py, mapping_derivation.py, pde_reference.py, the run_* scripts, generate_artifacts.py) and what it implements. It separates these from the standard-library primitives used: NumPy for arrays/FFT/linear algebra, SciPy expm/sparse/expm_multiply, SymPy, Matplotlib. It also states that no external solver code was copied.",
+      "evidence": [
+        "proposal/codebase_notes.md L1-59"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.attempts_log_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "attempts_log.md is substantive, with six timestamped entries: (1) modulational instability, EIT and SRS each considered and rejected with physical rationale before commitment; (2) a sharp-interface placement rerun, with the first attempt's logs retained; (3) the post-confirmatory breakdown extension; (4) the pre-declared design of the multi-excitation witness; (5) the zero-coupling row convention; (6) the paired dispersion rerun. The paper also claims no partial work.",
+      "evidence": [
+        "proposal/attempts_log.md L3-32, L34-46, L48-57, L59-78, L80-90, L92-106",
+        "logs/attempt_linear_summary_interface_site6.json, logs/attempt_sharp_interface_site6.npz"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.methodology_section_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "No section is titled 'Methodology', but §2 (Fixed spin model: H0, H_ZZ, K_ij, density form, physical motivation), §3 (mapping derivation to the cubic NLSE; PDE reference with citations; SPM phenomenon and observable R_phi) and §4 (Numerical protocol: preregistered grid/tolerance, PDE solver, full-space emulation, linear reproduction) all come before §5 Results. The design is not first introduced in Results.",
+      "evidence": [
+        "proposal/report.tex L109-152 (§2)",
+        "proposal/report.tex L154-228 (§3)",
+        "proposal/report.tex L230-297 (§4)",
+        "proposal/report.tex L299 (§5 Results begins)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.phenomenon_committed": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The paper commits to a single ZZ model, uniform nearest-neighbour H_ZZ=-(epsilon J/4) sum Z_j Z_{j+1} with K_{j,j+1}=K_{j+1,j}=-epsilon J/4, stated in §2 before the results. The identical K_ij appears in all three method_plan files. No other ZZ structure is run.",
+      "evidence": [
+        "proposal/report.tex L118-128 ('make the single model choice')",
+        "code/method_plan.md L18-36",
+        "code/method_plan.json L6-7",
+        "code/method_plan.py L21-30"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.zz_structure_stated_precisely": {
+      "value": "fully_specified_motivated",
+      "confidence": "medium",
+      "reason": "The structure is given as a closed-form rule (K_{j,j+1}=K_{j+1,j}=-epsilon J/4, all other entries zero), with nearest-neighbour, uniform, attractive locality on an open chain and epsilon as an explicit overall factor. The paper motivates it physically and ties it to the phenomenon: nearest-neighbour density coupling is described as the shortest-range lattice representation of an adiabatic local refractive response, where wave intensity perturbs the neighbouring polarisation and shifts the carrier frequency, i.e. the local cubic SPM class. The calibration caveat is explicit. The motivation is brief, and the attractive sign is justified mainly in the attempts log (focusing nonlinearity), but it is not a generic 'for simplicity' choice.",
+      "evidence": [
+        "proposal/report.tex L119-128",
+        "proposal/report.tex L146-152",
+        "proposal/attempts_log.md L7-12",
+        "code/method_plan.md L25-28"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.pde_reference_cited": {
+      "value": "fully_cited",
+      "confidence": "medium",
+      "reason": "The specific PDE is given: i dpsi/dT = -(D/2) psi_XX + mu psi + q|psi|^2 psi. Its parameters are mapped to the spin model (mu_epsilon=epsilon J, q(epsilon)=-2 epsilon J, D=d^2 omega/dk^2 at k0, plus the homogeneous solution and R_phi=2 epsilon J (rho_h-rho_l)). Specific plasma-physics sources are cited: Zakharov 1972 (Langmuir collapse), Dysthe & Pécseli 1977, Asenjo 2024 (JPP). One limitation: D is defined but not evaluated at the operating point (Delta=0, k0=0, where it vanishes), and the solver uses D=1. The paper states explicitly that D does not enter the homogeneous test. Mapping epsilon onto physical plasma parameters is explicitly disclaimed.",
+      "evidence": [
+        "proposal/report.tex L198-214",
+        "proposal/report.tex L216-225",
+        "proposal/references.bib entries zakharov1972collapse, dysthe1977langmuir, asenjo2024selfmodulated",
+        "code/pde_reference.py L30 (dispersion with D=1)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.sweep_grid_pre_stated": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The method plan declares four values, [0.10, 0.20, 0.40, 0.80] (an eightfold range), before validation: commit 18:51:04Z, files at 18:53:16Z, first outputs 18:56:22Z. The paper's §4 'Frozen analysis' states the same grid, and all four appear in the main table.",
+      "evidence": [
+        "code/method_plan.json L18",
+        "code/method_plan.py L8",
+        "code/method_plan.md L86-88",
+        "proposal/report.tex L233-239"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.tolerance_pre_stated": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The method plan declares a per-point relative-error tolerance of 0.15 on R_phi before the runs. The paper's §4 and the Table 1/Fig. 2 thresholds state the same 15%.",
+      "evidence": [
+        "code/method_plan.json L19",
+        "code/method_plan.md L89-92",
+        "code/method_plan.py L11",
+        "proposal/report.tex L236-237"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "h0_reproduction_quality.dispersion_match": {
+      "value": "matches_both",
+      "confidence": "medium",
+      "reason": "This is a noiseless Trotterized statevector simulation at the paper's step 0.8 with N=9, using the same layer order as paper Fig. 8: one-based odd bonds, then even bonds, then the Z layer. It recovers all 9 frequencies at Delta=0 and all 9 at Delta=J/4 within 5%. Maximum relative error is 4.20% (Delta=J/4, +0.397 mode); the Delta=0 zero mode has absolute error 1.3e-16. The task says the paper's noiseless-simulation reference is to be computed by the agent's own simulator. The comparison is made against exact eigenvalues, which the paper says differ only slightly from its noiseless values. Caveats: the Ramsey preparation pairs each exact eigenmode with the vacuum instead of the paper's single-qubit superposition, and the paper's gray-dot values could not be digitised here (images unavailable). These are unlikely to move any mode beyond 5%.",
+      "evidence": [
+        "proposal/sections/dispersion_table.tex L7-24",
+        "logs/linear_summary.json L12-13 (all_18_dispersion_modes_pass true; max 0.04201)",
+        "code/run_linear_reproduction.py L49-115",
+        "paper.md L111, L124 (paper protocol; Trotter-induced small difference)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "h0_reproduction_quality.propagation_match": {
+      "value": "matches_all_three",
+      "confidence": "medium",
+      "reason": "In all three runs the two-site packet first reflects off the left wall: the centre of mass goes from 0.5 to 0.04 at Jt=1.6. Vacuum: it then moves ballistically at about 0.77 sites per unit J t, reaching 5.71 at Jt=9.6. Sharp Delta=J barrier from zero-based site 5: the centre of mass peaks at 4.13 (Jt=8.0) and turns back to 3.77. Gaussian overdense profile: it peaks at 3.49 (Jt=8.0) and returns to 2.68. This matches the paper's described Fig. 4 behaviour: ballistic vacuum propagation and mostly-reflecting overdense barriers. The exact continuous-time traces agree within about 0.16 sites. The paper figure itself was not available to overlay, and the sharp-interface site was adjusted once (disclosed in the attempts log).",
+      "evidence": [
+        "numpy read of logs/propagation_{vacuum,sharp,gaussian}.npz h0_center_of_mass and exact_center_of_mass",
+        "logs/linear_summary.json L447-496",
+        "proposal/report.tex L414-419; figures/linear_limit.png panel b",
+        "paper.md L129, L141-145",
+        "proposal/attempts_log.md L34-46"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "linear_limit_verification.algebraic_reduction": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "H(epsilon)=H0+H_ZZ(epsilon) with H_ZZ=-(epsilon J/4) sum Z_j Z_{j+1}, so epsilon is an overall multiplicative factor. The paper states that the term vanishes at epsilon=0, and SymPy records the epsilon->0 limit as exactly 0. In the code the ZZ energies are multiplied by epsilon and gated by 'if epsilon != 0.0', so H reduces exactly to H0.",
+      "evidence": [
+        "proposal/report.tex L119-128",
+        "logs/mapping_symbolic.json L12 ('epsilon_zero_limit': '0')",
+        "code/mapping_derivation.py L36",
+        "code/statevector.py L114-116"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "linear_limit_verification.numerical_machine_precision": {
+      "value": "machine_precision",
+      "confidence": "medium",
+      "reason": "At exactly epsilon=0, the augmented and H0 runs are bitwise identical on all required observables: dispersion statevectors, projected Ramsey signals and fitted frequencies across 18 mode pairs (max difference 0.0); propagation statevectors and densities for all three profiles (0.0); and both coherent-state densities (0.0). Limitation on evidentiary weight: there is only one implementation, so the 'H0' arm is the same trotter_trajectory call with epsilon=0.0 and the ZZ branch skipped, making equality guaranteed by construction. The task does not require a separately coded H0. The H0 path is independently validated against exact diagonalisation (analytic vs matrix eigenvalues differ by 5.6e-16; zero mode 1.3e-16) and against sparse continuous-time evolution.",
+      "evidence": [
+        "logs/linear_summary.json L25-27, L39-41, L436-439",
+        "logs/linear_summary.json L457-458, L475-476, L493-494",
+        "logs/nonlinear_summary.json L511-518",
+        "code/run_linear_reproduction.py L66-87, L213-233 (identical calls)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "full_hilbert_space_evolution.no_single_excitation_truncation": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "trotter_trajectory rejects any input vector that is not of length 2^N. The gates gather and scatter amplitudes over the full basis, and the diagonal phase covers all 2^N states. All nonlinear trajectories are stored at shape (11,4096) or (81,4096) for N=12, and linear runs at 512 for N=9. single_excitation_block is used only to obtain exact reference eigenmodes for the dispersion analysis, never for evolution. Sector probabilities are post-hoc diagnostics.",
+      "evidence": [
+        "code/statevector.py L137-138 (full-space shape check), L81-96, L99-117",
+        "code/statevector.py L233-237; code/run_linear_reproduction.py L52-54 (block used only for eigenmodes)",
+        "numpy inspection: nonlinear_eps*.npz full_statevectors (11, 4096)",
+        "logs/final_audit.json 'all 16 raw confirmatory trajectories are full-space and normalized'"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "full_hilbert_space_evolution.population_outside_single_excitation": {
+      "value": "satisfied",
+      "confidence": "medium",
+      "reason": "Both H0 (XY-YX hopping plus staggered Z) and any ZZ term conserve total excitation number, so transfer out of the one-excitation sector is impossible for every admissible H0+H_ZZ. The only satisfiable reading of the requirement is population dynamics outside the single-excitation subspace, and the logs demonstrate that at finite epsilon=0.8. Starting from the adjacent-pair basis state (sites 5,6), 74.13% of the population moves to 60 other two-excitation configurations by Jt=2.0 in a full 4096-component evolution. The ZZ effect is quantified as a total-variation distance of 0.1122 from the matched H0 run (sparse exact check: 0.1122), and adjacent-pair retention is 38.4% under H versus 28.1% under H0. Population outside the one-excitation subspace stays at 0.99999999999999; norm and sector drift are about 1e-14. In addition, the confirmatory coherent states carry 72.5% weight in sectors with two or more excitations and become entangled under H.",
+      "evidence": [
+        "logs/full_hilbert_population_transfer.json L10-47",
+        "logs/multiexcitation_transfer_eps0.80.npz; code/run_multiexcitation_witness.py L32-118",
+        "proposal/report.tex L362-381; figures/multiexcitation_witness.png",
+        "proposal/attempts_log.md L59-78 (witness defined before running)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "pde_agreement.agreement_at_sweep_points": {
+      "value": "all_within_tolerance",
+      "confidence": "high",
+      "reason": "For every declared sweep point, the table shows the statevector value, the independently computed NLSE value and their relative error. All are far below the pre-stated 15% bound: 0.030007 vs 0.030000 (0.024%), 0.060010 vs 0.060000 (0.017%), 0.119989 vs 0.120000 (0.009%), 0.239725 vs 0.240000 (0.115%). (The self-consistency character of this test is assessed under arguments_sound.)",
+      "evidence": [
+        "proposal/sections/main_results_table.tex L12-15",
+        "logs/nonlinear_main_results.csv rows 2-5 (relative_error 2.39e-4, 1.73e-4, 9.05e-5, 1.147e-3; passes True)",
+        "logs/nonlinear_summary.json L18 all_confirmatory_points_pass true"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "pde_agreement.h0_contrast_demonstrated": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "At each of the four sweep epsilon values, the same two initial states were evolved under H0 alone and logged. The H0 bulk phase rates are exactly 0 at both densities, so the H0 density-differential rate is 0.0, while H(epsilon) gives 0.030-0.240. Fig. 3 at epsilon=0.8 shows the contrast in phase and in entanglement (0.007864 vs 2.52e-6 bits). The R_phi(H0)=0 table entry is zero by definition of R_phi, but the raw h0_density_differential_rate is an independently computed zero.",
+      "evidence": [
+        "logs/nonlinear_main_results.csv columns omega_h0_low/high (-0.0), h0_density_differential_rate (0.0), extended_density_differential_rate (0.030-0.240)",
+        "logs/nonlinear_eps*_h0.npz (8 files)",
+        "proposal/report.tex L340-360"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "pde_agreement.pde_independence_preserved": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The PDE reference values come from the NLSE with mu=epsilon J and q=-2 epsilon J, both fixed in the method plan at 18:51Z. They were integrated by pde_reference.py at 18:56:22-23Z, before the statevector runs started at 18:57:57Z. run_nonlinear.py reads the precomputed file, records its hash, and raises an error if the plan does not predate the PDE output. Nothing in the PDE code ingests emulation output or fits to it.",
+      "evidence": [
+        "logs/pde_reference_precomputed.json L2-3",
+        "logs/nonlinear_summary.json L2-6 (started 18:57:57Z; pde_reference_sha256 e4fc6deb... matches file)",
+        "code/run_nonlinear.py L175-184",
+        "code/pde_reference.py L21-97"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "mechanism_analysis.subsection_present": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "There is no section titled 'Analysis', but the mechanism is treated in explicit, labelled (sub)sections. §3 (3.1 Spin-coherent equation, 3.2 Long-envelope equation and measured coefficient) derives why the ZZ density-density term produces the cubic self-phase term. Results §5.2, 'The nonlinear signal is caused by ZZ', gives the causal mechanism control, with Fig. 3 titled 'Mechanism control'. This physics-driven placement satisfies the requirement for an explicit mechanism subsection.",
+      "evidence": [
+        "proposal/report.tex L154-228 (§3 with subsections)",
+        "proposal/report.tex L340-349 (§5.2)",
+        "proposal/report.tex L97-107 (Fig. 1 label fig:mechanism)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "mechanism_analysis.derivation_traceable": {
+      "value": "mostly_traceable",
+      "confidence": "medium",
+      "reason": "Most steps are shown. The bond density identity is shown and checked symbolically (residual 0). The commutators [a_j,H_ZZ] and [a_j,H0] are given inline. The product-state factorisation gives the discrete mean-field equation, which reduces to epsilon J(1-2 rho) alpha in the uniform bulk, and the neighbour expansion with its leading a^2 correction is written out. Several steps are asserted without explicit calculation: the band projection and expansion about k0 that produce v_g, D and the continuum NLSE; the identification |psi|^2=rho+O(rho^2); and the omitted O(rho d_X psi) hard-core terms. The SymPy script hand-enters the mean-field coefficient rather than deriving it.",
+      "evidence": [
+        "proposal/report.tex L174-190, L194-214",
+        "proposal/report.tex L550-576 (Appendix A)",
+        "code/mapping_derivation.py L32 (hand-entered mean_field_coefficient)",
+        "logs/mapping_symbolic.json"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "mechanism_analysis.zz_to_pde_term_correspondence": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The paper gives an explicit term-by-term correspondence. The quartic density term -epsilon J sum n_j n_{j+1} maps to the cubic self-phase term -2 epsilon J|psi|^2 psi (q=-2 epsilon J in the coordination-two bulk). The linear density term (epsilon J/2)(n_j+n_{j+1}) maps to the carrier detuning epsilon J psi (mu). The constant is a global phase. Eq. (8) labels both terms with underbraces, Appendix A gives the leading lattice correction -epsilon J a^2 (d_X^2 rho) alpha, and the symbolic log states the same correspondence. The algebra checks out: summing the two bonds' linear terms gives epsilon J n_j (hence mu), and the quartic terms give -epsilon J(n_{j-1}+n_{j+1}) (hence -2 epsilon J rho).",
+      "evidence": [
+        "proposal/report.tex L133-144 (Eqs. 3-4)",
+        "proposal/report.tex L198-214 (Eq. 8 underbraces, Eq. 9)",
+        "proposal/report.tex L568-576",
+        "logs/mapping_symbolic.json L17 (interpretation)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_analysis.subsection_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Results §5.5, 'Convergence and breakdown', is an explicit subsection analysing where agreement fails (the long-window breakdown) and Trotter sensitivity, supported by Fig. 6 'Validity boundary'. §7 Limitations adds further breakdown regimes.",
+      "evidence": [
+        "proposal/report.tex L434-459",
+        "figures/failure_convergence.png"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_analysis.patterns_identified": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Failure patterns are stated concretely with parameter regimes. At epsilon=0.8, with everything else fixed, extending the phase-fit window raises the NLSE error from 0.115% (Jt=0.2) to 8.04% (1.6), 13.64% (2.0), 21.4% at Jt=2.4 (the first failure), and 70.27% at Jt=4.0. Over the same windows the high-density half-chain entropy rises from 0.007864 to 0.4460 to 0.8749 bits. The Trotter step from 0.08 to 0.01 keeps the error between 0.092% and 0.124% (exact: 0.108%). Limitations add the regimes N=12 boundary effects at long times, spin-1/2 saturation when gradients develop, and the absence of number-changing channels. Breakdown was not probed as a function of epsilon or density, but the patterns identified are concrete.",
+      "evidence": [
+        "proposal/report.tex L436-449",
+        "logs/additional_checks.json L7-48 (convergence), L59-123 (postconfirmatory_breakdown), L124-197 (entropies)",
+        "proposal/report.tex L491-505"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_analysis.patterns_explained_coherently": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The long-window breakdown is tied to a specific structural feature of the mapping: the cubic NLSE rests on a product-state (mean-field) factorisation of intersite correlators. That factorisation is exact at t=0 and degrades as correlations grow, which the logged entanglement growth supports, and hard-core saturation and finite boundaries are also outside the cubic closure. The small agreement and its insensitivity to Trotter step are attributed to exact factorisation at t=0 plus a homogeneous envelope that cancels the hard-core gradient term. The three candidate causes (correlations, saturation, boundaries) are not quantitatively separated, and the Trotter non-monotonicity explanation is asserted, but each pattern is linked to a mapping assumption.",
+      "evidence": [
+        "proposal/report.tex L326-332, L436-449",
+        "proposal/report.tex L172-190 (factorization assumption)",
+        "logs/additional_checks.json breakdown_entanglement"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "compute_cost_analysis.subsection_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "§6, 'Computational cost and scope for quantum simulation', is an explicit section. It reports statevector wall-clock (0.127 s median for 200 steps at N=12) and PDE wall-clock (0.051 s for 2000 steps on 256 points), with a cost table for N=9-12.",
+      "evidence": [
+        "proposal/report.tex L461-486",
+        "proposal/sections/cost_table.tex",
+        "logs/additional_checks.json L198-277"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "compute_cost_analysis.scaling_discussed": {
+      "value": "no",
+      "confidence": "medium",
+      "reason": "The section gives the asymptotic cost O(N 2^N) time and O(2^N) memory, measured timings for N=9-12 (growth factor 3.17), and a qualitative statement of where advantage might arise (non-uniform Delta, higher dimension, general states; Delta=0 is integrable, XXZ-equivalent). It does not estimate the lattice size at which dense statevector emulation becomes prohibitive or quantum advantage would emerge, and it says end-to-end advantage is 'none of which is benchmarked here'. The rubric's 'yes' criterion explicitly requires that lattice-size estimate, so it is not met, even though the paper does more than report cost at a single size.",
+      "evidence": [
+        "proposal/report.tex L463-470",
+        "proposal/report.tex L474-486",
+        "logs/additional_checks.json L240-243 (scaling fit not used for any crossover estimate)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "originality_and_literature.contribution_originality": {
+      "value": "meaningful_extension",
+      "confidence": "medium",
+      "reason": "Applying a nearest-neighbour ZZ extension specifically to the Sundar plasma-wave chain is new. The paper adds a clean derivation of q=-2 epsilon J for this chain, full-space numerical confirmation, an exact linear-limit check, a quantified validity time (breakdown at Jt≈2.4 tied to entanglement growth), and a multi-excitation population witness. Novelty is limited, though. The mapping is the standard spin-coherent / Holstein-Primakoff-type mean-field route from an XXZ-like hard-core boson model to a cubic NLSE. The tested observable is a homogeneous k0=0, Delta=0 phase rate that reduces to the single-site mean-field coefficient. Dispersion-dependent nonlinear phenomena (modulational instability, packet self-modulation) are not demonstrated.",
+      "evidence": [
+        "proposal/report.tex L88-95 (claimed contributions)",
+        "proposal/report.tex L168-172 (coherent-state/HP lineage acknowledged)",
+        "proposal/report.tex L216-228, L491-493 (homogeneous test validates q only)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "originality_and_literature.literature_engagement": {
+      "value": "substantial",
+      "confidence": "medium",
+      "reason": "The paper cites 20 references spanning all three required literatures. Classical nonlinear plasma: Zakharov 1972, Dysthe & Pécseli 1977, Gupta 1981, Liu & Dodin 2015, Watts 2002, Asenjo 2024. Spin-mapping and coherent-state: Jordan-Wigner, Holstein-Primakoff, Zhang & Batista 2021. Quantum plasma simulation: Engel 2019, Vahala 2020, Novikau 2022, Dodin & Startsev 2021, Joseph 2023, Shi 2024, Sundar 2026, Rubin 2024. It makes explicit comparisons: linearised quantum encodings versus this local approach; Shi 2024's modal wave mixing lacking a local envelope model; kinetic dependence of nonlinear shifts limiting the calibration of epsilon; amplitude-encoded solvers and stopping-power simulations. Weaknesses: the comparisons are brief, there is no dedicated Related Work section, and engagement with the spin-chain-to-NLSE mapping literature is thin.",
+      "evidence": [
+        "proposal/report.tex L60-86",
+        "proposal/report.tex L146-152, L168-171, L474-486",
+        "proposal/references.bib (23 entries; 20 cited per rendered reference list pages 9-10)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "originality_and_literature.spec_independence": {
+      "value": "partially_independent",
+      "confidence": "medium",
+      "reason": "Mostly journal-style. The paper uses physics-driven section titles, does not frame itself as a follow-up, and avoids 'axis (1)', 'step 1' and 'headline observable' in prose. It retains noticeable contract/spec terminology and structure: the 'Preregistered comparison' table with 'Linear-limit observable/Linear-limit check' columns, 'registered sweep', 'post-confirmatory', 'Frozen analysis', a 'Dynamic multi-excitation witness', a paragraph justifying the zero-coupling row convention, a subsection answering the population-transfer requirement, and an artifact-to-claim appendix.",
+      "evidence": [
+        "proposal/sections/main_results_table.tex L3, L9",
+        "proposal/report.tex L233, L287, L306-307, L334-338, L362-381, L443",
+        "proposal/report.tex L595-635 (artifact map)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.journal_quality_structure": {
+      "value": "journal_quality",
+      "confidence": "medium",
+      "reason": "The paper has a clear thesis: a local ZZ term fixes the early-time cubic SPM coefficient q=-2 epsilon J, and the correspondence is bounded in time. The main sections are prose-driven and the narrative runs coherently from model to mapping to protocol, results, cost and limitations. Claims are backed by figures, tables and logs. Detractors: the abstract is dense with numbers, and some audit-driven passages (the zero-row convention, the population-transfer subsection) reduce the journal feel without breaking the structure.",
+      "evidence": [
+        "proposal/report.tex L32-56, L88-95, L514-529",
+        "rendered/finalpaired-01..12.png (layout and prose)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.arguments_sound": {
+      "value": "minor_issues",
+      "confidence": "high",
+      "reason": "The core derivation (ZZ density identity to mean-field to q=-2 epsilon J) is correct and consistent with the results. However, the headline comparison is a self-consistency check. For a product initial state, the early-time statevector phase rate equals the single-site mean-field value mu+q rho=epsilon J(1-2 rho), and the 'PDE' is the homogeneous NLSE with the same coefficients (D is irrelevant). The paper nevertheless calls the agreement 'a stringent check of the coefficient and simulator' (L330-331) and says the results 'establish a controlled nonlinear field coefficient' (L53-54). The rubric names exactly this overclaim as minor_issues. Secondary loose claims: §5.4 says the paired epsilon=0 run 'independently evolves both implementations' and 'rules out a hidden offset in the diagonal gate or Ramsey estimator', but both arms are the same function call sharing that gate and estimator. The 'plasma-wave' SPM framing rests on a Delta=0, k0=0 test (no plasma gap, zero band curvature), which the Limitations acknowledge. None of this contradicts the results.",
+      "evidence": [
+        "proposal/report.tex L326-332",
+        "proposal/report.tex L53-54",
+        "proposal/report.tex L399-406 vs code/run_linear_reproduction.py L66-87 (identical calls)",
+        "logs/pde_reference_precomputed.json (omega = mu + q rho exactly) and logs/nonlinear_main_results.csv (omega_extended_low 0.72, high 0.480 = epsilon(1-2rho))"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.limitations_discussion_present": {
+      "value": "substantive",
+      "confidence": "high",
+      "reason": "§7 gives six concrete limitations: the homogeneous test validates q but not packet transport, sideband growth or collapse; N=12 leaves only ten bulk sites, so boundary corrections appear at long times; the spin-1/2 saturation term is absent in weak-field bosons; the coherent state has number fluctuations and no particle-production channels; kinetic damping, trapping, ion response and calibration of epsilon are absent; and runs are noiseless only. It then names specific next tests: a gapped carrier with band curvature, a longer chain for sideband growth, comparison with the focusing-NLSE spectrum, and an inhomogeneous calibrated coefficient. The Conclusion restates the bounded scope.",
+      "evidence": [
+        "proposal/report.tex L488-512",
+        "proposal/report.tex L525-529"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.rendered_pdf_clean": {
+      "value": "yes",
+      "confidence": "low",
+      "reason": "The rubric's listed failure classes are absent. report.log has no Overfull, Underfull or undefined-reference warnings. pypdf extraction of all 12 pages finds no '??' or '[?]' markers. The rendered pages show no equation overflow or cut-off figures. Limitation: I could not rasterise the PDF myself (pdftoppm unavailable, and no file writing permitted). Visual checks therefore rely on the agent's page renders rendered/finalpaired-01..12.png, which were produced at the same time as the hash-verified final PDF. Minor cosmetic defects are visible: in Fig. 4(c) the y-axis label overlaps the ends of panel (b)'s curves; in Fig. 2(b) the '15% threshold' label is struck through by its own dashed line; in Fig. 1 the arrows partly cover the site labels; the Appendix C heading is stranded at the bottom of page 10; and Table 1 is shrunk to a very small font. I judge these as not rising to the rubric's formatting-failure classes, which is why confidence is low.",
+      "evidence": [
+        "proposal/report.log (no Overfull/Underfull/undefined matches; L679 12 pages)",
+        "pypdf extraction: 12 pages, '??' count 0 on every page",
+        "rendered/finalpaired-02.png, -05.png, -06.png, -10.png (cosmetic issues noted)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.main_results_table_complete": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "All rows are present: the epsilon=0 baseline and the four declared sweep points. Every column is filled with values traceable to logs: the nonlinear rates and errors to nonlinear_main_results.csv; the zero row to zero_baseline_headline.json (both rates 0.0, absolute error 0.0, convention documented); the linear-limit summary of 18/18 modes with max 4.20% to linear_summary.json. There are no placeholders.",
+      "evidence": [
+        "proposal/sections/main_results_table.tex L11-15",
+        "logs/nonlinear_main_results.csv",
+        "logs/zero_baseline_headline.json L12-16",
+        "logs/linear_summary.json L12-13"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.pre_stated_method.method_plan_pre_validation": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "method_plan.md, .json and .py record every required component: the ZZ structure K_ij(epsilon), the PDE reference (cubic NLSE, Zakharov 1972, mu and q), the phenomenon (SPM), the observable R_phi, the sweep grid [0.10,0.20,0.40,0.80] and the 15% tolerance. The commit timestamp (18:51:04Z) and file mtimes (18:53:16Z) predate the first validation outputs (PDE 18:56:22Z; statevector 18:57:57Z). The plan's hash is embedded in nonlinear_summary.json and matches the current file, so the plan was not edited after the runs.",
+      "evidence": [
+        "code/method_plan.json L2-31",
+        "code/method_plan.md L3-5",
+        "logs/final_audit.json L19-27 (method precedes PDE precedes validation)",
+        "nonlinear_summary.json plan_sha256 = current method_plan.json hash"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.experiment_completeness.all_paper_experiments_logged": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "Every experiment described in the paper has corresponding logs. The four-point sweep and H0 controls have 16 NPZ files plus the summary and CSV. The epsilon=0 coherent-state identity is in nonlinear_summary.json. The zero-coupling row has zero_baseline_headline.json/.npz. Sparse exact checks are in nonlinear_exact_check_*.npz and exact_convergence_*.npz. The Trotter-step convergence results are in additional_checks.json (summary metrics; trajectories not stored for dt 0.08/0.04/0.01). The long-window breakdown has breakdown_*.npz and additional_checks.json, entropies are in additional_checks.json, and the cost benchmarks are in additional_checks.json. The multi-excitation witness has a JSON and an NPZ. Linear dispersion and propagation have dispersion_*.npz, propagation_*.npz, linear_summary.json and the CSVs. The symbolic mapping is in mapping_symbolic.json and the PDE reference in pde_reference_*.",
+      "evidence": [
+        "proposal/report.tex L595-635 (artifact-to-claim map) cross-checked against ls proposal/logs",
+        "logs/additional_checks.json L7-277",
+        "logs/full_hilbert_population_transfer.json; logs/zero_baseline_headline.json"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.full_hilbert_space_integrity.norm_conservation_logged": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "Norms of the full 2^N statevector are logged at every step in every trajectory NPZ (norms, step_norms) and summarised in JSON. The maximum norm error is 2.0e-15 across the confirmatory 4096-dimensional runs, up to about 1e-14 for the long, breakdown and witness runs, and 2.2e-15 for the 512-dimensional linear runs. Number-sector weights are also logged as conserved, with drift of at most 7.2e-16.",
+      "evidence": [
+        "numpy read: nonlinear_eps*.npz max |norm-1| 1.1e-15 to 2.0e-15; long runs up to 9.3e-15",
+        "logs/nonlinear_main_results.csv max_norm_error 1.998e-15",
+        "logs/full_hilbert_population_transfer.json L34-42",
+        "logs/final_audit.json L78-226"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.no_phenomenon_switching.phenomenon_committed_before_runs": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "The single ZZ model (uniform nearest-neighbour, -epsilon J/4) and the phenomenon (SPM via the cubic NLSE) were committed in method_plan before any validation output, together with the PDE reference, sweep grid and 15% tolerance. The logs and paper use only that model. Alternative phenomena (modulational instability, EIT, SRS) were rejected before commitment, as recorded in the attempts log. Later changes are disclosed and do not alter the model or phenomenon: the interface site in the linear reproduction, the exploratory breakdown extension, and the added witness.",
+      "evidence": [
+        "code/method_plan.md L18-36, L86-92",
+        "proposal/attempts_log.md L3-32 (pre-commit model selection), L34-106 (later dated changes)",
+        "logs/pde_reference_precomputed.json started 18:56:22Z"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.effort_evidence.attempts_log_when_partial_work_claimed": {
+      "value": "not_applicable",
+      "confidence": "medium",
+      "reason": "The task's requirement is conditional: two or more attempts are needed only if the paper describes a contract item as attempted-but-failed or partial. The paper reports every contract item as completed. The long-window breakdown is a required failure-analysis finding, not an unresolved item, and the scope restrictions are framed as future tests. The antecedent is therefore absent. Even so, attempts_log.md documents several distinct attempts with reasoning: three phenomena considered and rejected, two sharp-interface runs, and two dispersion runs.",
+      "evidence": [
+        "task_spec.md L183 (item 15 conditional wording)",
+        "proposal/report.tex L42-55, L441-449, L491-512",
+        "proposal/attempts_log.md L3-106"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "evidence_completeness.quantitative_sources_documented": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "Every quantitative claim I checked traces to a named log, and most macros are generated from logs via results_macros.tex. Checked against logs: the rates 0.030007/0.060010/0.119989/0.239725; the sparse result 0.239741 (0.108%); the entropies 0.007864 vs 2.52e-6 bits; the sector weights 20.616% and 72.512% with drift 7.2e-16; the breakdown errors 8.04/13.64/21.4/70.27% and entropies 0.4460/0.8749; the convergence range 0.092-0.124%; the dispersion table values and the 4.20% maximum; the zero-mode error 1.3e-16 and the 5.6e-16 eigenvalue difference; the propagation CoM values 5.710/4.127/3.767/3.491/2.683; the timings 0.127 s and 0.051 s; 12.56 MiB and the factor 3.17; and the witness figures 74.132%, 11.220%/11.221%, 38.430%/28.098% and 60 configurations. An artifact-to-claim appendix maps claims to files. Minor provenance caveat: statevector.py was modified at 19:48Z, after most runs, and its hash is not logged with them.",
+      "evidence": [
+        "proposal/logs/results_macros.tex L1-18",
+        "proposal/report.tex L595-635",
+        "logs/additional_checks.json; logs/nonlinear_main_results.csv; logs/full_hilbert_population_transfer.json; logs/linear_summary.json",
+        "ls -laT code: statevector.py 15:48:07 EDT vs nonlinear runs 14:57:57 EDT"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "evidence_completeness.required_reporting_coverage": {
+      "value": "satisfied",
+      "confidence": "medium",
+      "reason": "All task-required experiments and reports are present. These are: the method plan; the H0 dispersion (both Delta values, 9 modes each) and the three propagation cases; the symbolic mapping; epsilon=0 side-by-side verification; all four sweep points with trajectories, observables and PDE values; H0 contrast at every sweep epsilon; full-space evidence (norms, multi-excitation witness, no truncation); the main table; sweep, linear-limit and contrast figures; mechanism, failure and cost sections (both wall-clocks and an O(N 2^N) scaling discussion); literature engagement; limitations; codebase notes; and the attempts log. Seeds and stochastic uncertainty do not apply to the deterministic noiseless emulation; numerical uncertainty is covered by the Trotter-convergence and exact-evolution checks. Gaps, assessed elsewhere: no lattice-size crossover estimate in the cost section; the Ramsey preparation is a mode-resolved variant of the paper's single-qubit protocol; and the choice of a smaller Trotter step (0.02) is supported only implicitly, by the convergence study.",
+      "evidence": [
+        "task_spec.md L187-228 (deliverables list)",
+        "proposal/report.tex L230-297, L299-459, L461-512",
+        "proposal/logs/* (as itemized above)",
+        "logs/additional_checks.json convergence block"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    }
+  }
+}

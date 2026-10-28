@@ -1,0 +1,718 @@
+{
+  "nodes": {
+    "deliverables.report_pdf_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "proposal/report.pdf exists (767,690 bytes). It is a 22-page manuscript with an Introduction, Methodology, Experimental Setup, Experimental Results, Analysis, Conclusion, References, supplement and appendix. Its sha256 (1858813d…) matches logs/completion.json.",
+      "evidence": [
+        "proposal/report.pdf (767690 bytes; sha256 1858813db2cf… = logs/completion.json report_pdf_sha256)",
+        "proposal/logs/pdf_verification.json: pages=22, bibliography_entries=32",
+        "proposal/figures/qa/contact_01_06.png … contact_19_22.png show substantive rendered pages"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.logs_directory_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "proposal/logs/ holds substantive run records. logs/main has 410 headline trajectories, each with manifest.json, trajectory.jsonl (timestamped steps), fits.jsonl, metrics.json, prediction_n*.npz and complete.json. The logs also cover ablations, controls, pilots, compute cost, an integrity audit and aggregates.",
+      "evidence": [
+        "proposal/logs/main: 414 entries (210 grid + 50 each random/smart/gsmart/carr + 4 suite manifests)",
+        "proposal/logs/main/piecewise1_carr_s00/{manifest.json,trajectory.jsonl,fits.jsonl,metrics.json,prediction_n50..n500.npz,complete.json}",
+        "proposal/logs/integrity_audit.json: 760 trajectories, 2520 metric records, status passed"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.baseline_runs_logged": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Complete SMART and gSMART trajectories are logged for all five functions and seeds 0–9: 50 runs each in logs/main, all with complete.json and per-budget metrics.",
+      "evidence": [
+        "proposal/logs/main/{piecewise1,piecewise2,oscillatory,nondiff,diffusion}_{smart,gsmart}_s00..s09 (10 per function per method)",
+        "proposal/logs/main/baseline_suite.json, baseline_suite_complete.json",
+        "Recomputed from metrics.json: every SMART/gSMART cell has n=10 seeds"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.proposed_method_runs_logged": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "CARR, the new acquisition, has 50 logged trajectories (5 functions × 10 seeds) in logs/main. Each has guide-fit logs (fits.jsonl) and checkpoint metrics at every budget.",
+      "evidence": [
+        "proposal/logs/main/*_carr_s00..s09 (50 dirs, all with complete.json)",
+        "proposal/logs/main/piecewise1_carr_s00/manifest.json: method carr, guide_variant v3, selection_procedure three_fold_simplex…_v1",
+        "proposal/logs/main_carr_stdout.log"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.methodology_section_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Section 2 'Methodology' fully describes the method in four subsections: the shared ordinary-Kriging model, the working error law and CARR counterfactual score, one fitting procedure for all functions, and positioning against prior work.",
+      "evidence": [
+        "proposal/sections/methodology.tex:1-105",
+        "proposal/report.tex:29 (\\input{sections/methodology})"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.analysis_section_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Section 5 'Analysis' goes beyond reporting numbers. It has subsections on mechanism (ablations, regional errors, counterfactual audit), failure (a scale-inflation proposition and early-budget failures), computational cost trade-off, and limits of the evidence.",
+      "evidence": [
+        "proposal/sections/analysis.tex:2 (5.1 Mechanism analysis), :35 (5.2 Failure analysis), :55 (5.3 Computational cost trade-off), :61 (5.4 Limits of the evidence)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.main_results_table_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Table 1 carries \\label{tab:main_results}. Its rows are the 21 (function, budget) configurations and its columns are Grid/Random/SMART/gSMART/CARR, each cell giving mean ± std. All values match the per-run logs exactly.",
+      "evidence": [
+        "proposal/sections/main_table.tex:4 (\\label{tab:main_results}), rows :8-32",
+        "Recomputed from logs/main/*/metrics.json: e.g. PI n=500 CARR 1.583±0.054, gSMART 2.038±0.066; Diffusion n=1000 CARR 1.275±0.052"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.convergence_curves_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Figure 1 (figures/convergence.pdf) plots absolute error against the number of measurements for all five methods, including SMART, gSMART and CARR, in five function panels.",
+      "evidence": [
+        "proposal/sections/results.tex:3-7 (Figure fig:curves, convergence.pdf)",
+        "proposal/figures/qa/page_07.png (rendered Figure 1 with five panels and legend Grid/Random/SMART/gSMART/CARR)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.codebase_notes_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "codebase_notes.md records specific inspection of all three codebases. For gpCAM it lists the files read, the GPOptimizer/ask API, and the default kernel and noise problems, and states what was reused. For Bluesky and SciAnalysis it names the modules inspected and explains why each was not reused.",
+      "evidence": [
+        "proposal/codebase_notes.md:3-31 (gpCAM: gp_optimizer.py, gp_optimizer_base.py, surrogate_model.py, fvGP inverse reuse)",
+        "proposal/codebase_notes.md:33-40 (Bluesky RunEngine, plans.adaptive_scan; not reused)",
+        "proposal/codebase_notes.md:42-49 (SciAnalysis tools.py, XSAnalysis/Protocols.py; context only)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.attempts_log_present": {
+      "value": "required_and_present_substantive",
+      "confidence": "high",
+      "reason": "An attempts log is required because the paper reports non-wins and unresolved items: CARR loses to gSMART at n=50 on three functions, the twofold-saving target is met only on diffusion, and the baseline ranking reproduction is unresolved. attempts_log.md contains 17 entries recording many distinct approaches, each with observations and keep/abandon reasoning. Examples are a fixed versus normalized gSMART coefficient, an alternative variogram normalization, a continuous DE optimizer, the scalar → six-expert → spatial-scale guide versions, and ablations. Most are backed by logged pilot suites.",
+      "evidence": [
+        "proposal/attempts_log.md A05-A10 (development attempts, logs/pilot, pilot_bounded, pilot_sill, pilot_guides, pilot_local, optimizer_check — all runs complete)",
+        "proposal/attempts_log.md A11 and A15 (unmet baseline ranking and unmet twofold target, by function)",
+        "proposal/sections/results.tex:27-30; proposal/sections/reproduction_limits.tex"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.method_stated_before_results": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Section 2 names CARR, motivates it (error transport versus variance), and gives its full mathematical form (Eqs. 3–7) and fitting procedure. This all comes before the Setup (Section 3) and Results (Section 4). The introduction contains no results; only the conventional abstract summarizes numbers.",
+      "evidence": [
+        "proposal/report.tex:28-32 (section order intro→methodology→setup→results→analysis)",
+        "proposal/sections/methodology.tex:24-60 (error law, influence update, folded-normal loss, CARR score)",
+        "proposal/sections/introduction.tex:1-8 (no numerical results)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.mathematical_form_clear": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The method could be reimplemented from the paper alone. It gives explicit formulas for the variogram fit, the ordinary-Kriging mean and covariance with the unknown-mean correction, the working error law, the rank-one influence function, the post-update bias and variance, the folded-normal loss, and the CARR integral. It also specifies the cross-validated stacking objective, the residual-ratio definitions, and the nearest-neighbour scale model with its selection score. The candidate set and integration points are defined in Setup. The code matches these equations (acquisitions.py:211-228).",
+      "evidence": [
+        "proposal/sections/methodology.tex:4-21 (Eqs 1-2), :25-60 (Eqs 3-7), :71-100 (stacking Eq 8, scale estimator Eqs 9-10)",
+        "proposal/sections/setup.tex:15 (candidate recipe, 512 Sobol integration points)",
+        "proposal/code/acquisitions.py:211-228 implements Eq. 5/7 as written"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.hyperparameters_specified": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "All of CARR's fixed settings are given with concrete values, enough to reproduce the protocol. These include:\n- nugget 1e-8; log a bounds [-7,7]; tolerance 1e-5;\n- refresh at n=10 and every 10 observations; three arrival-mod-3 folds;\n- the six experts with their settings (64 neighbours, smoothing 1e-8, 32 trees with leaf size 1, knot formula, ridge 1e-5/1e-4, leaf-size rule, asinh s0 rule with [-30,30] clip);\n- SLSQP tolerance 1e-10 and 200 iterations; penalty 1e-6;\n- k∈{3,8,16,32}, η∈{0,…,1}, clip ranges and floors;\n- M=512 integration points; candidate pool 256 Sobol + 16 per face + corners + ≤64 midpoints.\nThe fitted quantities (weights, λ, η) are reported per function in Table 7.",
+      "evidence": [
+        "proposal/sections/methodology.tex:3,13,71-100",
+        "proposal/sections/setup.tex:15",
+        "proposal/sections/fit_table.tex (fitted weights, median λ, mean η per function)",
+        "proposal/logs/main/*_carr_*/manifest.json config identical across functions"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.motivation_grounded_in_literature": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The motivation goes beyond intuition and engages the literature. It places CARR in the statistical active-learning and integrated-design tradition (MacKay 1992, Cohn 1996, Bect 2019). It proves that the zero-bias, homogeneous limit reduces to integrated posterior-SD reduction. It grounds the guide in stacked generalization (Wolpert, Breiman), and it contrasts CARR with MEPE, SFCVT, EIGF, LOLA-Voronoi, TEAD and GUESS/GALE.",
+      "evidence": [
+        "proposal/sections/introduction.tex:8",
+        "proposal/sections/methodology.tex:68 (zero-bias limit = integrated SD reduction), :80 (stacking citations), :102-105"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.gpcam_integration": {
+      "value": "gpcam_integrated",
+      "confidence": "high",
+      "reason": "Every method uses the same OrdinaryGP. It subclasses gpCAM's GPOptimizer, reuses the fvGP inverse, and adds only the ordinary-mean correction. CARR is a custom acquisition callable maximized by gpCAM's ask over the same candidate-list recipe used for SMART/gSMART, so the only difference between methods is the Criterion. kriging.py has an identical hash in all run manifests.",
+      "evidence": [
+        "proposal/code/kriging.py:34-57 (class OrdinaryGP(GPOptimizer))",
+        "proposal/code/run_experiments.py:136-145 (gp.ask(list(points), acquisition_function=crit) for all adaptive methods)",
+        "Manifests: kriging.py sha 5e7ceb9d in every main/ablation/control run",
+        "proposal/sections/methodology.tex:22"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_verification.smart_run_on_all_functions": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "SMART (maximize the Kriging variance v(x)) runs on the gpCAM GPOptimizer subclass with the exponential kernel and is maximized via gpCAM ask. It covers all five functions, all budgets (nested checkpoints at 50/100/200/500, plus 1000 for diffusion) and seeds 0–9. All 50 runs are complete.",
+      "evidence": [
+        "proposal/logs/main/*_smart_s00..s09 (50 complete runs; metrics at every budget)",
+        "proposal/code/acquisitions.py:193 (smart returns v)",
+        "proposal/code/kriging.py:34-46",
+        "proposal/logs/integrity_audit.json: groups_with_ten_seeds=252"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_verification.gsmart_run_on_all_functions": {
+      "value": "no",
+      "confidence": "medium",
+      "reason": "Coverage is complete: 5 functions × all budgets × 10 seeds, run via gpCAM, with one rule used for every function. But gSMART does not use a single fixed weight value. The submission's 'normalized gSMART' recomputes the coefficient at every step as c_n = 1/max over candidates of ||∇m||²/Var(y). The logged effective coefficient varies by orders of magnitude across steps and functions, for example:\n- Piecewise I seed 0: 7.0e-5 to 1.6e-2, median 2.3e-4\n- oscillatory: median 1.1e-3\n- diffusion: 2.3e-5 to 3.3e-2\nThe paper states this is not the original fixed-c (c=20) form. The question explicitly requires a single fixed weight value, and the 'no' description covers runs that 'use varying weights'.",
+      "evidence": [
+        "proposal/sections/setup.tex:17-26 (Eq. 12 c_n = 1/max g²; 'not a literal reconstruction of the original paper's manually chosen coefficient')",
+        "proposal/code/acquisitions.py:186-210 (calibrate_gradient; coefficient_rule 'reciprocal_candidate_max_gradient_squared')",
+        "proposal/logs/main/*_gsmart_s00/trajectory.jsonl diagnostics.gradient_c: min/median/max PI 7.0e-5/2.3e-4/1.6e-2; osc 8.3e-4/1.1e-3/3.3e-3; diffusion 2.3e-5/1.1e-4/3.3e-2",
+        "manifests: gradient_c=-1.0 (sentinel for normalized rule) in all gsmart runs"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_verification.random_grid_baselines_run": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Random has 50 complete nested trajectories. Grid has 210 budget-specific runs (21 configurations × 10 seeds), each starting from the shared 10 random points. Every cell has n=10.",
+      "evidence": [
+        "proposal/logs/main/*_random_s00..s09 (50)",
+        "proposal/logs/main/*_grid_sXX_nB (40 per 2D function, 50 for diffusion = 210)",
+        "Recomputed: every grid/random cell has 10 seeds, matching main_table.tex"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_verification.qualitative_match_to_paper": {
+      "value": "no",
+      "confidence": "high",
+      "reason": "Error does decrease with budget for every baseline. But SMART and gSMART do not clearly beat random and grid at matched budgets:\n- Diffusion: random is far better at every budget (n=1000: 1.654 vs SMART 4.593 / gSMART 4.024; n=50: 4.204 vs 18.501 / 13.717).\n- Smooth oscillatory: grid wins at n=200 (0.328 vs 0.535 / 0.577), and random beats both at n=50 and n=100.\n- Non-differentiable: grid wins at n=200 (1.434 vs 1.650 / 1.541).\n- Piecewise II: grid beats SMART at n=50 and n=100.\nThe paper itself states that universal dominance was not reproduced and leaves this unresolved.",
+      "evidence": [
+        "proposal/sections/main_table.tex:8-32",
+        "proposal/sections/results.tex:29-30 ('They do not reproduce universal dominance over both random and grid')",
+        "proposal/sections/reproduction_limits.tex:3-9",
+        "proposal/attempts_log.md A11"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "experimental_completeness.all_21_configurations_run": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "CARR's nested trajectories have checkpoint metrics and saved predictions at 50/100/200/500 for the four 2D functions and at 50/100/200/500/1000 for diffusion: 21 configurations, each with 10 seeds.",
+      "evidence": [
+        "proposal/logs/main/*_carr_sXX/metrics.json (budgets 50,100,200,500[,1000]) and prediction_n*.npz",
+        "Recomputed CARR column matches main_table.tex for all 21 rows"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "experimental_completeness.ten_seeds_per_configuration": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Every (method, function, budget) cell has exactly seeds 0–9 (verified by recomputation and integrity_audit 'all groups contain exactly seeds 0 through 9'). Table 1 and every other table report the mean ± sample standard deviation.",
+      "evidence": [
+        "Recomputation from logs/main: n=10 for all 105 headline cells",
+        "proposal/logs/integrity_audit.json checks list",
+        "proposal/sections/setup.tex:12 ('Every table reports sample standard deviations over ten seeds')"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "experimental_completeness.initial_design_paired": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The initial 10 points come from np.random.default_rng(seed) for every method, grid included. Across all main, ablation and control manifests, each (function, seed) pair has exactly one distinct initial_design_sha256 (50 of 50 keys).",
+      "evidence": [
+        "proposal/code/run_experiments.py:82-84",
+        "Manifest check: Counter({1: 50}) distinct initial hashes per (function,seed) across main/ablations/homogeneous/classical",
+        "proposal/sections/setup.tex:6"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "experimental_completeness.single_hyperparameter_setting": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "All 50 headline CARR runs use an identical config (guide_variant v3, guide_period 10, representer_power 9, candidate_power 8) and the same selection procedure on every function. That procedure is three-fold stacking by least squares followed by a Gaussian-score choice of the scale model. Fitted weights, λ and η differ by function (Table 7), as expected. No hand-tuned per-function rows are reported.",
+      "evidence": [
+        "Manifest check: ('main','carr') 50 runs, 1 distinct config, selection_procedure three_fold_simplex_squared_error_then_standardized_residual_scale_v1",
+        "proposal/logs/fit_summary.json; proposal/sections/fit_table.tex",
+        "proposal/logs/integrity_audit.json: 'one headline acquisition fitting procedure'"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "metric_reporting.modern_metrics_reported": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "RMSE, CRPS and coverage (90%/95% in the table) are reported for all five methods on all 21 configurations. They are computed from the Kriging posterior mean and variance on the dense held-out grid. Coverage curves at 11 nominal levels appear for every function, budget and method (Figs 2, 6, 7).",
+      "evidence": [
+        "proposal/sections/metrics_table.tex (105 rows: 5 methods × 21 configurations)",
+        "proposal/sections/results.tex:33-38 (Fig fig:calibration)",
+        "proposal/sections/supplement.tex:50-59 (calibration_all_2d, calibration_all_diffusion)",
+        "proposal/code/run_experiments.py:47-71"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "metric_reporting.baseline_metrics_recomputed": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "SMART and gSMART, as well as grid and random, are scored on RMSE, CRPS and coverage and compared head-to-head with CARR. The text explicitly notes CARR's worse CRPS on four functions.",
+      "evidence": [
+        "proposal/sections/metrics_table.tex",
+        "proposal/sections/results.tex:38 (CARR vs gSMART/SMART CRPS comparisons)",
+        "proposal/logs/aggregates.json, all_metrics.csv"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "outperformance.speedup_on_piecewise_I": {
+      "value": "matches",
+      "confidence": "medium",
+      "reason": "Neither speedup tier is met. Target = min(SMART, gSMART) at 500 = 2.038. CARR first reaches it at the tested budget 500; interpolating linearly between 200 (3.051) and 500 (1.583) gives B*/B_max ≈ 0.81. CARR's mean is above gSMART at n=50 (8.497 vs 7.744). One-SD dominance (CARR mean + SD ≤ min) holds at only 2 of 4 budgets. The only deficit (n=50, gap 0.753) lies within CARR's 1 SD (0.939), and CARR is lower at 100, 200 and 500, so there is no clear regression. Because the difference changes sign rather than showing a consistent slowdown, 'matches' is the best-fitting formal tier. Slight_regression is the alternative only if the gap at n=50 is judged against gSMART's SD (0.521).",
+      "evidence": [
+        "Recomputed from logs/main: CARR 8.497±0.939/5.074±0.444/3.051±0.143/1.583±0.054; gSMART 7.744±0.521/5.206±0.250/3.421±0.192/2.038±0.066; SMART 8.443/5.478/3.733/2.299",
+        "proposal/sections/speedup_table.tex (n_*=500, Separated 2/4)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "outperformance.speedup_on_piecewise_II": {
+      "value": "matches",
+      "confidence": "medium",
+      "reason": "Target = 6.595 (gSMART at 500). Linear interpolation gives B*/B_max ≈ 0.77, but modest also requires CARR ≤ both baselines at every budget, and at n=50 CARR is 24.688 vs gSMART 23.537. Substantial fails (B* > 0.5; one-SD dominance at only 2 of 4 budgets). The single deficit (gap 1.151) is within CARR's SD (2.677), and CARR is lower at 100, 200 and 500. That gives 'matches' rather than a consistent slowdown.",
+      "evidence": [
+        "Recomputed: CARR 24.688±2.677/15.947±0.925/9.559±0.560/4.751±0.158; gSMART 23.537±1.004/16.060±0.614/10.877±0.411/6.595±0.198; SMART 25.184/16.864/11.858/7.208",
+        "proposal/sections/main_table.tex:13-16"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "outperformance.speedup_on_smooth_oscillatory": {
+      "value": "modest_speedup",
+      "confidence": "medium",
+      "reason": "CARR is at or below min(SMART, gSMART) at every budget: 0.946≤1.008, 0.729≤0.874, 0.337≤0.535, 0.105≤0.190. Mean + SD is below the baseline minimum at 4 of 4 budgets. Target = 0.190 (SMART at 500). Interpolating between 200 (0.337) and 500 (0.105) gives B*/B_max ≈ 0.78 (linear) or 0.63 (log), both in (0.5, 0.8]. So the modest tier holds and substantial fails (B*/B_max > 0.5). Interpolation is required to classify at all: the rubric prescribes it, and without it the modest band could never be reached on tested budgets. The paper itself does not interpolate (n_*=500).",
+      "evidence": [
+        "Recomputed: CARR 0.946±0.040/0.729±0.024/0.337±0.014/0.105±0.002; SMART 1.039/0.874/0.535/0.190; gSMART 1.008/0.877/0.577/0.234",
+        "proposal/sections/speedup_table.tex:7 (target 0.190, n_* 500)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "outperformance.speedup_on_non_differentiable": {
+      "value": "matches",
+      "confidence": "medium",
+      "reason": "Target = 0.899 (gSMART at 500). Interpolation gives B*/B_max ≈ 0.67, but CARR is above both baselines at n=50 (3.543 vs SMART 3.478 and gSMART 3.271), so the every-budget dominance condition of modest fails. Substantial fails because B* > 0.5. The n=50 gap (0.272) is within CARR's SD (0.458), and CARR is lower with one-SD separation at 100, 200 and 500. That gives 'matches', not a regression tier.",
+      "evidence": [
+        "Recomputed: CARR 3.543±0.458/1.873±0.221/1.130±0.063/0.616±0.033; gSMART 3.271±0.263/2.198±0.083/1.541±0.058/0.899±0.031; SMART 3.478/2.393/1.650/0.988",
+        "proposal/sections/main_table.tex:23-26"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "outperformance.speedup_on_diffusion_3d": {
+      "value": "substantial_speedup",
+      "confidence": "high",
+      "reason": "Target = min(SMART, gSMART) at 1000 = 4.024. CARR reaches 3.276 at the tested budget n=100 (B*/B_max = 0.10; ≈0.08 interpolated), well under 0.5. CARR mean + SD is below min(SMART, gSMART) at 5 of 5 budgets (e.g. 6.740 ≤ 13.717 at 50; 1.327 ≤ 4.024 at 1000). Random beats SMART/gSMART here, but the tier is defined only against SMART/gSMART.",
+      "evidence": [
+        "Recomputed: CARR 5.063±1.677/3.276±0.914/2.524±0.370/1.802±0.097/1.275±0.052; gSMART 13.717/9.774/7.722/5.135/4.024; SMART 18.501/12.434/8.948/6.233/4.593",
+        "proposal/sections/speedup_table.tex:9"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "justification.quality_on_piecewise_I": {
+      "value": "method_connected_justification",
+      "confidence": "medium",
+      "reason": "The paper names Piecewise I and ties the missing twofold saving to its structure. A curved boundary plus a smooth background both need coverage. Early on, the cross-validated stacked guide is unreliable and can 'spend points fitting a wrongly located transition', and the spatial scale λ only becomes useful once enough CV residuals localize the transition. In the failure analysis, a misplaced branch's signed innovation is spread by the domain integral, producing the n=50 regression. Ablations and the audit back this: zero-bias CARR is better on Piecewise I (1.512 vs 1.583), and CARR's ranking correlation is worse than gSMART's there (0.246 vs 0.347). This is an explicit function-property ↔ method-component link, not generic noise talk.",
+      "evidence": [
+        "proposal/sections/results.tex:10-11",
+        "proposal/sections/analysis.tex:9 (zero bias 1.512; global scale 2.230), :33 (audit), :51 (early-budget failures)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "justification.quality_on_piecewise_II": {
+      "value": "method_connected_justification",
+      "confidence": "medium",
+      "reason": "The paper names Piecewise II and ties its stronger jump contrast to the acquisition's transport term: 'Larger jumps increase the value of resolving the boundary but also the penalty for transporting an innovation across it', and the shared geometry 'does not make the early guide correct'. It also invokes the common failure mechanism for discontinuous functions (guide misplacement spread by the domain integral) and the global-scale ablation (6.667 vs 4.751) for why late refinement works.",
+      "evidence": [
+        "proposal/sections/results.tex:13-14",
+        "proposal/sections/analysis.tex:9, :51"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "justification.quality_on_smooth_oscillatory": {
+      "value": "not_applicable_speedup_shown",
+      "confidence": "medium",
+      "reason": "The speedup node for this function is modest_speedup (CARR below both baselines at every budget; interpolated B*/B_max ≈ 0.78), so no justification is required. Even if the tier were judged 'matches' without interpolation, the paper gives a method-connected explanation. The function is additive with oscillations across the whole domain; the additive-spline guide expert (weight 0.999) recognizes this, but the unchanged rough exponential Kriging predictor still needs broad spatial coverage.",
+      "evidence": [
+        "proposal/sections/results.tex:16-17",
+        "proposal/sections/analysis.tex:11, :51"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "justification.quality_on_non_differentiable": {
+      "value": "method_connected_justification",
+      "confidence": "medium",
+      "reason": "The paper names the piecewise-linear case and links its affine branches and discontinuity to specific components. The partition-linear guide expert (weight 0.890) represents branch interiors only after it learns the split; early misplacement is spread by signed transport. And because CARR changes only the acquisition, the continuous Kriging predictor must still resolve the jump. The paper uses this to explain why n=200 (1.130) remains above the baseline target, and supports it with the zero-bias ablation (0.886) and regional boundary-error diagnostics.",
+      "evidence": [
+        "proposal/sections/results.tex:19-20",
+        "proposal/sections/analysis.tex:13, :25, :51"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "justification.quality_on_diffusion_3d": {
+      "value": "not_applicable_speedup_shown",
+      "confidence": "high",
+      "reason": "The speedup node for diffusion is substantial_speedup (B*=100 of 1000; one-SD dominance at 5 of 5 budgets), so no justification is required.",
+      "evidence": [
+        "proposal/sections/speedup_table.tex:9",
+        "proposal/sections/main_table.tex:28-32"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "mechanism_analysis.subsection_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Analysis has an explicit Section 5.1, 'Mechanism analysis: spatial scale and signed transport have different roles'.",
+      "evidence": [
+        "proposal/sections/analysis.tex:2"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "mechanism_analysis.mechanism_supported": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The mechanism rests on three kinds of evidence:\n- Component ablations run for all functions with 10 seeds, all reproduced from logs: zero bias, unsigned bias, global scale, local disagreement, plus the IVR/ISR/EIGF controls.\n- An offline counterfactual audit at n=200 with seed-level Spearman correlations between predicted scores and realized gains.\n- Proposition 1, the exact one-step absolute-risk identity, which links CARR to integrated uncertainty reduction.",
+      "evidence": [
+        "proposal/sections/ablation_table.tex (verified against logs/ablations, homogeneous, classical)",
+        "proposal/sections/audit_table.tex; proposal/logs/counterfactual_summary.json",
+        "proposal/sections/methodology.tex:62-68"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "mechanism_analysis.surrogate_vs_acquisition_ablation": {
+      "value": "not_applicable_surrogate_unchanged",
+      "confidence": "high",
+      "reason": "Every method, including CARR, returns the same ordinary-Kriging exponential-kernel predictor (same kriging.py hash; metrics computed from the same OrdinaryGP). The stacked guide is used only inside the acquisition score. The surrogate is therefore unchanged and the difference is confined to the acquisition. Ablations are provided anyway.",
+      "evidence": [
+        "proposal/code/run_experiments.py:111-119 (metrics from OrdinaryGP for every method)",
+        "proposal/sections/introduction.tex:6; proposal/sections/methodology.tex:22,32",
+        "Manifests: kriging.py sha 5e7ceb9d for all methods"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_analysis.subsection_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Analysis has an explicit Section 5.2, 'Failure analysis: accuracy can inflate a misspecified uncertainty model'.",
+      "evidence": [
+        "proposal/sections/analysis.tex:35"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_analysis.patterns_identified": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Failures are grouped by shared structure:\n- Early-budget (n=50) regressions on all three discontinuous functions.\n- Worse CRPS and over-coverage on the four functions where CARR concentrates samples near sharp changes, linked to inflated fitted scale (×3.3, ×2.5, ×9.4).\n- An objective-mismatch failure (MAPE) on diffusion.\n- No twofold saving on the four 2D functions.",
+      "evidence": [
+        "proposal/sections/analysis.tex:36, :49, :51, :53",
+        "proposal/sections/results.tex:38-41"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_analysis.patterns_explained_coherently": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Each pattern is linked to a design property in a way that predicts when CARR will fail:\n- Proposition 2 bounds the fitted global scale below by sampled jumps over short distances. Since CARR concentrates samples near discontinuities while the returned predictor stays stationary, this predicts CRPS and over-coverage failures on jump functions but not on the smooth oscillatory case (scale ratio 1.0; CRPS improves there).\n- Early failures come from an unreliable guide whose signed innovations the domain integral spreads.\n- The MAPE regression comes from the absolute-loss objective underweighting small responses.",
+      "evidence": [
+        "proposal/sections/analysis.tex:38-49 (Prop. 2 and checked scale ratios), :51, :53",
+        "proposal/logs/diagnostics.json (scale bound checks)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "compute_cost_analysis.subsection_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Analysis has an explicit Section 5.3, 'Computational cost trade-off'.",
+      "evidence": [
+        "proposal/sections/analysis.tex:55"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "compute_cost_analysis.measurements_reported": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Table 6 reports serial per-decision wall-clock costs on Piecewise II (n=190–199, 10 seeds), split into GP fit, guide fit, acquisition and total. Totals: CARR 75.81±35.77 ms, SMART 6.65 ms, gSMART 10.88 ms, grid 3.01 ms, random 2.87 ms. These match logs/compute_cost.json, which also verified the selected points against the saved trajectories.",
+      "evidence": [
+        "proposal/sections/cost_table.tex",
+        "proposal/logs/compute_cost.json summary (carr total 0.0758 s; smart 0.00665 s; gsmart 0.0109 s)",
+        "proposal/code/benchmark_cost.py:29-30 (selection assertion)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "compute_cost_analysis.tradeoff_explicit": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The trade-off is stated plainly. CARR costs about 11.4× SMART and 7.0× gSMART per decision. The overhead (a fraction of a second) is acceptable when physical measurements are slow but wasteful for cheap oracles. Where CARR does not beat the simple disagreement rule, its extra complexity 'lacks empirical justification'.",
+      "evidence": [
+        "proposal/sections/analysis.tex:57-59",
+        "proposal/logs/paper_macros.tex (CostRatioSmart 11.4, CostRatioGsmart 7.0)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "originality.related_work_cited": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Section 2.4 and the introduction discuss prior work substantively. Of the 32 references, about 18 come from the relevant active-learning, design and surrogate literature: MacKay 1992, Cohn 1996, Bect 2019, Sacks 1989, Cressie 1990, Rasmussen 2006, MEPE (Liu 2017), SFCVT (Aute 2013), EIGF (Lam 2008), LOLA-Voronoi (Crombecq 2011), TEAD (Mo 2017), GUESS/GALE (Lämmle 2023), reviews by Liu 2018 and Fuhg 2021, Bachoc 2013, and the Noack 2019/2020/2021 papers.",
+      "evidence": [
+        "proposal/sections/methodology.tex:102-105",
+        "proposal/sections/introduction.tex:2-8",
+        "proposal/report.bbl (32 bibitems)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "originality.positioning_vs_prior_work": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "The paper explains how CARR relates to the closest methods and what it adds. MEPE, SFCVT, EIGF, TEAD and LOLA use local residual or disagreement scores; CARR instead transports a signed innovation h_x(z)b(x) through the Kriging update and integrates its absolute risk. It differs from variance multipliers through its spatially varying error covariance. It concedes that stacking and CV-under-misspecification are not new. It shows that the zero-bias limit reduces to integrated SD reduction, compares directly with EIGF, IVR and ISR, and explicitly disclaims comparisons it did not run (MEPE, SFCVT, TEAD, GALE).",
+      "evidence": [
+        "proposal/sections/methodology.tex:68, :103-105",
+        "proposal/sections/introduction.tex:8",
+        "proposal/sections/ablation_table.tex (EIGF/IVR/ISR rows)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.rendered_pdf_clean": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "report.log shows no overfull or underfull boxes and no undefined references or citations; the only warning is the supplied style's package-name mismatch. I could not rasterize the PDF myself (no pdftoppm, and no file writes allowed). Instead I inspected the solver's renders of all 22 pages, made after the final build; the PDF hash matches the completion record. Equations fit the margins, tables fit, figures display, and citations resolve. The only flaw is cosmetic: overlapping x-axis tick labels in Figure 1's 2D panels.",
+      "evidence": [
+        "proposal/report.log (no Overfull/Underfull/undefined entries)",
+        "proposal/logs/pdf_verification.json (overfull_boxes [], undefined_reference_or_citation false)",
+        "proposal/figures/qa/page_02.png, page_06.png, page_07.png, page_11.png; contact_01_06..19_22.png",
+        "Limitation: page images are solver-generated renders of report.pdf (sha256 1858813d…)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.neurips_style": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The preamble uses \\usepackage[preprint]{neurips}, and the supplied neurips.sty is copied unchanged (byte-identical per reuse_verification).",
+      "evidence": [
+        "proposal/report.tex:3",
+        "proposal/logs/reuse_verification.json: copied_style_identical true"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.main_results_table_complete": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Table 1 covers all 21 (function, budget) rows in the main paper, reports mean ± sample SD over ten seeds, and puts the methods (Grid, Random, SMART, gSMART, CARR) in columns.",
+      "evidence": [
+        "proposal/sections/main_table.tex:7-32"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.convergence_curves_complete": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Figure 1 has five panels (Piecewise I, Piecewise II, smooth oscillatory, non-differentiable, 3D diffusion). They show ten-seed mean lines with shaded ±1 sample-SD bands for all five methods.",
+      "evidence": [
+        "proposal/sections/results.tex:3-6 (caption: 'Lines are ten-seed means and bands are one sample standard deviation')",
+        "proposal/figures/qa/page_07.png"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.scatter_plots": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Figure 4 overlays the measurement locations at n=200 (seed 0) on the true functions for all four 2D functions and all five methods. Figure 5 projects the diffusion sampling locations over a slice of the true function.",
+      "evidence": [
+        "proposal/sections/analysis.tex:15-24",
+        "proposal/figures/qa/page_11.png, page_12.png"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.limitations_discussed": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Section 5.4, 'Limits of the evidence', is a dedicated limitations subsection. It covers few benchmark functions, development on the same benchmark, the guide library's favorable match to two functions, heuristic scale fitting, the candidate-pool approximation, no noisy or high-dimensional tests, and the unmet twofold target and baseline ranking. The Conclusion repeats the scope limits.",
+      "evidence": [
+        "proposal/sections/analysis.tex:61-62",
+        "proposal/report.tex:34-36"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.independence_from_spec": {
+      "value": "no",
+      "confidence": "medium",
+      "reason": "Several elements are independent: the title states the contribution, the method has a substantive name (CARR), and the introduction motivates the work from the science. But spec terminology and contract criteria are transliterated in several places:\n- Results restate the spec's speedup gate almost verbatim: 'A substantial saving requires reaching that target by half that budget and … on a majority of tested budgets', and 'does not establish substantial savings on four of the five functions'.\n- The limitations say 'neither establishes twofold measurement savings on four functions'.\n- A paragraph heading and the appendix title use the spec's 'baseline reproduction' wording ('Unresolved aspects of baseline reproduction').\nA reader could reverse-engineer the 4-of-5, 2× contract from these passages, so the 'spec terminology not transliterated' component fails.",
+      "evidence": [
+        "proposal/sections/results.tex:27, :29",
+        "proposal/sections/analysis.tex:51, :62",
+        "proposal/sections/reproduction_limits.tex:1",
+        "task_spec.md:36,120,257 (contract gate and independence requirement)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.appendix_usage_minimized": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The main paper contains the methodology, the full 21-row results table, convergence and calibration figures, MAPE, and the mechanism, failure, cost and limitations analyses. The appendix holds only the unresolved baseline-reproduction attempts, which is permitted. The supplement holds benchmark equations, the full RMSE/CRPS/coverage table, coverage curves and control metrics, as the task allows for supplementary metrics.",
+      "evidence": [
+        "proposal/report.tex:28-44",
+        "proposal/sections/supplement.tex; proposal/sections/reproduction_limits.tex",
+        "task_spec.md:91 ('a supplementary metrics table and a calibration-curve figure are sufficient')"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.prose_quality": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The main-body sections are written in full paragraphs with proper citations and a coherent narrative. The only list is an appropriate enumeration of the six guide experts in the Methodology.",
+      "evidence": [
+        "proposal/sections/introduction.tex, results.tex, analysis.tex (paragraph prose)",
+        "proposal/sections/methodology.tex:72-79 (single justified enumerate)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "supporting_quality.codebase_notes_substantive": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The notes reflect real inspection of all three codebases:\n- gpCAM: named files; the ask API taking a candidate list or bounds; the acquisition signature; the built-in 'variance' returning standard deviation; default kernel, mean and noise unsuitable; the missing _version.py; fvGP version pinning; what was reused.\n- Bluesky: RunEngine and plans.adaptive_scan inspected, not reused, with reasons.\n- SciAnalysis: Processor/Protocol and XSAnalysis protocols inspected; context only, with reasons.\nThe notes also cover provenance and source commits.",
+      "evidence": [
+        "proposal/codebase_notes.md:3-49, :61-104"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.experiment_completeness.all_methods_logged_per_config": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "Every method in the results table (grid, random, SMART, gSMART, CARR) has 10 logged, completed runs for each of the 21 configurations. The controls and ablations reported at maximum budget also have 10-seed logs for all five functions. All table values were recomputed from these logs.",
+      "evidence": [
+        "proposal/logs/main (410 trajectories), ablations (150), homogeneous (50), classical (150) — all with complete.json",
+        "proposal/logs/integrity_audit.json (groups_with_ten_seeds 252)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.selective_reporting.per_function_curve_characterized": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "Results gives a named paragraph per function describing its curve pattern, not just win counts:\n- Piecewise I: 'a late crossover'.\n- Piecewise II: 'the same delayed separation'.\n- Smooth oscillatory: persistent mean improvement, with the grid lower at n=200.\n- Piecewise-linear: an initial investment, then separation.\n- Diffusion: below at all budgets, with a strong random baseline.\nA fixed-reference speedup table complements these.",
+      "evidence": [
+        "proposal/sections/results.tex:10-27",
+        "proposal/sections/speedup_table.tex"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.effort_evidence.attempts_log_when_partial_work_claimed": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "The paper reports the four-function speedup target as unmet and the baseline ranking reproduction as unresolved. attempts_log.md documents multiple distinct attempts for both, each backed by logged two-seed suites:\n- Baseline: fixed gSMART coefficient c=0.1, analytic gradient with a normalized coefficient, variogram sill normalization, continuous DE optimizer.\n- Speedup: scalar guide, extended experts, spatial scale, signed/unsigned/zero-bias variants.\nEach entry gives observations and reasons for keeping or abandoning.",
+      "evidence": [
+        "proposal/attempts_log.md A05-A10, A11, A12, A15",
+        "proposal/logs/pilot (50), pilot_bounded (30), pilot_sill (30), pilot_guides (10), pilot_local (10), optimizer_check (20) — all complete"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "evidence_completeness.quantitative_sources_documented": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "Each paper number traces to an identifiable log; I spot-checked the main table (exact recomputation), ablation and control MAEs and MAPEs, cost table, fit table, audit Spearman values, regional boundary errors and math-validation discrepancies. paper_claims.json maps every prose macro to a source path. No numerical values from the original paper are cited as substitutes.",
+      "evidence": [
+        "proposal/logs/paper_claims.json (macro→source mapping)",
+        "proposal/logs/compute_cost.json, fit_summary.json, counterfactual_summary.json, regional_summary.json, math_validation.json",
+        "Recomputed main/ablation tables from logs/*/metrics.json"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "evidence_completeness.required_reporting_coverage": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "Reporting covers everything the task requires:\n- 21 configurations × 5 methods × 10 seeds, with mean ± SD.\n- MAE on dense held-out grids (10,000 points in 2D, 64,000 in 3D) and MAPE for diffusion.\n- RMSE, CRPS and coverage for every method and configuration, with coverage figures.\n- Convergence curves with bands; scatter plots.\n- Ablation logs; per-refresh hyperparameter-fit logs; per-step compute-cost logs; an attempts log for the unmet items.",
+      "evidence": [
+        "proposal/sections/main_table.tex; metrics_table.tex; mape_table.tex",
+        "proposal/sections/setup.tex:8,12",
+        "proposal/logs/main/*/fits.jsonl; logs/compute_cost.json; proposal/attempts_log.md"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    }
+  },
+  "context": {
+    "partial_work_claimed": {
+      "value": true,
+      "reason": "The submission explicitly reports two partial or unresolved items. The twofold-saving target is met only on diffusion, not on four of five functions. The original qualitative baseline ranking is only partially reproduced. Both are recorded in the paper, README, completion record and attempts log.",
+      "evidence": [
+        "proposal/sections/results.tex:27-30",
+        "proposal/sections/reproduction_limits.tex:1-9",
+        "proposal/attempts_log.md A11, A15",
+        "proposal/logs/completion.json: four_function_speedup_target_met false, original_qualitative_baseline_ranking_fully_reproduced false"
+      ]
+    }
+  }
+}

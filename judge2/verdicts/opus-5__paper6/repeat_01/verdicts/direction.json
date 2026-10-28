@@ -1,0 +1,1369 @@
+{
+  "nodes": {
+    "deliverables.paper_exists": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "proposal/report.tex exists and inputs eight section files (~100 KB total) containing full prose, equations, tables and figures; the compiled report.pdf has 25 pages with all sections populated.",
+      "evidence": [
+        "proposal/report.tex:77-88 (inputs intro, methods, setup, results, analysis, conclusion, refs, appendix)",
+        "proposal/sections/results.tex (30.5 KB), methods.tex (19.5 KB), analysis.tex (11.2 KB)",
+        "pypdf text extraction of proposal/report.pdf: 25 pages"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.uses_neurips_style": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The LaTeX source loads the provided style file via usepackage[final,main,nonatbib]{neurips}; neurips.sty is present in proposal/. The log notes the file identifies itself as neurips_2026 but it is the supplied file.",
+      "evidence": [
+        "proposal/report.tex:2",
+        "proposal/neurips.sty",
+        "proposal/report.log:27-28"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.has_required_sections": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "All seven required sections are present, in order: Introduction, Methodology, Experimental Setup, Experimental Results, Analysis, Conclusion, References (thebibliography), followed by the appendix.",
+      "evidence": [
+        "proposal/sections/intro.tex:1, methods.tex:1, setup.tex:1, results.tex:1, analysis.tex:1, conclusion.tex:1, refs.tex:1",
+        "PDF headings: 1 Introduction, 2 Methodology, 3 Experimental Setup, 4 Experimental Results, 5 Analysis, 6 Conclusion, References, A/B appendices"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.main_results_table_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "A table environment carries label tab:main_results and is input into the Experimental Results section, using the required column headers.",
+      "evidence": [
+        "proposal/sections/tab_main.tex:1-20 (label at line 3; headers at line 10)",
+        "proposal/sections/results.tex:496 (input tab_main)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.main_results_table_six_rows": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The table has exactly six data rows: Cold linear waves (verification, unmagnetised 1D dispersion = III.1); Gamma-ray laser on a slab (verification, 1D laser-plasma at a≈1,16 = III.2); Dressed plasma and Counter-streaming beams (scope); Magnetised plasma on a torus and Vacuum-seeded ensemble (boundary). The rows use physics names, as the task requires, and the category column is explicit.",
+      "evidence": [
+        "proposal/sections/tab_main.tex:12-17"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.scope_test_1_designated": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "Following the task's instruction to avoid spec terminology, the paper never writes the literal string 'Scope Test 1'. The first scope test is still a named entity throughout: 'Relativistically dressed plasma' has its own Methods paragraph (P3) and Results subsection 4.2, and it is the first row categorised 'scope' in Table 3. The rubric's failing condition (no corresponding test identified) does not apply.",
+      "evidence": [
+        "proposal/sections/methods.tex:189-237 (P3)",
+        "proposal/sections/results.tex:106-172 (Sec. 4.2)",
+        "proposal/sections/tab_main.tex:14 (Dressed plasma & scope)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.scope_test_2_designated": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The second scope test, 'Counter-streaming relativistic beams', is named in Methods (P4) and Results subsection 4.3, and is the second 'scope' row of Table 3. The literal label 'Scope Test 2' is deliberately not used, per the task's spec-independence instruction.",
+      "evidence": [
+        "proposal/sections/methods.tex:239-270 (P4)",
+        "proposal/sections/results.tex:174-221",
+        "proposal/sections/tab_main.tex:15"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.boundary_test_1_designated": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "'Magnetised plasma on a torus' is named in Methods (P5) and Results 4.4 ('a topological obstruction and its repair') and is the first 'boundary' row of Table 3. The body also refers collectively to 'the two boundary tests' (analysis.tex:135).",
+      "evidence": [
+        "proposal/sections/methods.tex:272-302",
+        "proposal/sections/results.tex:223-308",
+        "proposal/sections/tab_main.tex:16"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.boundary_test_2_designated": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "'Vacuum-seeded ensembles' is named in Methods (P6) and Results 4.5 ('loss of the continuum limit and its repair') and is the second 'boundary' row of Table 3.",
+      "evidence": [
+        "proposal/sections/methods.tex:304-348",
+        "proposal/sections/results.tex:310-429",
+        "proposal/sections/tab_main.tex:17"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.code_organized_under_proposal": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "proposal/code/ contains the from-scratch 1D and 2D solvers, analytic and prediction modules, and one driver per reported experiment (repro1, repro2, repro2_convergence, scope_dressed, scope_twostream, boundary_flux(+alternatives, reanalysis), boundary_vacuum, vacuum_schwinger), plus structural tests and asset generators. A README maps scripts to experiments and logs.",
+      "evidence": [
+        "proposal/code/README.md:1-54",
+        "proposal/code/lattice1d.py, lattice2d.py, run_*.py, test_scheme*.py, make_numbers.py"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.logs_organized_under_proposal": {
+      "value": "no",
+      "confidence": "medium",
+      "reason": "proposal/logs/ has one JSON per experiment with inputs, summary metrics, max-over-run charge and energy drifts, seed lists and timestamps. However, the required conservation time series are absent, and so are the full phi_v/A_e histories for the reproductions. The drivers wrote these to .npz files, and the paper cites logs/fields_*.npz and logs/scope_dressed_*_L41.npz, but no .npz file exists anywhere in the snapshot. boundary_vacuum.json contains no charge or energy diagnostic at all; the vacuum conservation values come only from the absent bvac_*.npz via numbers.tex. The required diagnostics are therefore missing from the submitted logs.",
+      "evidence": [
+        "find proposal -name '*.npz' -> no files",
+        "proposal/code/run_repro2.py:188, run_repro1.py:190, run_boundary_vacuum.py:240-292 (np.savez_compressed outputs)",
+        "proposal/sections/setup.tex:84-91 (cites logs/fields_*.npz)",
+        "proposal/sections/analysis.tex:103-104 (cites logs/scope_dressed_*_L41.npz)",
+        "proposal/logs/boundary_vacuum.json (mass_* and pairs_* entries lack dQ/dU fields)",
+        "proposal/code/make_numbers.py:423-439"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "reproduction_iii_1.attempted": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The paper explicitly reproduces the linear-wave dispersion demonstration as an implementation control. Methods P1 states the predictions; Experimental Setup lists the run configuration and says it uses exactly the published parameters; Results 4.1 details it (q=0.3, ω_p=0.85m, mΔx=0.04, mΔt=0.02, L=512, plus a long T=4096, R=128 run).",
+      "evidence": [
+        "proposal/sections/methods.tex:156-175",
+        "proposal/sections/setup.tex:47-54; tab_runs.tex:9",
+        "proposal/sections/results.tex:11-28",
+        "proposal/logs/repro1.json"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "reproduction_iii_1.matches_analytic_within_tolerance": {
+      "value": "matches_within_stated_tolerance",
+      "confidence": "medium",
+      "reason": "I recomputed from repro1.json spectral.rows: 13 wavenumbers, 0.307 ≤ k/m ≤ 3.99, compared with the logged lattice predictions. Maximum relative deviations are 0.84% (transverse, Eq. 21), 0.92% (Langmuir root of Eq. 22) and 0.40% (pair root), all below τ_ω=1%. Convergence runs at mΔx = 0.08/0.04/0.02 reproduce the same maxima. Caveats: τ_ω was calibrated from this same control run, and the raw ω–k spectra (repro1_long.npz) are absent, so only the logged peak positions can be checked.",
+      "evidence": [
+        "proposal/logs/repro1.json spectral.rows and summary (transverse 0.0084, langmuir 0.0092, pair 0.0040)",
+        "proposal/logs/repro1.json convergence[0..2]",
+        "proposal/sections/methods.tex:356-364"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "reproduction_iii_1.charge_conservation_machine_precision": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The logged maximum |ΔQ|/Q_ion over the full 4096-step conservation run is 2.7e-15. Recomputing charge from the stored double-precision fields of seed 1000 gives 1.9e-15. Both are far below 1e-10.",
+      "evidence": [
+        "proposal/logs/repro1.json conservation.dQ_over_Qion=2.699e-15",
+        "proposal/logs/verify_field_dumps.json repro1_seed1000 charge_drift_rel=1.95e-15"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "reproduction_iii_1.energy_conservation_within_tolerance": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The logged |ΔU/U| of 1.55e-13 is far below the 1e-3 tolerance the paper states for non-laser runs.",
+      "evidence": [
+        "proposal/logs/repro1.json conservation.dU_over_U=1.549e-13",
+        "proposal/sections/methods.tex:370-375"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "reproduction_iii_2.attempted": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The paper claims reproduction of both a≈1 and a≈16. Experimental Setup lists the laser-plasma run (N=12000, mΔx=0.04, mΔt=0.005, T=60000, R=200) and says it uses exactly the published parameters; Methods P2 states the a-dependent prediction. The explicit physical configuration (ω0=0.7m, τ=20/m, n0=m³, 100/m plateau, σ=20/m, a≈1 and a≈16) appears at the start of Results 4.1. Both configurations were run.",
+      "evidence": [
+        "proposal/sections/setup.tex:47-54; tab_runs.tex:10",
+        "proposal/sections/methods.tex:176-187",
+        "proposal/sections/results.tex:52-60",
+        "proposal/logs/repro2.json cases a1, a16"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "reproduction_iii_2.wakefield_at_a1": {
+      "value": "yes",
+      "confidence": "low",
+      "reason": "At a=1 the log shows a wakefield of max|E_x| = 0.191 E_c, below the Schwinger field. It is converged across resolutions (0.194, 0.195, 0.195 at mΔx = 0.08/0.04/0.02). Charged-field energy rises 6.1% and EM energy falls 9.5%, and essentially no positive charge appears (fraction ≤ 4e-5). The paper's quoted 0.3 E_c equals its own heuristic aω_p/m; the measured value is about 1.6× lower, which the submission discloses as a partial quantitative reproduction. That is consistent with the qualitative form at the heuristic's order-of-magnitude precision. figures/repro2.pdf is an x–t charge-density map like paper Fig. 5a (per make_figs.py), but I could not render it, so the visual structure is unverified.",
+      "evidence": [
+        "proposal/logs/repro2.json cases.a1 (Ex_max_over_Ec 0.1906, Uphi 1.061, UA 0.905, pos 4.1e-5)",
+        "proposal/logs/repro2_convergence.json rows",
+        "proposal/sections/results.tex:57-73",
+        "proposal/code/make_figs.py:82-129"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "reproduction_iii_2.pair_production_at_a16": {
+      "value": "no",
+      "confidence": "medium",
+      "reason": "The logs do show pair production above threshold at a=16: max|E_x| = 1.97 E_c, positive-charge fraction up to 0.87% (×209 relative to a=1), and charged-field energy ×14.6. However, the criterion explicitly requires the spectral broadening and annihilation peaks the paper reports. No EM k- or ω-spectrum is computed, logged or plotted. figures/repro2.pdf contains only x–t charge density and energy/charge traces; the transverse fields were saved only to the absent repro2_a16.npz.",
+      "evidence": [
+        "proposal/logs/repro2.json cases.a16",
+        "proposal/code/make_figs.py:82-129 (no spectrum panel)",
+        "proposal/sections/results.tex:93-104 (Fig. 2 caption)",
+        "proposal/code/run_repro2.py:188-197"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "reproduction_iii_2.charge_conservation_machine_precision": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Logged maximum |ΔQ|/Q_ion is 3.4e-15 (a=1) and 1.9e-15 (a=16). The convergence runs are ≤ 2.5e-14, and field-dump recomputation gives about 1.9e-14 for both cases. All are below 1e-10.",
+      "evidence": [
+        "proposal/logs/repro2.json cases a1/a16 dQ_over_Qion",
+        "proposal/logs/repro2_convergence.json",
+        "proposal/logs/verify_field_dumps.json"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "reproduction_iii_2.energy_conservation_within_tolerance": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Logged |ΔU/U| is 2.13e-6 at a=1 (target 6 ppm) and 3.43e-4 at a=16 (target 0.2%). Both are within the published tolerances the paper adopts.",
+      "evidence": [
+        "proposal/logs/repro2.json dU_over_U 2.13e-6, 3.43e-4",
+        "proposal/sections/methods.tex:371-375"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "algorithm_fidelity.derives_eom_from_variational_action": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "lattice1d.py implements the Euler–Lagrange equations of the stated Yee-type action: a Wilson-line covariant Klein–Gordon update, charge and current densities as variational derivatives of S_d, and Maxwell–Ampère updates; lattice2d.py does the same in 2D. Methods 2.1 presents S_d and derives each equation of motion as δS_d=0, with the discrete Noether continuity law. The structural log confirms continuity to round-off.",
+      "evidence": [
+        "proposal/code/lattice1d.py:1-27, 87-153",
+        "proposal/code/lattice2d.py:1-33, 162-203",
+        "proposal/sections/methods.tex:16-80",
+        "proposal/logs/test_scheme.json T1_continuity_rel=1.5e-15"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "algorithm_fidelity.yee_type_field_layout": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "φ sits on vertices; A^x on x-edges (i+1/2); the optional temporal component sits on time-like edges at n+1/2 (temporal gauge is used); E_x lives on time-like faces. In 2D, A^x and A^y are on x- and y-edges and B_z is on plaquettes. In 1D the transverse A^y and A^z sit on vertices, which is the correct dimensional reduction of the y/z edges.",
+      "evidence": [
+        "proposal/code/lattice1d.py:36-84",
+        "proposal/code/lattice2d.py:104-110, 153-156",
+        "proposal/sections/methods.tex:16-38, 91-92"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "algorithm_fidelity.bianchi_identities_by_construction": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "B is computed only as the discrete curl of A, and A is advanced by A −= ΔtE, so the discrete Faraday law holds identically; ∇·B=0 is trivial in the 1D/2D reductions. Logged Faraday residuals are 3.8e-16 (1D) and ≤ 8.1e-15 in the periodic, Landau-twisted and symmetric-twisted 2D sectors, all ≪ 1e-10. Production-run logs do not record Faraday residuals separately, but the identity is structural to both solvers and verified in every boundary sector used.",
+      "evidence": [
+        "proposal/code/lattice1d.py:123-126, 146-151",
+        "proposal/code/lattice2d.py:153-156, 200-201",
+        "proposal/logs/test_scheme.json T3_faraday_rel=3.8e-16",
+        "proposal/logs/test_scheme2d.json U3_faraday_rel (9.8e-16, 7.9e-15, 8.1e-15)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "algorithm_fidelity.charge_conservation_by_construction": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Every logged run is at round-off: repro1 2.7e-15; repro2 3.4e-15/1.9e-15 (convergence ≤ 2.5e-14); dressed ≤ 3.1e-14 (large box ≤ 9.3e-15); two-stream per species 1.6e-15/1.4e-15; magnetised torus |ΔQ| ≤ 3e-19 (absolute); structural tests ~1e-15; vacuum runs 1.6e-14 absolute (numbers.tex). No boundary test targets charge violation.",
+      "evidence": [
+        "proposal/logs/repro1.json, repro2.json, repro2_convergence.json",
+        "proposal/logs/scope_dressed.json, scope_dressed_L41.json, scope_twostream.json",
+        "proposal/logs/boundary_flux.json dQ_abs",
+        "proposal/logs/numbers.tex:257 VacDQabs"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "algorithm_fidelity.resolution_constraints_respected": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "From the logged parameters: mΔt ≤ 0.08 in every run; Courant number Δt/Δx ≤ 0.5 (0.125 for laser-plasma, 0.4 for the torus); qAΔ stays well below 2π (dressed qA0Δx = 0.32 at a=8; magnetised torus max qA^yΔy ≈ 1.57 at N=64; Schwinger runs qA^xΔx ≲ 0.6). The dressed runs reach m*Δt ≈ 0.16 at a=8, still small, and comparisons use lattice symbols. I found no unflagged violation.",
+      "evidence": [
+        "proposal/sections/tab_runs.tex:9-14",
+        "proposal/logs/boundary_flux.json (dx, dt)",
+        "proposal/logs/boundary_vacuum.json (dx, dt)",
+        "proposal/sections/results.tex:148-149 (qA0Δx=0.32)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "test_scope_test_1.regime_distinct_from_paper_demos": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "A homogeneous plasma dressed by a relativistically strong circularly polarised k=0 pump (a up to 8) probes Volkov-mass dressing, the dressed plasma frequency and an upshifted pair gap: nonlinear φ–A coupling absent from both the unmagnetised linear-wave demo (III.1) and the laser-slab demo (III.2).",
+      "evidence": [
+        "proposal/sections/methods.tex:189-237",
+        "proposal/sections/intro.tex:84-91"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "test_scope_test_1.regime_distinct_from_other_three": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The paper distinguishes the tests by physics. The dressed plasma exercises intensity-dependent mass and φ–A coupling; the two-stream test a kinetic beam instability with separately conserved species; the torus magnetic topology and holonomy; the vacuum test UV fluctuation seeding. These distinctions are stated in the Introduction, the Methods diagnostics and the Analysis.",
+      "evidence": [
+        "proposal/sections/intro.tex:84-129",
+        "proposal/sections/methods.tex:234-237, 266-270, 298-302, 332-334",
+        "proposal/sections/analysis.tex:4-24"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "test_scope_test_1.regime_physically_meaningful": {
+      "value": "ambitious_well_motivated",
+      "confidence": "high",
+      "reason": "Volkov dressing, intensity-dependent mass and relativistic self-induced transparency are well-studied strong-field and laser-plasma topics with rich closed-form predictions (m*, ω̃_p, dressed pair gap), cited to Volkov, Kibble, Harvey, Akhiezer–Polovin, Kaw–Dawson and others.",
+      "evidence": [
+        "proposal/sections/methods.tex:189-221",
+        "proposal/sections/refs.tex (Volkov1935, Kibble1966, Harvey2012, AkhiezerPolovin1956, KawDawson1970)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "test_scope_test_1.described_in_methodology_before_results": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "Methods P3 describes the setup (homogeneous plasma, CP k=0 pump, white-noise probes), the predictions D1–D3, the pre-stated k window, the modulational-instability caveat and the intent. Experimental Setup Table 2 gives the lattice configuration (N=256, mΔx=0.04, mΔt=0.02, T=16384, R=32), all before Results. Some physical values (ω_p = 0.5m, the a-scan values, L = 10.24/m) first appear in Results 4.2.",
+      "evidence": [
+        "proposal/sections/methods.tex:189-237",
+        "proposal/sections/tab_runs.tex:11",
+        "proposal/sections/results.tex:109-111"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "test_scope_test_1.convergence_study_logged": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Convergence runs at a=2 for mΔx = 0.08, 0.04 and 0.02 are logged, with m*, ω̃_p and all branch metrics measured at each.",
+      "evidence": [
+        "proposal/logs/scope_dressed.json convergence[0..2]",
+        "proposal/sections/tab_conv.tex:15-17"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "test_scope_test_1.charge_conservation_holds": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Logged dQ/Q_ion ranges from 3.1e-15 to 3.1e-14 across the a-scan and the convergence runs — machine precision.",
+      "evidence": [
+        "proposal/logs/scope_dressed.json scan[*].dQ_over_Qion, convergence[*].dQ_over_Qion"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "test_scope_test_1.energy_conservation_holds": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "Production runs stay within the stated 1e-3 tolerance (maximum dU/U = 3.8e-4 at a=4; convergence runs 1.7e-5 to 2.6e-7). Caveat: the auxiliary large-box runs reported in the Analysis reach 1.55e-3 at a=8, exceeding 1e-3, although the text says 'the conservation laws are unaffected'.",
+      "evidence": [
+        "proposal/logs/scope_dressed.json scan dU_over_U (max 3.79e-4)",
+        "proposal/logs/scope_dressed_L41.json scan[a=8].dU_over_U=1.55e-3",
+        "proposal/sections/analysis.tex:104-106"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "test_scope_test_1.primary_diagnostic_identified": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Methods explicitly names non-trivial φ–A coupling as the primary diagnostic, and this fits the design: m* and the pair gap are set by the covariant-derivative and q²A⊥² terms at a ≳ 1.",
+      "evidence": [
+        "proposal/sections/methods.tex:234-237",
+        "proposal/sections/results.tex:145-150"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "test_scope_test_2.regime_distinct_from_paper_demos": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Counter-streaming relativistic boson beams drive a kinetic two-stream instability with quantum recoil — an unstable, multi-beam regime that neither demo touches.",
+      "evidence": [
+        "proposal/sections/methods.tex:239-270"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "test_scope_test_2.regime_distinct_from_other_three": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The paper articulates this test's physics as beam-driven instability with growth rates and band edges set by quantum recoil, monitored for per-species conservation. That is distinct from the dressed equilibrium, the magnetic topology test and the UV vacuum test.",
+      "evidence": [
+        "proposal/sections/intro.tex:91-98",
+        "proposal/sections/analysis.tex:113-131"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "test_scope_test_2.regime_physically_meaningful": {
+      "value": "ambitious_well_motivated",
+      "confidence": "high",
+      "reason": "The quantum and relativistic two-stream instability is a canonical, widely studied problem (Haas, Bret, Manfredi multistream models). The submission derives a scalar-QED multi-beam dispersion relation and contrasts it with a classical cold-fluid null hypothesis, exploiting cross-species physics.",
+      "evidence": [
+        "proposal/sections/methods.tex:239-270",
+        "proposal/sections/appendix.tex:10-43"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "test_scope_test_2.described_in_methodology_before_results": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "Methods P4 describes the drifting-condensate setup, the prediction (γ = max Im ω of the multi-beam relation for p_z = ±p_b), the classical null hypothesis and the diagnostic; Table 2 gives the lattice configuration (N=1024, T=6000, R=32) before Results. The specific p_b, ω̃_p, seed amplitude and fit window first appear in Results 4.3.",
+      "evidence": [
+        "proposal/sections/methods.tex:239-270",
+        "proposal/sections/tab_runs.tex:12",
+        "proposal/sections/results.tex:177-183"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "test_scope_test_2.convergence_study_logged": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Runs at mΔx = 0.08, 0.04 and 0.02 are logged, with growth-rate errors measured at each (0.46%, 1.08%, 0.48%).",
+      "evidence": [
+        "proposal/logs/scope_twostream.json convergence[0..2]"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "test_scope_test_2.charge_conservation_holds": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Per-species charge drifts are 1.6e-15 and 1.4e-15, and total drift is 1.2e-15. The convergence runs are all ≤ 1.8e-15.",
+      "evidence": [
+        "proposal/logs/scope_twostream.json main.dQ1_over_Q1, dQ2_over_Q2, convergence[*]"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "test_scope_test_2.energy_conservation_holds": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "dU/U is 1.1e-7 (main run) and 8.4e-7 to 1.8e-8 (convergence runs), well within 1e-3.",
+      "evidence": [
+        "proposal/logs/scope_twostream.json main.dU_over_U, convergence[*].dU_over_U"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "test_scope_test_2.primary_diagnostic_identified": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "Methods names charge and energy conservation as the primary diagnostic, arguing that beam-to-field energy transfer and separate per-species charge conservation with overlapping beams would expose a non-variational deposition. The logs do measure per-species charge and energy. The headline observable, growth rate, is closer to dispersion fidelity, so the assignment is defensible but somewhat forced.",
+      "evidence": [
+        "proposal/sections/methods.tex:266-270",
+        "proposal/sections/results.tex:200-206"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "test_boundary_test_1.regime_distinct_from_paper_demos": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "A 2D plasma in a uniform magnetic field with a relativistic Landau ladder on a torus: magnetised and two-dimensional, unlike either 1D unmagnetised demo.",
+      "evidence": [
+        "proposal/sections/methods.tex:272-302"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "test_boundary_test_1.regime_distinct_from_other_three": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The paper presents this as a configuration-space and topological obstruction (holonomy, first Chern class), explicitly contrasted with the vacuum test's measure/UV defect and with the two scope tests.",
+      "evidence": [
+        "proposal/sections/analysis.tex:6-24",
+        "proposal/sections/intro.tex:100-113"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "test_boundary_test_1.regime_physically_meaningful": {
+      "value": "ambitious_well_motivated",
+      "confidence": "medium",
+      "reason": "Magnetised relativistic-quantum plasma with Landau quantisation (relevant to magnetars) is a central, well-studied scenario with non-trivial analytic content: the Landau ladder plus the Hofstadter-type lattice correction. The obstruction is a known lattice-gauge fact, but the regime itself is not adversarial.",
+      "evidence": [
+        "proposal/sections/methods.tex:272-284",
+        "proposal/sections/intro.tex:9-11"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "test_boundary_test_1.described_in_methodology_before_results": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "Methods 2.2 (twisted-BC construction) and P5 (Landau ladder, exact obstruction statement, failure criteria B1/B2, diagnostic) plus Table 2 (128², mΔx=0.0781, R=8) describe the test before Results. The specific B0 and L values appear first in Results 4.4.",
+      "evidence": [
+        "proposal/sections/methods.tex:82-124, 272-302",
+        "proposal/sections/tab_runs.tex:13",
+        "proposal/sections/results.tex:226-230"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "test_boundary_test_1.convergence_study_logged": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Periodic and twisted runs are logged at N = 64, 128 and 256. The periodic failure persists (max level error 5.1%, 10.9%, 9.1%) while the twisted error stays at 0.18%, 0.16%, 0.15%.",
+      "evidence": [
+        "proposal/logs/boundary_flux.json naive_periodic[*].level_max_relerr, twisted[*].level_max_relerr"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "test_boundary_test_1.charge_conservation_holds": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Total charge is zero by construction (neutralised), and the absolute drift is 7.5e-20 to 3.0e-19 in all periodic and twisted runs.",
+      "evidence": [
+        "proposal/logs/boundary_flux.json dQ_abs (naive and twisted)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "test_boundary_test_1.energy_conservation_holds": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "dU/U is 1.5e-9 to 4.3e-9 (periodic) and 2.4e-13 to 7.4e-13 (twisted), inside the stated 1e-3. This test does not target energy conservation.",
+      "evidence": [
+        "proposal/logs/boundary_flux.json dU_over_U"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "test_boundary_test_1.primary_diagnostic_identified": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Methods names gauge invariance (holonomy of the discrete connection; Landau versus symmetric gauge equivalence). The measurements match: total flux, and a cocycle test showing gauge-level mismatch of 1.2e-7 at integer flux versus 9.3e-4 at half-integer flux.",
+      "evidence": [
+        "proposal/sections/methods.tex:298-302",
+        "proposal/logs/boundary_flux.json cocycle_test"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "test_boundary_test_2.regime_distinct_from_paper_demos": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Half-quantum vacuum-seeded ensembles and their UV behaviour (renormalised mass, spurious pairs, constant-field Schwinger plateau) are distinct from III.2, which seeds only a plasma condensate and never the vacuum fluctuation sector.",
+      "evidence": [
+        "proposal/sections/methods.tex:304-348"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "test_boundary_test_2.regime_distinct_from_other_three": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The paper explicitly contrasts this measure/UV obstruction with the topological one and with the scope tests.",
+      "evidence": [
+        "proposal/sections/analysis.tex:6-24, 133-147"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "test_boundary_test_2.regime_physically_meaningful": {
+      "value": "ambitious_well_motivated",
+      "confidence": "high",
+      "reason": "Vacuum pair creation is a central advertised application. The test engages the known non-renormalisability of the classical-statistical approximation (Epelbaum et al.) and the Nikishov/Schwinger plateau, with rich analytic content.",
+      "evidence": [
+        "proposal/sections/methods.tex:304-334",
+        "proposal/sections/intro.tex:115-129"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "test_boundary_test_2.described_in_methodology_before_results": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "Methods P6 gives the tadpole and m_eff predictions, criteria C1/C2 and the fix. Setup's 'Ensembles and error bars' paragraph describes the half-quantum sampler, antithetic pairs and the ±δ probe, and Table 2 lists the configuration. Λ = 8m, L, δ and the fit window are first given in Results 4.5.",
+      "evidence": [
+        "proposal/sections/methods.tex:304-348",
+        "proposal/sections/setup.tex:56-78",
+        "proposal/sections/tab_runs.tex:14"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "test_boundary_test_2.convergence_study_logged": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Mass runs are logged at mΔx = 0.16, 0.08, 0.04 and 0.02, and pair runs at 0.08, 0.04 and 0.02, for both unfixed and fixed schemes. The failure persists and grows: m_eff/m = 1.079, 1.089, 1.097, 1.106.",
+      "evidence": [
+        "proposal/logs/boundary_vacuum.json mass_photon_unfixed, mass_photon_fixed, pairs_unfixed, pairs_fixed"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "test_boundary_test_2.charge_conservation_holds": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "numbers.tex records a maximum absolute charge drift of 1.6e-14 over all vacuum runs, and the sampler log shows initial total charge of 1.3e-14. Caveat: boundary_vacuum.json has no charge field; the value traces to bvac_*.npz files absent from the snapshot.",
+      "evidence": [
+        "proposal/logs/numbers.tex:257 VacDQabs",
+        "proposal/code/make_numbers.py:423-439",
+        "proposal/logs/test_vacuum_sampler.json phase.total_charge_max=1.25e-14"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "test_boundary_test_2.energy_conservation_holds": {
+      "value": "no",
+      "confidence": "medium",
+      "reason": "Methods pre-states |ΔU/U| < 1e-3 for all non-laser runs. The photon-vacuum mass runs meet it (2.2e-7), but the matter-vacuum and pair runs of this test reach about 1e-2, which the paper acknowledges in Results and explains only after the fact. This test does not target energy conservation, so the exceedance is inconsistent with the stated expectation.",
+      "evidence": [
+        "proposal/sections/methods.tex:371-375",
+        "proposal/sections/results.tex:349-359",
+        "proposal/logs/numbers.tex:258-259 (VacDUall 10^-2, VacDUphoton 2.2e-7)",
+        "proposal/sections/tab_main.tex:2 (footnote double-dagger)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "test_boundary_test_2.primary_diagnostic_identified": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Methods names dispersion fidelity: the failure is a shift of the charged-field propagator pole. That matches the m_eff measurement.",
+      "evidence": [
+        "proposal/sections/methods.tex:332-334"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "scope_scope_test_1.prediction_stated_and_sharp": {
+      "value": "sharp_and_pre_stated",
+      "confidence": "high",
+      "reason": "Methods states closed-form predictions before any results: D1 m* = m√(1+a²), ω̃_p = ω_p(1+a²)^(-1/4), D2 ω̂_T² = k̂² + ω̃_p², and D3 as the roots of the longitudinal polynomial with (m, ω_p) → (m*, ω̃_p).",
+      "evidence": [
+        "proposal/sections/methods.tex:189-221"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "scope_scope_test_1.prediction_cited_or_derived": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Cited to Volkov, Kibble and Harvey (m*) and to Akhiezer–Polovin, Kaw–Dawson, Cattani and Siminos (dressed ω_p), and derived step by step in Appendix B.",
+      "evidence": [
+        "proposal/sections/methods.tex:192-207",
+        "proposal/sections/appendix.tex:45-75"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "scope_scope_test_1.tolerance_pre_stated_and_justified": {
+      "value": "stated_and_justified",
+      "confidence": "medium",
+      "reason": "τ_ω = 1% is stated in Methods 2.5 before results. It is justified by the control run's convergence: the 0.92% residual is unchanged under refinement from mΔx = 0.08 to 0.02, so it is a measurement floor rather than discretisation error. It is applied by extension to the dressed test.",
+      "evidence": [
+        "proposal/sections/methods.tex:350-364"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "scope_scope_test_1.simulation_agrees_with_prediction_within_tolerance": {
+      "value": "no",
+      "confidence": "medium",
+      "reason": "D1–D3 are pre-stated for every resolved k with 2π/L ≤ k ≤ 3m, and Table 3 states τ_ω = 1% 'on all three'. Recomputed from the log: D1 (max 0.20%) and ω̃_p (0.98%) pass. D2 deviates 1.54%, 2.58%, 2.92% and 3.28% at k = 0.61 for a = 0.5, 1, 2 and 4. D3 deviates 4.4%, 12.2% and 15.0% at k = 1.23, 1.84 and 2.45 for a=4, and 1.48% at k = 1.84 for a=8. The paper excludes the box-scale mode after the fact and substitutes the k_min pair point (0.73%). The convergence metric is 2.91–2.92% at every Δx.",
+      "evidence": [
+        "proposal/sections/methods.tex:210-221",
+        "proposal/logs/scope_dressed.json scan[a=0.5..8].rows (wT, wP)",
+        "proposal/sections/results.tex:124-138",
+        "proposal/sections/tab_main.tex:14; tab_conv.tex:15-17"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "scope_scope_test_2.prediction_stated_and_sharp": {
+      "value": "sharp_and_pre_stated",
+      "confidence": "high",
+      "reason": "Methods gives the multi-beam dispersion relation in closed form and defines the prediction as γ(k) = max Im ω for p_z = ±p_b. It is numerically computable via documented polynomial root-finding with spurious-root filtering.",
+      "evidence": [
+        "proposal/sections/methods.tex:239-265",
+        "proposal/code/dispersion.py:27-105"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "scope_scope_test_2.prediction_cited_or_derived": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Derived in Appendix A by linearising the KG–Ampère system about drifting condensates; I checked the ψ± amplitudes and D± denominators. The reduction to the published susceptibility is shown, and the multistream quantum-plasma literature is cited.",
+      "evidence": [
+        "proposal/sections/appendix.tex:10-43",
+        "proposal/sections/methods.tex:249-257"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "scope_scope_test_2.tolerance_pre_stated_and_justified": {
+      "value": "stated_but_unjustified",
+      "confidence": "medium",
+      "reason": "τ_γ = 5% is stated in Methods before results, but its value is set as 'five times τ_ω' with only a qualitative appeal to fit-window and seed-amplitude systematics. No convergence or noise estimate quantifies it; the block scatter found later is 0.16%.",
+      "evidence": [
+        "proposal/sections/methods.tex:366-368",
+        "proposal/logs/ensemble_stats.json twostream_gamma_kmax std 2.0e-4"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "scope_scope_test_2.simulation_agrees_with_prediction_within_tolerance": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "Over the six unstable modes with k ≥ 0.30 (0.307–1.074), measured γ matches the quantum prediction within 1.08% (mean 0.41%), inside τ_γ = 5%. This includes the three classically stable modes (0.007%, 0.32%, 1.08%). Convergence errors are 0.46%, 1.08% and 0.48%, and the block mean at k = 0.46 is 0.1231 ± 0.0002 against a prediction of 0.1230. Caveats: the box-scale mode k = 0.153 deviates 8.7% and was excluded by a k ≥ 0.30 window introduced after the first analysis (A8.3), stated only in Results; fitted γ = 0.023–0.005 at the predicted-stable k = 1.23–1.53 is not discussed.",
+      "evidence": [
+        "proposal/logs/scope_twostream.json main.rows, convergence",
+        "proposal/logs/ensemble_stats.json twostream_gamma_kmax",
+        "proposal/attempts_log.md:371-381 (A8.3)",
+        "proposal/sections/results.tex:185-198"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "boundary_boundary_test_1.failure_criterion_pre_stated": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Methods P5 pre-states B1 (⟨B_z⟩ vanishes to machine precision although B0 ≠ 0 was requested) and B2 (a level among the first four off by more than 5τ_ω = 5%, not decreasing with Δx). Both are checked later against logs.",
+      "evidence": [
+        "proposal/sections/methods.tex:292-298",
+        "proposal/sections/results.tex:234-251"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "boundary_boundary_test_1.violated_assumption_identification": {
+      "value": "correctly_identified",
+      "confidence": "high",
+      "reason": "The violated assumption is identified as the strict periodicity of a single-valued gauge potential on the torus, which forces zero net flux (vanishing first Chern class). That is precisely why a uniform B, and hence the Landau ladder, is unrepresentable.",
+      "evidence": [
+        "proposal/sections/methods.tex:284-291",
+        "proposal/sections/analysis.tex:14-18, 36-51"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "boundary_boundary_test_1.failure_demonstrated_quantitatively": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Logs and paper give magnitudes: ⟨B_z⟩ = 1.1e-15 against a requested 3.35 m², seam standard deviation 53.5; level errors of 5.1%, 10.9% and 9.1% at N = 64, 128 and 256; alternative periodic fields at 7.4% (cosine) and 11.3% (sawtooth); exact zero flux for random periodic A.",
+      "evidence": [
+        "proposal/logs/boundary_flux.json naive_periodic",
+        "proposal/logs/boundary_flux_alternatives.json",
+        "proposal/logs/test_scheme2d.json U5_total_flux"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "boundary_boundary_test_1.failure_vs_bug_discrimination": {
+      "value": "partially_convincing",
+      "confidence": "medium",
+      "reason": "The convergence check is present: the failure persists at three resolutions. The reproduction cross-check is incomplete. The demos were run with the 1D solver, not the 2D solver used here (the paper calls it 'the 1D branch of the same solver', but they are separate implementations), and the III.2 reproduction is itself partial (wakefield amplitudes low; no spectral analysis). The exact telescoping identity and the twisted-BC success in the same 2D code add strong but different evidence.",
+      "evidence": [
+        "proposal/logs/boundary_flux.json naive_periodic N64/128/256",
+        "proposal/sections/results.tex:251-258",
+        "proposal/code/lattice1d.py vs lattice2d.py",
+        "proposal/sections/results.tex:63-65"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "boundary_boundary_test_1.first_principles_reasoning_soundness": {
+      "value": "rigorous_and_correct",
+      "confidence": "medium",
+      "reason": "The plaquette-sum telescoping argument is exact. Transition functions are gauge transformations, so the action's form, U(1) invariance and the Bianchi identities survive. The cocycle condition gives qB0LxLy = 2πN. The lattice Landau correction ⟨p⁴⟩ = (3/2)(qB)²(2n²+2n+1) checks out against ⟨Πx⁴+Πy⁴⟩. The compact/non-compact discussion correctly explains why the Yee Maxwell term exposes the seam.",
+      "evidence": [
+        "proposal/sections/methods.tex:97-124, 280-291",
+        "proposal/sections/analysis.tex:34-57",
+        "proposal/logs/test_scheme2d.json U5 (0.0 vs 83.776)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "boundary_boundary_test_1.fix_proposal_and_motivation": {
+      "value": "proposed_and_well_motivated",
+      "confidence": "high",
+      "reason": "The proposed fix, 't Hooft twisted boundary conditions, follows directly from the identified violation: it relaxes single-valued periodicity to periodicity up to a gauge transformation.",
+      "evidence": [
+        "proposal/sections/methods.tex:97-124",
+        "proposal/sections/intro.tex:104-113"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "boundary_boundary_test_1.fix_implementation_completeness": {
+      "value": "fully_implemented",
+      "confidence": "high",
+      "reason": "The Twist class (periodic, Landau, symmetric) and twisted shift operators in lattice2d.py run to completion at three resolutions and in both gauges, plus a flux and cocycle scan, all with logs.",
+      "evidence": [
+        "proposal/code/lattice2d.py:37-150",
+        "proposal/code/run_boundary_flux.py",
+        "proposal/logs/boundary_flux.json twisted, symmetric, cocycle_test"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "boundary_boundary_test_1.fix_documented_at_action_level": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "Methods 2.2 gives the 2D action, the precise twisted boundary relations for φ, A^x and A^y, the equations of motion from varying the unchanged action, the preservation of U(1) invariance, charge conservation and the Bianchi identities, and the quantisation condition. The relaxed properties are stated in Results. Boundary-specific equations of motion are implied by the stated relations rather than written out.",
+      "evidence": [
+        "proposal/sections/methods.tex:85-124",
+        "proposal/sections/results.tex:280-293"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "boundary_boundary_test_1.fix_resolves_failure_in_logs": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Before and after at each resolution: periodic level errors of 5.1%, 10.9% and 9.1% with ⟨B_z⟩ ≈ 0, versus twisted errors of 0.18%, 0.16% and 0.15% with ⟨B_z⟩ = B0 (standard deviation ~1e-14). The twisted code also passes the original structural tests in the periodic sector, and the free 2D dispersion test (zero flux) passes to 1.9e-15.",
+      "evidence": [
+        "proposal/logs/boundary_flux.json naive_periodic vs twisted",
+        "proposal/logs/test_scheme2d.json periodic, U6_dispersion"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "boundary_boundary_test_1.fix_preserves_claimed_invariants": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The claimed invariants are verified in logs for the twisted scheme: charge |ΔQ| ≤ 2.8e-19, Gauss residual ≤ 3.8e-18, Faraday 7.9e-15 and 8.1e-15 (Landau and symmetric), gauge invariance (structural ΔB ≤ 1.7e-13; Landau versus symmetric levels agree to 1.2e-7 at integer flux), and energy ≤ 7.4e-13.",
+      "evidence": [
+        "proposal/logs/boundary_flux.json twisted dQ_abs, max_gauss, dU_over_U",
+        "proposal/logs/test_scheme2d.json landau/symmetric U3, U4",
+        "proposal/logs/boundary_flux.json cocycle_test"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "boundary_boundary_test_2.failure_criterion_pre_stated": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Methods P6 pre-states C1: |m_eff/m − 1| > 1% with a step between successive Δx halvings exceeding 10 standard errors, tracking the tadpole formula. C2 is supporting: spurious E=0 occupation growing with 1/Δx. Both are checked in Results.",
+      "evidence": [
+        "proposal/sections/methods.tex:326-334",
+        "proposal/sections/results.tex:321-370"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "boundary_boundary_test_2.violated_assumption_identification": {
+      "value": "correctly_identified",
+      "confidence": "high",
+      "reason": "The violated assumption is identified as the high-occupation premise of the classical-statistical approximation. Half-quantum seeding of every mode produces a Rayleigh–Jeans UV reservoir and a log-divergent tadpole, consistent with the known non-renormalisability of the approximation (Epelbaum et al.) and the original paper's validity regime.",
+      "evidence": [
+        "proposal/sections/methods.tex:304-326",
+        "proposal/sections/intro.tex:115-129",
+        "proposal/sections/analysis.tex:14-18"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "boundary_boundary_test_2.failure_demonstrated_quantitatively": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "m_eff/m = 1.079, 1.089, 1.097 and 1.106 at mΔx = 0.16, 0.08, 0.04 and 0.02 (10.6% deviation at the finest grid; steps 26–35 split-half standard errors), matching the tadpole prediction to ≤ 0.79%. Spurious occupation is 0.052, 0.084 and 0.161, growing with 1/Δx. Block statistics give 1.0972 ± 0.0005.",
+      "evidence": [
+        "proposal/logs/boundary_vacuum.json mass_photon_unfixed, pairs_unfixed",
+        "proposal/logs/ensemble_stats.json vacuum_meff_unfixed"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "boundary_boundary_test_2.failure_vs_bug_discrimination": {
+      "value": "partially_convincing",
+      "confidence": "medium",
+      "reason": "The convergence check is present: the failure grows over four resolutions. The same 1D solver reproduces III.1 within 0.92%, but III.2 only partially (self-described 'partial quantitative reproduction', no spectral features). The parameter-free tadpole match (0.79%) strongly supports a physical origin, but under the tier definition one of the two checks is incomplete.",
+      "evidence": [
+        "proposal/logs/boundary_vacuum.json mass_photon_unfixed",
+        "proposal/sections/results.tex:63-65, 327-338",
+        "proposal/logs/repro2.json"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "boundary_boundary_test_2.first_principles_reasoning_soundness": {
+      "value": "mostly_correct_with_minor_issues",
+      "confidence": "medium",
+      "reason": "The core chain is sound and quantitatively confirmed: half-quantum seeding gives a log-divergent lattice tadpole, q²A⊥² acts as a mass, there is no continuum limit, and the UV energy grows as Δx⁻². Minor issues: (1) the measured ⟨A⊥²⟩ (1.84, 2.07, 2.28, 2.50) exceeds the analytic tadpole by 10–13%, yet results.tex:338 quotes the predicted series as if it were the measured growth; (2) the matter-vacuum explanation (A^x random walk) is asserted, not derived; (3) the full-vacuum fixed mass staying at 1.08–1.11 is not addressed; (4) the abstract calls the 10.62% deviation a drift 'between resolutions', whereas the actual inter-resolution spread is 2.7%.",
+      "evidence": [
+        "proposal/logs/boundary_vacuum.json mass_photon_unfixed tadpole_meas vs tadpole_pred; mass_full_fixed",
+        "proposal/sections/results.tex:333-347",
+        "proposal/report.tex:69"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "boundary_boundary_test_2.fix_proposal_and_motivation": {
+      "value": "proposed_and_well_motivated",
+      "confidence": "high",
+      "reason": "The fix — band-limit the sampled fluctuations at |p| ≤ Λ and add a gauge-invariant counterterm δm² = −q²⟨A⊥²⟩_Λ — follows directly from the tadpole analysis: the band limit makes the tadpole finite and the counterterm cancels it.",
+      "evidence": [
+        "proposal/sections/methods.tex:336-348"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "boundary_boundary_test_2.fix_implementation_completeness": {
+      "value": "fully_implemented",
+      "confidence": "medium",
+      "reason": "The fix runs as a real code path: the dm2 counterterm in the KG update and energy (lattice1d.py), the band-limited samplers (vacuum.py), and an analytically computed counterterm (run_boundary_vacuum.py). It completes at four resolutions for the mass runs and three for the pair runs, plus a field and window scan, all logged. What it does not fix (qE ~ m² yield) is a matter of efficacy, not implementation.",
+      "evidence": [
+        "proposal/code/lattice1d.py:84, 141, 191",
+        "proposal/code/run_boundary_vacuum.py:56-77",
+        "proposal/logs/boundary_vacuum.json mass_photon_fixed, pairs_fixed",
+        "proposal/logs/vacuum_schwinger.json"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "boundary_boundary_test_2.fix_documented_at_action_level": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The counterterm modifies the discrete Lagrangian (L_d → L_d − δm²φ̄φ), the modified KG equation includes δm², the preserved invariants (Noether charge, Bianchi, gauge invariance, variational structure) are stated, and the relaxed properties are given (bare ≠ physical mass, Λ as a physical scale, no physics above Λ). The band limit is a stated modification of the initial ensemble.",
+      "evidence": [
+        "proposal/sections/methods.tex:47-53, 336-348",
+        "proposal/sections/results.tex:382-389"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "boundary_boundary_test_2.fix_resolves_failure_in_logs": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "Before and after: photon-vacuum m_eff/m goes from 1.079→1.106 (unfixed) to 1.0010, 0.9998, 0.9995, 0.9995 (fixed; spread 0.15%). E=0 spurious occupation goes from 0.052, 0.084, 0.161 to −0.0122, −0.0125, −0.0113, independent of Δx. At strong fields (qE = 2, 3) the repaired scheme stays near Nikishov (null-subtracted 0.87 and 0.98, versus 0.68 and 0.76 unrepaired); the fix is inactive (dm2 = 0) in non-vacuum runs using the same code. Caveats: with the matter vacuum also seeded, the fixed mass remains 1.10, 1.11, 1.08, 1.09 (logged but unreported), and the qE ~ m² yield is acknowledged as unusable.",
+      "evidence": [
+        "proposal/logs/boundary_vacuum.json mass_photon_unfixed/fixed, pairs_unfixed/fixed, mass_full_fixed",
+        "proposal/logs/vacuum_schwinger.json rows",
+        "proposal/sections/results.tex:372-429"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "boundary_boundary_test_2.fix_preserves_claimed_invariants": {
+      "value": "yes",
+      "confidence": "low",
+      "reason": "The paper claims charge conservation, the Bianchi identities, gauge invariance and variational structure are preserved. Charge: numbers.tex VacDQabs = 1.6e-14, the maximum over all bvac_*.npz runs including fixed ones; photon-run energy ≤ 2.2e-7 including fixed runs. However, boundary_vacuum.json carries no conservation fields, the source .npz files are absent, and no log checks Bianchi or gauge invariance with dm2 ≠ 0. The structural tests never set dm2. Those invariants are structurally untouched by a φ̄φ term and are verified for the same lattice1d.py with dm2 = 0, so support is indirect.",
+      "evidence": [
+        "proposal/sections/methods.tex:344-348",
+        "proposal/logs/numbers.tex:257-259",
+        "proposal/code/make_numbers.py:423-439",
+        "proposal/logs/test_scheme.json T3/T4"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "coverage.bug_classes_count": {
+      "value": "all_four",
+      "confidence": "medium",
+      "reason": "Methods assigns a distinct primary diagnostic to each test with no overlap: dressed plasma → φ–A coupling; two-stream → charge and energy conservation; magnetised torus → gauge invariance; vacuum → dispersion fidelity. The two-stream assignment is the least natural, but it is explicitly argued.",
+      "evidence": [
+        "proposal/sections/methods.tex:234-237, 266-270, 298-302, 332-334"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "analysis.adds_substantive_insight_beyond_contract": {
+      "value": "substantive_insight",
+      "confidence": "high",
+      "reason": "The Analysis synthesises across the tests. It traces both obstructions to what S_d does not determine (configuration space versus measure), notes that exact invariants are necessary but not sufficient, and explains how the compact matter sector differs from the non-compact Maxwell sector. It reports an unpredicted feature near 2m*−m, the modulational instability of the dressed state, and quantum-recoil implications for pair-beam instabilities. It also finds a compounding of UV and magnetic constraints, derives a 3D cost and dynamic-range constraint, and poses grounded open questions.",
+      "evidence": [
+        "proposal/sections/analysis.tex:4-176"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.thesis_and_framing": {
+      "value": "clear_self_contained",
+      "confidence": "medium",
+      "reason": "The introduction opens with the physics (breakdown of plasma-kinetic theory at Compton scales; the classical-statistical approach) rather than extension framing. It states the gap (the predictive regime has not been mapped) and the contribution ('we map that boundary and repair it'). That statement comes in the fifth paragraph; the abstract states it up front.",
+      "evidence": [
+        "proposal/sections/intro.tex:1-82",
+        "proposal/report.tex:42-75"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.body_prose_quality": {
+      "value": "competent",
+      "confidence": "medium",
+      "reason": "The body is coherent, quantitative prose with numbers traced to logs and block-level error bars for the headline observables. However, some claims are unsupported or contradicted by the evidence. The Fig. 6 caption says both scope tests sit at or below τ_ω, but the dressed metric is 2.9%. A Lorentz-boost validation 'to 1e-15' has no code or log. The abstract describes the 10.62% deviation as a drift 'between resolutions'. The Analysis says 'conservation laws are unaffected' while the large-box energy reaches 1.55e-3. The band widening is quoted as 'more than 75%' from grid points.",
+      "evidence": [
+        "proposal/sections/results.tex:478-480 vs tab_conv.tex:15-17",
+        "proposal/sections/setup.tex:38-45; no boost check in proposal/code",
+        "proposal/report.tex:69",
+        "proposal/sections/analysis.tex:104-106"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.reference_count_at_least_original": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "There are 97 bibitems, all cited; the original Shi et al. paper lists 62 references.",
+      "evidence": [
+        "proposal/sections/refs.tex (97 bibitem entries)",
+        "paper.md:324-386 (62 references)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.references_substantively_used": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Citations support specific claims: Volkov, Kibble and Harvey for m*; Akhiezer–Polovin and Kaw–Dawson for ω̃_p; Haas et al. for the quantum two-stream instability; 't Hooft, Al-Hashimi–Wiese and Bali for twisted boundary conditions; Hofstadter, Smit–Vink and Sekiguchi for the lattice Landau problem; Epelbaum et al. for non-renormalisability; Nikishov for the plateau. Only background paragraphs of the introduction cluster citations.",
+      "evidence": [
+        "proposal/sections/methods.tex:192-207, 249-257, 280-283, 306-308",
+        "proposal/sections/intro.tex:28, 60"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.limitations_discussed": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The Conclusion has a dedicated Limitations paragraph listing six limitations: the partial vacuum repair, 1D/2D only, no spin, an incomplete dressed-branch theory, ensemble sizes, and the dressed-box restriction.",
+      "evidence": [
+        "proposal/sections/conclusion.tex:45-78"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.title_describes_contribution": {
+      "value": "states_contribution",
+      "confidence": "high",
+      "reason": "'Magnetic flux quantisation and vacuum counterterms in real-time lattice simulations of relativistic-quantum plasmas' names the specific mechanisms and modifications contributed, not the investigation's structure.",
+      "evidence": [
+        "proposal/report.tex:32-33"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.paper_structure_independent_of_spec": {
+      "value": "mixed",
+      "confidence": "medium",
+      "reason": "Subsection titles and table row labels are physics-driven. However, the main table also carries scope/boundary categories (it 'uses both'), captions and body text speak of 'the two scope tests'/'the two boundary tests' and 'boundary-test claims', Methods uses the spec's 'primary diagnostic' and 'failure criterion stated in advance', and the Introduction announces 'four results. Two ... extend the verified reach ... The other two ... are obstructions'.",
+      "evidence": [
+        "proposal/sections/tab_main.tex:12-17",
+        "proposal/sections/results.tex:8, 478-481",
+        "proposal/sections/analysis.tex:135",
+        "proposal/sections/intro.tex:81-100"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.rendered_pdf_formatting_correct": {
+      "value": null,
+      "confidence": "low",
+      "reason": "The rubric requires visual inspection of the rendered PDF, and I could not do it: the Read tool's PDF renderer reports pdftoppm missing, and this protocol forbids writing rasterised images. Indirect evidence is favourable but not a visual check. report.log has zero Overfull hbox warnings and no undefined references or citations; in-memory text extraction finds no '??' across 25 pages; only two Underfull vbox notices appear. The main table's column widths (~13.1 cm) fit the ~13.97 cm text width. The readability of the dense scriptsize table and figure clipping cannot be judged.",
+      "evidence": [
+        "proposal/report.log (no Overfull; Underfull vbox at lines 597, 626)",
+        "pypdf extraction of proposal/report.pdf: no '??'",
+        "proposal/sections/tab_main.tex:4-8"
+      ],
+      "requires_adjudication": true,
+      "adjudication_reason": "inaccessible_evidence"
+    },
+    "main_appendix_placement.scope_test_1_location": {
+      "value": "main_paper",
+      "confidence": "high",
+      "reason": "The dressed-plasma test sits in Methods P3, Results 4.2 and the Analysis; the appendix holds only its supporting derivation.",
+      "evidence": [
+        "proposal/sections/methods.tex:189-237",
+        "proposal/sections/results.tex:106-172"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "main_appendix_placement.scope_test_2_location": {
+      "value": "main_paper",
+      "confidence": "high",
+      "reason": "The two-stream test sits in Methods P4, Results 4.3 and Analysis 5.5.",
+      "evidence": [
+        "proposal/sections/methods.tex:239-270",
+        "proposal/sections/results.tex:174-221"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "main_appendix_placement.boundary_test_1_location": {
+      "value": "main_paper",
+      "confidence": "high",
+      "reason": "The magnetised-torus test sits in Methods 2.2 and P5, Results 4.4 and Analysis 5.2.",
+      "evidence": [
+        "proposal/sections/methods.tex:82-124, 272-302",
+        "proposal/sections/results.tex:223-308"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "main_appendix_placement.boundary_test_2_location": {
+      "value": "main_paper",
+      "confidence": "high",
+      "reason": "The vacuum-seeded test sits in Methods P6, Results 4.5 and the Analysis.",
+      "evidence": [
+        "proposal/sections/methods.tex:304-348",
+        "proposal/sections/results.tex:310-429"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "main_appendix_placement.appendix_usage_minimized": {
+      "value": "empty_or_near_empty",
+      "confidence": "high",
+      "reason": "The appendix holds only two supporting derivations (the multi-beam dispersion relation and linear response about a CP pump) and explicitly states that no limitation is deferred there. No contract test is relegated to it.",
+      "evidence": [
+        "proposal/sections/appendix.tex:1-75"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "claim.test_scope_test_1.success_or_resolution_claimed": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The abstract and conclusion claim the dressed regime is 'quantitatively accessible': m* and ω̃_p to 0.98% and the pair gap to 0.73%.",
+      "evidence": [
+        "proposal/report.tex:49-54",
+        "proposal/sections/conclusion.tex:14-25"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "claim.test_scope_test_1.implementation_complete_claimed": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The test is presented as a complete main-paper result; the appendix note states every claimed result is complete in the sense of the main text.",
+      "evidence": [
+        "proposal/sections/appendix.tex:3-8",
+        "proposal/sections/conclusion.tex:14-19"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "claim.test_scope_test_2.success_or_resolution_claimed": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The paper claims growth rates agree to 1.08% 'comfortably inside τ_γ', including classically stable modes.",
+      "evidence": [
+        "proposal/sections/results.tex:185-198",
+        "proposal/report.tex:54-57"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "claim.test_scope_test_2.implementation_complete_claimed": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The test is presented as a fully completed main-paper result.",
+      "evidence": [
+        "proposal/sections/conclusion.tex:19-25",
+        "proposal/sections/appendix.tex:3-8"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "claim.test_boundary_test_1.success_or_resolution_claimed": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The paper claims both failure criteria are met and that twisted boundary conditions 'remove the obstruction completely', recovering the ladder to 0.18%.",
+      "evidence": [
+        "proposal/sections/results.tex:251, 260-265",
+        "proposal/sections/tab_main.tex:16"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "claim.test_boundary_test_1.implementation_complete_claimed": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The table states 'Fix (twisted BC, quantised flux) implemented and verified'.",
+      "evidence": [
+        "proposal/sections/tab_main.tex:16"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "claim.test_boundary_test_2.success_or_resolution_claimed": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The paper claims C1 and C2 are met and that the fix 'removes the cutoff dependence — criterion (C1) in full' (drift to 0.15%). It also explicitly calls the overall vacuum repair partial, unusable at qE ~ m², so the claimed resolution covers the defined failure rather than every downstream use.",
+      "evidence": [
+        "proposal/sections/tab_main.tex:17",
+        "proposal/sections/results.tex:415-422",
+        "proposal/sections/conclusion.tex:46-55"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "claim.test_boundary_test_2.implementation_complete_claimed": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The table states 'Fix (band limit + counterterm) implemented and verified'. The 'partial' qualifier concerns efficacy at qE ~ m², not implementation.",
+      "evidence": [
+        "proposal/sections/tab_main.tex:17",
+        "proposal/sections/results.tex:372-390"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.citations_and_derivations.present_when_claimed": {
+      "value": "satisfied",
+      "confidence": "medium",
+      "reason": "The derivations underpinning the results are present with steps: the multi-beam relation (App. A), the dressed linear response (App. B), the topological obstruction and flux quantisation (Methods 2.2/P5), the tadpole and m_eff (P6), and the counterterm. Gaps: the lattice Landau ⟨p⁴⟩ correction is stated without derivation, though I checked it is correct. A claimed numerical Lorentz-boost validation 'to 1e-15' has no code or log, and the single-species check exists only as an unlogged selfcheck().",
+      "evidence": [
+        "proposal/sections/appendix.tex:10-75",
+        "proposal/sections/methods.tex:280-334",
+        "proposal/code/dispersion.py:108-125",
+        "proposal/sections/setup.tex:38-45"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.citations_and_derivations.mathematically_sound": {
+      "value": "satisfied",
+      "confidence": "medium",
+      "reason": "I checked the key derivations: the linearisation and D± denominators in App. A; the dressed state (m*, ω² = 2q²|φ0|², ρ = −2qm*|φ0|², ω̃_p); the longitudinal polynomial having two positive roots, so the third 'branch' lies on the χ_p poles; the Landau ⟨p⁴⟩; the telescoping flux and cocycle; the lattice-symbol numbers (1.1e-3, 2.7e-4). Only minor non-critical errors: the 3D dynamic-range bound N_Φ ≤ (L/5Δx)² omits a 1/(2π), and the 'more than 75%' band widening is estimated from grid points.",
+      "evidence": [
+        "proposal/sections/appendix.tex:13-43, 48-75",
+        "proposal/sections/methods.tex:146-175, 280-291",
+        "proposal/sections/analysis.tex:155-160"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.log_paper_consistency.claimed_runs_have_log_evidence": {
+      "value": "satisfied",
+      "confidence": "medium",
+      "reason": "Every simulation run the paper describes has a JSON log entry: repro1 (paper parameters, long, convergence, conservation); repro2 and its convergence; the dressed scan, convergence and large box; two-stream and convergence; flux periodic, twisted, symmetric, alternatives and cocycle scan; vacuum mass, pairs and Schwinger scan; sampler test; field dumps; ensemble blocks; structural tests. The npz archives the paper says hold the raw fields and large-box data are absent, but the runs themselves are logged.",
+      "evidence": [
+        "proposal/logs/*.json (repro1, repro2, repro2_convergence, scope_dressed, scope_dressed_L41, scope_twostream, boundary_flux, boundary_flux_alternatives, boundary_vacuum, vacuum_schwinger, field_dumps, verify_field_dumps, ensemble_stats, ensemble_seeds, test_*)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.effort_evidence.attempts_log_exists_if_needed": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "The paper documents partial or unresolved work: the vacuum repair is partial and the qE ~ m² yield unusable; the laser-plasma reproduction is partial. proposal/attempts_log.md exists with corresponding entries (A3.2, A4.1–A4.6, A5.1–A5.7).",
+      "evidence": [
+        "proposal/attempts_log.md:69-215",
+        "proposal/sections/conclusion.tex:46-55"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.effort_evidence.attempts_log_diverse_for_unresolved_tests": {
+      "value": "satisfied",
+      "confidence": "medium",
+      "reason": "For the unresolved vacuum residual, the log records several substantively different approaches with outcomes: fixed-modulus versus Gaussian sampling, antithetic pairing, matched-seed null subtraction (failed), reducing Λ, shorter windows, a band-limit-only versus counterterm-only ablation, and an additive-background hypothesis versus a settling-time hypothesis (refuted by window scan). This meets the 'multiple distinct approaches' requirement.",
+      "evidence": [
+        "proposal/attempts_log.md:121-143 (A4.4-A4.6)",
+        "proposal/attempts_log.md:175-215 (A5.5-A5.7)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.effort_evidence.attempts_match_logs": {
+      "value": "not_satisfied",
+      "confidence": "medium",
+      "reason": "Many entries cite log files whose contents match: A5.4 against mass_full_unfixed, A5.7 against the vacuum_schwinger window scan, A6.5 against the cocycle_test, A4.4, A3.2 and A7.3/A7.4. Several attempts, however, have no linked execution record in the submission. These include the original Schwinger scope runs and the single-mode check that motivated reclassifying the test (A4.1–A4.3; run_scope1.py outputs absent); the band-limit-only and counterterm-only ablations (A5.5); reducing Λ (A5.6(i)); the abandoned mass-measurement methods (A5.1, A5.2); the linear-polarisation pump (A7.1); and E-field seeding (A8.1).",
+      "evidence": [
+        "proposal/attempts_log.md:99-119, 149-181, 207-215, 316-321, 357-361",
+        "proposal/logs/ (no scope1_* log)",
+        "proposal/code/run_scope1.py:171-191 (writes absent npz)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.main_appendix_placement_integrity.main_paper_work_is_deep": {
+      "value": "satisfied",
+      "confidence": "medium",
+      "reason": "The main-paper work is deep: derivations from the action, convergence studies over 3–4 resolutions for every test, block-level ensemble statistics, structural invariant checks, analytic cross-checks, and a substantial Analysis. Specific shortfalls (dressed D2/D3 tolerance exceedances, missing III.2 spectral analysis, a partial vacuum fix) are disclosed in the text and captured by other nodes. They are not cases of shallow work presented as complete.",
+      "evidence": [
+        "proposal/sections/methods.tex",
+        "proposal/sections/results.tex:124-138, 63-65, 391-429",
+        "proposal/logs/ensemble_stats.json"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.main_appendix_placement_integrity.appendix_work_is_honestly_categorized": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "No contract content is relegated to the appendix, which holds only derivations. The partial vacuum repair and the partial III.2 reproduction are kept in the main paper with explicit limitations and attempts-log entries, matching where the work actually stands.",
+      "evidence": [
+        "proposal/sections/appendix.tex:1-8",
+        "proposal/sections/conclusion.tex:45-55",
+        "proposal/attempts_log.md:207-215"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "evidence_completeness.quantitative_sources_documented": {
+      "value": "not_satisfied",
+      "confidence": "medium",
+      "reason": "Most paper numbers are auto-generated macros traceable to JSON logs via numbers.tex, and source-paper values (6 ppm, 0.2%, 0.3 and 5 E_c) are cited. Several quantitative claims lack inspectable sources, however. The vacuum-run charge and energy figures (1.6e-14, 2.2e-7, 1e-2) derive only from absent bvac_*.npz. The 'verified to 1e-15' single-species and Lorentz-boost validations have no log, and the boost check has no code. The ⟨A⊥²⟩ series quoted as growing in results.tex:338 is the predicted tadpole, not the logged measurement (1.84–2.50). The conservation time-series traces in Fig. 6 have no data in the snapshot.",
+      "evidence": [
+        "proposal/code/make_numbers.py:423-439",
+        "proposal/sections/setup.tex:38-45; methods.tex:171-172, 258-260",
+        "proposal/logs/boundary_vacuum.json tadpole_meas vs tadpole_pred",
+        "proposal/code/make_figs.py:427-455"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "evidence_completeness.required_reporting_coverage": {
+      "value": "not_satisfied",
+      "confidence": "medium",
+      "reason": "Covered: per-test configurations, observables, convergence studies, seed lists, timestamps, an attempts log, and block mean ± std for one headline observable per test. Missing required items: full time series of conserved quantities for each test, and the reproductions' full φ_v/A_e histories (only summaries in JSON; the cited npz files are absent). The III.2 comparison spectra are also missing: no EM spectra, so neither broadening nor annihilation peaks are reported. Mean ± std is given for only a single observable per test.",
+      "evidence": [
+        "proposal/logs/ (no .npz files)",
+        "proposal/logs/repro2.json (no spectral fields)",
+        "proposal/logs/ensemble_stats.json (one observable per test)",
+        "task_spec.md:121-127"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    }
+  },
+  "context": {
+    "incomplete_work_in_appendix": {
+      "value": false,
+      "reason": "The appendix holds only two supporting derivations (cold multi-beam dispersion; linear response about a circularly polarised pump) and states that no limitation is deferred there. No attempted-but-incomplete work is placed in it.",
+      "evidence": [
+        "proposal/sections/appendix.tex:1-8",
+        "proposal/sections/appendix.tex:10-75"
+      ]
+    },
+    "partial_work_claimed": {
+      "value": true,
+      "reason": "The submission describes partial and unresolved work. The vacuum repair is called partial, with the absolute Schwinger yield at qE ~ m² not made usable. The laser-plasma reproduction is described as 'a partial quantitative reproduction'. The attempts log marks A5.6 'Not resolved'.",
+      "evidence": [
+        "proposal/sections/conclusion.tex:46-55",
+        "proposal/sections/results.tex:63-65, 415-429",
+        "proposal/attempts_log.md:207-215"
+      ]
+    }
+  }
+}

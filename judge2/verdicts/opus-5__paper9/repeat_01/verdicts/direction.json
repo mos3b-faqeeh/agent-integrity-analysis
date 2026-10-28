@@ -1,0 +1,693 @@
+{
+  "nodes": {
+    "deliverables.report_pdf_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "report.pdf exists and parses cleanly: pypdf extracts text from all 14 pages. It is a substantive paper. The methodology role is filled by Kernels (Proposition 1, Eq. 9, scaling Eqs. 10-11), Circuit and Experimental setup. Results contains Precision scaling, Kernel-family characterisation, Mechanism, Where the variant does not help and Classical cost. Related work, Limitations, Conclusions and an Appendix follow. There are no literal 'Methodology'/'Analysis' headings, but equivalent non-placeholder sections are present.",
+      "evidence": [
+        "proposal/report.pdf: 477,905 bytes, 14 pages, text extracted via pypdf on every page with no '??'",
+        "proposal/report.tex lines 165-440 (Kernels, Circuit, Experimental setup), 442-567 (Results incl. Mechanism, failure, Classical cost), 569-625 (Related work, Limitations, Conclusions)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.logs_directory_present": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "proposal/logs/ exists and holds non-placeholder per-run emulator records. logs/smoke is the reference-input reproduction (dc.oracle, dc.clog with N-gates 2692135, dc_OUTPUT.hdf5). logs/smoke2 has a baseline run (base_nt4_nk6) and a variant run (hyb_nt4_nk6), each with case.json, run.log, dc_OUTPUT.hdf5 and result.json. logs/weights_standalone has 3 emulator runs. Kernel-derivation and selection outputs are in logs/design (verify_kernel.log, asymptotics.log, configs.csv). The presence gate is met. However, logs/runs/ is absent: the README and Appendix say it holds 509 circuits plus all_runs.csv. That coverage shortfall is scored under the coverage nodes.",
+      "evidence": [
+        "proposal/logs/{analysis,design,smoke,smoke2,weights_standalone}",
+        "proposal/logs/smoke2/base_nt4_nk6/result.json and hyb_nt4_nk6/result.json (full metrics)",
+        "proposal/logs/smoke/dc.clog line 181 'N-gates: 2692135'",
+        "README.md line 14 references logs/runs/all_runs.csv; no logs/runs directory exists in the snapshot"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.kernel_plan_present": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "kernel_plan.json and kernel_plan.py (mtime 2026-08-12T05:18:25Z; stated creation 05:17:12Z) contain all required items: axis 1, the xi(k) family formula with every parameter, the headline variant (m=0, beta=0.7, gamma/c selected per target), the claimed family (optimal-class Gaussian mollification), the test problem (ADE, v=1, D=0.01, n_x=6, t=0.0125) and sweeps S1-S4. These files predate the earliest kernel-validation emulation (smoke2 at 05:22:23Z) and configs.json (05:52Z), which drives the sweeps. kernel_plan.md was last modified at 07:23Z because of dated, disclosed amendments. The only earlier emulator log (logs/smoke, 04:13-04:16Z) re-runs the reference build's own nk7/kmax20/t=0.8 input, not a kernel validation.",
+      "evidence": [
+        "proposal/code/kernel_plan.json lines 2-45 (created_utc, axis 1, kernel.form, family_claimed, test_problem, sweeps S1-S4)",
+        "mtimes (UTC): kernel_plan.json/.py 05:18:25Z; logs/smoke2/* 05:22:23Z; logs/design/configs.json 05:52:49Z; kernel_plan.md 07:23:33Z",
+        "proposal/attempts_log.md A1 (smoke = reproduction of the paper's own input)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.kernel_derivation_artifacts_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "code/kernel_derivation/ covers all four required parts. (a) Scaling: K7 truncation law and K8 envelope fits in verify_kernel.py, backing the paper's derivation in Eqs. 10-11. (b) Admissibility and approximate-LCHS checks: K1 normalisation, K2 decay, K3 lower-half-plane seed check, K5 closed forms, K6 erfc bound. (c) Discretised FCC weights w_j: built in qsvt_weights.py sqrt_weight_parts. (d) QSVT angle generation via QuCF compute_angles, with independent QSP re-evaluation: report.json gives qsp_vs_poly ~1e-12 and qsp_vs_target <=9.1e-5 at tolerance 1e-4.",
+      "evidence": [
+        "proposal/code/kernel_derivation/verify_kernel.py (K1-K8) -> verification.json",
+        "proposal/code/kernel_derivation/qsvt_weights.py lines 41-66, 163-220",
+        "proposal/code/kernel_derivation/qsvt_angles/{baseline_nk8_nt11,variant_nk8_nt6,lowsomma_f2_nk8_nt5}/report.json"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.baseline_reproduction_logged": {
+      "value": "no",
+      "confidence": "high",
+      "reason": "The headline baseline run is logged with all metrics: (6,6), QA=300, STMC 61094, na 18, rel_err 2.80e-3, p 0.477. The baseline sweep configurations it is compared against are not logged: the n_k=5-8 envelopes and the n_k=8 precision sweep would live in logs/runs/, which is absent. Only summary JSONs remain (analysis.json holds eps/QA/success for the n_k=8 envelope, without STMC or ancilla counts). At least one baseline configuration is therefore missing from the logs.",
+      "evidence": [
+        "proposal/logs/smoke2/base_nt4_nk6/result.json lines 29-35",
+        "no proposal/logs/runs/ directory; README.md line 14 and report.tex Appendix lines 727-733 claim it",
+        "proposal/logs/analysis/analysis.json lines 4-74 (summary only, no STMC/ancilla per point)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.variant_runs_logged": {
+      "value": "no",
+      "confidence": "high",
+      "reason": "Only one end-to-end variant emulation is logged with full metrics: logs/smoke2/hyb_nt4_nk6 (gamma=4, c=0.15, QA=300). The roughly 253 mollified runs that back Tables 2-5 and Figs. 1-2 have no per-run records in the submission, so most baseline configurations lack a matching logged variant run.",
+      "evidence": [
+        "proposal/logs/smoke2/hyb_nt4_nk6/result.json",
+        "headline_text.tex: 'Across all 253 mollified runs' — no corresponding run directories",
+        "logs/runs/ absent"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.characterization_sweep_logged": {
+      "value": "no",
+      "confidence": "high",
+      "reason": "The declared S3 grid (n_k in {5,6,7,8} x eps in {1e-2,1e-3,1e-4} x 7 families) and the S1 precision sweep have no per-run logs; logs/runs/ is absent. Even the summary JSONs (family.json, floors.json, report_numbers.json) cover only 4-5 families. Declared moll-flat, moll-beta0.8 and moll-cauchy2 data are absent from them. The axis-1 precision sweep was also run at (6,8), not the headline (6,6); this deviation is disclosed.",
+      "evidence": [
+        "proposal/code/kernel_plan.json lines 35-43 (S1, S3 declared grids)",
+        "proposal/logs/analysis/floors.json and report_numbers.json family_cells (5 families only)",
+        "logs/runs/ absent"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.main_results_table_present": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "tab:main_results is present. Its columns are Method, Test, (n_x,n_k,t), k_max, (gamma,c), Q_A, STMC, eps_LCHS, anc. and p_succ. It has baseline and variant rows for the headline (6,6) configuration (full envelopes) and for n_k=8 sweep points, with no placeholder cells. Deviations: the configuration tuple lacks an eps target (achieved error is given instead); n_k=5 and 7 have no rows; and most cells cannot be traced to submitted logs. These completeness issues are scored under writing_quality.main_results_table_complete.",
+      "evidence": [
+        "proposal/tab_main.tex lines 1-41 (\\label{tab:main_results}, 27 rows)",
+        "row 'ACL beta=0.7 ... 300 61094 2.80e-3 18 0.477' matches logs/smoke2/base_nt4_nk6/result.json"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.axis_specific_figure_present": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "Fig. 1(a) overlays emulator-measured eps vs Q_A at (6,8) for the baseline (ACL beta=0.7) and the variants. Fig. 1(b) plots log(1/eps) vs k_max (Q_A is affine in k_max) with explicit fitted exponents (q=0.85+-0.11 baseline, 1.05+-0.50 mollified beta=0.7, 1.35+-0.35 mollified Cauchy). Table 3 and the text compare these to the theoretical q. The figure is at (6,8) rather than the headline (6,6), a disclosed choice; the rubric criterion (overlay plus explicit fitted exponents) is met.",
+      "evidence": [
+        "proposal/report.tex lines 451-462 (fig:scaling)",
+        "PDF page 8 legend text 'fit q = 1.05 ± 0.50', 'fit q = 0.85 ± 0.11'",
+        "proposal/tab_scaling.tex lines 8-15"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.characterization_figure_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Fig. 2 plots eps vs Q_A at n_k=5,6,7,8 for 7 families. Table 4 gives the smallest Q_A per (n_k, eps in {1e-2,1e-3,1e-4}) cell with a gain column. Table 5 gives the measured FCC floors per n_k, explaining which cells are unreachable. Together they show which family is best at which resolution across the declared n_k range and eps targets.",
+      "evidence": [
+        "proposal/report.tex lines 468-478 (fig:family)",
+        "proposal/tab_family.tex lines 1-25",
+        "proposal/tab_floor.tex lines 1-18"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.codebase_notes_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "codebase_notes.md is substantive. It lists QuCF-OPT-LCHS files inspected with line ranges: read_structure_dirdec, qsp_ham_opt2, gate_sin, read_qsvt_data, compute_QSVT_angles. It also covers wiki pages and a diff of code/QuCF. It states what was reused unchanged (circuit structure of Figs. 2-5, QuEST, angle finder, shipped QSP angle sets) and what was extended (one new DirDec profile LCHS_weights_sin_MOLL_sqrt, build glue). It lists files written from scratch and the conventions that were reverse-engineered and validated.",
+      "evidence": [
+        "proposal/codebase_notes.md sections 1-5",
+        "proposal/code/qucf_lchs_kernels/src/QCircuit.cpp lines 1882-1935"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.attempts_log_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "attempts_log.md documents distinct approaches with rationale: A1-A3 reproduction issues; B1-B3 QSP-angle strategies (Haah completion not implemented, greedy decomposition rejected, repetition adopted); C1-C2 time/resolution choices; D1-D4 selection criteria; E table of kernel seeds with E1/E2 rejected variants; G1-G8 late findings.",
+      "evidence": [
+        "proposal/attempts_log.md sections A-G"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.methodology_section_present": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "Sec. 2 (Kernels) states the kernel's closed form (Eq. 9), the mollification Proposition with admissibility/normalisation and erfc bound, and the theoretical scaling (Eqs. 10-11). Sec. 4 states the hyperparameter rule: beta=0.7, (gamma,c,k_max) chosen by eta <= target subject to alpha <= 1.3053, plus the k_max grid. All of this precedes Sec. 5 Results. The section is titled 'Kernels' rather than 'Methodology', which is acceptable.",
+      "evidence": [
+        "proposal/report.tex lines 165-325 (Kernels), 386-432 (Experimental setup, parameter selection)",
+        "Results start at report.tex line 442"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "kernel_specification.axis_committed": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The paper uses a single headline resource, A-oracle query complexity Q_A. The intro frames Q_A as the dominant cost, linear in k_max. The contributions claim fewer A-oracle queries and a lower query exponent. The setup defines Q_A = n_t M_b, and the limitations refer to 'the query axis chosen here'. STMC and ancillae are reported but never claimed as the headline. This matches kernel_plan axis 1. Physics-natural wording is used instead of 'axis 1'.",
+      "evidence": [
+        "proposal/report.tex lines 98-103, 148-155, 403-423",
+        "proposal/limitations_text.tex line 27",
+        "proposal/code/kernel_plan.json line 3 ('axis': 1)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "kernel_specification.axis_number": {
+      "value": "axis_1",
+      "confidence": "high",
+      "reason": "kernel_plan declares Axis 1 (A-oracle query complexity in precision), and the paper's headline claims concern Q_A and its precision exponent.",
+      "evidence": [
+        "proposal/code/kernel_plan.md lines 8-17",
+        "proposal/code/kernel_plan.json lines 3-4"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "kernel_specification.kernel_stated_as_function": {
+      "value": "fully_specified",
+      "confidence": "high",
+      "reason": "Eq. (9) gives the closed form xi_{beta,gamma,c}(k) = (1/2pi) exp[2^beta - (1+ik)^beta + c(1-ik) - (1+k^2)/4gamma^2] with beta=0.7. Discretisation with discrete normalisation is given in Eq. 12. The k_max grid formula and values are stated, and the (gamma,c) selection rule is explicit. The actual (gamma,c) per configuration is listed in Table 2, the fixed-kernel values in Table 3, and QSVT polynomial degrees in Table 1. The kernel can be reimplemented from the paper alone.",
+      "evidence": [
+        "proposal/report.tex lines 255-260 (Eq. hybrid), 300-313 (weights), 403-414 (k_max grid), 425-432 (selection)",
+        "proposal/tab_main.tex (gamma,c) column; tab_scaling.tex lines 13-14"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "kernel_specification.scaling_derived_or_cited": {
+      "value": "derived",
+      "confidence": "high",
+      "reason": "The paper derives the scaling from the kernel's form. Proposition 1 gives the erfc mollification-error bound. The truncation error is O(gamma^2 k^-3 e^c) e^{-k^2/4gamma^2}; balancing the two gives gamma c ~ sqrt(L) and k_max ~ 2L/c (Eq. 10), and the one-norm-budget version is Eq. 11. Because Q_A is linear in k_max via the QSP selector, Q_A = O(log 1/eps). The optimal class is also cited (Low-Somma; Jin et al.).",
+      "evidence": [
+        "proposal/report.tex lines 186-219 (Prop. 1 + proof sketch), 266-296 (Eqs. 10-11), 98-103 (Q_A linear in k_max)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "kernel_specification.admissibility_verified": {
+      "value": "verified",
+      "confidence": "medium",
+      "reason": "Each condition is addressed analytically or numerically. Normalisation: analytically M(-i)=1, and K1 shows error 0.0 for 8 kernels including beta=0.7, gamma=4, c=0.35. Decay: analytically Gaussian modulus, numerically K2 at k=1e2-1e4 and K7 tails. Continuity/analyticity: the mollifier is entire and the seed is analytic in Im k<0 (stated); K3 checks finiteness on a 401x101 lower-half-plane grid. The approximate-LCHS error bound has a proof sketch, and K6 shows the bound attained (8.9244e-5 vs 8.9244e-5). K6 checks the bound numerically only for the flat seed; for the beta-seeded variant, approximation error is checked per configuration through the eta operator-norm criterion.",
+      "evidence": [
+        "proposal/code/kernel_derivation/verification.json K1-K7",
+        "proposal/report.tex lines 186-219, 241-250",
+        "proposal/code/kernel_derivation/verify_kernel.py lines 40-105"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "kernel_specification.weight_construction_reworked": {
+      "value": "reworked_and_verified",
+      "confidence": "medium",
+      "reason": "All three enumerated components are present. (1) New QSVT angles for the baseline, the mollified beta=0.7 variant and f2 were computed with QuCF compute_angles and independently re-evaluated: QSP vs polynomial <=1.5e-12, QSP vs target <=9.1e-5 at stated tolerance 1e-4. (2) A 6-parameter weight-selection profile LCHS_weights_sin_MOLL_sqrt was added to QCircuit.cpp and used by the generated circuits. (3) The new weight oracle was verified standalone on the emulator (max abs deviation 2.2e-15/4.8e-15/4.0e-16), and an end-to-end LCHS run with the new weights is logged (smoke2/hyb_nt4_nk6, rel_err 8.99e-4 vs runtime expm). Caveat: the QSVT angle sequences are not the path exercised end to end. Circuits use the reference-style direct decomposition (1 ancilla vs 3), and the plan's S4 end-to-end run with QSVT-constructed weights was not done. That omission is scored under runs_match_announced_configs; the tier criteria do not require the QSVT angles to be the end-to-end path.",
+      "evidence": [
+        "proposal/report.tex lines 339-384 (Table 1)",
+        "proposal/code/qucf_lchs_kernels/src/QCircuit.cpp lines 1882-1935",
+        "proposal/logs/weights_standalone/verification.json",
+        "proposal/logs/smoke2/hyb_nt4_nk6/result.json",
+        "proposal/limitations_text.tex lines 19-22"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "implementation_framework_preserved.fcc_quadrature_used": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Weights are computed on theta_j = -pi/2 + j pi/(N_k-1), k_j = k_max sin(theta_j). The selector's U_BE uses the reference SIN sub-circuit with alpha_0=-pi/2 and alpha_1=(pi/2)N_k/(N_k-1). FCC-equivalence is preserved. The discrete weight renormalisation is applied identically to all kernels and is not a different quadrature.",
+      "evidence": [
+        "proposal/code/qucf_lchs_kernels/src/QCircuit.cpp lines 1914-1927",
+        "proposal/code/run_lchs.py lines 178-184, 235",
+        "proposal/report.tex lines 300-313"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "implementation_framework_preserved.single_qsp_selector": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The selector is one QSVT/QSP gate (qsp_selector) acting on the U_BE block-encoding of C_j = A_H + sin(theta_j) k_max A_L. It is built from the shipped QSP-Hamiltonian angle set, repeated n_t times, which is the reference build's own n_repeat mechanism. It is not a multiplexed block-encoding and not a sequence of controlled evolutions.",
+      "evidence": [
+        "proposal/code/run_lchs.py line 196 'gate QSVT qsp_selector a_qsp -1 U_BE ...'",
+        "proposal/logs/smoke/dc.clog lines 161-162 (reference also uses repeated time intervals)",
+        "proposal/codebase_notes.md section 1 (qsp_ham_opt2)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "implementation_framework_preserved.qsvt_weight_construction": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The U_sqrt(w) + amplitude-amplification interface (Ow/PREP/RA with N_AA_w rounds) is kept exactly as in the reference build. QSVT polynomials and angles were reworked for the new kernels (Table 1). Emulated circuits realise U_sqrt(w) by direct decomposition, which is what the original paper's own emulations do. That choice is justified (one ancilla instead of three), so this is not an unjustified abandonment of the interface.",
+      "evidence": [
+        "proposal/code/run_lchs.py lines 117-154, 192-199",
+        "proposal/report.tex lines 339-362",
+        "paper.md line 228 (reference emulations use direct brute-force weights)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "implementation_framework_preserved.block_encoding_counted_faithfully": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "U_BE_H and U_BE_m are constructed explicitly, with prepare rotations, incrementor/decrementor and the SIN ladder, and compiled into the circuit. STMC is QuCF's N_gates for the whole circuit. Q_A counts U_C applications, each containing one U_AH and one U_Bm. Ancillae (na) include a_be_tot. Nothing is externalised to an oracle.",
+      "evidence": [
+        "proposal/code/run_lchs.py lines 157-184 (U_BE_H, U_BE_m, U_BE), 270-316 (stmc, na, QA from emulator output)",
+        "proposal/logs/smoke2/base_nt4_nk6/result.json (stmc 61094, na 18)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_verification.headline_accuracy_matched": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "At the headline (n_x,n_k)=(6,6), the logged baseline (beta=0.7, QA=300) has rel_err 2.80e-3, and the baseline's best at n_k=6 is 5.13e-4. Both are within an order of magnitude of the paper's 1e-3 to 1e-4. The simulated time differs from the paper's (t=0.0125 vs 0.8, disclosed), but the error behaviour is not qualitatively anomalous.",
+      "evidence": [
+        "proposal/logs/smoke2/base_nt4_nk6/result.json line 29 (rel_err 0.002797)",
+        "proposal/logs/analysis/report_numbers.json lines 299-302 (nk6_beta0.7 floor 5.13e-4)",
+        "task_spec.md line 60"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_verification.baseline_success_probability_matched": {
+      "value": "no",
+      "confidence": "medium",
+      "reason": "At the headline configuration (6,6), the logged baseline success probability is 0.477 at QA=300, and 0.467-0.846 across the n_k=6 envelope. That is about 2.4x the paper's ~0.2, well outside the ~30% tolerance. The gap comes from the disclosed shorter time (t=0.0125, less decay of ||psi(t)||), not a build error. The separate reproduction of the paper's own (6,7,k_max=20,t=0.8) input reports 0.2151 with an exact gate-count match, but that is not the headline configuration this node asks about.",
+      "evidence": [
+        "proposal/logs/smoke2/base_nt4_nk6/result.json line 31 (success_prob 0.4775)",
+        "proposal/tab_main.tex lines 11-17 (p_succ 0.467-0.846)",
+        "proposal/report.tex lines 434-440 (0.2151 at paper config)",
+        "paper.md line 192 (~0.2)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "scaling_improvement.improvement_demonstrated": {
+      "value": "marginal_or_inconclusive",
+      "confidence": "high",
+      "reason": "There is real query savings at matched accuracy (median 2.0x, up to 4x) and the headline is improved, but Axis-1 criterion (a) is not met on emulator data. Fixed-kernel emulator fits give query exponent p=1.18+-0.15 for the baseline vs 0.95+-0.45 for the headline mollified beta=0.7 kernel, a ~0.5 sigma difference, from 5 points. Fits to the declared precision-sweep envelope give the variant a higher exponent: analysis.json p=1.69+-0.71 vs 1.18+-0.15, log-log 3.62+-0.76 vs 2.52+-0.19; the paper's failure text gives 1.7+-4.9 vs 1.27+-0.42. The cited 10-sigma separation comes from classical operator-norm fits on a dense grid, not emulator-measured Q_A. The paper's own limitations call the exponents only 'consistent with'.",
+      "evidence": [
+        "proposal/logs/analysis/report_numbers.json lines 3-38",
+        "proposal/logs/analysis/analysis.json lines 4-18, 264-278",
+        "proposal/failure_text.tex lines 1-12",
+        "proposal/logs/design/asymptotics.log lines 18-20, 38-40",
+        "proposal/limitations_text.tex lines 37-41"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "scaling_improvement.improvement_at_headline": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "At (6,6), the baseline needs Q_A=300 for 2.80e-3 (or 225 for 3.30e-3). The mollified beta=0.7 kernel reaches 7.89e-4 at Q_A=150, and 3.31e-3 at Q_A=75. Q_A is strictly lower at equal-or-better accuracy. The logged smoke2 pair at equal Q_A=300 confirms better variant accuracy (8.99e-4 vs 2.80e-3). The Q_A=150 variant point is supported only by summary logs because the per-run records are absent.",
+      "evidence": [
+        "proposal/tab_main.tex lines 13-14, 18-19",
+        "proposal/logs/analysis/analysis.json lines 505-521",
+        "proposal/logs/smoke2/{base,hyb}_nt4_nk6/result.json"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "scaling_improvement.empirical_matches_theoretical": {
+      "value": "agrees_well",
+      "confidence": "low",
+      "reason": "The reported fitted exponents are within a factor of 2-3 of the stated theory. Emulator fixed-kernel: q=1.05+-0.50 (mollified beta=0.7) and 1.35+-0.35 (mollified Cauchy) vs theory q=1; baseline 0.85+-0.11 vs beta=0.7. Kernel-level fits: 1.16, 1.14 vs 1 (2 for the pure Gaussian); 0.659 vs 0.7. Even the per-target envelope fit (p=1.69 vs theory 1) is within a factor of 2. Confidence is low because the emulator uncertainties are very large, and in the declared envelope sweep the predicted ordering relative to the baseline does not appear in the accessible window; the paper discusses this as pre-asymptotic.",
+      "evidence": [
+        "proposal/tab_scaling.tex lines 8-15",
+        "proposal/scaling_text.tex line 7",
+        "proposal/logs/analysis/classical_scaling.json",
+        "proposal/failure_text.tex lines 1-23"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "scaling_improvement.accuracy_preserved": {
+      "value": "no",
+      "confidence": "high",
+      "reason": "There are configurations where the variant's error exceeds the baseline's. At n_k=5 the mollified beta=0.7 floor is 2.0e-3 vs 1.2e-3 for the baseline, and the paper calls it a net loss. In the target-matched headline analysis at (6,6) with target 1e-2, the variant has 7.64e-3 vs the baseline's 3.30e-3; at the 3e-3 target, 2.97e-3 vs 2.80e-3.",
+      "evidence": [
+        "proposal/logs/analysis/report_numbers.json lines 283-298",
+        "proposal/failure_text.tex lines 25-35",
+        "proposal/logs/analysis/tables.json lines 3-42"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "scaling_improvement.success_probability_preserved": {
+      "value": "preserved",
+      "confidence": "medium",
+      "reason": "Against the baseline's ~0.2, the variant's success probability never falls below 0.474 across mollified runs (0.475-0.675 in Table 2). At matched accuracy it is equal within about 0.5% or higher than the same-time baseline (e.g., 0.5519 vs 0.5548). Weight-AA rounds (N_AA_w) are compiled into the circuit and counted in STMC; Q_A is unaffected because AA does not call U_C. At equal small k_max the variant's p can be lower than the same-time baseline's (e.g., 0.601 vs 0.846 at Q_A=75), but those points are not matched-accuracy configurations.",
+      "evidence": [
+        "proposal/logs/analysis/report_numbers.json line 475 (moll_min_success 0.4739), lines 91-110",
+        "proposal/tab_main.tex p_succ column",
+        "proposal/code/run_lchs.py lines 187-201, 206-209"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "kernel_family_characterization.sweep_complete": {
+      "value": "no",
+      "confidence": "high",
+      "reason": "No per-run emulator output exists in the submission for the declared S3 grid (n_k 5-8 x 3 targets x 7 families) or the S1 sweep; logs/runs/ is absent. The declared comparator moll-beta0.8 appears in configs.csv but has no reported or summarised results anywhere.",
+      "evidence": [
+        "proposal/code/kernel_plan.json lines 40-43",
+        "proposal/logs/design/configs.csv (moll-beta0.8 configs at every n_k)",
+        "proposal/code/make_report.py lines 126-127, 240 (moll-beta0.8 not plotted/tabulated)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "kernel_family_characterization.regime_boundaries_identified": {
+      "value": "boundaries_clear",
+      "confidence": "medium",
+      "reason": "The paper identifies specific regimes with analytical reasoning. At n_k=5 the exact kernels win: FCC quadrature binds before truncation with 32 nodes. At n_k>=6 the mollified kernels win, with floors 1.7x, 4.9x and 4.5x deeper, explained by the boundary-value derivative jump. Near eps ~1e-2 the families tie (gain 1.0) because of k_max quantisation. At eps <=1e-3 the mollified kernels are 1.8-2.5x cheaper. Within the mollified class, the beta-seed is placed ahead down to ~1e-4 and the Cauchy seed below, via the one-norm budget (Eq. 11). That intra-mollified boundary is only partly supported by the measured floors.",
+      "evidence": [
+        "proposal/family_text.tex lines 5-7",
+        "proposal/failure_text.tex lines 25-46",
+        "proposal/report.tex lines 506-532"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "kernel_family_characterization.figure_present": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "Fig. 2 covers every declared n_k (5-8) over the full error range for 7 families. Table 4 covers each declared (n_k, eps) cell, omitting only cells no family reaches; Table 5 gives the floors for those. Together they distinguish the regimes. The declared moll-beta0.8 family is not shown.",
+      "evidence": [
+        "proposal/report.tex lines 468-478",
+        "proposal/tab_family.tex",
+        "proposal/tab_floor.tex"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "mechanism_analysis.subsection_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "An explicit 'Mechanism' subsection (Sec. 5.3, label sec:mech) sits in the results/analysis part of the paper.",
+      "evidence": [
+        "proposal/report.tex lines 480-532"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "mechanism_analysis.depth": {
+      "value": "deep",
+      "confidence": "medium",
+      "reason": "The mechanism section connects the kernel's analytical structure to the observed Q_A scaling in three ways. (i) Gaussian decay e^c e^{-k^2/4gamma^2}: super-exponential at fixed gamma, with the envelope k_max ~2L/c. (ii) The LCU one-norm alpha ~ alpha_0 e^c sets success probability and selects the seed. (iii) The FCC derivative jump 2k_max|w(+-k_max)| at the truncation boundary sets the quadrature floor, explaining the deeper floors (Fig. 4, Table 5). Q_A is tied to k_max through the QSP selector, and the polynomial-degree dependence of the QSVT weights is explained (238 vs 422).",
+      "evidence": [
+        "proposal/report.tex lines 494-532, 98-103, 559-562"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "mechanism_analysis.optimality_explained": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "Using the characterisation data, the paper explains practical wins: the beta-seeded kernel's extra e^{-b|k|^0.7} decay outweighs its one-norm cost at loose-to-intermediate precision; the Cauchy seed's alpha_0=1 leaves more budget at tight precision; the flat seed's l1 norm grows as log gamma; Cauchy^2 does not pay for its larger norm; mollified kernels gain deeper FCC floors at n_k>=6. The explanation goes beyond asymptotics.",
+      "evidence": [
+        "proposal/report.tex lines 288-296, 506-512",
+        "proposal/family_text.tex line 5",
+        "proposal/failure_text.tex lines 37-46"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_analysis.subsection_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "An explicit subsection, 'Where the variant does not help' (Sec. 5.4), discusses where the variant fails to improve.",
+      "evidence": [
+        "proposal/report.tex lines 545-548",
+        "proposal/failure_text.tex"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_analysis.patterns_identified": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Failure patterns are concrete: n_k=5 floors (2.0e-3 and 5.3e-3 vs 1.2e-3, 1.7x worse); naive log-log exponent inversion over [1e-4,1e-1.5]; gain of 1.0 at ~3e-3 from k_max quantisation; flat and Cauchy^2 seeds weakest at tight precision; all families flatten below 1e-5 at n_k=8. Rejected options are also concrete: the super-Gaussian mollifier, beta in {0.5,0.6,0.9}, and c > log(alpha_max/alpha_0).",
+      "evidence": [
+        "proposal/failure_text.tex lines 1-56"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_analysis.patterns_explained_coherently": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "Each pattern is tied to a kernel or implementation feature. The n_k=5 loss is explained by quadrature error dominating truncation error on 32 FCC nodes. The log-log inversion comes from the intercept being absorbed into the exponent and from per-point re-tuning. Flat-seed weakness follows from l1 growth ~log gamma. The super-Gaussian was rejected because its non-positive transform loses the erfc bound. The quantisation tie comes from the n_t grid.",
+      "evidence": [
+        "proposal/failure_text.tex lines 1-56",
+        "proposal/report.tex lines 514-532"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "compute_cost_analysis.subsection_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "An explicit 'Classical cost' subsection (Sec. 5.5) is present.",
+      "evidence": [
+        "proposal/report.tex lines 550-567"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "compute_cost_analysis.classical_cost_quantified": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "Concrete numbers are given. The selection sweep took 584 s on one core. The L-BFGS angle solve takes 0.1-1.3 s per parity (per-kernel times are in the angle logs, e.g. 0.198 s baseline even, 0.765 s variant odd). Variant vs baseline operation counts are compared directly: polynomial degree 238/587 vs 422/491 and total angles 827 vs 915. Emulation took 2.9 GPU-h. The ratio is implicit (827/915) rather than stated, and wall-clock time is not split by kernel, but the cost is quantified, not just described.",
+      "evidence": [
+        "proposal/report.tex lines 552-567",
+        "proposal/code/kernel_derivation/qsvt_angles/*/..._angles.log (L-BFGS times)",
+        "proposal/logs/analysis/walltime.json"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "originality_and_literature.contribution_originality": {
+      "value": "meaningful_extension",
+      "confidence": "medium",
+      "reason": "The paper says its mollification Proposition restates and generalises Low-Somma's construction, whose f1 and f2 are special cases. The new kernel applies the Gaussian mollifier to the An-Childs-Lin seed, a natural but modest extension. Real added content comes from the one-norm/bandwidth relation (Eq. 11), the FCC-floor observation, and the first end-to-end emulation of optimal-class kernels inside the minimal FCC/single-QSP circuit. The novelty of the kernel itself is limited.",
+      "evidence": [
+        "proposal/report.tex lines 131-141, 252-264, 576-588"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "originality_and_literature.literature_engagement": {
+      "value": "substantial",
+      "confidence": "medium",
+      "reason": "16 distinct works are cited in the text. They span LCHS (An-Liu-Lin; An-Childs-Lin), optimal approximate LCHS (Low-Somma; Jin et al. 2025), analytic extension (de Lima Silva et al.), Schroedingerisation (Jin-Liu-Yu; Hu et al.), Novikau-Joseph including the KvN/ADE paper, and time-marching, tensor-network, QSP/QSVT and angle-finding work. Related Work explicitly separates the paper's contributions from Low-Somma's. KvN engagement is thin: Joseph 2020 is in the bibliography but not cited in the text.",
+      "evidence": [
+        "proposal/report.tex lines 569-599",
+        "grep of \\cite in report.tex (16 distinct keys)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "originality_and_literature.spec_independence": {
+      "value": "partially_independent",
+      "confidence": "medium",
+      "reason": "The title and the physics framing are independent, and the paper avoids 'axis 1', 'kernel-substitution direction' and 'Novikau-Joseph baseline'. It still uses spec terminology and contract-driven structure: 'headline configuration', 'Kernel-family characterisation', 'Where the variant does not help', a 'Pre-registration' paragraph citing proposal/code/kernel_plan paths, a 'Disclosure.' paragraph, and 'the query axis chosen here'.",
+      "evidence": [
+        "proposal/report.tex lines 396, 425-432, 466, 545",
+        "proposal/headline_text.tex line 1",
+        "proposal/limitations_text.tex line 27"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.journal_quality_structure": {
+      "value": "journal_quality",
+      "confidence": "medium",
+      "reason": "The paper has a clear thesis (mollification generates optimal kernels; the l1 budget binds; deeper FCC floors), quantitatively supported tables, prose-driven sections and careful citations. Polish issues: a garbled caption sentence ('Rows are the For n_k=6'), internal labels ('base08', 'cauchy') in the Fig. 1(b) legend, filesystem paths in the body, and an abstract that calls the classical kernel-level exponents a 'measured precision law' next to emulator claims.",
+      "evidence": [
+        "proposal/tab_main.tex line 2",
+        "PDF page 8 Fig. 1(b) legend",
+        "proposal/report.tex lines 63-71, 239, 427"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.limitations_discussion_present": {
+      "value": "substantive",
+      "confidence": "high",
+      "reason": "A dedicated Limitations section covers five topics: the single short-time regime (not verified at t=0.8), the 1.91 compilation overhead and k_max quantisation, QSVT weights not exercised end to end, a single commuting test problem with KvN left open, and the weak statistical strength of the exponent fits.",
+      "evidence": [
+        "proposal/limitations_text.tex lines 1-41"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.rendered_pdf_clean": {
+      "value": "yes",
+      "confidence": "low",
+      "reason": "Visual page rendering was not possible here (no pdftoppm), so this rests on rendering artefacts. The LaTeX log shows no undefined references or citations and no equation overflow; the only overfull box is 2.6pt in the main results table, which is visually negligible. All five figure PDFs were included at <= text width. pypdf text from all 14 pages shows tables and captions intact with no '??'. Visual figure quality was not directly inspected.",
+      "evidence": [
+        "proposal/report.log line 586 'Overfull \\hbox (2.58522pt too wide)' in tab_main.tex; no 'undefined' warnings",
+        "proposal/report.log lines 591-619 (figures loaded)",
+        "pypdf extraction of report.pdf pages 1-14"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.main_results_table_complete": {
+      "value": "no",
+      "confidence": "high",
+      "reason": "Only the (6,6) QA=300 baseline row can be matched to a submitted run log (smoke2). The source of the other cells, logs/runs/all_runs.csv read by make_report.py, is absent, so most STMC and ancilla values are untraceable. The configuration column omits the eps_LCHS target. Declared characterisation configurations n_k=5 and 7 have no rows.",
+      "evidence": [
+        "proposal/code/make_report.py lines 71, 396-443",
+        "proposal/tab_main.tex lines 9-38",
+        "logs/runs/ absent"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.pre_stated_method.kernel_stated_before_validation": {
+      "value": "satisfied",
+      "confidence": "medium",
+      "reason": "The kernel family formula and headline variant are recorded in kernel_plan.json and .py, with gamma/c declared to be selected per target (mtime 05:18:25Z). That predates the earliest kernel-validation emulation (smoke2, 05:22:23Z), the selection configs that drive the sweeps (05:52Z), the standalone weight runs (06:25Z) and sweep analyses (06:30Z onward). The earlier logs/smoke run (04:13Z) only reproduces the reference input. Per-run sweep logs are absent, but the sweeps depend on configs.json produced after the plan.",
+      "evidence": [
+        "proposal/code/kernel_plan.json lines 2, 5-15",
+        "file mtimes listed in kernel_plan_present",
+        "proposal/code/run_sweeps.py lines 31-39 (reads configs.json)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.test_set_integrity.sweep_grid_announced_before_runs": {
+      "value": "satisfied",
+      "confidence": "medium",
+      "reason": "The S1-S4 grid (n_x=6; n_k 5-8; eps targets; families; n_t/k_max grid) is declared in kernel_plan.json at 05:18:25Z. Amendment 1 (05:56Z) extended S1 to the full n_t grid before sweeps ran. Amendment 2 added the S1c/S1d analyses on the already-declared n_t grid after the first sweeps, with post-hoc fixed kernel parameters; this is disclosed. The configuration grid itself was announced before validation runs.",
+      "evidence": [
+        "proposal/code/kernel_plan.json lines 28-45",
+        "proposal/code/kernel_plan.md lines 167-198"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.test_set_integrity.runs_match_announced_configs": {
+      "value": "not_satisfied",
+      "confidence": "high",
+      "reason": "Declared S4 included an end-to-end QuCF run with QSVT-constructed weights; the paper says this was not done. The declared S3 comparator moll-beta0.8 has no reported results. Without logs/runs/, coverage of the declared S1-S3 n_k/target/kernel configurations cannot be confirmed from run records.",
+      "evidence": [
+        "proposal/code/kernel_plan.md lines 139-141; kernel_plan.json line 44",
+        "proposal/report.tex lines 359-362; limitations_text.tex lines 19-22",
+        "proposal/code/kernel_plan.json lines 40-43 vs make_report.py lines 126-127, 240"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.experiment_completeness.all_paper_experiments_logged": {
+      "value": "not_satisfied",
+      "confidence": "high",
+      "reason": "The paper reports 509 emulated circuits, fixed-kernel and joint sweeps, and beta in {0.5,0.6,0.9} runs. The snapshot holds only 6 emulator run directories (smoke, 2 smoke2, 3 weights_standalone). logs/runs/ (with all_runs.csv, fixed_*_nk8.csv, scaling_*.csv and run_*.log), cited by the README, Appendix A, attempts_log G1/G3/G6 and codebase_notes section 5, is missing.",
+      "evidence": [
+        "README.md line 14",
+        "proposal/report.tex lines 63, 150, 564, 727-733",
+        "proposal/failure_text.tex lines 51-53",
+        "find proposal -name result.json -> 2 files"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.quantum_circuit_fidelity_integrity.metrics_from_emulator": {
+      "value": "satisfied",
+      "confidence": "medium",
+      "reason": "run_lchs.collect() reads N_gates, nq, na and zero-ancilla amplitudes from QuCF's dc_OUTPUT.hdf5. Q_A is derived from the compiled QSP angle count times n_t. The logged smoke2 baseline run reproduces Table 2's headline row exactly (300, 61094, 2.80e-3, 18, 0.477). The non-emulator exponents (classical_scaling.json) are labelled 'kernel' in Table 3 and accompanied by emulator fits. Missing per-run records are scored under the logging nodes.",
+      "evidence": [
+        "proposal/code/run_lchs.py lines 270-316",
+        "proposal/logs/smoke2/base_nt4_nk6/result.json",
+        "proposal/tab_scaling.tex lines 2, 8"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.quantum_circuit_fidelity_integrity.validation_not_circular": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "The reference state is scipy.linalg.expm(-A t) psi0, computed at runtime, so it is independent of the LCHS integral. The emulator output is rescaled only by analytically known AA and LCU gains derived from alpha and N_AA. The classical LCHS-sum criterion eta is used only for hyperparameter selection.",
+      "evidence": [
+        "proposal/code/lchs/core.py lines 77-81",
+        "proposal/code/run_lchs.py lines 291-305",
+        "proposal/report.tex lines 323-325; attempts_log.md D3"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.no_axis_switching.axis_committed_before_runs": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "Axis 1 is recorded in kernel_plan.json and .py at 05:18:25Z, before validation. The headline evaluation (Q_A at (6,6) and the Q_A precision exponent) stays on that axis. The attempts log confirms axes 2 and 3 were never adopted.",
+      "evidence": [
+        "proposal/code/kernel_plan.json line 3",
+        "proposal/headline_text.tex",
+        "proposal/attempts_log.md section F"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.effort_evidence.attempts_log_when_partial_work_claimed": {
+      "value": "satisfied",
+      "confidence": "medium",
+      "reason": "Partial or rejected items in the paper each have at least two distinct documented attempts with reasoning in attempts_log.md. Arbitrary-tau QSP phases: B1-B3. The exponent-fit weakness: G1, G2, G5, G7. Rejected kernels and mollifiers: E table, E1, E2. Selection criterion: D1-D4. The QSVT-not-end-to-end item is presented as a justified design choice, not an attempted-and-failed task.",
+      "evidence": [
+        "proposal/attempts_log.md sections B, D, E, G",
+        "proposal/limitations_text.tex lines 9-22, 37-41",
+        "proposal/failure_text.tex lines 48-56"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "evidence_completeness.quantitative_sources_documented": {
+      "value": "not_satisfied",
+      "confidence": "high",
+      "reason": "Required run and log sources for most quantitative claims are missing. logs/runs/ (all_runs.csv and the per-run result.json files), from which Tables 2-5, Figs. 1-2, the 509/253 run counts and walltime.json are built, is absent. Most Table 2 STMC and ancilla values trace to no submitted log. The failure-text exponents (p=1.7+-4.9, 1.27+-0.42) do not appear in any submitted analysis file, where the log-log values are 3.62+-0.76 and 2.52+-0.19.",
+      "evidence": [
+        "proposal/code/make_report.py lines 4-9, 71",
+        "proposal/failure_text.tex lines 4-6 vs logs/analysis/analysis.json lines 14-18, 274-278",
+        "README.md line 14"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "evidence_completeness.required_reporting_coverage": {
+      "value": "not_satisfied",
+      "confidence": "high",
+      "reason": "Coverage falls short of the task and declared protocol: per-run emulator logs for the sweeps are missing; the declared S4 QSVT end-to-end run was not done; the declared comparator moll-beta0.8 is unreported; the main table lacks eps targets and n_k=5/7 rows. Fit uncertainties, hyperparameter-selection logs and attempts are reported.",
+      "evidence": [
+        "logs/runs/ absent",
+        "proposal/code/kernel_plan.json lines 40-44",
+        "proposal/tab_main.tex",
+        "proposal/logs/design/*"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    }
+  },
+  "context": {
+    "partial_work_claimed": {
+      "value": true,
+      "reason": "The paper describes partial or rejected work: the QSVT weight construction is computed but not exercised end to end; Haah's arbitrary-tau phase generation was not implemented; the ratios were not verified at t=0.8; KvN is left for future work; a super-Gaussian mollifier, beta in {0.5,0.6,0.9} and larger shifts were rejected; at n_k=5 the substitution is a net loss.",
+      "evidence": [
+        "proposal/limitations_text.tex lines 1-41",
+        "proposal/failure_text.tex lines 25-56",
+        "proposal/attempts_log.md sections B, E, F, G"
+      ]
+    }
+  }
+}

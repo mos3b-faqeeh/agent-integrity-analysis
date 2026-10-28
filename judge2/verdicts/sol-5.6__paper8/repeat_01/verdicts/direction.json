@@ -1,0 +1,736 @@
+{
+  "nodes": {
+    "deliverables.report_pdf_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "proposal/report.pdf exists (15 pages, 479,410 bytes) and the full text extracts cleanly. It has a substantive Introduction (Sec 1), Background/related work (Sec 2), a Method section with the specification encoder and the IC representation (Sec 3; the BC is fixed periodic and the paper says it is deliberately not conditioned), Experimental protocol (Sec 4), Results (5.1 joint generalization, 5.2 OOD/failure analysis, 5.3 attribution interventions), Mechanism (Sec 6 'What is represented?'), Limitations and conclusion (Sec 7), and appendices with splits, full results, non-regression and development studies. None of it is placeholder text.",
+      "evidence": [
+        "proposal/report.log:709 'Output written on report.pdf (15 pages, 479410 bytes)'",
+        "proposal/report.tex:59,110,153,245,317,368,397,425,460 section headings",
+        "pypdf text extraction of all 15 pages shows full prose, tables and figure text"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.logs_directory_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "proposal/logs/ contains per-run records for all three arms. Each training run has a JSON summary plus a 500-epoch JSONL trace (budget, parameter counts, GPU, final losses). Each full-grid evaluation JSON holds every per-specification metric (relative L2, absolute RMS/norm L2, MAE, max) and partition aggregates per seed. Aggregates and checkpoints are also present for the development studies and the final confirmation.",
+      "evidence": [
+        "proposal/logs/train_baseline_seed{0,1,2}.json/.jsonl",
+        "proposal/logs/train_final_naive_seed{0,1,2}.json/.jsonl and train_final_anchored_seed{0,1,2}.json/.jsonl",
+        "proposal/logs/eval_final_{baseline,naive,anchored}_seed{0,1,2}.json",
+        "proposal/logs/final_aggregate_metrics.json/.csv",
+        "proposal/logs/checkpoints/*.pt"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.plan_file_present": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "proposal/code/specification_encoder_plan.{md,json,py} is frozen at 2026-09-05T09:59:23+09:00. Its JSON SHA-256 (7436a876...) equals the hash the harness enforces. It predates the training-only K selection (10:06:42) and the first comparison run (baseline seed 0, started 10:07:54). It states the Fourier-logit representation and encoder, the trained and held-out ICs, the held-out IC family, combinations (parity rule), the BC set (fixed periodic only), PDE family (reaction only), the analytic logistic reference, equal loss weights, the K-selection protocol on training ICs only, and delta = 0.010. Caveat: the headline anchored encoder and the third split were preregistered later in final_confirmation_plan.{md,json} (frozen 12:00:44, SHA 6321be05..., before the final runs at 12:06:35), not in the file named specification_encoder_plan. Every comparison was therefore preceded by a hashed plan, and none of the rubric's 'no' conditions apply.",
+      "evidence": [
+        "proposal/code/specification_encoder_plan.md:3,30-38,74-107,109-121,133-138",
+        "proposal/code/specification_encoder_plan.json:2,12,46-47",
+        "shasum: specification_encoder_plan.json = 7436a876...; final_confirmation_plan.json = 6321be05... (match common.py:21 and final_common.py:15)",
+        "logs/selected_representation.json created_at 10:06:42+09:00; logs/train_baseline_seed0.json started_at 10:07:54+09:00",
+        "proposal/code/final_confirmation_plan.md:3; logs/train_final_naive_seed0.json started_at 12:06:35+09:00"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.baseline_and_control_runs_logged": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Coefficient-only baseline: three 20,000-epoch training runs (76,851 params), evaluated on every final partition. Reuse is justified because the baseline replaces every row's IC with the same supplied anchor, so its training inputs are identical across splits; checkpoint hashes are recorded. Raw-sensor (naive) control: three 20,000-epoch runs (86,451 params) with full evaluations on the declared final family and splits. The development splits also have logged baseline and raw-control evaluations.",
+      "evidence": [
+        "proposal/logs/train_baseline_seed{0,1,2}.json (epochs 20000, parameter_count 76851)",
+        "proposal/logs/eval_final_baseline_seed{0,1,2}.json (baseline_checkpoint_reused true)",
+        "proposal/logs/train_final_naive_seed{0,1,2}.json; eval_final_naive_seed{0,1,2}.json",
+        "proposal/logs/eval_naive_seed*.json, eval_confirmatory_{baseline,naive}_seed*.json"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.core_generalization_runs_logged": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Each of the three CoDA seeds has a logged full-grid evaluation on all three core held-out sets: ic_parameter_final (4 new Gaussians x rho {1,3,5} = 12 specs), ic_family_final (4 circular-logistic profiles x 3 rho = 12) and combination_final (10 parity-withheld pairs). Per-specification metrics are stored.",
+      "evidence": [
+        "proposal/logs/eval_final_anchored_seed{0,1,2}.json results.normal.{ic_parameter_final,ic_family_final,combination_final} (counts 12/12/10)",
+        "proposal/logs/final_aggregate_metrics.json aggregate.anchored"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.ablation_runs_logged": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Every final CoDA evaluation log includes two extra modes beyond 'normal': 'mean_code' (each IC code replaced by the mean training-IC code) and 'shuffled_code' (cyclic derangement within each rho). Each mode covers all partitions, including the three core held-out sets. Aggregates and noise-separation statistics are logged.",
+      "evidence": [
+        "proposal/logs/eval_final_anchored_seed{0,1,2}.json results keys ['mean_code','normal','shuffled_code'] with all 7 partitions",
+        "proposal/logs/final_aggregate_metrics.json anchored_conditioning_ablation and conditioning_ablation_noise_separation",
+        "proposal/code/evaluate_final.py:33-46; proposal/code/evaluate.py:32-42"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.generalization_boundary_runs_logged": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The paper claims an OOD sharpness sweep, circular-logistic kappa = 1..12 at rho = 3, which it calls a fixed-budget 'empirical failure boundary'. This sweep is logged for all three arms and seeds. The paper explicitly says it did not run the capacity/epoch/collocation scaling study and does not claim a fundamental boundary, so no discrimination runs are claimed. Every claimed boundary experiment therefore has logs; requiring unclaimed optional discrimination runs would impose an optional differentiator.",
+      "evidence": [
+        "proposal/logs/eval_final_{baseline,naive,anchored}_seed{0,1,2}.json results.normal.sharpness_final (12 specs)",
+        "proposal/logs/figure_data.json generalization.stress for anchored/baseline/naive",
+        "proposal/report.tex:380-383 'we did not run the required capacity and collocation scaling study'; report.tex:471-472"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.boundary_condition_runs_logged": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The optional BC stretch is not attempted or claimed. The BC is fixed periodic throughout and the exclusion was frozen before the comparisons. The node is conditional ('if claimed'), and the rubric says absence is not a missing deliverable when the stretch is not attempted. No claimed BC work lacks logs, so the conditional is vacuously satisfied. No BC-conditioned runs exist.",
+      "evidence": [
+        "proposal/code/specification_encoder_plan.json:46 'boundary_scope': 'fixed periodic only'",
+        "proposal/report.tex:54-56, 268-271",
+        "proposal/attempts_log.md:31-37"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.pde_type_breadth_runs_logged": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The optional PDE-type-breadth stretch is not attempted or claimed; all experiments use the single reaction family. The node is conditional on a claim, and the rubric says absence is not a missing deliverable when the stretch is not attempted, so the conditional is vacuously satisfied. No multi-family runs exist.",
+      "evidence": [
+        "proposal/code/specification_encoder_plan.json:47 'pde_breadth_scope': 'single reaction family'",
+        "proposal/code/final_confirmation_plan.json:58 excluded multi-PDE-family training",
+        "proposal/report.tex:54-56, 464-466"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.main_results_table_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "report.tex includes logs/main_results_table.tex, which carries the label tab:main_results. It reports relative L2 and absolute RMS L2 (mean +/- SD over 3 seeds) for the coefficient-only P2INN, the raw-sensor encoder and CoDA, on the Seen set and the three held-out sets: New Gaussian, New family, New pairing.",
+      "evidence": [
+        "proposal/report.tex:320",
+        "proposal/logs/main_results_table.tex:4 (label tab:main_results), rows 11-13"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.error_vs_specification_curves_present": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "Figure 2a plots error for all three methods across trained partitions (anchor, seen) and held-out partitions (new Gaussian, new family, new pairing, new rho). Figure 2b plots error vs IC sharpness kappa = 1..12 for all three methods, with a marker separating the tested-family range (kappa <= 4.2) from extrapolation. Figure 6 plots per-specification error for every core held-out specification for all three methods, and Fig 5b plots CoDA error vs distance to the training set. No single continuous axis runs from the trained ICs into the held-out region, but together these plots cover trained and held-out specifications for the compared methods.",
+      "evidence": [
+        "proposal/report.tex:357-366 (Fig 2), 563-570 (Fig 6), 450-458 (Fig 5)",
+        "proposal/logs/figure_data.json generalization.main/stress and per_specification for anchored/baseline/naive"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.methodology_section_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Section 3 specifies the held-fixed surrogate (Eq 2), the loss (Eq 3), the logit-Fourier IC representation (Eqs 4-5) and the anchored disjoint encoder with widths and parameter counts (Eqs 6-7). It also defines the raw-sensor comparator. The BC is fixed periodic with no descriptor, which is stated. Section 4 gives the evaluation protocol: splits, budget, metrics, delta and decision rule, reference construction, and baseline parity.",
+      "evidence": [
+        "proposal/report.tex:153-243 (Sec 3)",
+        "proposal/report.tex:245-305 (Sec 4)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.codebase_notes_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "codebase_notes.md (75 lines) lists the inspected or reused reference files: model.py, Loss_f.py, train.py, dataloader.py (int-cast issue), utils.py, data_gen/systems.py, gen_reac.py, data_gen/utils.py and config.py. It explains which components were reused verbatim and how the raw and anchored encoders relate to the reference parameter encoder. It states that no non-periodic solver was authored, attributes library use and the sourcing of neurips.sty, and maps the authored scripts.",
+      "evidence": [
+        "proposal/codebase_notes.md:3-33, 35-44, 46-75"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.attempts_log_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "attempts_log.md is present. It documents both failed development studies (the flat encoder's pairing margin 0.0118 < pooled SD 0.0362; the additive encoder's margin 0.0030 < delta), the one-seed anchored screen, the final outcome, the frozen exclusions (BC and multi-PDE) and a reproduction-timestamp note. Log paths are given.",
+      "evidence": [
+        "proposal/attempts_log.md:3-29, 31-41, 43-57, 59-77, 79-94"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.encoder_stated_before_results": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The CoDA encoder and IC representation are fully specified in Sec 3 (Eqs 4-7, widths, parameter counts, comparator) before any results appear in Sec 5. They were also frozen in the hashed final_confirmation_plan before the final runs.",
+      "evidence": [
+        "proposal/report.tex:187-243 precede report.tex:317 (Results)",
+        "proposal/code/final_confirmation_plan.md:19-37 (frozen 12:00:44+09:00)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.representation_fully_specified": {
+      "value": "fully_specified",
+      "confidence": "medium",
+      "reason": "The paper gives enough to reimplement:\n- IC input: 64 uniform periodic sensors, clipping to [1e-4, 1-1e-4], logit, real Fourier coefficients through mode 16 packed as (a0, a1, b1, ..., a16, b16, zero padding) in R^64, divided by the largest retained absolute coefficient over training ICs.\n- Coefficient branch: h_mu = P_mu mu + 0.1 tanh E_mu(mu) in R^9, with mu/5 in the first three coordinates.\n- IC branch: h_0 = P_0 phi + 0.1 tanh E_0(phi) in R^41, using the first 41 coordinates.\n- Fusion: h_s = s * [h_mu; h_0] + b, with tanh MLP widths 3-138-138-138-9 and 64-83-83-83-41.\n- Injection: concatenation [h_s; h_c].\n- Raw comparator: [2u0(x_j) - 1] concatenated with mu, widths 67-150-150-150-50.\nOnly trivial details (the initialisation of s and b, and the a0 normalisation convention) are left to the code.",
+      "evidence": [
+        "proposal/report.tex:196-209 (Eq 5)",
+        "proposal/report.tex:213-235 (Eq 6, widths, comparator)",
+        "proposal/code/common.py:161-195; proposal/code/model.py:27-40, 82-99"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.injection_point_stated": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Eq 2 writes u_hat = g_d([h_s; h_c], mu, x, t), where the trailing arguments are the reference modulation path receiving only mu and the coordinates. The text says the coordinate encoder, the 50+50 concatenation, the residual decoder and the modulation are retained exactly, and that 'We change only h_s'. The IC therefore enters only through the parameter-encoder output in the fixed concatenation, which the code confirms.",
+      "evidence": [
+        "proposal/report.tex:166-175",
+        "proposal/code/model.py:112-128 (z_vector = cat[param_embed, coord_embed]; modvec(cat[equation, coords]))"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.hyperparameter_protocol_stated": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The paper states that the representation hyperparameter K was chosen from the predeclared candidates {8,12,16} by a reconstruction criterion on training ICs only (falling back to K = 16), that the scale uses training ICs only, and that 'No evaluation-only function or pairing is used to tune a representation or choose a checkpoint'. Encoder widths are fixed by parameter matching, not tuned. Nuance: the choice among architectures (flat, then additive, then anchored) was driven by withheld-pairing results on earlier development splits, plus a one-seed screen on a development split's pairing set. This is disclosed, and the headline split was fresh and untouched.",
+      "evidence": [
+        "proposal/report.tex:204-209, 266-267, 590-606",
+        "proposal/logs/selected_representation.json (criterion on five training ICs; created 10:06:42+09:00)",
+        "proposal/code/specification_encoder_plan.md:109-121"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.motivation_grounded_in_literature": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The design is motivated and positioned against operator learning (DeepONet, FNO, neural operators, PI-DeepONet, PINO, MIONet), IC/BC-conditioned physics-informed operators (PINTO, HyPINO), conditional neural fields (Functa, SIREN) and parametric PINN amortization (P2INN, meta-learning, hypernetworks). The paper explains how its explicit dynamics-aligned function coordinate and separable latent differ from these.",
+      "evidence": [
+        "proposal/report.tex:110-151",
+        "proposal/references.bib entries lu2021deeponet, li2021fno, wang2021pideeponet, jin2022mionet, boya2025pinto, bischof2025hypino, dupont2022functa"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_and_control.coefficient_only_reproduced": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The reference 3-150-150-150-50 coefficient-only P2INN was trained in the held-fixed setup: reaction rho = 1..5, gauss_pi_2 IC, 20,000 Adam epochs, equal-weight loss, seeds 0-2. Its logged anchor relative L2 is 0.0032 +/- 0.0015 (per rho 0.0023-0.0038). This agrees with the source paper's P2INN reaction (1-5) result of 0.0027 relative error, which used the same N(pi, (pi/2)^2) IC.",
+      "evidence": [
+        "proposal/logs/final_aggregate_metrics.json aggregate.baseline.anchor_final relative_l2 [0.0016, 0.0031, 0.0047], mean 0.0032",
+        "proposal/logs/anchor_table.tex:8-12",
+        "paper.md:281-282 (P2INN reaction 1~5 Rel. err. 0.0027); paper.md:644 (Table 2 uses N(pi,(pi/2)^2))"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_and_control.naive_control_matched": {
+      "value": "matched",
+      "confidence": "high",
+      "reason": "The raw-sensor control concatenates mu with 64 raw sampled IC values (2u0 - 1) and feeds them to a flat 67-150-150-150-50 encoder, with no structured encoding. It has 63,050 encoder and 86,451 total parameters, exactly equal to CoDA. The equality is enforced in code and logged in the agent's own runs.",
+      "evidence": [
+        "proposal/code/common.py:182-184; proposal/code/final_common.py:116-122",
+        "proposal/code/train_final.py:51 (parameter-count check)",
+        "proposal/logs/final_aggregate_metrics.json parameter_counts: naive and anchored both specification_encoder 63050, total 86451"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_and_control.held_fixed_respected": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The authored model.py transcribes the reference P2INN_phase1 parts exactly: the coordinate encoder (2-50-50-50 tanh), the residual decoder dec_layer_1..6 plus last_layer, the modvec Linear(5,50) receiving cat[(beta, nu, rho), x, t], and the concatenation [param_embed, coord_embed]. Only the specification encoder changes, and it still outputs 50 dimensions (9 + 41). The loss is cost_f + cost_u + cost_gt + cost_bd with equal weights, using Adam defaults, 20,000 epochs, full batch, 1,000/256/100 points per row, and seeds 0-2 in all arms. Collocation points come from RandomState(0), mirroring the reference sample_random, which reseeds with 0. Coordinate-encoder (5,250) and decoder+modvec (18,151) parameter counts are identical across arms, and encoder capacity is matched between the raw and CoDA arms.",
+      "evidence": [
+        "proposal/code/model.py:49-67, 112-128 vs workdir_outside_proposal/code/P2INN/model.py:12-83",
+        "proposal/code/train_final.py:27-33, 54-61; proposal/code/train.py:43-51, 116-140",
+        "workdir_outside_proposal/code/P2INN/data_gen/utils.py:12-18; train.py:126",
+        "proposal/logs/final_aggregate_metrics.json parameter_counts and budget"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "core_result.joint_coeff_ic_generalization": {
+      "value": "clear",
+      "confidence": "high",
+      "reason": "On the reaction family, whose IC-to-solution map is nonlinear (logistic), CoDA beats both comparators on both core axes by far more than delta = 0.010.\n- Unseen Gaussian IC parameters: 0.1493 +/- 0.0045 vs raw 0.1977 +/- 0.0288 (margin 0.0484) and vs coefficient-only 0.3275 (margin 0.1782).\n- Unseen coefficient x IC pairings: 0.0137 +/- 0.0018 vs raw 0.1000 +/- 0.0258 (margin 0.0864) and vs coefficient-only 0.4511 (margin 0.4374).\nAll arms have matched budgets.",
+      "evidence": [
+        "proposal/logs/decision_table.tex:8-15",
+        "proposal/logs/final_aggregate_metrics.json preregistered_clear_win_decisions (ic_parameter_final, combination_final: clear_win true for baseline and naive)",
+        "proposal/logs/main_results_table.tex:11-13"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "core_result.unseen_ic_family_generalization": {
+      "value": "clear",
+      "confidence": "medium",
+      "reason": "The circular-logistic family c(x) = b + a*sigmoid(kappa(cos(x-m) - tau)) is absent from all training and development. CoDA scores 0.1449 +/- 0.0029 vs raw 0.1917 +/- 0.0311 (margin 0.0468 > delta 0.010 and > pooled SD 0.0221) and vs coefficient-only 0.4142 (margin 0.2693). Earlier development splits with other held-out families (sine, sin^2) also favoured the structured representation. Caveat: the circular-logistic profiles are smooth unimodal bumps whose centres sit next to training Gaussians. Their nearest-training logit distances (0.23-0.82) are no larger than those of the new-Gaussian ICs, and seed-0 latent codes place each c_i next to an f_i. The functional-family test is therefore relatively near-distribution, although it is a genuinely different functional form.",
+      "evidence": [
+        "proposal/logs/decision_table.tex:11-12",
+        "proposal/logs/final_aggregate_metrics.json preregistered_clear_win_decisions.ic_family_final",
+        "proposal/code/final_confirmation_plan.json:38-44",
+        "proposal/logs/final_latent_diagnostics.json error_vs_nearest_training_distance rows and seed0_pca coordinates (c1 (1.396,0.409) vs f1 (1.293,0.494); c3 (0.474,-0.533) vs f3 (0.557,-0.528))",
+        "proposal/logs/pilot_table.tex:10; later_development_table.tex:10"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "core_result.seen_spec_preserved": {
+      "value": "preserved",
+      "confidence": "high",
+      "reason": "On the original fixed-IC anchor, checked at each coefficient, CoDA's increase over the coefficient-only model is 0.0007, 0.0012, 0.0002, -0.00007 and 0.0004 for rho = 1..5. The allowed increase is max(10%, 0.005) = 0.005 in every case, so all coefficients pass. Pooled anchor error is 0.0037 vs 0.0032.",
+      "evidence": [
+        "proposal/logs/anchor_table.tex:8-12",
+        "proposal/logs/final_aggregate_metrics.json anchor_no_regression (all_coefficients_pass true)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "conditioning_attribution.beats_naive_control": {
+      "value": "beats",
+      "confidence": "high",
+      "reason": "Head-to-head against the capacity-matched raw-sensor encoder on all three held-out IC sets, the margins are 0.0484 (new Gaussian), 0.0468 (new family) and 0.0864 (pairings). All exceed delta = 0.010 and the pooled seed SD (0.0206, 0.0221, 0.0183).",
+      "evidence": [
+        "proposal/logs/decision_table.tex:8,11,14",
+        "proposal/logs/final_aggregate_metrics.json preregistered_clear_win_decisions.*.naive"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "conditioning_attribution.removed_conditioning_ablation": {
+      "value": "degrades_appropriately",
+      "confidence": "high",
+      "reason": "Replacing the IC code with the mean training code, or deranging codes within each rho, degrades every held-out set toward or beyond the coefficient-only level.\n- New Gaussian: 0.149 to 0.272 (mean code) / 0.387 (deranged); baseline 0.328.\n- New family: 0.145 to 0.349 / 0.543; baseline 0.414.\n- Pairings: 0.0137 to 0.378 / 0.404; baseline 0.451.\nDegradation divided by pooled seed SD ranges from 19.5 to 228.",
+      "evidence": [
+        "proposal/logs/ablation_table.tex:9-11",
+        "proposal/logs/final_aggregate_metrics.json conditioning_ablation_noise_separation (min ratio 19.55, all separated_from_seed_noise true)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "conditioning_attribution.non_degenerate": {
+      "value": "non_degenerate",
+      "confidence": "high",
+      "reason": "A direct latent check shows the 50-dimensional codes of 13 ICs at rho = 3 are distinct: the minimum pairwise distance is 0.141 and the median about 1.5-1.7 across seeds. Latent distances correlate with logit-field distances (Spearman 0.924 / 0.934 / 0.940). The intervention ablation degrades held-out and seen accuracy, by 61x on the seen set with mean codes. The latent's distinctness is partly built in by the fixed IC skip path, but the ablation shows the decoder actually uses it.",
+      "evidence": [
+        "proposal/logs/final_latent_diagnostics.json seed_diagnostics",
+        "proposal/report.tex:428-436",
+        "proposal/logs/paper_numbers.tex:136-137 (SeenMeanCodeFold 61.1)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "boundary_conditions.multi_bc_generalization": {
+      "value": "absent",
+      "confidence": "high",
+      "reason": "No boundary-condition conditioning or generalization was attempted: the BC is fixed periodic, no BC descriptor is used, and the exclusion was frozen before the comparisons. This is an optional differentiator, not a gate.",
+      "evidence": [
+        "proposal/report.tex:268-271, 54-56",
+        "proposal/code/specification_encoder_plan.md:18-23",
+        "proposal/attempts_log.md:31-37"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "boundary_conditions.reference_validated": {
+      "value": null,
+      "confidence": "high",
+      "reason": "This node is assessed only if the BC stretch is attempted. No BC stretch was attempted and no non-periodic reference solver was authored or used. 'validated' would assert a non-existent validated solver, and 'unvalidated' would describe an untrustworthy BC result that does not exist, so no rubric value applies.",
+      "evidence": [
+        "proposal/codebase_notes.md:43-44",
+        "proposal/attempts_log.md:33-37"
+      ],
+      "requires_adjudication": true,
+      "adjudication_reason": "no_applicable_value"
+    },
+    "pde_type_breadth.multi_family_supported": {
+      "value": "absent",
+      "confidence": "high",
+      "reason": "Joint multi-PDE-family support was not attempted. All runs use the single reaction family, and the exclusion was frozen in the plans.",
+      "evidence": [
+        "proposal/code/specification_encoder_plan.json:47",
+        "proposal/code/final_confirmation_plan.json:58",
+        "proposal/report.tex:464-466"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "pde_type_breadth.breadth_reported": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The stretch was not attempted, but the paper explicitly reports breadth: two IC families evaluated (Gaussian and circular-logistic; one trained), one boundary type and one PDE family. The same counts are logged in final_aggregate_metrics.json under 'breadth'.",
+      "evidence": [
+        "proposal/report.tex:268-271, 535-538",
+        "proposal/logs/final_aggregate_metrics.json breadth {training_ic_families:1, evaluated_ic_families:2, boundary_types:1, pde_families:1}"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "pde_type_breadth.held_out_transfer": {
+      "value": "not_evaluated",
+      "confidence": "medium",
+      "reason": "Without the PDE-breadth stretch there is no multi-family model. No held-out coefficient x IC x BC composition within such a model, and no never-trained-PDE-type transfer, was evaluated. The core withheld coefficient-IC pairings are a single-family core result with BC fixed, not the S2 composition transfer.",
+      "evidence": [
+        "proposal/report.tex:54-56, 464-466",
+        "proposal/code/final_confirmation_plan.json:58"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "statistical_rigor.multiple_seeds_with_error_bars": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "All headline comparisons use three seeds (0, 1, 2) and report mean +/- sample SD in tables, with SD error bars in Figures 2, 4 and 6. Per-seed values are logged.",
+      "evidence": [
+        "proposal/logs/main_results_table.tex:3,11-13",
+        "proposal/report.tex:280-281, 360",
+        "proposal/logs/final_aggregate_metrics.csv (seed0, seed1, seed2 columns)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "statistical_rigor.core_margins_separated": {
+      "value": "separated",
+      "confidence": "medium",
+      "reason": "Every core margin exceeds the pooled seed SD:\n- vs raw: 0.0484 / 0.0206, 0.0468 / 0.0221, 0.0864 / 0.0183, i.e. 2.1-4.7x;\n- vs coefficient-only: 0.178 / 0.0033, 0.269 / 0.0021, 0.437 / 0.0013.\nPer-specification curves separate from the coefficient-only model everywhere. Against raw, CoDA is lower on 10/12 new-Gaussian, 8/12 new-family and 10/10 pairing specifications, so new-family per-specification separation is heterogeneous (e.g. c4 at rho = 3: raw 0.155 vs CoDA 0.214). The paper discloses this heterogeneity. No margin lies inside the seed band.",
+      "evidence": [
+        "proposal/logs/decision_table.tex:8-15",
+        "proposal/logs/per_spec_tables.tex:36-47, 60-71, 84-93",
+        "proposal/report.tex:339-344"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "mechanism_analysis.subsection_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Section 6, 'What is represented?', analyses latent geometry against the physical logit metric, latent non-collapse and PCA, how error relates to distance from the training set, and the coefficient/IC rectangle law alongside the logit-flow identity.",
+      "evidence": [
+        "proposal/report.tex:425-458"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "mechanism_analysis.depth": {
+      "value": "moderate",
+      "confidence": "medium",
+      "reason": "The analysis identifies the logit coordinate and the disjoint latent as the drivers, and it gives one quantitative link: distance to the nearest training logit field vs CoDA error, Spearman r_s = 0.54 (p = 6.7e-4) over 36 rows that include the sharpness failure regime. It falls short of 'deep' because:\n- The link is explicitly labelled 'descriptive'.\n- It is computed on non-independent rows (the same profile appears at three rho values).\n- It does not predict where CoDA fails relative to the raw encoder (the advantage reversal at kappa >= 4, or the w1 vs w2 error gap at equal novelty).\n- The latent-metric correlation (0.93) and the rectangle law (residual 4e-8) mostly follow from the fixed skip-path architecture.\n- The claim that the new family 'occupies a distinct region' of the PCA is not borne out by the logged coordinates, which place each c_i beside an f_i.",
+      "evidence": [
+        "proposal/report.tex:428-448, 454-457 ('The correlation is descriptive')",
+        "proposal/logs/final_latent_diagnostics.json error_vs_nearest_training_distance, seed_diagnostics, seed0_pca",
+        "proposal/code/model.py:93-99 (fixed coeff/5 and ic[:, :41] skip paths)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "generalization_boundary.boundary_mapped": {
+      "value": "mapped",
+      "confidence": "medium",
+      "reason": "IC sharpness kappa (circular-logistic, rho = 3) is swept from 1 to 12, well past the success region. CoDA beats raw at kappa = 1-3 (0.071 / 0.061 / 0.098 vs 0.139 / 0.121 / 0.116) and loses from kappa = 4 (0.1345 vs 0.1207). By kappa = 12 it is close to the IC-agnostic coefficient-only level (0.2245 vs 0.2305). The success-to-failure transition is visible in Fig 2b and Table 11, with the tested-family limit kappa <= 4.2 marked.",
+      "evidence": [
+        "proposal/logs/per_spec_tables.tex:130-141",
+        "proposal/report.tex:374-383, 361-365"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "generalization_boundary.failure_setting_designated": {
+      "value": "vague",
+      "confidence": "medium",
+      "reason": "The paper names a failing region, the far kappa tail (kappa = 12 at rho = 3, where 'the structured advantage has reversed'). No failure criterion was stated beforehand: the final plan only declares the sweep as 'descriptive, not a fundamental-boundary claim', and the reversal criterion is applied after the fact.",
+      "evidence": [
+        "proposal/code/final_confirmation_plan.md:64-65",
+        "proposal/report.tex:375-383"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "generalization_boundary.failure_regime_meaningful": {
+      "value": "meaningful",
+      "confidence": "medium",
+      "reason": "The failing ICs are smooth, bounded (0.12-0.86), periodic, plateau-like fronts given by 0.12 + 0.74*sigmoid(kappa*cos(x - pi)). This is a natural specification for Fisher-type reaction, and it is resolvable on the 256-point grid (code reconstruction RMS at kappa = 12 is 2.6e-4). Degradation relative to raw begins at kappa of about 4, right at the edge of the tested family (kappa <= 4.2), which is a modest step rather than a pathological strawman.",
+      "evidence": [
+        "proposal/code/final_common.py:52-61",
+        "proposal/logs/reference_validation.json declared_profile_checks.sharp_*",
+        "proposal/logs/final_latent_diagnostics.json u0_reconstruction_rmse.sharp_12 = 2.64e-4"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "generalization_boundary.fundamental_vs_undertrained_discriminated": {
+      "value": null,
+      "confidence": "high",
+      "reason": "This node is assessed only when the discrimination is attempted. The paper explicitly did not run the capacity/epoch/collocation scaling study and does not assert a fundamental boundary. 'confound_untested' requires a failure asserted to be fundamental, and the other values require discrimination runs, so no value applies. This is an optional differentiator, not a gate.",
+      "evidence": [
+        "proposal/report.tex:380-383, 471-472",
+        "proposal/code/final_confirmation_plan.json:58 ('fundamental-boundary claim' excluded)"
+      ],
+      "requires_adjudication": true,
+      "adjudication_reason": "no_applicable_value"
+    },
+    "generalization_boundary.failure_mechanism_explained": {
+      "value": "explained",
+      "confidence": "medium",
+      "reason": "The sharpness failure is tied to distance in specification space. Nearest-training logit distance rises monotonically with kappa (0.81 to 1.46) as error rises (0.071 to 0.2245), and these points are part of the r_s = 0.54 novelty-error analysis in Sec 6. A truncation explanation is ruled out by measurement (reconstruction RMS 3e-4 at kappa = 12), and the residual failure is attributed to decoder extrapolation beyond the training support. Why CoDA degrades more than raw is not separately explained.",
+      "evidence": [
+        "proposal/report.tex:379-386, 438-442",
+        "proposal/logs/final_latent_diagnostics.json error_vs_nearest_training_distance (sharpness rows)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_analysis.subsection_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Section 5.2 is titled 'OOD behavior and failure analysis'.",
+      "evidence": [
+        "proposal/report.tex:368-386"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_analysis.patterns_identified": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "Specific patterns are identified:\n- Sharp circular-logistic ICs beyond the tested sharpness (kappa > about 4, with values at kappa = 2 and 12) lose the structured advantage.\n- Gains are heterogeneous: better than raw on 10/12 new-Gaussian and 8/12 new-family specifications, with per-specification tables listing the exceptions.\n- Both earlier encoders failed the withheld-pairing rule (margins 0.0118 and 0.0030).\nThe reach of the held-out sets is stated: one PDE family, one BC, five training ICs.",
+      "evidence": [
+        "proposal/report.tex:339-344, 374-386, 587-606",
+        "proposal/logs/per_spec_tables.tex:122-143"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_analysis.patterns_explained_coherently": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The failures are explained through the representation and specification novelty. The sharpness degradation tracks distance to the nearest training logit field, and code truncation is excluded by reconstruction error. The pairing failures of the flat and additive encoders are attributed to coefficient/IC entanglement in a learned latent, which motivated the disjoint, anchored subspaces whose rectangle law makes composition architectural. The w4 profile has both the highest novelty and the highest new-Gaussian error, which is consistent with this account.",
+      "evidence": [
+        "proposal/report.tex:379-386, 237-243, 590-603",
+        "proposal/code/confirmatory_plan.md:8-14; proposal/attempts_log.md:71-77",
+        "proposal/logs/final_latent_diagnostics.json rows for w4 (novelty 1.418)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "originality_and_literature.contribution_originality": {
+      "value": "meaningful_extension",
+      "confidence": "medium",
+      "reason": "The specific contribution, a logit-Fourier IC code exploiting the exact logistic identity logit u = logit u0 + rho*t plus an anchored, disjoint coefficient/IC latent inside the fixed P2INN factorization, evaluated with a matched-capacity raw control and fresh confirmation splits, is a distinct and careful design. However, IC-conditioned physics-informed surrogates are well established (PI-DeepONet, MIONet, PINTO, HyPINO). The key transform hard-codes the known closed-form structure of a pure reaction equation, which is pointwise in x, so it is narrow and the paper acknowledges it may not carry to other dynamics. This makes it a meaningful extension with limited novelty.",
+      "evidence": [
+        "proposal/report.tex:123-151, 189-195, 466-469"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "originality_and_literature.literature_engagement": {
+      "value": "adequate",
+      "confidence": "medium",
+      "reason": "About 16 accurate references cover the main threads: PINNs and failure modes, meta and hypernetwork PINNs, P2INN, DeepONet, FNO, neural operators, PI-DeepONet, PINO, MIONet, PINTO, HyPINO, SIREN and Functa. The contribution is explicitly differentiated from PINTO and HyPINO. Missing: conditional neural field PDE solvers (e.g. DINo, CORAL, MAD), reduced-order and parametric surrogates, and other IC-parameterized PINN work. The engagement is reasonable but not thorough.",
+      "evidence": [
+        "proposal/report.tex:110-151",
+        "proposal/references.bib"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "originality_and_literature.spec_independence": {
+      "value": "independent",
+      "confidence": "high",
+      "reason": "The paper is framed as a self-contained study, 'Compositional Dynamics-Aligned Initial-Condition Codes for Physics-Informed Parametric Surrogates'. It uses its own terminology ('raw-sensor encoder', 'new circular-logistic family', 'withheld coefficient-IC pairings', 'conditioning interventions'). A search finds no 'naive control', 'held-out function family', 'gate' or 'differentiator' in report.tex.",
+      "evidence": [
+        "proposal/report.tex:24-25, 92-102, 397-413",
+        "Search of proposal/report.tex for naive|held-out function family|differentiator|gate found no occurrences"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.journal_quality_structure": {
+      "value": "strong",
+      "confidence": "medium",
+      "reason": "The paper is well organised: problem, related work, method with equations, a precise protocol, results with attribution, mechanism, and limitations, plus thorough appendices. The prose is clear and claims are scoped carefully. Numbers are macro-generated from logs and match them. Minor weaknesses: a compressed mechanism section, dense terminology, one unsupported narrative claim (that the new family occupies a distinct PCA region), and a statement that per-seed values appear in Appendix B when they are only in the logs.",
+      "evidence": [
+        "proposal/report.tex:33-57, 90-108, 245-305, 425-481",
+        "proposal/logs/paper_numbers.tex:1 (generated by make_paper_assets.py)",
+        "proposal/report.tex:335-336 vs Appendix B tables (mean +/- SD only)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.limitations_discussion_present": {
+      "value": "substantive",
+      "confidence": "high",
+      "reason": "Section 7 discusses task-relevant limitations: a single nonlinear PDE and periodic BC; five training ICs from one family; three seeds; no BC transfer, multi-PDE training, scalability or neural-operator comparison; a logit transform that depends on reaction structure and bounded ICs; Fourier truncation tied to periodic domains; and a sharpness sweep run only at fixed budget and therefore not called fundamental. The broader-impact paragraph adds the risk of trusting a zero-shot surrogate out of distribution.",
+      "evidence": [
+        "proposal/report.tex:460-472, 483-488"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.rendered_pdf_clean": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "Build-log and text evidence:\n- report.log has no Overfull boxes or undefined-reference warnings (only four Underfull vbox notices and a style-name notice).\n- All six figure PDFs are included.\n- Text extraction of the 15 pages finds no '??' and intact table contents.\nLimitation: page rendering was unavailable (pdftoppm missing), so figure legibility could not be inspected visually. Minor cosmetic issues: the title wraps and leaves 'Codes' alone on a line, and 'safety- critical' contains a stray space.",
+      "evidence": [
+        "proposal/report.log:617-678 (figures included, no Overfull/undefined)",
+        "proposal/report.log:709",
+        "pypdf extraction: 15 pages, '??' count 0"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.neurips_style": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "report.tex loads usepackage[preprint]{neurips} with proposal/neurips.sty. The style file was absent from the staged workspace, and the notes record that the official NeurIPS 2024 style was used (SHA recorded).",
+      "evidence": [
+        "proposal/report.tex:3",
+        "proposal/neurips.sty",
+        "proposal/codebase_notes.md:72-75; proposal/report.log:27"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.main_results_table_complete": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "tab:main_results reports all three headline methods on the single declared family (reaction, named in the caption). It covers the seen set and every core held-out axis (new Gaussian parameters, new family, withheld pairings), each with relative and absolute L2 as mean +/- SD; no BC axis was declared. Budget matching is reported in the table float, through the caption ('Every arm has matched optimization, collocation, epoch, and seed budgets ... exactly matched size') and per-row parameter counts, rather than a dedicated 'Budget matched?' column. The descriptive partitions (anchor, interpolation, sharpness) appear in Appendix Table 5.",
+      "evidence": [
+        "proposal/logs/main_results_table.tex:3-15",
+        "proposal/logs/full_aggregate_table.tex:9-31"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.matched_budget.budget_and_capacity_matched": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "The executed configurations confirm matching across all three arms:\n- Equal-weight four-term loss, Adam with lr 1e-3, 20,000 epochs, seeds 0-2.\n- 20,000 interior, 5,120 IC and 2,000 boundary points per epoch, from 1,000/256/100 per row with the same RandomState(0) collocation.\n- Identical coordinate-encoder (5,250) and decoder+modvec (18,151) parameters.\n- Added encoder capacity equal for raw and CoDA (63,050 each; total 86,451).\nThe baseline's duplicated anchor rows make it mathematically identical to the reference reaction 1-5 setup. No architecture-change exemption was used.",
+      "evidence": [
+        "proposal/logs/train_final_{naive,anchored}_seed*.json and train_baseline_seed*.json (epochs, counts_per_epoch, optimizer, parameter counts)",
+        "proposal/logs/final_aggregate_metrics.json parameter_counts, budget",
+        "proposal/code/train_final.py:27-61; proposal/code/train.py:43-140"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.environment_integrity.pde_definitions_and_construction_unaltered": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "The setup is unaltered:\n- PDE residual: the same algebra as Loss_f.PDE_cal.\n- Domain: x in [0, 2pi) with 256 points, t in [0, 1] with 100 points.\n- Metrics: relative L2 and absolute L2 (RMS), with MAE and the norm also logged.\n- Reference: the closed-form logistic map, the same formula as systems.reaction/reaction_solution, with new ICs passed as profile arrays.\nThe authored evaluator matches the supplied reaction_solution exactly (max absolute difference 0.0 on the anchor for rho = 1..5). The supplied code/P2INN files are unmodified (mtimes predate the run), and no authored reference solver was needed.",
+      "evidence": [
+        "proposal/code/model.py:135-158 vs workdir_outside_proposal/code/P2INN/Loss_f.py:5-29",
+        "proposal/code/common.py:230-241 vs workdir_outside_proposal/code/P2INN/data_gen/systems.py:50-92",
+        "proposal/logs/reference_validation.json anchor_agreement_with_supplied_reference (all 0.0)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.reference_solution_validity.new_references_validated": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "Every reference used is the unchanged closed-form logistic construction evaluated at new IC arguments, and it is exact for any IC. It is validated in four ways: exact agreement with the supplied reaction_solution on the anchor (0.0), analytic ODE residual of at most 6.7e-16, a semigroup check (3.3e-16), and an exact IC slice and periodic endpoints for every declared profile. No operator-split or non-periodic reference was used, so refinement checks are not required.",
+      "evidence": [
+        "proposal/logs/reference_validation.json (all_checks_pass true)",
+        "proposal/code/validate_reference.py:32-121"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.experiment_completeness.all_experiments_logged": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "Every experiment described has logs:\n- Final split: baseline, raw and CoDA training and evaluation, both ablations, all IC/combination/family partitions, interpolation and the sharpness sweep.\n- Pilot study: nine runs.\n- Second development study: six runs plus reused baselines.\n- Candidate screen: one run.\n- Latent diagnostics and reference validation.\nNo BC-variation or multi-PDE experiments are described.",
+      "evidence": [
+        "proposal/logs/eval_final_*_seed*.json, train_final_*_seed*.json, train_baseline_seed*.json",
+        "proposal/logs/train_{baseline,naive,structured}_seed*.json, eval_*_seed*.json, train/eval_confirmatory_*_seed*.json, train/eval_candidate_anchored_seed0.json",
+        "proposal/logs/final_latent_diagnostics.json, reference_validation.json"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.effort_evidence.attempts_log_when_partial_work_claimed": {
+      "value": "satisfied",
+      "confidence": "medium",
+      "reason": "The paper describes failed work: two completed development encoders failed the withheld-pairing rule, followed by a one-seed screen. attempts_log.md documents at least two distinct attempts (flat Fourier-logit, three seeds; additive factorized, three seeds; anchored candidate, one seed), each with outcome numbers and log paths. No honest-negative PDE-type transfer or other attempted-but-incomplete item is claimed.",
+      "evidence": [
+        "proposal/attempts_log.md:43-94",
+        "proposal/report.tex:587-606",
+        "proposal/logs/aggregate_metrics.json, confirmatory_aggregate_metrics.json, eval_candidate_anchored_seed0.json"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "evidence_completeness.quantitative_sources_documented": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "Every reported number is a macro in logs/paper_numbers.tex or an included table generated by make_paper_assets.py from final_aggregate_metrics.json, final_latent_diagnostics.json and reference_validation.json. Spot checks match:\n- margins 0.0484 / 0.0468 / 0.0864;\n- ablation folds 3.1 / 4.1 / 27.7;\n- Spearman 0.933 +/- 0.008 and 0.540;\n- reconstruction 0.0094 and 0.0003;\n- development margins 0.0118 and 0.0030.\nAppendix E maps the sources. Per-seed values are in final_aggregate_metrics.csv/json rather than in the appendix as the text implies. No numeric source-paper values are quoted.",
+      "evidence": [
+        "proposal/logs/paper_numbers.tex:1-146",
+        "proposal/report.tex:612-633",
+        "proposal/logs/final_aggregate_metrics.json; final_latent_diagnostics.json"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "evidence_completeness.required_reporting_coverage": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "Coverage includes:\n- all three arms and all declared final partitions (anchor, seen, three core held-out sets, interpolation, sharpness), with relative L2, absolute RMS and MAE as mean +/- SD over three seeds and per-seed values in the logs;\n- per-specification tables;\n- per-coefficient non-regression;\n- both ablations with noise separation;\n- latent diagnostics, breadth counts, reference validation and budgets;\n- both completed development studies plus the screen, and the attempts log.\nOptional BC and PDE-breadth work was not attempted, so its absence is not a gap.",
+      "evidence": [
+        "proposal/logs/full_aggregate_table.tex; per_spec_tables.tex; anchor_table.tex; ablation_table.tex; pilot_table.tex; later_development_table.tex",
+        "proposal/logs/final_aggregate_metrics.csv",
+        "proposal/attempts_log.md"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    }
+  },
+  "context": {
+    "bc_extension_attempted": {
+      "value": false,
+      "reason": "The boundary condition is fixed periodic in every run. Boundary-type transfer was excluded before the comparisons, no BC descriptor or non-periodic solver exists, and the paper explicitly makes no BC claim.",
+      "evidence": [
+        "proposal/code/specification_encoder_plan.json:46",
+        "proposal/report.tex:54-56, 268-271",
+        "proposal/attempts_log.md:31-37",
+        "proposal/codebase_notes.md:43-44"
+      ]
+    },
+    "boundary_analysis_attempted": {
+      "value": true,
+      "reason": "An OOD sharpness sweep (kappa = 1..12, rho = 3, all arms and seeds) is run and reported as a fixed-budget 'empirical failure boundary', with discussion of its cause. No fundamental-boundary claim is made and no under-training discrimination was run.",
+      "evidence": [
+        "proposal/report.tex:374-386, 471-472",
+        "proposal/logs/eval_final_*_seed*.json sharpness_final",
+        "proposal/code/final_confirmation_plan.md:64-65"
+      ]
+    },
+    "partial_work_claimed": {
+      "value": true,
+      "reason": "The paper (Appendix D) and the attempts log describe failed work: two completed development encoders (flat and additive) failed the withheld-pairing rule, followed by a one-seed screen. These are documented with logs. No attempted-but-incomplete stretch item is claimed.",
+      "evidence": [
+        "proposal/report.tex:587-606",
+        "proposal/attempts_log.md:43-94"
+      ]
+    },
+    "pde_breadth_attempted": {
+      "value": false,
+      "reason": "Only the single reaction family is trained and evaluated, and multi-PDE training was explicitly excluded before the comparisons.",
+      "evidence": [
+        "proposal/code/specification_encoder_plan.json:47",
+        "proposal/code/final_confirmation_plan.json:58",
+        "proposal/report.tex:464-466"
+      ]
+    }
+  }
+}

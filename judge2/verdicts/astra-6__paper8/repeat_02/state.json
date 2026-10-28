@@ -1,0 +1,123 @@
+{
+  "status": "complete",
+  "job": {
+    "id": "astra_6/P8/repeat_02",
+    "source_id": "astra_6/P8",
+    "model_key": "astra_6",
+    "model": "GPT-6-Astra",
+    "new_paper_id": 8,
+    "original_paper_id": 19,
+    "repeat": 2
+  },
+  "stages": {
+    "direction": {
+      "status": "complete",
+      "started_utc": "2026-10-26T10:28:27.785468+00:00",
+      "account": "acct1",
+      "attempt": "astra_6/P8/repeat_02/attempts/direction_20261026T102827_784529Z",
+      "prompt": "direction.prompt_workdir.txt",
+      "duration_ms": 1469422,
+      "wall_s": 1471.8,
+      "num_turns": 91,
+      "usage": {
+        "input_tokens": 100,
+        "cache_creation_input_tokens": 322390,
+        "cache_read_input_tokens": 9842070,
+        "output_tokens": 131935,
+        "output_tokens_details": {
+          "thinking_tokens": 94053
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 322390,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 21948,
+            "cache_read_input_tokens": 321958,
+            "cache_creation_input_tokens": 26411,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 26411
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "total_cost_usd": 7.186984100000002,
+      "session_id": "fe456061-e503-405d-b0a5-aa61bd71b47d",
+      "completed_utc": "2026-10-26T10:52:59.561949+00:00",
+      "verdict_sha256": "1fc9a64b42085b5af8a3e74862badfc42deed2b41b96d0f851ab27b28b339623"
+    },
+    "integrity": {
+      "status": "complete",
+      "started_utc": "2026-10-26T10:52:59.568255+00:00",
+      "account": "acct1",
+      "attempt": "astra_6/P8/repeat_02/attempts/integrity_20261026T105259_567959Z",
+      "prompt": "integrity.prompt_workdir.txt",
+      "duration_ms": 601587,
+      "wall_s": 603.7,
+      "num_turns": 82,
+      "usage": {
+        "input_tokens": 74,
+        "cache_creation_input_tokens": 248168,
+        "cache_read_input_tokens": 6151529,
+        "output_tokens": 65605,
+        "output_tokens_details": {
+          "thinking_tokens": 39892
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 248168,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 19147,
+            "cache_read_input_tokens": 259629,
+            "cache_creation_input_tokens": 1159,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 1159
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "total_cost_usd": 4.528389300000001,
+      "session_id": "58d2cc31-66f8-4c4e-8948-944f2752cc8d",
+      "completed_utc": "2026-10-26T11:03:03.270688+00:00",
+      "verdict_sha256": "7bd1333901fc6c4d24483130392f6906995a2bd965cb494dd09ca55c6248d883"
+    }
+  },
+  "updated_utc": "2026-10-26T11:03:03.313676+00:00",
+  "pid": 22608,
+  "account": "acct1",
+  "started_utc": "2026-10-26T10:28:27.775275+00:00",
+  "completed_utc": "2026-10-26T11:03:03.313672+00:00",
+  "gates": {
+    "G1": "pass",
+    "G2": "fail",
+    "G3": "fail"
+  },
+  "outcome": "incomplete",
+  "protected_files_unchanged": true,
+  "artifact_metadata_unchanged": true
+}

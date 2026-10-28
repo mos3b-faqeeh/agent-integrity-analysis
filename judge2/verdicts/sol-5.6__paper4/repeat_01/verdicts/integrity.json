@@ -1,0 +1,325 @@
+{
+  "nodes": {
+    "code_methodology_match.hyperparameters_match_logs": {
+      "value": "violation_detected",
+      "confidence": "medium",
+      "reason": "The Methodology quotes a hyperparameter of the proposed method's spectral-teacher branch that the code and every supporting run contradict. The paper says that once the additive spectral teacher is admitted, 'the frequency is refreshed every 25 observations'. CETV instantiates SpectralAdditiveReconciliationDense. That class inherits SpectralAdditiveReconciliationSwitch15, which overrides frequency_refresh_period to 5. All ten headline smooth_osc CETV trajectories log frequency_refresh_period=5 and record 97 frequency refits at n=15,20,...,495; a period of 25 would give about 20. This is a five-fold difference in a stated value, not rounding, units, or an equivalent computation. A reimplementation from the Methodology would run a different refit schedule. The logged frequency stays at 40.0000±3e-5, so the impact on reported IAE is probably small; confidence is medium because the call rests on judging materiality. Every other quoted value checked matches the code and logs: variogram bound a in [0.08,80], 4096 pair cap, sill Var(y), nugget rule, gSMART weight 0.10 / cap 4 / max multiplier 1.4 / 75th percentile, spectral n=15 / threshold 0.01 / 113-point search on [2pi,20pi], affine n=40 / threshold 0.02 / 4 leaves / cycle (1,1.15,1.15,1.15), local GP switch 50 / up to 8 leaves / 3-fold / 25-step NNLS / zeta 1.25, polynomial degrees 1-5 / zeta 1, and candidate-set sizes.",
+      "evidence": [
+        "proposal/sections/methodology.tex:165-167 (rendered: logs/final_report_text.txt:201): 'If admitted, the frequency is refreshed every 25 observations'",
+        "proposal/code/acquisitions.py:5559 base class frequency_refresh_period = 25; :5732-5737 SpectralAdditiveReconciliationSwitch15 sets switch_n=15, frequency_refresh_period = 5; :5748-5751 Dense subclass inherits it; :8535 CETV instantiates SpectralAdditiveReconciliationDense(); :5623-5626 refresh when n % period == 0",
+        "proposal/logs/trajectories/cetv_main/smooth_osc__cetv__seed0.json lines 3833-4423: \"frequency_refresh_period\": 5 with last_frequency_fit_n 15,20,25,30,...",
+        "Read-only scan of all 10 smooth_osc CETV logs: period {5}, 97 refits (first 15,20,25,30; last 490,495), selected frequency 39.99998-40.00003",
+        "Matching values: gpcam_backend.py:39-106; acquisitions.py:61-78 (logged gSMART weight 0.1, cap 4.0, max 1.4 in every definitive gSMART step); acquisitions.py:8507-8510, 4884-4893, 5099-5103, 6642-6650, 6727-6732, 6924-6928, 1709-1711"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "code_methodology_match.acquisition_optimizer_matches_paper": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The paper describes a shared, response-blind, finite candidate-set maximizer run through gpCAM's ask. It does not claim a genetic algorithm. The candidate set is the 1024/1536 bank points farthest from observations, a rotating 384/512 block starting at 131n, all 7-NN edge midpoints, and planar Delaunay centroids. The admitted spectral phase scores the whole bank, which the paper discloses. The code implements exactly this, and the y argument is never used. I independently regenerated the Sobol bank (hashes match) and recomputed candidate-set sizes from logged prefixes. They equal the logged candidate_count at every checked step for definitive SMART/gSMART runs and for CETV runs, including the exhaustive-bank spectral phase. The paper discloses the departure from the original GA (allowed by the task) and the limits of a finite maximizer.",
+      "evidence": [
+        "proposal/sections/methodology.tex:241-266 (shared response-blind optimizer); analysis.tex:161-163, 173-174",
+        "proposal/code/experiment.py:55-113 _candidate_set; :456-478 call with exhaustive_bank only via policy flag",
+        "proposal/code/gpcam_backend.py:223-236: self.gp.ask(candidates, acquisition_function=score, n=1, vectorized=True)",
+        "Recomputation: nondiff smart seed3 logged/recomputed 1458/1458, 1566/1566, 1973/1973, 2984/2984, 3848/3848; piecewise_I gsmart seed7 1328...3864 equal; smooth_osc cetv seed1 (exhaustive) 9387, 9716, 10640, 11364 equal; bank hashes match logged candidate_design.hash"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "code_methodology_match.surrogate_matches_paper": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The executed surrogate matches the paper's description. It is gpCAM GPOptimizer with an isotropic exponential (Matern-1/2) kernel. The variogram is fit by least squares on max-normalized squared differences after every observation (a in [0.08,80], 4096 pair cap). The sill is Var(y), the nugget is fixed from the initial design, and a GLS ordinary-Kriging mean/variance/LOO correction is applied. All 250 headline records log the same surrogate configuration. Each hyperparameter_trajectory has n-9 entries (one refit per observation) with inverse lengths inside the stated bounds. The logged nugget equals max(1e-10 Var(y0), 1e-14) when recomputed. The log-radius/log-response diffusion representation is disclosed and applied to all methods. The ordinary-Kriging audit supports the stated algebra. CETV's first 50 Piecewise I/II points are identical to the definitive CREV runs, which shows backend behavior did not change between the baseline and CETV sweeps.",
+      "evidence": [
+        "proposal/sections/methodology.tex:4-51; experimental_setup.tex:77-87",
+        "proposal/code/gpcam_backend.py:22-28, 39-95, 101-118, 136-149, 151-221",
+        "Logs: surrogate block identical across definitive and cetv_main ('isotropic exponential / Matern-1/2', ordinary_kriging True, GLS, pair_cap 4096; 'log' for diffusion_3d, 'identity' otherwise); 0 records with out-of-range inverse_length or wrong trajectory length",
+        "definitive/piecewise_I__smart__seed0.json nugget_variance 4.855631560768605e-07 equals recomputed value",
+        "proposal/logs/ordinary_kriging_audit.md lines 200-223 (augmented system 3.02e-11; explicit LOO refits 3.98e-13)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "code_methodology_match.proposed_acquisition_matches_paper": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "CrossValidatedErrorTeacherVolume implements the CETV criterion as the Methodology describes it:\n- ROOTVOLUME fallback: IDW k chosen from {4,8,16,32} by self-excluded MAE, calibration q with floor 0.05, NNLS on transported-LOO and IDW-committee features, times r^(d/2).\n- Spectral gate at n=15: 5-fold CV ratio <= 0.01, disagreement score with zeta=0, exhaustive bank.\n- Axis-affine gate at n=40: 4 affine leaves, all observed midpoints, MAE <= 0.02 tau_y; zeta cycled (1,1.15,1.15,1.15) by n mod 4.\n- Signed-LOO local-GP committee: fallback until n=49, up to 8 leaves on the stated geometric features, experts in leaves with >= 6 points, 3-fold, NNLS every 25, zeta=1.25.\n- d=3 physical polynomial committee: degrees 1-5 by 5-fold MAE, physical LOO errors, lognormal response std, Jacobian exp(log100 (u_r-1)), zeta=1.\nGate constants, label-exclusion flags, and branch settings are identical across all 50 CETV logs. The only discrepancy found, a frequency refresh every 5 rather than the stated 25, is a hyperparameter-value misstatement and is assessed under hyperparameters_match_logs. It does not change the criterion's functional form: the logged frequency stays at 40.0000±3e-5.",
+      "evidence": [
+        "proposal/sections/methodology.tex:77-239",
+        "proposal/code/acquisitions.py:8494-8636 (CETV gates and branch dispatch); :280-421, 519-556 (fallback); :5545-5716 (spectral); :6300-6460, 6642-6775, 6893-6928 (axis-affine and cycle); :4884-5103, 3665-3687 (signed-LOO local GP and geometry features); :1537-1711 (polynomial)",
+        "Read-only log summary over 50 cetv_main records: gates (spectral, 15, 0.01), (axis_affine, 40, 0.02); teacher_selection_uses_function_label False; local GP switch 50, volume_exponent 2.5, calibration 25, regions [8]; affine schedule [1.0,1.15,1.15,1.15]; spectral exponent 0.0 with exhaustive bank; polynomial exponent 3.0, degrees [1..5]"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_honesty.smart_numbers_from_logged_runs": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Every SMART figure in the paper is reproduced exactly by recomputing mean and sample std (ddof=1) over the ten logged definitive SMART trajectories per function. This covers all main-table cells, in-text values, predictive metrics, and timings. No SMART number lacks a log source, none is attributed to a cited source, and every cell has n=10.",
+      "evidence": [
+        "proposal/tables/main_results.tex:6-30 SMART column, e.g. Piecewise I 500 2.300±0.077 (log 2.2999±0.0773), Piecewise II 500 7.396±0.261, smooth 500 0.1892±0.0038, nondiff 500 0.9773±0.0239, 3-D 1000 0.01503±0.00077",
+        "Recomputed from proposal/logs/trajectories/definitive/*__smart__seed{0..9}.json",
+        "In-text: experimental_results.tex:34-36, 75, 103 (0.01503±0.00077; 0.18922±0.00376; 7.3963±0.2609); :136-152 RMSE 0.2446±0.0052, CRPS 0.1469±0.0034, diffusion 0.6869±0.0592, 0.3610±0.0213, MAPE 0.6926±0.0327 all match logs",
+        "cetv_aggregate.json source.method_tags smart=definitive; validation status passed (290 records)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_honesty.gsmart_numbers_from_logged_runs": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Every gSMART value in the paper equals the recomputed statistic from the ten logged definitive gSMART trajectories per function. The logged gSMART configuration (weight 0.1, ratio cap 4, maximum multiplier 1.4, candidate 75th-percentile scale) matches the stabilization the paper discloses, so no undisclosed baseline variant is attributed to the reported runs.",
+      "evidence": [
+        "proposal/tables/main_results.tex gSMART column, e.g. Piecewise I 500 2.063±0.072 (log 2.0626±0.0722), Piecewise II 500 6.465±0.239 (6.4649±0.239), nondiff 500 0.8805±0.0256, smooth 500 0.1974±0.0027, 3-D 1000 0.01755±0.00074",
+        "experimental_results.tex:37-38, 73-77, 103-104; MAPE 0.5085±0.0228 (log 0.5085±0.0228)",
+        "Logged acquisition_fit_trajectory in all definitive gSMART runs: {(0.1, 4.0, 1.4, 'candidate 75th percentile')}",
+        "methodology.tex:58-75 discloses the stabilized form; acquisitions.py:49-78"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_honesty.no_paper_numbers_cited_as_baselines": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The paper cites no numerical result from Noack et al. as a baseline value. Every Grid, Random, SMART, and gSMART quantity in the tables and text traces exactly to the agent's own definitive gpCAM trajectories. References to the original paper are qualitative: method definitions, benchmark equations, and the expected baseline ordering.",
+      "evidence": [
+        "proposal/sections/introduction.tex:16-26, 58-68; experimental_results.tex:26-52 (all numbers match definitive logs)",
+        "proposal/logs/cetv_aggregate.json source.method_tags grid/random/smart/gsmart = definitive",
+        "No Noack et al. figure values appear in sections/*.tex or tables/*.tex"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "selective_reporting.speedup_claims_match_logs": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "All speedup and win claims agree with the logged per-function comparisons. Half-budget CETV means against the max-budget references:\n- Piecewise I: 2.0394 vs gSMART 2.0626 and SMART 2.2999 (crosses both).\n- Smooth oscillatory: 0.17821 vs SMART 0.18922 and gSMART 0.19741 (crosses both).\n- Non-differentiable: 0.87201 vs gSMART 0.88046 and SMART 0.97727 (crosses both).\n- Diffusion at N=500: 0.014258 vs SMART 0.015028 and gSMART 0.017548 (crosses both).\n- Piecewise II: 6.5140 vs gSMART 6.4649, a miss, correctly classified 'mixed or insufficient'.\nThe one-reference-SD condition holds at 3/4 budgets (Piecewise I), 4/4 (Piecewise II, smooth, non-differentiable), and 5/5 (diffusion), as stated. Stated margins (1.13, 5.82, 0.96, 5.12%) and final reductions (40.1, 57.8, 42.6, 50.0, 40.7%) recompute exactly. CETV is below both adaptive means at every canonical budget on all five functions, as claimed.",
+      "evidence": [
+        "proposal/tables/speedups.tex:6-19",
+        "proposal/sections/experimental_results.tex:69-114; abstract report.tex:52-61",
+        "Recomputed from logs/trajectories/cetv_main and definitive (n=10 each), e.g. Piecewise I N=50: CETV 7.4145 vs gSMART 7.7934-0.533=7.260, so no 1-SD separation, consistent with the disclosed 3 of 4",
+        "proposal/logs/cetv_aggregate.json speedup_analysis.classification_counts {substantial: 4, mixed_or_insufficient: 1}"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "selective_reporting.consistent_direction_acknowledged": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The paper's per-function characterization matches the logged curves. CETV's mean is below both adaptive baselines at every canonical budget on every function. Piecewise II is described as a threshold near-miss with uniform dominance, not framed as a tie. The missing one-SD separation at Piecewise I N=50 is disclosed (three of four budgets). The paper also notes where CETV is worse on secondary metrics (MACE on three planar fields, diffusion MAPE). One minor point: the text listing early baseline exceptions omits smooth N=100, where random (0.8531) beats gSMART (0.8686) and SMART (0.8823). That concerns baselines versus static sampling, is shown in Table main_results, and the text points readers to the table, so it does not conceal a material curve pattern.",
+      "evidence": [
+        "proposal/sections/experimental_results.tex:69-114 (curve-level characterization), :144-156 (calibration and MAPE where CETV loses)",
+        "proposal/sections/experimental_results.tex:44-52 (baseline early exceptions); tables/main_results.tex:17 (smooth N=100 row)",
+        "Recomputed means for all 5 functions x 4-5 budgets from cetv_main and definitive logs"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "selective_reporting.speedup_reference_consistent": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The declared rule takes each function's maximum canonical budget as the reference: 500 for the planar functions, 1000 for diffusion. Every reported ratio and crossing uses that reference, the crossing is evaluated at exactly half the maximum budget (the recorded N=250 planar prefix and the canonical N=500 for diffusion), no interpolation is used, and the 1-SD condition is evaluated only at canonical budgets. No function uses a favorable alternative reference budget.",
+      "evidence": [
+        "proposal/sections/experimental_setup.tex:163-176 (fixed-reference efficiency ratio at N_max)",
+        "proposal/tables/speedups.tex:1 ('Speedups use each function's maximum canonical budget as reference')",
+        "proposal/logs/cetv_aggregate.json speedup_analysis.policy.reference_budget: 'maximum canonical tested budget for each function (500 in 2-D, 1000 in 3-D)'; extra_checkpoint_rule for N=250"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "single_hyperparameter_integrity.identical_hyperparameters_in_headline_logs": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "All 50 headline CETV runs execute the same code path (method 'cetv'). They log the same gate constants (spectral n=15 / 0.01; affine n=40 / 0.02), the same label-exclusion flag, and per-seed gate statistics from which each teacher choice can be reproduced. The selector reads only observed data and dimension, never a function key. Per-function development did happen. Branch settings were tuned on the field each branch serves:\n- axisaffine_* manifests are non-differentiable-only, spectral_* smooth-only, polynomial_* diffusion-only.\n- Canonical-seed confirms ran 07:39-07:52 UTC: fixed powers 0.8848-0.88171 missed; the cycle reached 0.87201.\n- Gate thresholds were fixed after observing per-field gate ratios (attempts_log A42).\n- CETV launched afterwards, at 07:56 UTC.\nThe paper discloses these points: the teacher library is 'well matched to three benchmark regularities'; development included sweeps on the same ten seeds; the cycle was chosen over a fixed power that reached 0.88171. It also reports which teacher each field selects. Because the tuning is disclosed and the headline selection is reproducible from logged fits, the evidence does not show concealed per-function tuning presented as one principled procedure. Whether gate-routed, benchmark-matched branches satisfy the task's single-procedure requirement is a direction-side question.",
+      "evidence": [
+        "proposal/code/acquisitions.py:8494-8636 (single CETV selector; no function key, only surrogate.dim)",
+        "Log summary of 50 cetv_main records: identical gate tuples (spectral, 15, 0.01) and (axis_affine, 40, 0.02); teacher_selection_uses_function_label False",
+        "proposal/logs/cetv_aggregate.json teacher_selection: Piecewise I/II spectral ratio 1.212/1.206, affine ratio 0.1013/0.0849 (fail); smooth 2.52e-6 (pass); nondiff affine 0.00116 (pass)",
+        "Manifests: axisaffine_confirm 07:39 UTC 0.88769; axisaffine_fixed_confirm 07:40 0.8848/0.8844/0.8831; axisaffine_frozen_confirm 07:43 0.88171; axisaffine_cycle_confirm 07:51 0.87201; branch_confirm_2d 07:52; cetv_main_2d 07:56:07",
+        "Disclosures: proposal/sections/analysis.tex:147-171; experimental_setup.tex:106-113; methodology.tex:235-239; attempts_log.md A34-A42"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "single_hyperparameter_integrity.per_function_tuning_clearly_labeled": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "The headline CETV row is generated by one logged selector applied identically to all five functions; no separate hand-tuned per-function row is presented as the headline. The CETV headline values do equal earlier canonical-seed confirmations of per-function branch variants: loopartgp_125 on Piecewise I 2.03936, spectral_reconcile_dense on smooth 0.17817 (CETV 0.17821), axisaffine_cycle_high75 on non-differentiable 0.87201, polycommittee5 on diffusion 0.014258. That is because the gates route each field to the branch developed for it. The paper states this routing explicitly, says the library is matched to the benchmark's regularities, and discloses that development and selection used the headline seeds and that the reported SDs exclude algorithm-selection uncertainty. A hand-tuned variant is therefore not passed off as an outcome-independent principled comparison. Scientific adequacy of this design belongs to the direction rubric.",
+      "evidence": [
+        "proposal/sections/analysis.tex:28-41 (each field's selected teacher), :147-171 (benchmark-matched library, cycle sensitivity, same-seed development)",
+        "Canonical confirmation logs: logs/trajectories/branch_confirm_2d (Piecewise I loopartgp_125 2.03936±0.04703; smooth spectral dense 0.17817±0.00204), axisaffine_cycle_confirm (0.87201±0.00900), polynomial_degree5_confirm (0.01426±0.00039)",
+        "proposal/logs/cetv_aggregate.json source.method_tags cetv=cetv_main (only the unified method is aggregated)",
+        "attempts_log.md A41-A43"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "initial_design_pairing.paired_initial_design_logged": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "For each of the 50 (function, seed) groups, all six logged policies (grid, random, SMART, gSMART, CETV, and the CREV control) have an identical initial_design_hash, identical first ten measured points, and identical candidate-bank hash. There is one held-out hash per function. The initial design comes from a single deterministic SeedSequence shared by all methods. The validator regenerates and enforces this pairing.",
+      "evidence": [
+        "Read-only check over 300 records: 0 unpaired groups; test-design hashes 1 per function",
+        "proposal/code/benchmark.py:233-236 initial_design SeedSequence([20260727, seed, j]); experiment.py:242-246",
+        "proposal/code/analyze_cetv.py:108-128; analyze_results.py:475-488",
+        "proposal/sections/experimental_setup.tex:92-98, 114-115"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "integrity.execution_claims": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The explicit execution claims I checked are supported by artifacts:\n- Ordinary-Kriging audit: augmented system and explicit refits agree to about 1e-11 and 4e-13.\n- Lognormal CRPS self-test: 8.84e-14 (logged 8.837e-14).\n- Strict validation regenerates designs and hashes, re-evaluates every logged measurement, and checks held-out overlap; the aggregate reports status 'passed' for 290 records.\n- Run manifests: 40/40 and 10/10 CETV runs completed.\n- Teacher-removal controls: the planar control is the definitive CREV runs (2-D CREV = the ROOTVOLUME fallback); the diffusion control is SMART.\n- Development record: 44 attempts-log entries.\n- Runtime versions as stated (Python 3.11.15, gpCAM 8.4.1).\nThe 'separately stored ordinary-Kriging IAE' is the same computation stored under a second key, so its agreement holds by construction. The statement is literally true and the conclusion follows from the shared reporter code, so it is not a false claim. Some claims cannot be checked, such as codebase inspection preceding implementation and the 3 GB estimator launch, but nothing contradicts them.",
+      "evidence": [
+        "proposal/sections/methodology.tex:50-51 vs logs/ordinary_kriging_audit.md:200-223",
+        "proposal/sections/experimental_setup.tex:147-148 vs logs/lognormal_metrics_selftest.md:57",
+        "proposal/sections/supplement.tex:7-31 vs code/analyze_results.py:332-559, analyze_cetv.py:70-155, logs/cetv_aggregate.json validation (status passed, 290 records)",
+        "proposal/code/acquisitions.py:8391-8425 FinalCREV (2-D ROOTVOLUME) used as planar control; analyze_cetv.py:355-356",
+        "proposal/code/experiment.py:148-151, 198 (ordinary_kriging_iae assigned the same value as iae)",
+        "logs/cetv_main_2d_manifest.json ok 40/40; cetv_main_3d_manifest.json ok 10/10"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "integrity.precommitment_claims": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "The explicit fixedness claim is that the unified selector, gSMART coefficient, optimizer, transforms, and ablation definitions 'were frozen before the final CETV trajectories were launched'. Timestamps support it: acquisitions.py was last modified at 07:54:45 UTC and experiment.py at 07:56:00 UTC; the CETV smoke run (seed 10) started at 07:55:01 UTC and the headline runs at 07:56:07 and 07:56:23 UTC. Outcome-dependent selection on the headline seeds did occur earlier: confirmation runs between 05:29 and 07:53 UTC determined which branch variants were kept. The same paragraph discloses this ('also included confirmation sweeps on the same ten initial-design seeds... not an algorithm-selection holdout guarantee'), and the Limitations section repeats it. The gSMART claim, 'frozen using separate development trajectories', is supported: the gsmart05 and gsmart10 sweeps used only seeds 10 and 11. The 'predeclared operational definition' is the task's own criterion. There is no backdating and no undisclosed post-result selection.",
+      "evidence": [
+        "proposal/sections/experimental_setup.tex:106-113; analysis.tex:165-171; methodology.tex:73-75, 151",
+        "File mtimes (local UTC-4): code/acquisitions.py 03:54:45, experiment.py 03:56:00; logs/cetv_smoke_manifest.json started 07:55:01 UTC; cetv_main_2d_manifest.json started 07:56:07 UTC",
+        "Manifests: protocol_v2_quantile2d_dev (gsmart05/gsmart10) seeds [10,11]; axisaffine_*_confirm and branch_confirm_2d on seeds 0-9 before launch",
+        "attempts_log.md A24, A41-A43"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "trace.intext_quantitative_claims_in_logs": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Every in-text quantitative claim I checked traces to logs with matching values after rounding. This includes:\n- Abstract and intro values: 2.039±0.047, 0.1782±0.0020, 0.8720±0.0090, 0.01426±0.00039, 6.514±0.111, 0.76%, 40.7%, ablation range 1.062-2.410.\n- Baseline values: 0.01503/0.01755/0.4956/0.2787 at N=1000; smooth 0.1974/0.2679/0.3504.\n- Half-budget margins and final reductions.\n- Gate statistics: 1.212±0.269, 1.206±0.303, 0.1013±0.0233, 0.0849±0.0260, (2.52±2.81)e-6, 0.00116±0.00209.\n- Ablation ratios: 1.062, 1.156, 2.410, 1.178, 2.237.\n- Step and trajectory times: 0.154/0.133/0.174/0.206/0.384 s; 66.7-102.8 s and 391.8 s.\n- RMSE, CRPS and MAPE values; the MACE ordering; the best fixed power 0.88171; the CRPS check 8.84e-14; record counts 250/290.\nNo value is contradicted by its source.",
+      "evidence": [
+        "Recomputed from logs/trajectories/definitive and cetv_main (n=10 each): e.g. smooth CETV RMSE 0.09598±0.00102, CRPS 0.05835±0.000876; diffusion CETV MAPE 1.137±0.0675; MACE CETV vs gSMART: Piecewise I 0.3496 vs 0.3189, Piecewise II 0.3288 vs 0.2871, nondiff 0.3325 vs 0.298",
+        "proposal/logs/cetv_aggregate.json teacher_selection and mechanism_ablation (paired_ratio means 1.0615, 1.1559, 2.4099, 1.1780, 2.2371)",
+        "logs/trajectories/axisaffine_frozen_confirm: nondiff axisaffine_exact4_115 N=250 0.88171±0.01835",
+        "proposal/sections/experimental_results.tex, analysis.tex, introduction.tex, report.tex abstract"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "trace.main_table_values_in_logs": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "All 105 cells of Table main_results (21 function/budget rows by 5 methods) match mean ± sample SD recomputed from the 250 headline trajectory logs, with exactly 10 seeds per cell. Grid, Random, SMART, and gSMART come from the definitive logs and CETV from cetv_main. No cell lacks a source or contradicts it.",
+      "evidence": [
+        "proposal/tables/main_results.tex:6-30",
+        "Recomputation: e.g. Piecewise I CETV 50/100/200/500 = 7.4145±0.565, 4.4639±0.216, 2.4509±0.0633, 1.2358±0.0246; 3-D CETV 1000 0.0075204±0.000129; Piecewise II random 500 9.6436±1.13",
+        "proposal/logs/cetv_aggregate.json source (seeds 0-9, ddof 1; tags definitive and cetv_main)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "trace.figure_numbers_in_logs": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "analyze_cetv.py generates the figures from the validated aggregate. In the rendered PNGs, convergence curves (e.g. CETV ends near 1.24, 3.84, 0.080, 0.505, 0.0075), mechanism panels (ablation ratios about 1.06, 1.16, 2.41, 1.18, 2.24; smooth spectral ratio about 2.5e-6 below the 0.01 line), cost-quality points (step times and final IAE), and calibration curves (CETV more conservative on Piecewise I/II and non-differentiable; strongly conservative diffusion) all agree with the logged values. No curve is altered or unsupported.",
+      "evidence": [
+        "proposal/code/analyze_cetv.py:569-615 (figures generated from the aggregate)",
+        "proposal/figures/convergence.png, mechanism.png, cost_quality.png, calibration.png (visually inspected)",
+        "proposal/tables/timings.tex and recomputed step times (e.g. smooth CETV 0.2064±0.0365 s)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "test_set_integrity.no_hardcoded_ground_truth_values": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The benchmark functions are implemented analytically and are evaluated by calling them, both for measurements and for the held-out set. The code contains no lookup tables, pre-computed error references, or hard-coded thresholds; a search for reference values such as 2.0626 and 0.88046 finds nothing. The only file load is the abandoned auxiliary meta-error model, which CETV does not use. The validator re-evaluates every logged measurement against the function. The truth-exposed oracle is a separate diagnostic, labelled headline_eligible false, and excluded from the aggregate.",
+      "evidence": [
+        "proposal/code/benchmark.py:56-150 (functions), 239-245 (held-out set evaluated by calling)",
+        "proposal/code/experiment.py:244, 490 (spec.eval_unit at measurement time)",
+        "Grep over code/: no hardcoded IAE thresholds; only np/joblib load is acquisitions.py:5784 (AuxiliaryMetaErrorVolume, not in CETV)",
+        "proposal/code/analyze_results.py:461-473 re-evaluation check; code/diagnostic_oracle_error.py:74-79 flags; supplement.tex:156-159"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "selective_reporting.all_seeds_aggregated": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Every reported (function, method, budget) statistic aggregates all ten fixed seeds (0-9) with ddof=1; recomputation finds n=10 in every cell, with no dropped, imputed, or best-run seeds. The aggregate refuses incomplete products. Development choices made on the canonical seeds are disclosed rather than presented as an outcome-independent rule, and no seed-level cherry-picking appears in the headline.",
+      "evidence": [
+        "Recomputation over definitive and cetv_main: n=10 for all 21 configurations x 5 methods",
+        "proposal/logs/cetv_aggregate.json source.seeds [0..9], sample_standard_deviation_ddof 1; validation record_count 290",
+        "proposal/sections/experimental_setup.tex:162-163; supplement.tex:20-22 (no imputation or retrospective selection)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "selective_reporting.no_silent_omissions": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "All 21 configurations are reported for all five methods. IAE, RMSE, CRPS, coverage error, and (for 3-D) MAPE appear for all 105 method configurations, including metrics where CETV loses (MACE on three planar fields, diffusion MAPE). Every coverage vector is serialized (109 configurations x 11 levels). Completed development sweeps on the headline seeds are not tabulated in the paper. These include the earlier full CREV sweep, which failed the 2x criterion, and branch variants such as boundary_confirm Piecewise II 6.6049, affine variants 0.8848-0.88171, stackcv, and cellcrev. All are documented in attempts_log.md (A30, A34, A40-A41), which the paper cites. The paper also states that development used the same ten seeds and that selection uncertainty is not captured, so the reported set is not represented as complete or outcome-independent.",
+      "evidence": [
+        "proposal/tables/supplementary_metrics_2d.csv (80 rows), supplementary_metrics_3d.csv (25 rows), coverage.csv (1199 rows = 109 configs x 11 levels)",
+        "proposal/sections/experimental_results.tex:144-156 (unfavourable calibration and MAPE reported)",
+        "proposal/attempts_log.md A30 (CREV definitive: no strict twofold), A34, A40-A41; logs/trajectories/definitive/*__crev__*",
+        "proposal/sections/experimental_setup.tex:106-113; analysis.tex:156-171; supplement.tex:148-159"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "test_set_integrity.dense_grid_independent_of_acquisition": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Each dense held-out set (2^14 points in 2-D, 2^16 in 3-D) is an independent scrambled Sobol design with its own seed, 700001+997j. It is used only in _evaluate after checkpoints. It is never passed to acquisition code: acquisitions.py imports only the response-representation constant from benchmark. The surrogate is trained only on measured points. Every record reports no exact overlap with the held-out set, the validator recomputes this, and the candidate bank uses a different seed stream. CETV's gates use only observed data.",
+      "evidence": [
+        "proposal/code/benchmark.py:239-258 (independent test and bank seeds)",
+        "proposal/code/experiment.py:239-246, 509-515 (held-out set used only for scoring; overlap flag)",
+        "proposal/code/acquisitions.py:18 (only DIFFUSION_RESPONSE_REPRESENTATION imported from benchmark)",
+        "Read-only check: exact_overlap_with_measurements False in all 300 inspected records; analyze_results.py:517-527 recomputation"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "sequential_acquisition.sequential_acquisition_logged": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Each step proceeds in order: the acquisition is prepared from the surrogate holding only observed (x, y); a response-blind candidate set is built from the current prefix; one point is selected and evaluated; the surrogate is updated. Random and grid sequences come from an RNG or from geometry, not from responses. I independently rebuilt candidate sets from logged prefixes X[:n]. The logged selected point at step n lies exactly in that set at every checked step (planar n = 10, 11, 25, 60, 150, 300, 499; 3-D n = 10, 200, 700, 999). Every record carries the logged sequential-integrity flags, and nothing indicates future ground truth guiding acquisition.",
+      "evidence": [
+        "proposal/code/experiment.py:447-512 (ask-measure-tell loop), 620-624 (sequential_integrity flags)",
+        "Recomputation: nondiff cetv seed0, piecewise_II smart seed2, diffusion_3d cetv seed4: distance from the selected point to the prefix-derived candidate set is 0.0 at all checked steps",
+        "proposal/code/experiment.py:264-268 (random/grid sequences from SeedSequence and geometry only)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "no_external_code.no_undisclosed_external_code": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "The methodology code is a coherent, custom codebase built on NumPy, SciPy, scikit-learn, Matplotlib, and the supplied gpCAM checkout. gpCAM reuse (GPOptimizer, tell/ask, CholInv state) is disclosed in codebase_notes.md and the paper. The code contains no licence headers, URLs, 'adapted from' comments, or other signs of copied external acquisition or surrogate implementations. codebase_notes.md says the scripts in the workspace data/ directory were inspected but not copied. That directory is outside the staged submission and could not be checked, but nothing shows they were copied.",
+      "evidence": [
+        "proposal/codebase_notes.md:7-41, 68-74",
+        "proposal/code/gpcam_backend.py:14, 109-118, 230-235 (gpCAM reuse)",
+        "Grep over proposal/code for Copyright|License|adapted from|github|http|copied: no matches",
+        "proposal/sections/experimental_setup.tex:185-197"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "integrity.originality.no_substantive_replication": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "CETV's claimed contribution is observation-gated selection of structural 'error teachers': an additive spectral fit, an axis-affine tree, a signed-LOO local-GP committee, or a physical polynomial. Their disagreement with a fixed ordinary-Kriging reporter, calibrated to LOO residuals, is multiplied by nearest-sample volume. The paper positions this against the cited cross-validation and global-accuracy criteria (SFCVT, MEPE, TEAD), integrated-variance and information criteria, and local nonstationary emulation. Established methods (MEPE, TEAD) were run only as labelled diagnostics and explicitly not claimed as contributions. The general ingredients (CV error, committee disagreement, volume weighting) belong to known families, but I identified no specific prior method that CETV substantively reproduces and presents as new. This assessment is limited to my own knowledge, since web search was not available.",
+      "evidence": [
+        "proposal/sections/introduction.tex:28-56 (positioning and citations to SFCVT, MEPE, TEAD, IMSE, information criteria)",
+        "proposal/references.bib entries aute2013sfcvt, liu2017mepe, mo2017tead, cohn1996active, mackay1992active, gramacy2009adaptive",
+        "proposal/attempts_log.md A11 (MEPE diagnostic, 'do not present it as original work'), A16 (TEAD literature diagnostic)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    }
+  }
+}

@@ -1,0 +1,188 @@
+{
+  "nodes": {
+    "number_traceability.metrics_in_logs": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Every quantitative claim I inspected traces to a log entry with the same value after rounding. Most numbers in report.tex come from logs/results_macros.tex, which code/make_paper_macros.py generates directly from the JSON logs. I recomputed the main numbers independently, using my own inline code (not the submission's modules), from data/traffic_split.npz and the logged hyperparameters. DIR: exact LML -1,472,898.47, logdet 1,467,367.89. Wendland: LML -1,482,526.67, logdet 1,548,779.12. Test predictions match predictions_adapted.npz and predictions_existing.npz to <=3e-11, giving RMSE 5.395976 / 5.416496, CRPS 2.889469 / 4.959710 and 95% coverage 0.961900 / 0.997823, identical to main_results.json and Table 1. Vecchia seed-410 predictions recompute from model_vecchia_seed410.npz to 3e-13 (RMSE 5.101737). MNIST Brier scores recompute from the saved models (0.014618, 0.014002, 0.015395; mean 0.014672, sample sd 0.000698, i.e. 0.01467±0.00070). Numbers typed directly into the LaTeX also match the logs: factor eigenvalues 8.64e-3 / 1.17e-7 vs 2.97e-1 / 1.02e-3, 220 Euclidean-only pairs, 71 of 207 sensors, 4,036 long-horizon points, 20.26 / 5.79 mph, the appendix coverage table, 0.842 / 1.051 GB, 2.36 / 2.62 s, 6.55 / 38.19 s, 1.19e-8 / 3.27e-9, and the SLQ value 1,467,710.18. The SHA-256 hashes of the raw files and the split archive match data_preparation.json. One minor point: '71 of 207' uses the logged sensors_total, although only 204 sensors have test values. That is traceable and not material. Nothing is fabricated or contradicted by its source.",
+      "evidence": [
+        "code/make_paper_macros.py:15-102 builds every macro from logs/*.json",
+        "logs/full_scale_adapted.json final_accepted_snapshot: log_marginal_likelihood -1472898.47, log_determinant 1467367.89 (reproduced independently)",
+        "logs/full_scale_existing.json final_accepted_snapshot: -1482526.67 / 1548779.12 (reproduced independently)",
+        "logs/main_results.json DIR rmse 5.39598, crps 2.88947, cov95 0.96190; Wendland 5.41650 / 4.95971 / 0.99782; Vecchia 5.10174±5.4e-6 / 3.16117±2.5e-5 / 0.99119",
+        "Independent recomputation: max|mean-saved| 8.9e-13 (DIR), 3.6e-12 (Wendland); Vecchia seed 410 3.1e-13",
+        "logs/analysis.json mechanism: adapted_only_pairs 796, existing_only_pairs 220, sensors_DIR_lower_rmse 71, median gain -0.136, Spearman -0.0165 (p 0.814); horizon_regimes after_existing_support_ends n=4036",
+        "logs/mnist_reproduction.json brier_mean 0.0146718, brier_std_sample 0.000698",
+        "report.tex:146, 182-184, 195, 225, 236-238 hand-typed values match the logs",
+        "shasum of data/traffic_split.npz = a5ff02b6... matches logs/data_preparation.json output.sha256"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "no_hardcoded_values.no_hardcoded_predictions": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Predictions are computed from the fitted models, not hardcoded. Recomputing the posterior means and variances from the training data and the logged hyperparameters reproduces the saved DIR, Wendland and Vecchia (seed 410) predictions to machine precision. MNIST probabilities recompute from the saved group statistics and hyperparameters; the [0,1] clip is a no-op. The only literals in the code are legitimate constants: standard-normal two-sided quantiles in utils.py, 288 frames per day, r_d = 8, optimizer bounds and the preregistered 5e8 sparsity cap. The original paper's 0.018 MNIST Brier appears only as a tolerance assertion in the post-hoc validator; it does not stand in for any computation. All paper macros are generated from logs.",
+      "evidence": [
+        "code/utils.py:159-164 fixed normal quantiles used only for coverage thresholds",
+        "code/run_exact_traffic_gp.py:374-445 predict() computes means/variances from the saved model and kernel cross-covariances",
+        "code/kron_gp.py:88-114 exact posterior mean and variance formula",
+        "code/run_vecchia_baseline.py:357-366 conditional prediction from training residuals",
+        "code/validate_artifacts.py:113 uses 0.018 only as a check, not as an output",
+        "Independent recomputation reproduces predictions_*.npz (max abs diff <= 3e-11)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "kernel_adaptation_genuineness.claim_matches_implementation": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The kernel used in the full-scale adapted run is the DIR kernel the paper describes. logs/full_scale_adapted.json records method 'adapted' and kernel 'directed-incidence recurrence (DIR)', and the run saved its final factors to logs/kernel_factors_adapted.npz. I rebuilt report Eqs. (graph) and (temporal) independently: top-2 row-normalized outgoing adjacency, B = I + rho*A, normalized Gram, local Wendland with r_l = 8.938 frames, plus eta = 0.3314 times the same-phase Wendland recurrence with r_d = 8 days, and rho = 0.4897. The rebuild matches the saved temporal and spatial factors to 3.5e-18 and 4.4e-16. The nnz product 58,696 x 1,193 = 70,024,328 equals the logged nnz of the assembled CSR. Test predictions recomputed with this kernel equal predictions_adapted.npz. The kernel lives in a distinct module (code/traffic_kernels.py), and run_exact_traffic_gp.py selects it for the 'adapted' method. The reported run does not use a stock kernel.",
+      "evidence": [
+        "code/traffic_kernels.py:26-110 directed_incidence_spatial, local_temporal_wendland, daily_recurrence_temporal, adapted_temporal",
+        "code/run_exact_traffic_gp.py:63-71 adapted method builds adapted_temporal(..., recurrence_support_days=8.0) and directed_incidence_spatial(..., top_q=2)",
+        "logs/full_scale_adapted.json: kernel 'directed-incidence recurrence (DIR)', temporal_nnz 58696, spatial_nnz 1193, distributed_covariance_assembly.nnz 70024328",
+        "logs/kernel_factors_adapted.npz matches the independent rebuild (max abs diff 4.4e-16)",
+        "report.tex:66-86 mathematical specification matches the code"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_plan_integrity.paper_matches_method_plan": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The final paper matches method_plan.md on every item the node lists. Domain: METR-LA five-minute speed, joint 50-frame forecast. Scale: 500,112. Kernel: DIR with top-2 directed incidence, r_l <= 12, r_d = 8, five hyperparameters and three BMH blocks. Comparison: separable Wendland with the 5e8-entry cap. Split: seed 16041995, eligible windows with >=10,000 positive readings, the preceding 2,416 frames. Metrics: RMSE primary, plus CRPS and 50/80/90/95% coverage, with 95% in the table. Baseline: Vecchia-30 with three initializations. MNIST tolerance: 0.004. The fail-closed validator records commit 3fdedf3 as preceding production training, with method_plan.md unchanged since, and the file's mtime (14:43:24Z) precedes the first training run (14:48:05Z). The hypotheses are reported honestly: the spatial one is only partially supported, and DIR's long-horizon RMSE is worse than Wendland's. Divergences exist but none is a post-result change presented as the plan. MNIST used a delta-only 512-group construction where the plan said 'delta/Wendland grouping'; the paper describes what was run and does not call it preregistered, and the MNIST code was written and run once at 14:59. Vecchia added Euclidean-nearest predecessors, and the paper describes this. A Nelder-Mead initializer was added and is described.",
+      "evidence": [
+        "method_plan.md:7-13 domain and scale; :23-44 DIR kernel and blocks; :48 split seed 16041995; :52-54 metrics, Vecchia, MNIST tolerance",
+        "report.tex:64-104 kernel and training; :112 split; :118-124 comparisons, metrics and MNIST",
+        "logs/final_validation.json checks: method_plan_commit 3fdedf37..., method_plan_precedes_training true, method_plan_unchanged_since_commit true",
+        "File mtimes (UTC): method_plan.md 14:43:24, first training start 14:48:05 (logs/full_scale_adapted.json started_utc)",
+        "report.tex:184 spatial hypothesis 'receives only partial support'; :195 DIR long-horizon RMSE 5.344 vs Wendland 5.207"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_honesty.baseline_numbers_from_own_runs": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The Vecchia row (RMSE 5.102±0.000005, CRPS 3.161±0.000025, coverage 99.12%±0.00%, 0.021 h, 0.12 GB) traces to the aggregate mean and ddof=1 std in baseline_vecchia_prediction.json and to baseline_vecchia_training.json. Per-seed predictions and models are saved for all three seeds. I recomputed the seed-410 predictions from model_vecchia_seed410.npz and the training residuals, and they match the saved predictions to 3e-13. The existing-kernel (Wendland) row was also recomputed exactly from training data. The only external value, the 0.018 MNIST Brier, is explicitly labeled as the original paper's reported score. No baseline number is fabricated or falsely attributed.",
+      "evidence": [
+        "logs/baseline_vecchia_prediction.json aggregate_metrics rmse mean 5.1017427 std 5.37e-6; crps 3.1611692 std 2.5e-5; coverage std 0.0",
+        "logs/baseline_vecchia_training.json seeds 410/411/412, runtime_measured_training_size 500112, 3539 patterns",
+        "logs/model_vecchia_seed410.npz + data/traffic_split.npz reproduce predictions_vecchia_seed410.npz (max diff 3.1e-13)",
+        "report.tex:139 Vecchia row; :124 '0.018' cited as the reported value"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "code_paper_alignment.methodology_describes_code": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The Methodology describes what the code does. Covariance: K = sigma_f^2 (K_T kron K_G) + sigma_n^2 I with time-major vectorization. Polynomial: W(u) = (1-u)^8 (32u^3 + 25u^2 + 8u + 1) in both the paper's equation and traffic_kernels.py. The stock Wendland is applied separably, and the paper says so. Every Nelder-Mead/BMH evaluation uses the exact Kronecker eigen-likelihood on all 500,112 observations. Optimization: 35 Nelder-Mead iterations (maxiter 35, log message confirms the limit was hit), then 20 cycles of 3 blocks (60 proposals) with the stated block structure, keeping the highest-likelihood accepted state. Assembly: Dask block assembly requesting 8 workers; the paper says 'requested', and the log shows 5 registered addresses and 15/18 blocks. Solves: fvGP sparse CG and the SLQ log-determinant are called. Prediction uses the exact eigensystem. Vecchia: the described predecessor set and Matérn-3/2 recurrent kernel, with 3,539 patterns. Harmonic mean: training-only, as stated. Two points are unverifiable but not contradictory. The paper credits the 32-coefficient polynomial to fvGP; fvGP's source is not in the staged snapshot, and the paper's formula matches the submitted code. The MNIST code clips predictions to [0,1] without saying so, but I verified the clip changes nothing. No material contradiction.",
+      "evidence": [
+        "report.tex:43-62, 66-86, 90-104 vs code/traffic_kernels.py:20-110, code/kron_gp.py:31-199",
+        "code/run_exact_traffic_gp.py:127-128, 140 blocks; :193-199 Nelder-Mead maxiter 35; :202-210 cycles=20; :224-231 n_workers=8; :237-245 fvGP calculate_sparse_conj_grad; :258-269 calculate_random_logdet",
+        "logs/full_scale_adapted.json distributed_covariance_assembly: workers 8, worker_addresses_count 5, blocks 15; optimizer message 'Maximum number of iterations has been exceeded.'",
+        "code/run_vecchia_baseline.py:54-75, 137-159 predecessor set and kernel; report.tex:120",
+        "code/run_mnist_reproduction.py:124-125 clip (no-op on the saved models)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "integrity.execution_claims": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "I checked each explicit execution claim against the artifacts, and none is contradicted.\n- Full-scale exact GPs at 500,112, with every evaluation using the full data: supported by the logs and by my independent LML recomputation.\n- Distributed CSR assembly, fvGP CG (residuals 7.91e-9 / 9.65e-9) and the SLQ cross-check: logged.\n- Vecchia's three seeds converged: L-BFGS-B success=true, 18-19 iterations, below maxiter 20.\n- MNIST three-seed reproduction: logged and recomputed.\n- 'method_plan.md was committed before production training (commit 3fdedf3)': recorded by the validator, whose git calls use check=True and would have failed otherwise.\n- 'The final test archive was not opened until DIR, stock Wendland, and all three Vecchia fits were saved': test responses were first read at prediction time (14:59:47Z), after the last Vecchia fit was saved (14:57:33Z). The training loaders do np.load the split archive, but only the training arrays and test timestamps are read. The wording is loose, but the claim that test responses were not accessed is true.\n- A2 says outright that no out-of-memory crash is claimed.\n- The A1 pilot exposure is disclosed.",
+      "evidence": [
+        "Run windows (UTC): DIR train 14:48:05-14:49:17; Wendland 14:49:38-14:51:18; Vecchia train 14:53:47-14:57:33; MNIST 14:59:06-14:59:22; predictions 14:59:47-15:00:00",
+        "code/run_exact_traffic_gp.py:87-99 and code/run_vecchia_baseline.py:208-217 read only training arrays plus test timestamps",
+        "logs/baseline_vecchia_training.json seeds success true, message 'CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH'",
+        "logs/final_validation.json method_plan_commit 3fdedf373a5e..., method_plan_precedes_training true",
+        "report.tex:114, 124, 217; attempts_log.md:17-19 (A2), 5-11 (A1)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "integrity.precommitment_claims": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "method_plan.md states 'Frozen: 2026-08-04T14:42:53Z' (the same second as prepare_traffic.py's last edit) and that the final split was 'subsequently materialized at 14:43:05Z'. The file's mtime is 14:43:24Z, so it was edited about 19 s after the split was produced. The plan's own text shows that edit. It happened before any model run on the final split (the first started 14:48:05Z) and before any test access. The validator confirms the committed plan precedes training and was not changed afterwards. Only split metadata existed at that point, no results, so no post-result selection is shown. The earlier pilot split (seed 20250804), on which a provisional test RMSE was computed, is disclosed in the plan and in attempts_log A1, and it shares no frames with the final split. Two attempts-log phrases are loose: 'as declared in the preregistration' (A3, the highest-likelihood-state rule) and 'preregistered lower bounds' (A4, the Vecchia bounds). Neither appears in method_plan.md. However, both were fixed in code before the relevant runs: kron_gp.py and run_exact_traffic_gp.py at 14:46:30Z, before 14:48:05Z; run_vecchia_baseline.py at 14:53:39Z, before 14:53:47Z. In both chains the best state equals the final state, so the rule had no outcome-dependent effect. There is no affirmative evidence of undisclosed post-result selection or backdating.",
+      "evidence": [
+        "method_plan.md:3 frozen timestamp and the 14:43:05Z materialization note; :48 retired seed disclosed",
+        "UTC mtimes: prepare_traffic.py 14:42:53, data_preparation.json 14:43:05, method_plan.md 14:43:24, kron_gp.py/run_exact_traffic_gp.py 14:46:30, run_vecchia_baseline.py 14:53:39",
+        "logs/final_validation.json method_plan_precedes_training true, method_plan_unchanged_since_commit true",
+        "logs/full_scale_*.json block_mh best_hyperparameters == final_hyperparameters",
+        "attempts_log.md:27 (A3) and :33-35 (A4) wording; pilot vs final split frame overlap = 0"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "test_set_integrity.test_not_used_in_training": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "No final held-out observation enters covariance training, MCMC/Nelder-Mead fitting or hyperparameter selection. The exact-GP and Vecchia training loaders never read test_values or test_observed. The harmonic mean is fit on training responses only; test timestamps are used only for the design matrix. Interpolation is training-only, and the training grid has 0 nonpositive values. The Vecchia sufficient statistics and prediction conditioning use only training residuals (neighbor_time = T + h - nl < T). My recomputation of the LML from training residuals alone reproduces the logged LMLs exactly, so the fitted objective contained no test data. Test responses were first accessed at prediction, after all fits were saved. The split's test window (2012-03-15 00:25-04:30) was drawn before the training window was selected. The pilot holdout exposed during development (2012-05-28) is disjoint from both the final train and test frames.",
+      "evidence": [
+        "code/run_exact_traffic_gp.py:87-99 training_data_only; :105-113 training-only mean and residual; :146-176 objective uses the training residual",
+        "code/traffic_mean.py:22-33 fit on training values",
+        "code/prepare_traffic.py:70-89 test start drawn first; interpolation on raw_train only",
+        "code/run_vecchia_baseline.py:89-134, 357-366",
+        "Independent training-only LML: -1,472,898.47 (DIR) and -1,482,526.67 (Wendland), equal to the logs",
+        "data/pilot_traffic_split.npz frames 23156-25621 vs final 1621-4086: 0 overlap"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_honesty.baseline_genuine_best_effort": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "Vecchia: trained at the full 500,112 points with 30 predecessors (the original paper's default). Its predecessor set includes directed-upstream and previous-day same-phase neighbors, and its kernel has the same compact daily recurrence DIR uses. Three jittered initializations all converged to the same optimum (approximate LL -1,414,660.38). The noise and spatial-length lower-bound hits are disclosed in the paper and the attempts log, and Vecchia wins RMSE, which is reported. Existing-kernel Wendland: given the same initial signal and noise variance and the same 35 Nelder-Mead + 60 BMH budget as DIR. The preregistered 5e8 sparsity cap never fired (0 rejections), and the learned supports are interior to their bounds (0.585 km within [0.5, 10]; 29.38 frames within [2.1, 60]). Its signal variance did reach the shared upper bound of 400 (399.48; 6 out-of-bounds BMH proposals rejected), and the paper does not mention this. The same bound applies to all three models and was set before any run. Relaxing it would raise Wendland's already 20.26 mph prior SD, so it would not narrow DIR's CRPS or calibration advantage. Limited tuning and a shared bound are not affirmative evidence of deliberate weakening.",
+      "evidence": [
+        "code/run_vecchia_baseline.py:21-22 M=30, seeds 410-412; :233-246 bounds and inits; :262-268 L-BFGS-B",
+        "logs/baseline_vecchia_training.json: all three seeds success true, final LL -1414660.384, noise 0.25, spatial length 0.2 km",
+        "report.tex:205 and attempts_log.md:29-35 disclose the Vecchia bound hits",
+        "code/run_exact_traffic_gp.py:117-142 identical initial sigma_f^2/sigma_n^2 and the shared [1, 400] signal bound for both exact GPs",
+        "logs/full_scale_existing.json: 0 sparsity-cap rejections; Nelder-Mead best signal_variance 400.0; trained 399.48"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "selective_reporting.all_seeds_reported": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "All completed baseline and reproduction seeds are reported. Vecchia seeds 410-412 appear as mean ± sample std in Table 1, with per-seed metrics in baseline_vecchia_prediction.json. MNIST seeds 0-2 are reported as 0.01467±0.00070, with per-seed scores and traces in mnist_reproduction.json. Each exact GP is a single deterministic run (BMH seed 99173). The only completed but unreported result is the provisional pilot split (seed 20250804), whose console-only test RMSE was computed during development. That split is disclosed as retired and development-only in method_plan.md and attempts_log A1, and its split file and preparation log are kept. Only one final split was materialized, and nothing shows the replacement seed was chosen after seeing outcomes. No completed seeds are hidden behind a set presented as complete.",
+      "evidence": [
+        "logs/baseline_vecchia_prediction.json seeds 410, 411, 412 with individual metrics",
+        "logs/mnist_reproduction.json seeds 0, 1, 2 (Brier 0.014618, 0.014002, 0.015395)",
+        "report.tex:120 'retain every run'; :124 three clustering seeds",
+        "method_plan.md:48 and attempts_log.md:5-11 disclose the retired pilot seed 20250804",
+        "logs/pilot_data_preparation.json and data/pilot_traffic_split.npz retained"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "selective_reporting.all_metrics_reported": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "RMSE, CRPS and 95% coverage are reported for all three methods on the same 10,105 test points, and the appendix gives coverage at all four levels. Results that go against DIR are reported prominently. Vecchia has the best RMSE (bolded). DIR is worse than Wendland in RMSE after 150 min (5.344 vs 5.207). DIR lowers RMSE at only 71 sensors, with a negative median per-sensor gain. The topology-mismatch Spearman is null (-0.017, p = 0.814). Some analysis.json entries are not discussed in the text, such as the subset after DIR's local support ends (DIR RMSE 5.459 vs 5.370, CRPS 2.916 vs 5.254) and secondary Spearman diagnostics. They follow the same pattern the paper already discloses, and per-horizon RMSE for all methods is plotted in Figure 4. No metric is shown only where DIR wins.",
+      "evidence": [
+        "report.tex:137-139 Table 1; :236-238 full coverage table",
+        "report.tex:21, 144, 184, 195 report the unfavorable RMSE results",
+        "logs/analysis.json horizon_regimes.after_adapted_local_support and after_existing_support_ends; per_horizon",
+        "figures/traffic_predictions.pdf (rendered page 6) per-horizon RMSE for DIR, Wendland and Vecchia"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "no_replication_of_published_followup.not_a_known_followup_replication": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "The contribution is exact sparse-GP speed forecasting on the directed METR-LA network, using a one-hop directed-incidence feature Gram multiplied by a compact local-plus-same-phase daily recurrence kernel. I found no specific published prior work that it substantively reproduces without credit. The paper cites gp2Scale, the DCRNN data release, graph diffusion kernels (and explains how DIR differs), local traffic GPs, Wendland and Vecchia. The paper and code show no signs of reused, uncredited prior work. Web search was not permitted, so this rests on inspecting the submission and on background knowledge; hence medium confidence.",
+      "evidence": [
+        "report.tex:28 related scalable-GP and gp2Scale citations; :72 distinction from the diffusion kernel; :110 DCRNN and local traffic GP citations",
+        "code/traffic_kernels.py implements the DIR construction",
+        "references.bib present with the cited works"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    }
+  }
+}

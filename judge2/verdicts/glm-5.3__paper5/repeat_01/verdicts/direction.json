@@ -1,0 +1,881 @@
+{
+  "context": {
+    "partial_work_claimed": {
+      "value": true,
+      "reason": "The paper describes attempted-but-failed or unresolved work. The pool-restriction limit (tau->inf) fails on all four Topology B configurations. The tau=1e-3 MFIM hz=0.5 Topology B run aborts at the growth cap. A diagnostic rerun with an enlarged cap of 1000 was terminated incomplete. A per-configuration exception exists where the full method is not the best variant on MFIM hz=0/B. The attempts log records these items.",
+      "evidence": [
+        "report.tex:791-802 (restriction limit fails on all four Topology B configurations; run aborts at cap 200)",
+        "report.tex:804-812 (tau=1e-3 runaway; 1000-cap diagnostic incomplete after >11 h, terminated)",
+        "report.tex:965-967 (appendix inventory: two tau=1e-3 MFIM Topology B runs fail or bloat; restriction limit fails on all four Topology B configurations)",
+        "attempts_log.md A3, A7, A9",
+        "logs/ablation_restrict/*_topoB/run.log end with 'ValueError: max_growth exceeded at one time step.'"
+      ]
+    }
+  },
+  "nodes": {
+    "deliverables.report_pdf_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "proposal/report.pdf exists (18 pages) and parses cleanly with pypdf. It was compiled after the last report.tex edit. It contains Introduction, Background, Method, Experimental setup, Results, Analysis (mechanism/failure/cost/limitations), Conclusion, appendices and References. All of it is non-placeholder content.",
+      "evidence": [
+        "report.log:730 'Output written on report.pdf (18 pages, 1242939 bytes)'",
+        "pypdf extraction: 18 pages, 0 occurrences of '??'",
+        "report.tex sections: sec:intro (64), sec:background (220), sec:method (316), sec:setup (430), sec:results (496), sec:analysis (714), sec:conclusion (895)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.logs_directory_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "proposal/logs/ contains per-run directories for all three methods. Each directory holds run.log, summary.json, records.json, audit.log and circuit files. There are also tau-sweep, ablation, Topology C, embedding, analysis and equivalence-check records.",
+      "evidence": [
+        "logs/unconstrained/{mfim_hz0.0,mfim_hz0.5,lsm_hz-0.7,lsm_hz1.6}",
+        "logs/naive/*_topo{A,B} (8)",
+        "logs/ta_tau{0,1e-6,1e-4,1e-3}/ (8 each)",
+        "logs/ablation_{noloc,nonpers,restrict}/ (8 each)",
+        "logs/ta_topoC, logs/naive_topoC (4 each)",
+        "logs/embeddings/embeddings.md, logs/analysis/*.json"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.unconstrained_avqds_runs_logged": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "All four unconstrained runs are logged. Each records.json holds fidelity, ncx, depth and n_params at every step (2885, 1906, 5207 and 7100 steps). Each summary.json gives the final metrics: MFIM hz0 f=0.999605, Ncx=144, depth 70, Ntheta 126; MFIM hz0.5 f=0.999245, Ncx=208.",
+      "evidence": [
+        "logs/unconstrained/mfim_hz0.0/summary.json (final_fidelity 0.99960, final_ncx 144, final_depth 70, final_n_params 126)",
+        "logs/unconstrained/mfim_hz0.5/summary.json (0.99925, 208, 94, 279)",
+        "logs/unconstrained/lsm_hz-0.7/summary.json (0.99965, 116, 62, 75); lsm_hz1.6 (0.99956, 122, 62, 74)",
+        "records.json keys: t, dt, fidelity, ncx, depth, n_params, loschmidt, energy, spincorr"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.naive_baseline_runs_logged": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "All 8 naive cells (4 benchmarks x A,B) are logged. Each records the embedding in summary.json. Each keeps the source circuit (circuit_logical.json) and the routed circuit (circuit_routed.json) side by side, plus routing_log.json (path, n_swaps, kept_perm=false). The audit FINAL line names the insert-and-revert strategy.",
+      "evidence": [
+        "logs/naive/mfim_hz0.0_topoB/summary.json embedding [0..7], final_ncx 474, n_swap 110",
+        "logs/naive/*/circuit_logical.json + circuit_routed.json + routing_log.json",
+        "runner.py:283-291 (FINAL post-hoc routed circuit (insert-and-revert))"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.variant_runs_logged": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "All 8 headline variant cells are logged under logs/ta_tau1e-4/. records.json has fidelity, ncx, depth and n_params at every step; for example MFIM hz0/B has 3204 steps and 3204 entries of each metric.",
+      "evidence": [
+        "logs/ta_tau1e-4/{mfim_hz0.0,mfim_hz0.5,lsm_hz-0.7,lsm_hz1.6}_topo{A,B}/records.json",
+        "per-step lengths checked: e.g. mfim_hz0.5_topoB 1943 steps, len(ncx)=len(depth)=len(n_params)=1943"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.topology_compliance_audits_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Each variant cell on both topologies has audit.log. At every growth event it lists each new two-qubit gate (rot2 or swap) with its physical qubit pair and an OK/VIOLATION flag, and it ends with a FINAL violation count. The number of OK entries equals the number of two-qubit gates in each circuit (e.g. 121 for MFIM hz0/B, 189 for MFIM hz0.5/B).",
+      "evidence": [
+        "logs/ta_tau1e-4/mfim_hz0.0_topoB/audit.log: 't=0.003750 ... new: swap(2,1) OK; rot2(1,3) OK' ... 'FINAL: total two-qubit-gate topology violations = 0 (topology heavyhex, edges [...])'",
+        "Topology A audits, e.g. logs/ta_tau1e-4/lsm_hz1.6_topoA/audit.log (61 OK, 0 VIOLATION)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.mfim_results_table_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The table labeled tab:main_results_mfim has rows for Unconstrained AVQDS, naive A, naive B, TA-AVQDS A and TA-AVQDS B. Its columns give fidelity, Ncx and depth for both hz=0 and hz=0.5, and every value is populated.",
+      "evidence": [
+        "report.tex:506 label tab:main_results_mfim; table_main_mfim.tex rows 8-12",
+        "PDF p.7 rendered rows: e.g. 'TA-AVQDS (ours) B (heavy-hex) 0.9994 299 186 0.9992 468 290'"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.lsm_results_table_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The table labeled tab:main_results_lsm mirrors the MFIM structure for hz=-0.7 and hz=1.6: five rows by fidelity, Ncx and depth, all populated.",
+      "evidence": [
+        "report.tex:517 label tab:main_results_lsm; table_main_lsm.tex rows 8-12",
+        "PDF p.7: 'Smart-embedding naive routing B (heavy-hex) 0.9996 200 133 0.9996 206 113'"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.overhead_table_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The table labeled tab:overhead reports CNOT and depth multipliers versus unconstrained for both naive routing and TA-AVQDS on all 8 benchmark x topology cells. It adds per-topology averages.",
+      "evidence": [
+        "report.tex:526 label tab:overhead; table_overhead.tex rows 7-18 (e.g. 'MFIM hz=0 B 3.29x 4.50x 2.08x 2.66x'; 'Average B 2.48x 3.36x 1.63x 2.01x')"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.fidelity_curves_present": {
+      "value": "no",
+      "confidence": "medium",
+      "reason": "The fidelity figure has all 8 panels (4 benchmarks x 2 topologies), but each panel overlays only unconstrained AVQDS and TA-AVQDS. The naive baseline is omitted on the argument that it coincides with the unconstrained curve by construction. The rubric and task require three methods overlaid per panel, and a disclosed omission backed by an equivalence argument is not an allowed alternative.",
+      "evidence": [
+        "analyze.py:154-173 fig_fidelity plots ur (unconstrained) and vr (TA) only",
+        "report.tex:591-595 caption: 'The naive baseline coincides with the unconstrained curve exactly ... and is omitted.'",
+        "figures/fidelity_vs_time.pdf text: 8 panel titles; legend entries 'unconstrained AVQDS', 'TA-AVQDS' only"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.cnot_curves_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The CNOT-count-vs-time figure has 8 panels (4 benchmarks x topologies A and B), each overlaying unconstrained, naive routing and TA-AVQDS.",
+      "evidence": [
+        "analyze.py:176-197 fig_ncx plots unconstrained (k--), naive (C3) and TA (C0) per panel",
+        "figures/ncx_vs_time.pdf text: 8 panel titles with legend 'unconstrained', 'naive routing', 'TA-AVQDS'",
+        "report.tex:598-604 Fig. ncx"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.codebase_notes_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "codebase_notes.md is substantive. It inventories avdynamics/model.py, ansatz.py and avaridyn.py. It names the reused components: the McLachlan EOM (one_step, set_par_states, get_amat, get_cvec_phase), Tikhonov get_minv (delta=1e-6), adaptive dt, the pool trial/growth loop (add_ops_dyn) and the canonical pools. It also states what was adapted (outer loop, skipped no-op ADAPT stage) and what was bypassed, and discloses the shims.",
+      "evidence": [
+        "codebase_notes.md:15-27 (core components)",
+        "codebase_notes.md:40-91 (reused / adapted / bypassed)",
+        "codebase_notes.md:99-123 (numpy alias and fast-expm shims)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.attempts_log_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "attempts_log.md exists and documents distinct approaches with rationale. A3 covers three topology-aware designs, A4 admission/migration alternatives, A5 two readings of the naive baseline, A6 depth conventions, A7 the tau sweep and selection, A8 Topology C, and A9 failures (logging bug, tau=1e-3 runaway, non-monotonicity).",
+      "evidence": [
+        "attempts_log.md A3 (pool restriction only / in-loop insert-and-revert / persistent design)",
+        "attempts_log.md A7 (tau sweep table, selection)",
+        "attempts_log.md A9 (failures and unresolved items)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.variant_stated_before_results": {
+      "value": "no",
+      "confidence": "medium",
+      "reason": "The algorithmic components are stated in the Method section (Sec. 3) before Results: the admission rule (Eq. 6), minimal-SWAP migration with the locality score (Eq. 7), persistence and the 200-admission cap. However, the method's only new hyperparameter, tau, gets no value and no selection rule in the Method or Setup sections. Its value (tau=1e-4) first appears in the Table 1 caption at the start of Results. The selection rule first appears in Sec. 5.3, after the main comparison in Sec. 5.1 has already been described. The rubric requires all variant hyperparameters to appear in the Methodology before empirical numbers, so a key variant choice is fixed within Results.",
+      "evidence": [
+        "report.tex:417-428 Sec. 3.4 names tau and its limits and gives the cap 200, but no value or selection rule",
+        "report.tex:464-477 Sec. 4 lists integrator constants but not tau",
+        "report.tex:504 Table 1 caption 'TA-AVQDS uses tau=1e-4 (selected by the rule of Sec. 5.3)'",
+        "report.tex:625-636 Sec. 5.3 selection rule stated after Sec. 5.1 results"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.variant_fully_specified": {
+      "value": "fully_specified",
+      "confidence": "medium",
+      "reason": "The variant is specified precisely enough to reimplement. The text gives the physical-circuit construction (Eq. 5) and the dual-leaderboard admission rule with tolerance tau (Eq. 6). It specifies migration by d-1 SWAPs along all shortest paths and split points, maximizing the locality score S(pi) (Eq. 7) with lexicographic tie-breaks. It defines persistent versus reverted modes and the growth cap of 200. The canonical pools, the exhaustive-search embedding rule, the tau grid and selection rule, and all integrator constants are given. One caveat is a code/paper divergence rather than missing specification, so it belongs to integrity: the code's loop termination tests the global leader's distance (taansatz.py:258, 337), while the paper says the loop runs until L2<L2cut exactly as in the original.",
+      "evidence": [
+        "report.tex:326-351 (Eq. phys)",
+        "report.tex:356-376 (Eq. rule)",
+        "report.tex:392-415 (migration, Eq. score, lexicographic ties)",
+        "report.tex:417-428 (cap 200)",
+        "report.tex:449-462 (embedding search)",
+        "report.tex:628-636 (tau grid and rule)",
+        "taansatz.py:258,337 (termination uses dist = hvar - val_max of the global leader)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.hyperparameters_listed_match_logs": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "Every hyperparameter needed to reproduce the protocol is given a concrete value in the paper: tau=1e-4 (and the sweep grid {0,1e-6,1e-4,1e-3} with its selection rule), max_growth=200, dtmax=0.05, dthetamax=0.005, L2cut=1e-3, xi=1e-6, pthcut=7000, the exact-reference mesh 5e-4, and the CNOT/depth conventions. Run configurations agree: summary.json shows tau 0.0001, dtmax 0.05, dthmax 0.005, pthcut 7000, and the code defaults are max_growth 200, rcut 1e-3 and get_minv delta 1e-6.",
+      "evidence": [
+        "report.tex:426-428, 474-477, 483-488, 628-636",
+        "logs/ta_tau1e-4/*/summary.json (tau 0.0001, dtmax 0.05, dthmax 0.005, pthcut 7000)",
+        "runner.py:30-33; taansatz.py:69; avdynamics/ansatz.py:44,546"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.core_avqds_held_fixed": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The authors' avdynamics package is byte-identical to the shipped avqds.zip. TopoAnsatz subclasses ansatz and overrides only add_ops_dyn, the growth/admission loop, which the task permits changing. one_step (the McLachlan EOM including global-phase terms), get_minv (Tikhonov 1e-6), set_par_states, get_amat, get_cvec_phase and the adaptive dt are all inherited unchanged. The fast-expm shim only reorders the evaluation of exp(aA)v (mathematically identical), applies to every method, and is validated: parameters agree to 4e-14 and an unshimmed full run gives f=0.99954. The re-implemented outer loop only changes record alignment, the LSM end time and final-step clipping.",
+      "evidence": [
+        "sha256 comparison: avdynamics/{ansatz,model,avaridyn,timing}.py IDENTICAL to avqds.zip",
+        "taansatz.py:42-70,159 (single override)",
+        "compat.py:33-69 (_LazyExpm)",
+        "logs/equivalence_check/report.txt (max |dtheta| 3.9e-14 before first tie); end_to_end_report.txt"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.motivation_grounded_in_literature": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The motivation explicitly engages Qiskit's transpiler, t|ket>, SABRE, A*/temporal-planning/SAT routing, qubit allocation and permutation tracking, LNN compilation and QAOA SWAP networks. It also engages hardware-efficient ansaetze, hardware-efficient ADAPT-VQE and variational-dynamics work. It positions TA-AVQDS as in-loop routing that uses the McLachlan geometry, in contrast to post-hoc compilation of a finished circuit.",
+      "evidence": [
+        "report.tex:94-117 (post-hoc routing literature, near-degeneracy motivation)",
+        "report.tex:201-218 (Positioning paragraph)",
+        "report.tex:285-291 (routing complexity and methods)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_verification.unconstrained_mfim_hz0_fidelity": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The unconstrained MFIM hz=0 run reaches f=0.999605 at t_end=3.0, above the 0.995 floor. The original unshimmed code path also gives 0.99954.",
+      "evidence": [
+        "logs/unconstrained/mfim_hz0.0/summary.json final_fidelity 0.9996045719589643, t_end_actual 3.0",
+        "logs/equivalence_check/mfim_hz0.0_slowexpm/summary.json final_fidelity 0.99954"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_verification.unconstrained_mfim_hz05_fidelity": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The unconstrained MFIM hz=0.5 run reaches f=0.999245 at T=3, above 0.995.",
+      "evidence": [
+        "logs/unconstrained/mfim_hz0.5/summary.json final_fidelity 0.9992453364422669, t_end_actual 3.0"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_verification.unconstrained_lsm_hzn07_qualitative": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Fidelity is 0.99981 at the end of the ramp (t~3) and 0.99965 at 2T=6, consistent with the paper's >99.9% at t=T. Spin correlations track exact to within 0.008 maximum deviation. The logged energy tracks exact to within 0.057 on a scale of about 10. Ncx is 112 at T and 116 at 2T, against the paper's ~100 and 106. Caveat: the logged energy is <H(T)>, not the instantaneous <H(t)> (runner.py:126-127), but it is compared consistently with exact.",
+      "evidence": [
+        "logs/unconstrained/lsm_hz-0.7/records.json: fid(t=2.9993)=0.999811, fid(6.0)=0.999647; max|E-Eex|=0.057; max|spincorr-exact|=0.0082",
+        "logs/unconstrained/lsm_hz-0.7/summary.json final_ncx 116"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_verification.unconstrained_lsm_hzp16_qualitative": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Fidelity is 0.99981 at t~T and 0.99956 at 2T=6. Spin correlations track exact to within 0.012 and the energy (the <H(T)> observable) to within 0.068. Ncx is 122, qualitatively matching the paper's ~100-106 CNOT plateau.",
+      "evidence": [
+        "logs/unconstrained/lsm_hz1.6/records.json: fid(t=2.9995)=0.999813, fid(6.0)=0.999564; max|E-Eex|=0.068; max|spincorr-exact|=0.012",
+        "logs/unconstrained/lsm_hz1.6/summary.json final_ncx 122"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_verification.naive_uses_smart_embedding": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Topology A uses the Hamiltonian-cycle embedding [0,1,2,3,7,6,5,4] (ring onto 0-1-2-3-7-6-5-4-0), giving 8/8 and 7/7 local bonds and zero naive SWAPs. Topology B uses the identity placement, chosen by exhaustive 8! search that maximizes local pool pairs and then minimizes residual distance. My independent brute force confirms 5/8 (ring) and 5/7 (chain) are the maxima and that the identity attains the minimal residual sums (9 and 4). The logs document the choice and its justification.",
+      "evidence": [
+        "logs/embeddings/embeddings.md (all cells, scores, residual sums)",
+        "logs/naive/*_topoA/summary.json embedding [0,1,2,3,7,6,5,4]; *_topoB embedding [0..7]",
+        "independent brute-force: B ring max 5 local, min dsum 9 (320 optimal perms); B chain max 5, min dsum 4"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "experimental_completeness.all_variant_cells_run": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "TA-AVQDS completed on all 8 cells: MFIM hz 0 and 0.5, LSM hz -0.7 and 1.6, each on A and B, at the selected tau=1e-4. Each reaches the full end time.",
+      "evidence": [
+        "logs/ta_tau1e-4/*/summary.json: 8 summaries, t_end_actual 3.0 (MFIM) / 6.0 (LSM)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "experimental_completeness.all_naive_cells_run": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The naive baseline completed on all 8 cells. Each routes a logical circuit bit-identical to the corresponding unconstrained run (same labels, max |dtheta|=0).",
+      "evidence": [
+        "logs/naive/*_topo{A,B}/summary.json (8)",
+        "check: naive circuit_logical.json == unconstrained circuit_logical.json for all 8 cells"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "experimental_completeness.per_step_metrics_logged": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Every variant run logs fidelity, ncx, depth and n_params at every time step, with array lengths equal to the step counts. That is enough for the curve plots.",
+      "evidence": [
+        "logs/ta_tau1e-4/*/records.json lengths: e.g. mfim_hz0.0_topoB 3204 steps with 3204 ncx/depth/n_params entries; lsm_hz1.6_topoB 7023"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "experimental_completeness.topology_audits_both_topologies": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "All 8 variant cells, on both A and B, have per-growth-event audits. Every two-qubit gate, SWAPs included, is recorded with its physical pair and an OK flag, and the audit entry counts match the circuit gate counts.",
+      "evidence": [
+        "logs/ta_tau1e-4/*/audit.log (A and B)",
+        "OK-entry counts: mfim_hz0.0_topoA 72, _topoB 121; mfim_hz0.5_topoA 104, _topoB 189; lsm_hz-0.7 A 58, B 61; lsm_hz1.6 A 61, B 61"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "topology_compliance.compliance_on_a": {
+      "value": "fully_compliant",
+      "confidence": "high",
+      "reason": "I recomputed compliance from every circuit_physical.json against the spec's Topology A edge set. All variant runs on A (headline, tau sweep and ablations) have zero off-edge two-qubit gates, and the audit FINAL lines report 0 violations.",
+      "evidence": [
+        "independent recheck of 55 TA circuits / 5138 two-qubit gates: 0 violations",
+        "logs/ta_tau1e-4/*_topoA/audit.log FINAL violations = 0"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "topology_compliance.compliance_on_b": {
+      "value": "fully_compliant",
+      "confidence": "high",
+      "reason": "Every two-qubit rotation and SWAP in every Topology B variant circuit lies on the spec's 7-edge heavy-hex set (independent recheck). Recomputed CNOT counts match the summaries, e.g. 299 with 57 SWAPs for MFIM hz0/B.",
+      "evidence": [
+        "independent recheck: 0 violations; recomputed ncx = summary ncx for all B cells",
+        "logs/ta_tau1e-4/mfim_hz0.0_topoB/audit.log FINAL violations = 0 (edges [(0,1),(1,2),(1,3),(3,5),(4,5),(5,6),(6,7)])"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "accuracy_preservation.preservation_on_mfim_hz0": {
+      "value": "preserved_both",
+      "confidence": "high",
+      "reason": "Baseline f=0.999605. Topology A gives 0.999605 (no drop) and Topology B gives 0.999428 (drop 1.8e-4). Both are within 0.01 absolute.",
+      "evidence": [
+        "logs/unconstrained/mfim_hz0.0/summary.json 0.9996046",
+        "logs/ta_tau1e-4/mfim_hz0.0_topoA/summary.json 0.9996046; _topoB 0.9994280"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "accuracy_preservation.preservation_on_mfim_hz0p5": {
+      "value": "preserved_both",
+      "confidence": "high",
+      "reason": "Baseline f=0.999245. Topology A gives 0.999245 and Topology B gives 0.999219 (drop 2.6e-5). Both are within 1%.",
+      "evidence": [
+        "logs/unconstrained/mfim_hz0.5/summary.json 0.9992453",
+        "logs/ta_tau1e-4/mfim_hz0.5_topoA 0.9992453; _topoB 0.9992192"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "accuracy_preservation.preservation_on_lsm_hzn0p7": {
+      "value": "preserved_both",
+      "confidence": "high",
+      "reason": "Baseline f=0.999647. Topology A gives 0.999647 and Topology B gives 0.999418 (drop 2.3e-4). Both are within 1%.",
+      "evidence": [
+        "logs/unconstrained/lsm_hz-0.7/summary.json 0.9996473",
+        "logs/ta_tau1e-4/lsm_hz-0.7_topoA 0.9996473; _topoB 0.9994176"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "accuracy_preservation.preservation_on_lsm_hzp1p6": {
+      "value": "preserved_both",
+      "confidence": "high",
+      "reason": "Baseline f=0.999564. Topology A gives 0.999564 and Topology B gives 0.999605, slightly higher than baseline. Both are within 1%.",
+      "evidence": [
+        "logs/unconstrained/lsm_hz1.6/summary.json 0.9995643",
+        "logs/ta_tau1e-4/lsm_hz1.6_topoA 0.9995643; _topoB 0.9996046"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "overhead_quantification.overhead_on_a": {
+      "value": "near_unity",
+      "confidence": "high",
+      "reason": "On Topology A the variant's CNOT and depth multipliers are exactly 1.00 on all four benchmarks (144/144, 208/208, 116/116, 122/122; depth 70, 94, 62, 62), so both averages are 1.00, within the 1.2 limit.",
+      "evidence": [
+        "table_overhead.tex rows 7,9,11,13,16 (Average A 1.00x / 1.00x)",
+        "logs/ta_tau1e-4/*_topoA/summary.json final_ncx/final_depth equal unconstrained"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "overhead_quantification.overhead_on_b": {
+      "value": "substantial",
+      "confidence": "medium",
+      "reason": "Topology B CNOT multipliers are 299/144=2.08, 468/208=2.25, 130/116=1.12 and 132/122=1.08, averaging 1.632x, which is in the modest band. Depth multipliers are 186/70=2.657, 290/94=3.085, 69/62=1.113 and 73/62=1.177, averaging 2.008x (reported 2.01x), just above the 2.0x ceiling of the modest band. The near_unity tier requires both averages to meet its bound, and the same reading applies to the plural 'multipliers' in the other tiers. Since the depth average exceeds 2.0x, modest is not met on both metrics, and the best tier whose ceiling both averages satisfy is substantial (2.0-4.0x).",
+      "evidence": [
+        "table_overhead.tex:18 'Average B ... 1.63x 2.01x'",
+        "logs/ta_tau1e-4/*_topoB/summary.json final_ncx 299/468/130/132, final_depth 186/290/69/73",
+        "logs/unconstrained/*/summary.json ncx 144/208/116/122, depth 70/94/62/62"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "margin_over_naive_baseline.margin_on_a": {
+      "value": "no_margin",
+      "confidence": "high",
+      "reason": "On Topology A the smart-embedding naive baseline inserts no SWAPs (Hamiltonian-cycle embedding) and has identical CNOT and depth to TA-AVQDS on all four benchmarks. All multipliers are 1.00x for both, so the variant matches the naive baseline with zero margin.",
+      "evidence": [
+        "table_overhead.tex rows 7,9,11,13 (naive 1.00x/1.00x vs TA 1.00x/1.00x)",
+        "report.tex:545-551 (naive likewise inserts no SWAPs on Topology A)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "margin_over_naive_baseline.margin_on_b": {
+      "value": "substantial_margin",
+      "confidence": "high",
+      "reason": "TA versus naive CNOTs: 299 vs 474 (-36.9%), 468 vs 670 (-30.1%), 130 vs 200 (-35.0%), 132 vs 206 (-35.9%), averaging about -34.5%. Depth: 186 vs 315 (-41.0%), 290 vs 469 (-38.2%), 69 vs 133 (-48.1%), 73 vs 113 (-35.4%), averaging about -40.7%. Both averages exceed 30%, and every individual benchmark exceeds 30% on both metrics.",
+      "evidence": [
+        "logs/naive/*_topoB/summary.json final_ncx 474/670/200/206, final_depth 315/469/133/113",
+        "logs/ta_tau1e-4/*_topoB/summary.json final_ncx 299/468/130/132, final_depth 186/290/69/73"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "modular_separation.code_isolates_variant_logic": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The topology-aware contribution is confined to proposal/code/tavqds: taansatz.py (one subclass overriding only add_ops_dyn), topology.py, circuit.py and naive_route.py. The authors' package is imported pristine (byte-identical to the zip), and the McLachlan solver one_step and the variational formulation are inherited unchanged. The code's docstrings and the README state what is held fixed and what is new.",
+      "evidence": [
+        "taansatz.py:1-31 docstring (held fixed vs new), :159 single override",
+        "code/README.md:5-31 layout",
+        "sha256: avdynamics sources identical to avqds.zip"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "modular_separation.ablation_switch_present": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "run_benchmark.py exposes a single --method argument (unconstrained | naive | ta). With --method unconstrained, the shared runner instantiates the authors' unmodified ansatz with no topology layer, reproducing unconstrained AVQDS. In production, TA on Topology A also reproduces the unconstrained circuits bit-for-bit (identical Ncx, depth, Ntheta and step counts). There is no complete-graph topology option inside TopoAnsatz, but the single method flag meets the 'unconstrained=True mode' described in the rubric evidence.",
+      "evidence": [
+        "run_benchmark.py:25-26 (--method choices)",
+        "runner.py:76-104 (method branches)",
+        "logs/ta_tau1e-4/*_topoA vs logs/unconstrained: identical ncx/depth/n_params and n_steps (2885/1906/5207/7100)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "modular_separation.methodology_isolates_variant_logic": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The Method section says TA-AVQDS modifies the growth loop in one place, the operator-admission rule. It states that the variational state, McLachlan solve with Tikhonov regularization, adaptive step size and growth trigger are inherited unchanged. It describes the routing layer as pure relabeling that the statevector never sees. The appendix repeats which components are inherited and which are re-implemented.",
+      "evidence": [
+        "report.tex:319-324",
+        "report.tex:343-351",
+        "report.tex:921-931 (App. A implementation reuse)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "mechanism_analysis.subsection_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Sec. 6.1, 'Mechanism: where the overhead comes from', is an explicit subsection of the Analysis section.",
+      "evidence": [
+        "report.tex:717-775 (subsection sec:mechanism)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "mechanism_analysis.depth": {
+      "value": "deep",
+      "confidence": "medium",
+      "reason": "The analysis meets the deep criteria. Executed ablations isolate the components: persistence off, locality targeting off, tau=0, the restriction limit and the keep-permutation naive variant, with Topology B mean multipliers 1.98, 1.79, 1.77 versus 1.63, all matching logs/analysis/ablation.json. It ties behaviour to compilation and graph theory: Hamiltonian cycle/path embeddability, the pigeonhole bound on non-local bonds, degree-1 cul-de-sacs and the bridge vertex, a counting lower bound for SWAPs, and amortized permutation tracking. It predicts where the method should not help (embeddable graphs, confirmed on Topology A and LSM on C). Weaknesses: the persistence effect is attributed using the naive-to-non-persistent contrast, which actually isolates in-loop selection, and the stated distances 'd=3 or 5' are wrong (actually 2 and 5).",
+      "evidence": [
+        "report.tex:729-775",
+        "table_ablation.tex",
+        "logs/analysis/ablation.json (B means: naive 2.481, nonpers 1.98, noloc 1.788, tau0 1.772, full 1.632)",
+        "report.tex:733-736 (persistence attribution; 'd=3 or 5')"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "mechanism_analysis.structural_difference_engaged": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The analysis contrasts Topology A, where the interaction graph embeds via a Hamiltonian cycle (zero migrations, bit-for-bit baseline), with Topology B, which has no Hamiltonian path and at most 5/8 or 5/7 local bonds. It explains how locality-score migration steers logical sites away from the degree-1 endpoints and across the bridge vertex 3.",
+      "evidence": [
+        "report.tex:720-728 (Topology A)",
+        "report.tex:729-752 (Topology B, clusters joined by bridge vertex 3, cul-de-sacs 0,2,4,7)",
+        "report.tex:293-308 (structural facts)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_analysis.subsection_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Sec. 6.2, 'Failure analysis', is an explicit subsection discussing where the variant underperforms.",
+      "evidence": [
+        "report.tex:777-839 (subsection sec:failure)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_analysis.patterns_identified": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Failure patterns are stated concretely: (i) no benefit when the interaction graph embeds (Topology A, and LSM on C); (ii) the largest residual overhead is the MFIM ring on B (2.08x, 2.25x); (iii) the restriction limit fails on all four B configurations at the first growth events; (iv) tau=1e-3 runaway on MFIM hz0.5/B, with MFIM hz0/B worsening to 2.46x; (v) on MFIM hz0/B, tau=0 (1.90x) and no-loc (1.86x) beat the full method (2.08x); (vi) the keep-permutation naive variant comes close on some cells.",
+      "evidence": [
+        "report.tex:780-839",
+        "logs/ta_tau1e-3/mfim_hz0.0_topoB/summary.json ncx 354 (2.46x)",
+        "logs/ablation_restrict/*_topoB/run.log ValueError max_growth exceeded"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_analysis.patterns_explained_coherently": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "Each pattern is tied to a structural property. The MFIM ring has at least 3 non-embeddable bonds and its periodic bond forces long bridge migrations. Restriction fails because the operator the dynamics needs acts on a non-embeddable bond. The runaway comes from greedy tolerance admission accepting sub-tau improvements while the non-integrable model's distance spectrum is more spread out. Non-monotonicity comes from trajectory reshaping by admission decisions. There are minor factual slips: the periodic bond is said to sit at distance 'up to 4', but it is 5 under the chosen placement, and the non-monotonicity explanation is somewhat heuristic.",
+      "evidence": [
+        "report.tex:783-789, 791-802, 804-820, 822-839",
+        "independent: Topology B distance for logical bond (7,0) under identity placement = 5"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "compute_cost_analysis.subsection_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Sec. 6.3, 'Computational cost', discusses wall-clock times (Table 6) and the classical-side costs of the admissibility pass, migration planning and bookkeeping.",
+      "evidence": [
+        "report.tex:841-859",
+        "report.tex:1015-1028 (App. D Table 6)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "compute_cost_analysis.wall_clock_measured": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "Per-run wall-clock for unconstrained, naive (A/B) and TA-AVQDS (A/B) is reported for all four benchmarks in Table 6, sourced from summary.json wall_seconds. The text explicitly compares variant and baseline ('within a small factor ... e.g. 51.9 min vs 37.1 min'). The numeric ratio (about 1.18-1.40x) is not written out, but it follows directly from the side-by-side values. The paper's description of the overhead as 'negligible' understates these ratios, which is a claim-accuracy matter.",
+      "evidence": [
+        "table_wallclock.tex (e.g. MFIM hz0: 37.1 | 36.7/36.2 | 50.2/51.9)",
+        "report.tex:844-849",
+        "logs/analysis/wallclock.json -> TA/unc ratios A 1.35,1.28,1.40,1.29; B 1.40,1.35,1.30,1.18"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "compute_cost_analysis.tradeoff_explicit": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "The paper places the variant on the cost-quality trade-off. The topology layer adds O(|P|) admissibility checks and migration planning on top of the dominant O(Ntheta^2) solve. The naive post-hoc routing is classically nearly free but produces the expensive hardware circuits. The relevant axis is the two-qubit budget, where TA-AVQDS wins. This addresses whether the extra classical cost is worth the CNOT reduction.",
+      "evidence": [
+        "report.tex:849-859"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "third_topology_generalization.third_topology_evaluated": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "A linear-chain Topology C is evaluated on all four benchmarks for both naive and TA-AVQDS (tau=1e-4). Results are reported in Sec. 5.6 and App. B Table 4.",
+      "evidence": [
+        "logs/ta_topoC/*, logs/naive_topoC/* (4 each, summaries present)",
+        "report.tex:704-712, 973-995; table_topoc.tex"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "third_topology_generalization.third_topology_quality": {
+      "value": "full",
+      "confidence": "medium",
+      "reason": "On Topology C all four benchmarks were run. The TA fidelities (0.999577, 0.999166, 0.999647, 0.999564) are reported and stay within 1% of baseline. CNOT overheads are reported (TA 1.86x, 2.41x, 1.00x, 1.00x versus naive 3.25x, 3.25x, 1.00x, 1.00x) with SWAP counts and the naive comparison. Depth multipliers are not tabulated for C, which is a minor omission relative to the A/B reporting.",
+      "evidence": [
+        "table_topoc.tex rows 7-10",
+        "logs/ta_topoC/*/summary.json; logs/naive_topoC/*/summary.json"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "originality_and_literature.contribution_originality": {
+      "value": "meaningful_extension",
+      "confidence": "medium",
+      "reason": "The genuinely new element is the tau-admission rule, which uses the near-degeneracy of McLachlan distances to pick topology-local operators inside the adaptive dynamics loop. Its measured effect is modest and inconsistent (Topology B mean 1.77 to 1.63, and negative on MFIM hz0/B). The larger gains come from persistent permutation tracking and lookahead-like locality scoring, both standard in routers such as SABRE and t|ket>. The contribution adds real scientific content (systematic two-topology quantification, ablations, failure modes) but with limited novelty relative to the compilation and hardware-aware ADAPT literature, and there is no comparison against a lookahead router.",
+      "evidence": [
+        "report.tex:201-218 (positioning)",
+        "table_ablation.tex (tau=0 vs full; non-pers. vs full)",
+        "report.tex:754-763"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "originality_and_literature.literature_engagement": {
+      "value": "substantial",
+      "confidence": "medium",
+      "reason": "Around 70 references cover routing and compilation (Qiskit, t|ket>, Cowtan, SABRE, Zulehner, Venturelli, Siraichi, Ito, Maslov), hardware-efficient and ADAPT ansaetze (Kandala, Ganzhorn, Gard, Tepaske, Tang, Grimsley) and variational dynamics (Yuan, Li & Benjamin, Endo, Benedetti, Barison, Lin). The variant is explicitly positioned against them. Several entries have incorrect titles or identifiers (e.g. commeau2020, gomes2021, zhang2021, yao2021avqdst), which is an attribution matter assessed in integrity.",
+      "evidence": [
+        "report.tex:94-117, 201-218, 285-291, 861-893",
+        "report.tex:1032-1423 bibliography"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "originality_and_literature.spec_independence": {
+      "value": "partially_independent",
+      "confidence": "medium",
+      "reason": "The title is contribution-descriptive and the structure is method- and physics-driven: Background on AVQDS and the routing problem; persistent assignment, admission and migration subsections; gate usage on the device. However, spec terminology recurs verbatim or near-verbatim: 'smart-embedding naive baseline', 'Topology A/B', 'the routing problem has bite', contribution items titled 'Accuracy preservation' and 'Quantified overhead', and 'genuinely smart embedding'.",
+      "evidence": [
+        "report.tex:22 title",
+        "report.tex:164-199 (contribution list mirrors contract items)",
+        "report.tex:553 ('the routing problem has bite')",
+        "report.tex:155-162, 549-550"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.journal_quality_structure": {
+      "value": "reasonable",
+      "confidence": "medium",
+      "reason": "The thesis is clear, the main sections are prose-driven and the structure is well organized. It falls short of journal polish because of occasional unsupported or inaccurate claims. Sec. 5.3 says the enlarged-cap run 'completes', contradicting Sec. 6.2 and the logs. The classical overhead is called 'negligible' despite a measured 1.2-1.4x. The persistence contrast is misattributed and 'd=3 or 5' and 'distance up to 4' are wrong. The LSM energy is labeled instantaneous although it is <H(T)>. Several bibliography entries are inaccurate, and the figures float far from their text (pp. 9-13).",
+      "evidence": [
+        "report.tex:636-641 vs 808-811",
+        "report.tex:853-855",
+        "report.tex:733-736, 786-788",
+        "report.tex:617 caption vs runner.py:126-127",
+        "report.log page floats [9]-[13]"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.limitations_discussion_present": {
+      "value": "substantive",
+      "confidence": "medium",
+      "reason": "Sec. 6.4 covers dependence on the initial placement, scaling (SWAP lower bounds and a linear growth of non-embeddable bonds), the restriction to the canonical pool, and future noise-aware work. With the failure analysis, it also covers the limits of single-hyperparameter selection and that the in-loop logic wins only in aggregate. These are task-relevant limitations discussed with substance.",
+      "evidence": [
+        "report.tex:861-893",
+        "report.tex:822-839"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.rendered_pdf_clean": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "Page images could not be rendered here (no pdftoppm or ghostscript), so this rests on non-visual evidence. The final compile log has no Overfull boxes and no undefined or multiply-defined references. pypdf text shows no '??'. All 7 figure PDFs are embedded as XObjects with complete panel titles and legends. Text coordinates put the main tables at x~127.7 against a 107.7pt left margin, so they are centered within the text width. Remaining layout weaknesses (floats pushed to pp. 9-13, minor 'tau = 1e-4' typography) are not among the rubric's listed defects.",
+      "evidence": [
+        "report.log (grep: no 'Overfull', no 'undefined')",
+        "pypdf: 18 pages, '??' count 0, XObjects on pp. 9-13",
+        "PDF p.7 table rows start x=127.7 (text margin 107.7)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.neurips_style": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "report.tex loads the NeurIPS style via \\usepackage[preprint]{neurips}, and proposal/neurips.sty is byte-identical to the workspace neurips.sty (it provides neurips_2026).",
+      "evidence": [
+        "report.tex:2",
+        "sha256(proposal/neurips.sty) == sha256(workdir_outside_proposal/neurips.sty)",
+        "report.log:27-30"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.main_results_tables_complete": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "All three required tables are present with required labels, all five rows (unconstrained, naive A/B, variant A/B) and all columns: fidelity, Ncx and depth for both hz values, plus CNOT and depth multipliers for naive and variant on every cell. No cell is a placeholder.",
+      "evidence": [
+        "report.tex:506, 517, 526 labels",
+        "table_main_mfim.tex, table_main_lsm.tex, table_overhead.tex"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.initial_state_seed_pairing.same_initial_state_and_seeds": {
+      "value": "satisfied",
+      "confidence": "medium",
+      "reason": "The runs are deterministic, with no seeds. All three methods share psi0, and the logs show identical t=0 fidelity and energy across methods (MFIM -8.0 / -4.0; LSM -0.816727 / -4.361873). All use the same adaptive time-stepping rule and constants (dtmax 0.05, dthmax 0.005, pthcut 7000) and end exactly at t_end. The naive dt sequence is identical to unconstrained, as is TA's on Topology A. On Topology B the TA dt sequence diverges only because the adaptive rule responds to a different ansatz, which is inherent to held-fixed AVQDS stepping.",
+      "evidence": [
+        "records.json t=0 checks for unconstrained/naive/ta_tau1e-4, all 8 cells",
+        "summary.json dtmax/dthmax/pthcut fields",
+        "runner.py:13-15,166-171"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.effort_evidence.attempts_log_when_partial_work_claimed": {
+      "value": "satisfied",
+      "confidence": "medium",
+      "reason": "Partial or failed work is claimed, so the requirement applies. attempts_log.md documents the approaches tried and why each was kept or set aside. A3 covers pool restriction only (rejected as sole mechanism), in-loop insert-and-revert and the persistent design. A4 covers admission and migration alternatives, A5 the naive readings, A7 the tau sweep with the tau=1e-3 failure, and A9 the logging-bug reruns, the 1000-cap diagnostic termination and tau non-monotonicity. One weakness: the observed failure of the restriction ablation on B appears only implicitly (A3 says it is 'exercised in the tau sweep').",
+      "evidence": [
+        "attempts_log.md A3, A4, A5, A7, A9",
+        "report.tex:791-812"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.experiment_completeness.all_paper_experiments_logged": {
+      "value": "satisfied",
+      "confidence": "medium",
+      "reason": "Every described cell has run directories: 4 unconstrained, 8 naive, a 4x8 tau sweep (the crashed tau=1e-3 cell keeps its traceback log), 3x8 ablations (restriction B failures logged with tracebacks), 4+4 Topology C, the keep-permutation numbers in naive summaries, embeddings, and the parameter-level and full slow-expm equivalence checks. The 1000-cap diagnostic rerun has only an empty run.log. Sec. 5.3's statement that this configuration 'completes' with an enlarged cap has no completed log, but Sec. 6.2 describes it as terminated incomplete; that contradiction is a claim-accuracy (integrity) matter.",
+      "evidence": [
+        "logs/ directory inventory (report.tex:953-971 matches)",
+        "logs/ta_tau1e-3/mfim_hz0.5_topoB/run.log (0 bytes); ..._maxgrowth200_crashed/run.log (traceback)",
+        "logs/equivalence_check/{report.txt,end_to_end_report.txt,mfim_hz0.0_slowexpm/}"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.hamiltonian_pool_faithfulness.uses_original_benchmarks": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "MFIM uses the authors' zzxzmodel ring with PBC: ZZ over range(-1, n-1), including Z7Z0, with pool label [-1,3,0,3]. J=1, hx=-2, hz in {0, 0.5}, from |0>^8 to T=3. LSM uses the authors' xyzmodel with N=8 and OBC.",
+      "evidence": [
+        "bench.py:61-66, 94-97",
+        "avdynamics/model.py:246-251 (PBC ZZ), 84-88 (OBC XX/YY)",
+        "rerun.log: 'add op: [-1, 3, 0, 3]'"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.topology_subgraph_faithfulness.edge_sets_match_spec": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "In topology.py, Topology A has exactly the spec's 10 edges and Topology B exactly {(0,1),(1,2),(1,3),(3,5),(4,5),(5,6),(6,7)}. The audit FINAL lines echo the same edge lists.",
+      "evidence": [
+        "topology.py:93-94 (A), 109 (B)",
+        "logs/ta_tau1e-4/mfim_hz0.0_topoB/audit.log FINAL edges list"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.lsm_protocol_faithfulness.ramp_protocol_matches_paper": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "gamma(t) = 1 - 2t/T with T=3, held at -1 after the ramp, and the runs go to 2T=6. The Hamiltonian is H = -(1+gamma) XX - (1-gamma) YY + hz Z with J=1, matching paper Eq. (11) without a factor-of-2 change. hz is -0.7 or 1.6. The initial state is the exact ground state of H(0), and the exact reference uses a piecewise-constant mesh of 5e-4 as in the paper.",
+      "evidence": [
+        "avdynamics/model.py:109-124",
+        "bench.py:65-66, 96-97, 127-147",
+        "logs/unconstrained/lsm_*/summary.json t_end_actual 6.0"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.naive_baseline_protocol_faithfulness.post_hoc_shortest_path_swap": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "The naive baseline routes the unconstrained AVQDS circuit, bit-identical to the unconstrained run's circuit, post hoc. It uses BFS shortest-path SWAP insertion (insert-and-revert) under the optimal embedding, and logs the source and routed circuits side by side. The keep-permutation reading is also reported and is worse on average (2.75x vs 2.48x on B), so the headline baseline is not a weakened variant.",
+      "evidence": [
+        "naive_route.py:39-84",
+        "runner.py:273-299",
+        "check: naive circuit_logical.json == unconstrained circuit_logical.json (8/8)",
+        "logs/analysis/ablation.json B means naive 2.481, naive_keep 2.752"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.selective_reporting.swap_insertion_strategy_documented": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "The insert-and-revert shortest-path strategy is documented in the paper, code and logs, and is applied identically to all 8 A/B cells and the 4 C cells. The alternative keep-permutation strategy is reported for every cell, the tau settings and ablations are all reported, and embedding selection follows one stated rule.",
+      "evidence": [
+        "report.tex:469-473",
+        "attempts_log.md A5",
+        "logs/naive/*/routing_log.json (kept_perm false); summary.json keep_ncx",
+        "table_ablation.tex (naive and naive-keep columns)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.operator_pool_authorship.hamiltonian_pool_used_or_expansion_disclosed": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "The headline and all other runs use the canonical Hamiltonian pools from the authors' generate_op_pools: 'Ising' (16 ops) for MFIM hz=0, 'ZZXZ' (24 ops) for hz=0.5 and 'XYZ' (22 ops) for LSM. No expanded pool is used.",
+      "evidence": [
+        "bench.py:12-17, 94-97",
+        "logs/*/summary.json 'pool': Ising/ZZXZ/XYZ",
+        "report.tex:438-445, 888-893"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.simulation_time_faithfulness.times_match_spec": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "Every MFIM run ends at t_end_actual=3.0 and every LSM run at 6.0 (ramp T=3 plus T=3). Final-step clipping lands exactly on the end time for all methods.",
+      "evidence": [
+        "logs/*/summary.json t_end_actual (3.0 MFIM, 6.0 LSM)",
+        "runner.py:168-171"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.cnot_convention_consistency.unconstrained_uses_2cx_convention": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "Unconstrained Ncx = 2 x (number of two-qubit rotations), e.g. 144 = 2 x 72 and 208 = 2 x 104. Variant and naive circuits use the same 2 CNOTs per rotation plus 3 per SWAP, and recomputing from the circuit files reproduces the summary counts.",
+      "evidence": [
+        "circuit.py:52 'ncx = 2 * n_rot2 + 3 * n_swap'",
+        "runner.py:229-233 (pseudo-physical metrics for unconstrained)",
+        "recompute: ta_tau1e-4 mfim_hz0.0_topoB 2*64+3*57=299"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.noiseless_simulation_faithfulness.no_noise_model": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "All methods use dense noiseless statevector evolution through the authors' ansatz (get_ansatz_state, one_step) with exact references. No noise channels appear anywhere, and the authors' noisy extensions are explicitly bypassed.",
+      "evidence": [
+        "runner.py:13-15",
+        "codebase_notes.md:93-97 (noise-model extensions bypassed)",
+        "report.tex:473-474"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "evidence_completeness.quantitative_sources_documented": {
+      "value": "satisfied",
+      "confidence": "medium",
+      "reason": "Table values and inline macros are generated from summary.json by gen_latex.py. Hand-written figures in the text (ablation means 2.48/1.98/1.79/1.77/1.63, tau-sweep multipliers, equivalence numbers) trace to logs/analysis/*.json and logs/equivalence_check. Source-paper reference values (134, 210, 100) are cited to Yao et al. Minor unsourced items: the '>11 hours' diagnostic, whose run.log is empty, and the approximate '50-90 min' healthy-run range.",
+      "evidence": [
+        "gen_latex.py:107-189 (macros from logs)",
+        "results_macros.tex",
+        "logs/analysis/{tables,ablation,tau_sweep,wallclock,tau_selection}.json",
+        "report.tex:541-543"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "evidence_completeness.required_reporting_coverage": {
+      "value": "satisfied",
+      "confidence": "medium",
+      "reason": "All required experiments are covered: 4 baselines, 8 naive, 8 variant, the tau-selection sweep, ablations and wall-clock. The runs are deterministic, so no seeds or uncertainty summaries are required. Required metrics are logged per step. Ntheta per configuration appears only in the logs (summary final_n_params; the \\taparams macros are unused in the paper), but the task's prescribed tables carry only fidelity, Ncx and depth. The LSM energy observable is <H(T)> rather than the instantaneous <H(t)> during the ramp. Attempts are documented.",
+      "evidence": [
+        "logs/*/records.json and summary.json (final_n_params)",
+        "results_macros.tex (taparams/uncparams defined, not used in report.tex)",
+        "runner.py:126-127",
+        "attempts_log.md"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "evidence_completeness.auxiliary_observables_and_topology_figures": {
+      "value": "satisfied",
+      "confidence": "medium",
+      "reason": "The required auxiliary material is all present. The Loschmidt echo for both MFIM cases shows exact, unconstrained and TA (max deviation from exact 0.0017/0.0025). LSM energy and four spin correlations are plotted against exact for both hz values. Per-topology gate-usage figures show the embedding labels for A and B. An ablation figure and table cover the components. Caveat: the plotted LSM 'instantaneous energy' is computed with the end-of-ramp Hamiltonian H(T) at all times (t=0 value -0.817 rather than the H(0) ground-state energy), although it is compared consistently against exact.",
+      "evidence": [
+        "figures/loschmidt.pdf, lsm_observables.pdf, gate_usage.pdf, ablation.pdf (embedded pp. 11-13)",
+        "report.tex:606-623, 681-702, 673-679",
+        "runner.py:126-127 and bench.py:150-153 (lsm_energy at t=3.0)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    }
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "status": "complete",
+  "job": {
+    "id": "sol_5_6/P12/repeat_01",
+    "source_id": "sol_5_6/P12",
+    "model_key": "sol_5_6",
+    "model": "GPT-5.6-Sol",
+    "new_paper_id": 12,
+    "original_paper_id": 16,
+    "repeat": 1
+  },
+  "stages": {
+    "direction": {
+      "status": "complete",
+      "started_utc": "2026-10-27T11:53:26.069933+00:00",
+      "account": "acct1",
+      "attempt": "sol_5_6/P12/repeat_01/attempts/direction_20261027T115326_069816Z",
+      "prompt": "direction.prompt.txt",
+      "duration_ms": 1277887,
+      "wall_s": 1279.7,
+      "num_turns": 55,
+      "usage": {
+        "input_tokens": 76,
+        "cache_creation_input_tokens": 316896,
+        "cache_read_input_tokens": 6114782,
+        "output_tokens": 134154,
+        "output_tokens_details": {
+          "thinking_tokens": 103982
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 316896,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 30774,
+            "cache_read_input_tokens": 301825,
+            "cache_creation_input_tokens": 15071,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 15071
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "total_cost_usd": 6.441834200000001,
+      "session_id": "a24fe2ef-15e5-45f2-a061-7c6ae305f745",
+      "completed_utc": "2026-10-27T12:14:45.731754+00:00",
+      "verdict_sha256": "7d2c680655e1b9973d922f71f98eaf272120a630a3df8fc241dc8abe41505741"
+    },
+    "integrity": {
+      "status": "complete",
+      "started_utc": "2026-10-27T16:53:04.625933+00:00",
+      "account": "acct1",
+      "attempt": "sol_5_6/P12/repeat_01/attempts/integrity_20261027T165304_624798Z",
+      "prompt": "integrity.prompt.txt",
+      "duration_ms": 1032180,
+      "wall_s": 1034.2,
+      "num_turns": 51,
+      "usage": {
+        "input_tokens": 64,
+        "cache_creation_input_tokens": 255528,
+        "cache_read_input_tokens": 4757023,
+        "output_tokens": 109449,
+        "output_tokens_details": {
+          "thinking_tokens": 74278
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 255528,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 32846,
+            "cache_read_input_tokens": 251652,
+            "cache_creation_input_tokens": 3876,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 3876
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "total_cost_usd": 5.1848646,
+      "session_id": "e73dc3f9-3f33-4b4b-9fc8-42d89bde36c7",
+      "completed_utc": "2026-10-27T17:10:18.846575+00:00",
+      "verdict_sha256": "49edd541af6ae1182572f1618f6664f72a11fc720c96fe6bf805e391d30bab7d"
+    }
+  },
+  "updated_utc": "2026-10-27T17:10:18.916512+00:00",
+  "pid": 68812,
+  "account": "acct1",
+  "started_utc": "2026-10-27T16:53:04.615559+00:00",
+  "quota_requeues": 1,
+  "last_quota_wait": "acct1: integrity refused for usage limits; see integrity_20261027T135818_168066Z",
+  "completed_utc": "2026-10-27T17:10:18.916504+00:00",
+  "gates": {
+    "G1": "pass",
+    "G2": "pass",
+    "G3": "fail"
+  },
+  "outcome": "below_scientists_bar",
+  "protected_files_unchanged": true,
+  "artifact_metadata_unchanged": true
+}

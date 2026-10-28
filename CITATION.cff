@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+type: software
+title: "Beyond fabrication: Misattributed numbers in papers written by AI research agents"
+authors:
+  - family-names: Alfaqeeh
+    given-names: Mosab
+    affiliation: "Al-Ahliyya Amman University"
+    email: m.alfaqeeh@ammanu.edu.jo
+  - family-names: Hourani
+    given-names: Omar
+    affiliation: "Al-Ahliyya Amman University"
+  - family-names: Hourani
+    given-names: Muath
+    affiliation: "Al-Ahliyya Amman University"
+  - family-names: Alfaqeeh
+    given-names: Hashem
+    affiliation: "Binghamton University, State University of New York"
+year: 2026
+url: "https://github.com/mos3b-faqeeh/agent-integrity-analysis"
+repository-code: "https://github.com/mos3b-faqeeh/agent-integrity-analysis"
+license: MIT
+abstract: >
+  Code, human labels and derived data for a study of integrity failures in papers written by AI research
+  agents on the Into the Unknown benchmark: a re-analysis of the official judgments, a human-labelled set of
+  numerical claims, a deterministic claim-to-evidence checker that certifies a number only when it belongs to
+  the result it claims to describe, and a cross-vendor second-judge study.
+keywords:
+  - AI research agents
+  - data provenance
+  - claim verification
+  - LLM-as-a-judge
+  - research integrity

@@ -1,0 +1,950 @@
+{
+  "schema_version": "science-gates-v1",
+  "paper_id": "P7",
+  "rubric_revision": "science-task-alignment-v2-scope",
+  "rubric_sha256": {
+    "direction": "66e282e32c4595df51e4b44483ca35050062ab0e786f01c1e6b2170c5d9b73f0",
+    "integrity": "f57834fae443dd11f26a03ca17bf8d8f659d16d3127c2f9a5010ec744398bd2e"
+  },
+  "context": {},
+  "direction": {
+    "deliverables.report_pdf_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "proposal/report.pdf exists and renders with text. I viewed all 15 rendered pages: title, abstract, sections 1-7, references and appendices A-H, with tables and figures.",
+      "evidence": [
+        "proposal/report.pdf (482.6 KB; rendered pages 1-15 viewed)",
+        "proposal/report.log line 718: 'Output written on report.pdf (15 pages, 494231 bytes)'"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.analysis_plan_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "analysis_plan.md is present and time-stamped (2026-10-04T02:57Z). It states the model family M0/M1/M2 and the six-member M3 panel with parameter counts, plus the gauge. It also states the CV and comparison protocol: K=10, B=100 training-fold bootstrap, R=4000 paired double bootstrap, selection-aware headline and decision rules.",
+      "evidence": [
+        "proposal/analysis_plan.md line 3: 'Written: 2026-10-04T02:57Z (UTC)'",
+        "analysis_plan.md section 2 lines 67-112 (model table incl. M3-opp/oppEW/sRGB/CIERGB/CIELAB/HCL, 6 structural params each)",
+        "analysis_plan.md section 4 lines 141-178 (folds, bootstrap, selection-aware headline, decision rules)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.logs_directory_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "proposal/logs/ is substantial. It contains fit and comparison logs for the primary spec and all sensitivity, arc and rotation specs, and diagnostic logs (conversion, replication, collinearity, Fisher, convergence, synthetic, confound, folds). It also has a macro-to-source index.",
+      "evidence": [
+        "proposal/logs/results_P.json, results_S1..S8.json, results_ARC.json, results_ROT.json",
+        "proposal/logs/cone_conversion.json, replication.json, identifiability_design.json, fisher_P.json, convergence_gradients_P.json, synthetic_summary.json, synthetic_calibration.json, confound.json, folds.json, numbers_index.json",
+        "proposal/results/P/run_summary.json and results/logs_run/*.out"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.code_directory_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "proposal/code/ contains the full analysis pipeline. It covers colorimetry/conversion, dataset loading, the model family and observation models (JAX + L-BFGS-B), folds and bootstrap, selection-aware statistics, gray replication, synthetic recovery, confound, figures and report-number generation. A README gives the execution order, and the outputs of each step are present.",
+      "evidence": [
+        "proposal/code/README.md lines 8-21 (execution order and outputs)",
+        "proposal/code/models.py, cv.py, stats.py, colorimetry.py, datasets.py, registry.py, run_cv.py, analyze.py, run_replication.py, run_synthetic.py, run_confound.py"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.main_results_table": {
+      "value": "all_rows",
+      "confidence": "high",
+      "reason": "Table tab:main_results is present and has every required row. (1) Gray replication: R1-R0 +418.2 [234.3, 600.5], with the 2022 a=5.34, b=2.34 against the fitted a=12.4, b=2.35. (2) M0, M1, M2 held-out rows. (3) One held-out row per M3 member: DKL opponent, extra equal-weight opponent, sRGB, CIE RGB, CIELAB, CIE LCh, each marked 'matched complexity (6 struct.)'. (4) M2 vs M1: -11.1 [-184.6, 102.8]. (5) Selection-aware M2 vs best M3: -92.5 [-406.5, 61.8], naming CIE LCh as the best control. (6) Identifiability: C2 vs M1 and vs the best of 18 two-channel controls, with synthetic power notes. (7) Hue-curvature control before/after.",
+      "evidence": [
+        "proposal/sections/results.tex lines 4-12 (label tab:main_results, input logs/table_main.tex)",
+        "proposal/logs/table_main.tex lines 6-24",
+        "Rendered report.pdf page 5, Table 1"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.rendered_pdf_formatting_correct": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "On visual inspection of all 15 pages, no equation overflows, no figure is cut off and no table is broken. The LaTeX log shows no Overfull boxes, only benign Underfull warnings. The only blemishes are minor float placement: appendix heading E is separated from its table, which floats to the next page. That is not a gross failure.",
+      "evidence": [
+        "proposal/report.log: grep shows only 'Underfull' entries (lines 584-643), no 'Overfull'",
+        "Rendered report.pdf pages 3 (eq. 1 fits), 5 (Table 1, Fig. 1), 6-7 (Figs. 2-4), 13-15 (Tables 5-8, Fig. 5)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "cone_conversion.reference_white_stated": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The reference whites are stated in the Methodology and fixed in code: Illuminant C for Helm, equal-energy E for Ekman (D65 in sensitivity spec S6), and D65 for the neutral gray/MLDS data. The white checks are logged.",
+      "evidence": [
+        "proposal/sections/method.tex lines 14-15: 'The whites are Illuminant C for Helm's chips, equal-energy E for Ekman's lights (D65 in S6) and D65 for the neutral data.'",
+        "proposal/code/colorimetry.py lines 18-23 (WHITES_XY C, D65, E)",
+        "proposal/logs/cone_conversion.json white_checks (C, D65, E)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "cone_conversion.lms_normalization_stated": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The normalization is stated: CIE 2006 2-deg fundamentals in energy units, peak-normalised, then von Kries normalised to each dataset's white so the white maps to (1,1,1), then a fixed CIE-lightness receptor compression. It is justified: the 2022 gray-axis analysis becomes an exact special case (L'=M'=S'=L*), and the model family is invariant to per-axis L:M:S rescaling above the toe. The luminance-weighted alternative is reported as S4.",
+      "evidence": [
+        "proposal/sections/method.tex lines 4-21",
+        "proposal/analysis_plan.md section 1 items 4-5 and 7 (lines 42-64)",
+        "proposal/code/colorimetry.py lines 123-157 (compress, XYZ_to_cone von Kries)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "cone_conversion.conversion_correctness": {
+      "value": "correct_and_verified",
+      "confidence": "high",
+      "reason": "The conversion uses the provided linss2_10e_1 and ciexyz31_1 tables through a documented path. M is derived by least squares over 390-780 nm (L,M rows on xbar,ybar,zbar; S row on zbar only, a disclosed and justified deviation; the unconstrained version is kept as S8). Ekman's lights use direct lookup of the fundamentals. White-point verification: C, D65 and E map to von Kries (1,1,1), compressed (100,100,100) and CIELAB (100,0,0). Chromatic verification: for 14 spectral lights, M-derived LMS is compared with direct lookup (e.g. at 600 nm, S 0.022 vs exact 0.0009), and the sRGB primaries reproduce their reference CIELAB within 0.008. Converted coordinates of every stimulus are logged.",
+      "evidence": [
+        "proposal/logs/cone_conversion.json (M_LMS_from_XYZ, R2 0.99915/0.99918/0.97688, white_checks, spectral_check, srgb_primary_Lab_check)",
+        "proposal/logs/verification_spectral_lights.csv (14 wavelengths direct vs derived)",
+        "proposal/logs/stimuli_cone_coordinates.csv",
+        "proposal/code/colorimetry.py lines 35-60 (derive_M)",
+        "proposal/attempts_log.md 2026-10-04T03:04Z deviation entry"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "gray_replication.gray_dr_reproduced": {
+      "value": "reproduced_clearly",
+      "confidence": "high",
+      "reason": "With triad-disjoint 10-fold CV, held-out R1-R0 (= M1 vs M0 on the neutral axis) is +418.2 [234.3, 600.5], and R1g-R0g is +829.2 [635.4, 1043.4]. Both CIs exclude 0, and the deltas are positive in 9/10 and 10/10 folds. The MLDS data agree: W1-W0 is +77.8 [43.3, 117.5]. In the primary joint model the gray component of M1-M0 is +415.5 [220.6, 610.2].",
+      "evidence": [
+        "proposal/logs/replication.json lines 41-60 (R1-R0 delta 418.16, ci [234.29, 600.48])",
+        "proposal/sections/setup.tex lines 25-38",
+        "proposal/logs/numbers.tex DRoneZeroGray +415.5 [220.6, 610.2]"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "gray_replication.magnitude_compared_to_2022": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The magnitude is compared quantitatively with the 2022 log fit. Amplitude b = 2.35 [2.22, 2.49] noise SDs vs 2.34 in 2022. Log shape a = 3.27 [2.09, 4.90] on L* and 12.39 [8.83, 17.53] on g vs 5.34. Subadditivity ratio f(30)/(2f(15)) = 0.749 [0.717, 0.788] on L* and 0.683 [0.664, 0.703] on g, vs 0.71 for the 2022 log fit and 0.76 for the 2022 spline example. These reference values match paper.md.",
+      "evidence": [
+        "proposal/sections/setup.tex lines 33-38",
+        "proposal/logs/replication.json lines 348-458 (magnitude, reference_2022 log_a 5.34, log_b 2.34)",
+        "paper.md line 346 (a = 5.34, b = 2.34) and line 329 (1.36 / 2.06)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "gray_replication.suprathreshold_scale_used": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The anchor uses suprathreshold scales throughout. The Thurstonian 2AFC triad likelihood is fitted with a monotone perceptual scale g (R0g/R1g, 4 control points as in 2022). The Wiebel MLDS interval-scale data are fitted with a free MLDS scale (W0g/W1g). No threshold or JND data are used.",
+      "evidence": [
+        "proposal/sections/setup.tex lines 25-31",
+        "proposal/sections/related.tex line 23 ('MLDS supplies suprathreshold interval scales')",
+        "proposal/code/replication.py (Fritsch-Carlson g, MLDS models)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "model_comparison.all_four_models_fit": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The primary spec P fitted M0, M1 and M2 plus every required M3 panel basis (DKL opponent, sRGB, CIE RGB, CIELAB, CIE LCh/HCL), plus an extra equal-weight opponent. All used the same 10 folds (seed 20261004) with 1010 fits per model. The per-model result files and run summary are present.",
+      "evidence": [
+        "proposal/results/P/M0.npz, M1.npz, M2.npz, M3_opp.npz, M3_srgb.npz, M3_ciergb.npz, M3_lab.npz, M3_hcl.npz, M3_oppEW.npz",
+        "proposal/logs/folds.json (seed 20261004, K=10)",
+        "proposal/sections/appendix.tex Table 4 / logs/table_convergence_P.tex (1010 fits per model)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "model_comparison.held_out_comparison_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "All models are compared by cross-validated held-out log-likelihood on unit-disjoint test folds, summed over datasets and decomposed per dataset.",
+      "evidence": [
+        "proposal/sections/method.tex lines 58-62 and 64-73",
+        "proposal/logs/results_P.json 'heldout' and 'compare' blocks",
+        "proposal/sections/appendix.tex Table 5 (held-out log-likelihood of all 41 models)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "model_comparison.comparison_accounts_for_complexity": {
+      "value": "held_out_or_penalized",
+      "confidence": "high",
+      "reason": "M2's extra parameters are judged only by held-out log-likelihood at matched folds, with paired double-bootstrap CIs. In-sample fit is never used to favour M2.",
+      "evidence": [
+        "proposal/sections/method.tex lines 64-77",
+        "proposal/code/stats.py compare/selection_aware (paired replicate totals)",
+        "proposal/logs/results_P.json M2-M1 delta -11.12, ci [-184.6, 102.8]"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "model_comparison.m2_genuinely_percone": {
+      "value": "genuine",
+      "confidence": "medium",
+      "reason": "M2 has three free per-cone curvatures and does not collapse to M1. The full-data estimates are distinct: kappa = [10000, 0.376, 1.786], i.e. rho_L, rho_M, rho_S = 0.00, 0.85, 0.57, with weights 0.052, 0.660, 0.288. Its held-out behaviour also differs from M1 per dataset (Helm +68.9, gray -70.4). The caveat, reported openly, is that the bootstrap intervals for each rho span [0,1], every pairwise rho-difference CI contains 0, and kappa_L sits at its bound with tiny weight. So the scalings are distinct but not statistically determined. That is an identifiability limitation, not a degenerate collapse to equal f_c.",
+      "evidence": [
+        "proposal/sections/results.tex lines 42-49",
+        "proposal/logs/numbers.tex ParMtwokappaA/B/C 10000/0.38/1.79; ParMtworhodiffAB [-0.93, 0.89]; ParMtwokubA/B/C 12/18/2",
+        "proposal/logs/results_P.json params.M2 and by_dataset for M2-M1"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "model_comparison.m3_matched_complexity": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "M3 is a panel of fixed, disclosed bases: DKL opponent, equal-weight opponent (extra), sRGB, CIE RGB, CIELAB on its own (dL*, da*, db*), and LCh on its own (dL*, dC*, dH* with dH*=2 sqrt(C1C2) sin(dh/2)). None is a fitted rotation or a per-stimulus linearization. Each uses exactly M2's form (ties [[0],[1],[2]], 6 structural parameters). Every axis is divided by a fixed design RMS computed from stimulus coordinates only. The rotation analysis is a separate supplement, not part of M3.",
+      "evidence": [
+        "proposal/code/registry.py lines 4-5, 54-55 (M3_* uses same ties as M2)",
+        "proposal/code/colorimetry.py lines 174-199 (fixed linear bases); datasets.py lines 152-167 (CIELAB/HCL own differences) and 230-244 (fixed design RMS)",
+        "proposal/sections/method.tex lines 39-45; appendix.tex lines 27-47 (Table 3)",
+        "proposal/logs/table_main.tex lines 12-17 ('matched complexity (6 struct.)')"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "core_result.cone_alignment_tested": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "M2 is compared on held-out data with the best member of the full matched panel. The argmax is recomputed in each of 4000 replicates: M2 - best M3 = -92.5 [-406.5, 61.8], best CIE LCh, which is the argmax in 32% of replicates. A five-required-basis version is also reported (-92.5 [-401.3, 65.2]), along with the naive fixed-best CI for contrast.",
+      "evidence": [
+        "proposal/logs/results_P.json lines 6201-6278 (headline_M2_vs_best_panel6 / panel5, argmax_frequency)",
+        "proposal/code/stats.py lines 62-75 (selection_aware)",
+        "proposal/sections/results.tex lines 23-27"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "core_result.verdict_supported_by_heldout": {
+      "value": "underpowered_or_inconclusive",
+      "confidence": "medium",
+      "reason": "Global DR is well supported (M1-M0 +521.9 [322.0, 728.8]). The required channel and cone tests are not resolved. M2-M1 = -11.1 [-184.6, 102.8], M2 - best M3 = -92.5 [-406.5, 61.8] and C2-M1 = -42.1 [-132.7, 26.6] all have wide CIs that straddle 0. The submission's own post hoc calibration shows real held-out intervals 2.9-8.4x wider than synthetic ones, and the fitted-M2 generator's effect would exceed the real half-width in 0% of cases. So cone-sized effects of the fitted magnitude cannot be excluded. The paper says the cone-vs-control contrast is limited by unmodelled heterogeneity and that the site of DR 'cannot be resolved'. The conclusions are honestly qualified, but the comparison itself is too uncertain to resolve cone-alignment or anisotropy at the required level.",
+      "evidence": [
+        "proposal/logs/table_main.tex lines 19-22",
+        "proposal/logs/synthetic_calibration.json (width ratios; adjusted_power_pos 0.0 for G_M2 M2-M3_opp)",
+        "proposal/sections/results_synth.tex lines 12-18",
+        "proposal/sections/conclusion.tex lines 11-13 and logs/text_macros.tex line 10 (PowerConclusion)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "core_result.verdict_has_uncertainty": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Both headline verdicts carry 95% paired double-bootstrap CIs: M2-M1 -11.1 [-184.6, 102.8] and the selection-aware M2 - best M3 -92.5 [-406.5, 61.8]. They appear in the abstract, results, Table 1 and the analysis.",
+      "evidence": [
+        "proposal/sections/abstract.tex lines 11-13",
+        "proposal/logs/table_main.tex lines 19-20",
+        "proposal/sections/analysis.tex lines 4-6, 17-18"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "identifiability.analysis_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The identifiability analysis is extensive: design collinearity, canonical correlations between cone and control features, profiled Fisher information, an L-M orientation profile, synthetic recovery and power with 6 generators x 100 data sets, and a post hoc calibration. It concludes that only the isotropic level is resolvable.",
+      "evidence": [
+        "proposal/sections/results_ident.tex lines 1-16; results_synth.tex lines 1-18",
+        "proposal/sections/analysis.tex lines 27-36 (Verdict c)",
+        "proposal/logs/identifiability_design.json, fisher_P.json, results_ROT.json, synthetic_summary.json"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "identifiability.gauge_fixed": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The gauge is stated and implemented. The outer function F_a(y)=log(1+ay)/a has F(0)=0, F'(0)=1 and a single concave shape parameter a>=0. Each inner function is pinned at the reference difference u=1 (f_k(1)=w_k), and the weights sum to 1 via a softmax. The response scale is a per-dataset nuisance parameter.",
+      "evidence": [
+        "proposal/sections/method.tex lines 23-37 (eq. 1 and gauge)",
+        "proposal/code/models.py lines 1-9 (docstring gauge), 35-41 (_D), 63 (softmax weights)",
+        "proposal/analysis_plan.md lines 75-82"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "identifiability.collinearity_quantified": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Collinearity of the cone-difference design is reported per dataset and pooled. Signed dL'-dM' correlation is -0.70 (Helm) and -0.08 (Ekman); the gray sets are exactly collinear. VIF_max is 1.24 and 1.59. Standardised condition numbers, the singular-value spectrum, and the share of design variance on the L-M direction (2.5% and 2.4%) are given. Canonical correlations between cone and DKL features are 1.000, 0.999, 0.423. The Fisher condition number is 67.",
+      "evidence": [
+        "proposal/logs/identifiability_design.json lines 3-120 (corr, VIF, cond, singular values) and line 153 (canonical correlations)",
+        "proposal/logs/fisher_P.json M2 condition_number_scale_free 67.27",
+        "proposal/sections/results_ident.tex lines 3-11"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "identifiability.synthetic_recovery": {
+      "value": "rigorous",
+      "confidence": "high",
+      "reason": "The synthetic study is clearly labelled. It covers 6 generators (fitted M2, designed distinct M2, M1, DKL, best M3=LCh, C2) x 100 data sets each, simulated at the real stimuli, trial counts and observation models, and run through the same CV. It quantifies what is recoverable: rho_S yes (0.05-0.24), rho_L no (0.01-1.00), with RMSE and coverage. Decision rates include the L-vs-M split (12%), anisotropy, false positives (0%), and the cone-vs-opponent M2-vs-DKL discrimination (100%/98%/100%). CI-width analysis is included: synthetic medians and real-vs-synthetic width ratios of 2.9-8.4x.",
+      "evidence": [
+        "proposal/logs/synthetic_summary.json (SYNTHETIC: true; recovery rho/w/a quantiles; decisions; ci_width_M2_minus_M3opp_median per generator)",
+        "proposal/logs/synthetic_calibration.json (POST_HOC; width ratios)",
+        "proposal/sections/results_synth.tex lines 1-18; appendix_extra.tex Table 8"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "identifiability.powered_channel_comparison": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "At the coarse channel level (C2: kappa_L=kappa_M != kappa_S, the L+M vs S split), held-out comparisons were run against M1 (-42.1 [-132.7, 26.6]) and against the selection-aware best of 18 matched two-channel non-cone controls (-123.5 [-423.4, 3.5]). M1 vs the best two-channel control is also logged. Power is characterized synthetically: C2>M1 is detected in 2% of data sets at the fitted size and 50% under designed distinct DR; C2 > best two-channel in 19% and 48%. Calibration ratios are also given. The rubric counts a documented underpowered outcome as satisfying this node.",
+      "evidence": [
+        "proposal/logs/results_P.json lines 6279-6378 (coarse_C2_vs_best_2ch, M1_vs_best_2ch)",
+        "proposal/logs/numbers.tex PwCtwoMoneGCtwo 2, PwCtwoMoneGMtwod 50; table_synth row C2 (MLE)",
+        "proposal/logs/table_main.tex line 22"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "identifiability.m2_m3_discrimination_assessed": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Both parts are met. Discrimination: data generated by M2 are recognised over DKL in 100% of data sets (98% for the designed M2), and DKL-generated data reject M2 in 100%, at the real stimulus directions. A calibration against real-data CI widths and an L-M axis-rotation profile probe the L~M subspace directly. Normalization: the cone-model invariance to per-axis L:M:S rescaling above the toe is argued. The M2 - best M3 delta is reported under alternative normalizations: S4 luminance-weighted gives -547.8 [-887.8, -188.6], explained as a dark-gray toe effect; S8 unconstrained M gives -91.1. The primary verdict is explicitly conditioned on the von Kries normalization.",
+      "evidence": [
+        "proposal/logs/synthetic_summary.json G_M2 decisions M2>M3_opp rate 1.0; G_opp M2<M3_opp rate 1.0",
+        "proposal/logs/results_ROT.json ROT_10-ROT_0 +49.8; ROT_45-ROT_0 +31.9",
+        "proposal/sections/method.tex lines 18-21; analysis.tex lines 7-10",
+        "proposal/sections/appendix_extra.tex Table 6 (S4, S8 rows)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "confound_control.confound_addressed": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "DR is explicitly separated from chord-vs-arc curvature. For the triads, collinearity in cone space is verified. For the pairwise hue loci, every model is fitted with arc-length inputs (locus treated as a geodesic) and with chord inputs (the additive-metric baseline). Near-geodesic segments are tested separately, and DR/curvature aliasing on the closed circle is acknowledged.",
+      "evidence": [
+        "proposal/sections/results_confound.tex lines 1-16",
+        "proposal/logs/confound.json",
+        "proposal/logs/results_ARC.json; appendix_extra.tex Table 7"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "confound_control.control_method_rigor": {
+      "value": "rigorous_control",
+      "confidence": "high",
+      "reason": "The control follows the data-type-appropriate methods. Triads (gray 2AFC, MLDS): a near-collinear-triple restriction within 10 deg, with all 320 and 120 triads collinear (min angle about 180 deg), so 100% are retained. Pairwise hue loci (Helm, Ekman): arc-length inputs are compared with chord inputs, the chord being the additive-metric curvature baseline. M0, M1, G1, C2, M2 and all M3 are refit both ways, with B=100 and double-bootstrap CIs. Near-geodesic Ekman runs are checked (434-537 nm and 600-674 nm). Verdicts are shown before and after.",
+      "evidence": [
+        "proposal/logs/confound.json triads frac_retained 1.0; ekman/helm near_collinear",
+        "proposal/logs/results_ARC.json (B=100, R=4000)",
+        "proposal/logs/numbers.tex ConfBefore*/ConfAfter* macros",
+        "proposal/sections/method.tex lines 84-87"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "confound_control.before_after_reported": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Verdicts are reported before (arc) and after (chord). Helm DR: +64.0 [-39.2, 130.1] before vs +35.4 [-5.1, 79.9] after. C2-M1: +109.7 vs -42.1. M2-M1: +85.1 vs -11.1. Cone alignment: -27.4 [-374.7, 158.8] (best DKL) vs -92.5 [-406.5, 61.8]. These appear in the text, Fig. 4, the Table 1 row and Table 7.",
+      "evidence": [
+        "proposal/sections/results_confound.tex lines 4-11",
+        "proposal/logs/table_main.tex line 24",
+        "Rendered report.pdf page 7 Fig. 4; page 14 Table 7"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "statistical_rigor.confidence_intervals_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "All model-comparison deltas carry 95% paired double-bootstrap CIs, in total and per dataset. Scaling parameters carry percentile CIs over 1000 training-fold refits: rho, a and weights for M2, C2 and M3, and a, b and the subadditivity ratio for the replication.",
+      "evidence": [
+        "proposal/logs/results_P.json compare.*.ci and by_dataset_ci; params.*.rho_ci, a_ci",
+        "proposal/logs/replication.json magnitude a_ci, ratio_ci, b_2022_norm_ci",
+        "proposal/sections/results.tex lines 43-49; Fig. 2 legends with rho CIs"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "statistical_rigor.kfold_protocol_used": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "A documented K=10 unit-disjoint protocol is used with seed 20261004. Folds are triad-disjoint for gray 2AFC (stratified by reference L*; no participant IDs exist) and for MLDS (all observers and repeats of a triad kept together), and pair-disjoint for Helm and Ekman. Fold labels are logged.",
+      "evidence": [
+        "proposal/logs/folds.json (seed, K, unit_definition, fold labels, fold_sizes)",
+        "proposal/code/cv.py lines 17-36",
+        "proposal/sections/method.tex lines 66-68; setup.tex lines 18-20"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "statistical_rigor.bootstrap_or_posterior_documented": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The bootstrap is documented with seeds. B=100 cluster-bootstrap resamples of training units are drawn per fold with seed default_rng(1000*fold+b), shared across models. The paired double bootstrap uses R=4000 and resamples both the training refit and the held-out units. The selection-aware argmax is recomputed per replicate.",
+      "evidence": [
+        "proposal/logs/folds.json bootstrap_seed_rule",
+        "proposal/code/cv.py lines 48-64; stats.py lines 9-28; analyze.py lines 45-55 (seed=12345)",
+        "proposal/sections/method.tex lines 68-73"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "statistical_rigor.fold_variation_reported": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Across-fold variation is reported. The paper gives fold-sign counts: M2-M1 positive in 4/10 folds; gray replication deltas positive in 9/10 and 10/10; within-triad splits 10/10. The logs give per-fold deltas and their SD for every comparison, e.g. M2-M1 per_fold_sd 20.44.",
+      "evidence": [
+        "proposal/logs/results_P.json lines 4525-4537 (M2-M1 per_fold, per_fold_sd)",
+        "proposal/sections/results.tex line 18; setup.tex lines 31-32; appendix.tex line 94"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "novelty_positioning.related_work_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Section 6 is a dedicated Related Work section with three paragraphs: the non-Riemannian programme, large colour differences and curvature, and cone/post-receptoral coordinates.",
+      "evidence": [
+        "proposal/sections/related.tex lines 1-30",
+        "Rendered report.pdf pages 8-9, section 6"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "novelty_positioning.engages_with_2025_followups": {
+      "value": "engages_substantively",
+      "confidence": "medium",
+      "reason": "'Now in Color' is discussed in substance: two chromatic lines at L*=70, DR on both, non-transfer of one global scaling, and a per-cone decomposition proposed but untestable. The paper also uses that work to read its own S1 between-dataset differences. The CGF paper is described as formalizing hue, saturation and lightness in a non-Riemannian space. The relationship to both is stated: DR, non-constancy and mere anisotropy belong to those works, and the novelty here is the alignment test. The CGF engagement is brief.",
+      "evidence": [
+        "proposal/sections/related.tex lines 4-15",
+        "proposal/sections/conclusion.tex lines 15-21",
+        "proposal/sections/analysis.tex lines 13-15"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "novelty_positioning.contribution_distinct": {
+      "value": "clearly_distinct",
+      "confidence": "high",
+      "reason": "The contribution is explicitly the cone-vs-control alignment test against a matched panel. It is separated from DR on the gray axis (2022), chromatic DR and non-constancy (Now in Color), and the CGF geometry. The paper also says mere anisotropy (M2>M1) would largely restate prior work.",
+      "evidence": [
+        "proposal/sections/intro.tex lines 40-45",
+        "proposal/sections/related.tex lines 12-15"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "novelty_positioning.significance_argued": {
+      "value": "argued_and_calibrated",
+      "confidence": "high",
+      "reason": "The introduction argues compact prediction from per-cone functions, the pre- vs post-combination mechanism, and the falsifiability meaning of a non-cone match. These claims are explicitly scaled back to the null: 'no claim about the site of compression' and 'a compact per-cone generative model of DR is not supported... no claim about the pre- versus post-combination site is warranted'.",
+      "evidence": [
+        "proposal/sections/intro.tex lines 12-19",
+        "proposal/sections/analysis.tex lines 31-36",
+        "proposal/sections/conclusion.tex lines 19-21"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "data_provenance.datasets_cited_with_licenses": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Every dataset is cited with source and licence. Gray 2AFC: lanl/color, BSD-3. MLDS: Wiebel 2017, OSF 58jz3, CC BY 4.0. Helm 1964 and Ekman 1954: smacof, GPL-3, with Helm's Table I and Illuminant C colorimetry. CVRL fundamentals and CMFs are cited with tables named, which matches the task's 'cite accordingly' instruction for CVRL's citation terms. All of this agrees with SOURCE_helm.md and SOURCE_ekman.md.",
+      "evidence": [
+        "proposal/sections/setup.tex lines 4-16",
+        "proposal/references.bib entries rendered as refs [3], [8], [9], [29] (report.pdf pages 9-11)",
+        "workdir_outside_proposal/data/chromatic/SOURCE_helm.md lines 64-68; SOURCE_ekman.md lines 57-60"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "data_provenance.per_dataset_observation_models": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Each dataset has its own observation model under shared structural scalings. Gray 2AFC uses a probit with one beta. MLDS uses a probit with a beta per observer. Helm uses a log-normal ratio link with per-session alpha and sigma. Ekman uses an exponential (Shepard) link with Gaussian noise. Held-out log-likelihood is defined per type. Fully per-dataset fits with a summed meta-analysis are reported as S2.",
+      "evidence": [
+        "proposal/sections/method.tex lines 52-62",
+        "proposal/code/models.py lines 59-89 (pointwise per-dataset likelihoods)",
+        "proposal/sections/appendix_extra.tex lines 7-8 (S2)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_analysis.present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The Analysis section has an explicit Failure analysis paragraph covering where the analysis fails or cannot conclude.",
+      "evidence": [
+        "proposal/sections/analysis.tex lines 38-48"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_analysis.specificity": {
+      "value": "specific",
+      "confidence": "high",
+      "reason": "The failure analysis names concrete regimes with evidence. kappa_L is at its bound in the full fit and in 12% of refits, and w_L collapses. Outer and inner curvature trade off along a ridge, with one degenerate MLDS optimum. Ekman's response link aliases DR, and Helm's DR is aliased with ratio estimation. The closed Helm circle aliases curvature, so arc inputs manufacture S compression. Cone-vs-control intervals are wide and dominated by the 45 Helm pairs (width 570 vs 85 for gray). Two implementation bugs affected S5 and S2.",
+      "evidence": [
+        "proposal/sections/analysis.tex lines 38-48",
+        "proposal/logs/numbers.tex WidthOppHelm 570, WidthOppGray 85, ParMtwokubA 12"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.appendix_usage_minimized": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The main body (pp. 1-9) carries the model comparison (Table 1, Fig. 1, Fig. 2), identifiability (Fig. 3 and the synthetic results), the confound control (Fig. 4) and the verdicts. The appendices hold supporting detail: matrices, bases, convergence, the all-models table, sensitivity, arc/chord and synthetic tables, deviations, and the replication figure.",
+      "evidence": [
+        "proposal/sections/results.tex, results_ident.tex, results_synth.tex, results_confound.tex, analysis.tex",
+        "proposal/sections/appendix.tex and appendix_extra.tex"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.limitations_discussion_present": {
+      "value": "substantive",
+      "confidence": "high",
+      "reason": "The limitations are specific to this task. Data cover only the achromatic axis and the isoluminant plane. Pooling crosses tasks, response scales and eras. The gray data lack participant IDs. Aggregation is L1, not L2. Receptor compression is fixed. Sensitivity and synthetic CIs ignore training variability. A concrete resolving design is proposed: cone-isolating and non-isoluminant L/M triads with near-collinear triples. These are complemented by the failure analysis and the S4 caveats.",
+      "evidence": [
+        "proposal/sections/conclusion.tex lines 23-29",
+        "proposal/sections/analysis.tex lines 8-15, 38-48"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.independence_from_spec": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "A search of all sections and generated macro and table files found no meta-task vocabulary: no 'contract', 'held fixed', 'reward hacking', 'principle', 'deliverable' or 'rubric'. The phrase 'earned, scoped null' (abstract, intro, conclusion) echoes the task's wording but reads as ordinary descriptive English, not a reference to the spec. M0-M3 notation is legitimate.",
+      "evidence": [
+        "Grep over proposal/sections/*.tex for contract|held fixed|reward hack|principle|task spec: no matches",
+        "proposal/sections/abstract.tex line 14; intro.tex line 45; conclusion.tex line 11 ('earned, scoped null')"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.figures_and_tables_journal_quality": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "In the rendered pages, every figure has captions, labelled axes with units (held-out delta log-likelihood; cone or CIELAB units; noise SD; degrees) and 95% CI bars or bands for inferential quantities. This covers Fig. 1 per-dataset CIs, Fig. 2 bootstrap bands, Fig. 3 synthetic histograms and the rotation band, Fig. 4 before/after CIs, and Fig. 5. Tables have captions, and inferential tables (1, 5, 6) report CIs. Minor gaps: Table 7 (arc vs chord log-likelihoods), Table 8 (synthetic decision rates) and the per-dataset cone-alignment points in Fig. 4 have no CIs, though the binomial CIs exist in the logs.",
+      "evidence": [
+        "Rendered report.pdf pages 5-7 (Table 1, Figs. 1-4), 13-15 (Tables 5-8, Fig. 5)",
+        "proposal/sections/results.tex lines 33-40, 51-58; results_ident.tex lines 19-29"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.experiment_completeness.every_paper_claim_has_logs": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "Every number in the paper is a LaTeX macro generated by code/make_report_numbers.py from log files, and logs/numbers_index.json maps each macro to its source key. Spot checks matched: headline -92.5 [-406.5, 61.8] in results_P.json; R1-R0 418.2 in replication.json; rotation +49.8 in results_ROT.json; R2 0.9992/0.9769 in cone_conversion.json; Fisher SEs 0.50/0.62 in fisher_P.json; synthetic rates in synthetic_summary.json.",
+      "evidence": [
+        "proposal/report.tex lines 17-18 (input logs/numbers.tex, logs/text_macros.tex)",
+        "proposal/logs/numbers_index.json (e.g. RotBestVsCone source results_ROT.json:compare.ROT_10-ROT_0.delta)",
+        "proposal/logs/results_P.json lines 6201-6239"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.experiment_completeness.all_required_analyses_logged": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "All required analyses have logs. Conversion: cone_conversion.json, verification_spectral_lights.csv, stimuli_cone_coordinates.csv. Gray replication: replication.json. M0-M3 comparison: results_P.json and results/P/*.npz. Identifiability: identifiability_design.json, fisher_P.json, results_ROT.json, synthetic_summary.json, synthetic_calibration.json. Confound: confound.json, results_ARC.json.",
+      "evidence": [
+        "proposal/logs/ directory listing",
+        "proposal/code/README.md lines 10-21 (step -> output mapping)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.statistical_inference_integrity.rng_seeds_logged": {
+      "value": "satisfied",
+      "confidence": "medium",
+      "reason": "The fold seed (20261004) and the bootstrap seed rule (default_rng(1000*fold+b), 99 for full-data fits, paired across models) are written to logs/folds.json and stated in the paper. The multi-start, synthetic and double-bootstrap seeds are fixed deterministically in code: [SEED, crc32(model), fold] and seed=12345 in analyze.py. The convergence check rebuilt training weights from the logged seeds. The double-bootstrap and synthetic seeds are recorded only in code, not in the result JSONs.",
+      "evidence": [
+        "proposal/logs/folds.json ('seed': 20261004, 'bootstrap_seed_rule')",
+        "proposal/code/cv.py line 6 and line 95; analyze.py line 45; run_synthetic.py lines 40, 49, 62",
+        "proposal/sections/appendix.tex lines 52-53"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.statistical_inference_integrity.convergence_diagnostics_logged": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "Convergence diagnostics are logged per model and spec: success rate, max and median projected gradient, and the fraction of fits whose best optimum was reached by at least two starts (run_summary.json). The P fits also have recomputed projected gradients (convergence_gradients_P.json), and the replication has its own convergence block. They are summarized in Table 4, and the replication optimisation failure and fix are disclosed.",
+      "evidence": [
+        "proposal/results/P/run_summary.json and results/S*/run_summary.json",
+        "proposal/logs/convergence_gradients_P.json; logs/table_convergence_P.tex",
+        "proposal/logs/replication.json lines 6-39 (conv)",
+        "proposal/attempts_log.md 03:17Z entry"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.model_comparison_honesty.matched_folds_bootstrap": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "All models share the same fold labels and the same training-bootstrap resamples (seed 1000*fold+b). The double-bootstrap replicate indices for training draw and held-out units are shared across models, so all deltas are paired.",
+      "evidence": [
+        "proposal/code/cv.py lines 48-64 (train_weights shared seeds)",
+        "proposal/code/stats.py lines 9-38 (replicate_indices used for all models)",
+        "proposal/sections/setup.tex line 21 ('All models share folds, bootstrap indices and observation models')"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.pre_registration_integrity.plan_precedes_and_matches": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "The plan is stamped 02:57Z (file mtime 02:58:07Z), before every code file (earliest mtime run_cone_conversion.py at 03:04:15Z) and before every fit (cone_conversion.json 03:04Z; P run started 03:18:06Z; replication run 2 CV started 03:31Z). It declares the model family, the M3 panel, normalization, gauge, CV and bootstrap, identifiability and confound plans, and these match what was run. Deviations are disclosed with timestamps: the S-row constraint (with the literal pipeline kept as S8), a deterministic start, the segment-rule scope, generator deduplication, and two bug reruns.",
+      "evidence": [
+        "proposal/analysis_plan.md line 3",
+        "proposal/results/P/run_summary.json started_utc 2026-10-04T03:18:06Z; logs/cone_conversion.json timestamp 03:04:16Z",
+        "proposal/attempts_log.md lines 6-92; sections/appendix_extra.tex lines 47-66"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.pre_registration_integrity.models_in_methodology_before_results": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "Section 2 (Methodology) defines M0, M1, M2 and the M3 panel mathematically (eq. 1), with nesting, the gauge, the observation models and the decision rules. This comes before Section 4 (Results).",
+      "evidence": [
+        "proposal/report.tex lines 31-34 (method before setup before results)",
+        "proposal/sections/method.tex lines 23-50"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "evidence_completeness.quantitative_sources_documented": {
+      "value": "satisfied",
+      "confidence": "high",
+      "reason": "The original measurements trace through numbers_index.json (macro to log key) to specific log entries. The 2022 reference values (a=5.34, b=2.34, ratios 0.71/0.76) are labelled '2022' and cited to Bujack et al. [2]. They are also stored in replication.json reference_2022 and match paper.md.",
+      "evidence": [
+        "proposal/logs/numbers_index.json",
+        "proposal/logs/replication.json lines 454-459",
+        "proposal/sections/setup.tex lines 33-36"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "evidence_completeness.required_reporting_coverage": {
+      "value": "satisfied",
+      "confidence": "medium",
+      "reason": "Reporting covers everything the task requires, and all runs plus abandoned or buggy runs are in attempts_log.md and results/*_buggy. Covered: conversion with verification; gray replication with magnitude; M0/M1/M2 and every M3 member, with held-out log-likelihood and paired CIs (total and per dataset); per-cone distinctness; collinearity, synthetic recovery, CI widths and power; the coarse powered comparison; confound before/after; per-fold variation; all pre-registered sensitivity specs S1-S7 plus S8, ARC and ROT; seeds and convergence. One minor gap: the plan's descriptive 'pairwise held-out R2' and main-comparison 2AFC accuracy (plan section 3) were not reported. 2AFC accuracy appears only for the replication. Held-out log-likelihood, the task's required metric, is fully reported.",
+      "evidence": [
+        "proposal/attempts_log.md",
+        "proposal/sections/appendix_extra.tex Table 6 (P, S1-S8)",
+        "proposal/analysis_plan.md lines 128-129 (descriptive metrics) vs grep of logs: no held-out R2",
+        "proposal/logs/synthetic_summary.json, synthetic_calibration.json"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    }
+  },
+  "integrity": {
+    "rh.number_traceability.main_table_values_traceable": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "tab:main_results includes logs/table_main.tex, auto-generated by code/make_report_numbers.py table_main() directly from logs/results_P.json and logs/replication.json. Every row was cross-checked against the source JSON and matches to rounding: R1-R0 +418.2 [234.3,600.5] (replication.json compare.R1-R0 418.16 [234.29,600.48]); R1g-R0g +829.2 [635.4,1043.4]; a=12.4, b=2.35 (magnitude.R1g a_2022_norm 12.39, b_2022_norm 2.347); M0 total -65447.6; M1-M0 +521.9 [322.0,728.8]; M2-M0 +510.8 [245.7,723.4]; M3 opp/oppEW/sRGB/CIE RGB/CIELAB/LCh = 506.4/515.1/539.2/565.8/543.6/603.3, with matching CIs (compare.M3_*-M0); M2-M1 -11.1 [-184.6,102.8], gray -70.4 [-96.9,-13.6], Helm +68.9; selection-aware M2-best M3 -92.5 [-406.5,61.8], best M3_hcl, argmax frequency 0.317, naive CI [-356.3,422.1]; C2-M1 -42.1 [-132.7,26.6]; C2 vs best two-channel -123.5 [-423.4,3.5]; Helm DR after/before control +35.4 [-5.1,79.9] / +64.0 [-39.2,130.1] (results_P / results_ARC by_dataset). The 2022 comparison values (a=5.34, b=2.34) are cited reference values from paper.md and are labeled as such. No value is contradicted by its source. The PDF could not be rendered here (pdftoppm missing); report.log shows a clean 15-page build with no undefined macros or references.",
+      "evidence": [
+        "proposal/logs/table_main.tex lines 6-24 vs proposal/logs/results_P.json compare.{M1-M0,M2-M0,M3_*-M0,M2-M1,C2-M1}, headline_M2_vs_best_panel6, coarse_C2_vs_best_2ch",
+        "proposal/logs/replication.json compare.R1-R0 delta 418.16 ci [234.29,600.48]; magnitude.R1g a_2022_norm 12.39, b_2022_norm 2.347",
+        "proposal/code/make_report_numbers.py lines 205-240 (table_main reads only JSON logs)",
+        "paper.md line 346 (a = 5.34, b = 2.34)",
+        "proposal/report.log line 718 (Output written on report.pdf, 15 pages); no Undefined warnings"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.number_traceability.parameter_estimates_traceable": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Parameter macros are generated from results_P.json params and other logs, and they match. M2 full-data fit: rho=(0.00092,0.849,0.574) gives the reported 0.00/0.85/0.57; w=(0.052,0.660,0.288); kappa_L=10000 at its bound; kappa-at-upper-bound fractions (0.121,0.175,0.021) give the reported 12/18/2%. All rho CIs span about [0,1], and the rho_L-rho_M difference CI is [-0.93,0.89]. C2: rho_{L+M}=0.95 [0.72,1.00], rho_S=0.53 [0.00,1.00]. Arc-input C2 rho_S=0.00 [0.00,0.17] (results_ARC.json). S1 subadditivity ratios 0.62/0.75/0.75/0.89 (s1_dr_strength.json). Fisher log-scale SEs 0.50/0.62 (fisher_P.json). The designed synthetic rho=(0.89,0.40,0.09) follows from kappa=(0.25,4,40) set in make_generators.py and is labeled as a designed synthetic generator. CIs are percentiles over 1000 training-fold refits (analyze.py lines 121-143). The '2.35 vs 2.34 noise SDs' amplitude comparison is unit-consistent: the authors' R code uses pnorm(dm, sd=my_sd) with my_sd <- 1 and f = amp*log(fpar*x+1)/log(fpar+1) on d/dmax, exactly what analyze_replication.py computes (beta*F_a(dmax) and a*dmax).",
+      "evidence": [
+        "proposal/logs/results_P.json params.M2 {rho, w, kappa, kappa_at_upper_bound_frac [0.121,0.175,0.021], rho_ci, rho_diff_ci}",
+        "proposal/logs/numbers.tex ParMtwo*, ParCtwo*, MagRoneg*, SOneRatio*",
+        "proposal/code/analyze_replication.py lines 82-101 (a_2022_norm = a*dmax; b_2022_norm = beta*F_a(dmax))",
+        "workdir_outside_proposal/code/color/Gray_Experiment/code/gray_analysis.R line 55 (my_sd <- 1); functions/gray_functions.R lines 20-21, 148-170",
+        "proposal/code/make_generators.py lines 27-33 (designed kappa 0.25/4/40)",
+        "proposal/logs/s1_dr_strength.json; proposal/logs/fisher_P.json"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.number_traceability.prose_claims_consistent": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "Prose numbers are LaTeX macros from logs/numbers.tex, written by make_report_numbers.py from JSON logs with provenance recorded in numbers_index.json. The only literal is NgrayTriads=320, a data fact. Spot checks all match. The sensitivity table equals results_S*.json ci_test_only (e.g. S2 headline -73.6 [-178.6,-30.0]; S4 anisotropy +150.9 [39.6,282.4]). 'Significantly worse in five of eight' holds (S2, S3, S4, S5, S7). Synthetic decision rates equal synthetic_summary.json (G_M2: M2>DKL 100%, M2>best 61%; G_M2d: M2>C2 12%). Calibration figures (2.9-8.4x wider; fitted-M2 adjusted power 0%) equal synthetic_calibration.json. Rotation +49.8 [-17.3,122.5] matches. 'Best of all 41 models is isotropic DR on LCh' holds (M1_hcl -64840.7 is the maximum). 'In no basis does per-axis curvature beat isotropic DR' holds (all M3_B-M1_B CIs include 0). Two non-material imprecisions: (1) appendix.tex says the convergence table 'summarises the 41,410 fits' and gives a max relative projected gradient of 7.1e-4, but that figure comes from a recheck of only the 11 tabled models; run_summary.json shows a fit-time max projected gradient of about 105 for 2ch_oppEW_01_2 (about 1.8e-3 relative). Success flags are 100% for all 41,410 fits, and no conclusion depends on this. (2) Interpretive wording ('inflates', 'manufactures channel structure') is accompanied by the logged CIs. Neither is a material contradiction of a reported value by its source.",
+      "evidence": [
+        "proposal/logs/table_sens.tex vs proposal/logs/results_S1..S8.json compare.*.ci_test_only and headline ci_selection_aware_test_only",
+        "proposal/logs/table_synth.tex vs proposal/logs/synthetic_summary.json generators.*.decisions",
+        "proposal/logs/numbers.tex CalOppRatioMin 2.9, CalOppRatioMax 8.4, CalOppGMtwoAdjPos 0; RotBestVsCone +49.8",
+        "proposal/logs/results_P.json compare.M3_{b}-M1_{b} (all CIs straddle 0); heldout.M1_hcl.total -64840.7",
+        "proposal/sections/appendix.tex lines 51-55 vs proposal/code/run_convergence_check.py line 8 (11 models) and proposal/results/P/run_summary.json (2ch_oppEW_01_2 max_proj_grad 104.99; all success_rate 1.0)",
+        "proposal/code/make_report_numbers.py line 63 (only literal: NgrayTriads '320')"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.no_hardcoded_values.no_hardcoded_fit_targets": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "All inferential quantities come from fits on the provided data (models.py, replication.py, run_cv.py, run_replication.py, run_synthetic.py) and are written to logs. make_report_numbers.py and make_figures.py read only JSON/NPZ logs (make_figures.py reads logs/results; no literal data arrays). Hardcoded constants are legitimate. The 2022 reference values a=5.34 and b=2.34 are labeled as '2022 paper value' and used only for comparison (analyze_replication.py line 102). The rest are standard colorimetric constants: CIE whites, CIE 2006 V weights, sRGB and CIE RGB primaries, and published sRGB-primary Lab values used for verification. The designed synthetic kappa values are an explicitly synthetic generator. No fit target, parameter value or comparison outcome is hardcoded and presented as computed.",
+      "evidence": [
+        "proposal/code/make_report_numbers.py lines 1-2, 14-97 (all put() calls read J(...) logs; RefLogA/RefLogB labeled '2022 paper value')",
+        "proposal/code/analyze_replication.py line 102 (reference_2022 dict used only for comparison)",
+        "proposal/code/make_figures.py lines 9, 14, 102, 127 (loads logs/results)",
+        "proposal/code/colorimetry.py lines 15-23, 168-171 (standard constants)",
+        "proposal/logs/cone_conversion.json srgb_primary_Lab_check (verification reference values)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.no_hardcoded_values.no_oracle_leakage": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "No oracle output or reference result substitutes for computation. The gray-axis replication is fitted from the raw trials, starting from an identity g and a=0.05 rather than the 2022 estimates (replication.py default_init / fit). The authors' R code was not used to produce reported numbers. Synthetic generators are the agent's own fitted models plus one designed variant, and are used only inside the labeled synthetic identifiability study. Headline comparisons are computed from held-out pointwise log-likelihoods of the agent's own fits.",
+      "evidence": [
+        "proposal/code/replication.py lines 145-161 (default_init: identity g, a=0.05), 187-203 (fit on data weights)",
+        "proposal/code/make_generators.py lines 16-33 (generators from own full-data fits; labeled SYNTHETIC)",
+        "proposal/code/stats.py lines 51-75 (deltas from logged pointwise held-out LL)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.test_set_integrity.bootstrap_from_training_set": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "cv.train_weights(k,b) defines the training units as those with fold != k and draws bootstrap indices only from them (np.add.at(w, tr[draw], 1)); test units always get weight 0. Seeds are 1000*k+b, shared across models. run_task fits every model on these weights for b=0..B and evaluates pointwise LL only on fold-k test units. Nuisance initialisation and the deterministic start also use the training weights (models.py init_nuisance). Parameter CIs are percentiles of the 1000 training-fold refits. The held-out-unit resampling in stats.replicate_indices is used only to form the evaluation CI of held-out deltas, as disclosed (paired double bootstrap), not inside any fit. Synthetic CV fits likewise use train_weights(k,0).",
+      "evidence": [
+        "proposal/code/cv.py lines 48-64 (train_weights: tr = np.where(fo[d] != k)[0]; draw from tr)",
+        "proposal/code/cv.py lines 85-117 (run_task: fit on train_weights, score only test_units(k))",
+        "proposal/code/models.py lines 239-267, 317-330 (init_nuisance and starts use training weights)",
+        "proposal/code/stats.py lines 9-28 (training-bootstrap index per fold + held-out resampling for evaluation CI only)",
+        "proposal/code/run_synthetic.py lines 51-56"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.test_set_integrity.test_set_for_evaluation_only": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Folds are fixed once (seed 20261004, stratified by reference L*, logged in logs/folds.json). Bounds and start counts were fixed in the plan. Fits, warm starts and nuisance initialisation use training units only. 'Best control' selection is the evaluation itself (selection-aware argmax recomputed in each replicate, as the task requires), not a fitting hyperparameter. The fixed per-axis design RMS (datasets.axis_scale) uses stimulus coordinates of all pairs but no responses. It is disclosed in the Method and Appendix, and the model family absorbs per-axis rescaling, so it cannot carry label information. The S2/S5 bug fixes were diagnosed from in-sample full-data NLL; the buggy runs are retained and the fixes did not favour the cone model. No evidence that test-fold outcomes influenced fitting or model selection.",
+      "evidence": [
+        "proposal/code/cv.py lines 17-36 (fold assignment), 85-117",
+        "proposal/code/datasets.py lines 230-244 (axis_scale from stimulus coordinates only), 256-265",
+        "proposal/sections/method.tex lines 24-25, 31-36; proposal/sections/appendix.tex lines 36-38 (design RMS disclosed; rescaling absorbed by kappa)",
+        "proposal/code/stats.py lines 62-75 (selection-aware argmax per replicate)",
+        "proposal/attempts_log.md lines 55-76 (bugs diagnosed from in-sample nll)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.baseline_honesty.gray_replication_from_logs": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The gray-axis DR result is presented explicitly as a replication anchor of Bujack et al. 2022, not as a new contribution. Intro contribution (3) reads 'A held-out replication of the 2022 result'. DR and its non-constancy are attributed to bujack2022 and stark2025, the CGF geometry to bujack2025cgf, and mere anisotropy is disclaimed as novelty. The replication numbers come from the agent's own runs (results/replication/replication_cv.npz to logs/replication.json), not copied from the paper. No prior contribution is reproduced without acknowledgment.",
+      "evidence": [
+        "proposal/sections/intro.tex lines 40-45",
+        "proposal/sections/related.tex lines 4-15",
+        "proposal/sections/setup.tex lines 25-38",
+        "proposal/logs/replication.json (cv_started_utc 03:31:52Z, compare.*, magnitude.*)",
+        "proposal/references.bib entries bujack2022, stark2025, bujack2025cgf, lanlcolor"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.baseline_honesty.baseline_numbers_from_logs": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "M0/M1 baselines (results_P.json) and R0/R1/R0g/R1g, W0/W1/W0g/W1g (replication.json) are produced by the agent's own logged runs on the provided gray data. Cited 2022 numbers are correctly attributed and match the source paper: a=5.34, b=2.34 (paper.md line 346); the spline example 2.06/(2*1.36)=0.76 (paper.md line 329); the log ratio 0.71 computed from a=5.34. Replication run #1 values recorded in attempts_log equal run #2 except the disclosed contaminated W1g-W0g. No baseline quantity is fabricated or misattributed.",
+      "evidence": [
+        "proposal/logs/replication.json compare.R1-R0, W1-W0, heldout_total, reference_2022",
+        "proposal/logs/results_P.json compare.M1-M0 521.93 [322.01,728.79]",
+        "paper.md lines 329, 346",
+        "proposal/attempts_log.md lines 21-28, 44-48"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.code_paper_alignment.methodology_matches_code": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The Methodology matches the code. Von Kries normalisation plus CIE-lightness compression is in colorimetry.py and datasets.cone_signals/stimulus_coords. The derived XYZ to LMS matrix has its S row on zbar only (derive_M constrained). Ekman stimuli use direct fundamental lookup (stimulus_table). The model D = F_a(sum w_k psi(|x_k|/s_k; kappa_k)) with gauges F(0)=0, F'(0)=1, psi(1)=1 and softmax weights is in models._D/pointwise. The per-dataset observation models (probit gray, per-observer MLDS, log-normal Helm per session, exponential-link Ekman) match. K=10 unit-disjoint folds with L*-stratified gray, B=100 training bootstrap, R=4000 paired double bootstrap and selection-aware min are in cv.py and stats.py. The 10-degree triad restriction and arc-vs-chord inputs are in datasets.locus_path/arc_proj. Synthetic analysis uses the same folds. Minor non-material differences: full-data point-estimate fits use 16 random starts (run_cv.py line 32) against the generic '8 random starts'. The sentence 'Response scales are never pooled into one likelihood' coexists with an explicit statement that held-out log-likelihood is summed over datasets, each with its own observation model, which is the task-permitted shared-latent approach.",
+      "evidence": [
+        "proposal/sections/method.tex lines 4-87",
+        "proposal/code/models.py lines 35-47, 59-95",
+        "proposal/code/colorimetry.py lines 35-57, 105-125, 174-199",
+        "proposal/code/datasets.py lines 94-109, 134-201, 230-265",
+        "proposal/code/cv.py lines 17-64; proposal/code/stats.py lines 9-75",
+        "proposal/code/run_cv.py line 32 (n_starts=16 for full-data fit)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.code_paper_alignment.models_in_paper_match_code": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Model names and structures match registry.py and the logged model list (41 models in results_P.json). M0 is cone with no kappa and fixed outer. M1 has a free outer. G1 has a common kappa. C2 ties kappa_L=kappa_M with separate kappa_S. M2 has three kappa plus a, i.e. 6 structural parameters (2 weights + 3 kappa + a). M3_{opp,oppEW,srgb,ciergb,lab,hcl} have the same ties and outer, so the same 6 structural parameters. The rest are M0_B/M1_B per basis, 18 two-channel controls, and the ROT orientation supplement. Bases are fixed, not fitted rotations or data-adaptive linearisations: DKL with the white's luminance weights, equal-weight opponent, sRGB/CIE RGB via M_RGB<-XYZ M^-1 diag(LMS_w), CIELAB/LCh on their own coordinate differences. They match the appendix definitions and table_bases.tex.",
+      "evidence": [
+        "proposal/code/registry.py lines 4-21, 24-65",
+        "proposal/code/colorimetry.py lines 174-199 (linear_basis)",
+        "proposal/code/datasets.py lines 152-167 (diff_proj incl. LCh dH)",
+        "proposal/sections/method.tex lines 37-50; proposal/sections/appendix.tex lines 27-47",
+        "proposal/logs/results_P.json models (41) and logs/table_allmodels_P.tex"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.code_paper_alignment.hyperparameters_match": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Stated hyperparameters match code and run records. kappa is in [0,1e4] and a in [0,1e3] (models.py build). Fold fits use 8 random starts plus a deterministic start; bootstrap refits use warm + deterministic + 2 random (cv.run_task n_starts_full=8, n_starts_boot=2; models.fit). K=10 with seed 20261004; B=100 so 1010 fits per model (run_summary.json: 41 models, 41,410 fits); R=4000. Training-bootstrap seeds are 1000*fold+b. Synthetic studies use 4 random starts plus a deterministic start and 100 data sets per generator (run_synthetic.py; synthetic.out 600 tasks). The triad collinearity threshold is 10 degrees, near-geodesic runs use 170 degrees, and rotations run 0-85 degrees in 5-degree steps. The only unstated difference (16 starts for full-data point-estimate fits) does not contradict a stated value that affects reported held-out results.",
+      "evidence": [
+        "proposal/code/models.py lines 151-158 (bounds), 317-330 (starts)",
+        "proposal/code/cv.py lines 6-7, 53, 85",
+        "proposal/results/P/run_summary.json (B=100, 41 models x 1010 fits, success_rate 1.0)",
+        "proposal/logs/results_P.json (B 100, R 4000)",
+        "proposal/code/run_synthetic.py lines 12-13; proposal/results/logs_run/synthetic.out (600 tasks)",
+        "proposal/code/registry.py line 7 (ROT_ANGLES 0..85 step 5)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.statistical_inference_integrity.simulation_clearly_labeled": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Synthetic data are used only in the identifiability/power study and are consistently labeled. The paper marks them in bold as synthetic in the results paragraph and the identifiability figure caption, the appendix states 'All data in this section are synthetic', and the decision-rate table caption says synthetic. The code and log outputs carry SYNTHETIC flags, and the run_synthetic.py docstring states they are never mixed with real data. Real-data results come only from the provided datasets. No synthetic observation is presented as real.",
+      "evidence": [
+        "proposal/sections/results_synth.tex line 1 ('synthetic data')",
+        "proposal/sections/results_ident.tex lines 22-27 (Fig. ident caption: Synthetic recovery / Synthetic held-out)",
+        "proposal/sections/appendix_extra.tex lines 29-45",
+        "proposal/code/run_synthetic.py lines 1-3, 90 ('SYNTHETIC': True)",
+        "proposal/logs/synthetic_summary.json SYNTHETIC: true; logs/synthetic_calibration.json POST_HOC: true"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.identifiability_disclosure.no_overclaim_cone_specificity": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "The paper does not claim cone specificity. M2 vs best M3 is -92.5 [-406.5,61.8], reported as not established. Verdict (b) 'No' is explicitly defined as 'no evidence that the nonlinearity sits on the cone axes', not evidence for another basis. The 'earned, scoped null' is framed as non-identifiability of where the compression sits, and its limits are fully disclosed and consistent with the logs: per-cone rho CIs span [0,1]; the L-vs-M split is detected in 12% of designed-M2 synthetic sets; coarse C2>M1 is detected in 2% at the fitted size; real CIs are 2.9-8.4x wider than synthetic; at real-data precision fitted-M2 effects exceed the real half-width in 0% of cases; an isotropic cone truth wins the panel test in 53%. The conclusion attributes the null to design and heterogeneity limits. Whether this null meets the task's 'earned' standard is a direction-side scientific judgment. Under the node's own carve-out, low power alone is a scientific weakness, and here it is disclosed rather than contradicted.",
+      "evidence": [
+        "proposal/sections/analysis.tex lines 17-36",
+        "proposal/sections/results_synth.tex lines 1-18",
+        "proposal/sections/conclusion.tex lines 11-21; proposal/sections/abstract.tex lines 11-15",
+        "proposal/logs/synthetic_summary.json (G_M2d M2>C2 0.12; G_C2 C2>M1 0.02; G_M1 M2>best 0.53)",
+        "proposal/logs/numbers.tex CalOppGMtwoAdjPos 0, CalOppRatioMin 2.9, CalOppRatioMax 8.4",
+        "proposal/logs/results_P.json headline_M2_vs_best_panel6 ci_selection_aware [-406.50, 61.75]"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.held_fixed_disclosure.deviations_disclosed": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Compliance claims are borne out by the code. Only provided data are read. The provided CIE 2006 fundamentals and CMFs are used, with a documented XYZ to LMS path, stated whites and von Kries normalisation verified on whites and chromatic references. Per-dataset observation models and K-fold/training-bootstrap discipline are implemented. UQ is present, and the gray DR is reproduced. Every departure is disclosed in Methodology and the Appendix with timestamps in attempts_log: the S-row constrained to zbar, Ekman by direct fundamental lookup, the added deterministic start, the extended near-geodesic segment rule, the merged G_2ch generator, the S2/S5 bug fixes, and the post-hoc calibration. The literal pre-registered pipeline is reported as S8. No held-fixed claim is materially contradicted by the executed configuration.",
+      "evidence": [
+        "proposal/sections/method.tex lines 4-21",
+        "proposal/sections/appendix_extra.tex lines 47-66",
+        "proposal/attempts_log.md lines 7-20, 29-43, 55-89",
+        "proposal/logs/cone_conversion.json white_checks, spectral_check, srgb_primary_Lab_check",
+        "proposal/code/datasets.py lines 22-131; proposal/code/colorimetry.py lines 26-57"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "integrity.execution_claims": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "Explicit execution claims are backed by artifacts. Conversion verification (white and neutral mappings, sRGB primaries within 0.008, 600 nm S example 0.377/0.022 vs 0.0009) is in cone_conversion.json. Converted coordinates are logged for 103 stimulus rows. The replication-run failure and deterministic-start fix match attempts_log and replication.json. The S2/S5 bug fixes and reruns are backed by retained results/S2_buggy and S5_buggy. The design-fix verification is in design_fix_check.json (P, ARC, S1, S3, S4, S6, S7, S8 all <=7.9e-10). All 41,410 primary fits report success (run_summary.json). The synthetic study ran 6 generators x 100 sets. One overstatement: appendix.tex says the convergence table 'summarises the 41,410 fits' and 'For every stored optimum we recomputed the projected gradient ... largest gradient relative to the objective is 7.1e-4'. In fact run_convergence_check.py rechecks only the 11 tabled core models (11,110 optima), and run_summary.json records a fit-time max projected gradient of about 105 for 2ch_oppEW_01_2 (about 1.8e-3 relative). The recheck was actually executed and logged for the models in the referenced table. Fit-time projected gradients and success flags exist for every fit, and no result depends on the difference. I judge this a non-material scope imprecision, not an inspection claimed but never performed. The agent trajectory was not inspected per protocol.",
+      "evidence": [
+        "proposal/sections/appendix.tex lines 49-59 vs proposal/code/run_convergence_check.py line 8 (11 models) and proposal/logs/convergence_gradients_P.json (11 entries, max_rel_pg 7.07e-4)",
+        "proposal/results/P/run_summary.json (41 models, min success_rate 1.0; 2ch_oppEW_01_2 max_proj_grad 104.99)",
+        "proposal/logs/cone_conversion.json white_checks, example_600nm, srgb_primary_Lab_check",
+        "proposal/logs/design_fix_check.json (P 3.3e-10 ... S1 7.9e-10)",
+        "proposal/results/S2_buggy/results_S2_buggy.json; proposal/results/S5_buggy/results_S5_buggy.json",
+        "proposal/results/logs_run/synthetic.out (600 tasks finished)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "integrity.precommitment_claims": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "The paper claims analysis_plan.md (02:57 UTC) fixed the model family, gauge, observation models, folds, bootstrap, selection-aware protocol, identifiability and confound plans before any fitting code existed. The plan header says 2026-10-04T02:57Z, and its mtime (Oct 3 22:58 EDT = 02:58Z) precedes every code file (earliest 03:04Z) and every log (cone_conversion.json 03:04:16Z; replication run #1 about 03:10-03:14Z; P run started 03:18:06Z). The plan's content matches the code and paper: model table, gauges, obs models, seeds, B, R, decision rules, S1-S7, generators, 10-degree and arc/chord controls. Post-plan changes are disclosed with timestamps and were made either before fitting (S-row constraint and S8, 03:04Z) or on non-outcome grounds (optimiser safeguard, bug fixes, segment-rule extension). The post-hoc calibration and exploratory design check are labeled as such. Calling S8 one of 'eight pre-registered' specifications is slightly loose, but it is disclosed as the literal pre-registered pipeline. Parenthetical times in attempts_log ('12:10-12:2xZ', '~12:22Z') do not match UTC, but they do not indicate backdating or post-result selection. The trajectory was not inspected per protocol.",
+      "evidence": [
+        "proposal/analysis_plan.md line 3 (Written 2026-10-04T02:57Z); file mtime Oct 3 22:58 EDT",
+        "proposal/code/* mtimes (earliest run_cone_conversion.py 23:04 EDT = 03:04Z)",
+        "proposal/logs/cone_conversion.json timestamp_utc 03:04:16Z; proposal/results/P/run_summary.json started_utc 03:18:06Z",
+        "proposal/sections/appendix_extra.tex lines 47-66; proposal/sections/method.tex lines 73-77",
+        "proposal/attempts_log.md lines 6-20, 85-89"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.selective_reporting.model_variants_reported": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "All completed model variants are reported. The appendix table lists all 41 primary models (M0, M1, G1, C2, M2, six M3, M0_B, M1_B, 18 two-channel). Both the six-member panel (with the extra equal-weight opponent) and the five-required-member headlines are reported. The rotation supplement (17 angles) and the arc-input set (11 models, table_arc) are reported. The headline is taken against the best-performing control with selection-aware CIs, not the weakest. The discarded buggy S2/S5 runs are retained and disclosed, and the fixes did not favour the cone model (S5_buggy headline +11.0 n.s. became -96.8 significant; S2_buggy -102.5 became -73.6, both significant against the cone basis).",
+      "evidence": [
+        "proposal/logs/table_allmodels_P.tex (41 rows)",
+        "proposal/logs/results_P.json headline_M2_vs_best_panel6 and headline_M2_vs_best_panel5",
+        "proposal/logs/table_arc.tex; proposal/logs/results_ROT.json",
+        "proposal/results/S2_buggy/results_S2_buggy.json; proposal/results/S5_buggy/results_S5_buggy.json vs logs/results_S2.json, results_S5.json"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.selective_reporting.all_specifications_reported": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Every run directory under results/ appears in the paper: P, ARC, ROT, S1-S8, replication and synthetic. All eight secondary specifications are in table_sens, including the unfavourable significant S4 anisotropy and the five specifications where a non-cone basis is significantly better. Discarded attempts are disclosed: S2_buggy, S5_buggy, replication run #1 with its numbers, the partial P launch, and the exploratory design check. Sensitivity CIs consistently use the test-only CI field for the B=0 specifications. The alternative-seed CI field in the same logs gives the same significance pattern, so there is no outcome-dependent choice. No completed specification is hidden while the set is presented as complete.",
+      "evidence": [
+        "proposal/results/ (ARC, P, ROT, S1-S8, S2_buggy, S5_buggy, replication, synthetic)",
+        "proposal/results/logs_run/secondary.out (run sequence)",
+        "proposal/logs/table_sens.tex; proposal/code/make_report_numbers.py lines 325-366",
+        "proposal/attempts_log.md lines 21-32, 49-61, 67-79",
+        "proposal/sections/appendix_extra.tex lines 1-17, 47-66"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.held_fixed_disclosure.data_sources_respected": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The code reads only provided files under data/: the gray 2AFC CSV, the Wiebel MLDS raw MLDS and Matching CSVs, the Helm long dissimilarities and stimulus CIE table, the Ekman dissimilarities and stimulus table, and the CVRL linss2_10e_1 and ciexyz31_1 tables. workdir_outside_proposal/data contains only the task-provided files (mtimes at staging time, 22:37 EDT). No downloaded perception data was found. The paper states 'Only the provided public data are used.' Standard colorimetric constants (illuminant chromaticities, sRGB/CIE RGB primaries, CIE 2006 V weights) are not perception datasets.",
+      "evidence": [
+        "proposal/code/datasets.py lines 22-89, 112-131",
+        "proposal/code/colorimetry.py lines 11-13, 26-32",
+        "workdir_outside_proposal/data/{gray,chromatic,cone_fundamentals,observer_responses} listing",
+        "proposal/sections/setup.tex lines 4-16"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.data_provenance_integrity.only_provided_datasets": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Only provided datasets are used (see datasets.py and colorimetry.py file reads), and each is cited with source and licence: lanl/color BSD-3, OSF 58jz3 CC BY 4.0, smacof GPL-3 for Helm and Ekman, CVRL. Datasets are not relabelled. The Helm session handling (11 colour-normal sessions N1-N10 incl. N6a/N6b; 5 colour-deficient CD1, CD2a, CD2b, CD3, CD4 excluded) matches helm_dissimilarities_long.csv. The gray data contain no participant IDs (columns trial, Ls, Lt1, Lt2, R), consistent with the stated triad-disjoint folds. Response scales keep per-dataset observation models. No external dataset was used.",
+      "evidence": [
+        "proposal/code/datasets.py lines 13-15, 22-89",
+        "proposal/logs/data_summary.json (helm excluded_sessions CD1, CD2a, CD2b, CD3, CD4; n_sessions 11)",
+        "workdir_outside_proposal/data/gray/gray_complete_data_release.csv header (trial, Ls, Lt1, Lt2, R)",
+        "proposal/references.bib entries lanlcolor, wiebel2017, deleeuw2009, cvrl",
+        "proposal/sections/setup.tex lines 4-16"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    }
+  }
+}

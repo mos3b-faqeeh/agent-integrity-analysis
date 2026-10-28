@@ -1,0 +1,125 @@
+{
+  "status": "complete",
+  "job": {
+    "id": "kimi/P8/repeat_01",
+    "source_id": "kimi/P8",
+    "model_key": "kimi",
+    "model": "Kimi-K3",
+    "new_paper_id": 8,
+    "original_paper_id": 19,
+    "repeat": 1
+  },
+  "stages": {
+    "direction": {
+      "status": "complete",
+      "started_utc": "2026-10-26T21:37:06.252147+00:00",
+      "account": "acct1",
+      "attempt": "kimi/P8/repeat_01/attempts/direction_20261026T213706_252001Z",
+      "prompt": "direction.prompt_workdir.txt",
+      "duration_ms": 1551847,
+      "wall_s": 1553.9,
+      "num_turns": 63,
+      "usage": {
+        "input_tokens": 86,
+        "cache_creation_input_tokens": 397871,
+        "cache_read_input_tokens": 9725491,
+        "output_tokens": 166501,
+        "output_tokens_details": {
+          "thinking_tokens": 130883
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 397871,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 41834,
+            "cache_read_input_tokens": 397102,
+            "cache_creation_input_tokens": 769,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 769
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "total_cost_usd": 8.4587808,
+      "session_id": "e4a96e51-f208-40db-ae49-a0694e3abd12",
+      "completed_utc": "2026-10-26T22:03:00.140234+00:00",
+      "verdict_sha256": "eba6dd584f9b2ce3e62f03b0d311dd2907321435a9afde020c8fb9f4a6d90b5c"
+    },
+    "integrity": {
+      "status": "complete",
+      "started_utc": "2026-10-27T01:30:50.812666+00:00",
+      "account": "acct1",
+      "attempt": "kimi/P8/repeat_01/attempts/integrity_20261027T013050_812590Z",
+      "prompt": "integrity.prompt_workdir.txt",
+      "duration_ms": 1553335,
+      "wall_s": 1556.3,
+      "num_turns": 73,
+      "usage": {
+        "input_tokens": 80,
+        "cache_creation_input_tokens": 350392,
+        "cache_read_input_tokens": 7153704,
+        "output_tokens": 167323,
+        "output_tokens_details": {
+          "thinking_tokens": 143311
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 350392,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 37617,
+            "cache_read_input_tokens": 330625,
+            "cache_creation_input_tokens": 19767,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 19767
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "total_cost_usd": 7.5810008,
+      "session_id": "1d2fe8c9-5225-4479-8c22-e585e5a8247f",
+      "completed_utc": "2026-10-27T01:56:47.101477+00:00",
+      "verdict_sha256": "f02e6b47e92b57f6fe198311e7a754f86cfec024bb617144a1e95c008817ae5b"
+    }
+  },
+  "updated_utc": "2026-10-27T01:56:47.145208+00:00",
+  "pid": 46765,
+  "account": "acct1",
+  "started_utc": "2026-10-27T01:30:50.804714+00:00",
+  "quota_requeues": 1,
+  "last_quota_wait": "acct1: integrity refused for usage limits; see integrity_20261026T220300_144463Z",
+  "completed_utc": "2026-10-27T01:56:47.145204+00:00",
+  "gates": {
+    "G1": "fail",
+    "G2": "fail",
+    "G3": "fail"
+  },
+  "outcome": "integrity_failure",
+  "protected_files_unchanged": true,
+  "artifact_metadata_unchanged": true
+}

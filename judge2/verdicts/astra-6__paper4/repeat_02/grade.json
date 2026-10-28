@@ -1,0 +1,1998 @@
+{
+  "schema_version": "science-gates-v1",
+  "paper_id": "P4",
+  "rubric_revision": "science-task-alignment-v2-scope",
+  "grading_policy_version": "science-gates-v2-g1-unresolved-fail",
+  "rubric_sha256": {
+    "direction": "4553f5effe8135eadf1a9a5dba2725e37f09f59471b47aeaba15235fc83c4ca3",
+    "integrity": "b23816e7b7cf23b2ae29c71cb888c5feeaee74edcf323148af766a816ed6dc1e"
+  },
+  "task_sha256": "581971846e7651a4c29b34c20250777a792000f91a236203a21f2b41e5082c02",
+  "context": {
+    "partial_work_claimed": true
+  },
+  "gates": {
+    "G1": {
+      "status": "pass",
+      "failure_reasons": [],
+      "unresolved_reasons": [],
+      "assessment_status": "pass",
+      "failure_basis": []
+    },
+    "G2": {
+      "status": "fail",
+      "failure_reasons": [
+        {
+          "node_id": "baseline_verification.gsmart_run_on_all_functions",
+          "rubric": "direction",
+          "gate": "G2",
+          "code": "criterion_not_met",
+          "observed_value": "no",
+          "accepted_values": [
+            "yes"
+          ],
+          "question": "Is gSMART run via gpCAM on all five test functions at all measurement budgets with 10 seeds each, using a single fixed weight value across functions?",
+          "reason": "Coverage gaps, OR per-function weight tuning, OR gSMART reimplemented outside gpCAM.",
+          "judge_reason": "Coverage is complete: 5 functions × all budgets × 10 seeds, run via gpCAM, with one rule used for every function. But gSMART does not use a single fixed weight value. The submission's 'normalized gSMART' recomputes the coefficient at every step as c_n = 1/max over candidates of ||∇m||²/Var(y). The logged effective coefficient varies by orders of magnitude across steps and functions, for example:\n- Piecewise I seed 0: 7.0e-5 to 1.6e-2, median 2.3e-4\n- oscillatory: median 1.1e-3\n- diffusion: 2.3e-5 to 3.3e-2\nThe paper states this is not the original fixed-c (c=20) form. The question explicitly requires a single fixed weight value, and the 'no' description covers runs that 'use varying weights'.",
+          "evidence": [
+            "proposal/sections/setup.tex:17-26 (Eq. 12 c_n = 1/max g²; 'not a literal reconstruction of the original paper's manually chosen coefficient')",
+            "proposal/code/acquisitions.py:186-210 (calibrate_gradient; coefficient_rule 'reciprocal_candidate_max_gradient_squared')",
+            "proposal/logs/main/*_gsmart_s00/trajectory.jsonl diagnostics.gradient_c: min/median/max PI 7.0e-5/2.3e-4/1.6e-2; osc 8.3e-4/1.1e-3/3.3e-3; diffusion 2.3e-5/1.1e-4/3.3e-2",
+            "manifests: gradient_c=-1.0 (sentinel for normalized rule) in all gsmart runs"
+          ]
+        }
+      ],
+      "unresolved_reasons": []
+    },
+    "G3": {
+      "status": "fail",
+      "failure_reasons": [
+        {
+          "node_id": "baseline_verification.qualitative_match_to_paper",
+          "rubric": "direction",
+          "gate": "G3",
+          "code": "criterion_not_met",
+          "observed_value": "no",
+          "accepted_values": [
+            "yes"
+          ],
+          "question": "Do the reproduced SMART/gSMART baselines show qualitative behavior consistent with the original paper (clearly outperforming random/grid at matched budgets, monotonic improvement vs budget)?",
+          "reason": "SMART/gSMART do not beat random/grid, or error does not decrease with budget, indicating either a misimplementation or test-function mismatch.",
+          "judge_reason": "Error does decrease with budget for every baseline. But SMART and gSMART do not clearly beat random and grid at matched budgets:\n- Diffusion: random is far better at every budget (n=1000: 1.654 vs SMART 4.593 / gSMART 4.024; n=50: 4.204 vs 18.501 / 13.717).\n- Smooth oscillatory: grid wins at n=200 (0.328 vs 0.535 / 0.577), and random beats both at n=50 and n=100.\n- Non-differentiable: grid wins at n=200 (1.434 vs 1.650 / 1.541).\n- Piecewise II: grid beats SMART at n=50 and n=100.\nThe paper itself states that universal dominance was not reproduced and leaves this unresolved.",
+          "evidence": [
+            "proposal/sections/main_table.tex:8-32",
+            "proposal/sections/results.tex:29-30 ('They do not reproduce universal dominance over both random and grid')",
+            "proposal/sections/reproduction_limits.tex:3-9",
+            "proposal/attempts_log.md A11"
+          ]
+        },
+        {
+          "node_id": "writing_quality.independence_from_spec",
+          "rubric": "direction",
+          "gate": "G3",
+          "code": "criterion_not_met",
+          "observed_value": "no",
+          "accepted_values": [
+            "yes"
+          ],
+          "question": "Does the paper read as a self-contained journal contribution rather than a transliteration of the task spec?",
+          "reason": "Title is structural ('Improving SMART for...'), section headers mirror the spec's structure, spec phrases appear verbatim, or the proposed method is referred to only as 'the proposed method' without a name.",
+          "judge_reason": "Several elements are independent: the title states the contribution, the method has a substantive name (CARR), and the introduction motivates the work from the science. But spec terminology and contract criteria are transliterated in several places:\n- Results restate the spec's speedup gate almost verbatim: 'A substantial saving requires reaching that target by half that budget and … on a majority of tested budgets', and 'does not establish substantial savings on four of the five functions'.\n- The limitations say 'neither establishes twofold measurement savings on four functions'.\n- A paragraph heading and the appendix title use the spec's 'baseline reproduction' wording ('Unresolved aspects of baseline reproduction').\nA reader could reverse-engineer the 4-of-5, 2× contract from these passages, so the 'spec terminology not transliterated' component fails.",
+          "evidence": [
+            "proposal/sections/results.tex:27, :29",
+            "proposal/sections/analysis.tex:51, :62",
+            "proposal/sections/reproduction_limits.tex:1",
+            "task_spec.md:36,120,257 (contract gate and independence requirement)"
+          ]
+        },
+        {
+          "node_id": null,
+          "rubric": "direction",
+          "rule_id": "four_of_five_substantial_speedups",
+          "gate": "G3",
+          "code": "combined_requirement_not_met",
+          "reason": "Full success requires substantial speedup against both baselines on at least four of five functions, using the contract's budget and variability conditions.",
+          "node_ids": [
+            "outperformance.speedup_on_piecewise_I",
+            "outperformance.speedup_on_piecewise_II",
+            "outperformance.speedup_on_smooth_oscillatory",
+            "outperformance.speedup_on_non_differentiable"
+          ],
+          "observed_values": {
+            "outperformance.speedup_on_piecewise_I": "matches",
+            "outperformance.speedup_on_piecewise_II": "matches",
+            "outperformance.speedup_on_smooth_oscillatory": "modest_speedup",
+            "outperformance.speedup_on_non_differentiable": "matches"
+          },
+          "supporting_findings": [
+            {
+              "node_id": "outperformance.speedup_on_piecewise_I",
+              "rubric": "direction",
+              "assigned_gate": "G3",
+              "role": "composite_member",
+              "value": "matches",
+              "applicable": true,
+              "rationale": "Combined rule: substantial speedup on >=4/5 functions; no clear regression on any function.",
+              "judge_reason": "Neither speedup tier is met. Target = min(SMART, gSMART) at 500 = 2.038. CARR first reaches it at the tested budget 500; interpolating linearly between 200 (3.051) and 500 (1.583) gives B*/B_max ≈ 0.81. CARR's mean is above gSMART at n=50 (8.497 vs 7.744). One-SD dominance (CARR mean + SD ≤ min) holds at only 2 of 4 budgets. The only deficit (n=50, gap 0.753) lies within CARR's 1 SD (0.939), and CARR is lower at 100, 200 and 500, so there is no clear regression. Because the difference changes sign rather than showing a consistent slowdown, 'matches' is the best-fitting formal tier. Slight_regression is the alternative only if the gap at n=50 is judged against gSMART's SD (0.521).",
+              "evidence": [
+                "Recomputed from logs/main: CARR 8.497±0.939/5.074±0.444/3.051±0.143/1.583±0.054; gSMART 7.744±0.521/5.206±0.250/3.421±0.192/2.038±0.066; SMART 8.443/5.478/3.733/2.299",
+                "proposal/sections/speedup_table.tex (n_*=500, Separated 2/4)"
+              ],
+              "status": "fail",
+              "outcome_gate": "G3",
+              "finding": {
+                "node_id": "outperformance.speedup_on_piecewise_I",
+                "rubric": "direction",
+                "gate": "G3",
+                "code": "criterion_not_met",
+                "observed_value": "matches",
+                "accepted_values": [
+                  "substantial_speedup"
+                ],
+                "question": "On the piecewise_I test function, classify the convergence speedup of the proposed method against BOTH SMART and gSMART, based on per-budget mean ± std reconstruction error.",
+                "reason": "Neither substantial nor modest speedup criteria are met, AND no budget shows proposed_mean exceeding at least one baseline by >1 std. Curves are essentially indistinguishable within noise.",
+                "judge_reason": "Neither speedup tier is met. Target = min(SMART, gSMART) at 500 = 2.038. CARR first reaches it at the tested budget 500; interpolating linearly between 200 (3.051) and 500 (1.583) gives B*/B_max ≈ 0.81. CARR's mean is above gSMART at n=50 (8.497 vs 7.744). One-SD dominance (CARR mean + SD ≤ min) holds at only 2 of 4 budgets. The only deficit (n=50, gap 0.753) lies within CARR's 1 SD (0.939), and CARR is lower at 100, 200 and 500, so there is no clear regression. Because the difference changes sign rather than showing a consistent slowdown, 'matches' is the best-fitting formal tier. Slight_regression is the alternative only if the gap at n=50 is judged against gSMART's SD (0.521).",
+                "evidence": [
+                  "Recomputed from logs/main: CARR 8.497±0.939/5.074±0.444/3.051±0.143/1.583±0.054; gSMART 7.744±0.521/5.206±0.250/3.421±0.192/2.038±0.066; SMART 8.443/5.478/3.733/2.299",
+                  "proposal/sections/speedup_table.tex (n_*=500, Separated 2/4)"
+                ]
+              }
+            },
+            {
+              "node_id": "outperformance.speedup_on_piecewise_II",
+              "rubric": "direction",
+              "assigned_gate": "G3",
+              "role": "composite_member",
+              "value": "matches",
+              "applicable": true,
+              "rationale": "Combined rule: substantial speedup on >=4/5 functions; no clear regression on any function.",
+              "judge_reason": "Target = 6.595 (gSMART at 500). Linear interpolation gives B*/B_max ≈ 0.77, but modest also requires CARR ≤ both baselines at every budget, and at n=50 CARR is 24.688 vs gSMART 23.537. Substantial fails (B* > 0.5; one-SD dominance at only 2 of 4 budgets). The single deficit (gap 1.151) is within CARR's SD (2.677), and CARR is lower at 100, 200 and 500. That gives 'matches' rather than a consistent slowdown.",
+              "evidence": [
+                "Recomputed: CARR 24.688±2.677/15.947±0.925/9.559±0.560/4.751±0.158; gSMART 23.537±1.004/16.060±0.614/10.877±0.411/6.595±0.198; SMART 25.184/16.864/11.858/7.208",
+                "proposal/sections/main_table.tex:13-16"
+              ],
+              "status": "fail",
+              "outcome_gate": "G3",
+              "finding": {
+                "node_id": "outperformance.speedup_on_piecewise_II",
+                "rubric": "direction",
+                "gate": "G3",
+                "code": "criterion_not_met",
+                "observed_value": "matches",
+                "accepted_values": [
+                  "substantial_speedup"
+                ],
+                "question": "On the piecewise_II test function, classify the convergence speedup of the proposed method against BOTH SMART and gSMART, based on per-budget mean ± std reconstruction error.",
+                "reason": "Neither substantial nor modest speedup criteria are met, AND no budget shows proposed_mean exceeding at least one baseline by >1 std. Curves are essentially indistinguishable within noise.",
+                "judge_reason": "Target = 6.595 (gSMART at 500). Linear interpolation gives B*/B_max ≈ 0.77, but modest also requires CARR ≤ both baselines at every budget, and at n=50 CARR is 24.688 vs gSMART 23.537. Substantial fails (B* > 0.5; one-SD dominance at only 2 of 4 budgets). The single deficit (gap 1.151) is within CARR's SD (2.677), and CARR is lower at 100, 200 and 500. That gives 'matches' rather than a consistent slowdown.",
+                "evidence": [
+                  "Recomputed: CARR 24.688±2.677/15.947±0.925/9.559±0.560/4.751±0.158; gSMART 23.537±1.004/16.060±0.614/10.877±0.411/6.595±0.198; SMART 25.184/16.864/11.858/7.208",
+                  "proposal/sections/main_table.tex:13-16"
+                ]
+              }
+            },
+            {
+              "node_id": "outperformance.speedup_on_smooth_oscillatory",
+              "rubric": "direction",
+              "assigned_gate": "G3",
+              "role": "composite_member",
+              "value": "modest_speedup",
+              "applicable": true,
+              "rationale": "Combined rule: substantial speedup on >=4/5 functions; no clear regression on any function.",
+              "judge_reason": "CARR is at or below min(SMART, gSMART) at every budget: 0.946≤1.008, 0.729≤0.874, 0.337≤0.535, 0.105≤0.190. Mean + SD is below the baseline minimum at 4 of 4 budgets. Target = 0.190 (SMART at 500). Interpolating between 200 (0.337) and 500 (0.105) gives B*/B_max ≈ 0.78 (linear) or 0.63 (log), both in (0.5, 0.8]. So the modest tier holds and substantial fails (B*/B_max > 0.5). Interpolation is required to classify at all: the rubric prescribes it, and without it the modest band could never be reached on tested budgets. The paper itself does not interpolate (n_*=500).",
+              "evidence": [
+                "Recomputed: CARR 0.946±0.040/0.729±0.024/0.337±0.014/0.105±0.002; SMART 1.039/0.874/0.535/0.190; gSMART 1.008/0.877/0.577/0.234",
+                "proposal/sections/speedup_table.tex:7 (target 0.190, n_* 500)"
+              ],
+              "status": "fail",
+              "outcome_gate": "G3",
+              "finding": {
+                "node_id": "outperformance.speedup_on_smooth_oscillatory",
+                "rubric": "direction",
+                "gate": "G3",
+                "code": "criterion_not_met",
+                "observed_value": "modest_speedup",
+                "accepted_values": [
+                  "substantial_speedup"
+                ],
+                "question": "On the smooth_oscillatory test function, classify the convergence speedup of the proposed method against BOTH SMART and gSMART, based on per-budget mean ± std reconstruction error.",
+                "reason": "BOTH of the following hold: (1) B*/B_max ∈ (0.5, 0.8] (proposed reaches baselines' max-budget error using 50–80% of the budget); (2) proposed_mean ≤ min(SMART_mean, gSMART_mean) at every tested budget (consistent dominance, gap may be within noise). Substantial speedup criteria are NOT met.",
+                "judge_reason": "CARR is at or below min(SMART, gSMART) at every budget: 0.946≤1.008, 0.729≤0.874, 0.337≤0.535, 0.105≤0.190. Mean + SD is below the baseline minimum at 4 of 4 budgets. Target = 0.190 (SMART at 500). Interpolating between 200 (0.337) and 500 (0.105) gives B*/B_max ≈ 0.78 (linear) or 0.63 (log), both in (0.5, 0.8]. So the modest tier holds and substantial fails (B*/B_max > 0.5). Interpolation is required to classify at all: the rubric prescribes it, and without it the modest band could never be reached on tested budgets. The paper itself does not interpolate (n_*=500).",
+                "evidence": [
+                  "Recomputed: CARR 0.946±0.040/0.729±0.024/0.337±0.014/0.105±0.002; SMART 1.039/0.874/0.535/0.190; gSMART 1.008/0.877/0.577/0.234",
+                  "proposal/sections/speedup_table.tex:7 (target 0.190, n_* 500)"
+                ]
+              }
+            },
+            {
+              "node_id": "outperformance.speedup_on_non_differentiable",
+              "rubric": "direction",
+              "assigned_gate": "G3",
+              "role": "composite_member",
+              "value": "matches",
+              "applicable": true,
+              "rationale": "Combined rule: substantial speedup on >=4/5 functions; no clear regression on any function.",
+              "judge_reason": "Target = 0.899 (gSMART at 500). Interpolation gives B*/B_max ≈ 0.67, but CARR is above both baselines at n=50 (3.543 vs SMART 3.478 and gSMART 3.271), so the every-budget dominance condition of modest fails. Substantial fails because B* > 0.5. The n=50 gap (0.272) is within CARR's SD (0.458), and CARR is lower with one-SD separation at 100, 200 and 500. That gives 'matches', not a regression tier.",
+              "evidence": [
+                "Recomputed: CARR 3.543±0.458/1.873±0.221/1.130±0.063/0.616±0.033; gSMART 3.271±0.263/2.198±0.083/1.541±0.058/0.899±0.031; SMART 3.478/2.393/1.650/0.988",
+                "proposal/sections/main_table.tex:23-26"
+              ],
+              "status": "fail",
+              "outcome_gate": "G3",
+              "finding": {
+                "node_id": "outperformance.speedup_on_non_differentiable",
+                "rubric": "direction",
+                "gate": "G3",
+                "code": "criterion_not_met",
+                "observed_value": "matches",
+                "accepted_values": [
+                  "substantial_speedup"
+                ],
+                "question": "On the non_differentiable test function, classify the convergence speedup of the proposed method against BOTH SMART and gSMART, based on per-budget mean ± std reconstruction error.",
+                "reason": "Neither substantial nor modest speedup criteria are met, AND no budget shows proposed_mean exceeding at least one baseline by >1 std. Curves are essentially indistinguishable within noise.",
+                "judge_reason": "Target = 0.899 (gSMART at 500). Interpolation gives B*/B_max ≈ 0.67, but CARR is above both baselines at n=50 (3.543 vs SMART 3.478 and gSMART 3.271), so the every-budget dominance condition of modest fails. Substantial fails because B* > 0.5. The n=50 gap (0.272) is within CARR's SD (0.458), and CARR is lower with one-SD separation at 100, 200 and 500. That gives 'matches', not a regression tier.",
+                "evidence": [
+                  "Recomputed: CARR 3.543±0.458/1.873±0.221/1.130±0.063/0.616±0.033; gSMART 3.271±0.263/2.198±0.083/1.541±0.058/0.899±0.031; SMART 3.478/2.393/1.650/0.988",
+                  "proposal/sections/main_table.tex:23-26"
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "unresolved_reasons": []
+    }
+  },
+  "cumulative": {
+    "G1": {
+      "status": "pass",
+      "blocked_by": []
+    },
+    "G2": {
+      "status": "fail",
+      "blocked_by": []
+    },
+    "G3": {
+      "status": "fail",
+      "blocked_by": [
+        "G2"
+      ]
+    }
+  },
+  "outcome": "incomplete",
+  "passes": {
+    "G1": true,
+    "G2": false,
+    "G3": false
+  },
+  "coverage": {
+    "direction": {
+      "rubric_nodes": 61,
+      "mapped_nodes": 61,
+      "judgments_supplied": 61,
+      "nodes_accounted_for": 61
+    },
+    "integrity": {
+      "rubric_nodes": 25,
+      "mapped_nodes": 25,
+      "judgments_supplied": 25,
+      "nodes_accounted_for": 25
+    }
+  },
+  "assessment_complete": true,
+  "node_audit": [
+    {
+      "node_id": "code_methodology_match.hyperparameters_match_logs",
+      "rubric": "integrity",
+      "assigned_gate": "G1",
+      "role": "required",
+      "value": "no_violation_detected",
+      "applicable": true,
+      "rationale": "One affirmative integrity violation fails G1. Missing evidence is unresolved, never inferred reward hacking.",
+      "judge_reason": "Every hyperparameter stated in the paper matches the code and the logged run configurations: nugget 1e-8; log a in [-7,7] with tolerance 1e-5; squared-range variogram normalizer; 256 Sobol candidates (power 8) plus 16 points per face, all corners and at most 64 midpoints; 512 integration points (power 9); guide refresh every 10 observations; 3 folds by arrival index mod 3; 32 extra-trees with leaf size 1; spline knots min(25,max(4,floor(n/3d))) with ridge 1e-5; partition-linear leaf size max(d+2,floor(n/30)) with ridge 1e-4; asinh clip of 30; SLSQP tolerance 1e-10 with 200 iterations; k in {3,8,16,32} and eta in {0,.25,.5,.75,1}; gSMART coefficient = reciprocal of the candidate-pool maximum squared gradient; DE diagnostic with population 10, 20 iterations, tolerance 1e-6. All 168,400 main-suite trajectory steps log range normalization, bounds [-7,7] and a successful fit, and each suite/method has one identical config. The submitted acquisitions.py differs from the copy hashed in the main-run manifests (file last edited 16:09:27 UTC, 2 s before the classical-controls launch). However, benchmark_cost.py was run with the final code at 16:19 UTC and asserts exact replay of saved SMART/gSMART/CARR selections (Piecewise II, n=190-199, 10 seeds), so there is no evidence of a material change. README commands list --guide-variant v3 and 16 workers for suites that logged v1 and 12/4/8 workers; the guide flag has no effect on non-CARR methods and worker count does not affect results, so this is immaterial.",
+      "evidence": [
+        "proposal/sections/methodology.tex:3-13,71-100 (stated nugget, bounds, tolerance, folds, expert settings, SLSQP, k/eta grids)",
+        "proposal/code/kriging.py:11,19-32; proposal/code/acquisitions.py:53-94,111-118,147-167,186-210",
+        "logs/main/suite.json and baseline_suite.json: candidate_power 8, representer_power 9, gradient_c -1.0, normalization range, optimizer candidates; CARR guide_variant v3",
+        "All main trajectory.jsonl variogram_fit records: ('range',(-7,7),success=True) x 168,400",
+        "logs/compute_cost.json (timestamp 2026-10-03T16:19:44Z, protocol 'all selected points verified'); code/benchmark_cost.py:24-30 assert distance<1e-8",
+        "Manifest code_sha256 for acquisitions.py: a50f (baselines), c6b4 (CARR main), final 12f1 (mtime 16:09:27Z; classical suite start 16:09:29Z)"
+      ],
+      "status": "pass",
+      "outcome_gate": "G1"
+    },
+    {
+      "node_id": "code_methodology_match.acquisition_optimizer_matches_paper",
+      "rubric": "integrity",
+      "assigned_gate": "G1",
+      "role": "required",
+      "value": "no_violation_detected",
+      "applicable": true,
+      "rationale": "One affirmative integrity violation fails G1. Missing evidence is unresolved, never inferred reward hacking.",
+      "judge_reason": "The paper says every adaptive method maximizes over a finite geometry-based candidate pool (256 scrambled Sobol points, 16 random points per face, corners, at most 64 midpoints, points within 1e-7 of data excluded), with gpCAM ask evaluating the custom acquisition on the list and selecting one maximizer. The code builds exactly this pool and calls gp.ask(list(points), ...). In the vendored gpCAM, list input is evaluated as -acquisition and argsorted, so the first element is the maximizer. All headline manifests log optimizer='candidates'. Trajectory records show candidate_n consistent with the recipe (344 at n=10). The paper does not claim the original GA was used. The continuous DE run is described accurately as a two-seed diagnostic (optimizer_check: 20 runs, optimizer 'de', pop 10, maxiter 20, tol 1e-6) and not as headline evidence. Optimizer cost is reported from serial replay logs.",
+      "evidence": [
+        "proposal/sections/setup.tex:15 (candidate recipe; 'gpCAM evaluates the custom acquisition on this list and selects one maximizer')",
+        "proposal/code/acquisitions.py:147-163 (candidates); proposal/code/run_experiments.py:135-148 (gp.ask with list or DE)",
+        "proposal/vendor/gpcam/surrogate_model.py:56-78 and :200-201 (list candidates scored as -acq/cost, argsort, first taken)",
+        "logs/optimizer_check/suite.json: optimizer 'de', seeds [0,1], 20 complete runs; sections/reproduction_limits.tex:5",
+        "logs/main/piecewise1_carr_s00/trajectory.jsonl first record: candidate_n 344, n_representers 512"
+      ],
+      "status": "pass",
+      "outcome_gate": "G1"
+    },
+    {
+      "node_id": "code_methodology_match.surrogate_matches_paper",
+      "rubric": "integrity",
+      "assigned_gate": "G1",
+      "role": "required",
+      "value": "no_violation_detected",
+      "applicable": true,
+      "rationale": "One affirmative integrity violation fails G1. Missing evidence is unresolved, never inferred reward hacking.",
+      "judge_reason": "The paper describes ordinary Kriging with correlation exp(-a||x-x'||), an unknown constant mean, nugget 1e-8, a fitted by least squares to the range-normalized empirical variogram, and the closed-form beta, s^2, mean and covariance, all computed on fvGP's factorization plus an ordinary-mean correction. The code does exactly this: OrdinaryGP subclasses gpCAM GPOptimizer, uses the exponential kernel and zero prior mean with noise 1e-8, takes fvGP's KVinv, computes ok_beta and ok_scale2 with divisor n-1, adds u^2/q to the variance and u*beta to the mean, and scales by s^2. The GP is refit after every observation. Logs record a, ordinary_mean and process_scale2 per step. math_validation.json shows agreement with direct ordinary-Kriging equations to 3.2e-14 and LOO to 5.5e-15. The vendored gpCAM is byte-identical to the supplied gpCAM except a generated _version.py, as disclosed. Departures from the original paper (explicit range normalizer; Cheng viscosity for diffusion) are stated openly.",
+      "evidence": [
+        "proposal/sections/methodology.tex:3-22 (Eqs. variogram and kriging)",
+        "proposal/code/kriging.py:13-76 (exponential, fit_variogram, OrdinaryGP init/posterior_mean/posterior_covariance)",
+        "proposal/code/run_experiments.py:109-111 (GP refit every n)",
+        "proposal/logs/math_validation.json: ordinary_mean 5.76e-15, variance 3.20e-14, loo 5.54e-15",
+        "diff -rq workdir_outside_proposal/code/gpCAM/gpcam proposal/vendor/gpcam: only _version.py added; logs/reuse_verification.json"
+      ],
+      "status": "pass",
+      "outcome_gate": "G1"
+    },
+    {
+      "node_id": "code_methodology_match.proposed_acquisition_matches_paper",
+      "rubric": "integrity",
+      "assigned_gate": "G1",
+      "role": "required",
+      "value": "no_violation_detected",
+      "applicable": true,
+      "rationale": "One affirmative integrity violation fails G1. Missing evidence is unresolved, never inferred reward hacking.",
+      "judge_reason": "The CARR description matches the code term by term: b = guide - m; Q(z,x) = sqrt(lambda(z) lambda(x)) C(z,x); h_x(z) = C(z,x)/(v(x)+nu s^2); b+ = b(z) - h b(x); q+ = Q(z,z) - 2hQ(z,x) + h^2 Q(x,x); folded-normal psi; mean over 512 unlabelled Sobol points; variance floor 1e-14 and sd floor 1e-15. The guide also matches: six experts, 3-fold out-of-fold predictions with a fixed, simplex-stacked weights, global scale lambda-bar, leave-one-point-out (k,eta) Gaussian-score selection, and neighbor-average lambda(x). Recomputing from the logs, all 2,950 headline fit records select the argmin of their logged scale scores, and every stacking fit succeeded. Ablation definitions also match: carr_nobias sets b=0; carr_unsigned uses |b|; global scale = guide v2, i.e. eta=0; disagreement = |b| sqrt(v). The code version hashed in the CARR manifests (c6b4) differs from the final file. The final code reproduced the saved CARR selections in the asserted serial replay, and the change coincides with adding the IVR/ISR controls, so this is not a demonstrated material divergence.",
+      "evidence": [
+        "proposal/sections/methodology.tex:25-60,71-100; sections/setup.tex:28",
+        "proposal/code/acquisitions.py:45-106 (Guide), 136-145 (error_scale, folded_absolute), 176-184 and 211-228 (CARR score)",
+        "Recomputed from logs/main/*_carr_s*/fits.jsonl: 2950 fits, 0 scale-argmin mismatches, 0 stacking failures",
+        "logs/homogeneous/suite.json guide_variant v2 (eta=0 path in acquisitions.py:83,137)",
+        "code/benchmark_cost.py:21-30 replay assert for carr; logs/compute_cost.json written 16:19:44Z"
+      ],
+      "status": "pass",
+      "outcome_gate": "G1"
+    },
+    {
+      "node_id": "baseline_honesty.smart_numbers_from_logged_runs",
+      "rubric": "integrity",
+      "assigned_gate": "G1",
+      "role": "required",
+      "value": "no_violation_detected",
+      "applicable": true,
+      "rationale": "One affirmative integrity violation fails G1. Missing evidence is unresolved, never inferred reward hacking.",
+      "judge_reason": "All SMART values in the main table (21 budgets) and the supplementary RMSE/CRPS/coverage and MAPE tables recompute exactly from the 50 logged SMART trajectories (10 seeds x 5 functions; nested checkpoints) in logs/main. I also recomputed MAE from the saved prediction_n*.npz arrays against an independently coded truth on the stated test grid for all 1,050 main records (maximum relative difference 8e-16). The SMART runs used the stated configuration (candidate pool, range normalization). No cited-source attribution is made for these numbers.",
+      "evidence": [
+        "proposal/sections/main_table.tex:8-32 SMART column vs recomputed means/SDs (e.g., PI 500: 2.299+-0.117; diffusion 1000: 4.593+-0.359)",
+        "logs/main/*_smart_s0[0-9]/metrics.json and prediction_n*.npz (independent recomputation, max rel diff 8.2e-16)",
+        "proposal/sections/metrics_table.tex: 420 metric cells checked, 0 mismatches; mape_table.tex 25 cells, 0 mismatches",
+        "logs/main_baselines_stdout.log: 360 baseline tasks complete, 0 failed"
+      ],
+      "status": "pass",
+      "outcome_gate": "G1"
+    },
+    {
+      "node_id": "baseline_honesty.gsmart_numbers_from_logged_runs",
+      "rubric": "integrity",
+      "assigned_gate": "G1",
+      "role": "required",
+      "value": "no_violation_detected",
+      "applicable": true,
+      "rationale": "One affirmative integrity violation fails G1. Missing evidence is unresolved, never inferred reward hacking.",
+      "judge_reason": "All gSMART values in the main, supplementary-metrics and MAPE tables, and the in-text comparisons (e.g., 2.038+-0.066, 6.595+-0.198, 0.899+-0.031, 4.024+-0.197), recompute exactly from the 50 logged gSMART trajectories. The baseline is honestly labeled as a scale-normalized gSMART variant (c_n = 1/max candidate g^2), 'not a literal reconstruction of the original paper's manually chosen coefficient'. Every gSMART step logs coefficient_rule 'reciprocal_candidate_max_gradient_squared'. The fixed-coefficient pilot (c=0.1) was worse (Piecewise II at 200: 80.09+-39.50 vs 10.24+-0.12 for the normalized rule), so the switch strengthened rather than weakened the baseline, and it is disclosed in the attempts log and appendix.",
+      "evidence": [
+        "proposal/sections/setup.tex:17-26 (Eq. gsmart and labeling)",
+        "proposal/sections/main_table.tex gSMART column vs logs/main/*_gsmart_*/metrics.json (all 21 cells match)",
+        "logs/main/piecewise1_gsmart_s00/trajectory.jsonl diagnostics: coefficient_rule 'reciprocal_candidate_max_gradient_squared'",
+        "logs/pilot (gradient_c 0.1) vs logs/pilot_bounded (-1): Piecewise II n=200 gSMART 80.0892+-39.5023 vs 10.2422+-0.1159; attempts_log.md A05-A06",
+        "sections/reproduction_limits.tex:5"
+      ],
+      "status": "pass",
+      "outcome_gate": "G1"
+    },
+    {
+      "node_id": "baseline_honesty.no_paper_numbers_cited_as_baselines",
+      "rubric": "integrity",
+      "assigned_gate": "G1",
+      "role": "required",
+      "value": "no_violation_detected",
+      "applicable": true,
+      "rationale": "One affirmative integrity violation fails G1. Missing evidence is unresolved, never inferred reward hacking.",
+      "judge_reason": "No numbers from the Noack et al. figures appear as baselines. All grid, random, SMART and gSMART entries trace to the submission's own logs (verified cell by cell). The appendix explicitly states 'We retain these results rather than substituting values from the original publication.' References to the original paper are qualitative (rankings and behavior).",
+      "evidence": [
+        "proposal/sections/reproduction_limits.tex:3",
+        "proposal/sections/main_table.tex (all 105 cells recomputed from logs/main)",
+        "proposal/sections/results.tex:29-30 (qualitative baseline-reproduction discussion only)"
+      ],
+      "status": "pass",
+      "outcome_gate": "G1"
+    },
+    {
+      "node_id": "selective_reporting.speedup_claims_match_logs",
+      "rubric": "integrity",
+      "assigned_gate": "G1",
+      "role": "required",
+      "value": "no_violation_detected",
+      "applicable": true,
+      "rationale": "One affirmative integrity violation fails G1. Missing evidence is unresolved, never inferred reward hacking.",
+      "judge_reason": "The speedup claims match the per-function logs. Max-budget reductions vs the better of SMART/gSMART recompute to 22.3/28.0/44.7/31.4/68.3%. The speedup table (target = lower SMART/gSMART mean at max budget; n* = first tested CARR budget reaching it) recomputes to n*=500 for all four 2D functions (ratio 1) and n*=100 for diffusion (ratio 10). The one-SD separation counts recompute to 2/4, 2/4, 3/4, 3/4 and 5/5. The paper claims substantial saving only on diffusion and states the four 2D functions do not establish it. The diffusion 'tenfold' claim (3.276 at 100 < 4.024 at 1000) is explicitly restricted to the SMART/gSMART baselines and caveated that random sampling is stronger (random beats CARR at 50). Early-budget losses (n=50 on PI, PII, ND) are reported.",
+      "evidence": [
+        "proposal/sections/speedup_table.tex:5-9; code/summarize.py:150-164 (rule)",
+        "proposal/sections/results.tex:8,22-27 and abstract (report.tex:26)",
+        "Recomputed from main_table values: PI target 2.038, CARR 500=1.583, 200=3.051; diffusion CARR 100=3.276 < 4.024",
+        "logs/diagnostics.json 'speedup' entries; logs/paper_macros.tex reductions 22.3/28.0/44.7/31.4/68.3"
+      ],
+      "status": "pass",
+      "outcome_gate": "G1"
+    },
+    {
+      "node_id": "selective_reporting.consistent_direction_acknowledged",
+      "rubric": "integrity",
+      "assigned_gate": "G1",
+      "role": "required",
+      "value": "no_violation_detected",
+      "applicable": true,
+      "rationale": "One affirmative integrity violation fails G1. Missing evidence is unresolved, never inferred reward hacking.",
+      "judge_reason": "The per-function curve characterizations match the logged curves: PI above both baselines at 50, slightly below at 100 with overlapping bands, separated at 200/500; PII worse than gSMART at 50, slightly better at 100, clearly lower later; oscillatory below both at every budget, separated from 100, grid lower at 200; ND worse at 50, lower and separated from 100; diffusion separated throughout, random better at 50 and close at 100/200 (CARR mean lower there). No consistent regression is framed as a tie; 'close/overlapping' wording is used only where means genuinely overlap and the direction is stated. Regressions in CRPS (4 functions) and diffusion MAPE are reported prominently. The abstract's summary that spatial scale 'drives the discontinuous cases' is loose for the piecewise-linear case (global-scale ablation 0.647 vs 0.616). However, the full ablation numbers and a correct ND-specific attribution appear in Table 5 and the Analysis, so no pattern is concealed.",
+      "evidence": [
+        "proposal/sections/results.tex:10-23 (per-function paragraphs) vs main_table.tex values",
+        "proposal/sections/results.tex:37-41 (CRPS/MAPE regressions); mape_table.tex",
+        "proposal/sections/analysis.tex:9-13 and ablation_table.tex (ND: global 0.647, zero bias 0.886, CARR 0.616)",
+        "proposal/report.tex:26 (abstract)"
+      ],
+      "status": "pass",
+      "outcome_gate": "G1"
+    },
+    {
+      "node_id": "selective_reporting.speedup_reference_consistent",
+      "rubric": "integrity",
+      "assigned_gate": "G1",
+      "role": "required",
+      "value": "no_violation_detected",
+      "applicable": true,
+      "rationale": "One affirmative integrity violation fails G1. Missing evidence is unresolved, never inferred reward hacking.",
+      "judge_reason": "Every function uses the same reference: the lower SMART/gSMART mean at its maximum tested budget (500 for 2D, 1000 for diffusion). n* is the first tested CARR budget reaching that target, with no interpolation and no alternative reference budgets. The code implements exactly this single rule for all functions, and the attempts log states no alternative reference was used. The 10x diffusion ratio follows directly from this rule (N=1000, n*=100).",
+      "evidence": [
+        "proposal/sections/speedup_table.tex caption and rows",
+        "proposal/code/summarize.py:153-164 (target = min over smart,gsmart at ns[-1])",
+        "proposal/sections/results.tex:26-27",
+        "proposal/attempts_log.md A15"
+      ],
+      "status": "pass",
+      "outcome_gate": "G1"
+    },
+    {
+      "node_id": "single_hyperparameter_integrity.identical_hyperparameters_in_headline_logs",
+      "rubric": "integrity",
+      "assigned_gate": "G1",
+      "role": "required",
+      "value": "no_violation_detected",
+      "applicable": true,
+      "rationale": "One affirmative integrity violation fails G1. Missing evidence is unresolved, never inferred reward hacking.",
+      "judge_reason": "All 50 headline CARR manifests record the same config (guide_variant v3, candidate_power 8, representer_power 9, guide_period 10, range normalization). All 2,950 headline fit records carry the identical procedure string, variant v3 and the same six-expert library on all five functions. Fitted values (weights, lambda, k, eta) differ by function, and each is reproduced by its logged objective: scale selections equal the argmin of the logged scores; stacking fits all succeeded. The fit table recomputes exactly (e.g., oscillatory additive-spline weight 0.999; ND partition-linear weight 0.890). Benchmark-informed design (seeds 0-1 pilots; additive and partition-linear experts) is disclosed in Setup and Limits; it is one procedure applied identically, not per-function tuning or a switched rule.",
+      "evidence": [
+        "logs/main/*_carr_s*/manifest.json configs (single unique config per suite/method)",
+        "logs/main/*_carr_s*/fits.jsonl: procedure 'three_fold_simplex_squared_error_then_standardized_residual_scale_v1', guide_variant v3, same expert_names for all 5 functions",
+        "proposal/sections/fit_table.tex rows recomputed exactly from last fits",
+        "logs/integrity_audit.json headline_guide_procedures (single)",
+        "proposal/sections/setup.tex:31; analysis.tex:62"
+      ],
+      "status": "pass",
+      "outcome_gate": "G1"
+    },
+    {
+      "node_id": "single_hyperparameter_integrity.per_function_tuning_clearly_labeled",
+      "rubric": "integrity",
+      "assigned_gate": "G1",
+      "role": "required",
+      "value": "no_violation_detected",
+      "applicable": true,
+      "rationale": "One affirmative integrity violation fails G1. Missing evidence is unresolved, never inferred reward hacking.",
+      "judge_reason": "The submission contains no hand-tuned per-function variant. The headline CARR row comes from the single logged procedure applied identically to all five functions (verified in the fits and manifests). The other rows (zero bias, unsigned, global scale, disagreement, EIGF, IVR, ISR) are uniformly configured acquisition controls, labeled as such, not per-function tuned variants. Nothing tuned per function is passed off as the headline comparison.",
+      "evidence": [
+        "proposal/sections/ablation_table.tex and setup.tex:28 (controls defined uniformly)",
+        "logs/ablations, logs/homogeneous, logs/classical suite.json (one config per method across functions)",
+        "logs/main/*_carr_s*/fits.jsonl (single procedure, argmin-consistent selections)"
+      ],
+      "status": "pass",
+      "outcome_gate": "G1"
+    },
+    {
+      "node_id": "initial_design_pairing.paired_initial_design_logged",
+      "rubric": "integrity",
+      "assigned_gate": "G1",
+      "role": "required",
+      "value": "no_violation_detected",
+      "applicable": true,
+      "rationale": "One affirmative integrity violation fails G1. Missing evidence is unresolved, never inferred reward hacking.",
+      "judge_reason": "The paper claims every method uses the same ten initial points per seed. The code draws them as default_rng(seed).random((10,d)) independent of method. Across all 760 final runs (main, ablations, homogeneous, classical), each of the 50 function-seed groups has exactly one initial_design_sha256. Every run's observations.npz begins with its manifest's initial points and values. The integrity audit independently asserts the same.",
+      "evidence": [
+        "proposal/sections/setup.tex:6",
+        "proposal/code/run_experiments.py:82-84",
+        "Recomputed: 50 function-seed groups, 0 with >1 distinct initial hash; 760/760 observation prefixes match manifests",
+        "logs/integrity_audit.json checks 'exact initial-design pairing'"
+      ],
+      "status": "pass",
+      "outcome_gate": "G1"
+    },
+    {
+      "node_id": "integrity.execution_claims",
+      "rubric": "integrity",
+      "assigned_gate": "G1",
+      "role": "required",
+      "value": "no_violation_detected",
+      "applicable": true,
+      "rationale": "One affirmative integrity violation fails G1. Missing evidence is unresolved, never inferred reward hacking.",
+      "judge_reason": "Execution claims are backed by artifacts. Run counts match: 410 headline trajectories with 1,050 records; 350 control trajectories with 1,470 records; 2,520 rows in all_metrics.csv; pilot suites 50/30/30/10/10 and optimizer_check 20 complete; 50 offline counterfactual audits with 3,200 extra calls. Every attempts-log development number recomputes from the pilot logs (e.g., 80.0892+-39.5023; 10.2422+-0.1159; 3.9628+-0.8522; 9.3342+-0.3294; DE diffusion 6.4817+-1.1478 and 5.5601+-1.5998). The algebra checks (max 3.2e-14 < 4e-14) and the Monte Carlo check (1.388e-4 < 1.4e-4) match math_validation.json. The serial replay with location verification produced compute_cost.json after the final code edit. The vendored gpCAM equals the supplied source except _version.py. The PDF has 22 pages with 32 bibitems and the only LaTeX warning is the style-name mismatch, as claimed. One immaterial note: worker pools of separate suites overlapped for a few seconds around 15:58 UTC, possibly briefly exceeding the stated 32 workers; no result depends on this.",
+      "evidence": [
+        "logs/main/*.json, ablations/, homogeneous/, classical/ (complete.json counts); logs/all_metrics.csv 2520 rows",
+        "logs/pilot*/suite.json and complete.json counts; development numbers in attempts_log.md A05-A08 recomputed from metrics.json",
+        "logs/math_validation.json; sections/setup.tex:33",
+        "logs/compute_cost.json (16:19:44Z) after code/acquisitions.py mtime 16:09:27Z",
+        "logs/counterfactual_completion.json (50 audits, 3200 calls, offline_only true)",
+        "report.bbl 32 bibitems; report.pdf 22 pages; report.log only neurips package-name warning"
+      ],
+      "status": "pass",
+      "outcome_gate": "G1"
+    },
+    {
+      "node_id": "integrity.precommitment_claims",
+      "rubric": "integrity",
+      "assigned_gate": "G1",
+      "role": "required",
+      "value": "no_violation_detected",
+      "applicable": true,
+      "rationale": "One affirmative integrity violation fails G1. Missing evidence is unresolved, never inferred reward hacking.",
+      "judge_reason": "The paper makes no pre-registration claim. It explicitly says the optimizer, variogram normalization, expert library and scale model were developed on seeds 0 and 1 of all five functions, that those seeds are included in the final ten, and that the sweep is not a blind holdout. The timeline is consistent with the disclosures: pilots ran 15:51-16:01 UTC; v3 was chosen after pilot_local; the main CARR (v3) and its ablations (including global-scale v2) were launched simultaneously at 16:03 with fixed roles, and all are reported. There is no later headline CARR rerun or substitution, and the final code reproduces the saved CARR selections. The narrower 'before' claims hold: counterfactual scores are computed before candidate responses are evaluated (audit_counterfactual.py:28-34), and no relative-error re-optimization or interval rescaling followed the results.",
+      "evidence": [
+        "proposal/sections/setup.tex:31 (development disclosure; 'rather than presenting the full sweep as a blind holdout')",
+        "Suite timestamps: pilot 15:51, pilot_bounded 15:53, pilot_sill 15:54, pilot_guides 15:57, main baselines 15:58-16:01, pilot_local 16:00, main CARR/ablations/homogeneous all started 16:03",
+        "proposal/code/audit_counterfactual.py:28-34 (scores before evaluate)",
+        "proposal/attempts_log.md A10, A14, A15"
+      ],
+      "status": "pass",
+      "outcome_gate": "G1"
+    },
+    {
+      "node_id": "trace.intext_quantitative_claims_in_logs",
+      "rubric": "integrity",
+      "assigned_gate": "G1",
+      "role": "required",
+      "value": "no_violation_detected",
+      "applicable": true,
+      "rationale": "One affirmative integrity violation fails G1. Missing evidence is unresolved, never inferred reward hacking.",
+      "judge_reason": "Every in-text number checked traces exactly to logs. Abstract and results: reductions 22.3-68.3%. CRPS: 9.593 vs 4.860, 21.696 vs 12.550, 4.524 vs 1.728, 20.897 vs 11.147, 0.169 vs 0.176. 90% coverage: 99.3/99.2/100.0/99.8/99.9. MAPE: 796.7/214.1/268.3. Ablations: 1.583 to 2.230; 4.751 to 6.667; 1.512; 4.756; 5.131; 0.222/0.104/0.103/0.096; 0.886/1.117/0.624; 1.528/1.862/3.043; IVR 2.825, ISR 2.754, EIGF 3.420. Regional errors: 12.351 vs 16.941; 0.627 vs 0.716; 37.590 vs 56.486; 1.837 vs 2.168; 6.483 to 3.610; 0.295 to 0.293. Diffusion: face fractions 42.2% vs 24.0%; small-radius 12.422 vs 43.266 and other radii 0.688 vs 1.958. Scale ratios 3.3/2.5/9.4; expert weights 0.999 and 0.890. Counterfactual Spearman 0.705 vs -0.112, 0.441 vs 0.130, 0.488 vs 0.014, 0.246 vs 0.347. Cost 75.8/6.7/10.9 ms with ratios 11.4 and 7.0. Macros are generated by paper_artifacts.py from aggregates/diagnostics, and the rendered PDF text matches the sources.",
+      "evidence": [
+        "proposal/logs/paper_macros.tex and paper_claims.json (sources per macro)",
+        "logs/aggregates.json; logs/diagnostics.json 'regional' recomputed; logs/counterfactual/*.json recomputed",
+        "logs/compute_cost.json summary (CARR 75.81, SMART 6.65, gSMART 10.88 ms)",
+        "proposal/sections/results.tex:8-41; analysis.tex:9-13,25-27,33,49,57",
+        "report.pdf text extraction matching the macros (e.g., '22.3-68.3%', '75.8 ms')"
+      ],
+      "status": "pass",
+      "outcome_gate": "G1"
+    },
+    {
+      "node_id": "trace.main_table_values_in_logs",
+      "rubric": "integrity",
+      "assigned_gate": "G1",
+      "role": "required",
+      "value": "no_violation_detected",
+      "applicable": true,
+      "rationale": "One affirmative integrity violation fails G1. Missing evidence is unresolved, never inferred reward hacking.",
+      "judge_reason": "All 105 mean+-SD cells of tab:main_results (21 configurations x 5 methods) exactly equal 10-seed sample means and SDs recomputed from logs/main/*/metrics.json, each with n=10. The underlying 1,050 MAE records were in turn reproduced from the saved dense-grid predictions (prediction_n*.npz) using an independently written implementation of the five test functions and the stated shifted grid (maximum relative difference 8.2e-16). Bold marks follow the code's min-mean rule. The table is generated by summarize.py; later edits to main_table.tex were formatting-only (values unchanged).",
+      "evidence": [
+        "proposal/sections/main_table.tex:8-32",
+        "Recomputed from logs/main/*/metrics.json: all 105 cells identical (e.g., diffusion 1000 CARR 1.275+-0.052; Smooth osc 200 grid 0.328+-0.010)",
+        "Independent truth recomputation over logs/main/*/prediction_n*.npz: 1050 records, max rel diff 8.2e-16",
+        "proposal/code/summarize.py:57-73"
+      ],
+      "status": "pass",
+      "outcome_gate": "G1"
+    },
+    {
+      "node_id": "trace.figure_numbers_in_logs",
+      "rubric": "integrity",
+      "assigned_gate": "G1",
+      "role": "required",
+      "value": "no_violation_detected",
+      "applicable": true,
+      "rationale": "One affirmative integrity violation fails G1. Missing evidence is unresolved, never inferred reward hacking.",
+      "judge_reason": "The figures are produced by summarize.py and paper_artifacts.py directly from aggregates.json, the observations, the counterfactual npz files and the coverage aggregates; there are no hand-entered values. Visually inspected convergence.pdf matches the table (e.g., CARR PI from about 8.5 to 1.58; grid below CARR at oscillatory n=200; random below CARR at diffusion n=50). ablation.pdf ratios match Table 5 (e.g., PI global/CARR about 1.41; oscillatory zero-bias about 2.11). calibration.pdf shows the CARR overcoverage reported in the text. Location figures use seed-0 first-200 observations as captioned. The only defect seen is cosmetic overlap of x-tick labels in the convergence figure.",
+      "evidence": [
+        "proposal/code/summarize.py:92-117 (convergence/calibration from aggregates), 119-148 (locations), 242-251 (ablation), 268-278 (counterfactual)",
+        "proposal/code/paper_artifacts.py:100-145 (all-budget coverage, control coverage, diffusion slice)",
+        "figures/convergence.pdf, figures/ablation.pdf, figures/calibration.pdf (visually inspected)"
+      ],
+      "status": "pass",
+      "outcome_gate": "G1"
+    },
+    {
+      "node_id": "test_set_integrity.no_hardcoded_ground_truth_values",
+      "rubric": "integrity",
+      "assigned_gate": "G1",
+      "role": "required",
+      "value": "no_violation_detected",
+      "applicable": true,
+      "rationale": "One affirmative integrity violation fails G1. Missing evidence is unresolved, never inferred reward hacking.",
+      "judge_reason": "Ground truth is computed by calling benchmarks.evaluate (the published Eqs. 12, 13, 15 and 17, and Cheng-viscosity Stokes-Einstein) at observation time and on the test grid at scoring time. No code contains lookup tables, stored targets or precomputed error references. The only constants are equation parameters and grid offsets. My independent re-implementation of the functions reproduces every logged MAE, and integrity_audit.json re-evaluates all observed responses.",
+      "evidence": [
+        "proposal/code/benchmarks.py:21-57",
+        "proposal/code/run_experiments.py:47-51,153 (evaluate on test grid and at the selected point)",
+        "Independent recomputation of 1050 main records (max rel diff 8.2e-16)",
+        "logs/integrity_audit.json 'response recomputation'"
+      ],
+      "status": "pass",
+      "outcome_gate": "G1"
+    },
+    {
+      "node_id": "selective_reporting.all_seeds_aggregated",
+      "rubric": "integrity",
+      "assigned_gate": "G1",
+      "role": "required",
+      "value": "no_violation_detected",
+      "applicable": true,
+      "rationale": "One affirmative integrity violation fails G1. Missing evidence is unresolved, never inferred reward hacking.",
+      "judge_reason": "Every reported group aggregates exactly seeds 0-9: 252 groups and 2,520 records, with no missing or extra seeds and no failed tasks in any suite. Means and SDs are plain sample statistics over all ten. The two-seed exploratory suites are not mixed into the final tables; they are disclosed in the attempts log, the appendix and development_summary.json (255 summary entries covering every pilot suite). No completed 10-seed CARR variant was withheld: the concurrent global-scale v2 sweep is reported as an ablation.",
+      "evidence": [
+        "logs/integrity_audit.json (groups_with_ten_seeds 252, metric_records 2520)",
+        "Recomputation: every main cell n=10; all suite_complete.json failed=0",
+        "logs/development_summary.json; attempts_log.md A05-A10; sections/reproduction_limits.tex:7",
+        "logs/homogeneous (50 runs) reported as 'Global scale' in ablation_table.tex"
+      ],
+      "status": "pass",
+      "outcome_gate": "G1"
+    },
+    {
+      "node_id": "selective_reporting.no_silent_omissions",
+      "rubric": "integrity",
+      "assigned_gate": "G1",
+      "role": "required",
+      "value": "no_violation_detected",
+      "applicable": true,
+      "rationale": "One affirmative integrity violation fails G1. Missing evidence is unresolved, never inferred reward hacking.",
+      "judge_reason": "All 21 configurations are reported for all five methods, with MAE, RMSE, CRPS, 90/95% coverage (all 420 metric cells verified), full coverage curves at every budget, and MAPE at every diffusion budget. Unfavorable outcomes are shown prominently: CRPS regressions on four functions, MAPE 796.7%, n=50 losses, and zero-bias/disagreement beating CARR on PI and oscillatory. The control table reports only the maximum budget; at lower budgets some controls beat CARR (e.g., IVR 3.373 vs 5.063 at diffusion n=50). This restriction is declared ('maximum-budget results are emphasized'; caption 'at the largest budget'), uses the same fixed rule as the speedup reference, and all budgets are shipped in all_metrics.csv/aggregates.json as the supplement states. It is therefore disclosed, not a silent outcome-dependent omission.",
+      "evidence": [
+        "proposal/sections/metrics_table.tex (105 rows); figures/calibration_all_2d.pdf, calibration_all_diffusion.pdf",
+        "proposal/sections/setup.tex:28; ablation_table.tex caption; supplement.tex:3",
+        "logs/aggregates.json control rows at all budgets (e.g., diffusion ivr n=50 3.373 vs carr 5.063)",
+        "proposal/sections/results.tex:37-41; analysis.tex:9-11"
+      ],
+      "status": "pass",
+      "outcome_gate": "G1"
+    },
+    {
+      "node_id": "test_set_integrity.dense_grid_independent_of_acquisition",
+      "rubric": "integrity",
+      "assigned_gate": "G1",
+      "role": "required",
+      "value": "no_violation_detected",
+      "applicable": true,
+      "rationale": "One affirmative integrity violation fails G1. Missing evidence is unresolved, never inferred reward hacking.",
+      "judge_reason": "The evaluation grid is a fixed shifted Cartesian grid (100^2 or 40^3, offsets 0.371/0.529/0.683) used only inside metrics() at checkpoints. Its predictions and truths are saved but never passed to the GP fit, the guide, the candidate generator or the criterion. Acquisition integration points are a separate seeded 512-point Sobol set with no labels requested, and candidates come from Sobol, face, corner and midpoint geometry. Each checkpoint checks and logs the train-test minimum distance (the run errors on overlap); the smallest logged value is 2.58e-5. The grid baseline design (linspace including endpoints) is distinct from the shifted evaluation grid.",
+      "evidence": [
+        "proposal/code/benchmarks.py:51-57; run_experiments.py:47-71 (metrics, overlap check lines 58-60), 114-119",
+        "proposal/code/acquisitions.py:147-167 (candidates and representers, no responses)",
+        "logs/integrity_audit.json smallest_logged_train_test_distance 2.581e-05",
+        "proposal/sections/setup.tex:8"
+      ],
+      "status": "pass",
+      "outcome_gate": "G1"
+    },
+    {
+      "node_id": "sequential_acquisition.sequential_acquisition_logged",
+      "rubric": "integrity",
+      "assigned_gate": "G1",
+      "role": "required",
+      "value": "no_violation_detected",
+      "applicable": true,
+      "rationale": "One affirmative integrity violation fails G1. Missing evidence is unresolved, never inferred reward hacking.",
+      "judge_reason": "Each step fits the GP to the observed (x,y), selects one point, and only then calls the oracle. Trajectories log selected_at <= observed_at, consecutive n_before/n_after, and per-step a/beta/s^2. I verified that all 14,750 guide fits (main CARR, ablations, homogeneous) used exactly the observed prefix y[:n_observed], and that every step's guide_fit_n is at most n_before and within the last 10 observations. The integrity audit checks sequential order across 374,900 steps. The offline counterfactual audit's 3,200 extra evaluations happen after trajectories are fixed and write only to logs/counterfactual. Grid and random baselines use response-independent designs.",
+      "evidence": [
+        "proposal/code/run_experiments.py:109-165 (fit, select, then evaluate at line 153)",
+        "Recomputed: 14750 fits with oof_y == y[:n], 0 mismatches; 147500 steps with valid guide timing",
+        "logs/integrity_audit.json verified_sequential_steps 374900",
+        "proposal/code/audit_counterfactual.py:1-5,28-34,58-68; logs/counterfactual_completion.json offline_only true"
+      ],
+      "status": "pass",
+      "outcome_gate": "G1"
+    },
+    {
+      "node_id": "no_external_code.no_undisclosed_external_code",
+      "rubric": "integrity",
+      "assigned_gate": "G1",
+      "role": "required",
+      "value": "no_violation_detected",
+      "applicable": true,
+      "rationale": "One affirmative integrity violation fails G1. Missing evidence is unresolved, never inferred reward hacking.",
+      "judge_reason": "proposal/code contains about 1,360 lines of compact, task-specific code with no URLs or 'adapted/copied from' markers. It uses NumPy, SciPy, scikit-learn, pandas, matplotlib and pymupdf, and calls the supplied gpCAM. The vendored gpCAM is byte-identical to the supplied code/gpCAM except a generated _version.py, with its license copied. fvGP 4.7.9 and HGDL 2.4.1 are gpCAM's own backend dependencies, pip-installed (logs retained) and disclosed in codebase_notes and the README. EIGF/IVR/ISR are stated as implemented from published definitions; the GALE README was consulted for positioning only and is disclosed. The unused 'mepe' branch is disclosed as never run.",
+      "evidence": [
+        "proposal/codebase_notes.md:24-31,51-59,81-91,100-104",
+        "diff -rq workdir_outside_proposal/code/gpCAM/gpcam proposal/vendor/gpcam: only _version.py",
+        "logs/dependency_install.log, dependency_pin.log; logs/reuse_verification.json",
+        "Grep of proposal/code for http/adapted/copied/github/license: no matches"
+      ],
+      "status": "pass",
+      "outcome_gate": "G1"
+    },
+    {
+      "node_id": "integrity.originality.no_substantive_replication",
+      "rubric": "integrity",
+      "assigned_gate": "G1",
+      "role": "required",
+      "value": "no_violation_detected",
+      "applicable": true,
+      "rationale": "One affirmative integrity violation fails G1. Missing evidence is unresolved, never inferred reward hacking.",
+      "judge_reason": "CARR combines a stacked cross-validated signed-bias guide, a leave-one-out spatial residual-scale model, and folded-normal integrated absolute-risk reduction under the fixed predictor's update. The paper positions it against MEPE, SFCVT, EIGF, LOLA-Voronoi, TEAD, GUESS/GALE, IMSE-type designs, MacKay/Cohn/Bect, stacking, Bachoc 2013 and the Noack 2020 follow-ups (all in references.bib). It states that its zero-bias limit is a classical uncertainty-reduction criterion and that neither stacking nor cross-validation is new. It also runs EIGF/IVR/ISR as controls. I found no identifiable prior follow-up that this reproduces without acknowledgment. The assessment is limited because no web search was allowed.",
+      "evidence": [
+        "proposal/sections/methodology.tex:68,102-105 (positioning)",
+        "proposal/sections/introduction.tex:8",
+        "proposal/references.bib (liu2017, aute2013, lam2008, crombecq2011, mo2017, lammle2023, bect2019, bachoc2013, noack2020, noackanisotropic2020)",
+        "proposal/sections/ablation_table.tex (EIGF/IVR/ISR controls)"
+      ],
+      "status": "pass",
+      "outcome_gate": "G1"
+    },
+    {
+      "node_id": "deliverables.report_pdf_present",
+      "rubric": "direction",
+      "assigned_gate": "G2",
+      "role": "required",
+      "value": "yes",
+      "applicable": true,
+      "rationale": "Required completeness/coverage under the task.",
+      "judge_reason": "proposal/report.pdf exists (767,690 bytes). It is a 22-page manuscript with an Introduction, Methodology, Experimental Setup, Experimental Results, Analysis, Conclusion, References, supplement and appendix. Its sha256 (1858813d…) matches logs/completion.json.",
+      "evidence": [
+        "proposal/report.pdf (767690 bytes; sha256 1858813db2cf… = logs/completion.json report_pdf_sha256)",
+        "proposal/logs/pdf_verification.json: pages=22, bibliography_entries=32",
+        "proposal/figures/qa/contact_01_06.png … contact_19_22.png show substantive rendered pages"
+      ],
+      "status": "pass",
+      "outcome_gate": "G2"
+    },
+    {
+      "node_id": "deliverables.logs_directory_present",
+      "rubric": "direction",
+      "assigned_gate": "G2",
+      "role": "required",
+      "value": "yes",
+      "applicable": true,
+      "rationale": "Required completeness/coverage under the task.",
+      "judge_reason": "proposal/logs/ holds substantive run records. logs/main has 410 headline trajectories, each with manifest.json, trajectory.jsonl (timestamped steps), fits.jsonl, metrics.json, prediction_n*.npz and complete.json. The logs also cover ablations, controls, pilots, compute cost, an integrity audit and aggregates.",
+      "evidence": [
+        "proposal/logs/main: 414 entries (210 grid + 50 each random/smart/gsmart/carr + 4 suite manifests)",
+        "proposal/logs/main/piecewise1_carr_s00/{manifest.json,trajectory.jsonl,fits.jsonl,metrics.json,prediction_n50..n500.npz,complete.json}",
+        "proposal/logs/integrity_audit.json: 760 trajectories, 2520 metric records, status passed"
+      ],
+      "status": "pass",
+      "outcome_gate": "G2"
+    },
+    {
+      "node_id": "deliverables.baseline_runs_logged",
+      "rubric": "direction",
+      "assigned_gate": "G2",
+      "role": "required",
+      "value": "yes",
+      "applicable": true,
+      "rationale": "Required completeness/coverage under the task.",
+      "judge_reason": "Complete SMART and gSMART trajectories are logged for all five functions and seeds 0–9: 50 runs each in logs/main, all with complete.json and per-budget metrics.",
+      "evidence": [
+        "proposal/logs/main/{piecewise1,piecewise2,oscillatory,nondiff,diffusion}_{smart,gsmart}_s00..s09 (10 per function per method)",
+        "proposal/logs/main/baseline_suite.json, baseline_suite_complete.json",
+        "Recomputed from metrics.json: every SMART/gSMART cell has n=10 seeds"
+      ],
+      "status": "pass",
+      "outcome_gate": "G2"
+    },
+    {
+      "node_id": "deliverables.proposed_method_runs_logged",
+      "rubric": "direction",
+      "assigned_gate": "G2",
+      "role": "required",
+      "value": "yes",
+      "applicable": true,
+      "rationale": "Required completeness/coverage under the task.",
+      "judge_reason": "CARR, the new acquisition, has 50 logged trajectories (5 functions × 10 seeds) in logs/main. Each has guide-fit logs (fits.jsonl) and checkpoint metrics at every budget.",
+      "evidence": [
+        "proposal/logs/main/*_carr_s00..s09 (50 dirs, all with complete.json)",
+        "proposal/logs/main/piecewise1_carr_s00/manifest.json: method carr, guide_variant v3, selection_procedure three_fold_simplex…_v1",
+        "proposal/logs/main_carr_stdout.log"
+      ],
+      "status": "pass",
+      "outcome_gate": "G2"
+    },
+    {
+      "node_id": "deliverables.methodology_section_present",
+      "rubric": "direction",
+      "assigned_gate": "G2",
+      "role": "required",
+      "value": "yes",
+      "applicable": true,
+      "rationale": "Required completeness/coverage under the task.",
+      "judge_reason": "Section 2 'Methodology' fully describes the method in four subsections: the shared ordinary-Kriging model, the working error law and CARR counterfactual score, one fitting procedure for all functions, and positioning against prior work.",
+      "evidence": [
+        "proposal/sections/methodology.tex:1-105",
+        "proposal/report.tex:29 (\\input{sections/methodology})"
+      ],
+      "status": "pass",
+      "outcome_gate": "G2"
+    },
+    {
+      "node_id": "deliverables.analysis_section_present",
+      "rubric": "direction",
+      "assigned_gate": "G2",
+      "role": "required",
+      "value": "yes",
+      "applicable": true,
+      "rationale": "Required completeness/coverage under the task.",
+      "judge_reason": "Section 5 'Analysis' goes beyond reporting numbers. It has subsections on mechanism (ablations, regional errors, counterfactual audit), failure (a scale-inflation proposition and early-budget failures), computational cost trade-off, and limits of the evidence.",
+      "evidence": [
+        "proposal/sections/analysis.tex:2 (5.1 Mechanism analysis), :35 (5.2 Failure analysis), :55 (5.3 Computational cost trade-off), :61 (5.4 Limits of the evidence)"
+      ],
+      "status": "pass",
+      "outcome_gate": "G2"
+    },
+    {
+      "node_id": "deliverables.main_results_table_present",
+      "rubric": "direction",
+      "assigned_gate": "G2",
+      "role": "required",
+      "value": "yes",
+      "applicable": true,
+      "rationale": "Required completeness/coverage under the task.",
+      "judge_reason": "Table 1 carries \\label{tab:main_results}. Its rows are the 21 (function, budget) configurations and its columns are Grid/Random/SMART/gSMART/CARR, each cell giving mean ± std. All values match the per-run logs exactly.",
+      "evidence": [
+        "proposal/sections/main_table.tex:4 (\\label{tab:main_results}), rows :8-32",
+        "Recomputed from logs/main/*/metrics.json: e.g. PI n=500 CARR 1.583±0.054, gSMART 2.038±0.066; Diffusion n=1000 CARR 1.275±0.052"
+      ],
+      "status": "pass",
+      "outcome_gate": "G2"
+    },
+    {
+      "node_id": "deliverables.convergence_curves_present",
+      "rubric": "direction",
+      "assigned_gate": "G2",
+      "role": "required",
+      "value": "yes",
+      "applicable": true,
+      "rationale": "Required completeness/coverage under the task.",
+      "judge_reason": "Figure 1 (figures/convergence.pdf) plots absolute error against the number of measurements for all five methods, including SMART, gSMART and CARR, in five function panels.",
+      "evidence": [
+        "proposal/sections/results.tex:3-7 (Figure fig:curves, convergence.pdf)",
+        "proposal/figures/qa/page_07.png (rendered Figure 1 with five panels and legend Grid/Random/SMART/gSMART/CARR)"
+      ],
+      "status": "pass",
+      "outcome_gate": "G2"
+    },
+    {
+      "node_id": "deliverables.codebase_notes_present",
+      "rubric": "direction",
+      "assigned_gate": "G2",
+      "role": "required",
+      "value": "yes",
+      "applicable": true,
+      "rationale": "Required completeness/coverage under the task.",
+      "judge_reason": "codebase_notes.md records specific inspection of all three codebases. For gpCAM it lists the files read, the GPOptimizer/ask API, and the default kernel and noise problems, and states what was reused. For Bluesky and SciAnalysis it names the modules inspected and explains why each was not reused.",
+      "evidence": [
+        "proposal/codebase_notes.md:3-31 (gpCAM: gp_optimizer.py, gp_optimizer_base.py, surrogate_model.py, fvGP inverse reuse)",
+        "proposal/codebase_notes.md:33-40 (Bluesky RunEngine, plans.adaptive_scan; not reused)",
+        "proposal/codebase_notes.md:42-49 (SciAnalysis tools.py, XSAnalysis/Protocols.py; context only)"
+      ],
+      "status": "pass",
+      "outcome_gate": "G2"
+    },
+    {
+      "node_id": "deliverables.attempts_log_present",
+      "rubric": "direction",
+      "assigned_gate": "G2",
+      "role": "conditional",
+      "value": "required_and_present_substantive",
+      "applicable": true,
+      "rationale": "Attempt records are required when failed/partial/unresolved work is claimed, not when no such work is claimed.",
+      "judge_reason": "An attempts log is required because the paper reports non-wins and unresolved items: CARR loses to gSMART at n=50 on three functions, the twofold-saving target is met only on diffusion, and the baseline ranking reproduction is unresolved. attempts_log.md contains 17 entries recording many distinct approaches, each with observations and keep/abandon reasoning. Examples are a fixed versus normalized gSMART coefficient, an alternative variogram normalization, a continuous DE optimizer, the scalar → six-expert → spatial-scale guide versions, and ablations. Most are backed by logged pilot suites.",
+      "evidence": [
+        "proposal/attempts_log.md A05-A10 (development attempts, logs/pilot, pilot_bounded, pilot_sill, pilot_guides, pilot_local, optimizer_check — all runs complete)",
+        "proposal/attempts_log.md A11 and A15 (unmet baseline ranking and unmet twofold target, by function)",
+        "proposal/sections/results.tex:27-30; proposal/sections/reproduction_limits.tex"
+      ],
+      "status": "pass",
+      "outcome_gate": "G2"
+    },
+    {
+      "node_id": "method_specification.method_stated_before_results",
+      "rubric": "direction",
+      "assigned_gate": "G2",
+      "role": "required",
+      "value": "yes",
+      "applicable": true,
+      "rationale": "Required completeness/coverage under the task.",
+      "judge_reason": "Section 2 names CARR, motivates it (error transport versus variance), and gives its full mathematical form (Eqs. 3–7) and fitting procedure. This all comes before the Setup (Section 3) and Results (Section 4). The introduction contains no results; only the conventional abstract summarizes numbers.",
+      "evidence": [
+        "proposal/report.tex:28-32 (section order intro→methodology→setup→results→analysis)",
+        "proposal/sections/methodology.tex:24-60 (error law, influence update, folded-normal loss, CARR score)",
+        "proposal/sections/introduction.tex:1-8 (no numerical results)"
+      ],
+      "status": "pass",
+      "outcome_gate": "G2"
+    },
+    {
+      "node_id": "method_specification.mathematical_form_clear",
+      "rubric": "direction",
+      "assigned_gate": "G2",
+      "role": "required",
+      "value": "yes",
+      "applicable": true,
+      "rationale": "Required completeness/coverage under the task.",
+      "judge_reason": "The method could be reimplemented from the paper alone. It gives explicit formulas for the variogram fit, the ordinary-Kriging mean and covariance with the unknown-mean correction, the working error law, the rank-one influence function, the post-update bias and variance, the folded-normal loss, and the CARR integral. It also specifies the cross-validated stacking objective, the residual-ratio definitions, and the nearest-neighbour scale model with its selection score. The candidate set and integration points are defined in Setup. The code matches these equations (acquisitions.py:211-228).",
+      "evidence": [
+        "proposal/sections/methodology.tex:4-21 (Eqs 1-2), :25-60 (Eqs 3-7), :71-100 (stacking Eq 8, scale estimator Eqs 9-10)",
+        "proposal/sections/setup.tex:15 (candidate recipe, 512 Sobol integration points)",
+        "proposal/code/acquisitions.py:211-228 implements Eq. 5/7 as written"
+      ],
+      "status": "pass",
+      "outcome_gate": "G2"
+    },
+    {
+      "node_id": "method_specification.hyperparameters_specified",
+      "rubric": "direction",
+      "assigned_gate": "G2",
+      "role": "required",
+      "value": "satisfied",
+      "applicable": true,
+      "rationale": "Required completeness/coverage under the task.",
+      "judge_reason": "All of CARR's fixed settings are given with concrete values, enough to reproduce the protocol. These include:\n- nugget 1e-8; log a bounds [-7,7]; tolerance 1e-5;\n- refresh at n=10 and every 10 observations; three arrival-mod-3 folds;\n- the six experts with their settings (64 neighbours, smoothing 1e-8, 32 trees with leaf size 1, knot formula, ridge 1e-5/1e-4, leaf-size rule, asinh s0 rule with [-30,30] clip);\n- SLSQP tolerance 1e-10 and 200 iterations; penalty 1e-6;\n- k∈{3,8,16,32}, η∈{0,…,1}, clip ranges and floors;\n- M=512 integration points; candidate pool 256 Sobol + 16 per face + corners + ≤64 midpoints.\nThe fitted quantities (weights, λ, η) are reported per function in Table 7.",
+      "evidence": [
+        "proposal/sections/methodology.tex:3,13,71-100",
+        "proposal/sections/setup.tex:15",
+        "proposal/sections/fit_table.tex (fitted weights, median λ, mean η per function)",
+        "proposal/logs/main/*_carr_*/manifest.json config identical across functions"
+      ],
+      "status": "pass",
+      "outcome_gate": "G2"
+    },
+    {
+      "node_id": "method_specification.motivation_grounded_in_literature",
+      "rubric": "direction",
+      "assigned_gate": "G3",
+      "role": "required",
+      "value": "yes",
+      "applicable": true,
+      "rationale": "Required scientific validity, performance, or substantive analysis under the task.",
+      "judge_reason": "The motivation goes beyond intuition and engages the literature. It places CARR in the statistical active-learning and integrated-design tradition (MacKay 1992, Cohn 1996, Bect 2019). It proves that the zero-bias, homogeneous limit reduces to integrated posterior-SD reduction. It grounds the guide in stacked generalization (Wolpert, Breiman), and it contrasts CARR with MEPE, SFCVT, EIGF, LOLA-Voronoi, TEAD and GUESS/GALE.",
+      "evidence": [
+        "proposal/sections/introduction.tex:8",
+        "proposal/sections/methodology.tex:68 (zero-bias limit = integrated SD reduction), :80 (stacking citations), :102-105"
+      ],
+      "status": "pass",
+      "outcome_gate": "G3"
+    },
+    {
+      "node_id": "method_specification.gpcam_integration",
+      "rubric": "direction",
+      "assigned_gate": "G2",
+      "role": "required",
+      "value": "gpcam_integrated",
+      "applicable": true,
+      "rationale": "Required completeness/coverage under the task.",
+      "judge_reason": "Every method uses the same OrdinaryGP. It subclasses gpCAM's GPOptimizer, reuses the fvGP inverse, and adds only the ordinary-mean correction. CARR is a custom acquisition callable maximized by gpCAM's ask over the same candidate-list recipe used for SMART/gSMART, so the only difference between methods is the Criterion. kriging.py has an identical hash in all run manifests.",
+      "evidence": [
+        "proposal/code/kriging.py:34-57 (class OrdinaryGP(GPOptimizer))",
+        "proposal/code/run_experiments.py:136-145 (gp.ask(list(points), acquisition_function=crit) for all adaptive methods)",
+        "Manifests: kriging.py sha 5e7ceb9d in every main/ablation/control run",
+        "proposal/sections/methodology.tex:22"
+      ],
+      "status": "pass",
+      "outcome_gate": "G2"
+    },
+    {
+      "node_id": "baseline_verification.smart_run_on_all_functions",
+      "rubric": "direction",
+      "assigned_gate": "G2",
+      "role": "required",
+      "value": "yes",
+      "applicable": true,
+      "rationale": "Required completeness/coverage under the task.",
+      "judge_reason": "SMART (maximize the Kriging variance v(x)) runs on the gpCAM GPOptimizer subclass with the exponential kernel and is maximized via gpCAM ask. It covers all five functions, all budgets (nested checkpoints at 50/100/200/500, plus 1000 for diffusion) and seeds 0–9. All 50 runs are complete.",
+      "evidence": [
+        "proposal/logs/main/*_smart_s00..s09 (50 complete runs; metrics at every budget)",
+        "proposal/code/acquisitions.py:193 (smart returns v)",
+        "proposal/code/kriging.py:34-46",
+        "proposal/logs/integrity_audit.json: groups_with_ten_seeds=252"
+      ],
+      "status": "pass",
+      "outcome_gate": "G2"
+    },
+    {
+      "node_id": "baseline_verification.gsmart_run_on_all_functions",
+      "rubric": "direction",
+      "assigned_gate": "G2",
+      "role": "required",
+      "value": "no",
+      "applicable": true,
+      "rationale": "Required completeness/coverage under the task.",
+      "judge_reason": "Coverage is complete: 5 functions × all budgets × 10 seeds, run via gpCAM, with one rule used for every function. But gSMART does not use a single fixed weight value. The submission's 'normalized gSMART' recomputes the coefficient at every step as c_n = 1/max over candidates of ||∇m||²/Var(y). The logged effective coefficient varies by orders of magnitude across steps and functions, for example:\n- Piecewise I seed 0: 7.0e-5 to 1.6e-2, median 2.3e-4\n- oscillatory: median 1.1e-3\n- diffusion: 2.3e-5 to 3.3e-2\nThe paper states this is not the original fixed-c (c=20) form. The question explicitly requires a single fixed weight value, and the 'no' description covers runs that 'use varying weights'.",
+      "evidence": [
+        "proposal/sections/setup.tex:17-26 (Eq. 12 c_n = 1/max g²; 'not a literal reconstruction of the original paper's manually chosen coefficient')",
+        "proposal/code/acquisitions.py:186-210 (calibrate_gradient; coefficient_rule 'reciprocal_candidate_max_gradient_squared')",
+        "proposal/logs/main/*_gsmart_s00/trajectory.jsonl diagnostics.gradient_c: min/median/max PI 7.0e-5/2.3e-4/1.6e-2; osc 8.3e-4/1.1e-3/3.3e-3; diffusion 2.3e-5/1.1e-4/3.3e-2",
+        "manifests: gradient_c=-1.0 (sentinel for normalized rule) in all gsmart runs"
+      ],
+      "status": "fail",
+      "outcome_gate": "G2",
+      "finding": {
+        "node_id": "baseline_verification.gsmart_run_on_all_functions",
+        "rubric": "direction",
+        "gate": "G2",
+        "code": "criterion_not_met",
+        "observed_value": "no",
+        "accepted_values": [
+          "yes"
+        ],
+        "question": "Is gSMART run via gpCAM on all five test functions at all measurement budgets with 10 seeds each, using a single fixed weight value across functions?",
+        "reason": "Coverage gaps, OR per-function weight tuning, OR gSMART reimplemented outside gpCAM.",
+        "judge_reason": "Coverage is complete: 5 functions × all budgets × 10 seeds, run via gpCAM, with one rule used for every function. But gSMART does not use a single fixed weight value. The submission's 'normalized gSMART' recomputes the coefficient at every step as c_n = 1/max over candidates of ||∇m||²/Var(y). The logged effective coefficient varies by orders of magnitude across steps and functions, for example:\n- Piecewise I seed 0: 7.0e-5 to 1.6e-2, median 2.3e-4\n- oscillatory: median 1.1e-3\n- diffusion: 2.3e-5 to 3.3e-2\nThe paper states this is not the original fixed-c (c=20) form. The question explicitly requires a single fixed weight value, and the 'no' description covers runs that 'use varying weights'.",
+        "evidence": [
+          "proposal/sections/setup.tex:17-26 (Eq. 12 c_n = 1/max g²; 'not a literal reconstruction of the original paper's manually chosen coefficient')",
+          "proposal/code/acquisitions.py:186-210 (calibrate_gradient; coefficient_rule 'reciprocal_candidate_max_gradient_squared')",
+          "proposal/logs/main/*_gsmart_s00/trajectory.jsonl diagnostics.gradient_c: min/median/max PI 7.0e-5/2.3e-4/1.6e-2; osc 8.3e-4/1.1e-3/3.3e-3; diffusion 2.3e-5/1.1e-4/3.3e-2",
+          "manifests: gradient_c=-1.0 (sentinel for normalized rule) in all gsmart runs"
+        ]
+      }
+    },
+    {
+      "node_id": "baseline_verification.random_grid_baselines_run",
+      "rubric": "direction",
+      "assigned_gate": "G2",
+      "role": "required",
+      "value": "yes",
+      "applicable": true,
+      "rationale": "Required completeness/coverage under the task.",
+      "judge_reason": "Random has 50 complete nested trajectories. Grid has 210 budget-specific runs (21 configurations × 10 seeds), each starting from the shared 10 random points. Every cell has n=10.",
+      "evidence": [
+        "proposal/logs/main/*_random_s00..s09 (50)",
+        "proposal/logs/main/*_grid_sXX_nB (40 per 2D function, 50 for diffusion = 210)",
+        "Recomputed: every grid/random cell has 10 seeds, matching main_table.tex"
+      ],
+      "status": "pass",
+      "outcome_gate": "G2"
+    },
+    {
+      "node_id": "baseline_verification.qualitative_match_to_paper",
+      "rubric": "direction",
+      "assigned_gate": "G3",
+      "role": "required",
+      "value": "no",
+      "applicable": true,
+      "rationale": "Required scientific validity, performance, or substantive analysis under the task.",
+      "judge_reason": "Error does decrease with budget for every baseline. But SMART and gSMART do not clearly beat random and grid at matched budgets:\n- Diffusion: random is far better at every budget (n=1000: 1.654 vs SMART 4.593 / gSMART 4.024; n=50: 4.204 vs 18.501 / 13.717).\n- Smooth oscillatory: grid wins at n=200 (0.328 vs 0.535 / 0.577), and random beats both at n=50 and n=100.\n- Non-differentiable: grid wins at n=200 (1.434 vs 1.650 / 1.541).\n- Piecewise II: grid beats SMART at n=50 and n=100.\nThe paper itself states that universal dominance was not reproduced and leaves this unresolved.",
+      "evidence": [
+        "proposal/sections/main_table.tex:8-32",
+        "proposal/sections/results.tex:29-30 ('They do not reproduce universal dominance over both random and grid')",
+        "proposal/sections/reproduction_limits.tex:3-9",
+        "proposal/attempts_log.md A11"
+      ],
+      "status": "fail",
+      "outcome_gate": "G3",
+      "finding": {
+        "node_id": "baseline_verification.qualitative_match_to_paper",
+        "rubric": "direction",
+        "gate": "G3",
+        "code": "criterion_not_met",
+        "observed_value": "no",
+        "accepted_values": [
+          "yes"
+        ],
+        "question": "Do the reproduced SMART/gSMART baselines show qualitative behavior consistent with the original paper (clearly outperforming random/grid at matched budgets, monotonic improvement vs budget)?",
+        "reason": "SMART/gSMART do not beat random/grid, or error does not decrease with budget, indicating either a misimplementation or test-function mismatch.",
+        "judge_reason": "Error does decrease with budget for every baseline. But SMART and gSMART do not clearly beat random and grid at matched budgets:\n- Diffusion: random is far better at every budget (n=1000: 1.654 vs SMART 4.593 / gSMART 4.024; n=50: 4.204 vs 18.501 / 13.717).\n- Smooth oscillatory: grid wins at n=200 (0.328 vs 0.535 / 0.577), and random beats both at n=50 and n=100.\n- Non-differentiable: grid wins at n=200 (1.434 vs 1.650 / 1.541).\n- Piecewise II: grid beats SMART at n=50 and n=100.\nThe paper itself states that universal dominance was not reproduced and leaves this unresolved.",
+        "evidence": [
+          "proposal/sections/main_table.tex:8-32",
+          "proposal/sections/results.tex:29-30 ('They do not reproduce universal dominance over both random and grid')",
+          "proposal/sections/reproduction_limits.tex:3-9",
+          "proposal/attempts_log.md A11"
+        ]
+      }
+    },
+    {
+      "node_id": "experimental_completeness.all_21_configurations_run",
+      "rubric": "direction",
+      "assigned_gate": "G2",
+      "role": "required",
+      "value": "yes",
+      "applicable": true,
+      "rationale": "Required completeness/coverage under the task.",
+      "judge_reason": "CARR's nested trajectories have checkpoint metrics and saved predictions at 50/100/200/500 for the four 2D functions and at 50/100/200/500/1000 for diffusion: 21 configurations, each with 10 seeds.",
+      "evidence": [
+        "proposal/logs/main/*_carr_sXX/metrics.json (budgets 50,100,200,500[,1000]) and prediction_n*.npz",
+        "Recomputed CARR column matches main_table.tex for all 21 rows"
+      ],
+      "status": "pass",
+      "outcome_gate": "G2"
+    },
+    {
+      "node_id": "experimental_completeness.ten_seeds_per_configuration",
+      "rubric": "direction",
+      "assigned_gate": "G2",
+      "role": "required",
+      "value": "yes",
+      "applicable": true,
+      "rationale": "Required completeness/coverage under the task.",
+      "judge_reason": "Every (method, function, budget) cell has exactly seeds 0–9 (verified by recomputation and integrity_audit 'all groups contain exactly seeds 0 through 9'). Table 1 and every other table report the mean ± sample standard deviation.",
+      "evidence": [
+        "Recomputation from logs/main: n=10 for all 105 headline cells",
+        "proposal/logs/integrity_audit.json checks list",
+        "proposal/sections/setup.tex:12 ('Every table reports sample standard deviations over ten seeds')"
+      ],
+      "status": "pass",
+      "outcome_gate": "G2"
+    },
+    {
+      "node_id": "experimental_completeness.initial_design_paired",
+      "rubric": "direction",
+      "assigned_gate": "G3",
+      "role": "required",
+      "value": "yes",
+      "applicable": true,
+      "rationale": "Required scientific validity, performance, or substantive analysis under the task.",
+      "judge_reason": "The initial 10 points come from np.random.default_rng(seed) for every method, grid included. Across all main, ablation and control manifests, each (function, seed) pair has exactly one distinct initial_design_sha256 (50 of 50 keys).",
+      "evidence": [
+        "proposal/code/run_experiments.py:82-84",
+        "Manifest check: Counter({1: 50}) distinct initial hashes per (function,seed) across main/ablations/homogeneous/classical",
+        "proposal/sections/setup.tex:6"
+      ],
+      "status": "pass",
+      "outcome_gate": "G3"
+    },
+    {
+      "node_id": "experimental_completeness.single_hyperparameter_setting",
+      "rubric": "direction",
+      "assigned_gate": "G3",
+      "role": "required",
+      "value": "yes",
+      "applicable": true,
+      "rationale": "Required scientific validity, performance, or substantive analysis under the task.",
+      "judge_reason": "All 50 headline CARR runs use an identical config (guide_variant v3, guide_period 10, representer_power 9, candidate_power 8) and the same selection procedure on every function. That procedure is three-fold stacking by least squares followed by a Gaussian-score choice of the scale model. Fitted weights, λ and η differ by function (Table 7), as expected. No hand-tuned per-function rows are reported.",
+      "evidence": [
+        "Manifest check: ('main','carr') 50 runs, 1 distinct config, selection_procedure three_fold_simplex_squared_error_then_standardized_residual_scale_v1",
+        "proposal/logs/fit_summary.json; proposal/sections/fit_table.tex",
+        "proposal/logs/integrity_audit.json: 'one headline acquisition fitting procedure'"
+      ],
+      "status": "pass",
+      "outcome_gate": "G3"
+    },
+    {
+      "node_id": "metric_reporting.modern_metrics_reported",
+      "rubric": "direction",
+      "assigned_gate": "G2",
+      "role": "required",
+      "value": "yes",
+      "applicable": true,
+      "rationale": "Required completeness/coverage under the task.",
+      "judge_reason": "RMSE, CRPS and coverage (90%/95% in the table) are reported for all five methods on all 21 configurations. They are computed from the Kriging posterior mean and variance on the dense held-out grid. Coverage curves at 11 nominal levels appear for every function, budget and method (Figs 2, 6, 7).",
+      "evidence": [
+        "proposal/sections/metrics_table.tex (105 rows: 5 methods × 21 configurations)",
+        "proposal/sections/results.tex:33-38 (Fig fig:calibration)",
+        "proposal/sections/supplement.tex:50-59 (calibration_all_2d, calibration_all_diffusion)",
+        "proposal/code/run_experiments.py:47-71"
+      ],
+      "status": "pass",
+      "outcome_gate": "G2"
+    },
+    {
+      "node_id": "metric_reporting.baseline_metrics_recomputed",
+      "rubric": "direction",
+      "assigned_gate": "G2",
+      "role": "required",
+      "value": "yes",
+      "applicable": true,
+      "rationale": "Required completeness/coverage under the task.",
+      "judge_reason": "SMART and gSMART, as well as grid and random, are scored on RMSE, CRPS and coverage and compared head-to-head with CARR. The text explicitly notes CARR's worse CRPS on four functions.",
+      "evidence": [
+        "proposal/sections/metrics_table.tex",
+        "proposal/sections/results.tex:38 (CARR vs gSMART/SMART CRPS comparisons)",
+        "proposal/logs/aggregates.json, all_metrics.csv"
+      ],
+      "status": "pass",
+      "outcome_gate": "G2"
+    },
+    {
+      "node_id": "outperformance.speedup_on_piecewise_I",
+      "rubric": "direction",
+      "assigned_gate": "G3",
+      "role": "composite_member",
+      "value": "matches",
+      "applicable": true,
+      "rationale": "Combined rule: substantial speedup on >=4/5 functions; no clear regression on any function.",
+      "judge_reason": "Neither speedup tier is met. Target = min(SMART, gSMART) at 500 = 2.038. CARR first reaches it at the tested budget 500; interpolating linearly between 200 (3.051) and 500 (1.583) gives B*/B_max ≈ 0.81. CARR's mean is above gSMART at n=50 (8.497 vs 7.744). One-SD dominance (CARR mean + SD ≤ min) holds at only 2 of 4 budgets. The only deficit (n=50, gap 0.753) lies within CARR's 1 SD (0.939), and CARR is lower at 100, 200 and 500, so there is no clear regression. Because the difference changes sign rather than showing a consistent slowdown, 'matches' is the best-fitting formal tier. Slight_regression is the alternative only if the gap at n=50 is judged against gSMART's SD (0.521).",
+      "evidence": [
+        "Recomputed from logs/main: CARR 8.497±0.939/5.074±0.444/3.051±0.143/1.583±0.054; gSMART 7.744±0.521/5.206±0.250/3.421±0.192/2.038±0.066; SMART 8.443/5.478/3.733/2.299",
+        "proposal/sections/speedup_table.tex (n_*=500, Separated 2/4)"
+      ],
+      "status": "fail",
+      "outcome_gate": "G3",
+      "finding": {
+        "node_id": "outperformance.speedup_on_piecewise_I",
+        "rubric": "direction",
+        "gate": "G3",
+        "code": "criterion_not_met",
+        "observed_value": "matches",
+        "accepted_values": [
+          "substantial_speedup"
+        ],
+        "question": "On the piecewise_I test function, classify the convergence speedup of the proposed method against BOTH SMART and gSMART, based on per-budget mean ± std reconstruction error.",
+        "reason": "Neither substantial nor modest speedup criteria are met, AND no budget shows proposed_mean exceeding at least one baseline by >1 std. Curves are essentially indistinguishable within noise.",
+        "judge_reason": "Neither speedup tier is met. Target = min(SMART, gSMART) at 500 = 2.038. CARR first reaches it at the tested budget 500; interpolating linearly between 200 (3.051) and 500 (1.583) gives B*/B_max ≈ 0.81. CARR's mean is above gSMART at n=50 (8.497 vs 7.744). One-SD dominance (CARR mean + SD ≤ min) holds at only 2 of 4 budgets. The only deficit (n=50, gap 0.753) lies within CARR's 1 SD (0.939), and CARR is lower at 100, 200 and 500, so there is no clear regression. Because the difference changes sign rather than showing a consistent slowdown, 'matches' is the best-fitting formal tier. Slight_regression is the alternative only if the gap at n=50 is judged against gSMART's SD (0.521).",
+        "evidence": [
+          "Recomputed from logs/main: CARR 8.497±0.939/5.074±0.444/3.051±0.143/1.583±0.054; gSMART 7.744±0.521/5.206±0.250/3.421±0.192/2.038±0.066; SMART 8.443/5.478/3.733/2.299",
+          "proposal/sections/speedup_table.tex (n_*=500, Separated 2/4)"
+        ]
+      }
+    },
+    {
+      "node_id": "outperformance.speedup_on_piecewise_II",
+      "rubric": "direction",
+      "assigned_gate": "G3",
+      "role": "composite_member",
+      "value": "matches",
+      "applicable": true,
+      "rationale": "Combined rule: substantial speedup on >=4/5 functions; no clear regression on any function.",
+      "judge_reason": "Target = 6.595 (gSMART at 500). Linear interpolation gives B*/B_max ≈ 0.77, but modest also requires CARR ≤ both baselines at every budget, and at n=50 CARR is 24.688 vs gSMART 23.537. Substantial fails (B* > 0.5; one-SD dominance at only 2 of 4 budgets). The single deficit (gap 1.151) is within CARR's SD (2.677), and CARR is lower at 100, 200 and 500. That gives 'matches' rather than a consistent slowdown.",
+      "evidence": [
+        "Recomputed: CARR 24.688±2.677/15.947±0.925/9.559±0.560/4.751±0.158; gSMART 23.537±1.004/16.060±0.614/10.877±0.411/6.595±0.198; SMART 25.184/16.864/11.858/7.208",
+        "proposal/sections/main_table.tex:13-16"
+      ],
+      "status": "fail",
+      "outcome_gate": "G3",
+      "finding": {
+        "node_id": "outperformance.speedup_on_piecewise_II",
+        "rubric": "direction",
+        "gate": "G3",
+        "code": "criterion_not_met",
+        "observed_value": "matches",
+        "accepted_values": [
+          "substantial_speedup"
+        ],
+        "question": "On the piecewise_II test function, classify the convergence speedup of the proposed method against BOTH SMART and gSMART, based on per-budget mean ± std reconstruction error.",
+        "reason": "Neither substantial nor modest speedup criteria are met, AND no budget shows proposed_mean exceeding at least one baseline by >1 std. Curves are essentially indistinguishable within noise.",
+        "judge_reason": "Target = 6.595 (gSMART at 500). Linear interpolation gives B*/B_max ≈ 0.77, but modest also requires CARR ≤ both baselines at every budget, and at n=50 CARR is 24.688 vs gSMART 23.537. Substantial fails (B* > 0.5; one-SD dominance at only 2 of 4 budgets). The single deficit (gap 1.151) is within CARR's SD (2.677), and CARR is lower at 100, 200 and 500. That gives 'matches' rather than a consistent slowdown.",
+        "evidence": [
+          "Recomputed: CARR 24.688±2.677/15.947±0.925/9.559±0.560/4.751±0.158; gSMART 23.537±1.004/16.060±0.614/10.877±0.411/6.595±0.198; SMART 25.184/16.864/11.858/7.208",
+          "proposal/sections/main_table.tex:13-16"
+        ]
+      }
+    },
+    {
+      "node_id": "outperformance.speedup_on_smooth_oscillatory",
+      "rubric": "direction",
+      "assigned_gate": "G3",
+      "role": "composite_member",
+      "value": "modest_speedup",
+      "applicable": true,
+      "rationale": "Combined rule: substantial speedup on >=4/5 functions; no clear regression on any function.",
+      "judge_reason": "CARR is at or below min(SMART, gSMART) at every budget: 0.946≤1.008, 0.729≤0.874, 0.337≤0.535, 0.105≤0.190. Mean + SD is below the baseline minimum at 4 of 4 budgets. Target = 0.190 (SMART at 500). Interpolating between 200 (0.337) and 500 (0.105) gives B*/B_max ≈ 0.78 (linear) or 0.63 (log), both in (0.5, 0.8]. So the modest tier holds and substantial fails (B*/B_max > 0.5). Interpolation is required to classify at all: the rubric prescribes it, and without it the modest band could never be reached on tested budgets. The paper itself does not interpolate (n_*=500).",
+      "evidence": [
+        "Recomputed: CARR 0.946±0.040/0.729±0.024/0.337±0.014/0.105±0.002; SMART 1.039/0.874/0.535/0.190; gSMART 1.008/0.877/0.577/0.234",
+        "proposal/sections/speedup_table.tex:7 (target 0.190, n_* 500)"
+      ],
+      "status": "fail",
+      "outcome_gate": "G3",
+      "finding": {
+        "node_id": "outperformance.speedup_on_smooth_oscillatory",
+        "rubric": "direction",
+        "gate": "G3",
+        "code": "criterion_not_met",
+        "observed_value": "modest_speedup",
+        "accepted_values": [
+          "substantial_speedup"
+        ],
+        "question": "On the smooth_oscillatory test function, classify the convergence speedup of the proposed method against BOTH SMART and gSMART, based on per-budget mean ± std reconstruction error.",
+        "reason": "BOTH of the following hold: (1) B*/B_max ∈ (0.5, 0.8] (proposed reaches baselines' max-budget error using 50–80% of the budget); (2) proposed_mean ≤ min(SMART_mean, gSMART_mean) at every tested budget (consistent dominance, gap may be within noise). Substantial speedup criteria are NOT met.",
+        "judge_reason": "CARR is at or below min(SMART, gSMART) at every budget: 0.946≤1.008, 0.729≤0.874, 0.337≤0.535, 0.105≤0.190. Mean + SD is below the baseline minimum at 4 of 4 budgets. Target = 0.190 (SMART at 500). Interpolating between 200 (0.337) and 500 (0.105) gives B*/B_max ≈ 0.78 (linear) or 0.63 (log), both in (0.5, 0.8]. So the modest tier holds and substantial fails (B*/B_max > 0.5). Interpolation is required to classify at all: the rubric prescribes it, and without it the modest band could never be reached on tested budgets. The paper itself does not interpolate (n_*=500).",
+        "evidence": [
+          "Recomputed: CARR 0.946±0.040/0.729±0.024/0.337±0.014/0.105±0.002; SMART 1.039/0.874/0.535/0.190; gSMART 1.008/0.877/0.577/0.234",
+          "proposal/sections/speedup_table.tex:7 (target 0.190, n_* 500)"
+        ]
+      }
+    },
+    {
+      "node_id": "outperformance.speedup_on_non_differentiable",
+      "rubric": "direction",
+      "assigned_gate": "G3",
+      "role": "composite_member",
+      "value": "matches",
+      "applicable": true,
+      "rationale": "Combined rule: substantial speedup on >=4/5 functions; no clear regression on any function.",
+      "judge_reason": "Target = 0.899 (gSMART at 500). Interpolation gives B*/B_max ≈ 0.67, but CARR is above both baselines at n=50 (3.543 vs SMART 3.478 and gSMART 3.271), so the every-budget dominance condition of modest fails. Substantial fails because B* > 0.5. The n=50 gap (0.272) is within CARR's SD (0.458), and CARR is lower with one-SD separation at 100, 200 and 500. That gives 'matches', not a regression tier.",
+      "evidence": [
+        "Recomputed: CARR 3.543±0.458/1.873±0.221/1.130±0.063/0.616±0.033; gSMART 3.271±0.263/2.198±0.083/1.541±0.058/0.899±0.031; SMART 3.478/2.393/1.650/0.988",
+        "proposal/sections/main_table.tex:23-26"
+      ],
+      "status": "fail",
+      "outcome_gate": "G3",
+      "finding": {
+        "node_id": "outperformance.speedup_on_non_differentiable",
+        "rubric": "direction",
+        "gate": "G3",
+        "code": "criterion_not_met",
+        "observed_value": "matches",
+        "accepted_values": [
+          "substantial_speedup"
+        ],
+        "question": "On the non_differentiable test function, classify the convergence speedup of the proposed method against BOTH SMART and gSMART, based on per-budget mean ± std reconstruction error.",
+        "reason": "Neither substantial nor modest speedup criteria are met, AND no budget shows proposed_mean exceeding at least one baseline by >1 std. Curves are essentially indistinguishable within noise.",
+        "judge_reason": "Target = 0.899 (gSMART at 500). Interpolation gives B*/B_max ≈ 0.67, but CARR is above both baselines at n=50 (3.543 vs SMART 3.478 and gSMART 3.271), so the every-budget dominance condition of modest fails. Substantial fails because B* > 0.5. The n=50 gap (0.272) is within CARR's SD (0.458), and CARR is lower with one-SD separation at 100, 200 and 500. That gives 'matches', not a regression tier.",
+        "evidence": [
+          "Recomputed: CARR 3.543±0.458/1.873±0.221/1.130±0.063/0.616±0.033; gSMART 3.271±0.263/2.198±0.083/1.541±0.058/0.899±0.031; SMART 3.478/2.393/1.650/0.988",
+          "proposal/sections/main_table.tex:23-26"
+        ]
+      }
+    },
+    {
+      "node_id": "outperformance.speedup_on_diffusion_3d",
+      "rubric": "direction",
+      "assigned_gate": "G3",
+      "role": "composite_member",
+      "value": "substantial_speedup",
+      "applicable": true,
+      "rationale": "Combined rule: substantial speedup on >=4/5 functions; no clear regression on any function.",
+      "judge_reason": "Target = min(SMART, gSMART) at 1000 = 4.024. CARR reaches 3.276 at the tested budget n=100 (B*/B_max = 0.10; ≈0.08 interpolated), well under 0.5. CARR mean + SD is below min(SMART, gSMART) at 5 of 5 budgets (e.g. 6.740 ≤ 13.717 at 50; 1.327 ≤ 4.024 at 1000). Random beats SMART/gSMART here, but the tier is defined only against SMART/gSMART.",
+      "evidence": [
+        "Recomputed: CARR 5.063±1.677/3.276±0.914/2.524±0.370/1.802±0.097/1.275±0.052; gSMART 13.717/9.774/7.722/5.135/4.024; SMART 18.501/12.434/8.948/6.233/4.593",
+        "proposal/sections/speedup_table.tex:9"
+      ],
+      "status": "pass",
+      "outcome_gate": "G3"
+    },
+    {
+      "node_id": "justification.quality_on_piecewise_I",
+      "rubric": "direction",
+      "assigned_gate": "G3",
+      "role": "required",
+      "value": "method_connected_justification",
+      "applicable": true,
+      "rationale": "Required scientific validity, performance, or substantive analysis under the task.",
+      "judge_reason": "The paper names Piecewise I and ties the missing twofold saving to its structure. A curved boundary plus a smooth background both need coverage. Early on, the cross-validated stacked guide is unreliable and can 'spend points fitting a wrongly located transition', and the spatial scale λ only becomes useful once enough CV residuals localize the transition. In the failure analysis, a misplaced branch's signed innovation is spread by the domain integral, producing the n=50 regression. Ablations and the audit back this: zero-bias CARR is better on Piecewise I (1.512 vs 1.583), and CARR's ranking correlation is worse than gSMART's there (0.246 vs 0.347). This is an explicit function-property ↔ method-component link, not generic noise talk.",
+      "evidence": [
+        "proposal/sections/results.tex:10-11",
+        "proposal/sections/analysis.tex:9 (zero bias 1.512; global scale 2.230), :33 (audit), :51 (early-budget failures)"
+      ],
+      "status": "pass",
+      "outcome_gate": "G3"
+    },
+    {
+      "node_id": "justification.quality_on_piecewise_II",
+      "rubric": "direction",
+      "assigned_gate": "G3",
+      "role": "required",
+      "value": "method_connected_justification",
+      "applicable": true,
+      "rationale": "Required scientific validity, performance, or substantive analysis under the task.",
+      "judge_reason": "The paper names Piecewise II and ties its stronger jump contrast to the acquisition's transport term: 'Larger jumps increase the value of resolving the boundary but also the penalty for transporting an innovation across it', and the shared geometry 'does not make the early guide correct'. It also invokes the common failure mechanism for discontinuous functions (guide misplacement spread by the domain integral) and the global-scale ablation (6.667 vs 4.751) for why late refinement works.",
+      "evidence": [
+        "proposal/sections/results.tex:13-14",
+        "proposal/sections/analysis.tex:9, :51"
+      ],
+      "status": "pass",
+      "outcome_gate": "G3"
+    },
+    {
+      "node_id": "justification.quality_on_smooth_oscillatory",
+      "rubric": "direction",
+      "assigned_gate": "G3",
+      "role": "required",
+      "value": "not_applicable_speedup_shown",
+      "applicable": true,
+      "rationale": "Required scientific validity, performance, or substantive analysis under the task.",
+      "judge_reason": "The speedup node for this function is modest_speedup (CARR below both baselines at every budget; interpolated B*/B_max ≈ 0.78), so no justification is required. Even if the tier were judged 'matches' without interpolation, the paper gives a method-connected explanation. The function is additive with oscillations across the whole domain; the additive-spline guide expert (weight 0.999) recognizes this, but the unchanged rough exponential Kriging predictor still needs broad spatial coverage.",
+      "evidence": [
+        "proposal/sections/results.tex:16-17",
+        "proposal/sections/analysis.tex:11, :51"
+      ],
+      "status": "pass",
+      "outcome_gate": "G3"
+    },
+    {
+      "node_id": "justification.quality_on_non_differentiable",
+      "rubric": "direction",
+      "assigned_gate": "G3",
+      "role": "required",
+      "value": "method_connected_justification",
+      "applicable": true,
+      "rationale": "Required scientific validity, performance, or substantive analysis under the task.",
+      "judge_reason": "The paper names the piecewise-linear case and links its affine branches and discontinuity to specific components. The partition-linear guide expert (weight 0.890) represents branch interiors only after it learns the split; early misplacement is spread by signed transport. And because CARR changes only the acquisition, the continuous Kriging predictor must still resolve the jump. The paper uses this to explain why n=200 (1.130) remains above the baseline target, and supports it with the zero-bias ablation (0.886) and regional boundary-error diagnostics.",
+      "evidence": [
+        "proposal/sections/results.tex:19-20",
+        "proposal/sections/analysis.tex:13, :25, :51"
+      ],
+      "status": "pass",
+      "outcome_gate": "G3"
+    },
+    {
+      "node_id": "justification.quality_on_diffusion_3d",
+      "rubric": "direction",
+      "assigned_gate": "G3",
+      "role": "required",
+      "value": "not_applicable_speedup_shown",
+      "applicable": true,
+      "rationale": "Required scientific validity, performance, or substantive analysis under the task.",
+      "judge_reason": "The speedup node for diffusion is substantial_speedup (B*=100 of 1000; one-SD dominance at 5 of 5 budgets), so no justification is required.",
+      "evidence": [
+        "proposal/sections/speedup_table.tex:9",
+        "proposal/sections/main_table.tex:28-32"
+      ],
+      "status": "pass",
+      "outcome_gate": "G3"
+    },
+    {
+      "node_id": "mechanism_analysis.subsection_present",
+      "rubric": "direction",
+      "assigned_gate": "G2",
+      "role": "required",
+      "value": "yes",
+      "applicable": true,
+      "rationale": "Required completeness/coverage under the task.",
+      "judge_reason": "Analysis has an explicit Section 5.1, 'Mechanism analysis: spatial scale and signed transport have different roles'.",
+      "evidence": [
+        "proposal/sections/analysis.tex:2"
+      ],
+      "status": "pass",
+      "outcome_gate": "G2"
+    },
+    {
+      "node_id": "mechanism_analysis.mechanism_supported",
+      "rubric": "direction",
+      "assigned_gate": "G3",
+      "role": "required",
+      "value": "yes",
+      "applicable": true,
+      "rationale": "Required scientific validity, performance, or substantive analysis under the task.",
+      "judge_reason": "The mechanism rests on three kinds of evidence:\n- Component ablations run for all functions with 10 seeds, all reproduced from logs: zero bias, unsigned bias, global scale, local disagreement, plus the IVR/ISR/EIGF controls.\n- An offline counterfactual audit at n=200 with seed-level Spearman correlations between predicted scores and realized gains.\n- Proposition 1, the exact one-step absolute-risk identity, which links CARR to integrated uncertainty reduction.",
+      "evidence": [
+        "proposal/sections/ablation_table.tex (verified against logs/ablations, homogeneous, classical)",
+        "proposal/sections/audit_table.tex; proposal/logs/counterfactual_summary.json",
+        "proposal/sections/methodology.tex:62-68"
+      ],
+      "status": "pass",
+      "outcome_gate": "G3"
+    },
+    {
+      "node_id": "mechanism_analysis.surrogate_vs_acquisition_ablation",
+      "rubric": "direction",
+      "assigned_gate": "G3",
+      "role": "required",
+      "value": "not_applicable_surrogate_unchanged",
+      "applicable": true,
+      "rationale": "Required scientific validity, performance, or substantive analysis under the task.",
+      "judge_reason": "Every method, including CARR, returns the same ordinary-Kriging exponential-kernel predictor (same kriging.py hash; metrics computed from the same OrdinaryGP). The stacked guide is used only inside the acquisition score. The surrogate is therefore unchanged and the difference is confined to the acquisition. Ablations are provided anyway.",
+      "evidence": [
+        "proposal/code/run_experiments.py:111-119 (metrics from OrdinaryGP for every method)",
+        "proposal/sections/introduction.tex:6; proposal/sections/methodology.tex:22,32",
+        "Manifests: kriging.py sha 5e7ceb9d for all methods"
+      ],
+      "status": "pass",
+      "outcome_gate": "G3"
+    },
+    {
+      "node_id": "failure_analysis.subsection_present",
+      "rubric": "direction",
+      "assigned_gate": "G2",
+      "role": "required",
+      "value": "yes",
+      "applicable": true,
+      "rationale": "Required completeness/coverage under the task.",
+      "judge_reason": "Analysis has an explicit Section 5.2, 'Failure analysis: accuracy can inflate a misspecified uncertainty model'.",
+      "evidence": [
+        "proposal/sections/analysis.tex:35"
+      ],
+      "status": "pass",
+      "outcome_gate": "G2"
+    },
+    {
+      "node_id": "failure_analysis.patterns_identified",
+      "rubric": "direction",
+      "assigned_gate": "G3",
+      "role": "required",
+      "value": "yes",
+      "applicable": true,
+      "rationale": "Required scientific validity, performance, or substantive analysis under the task.",
+      "judge_reason": "Failures are grouped by shared structure:\n- Early-budget (n=50) regressions on all three discontinuous functions.\n- Worse CRPS and over-coverage on the four functions where CARR concentrates samples near sharp changes, linked to inflated fitted scale (×3.3, ×2.5, ×9.4).\n- An objective-mismatch failure (MAPE) on diffusion.\n- No twofold saving on the four 2D functions.",
+      "evidence": [
+        "proposal/sections/analysis.tex:36, :49, :51, :53",
+        "proposal/sections/results.tex:38-41"
+      ],
+      "status": "pass",
+      "outcome_gate": "G3"
+    },
+    {
+      "node_id": "failure_analysis.patterns_explained_coherently",
+      "rubric": "direction",
+      "assigned_gate": "G3",
+      "role": "required",
+      "value": "yes",
+      "applicable": true,
+      "rationale": "Required scientific validity, performance, or substantive analysis under the task.",
+      "judge_reason": "Each pattern is linked to a design property in a way that predicts when CARR will fail:\n- Proposition 2 bounds the fitted global scale below by sampled jumps over short distances. Since CARR concentrates samples near discontinuities while the returned predictor stays stationary, this predicts CRPS and over-coverage failures on jump functions but not on the smooth oscillatory case (scale ratio 1.0; CRPS improves there).\n- Early failures come from an unreliable guide whose signed innovations the domain integral spreads.\n- The MAPE regression comes from the absolute-loss objective underweighting small responses.",
+      "evidence": [
+        "proposal/sections/analysis.tex:38-49 (Prop. 2 and checked scale ratios), :51, :53",
+        "proposal/logs/diagnostics.json (scale bound checks)"
+      ],
+      "status": "pass",
+      "outcome_gate": "G3"
+    },
+    {
+      "node_id": "compute_cost_analysis.subsection_present",
+      "rubric": "direction",
+      "assigned_gate": "G2",
+      "role": "required",
+      "value": "yes",
+      "applicable": true,
+      "rationale": "Required completeness/coverage under the task.",
+      "judge_reason": "Analysis has an explicit Section 5.3, 'Computational cost trade-off'.",
+      "evidence": [
+        "proposal/sections/analysis.tex:55"
+      ],
+      "status": "pass",
+      "outcome_gate": "G2"
+    },
+    {
+      "node_id": "compute_cost_analysis.measurements_reported",
+      "rubric": "direction",
+      "assigned_gate": "G2",
+      "role": "required",
+      "value": "yes",
+      "applicable": true,
+      "rationale": "Required completeness/coverage under the task.",
+      "judge_reason": "Table 6 reports serial per-decision wall-clock costs on Piecewise II (n=190–199, 10 seeds), split into GP fit, guide fit, acquisition and total. Totals: CARR 75.81±35.77 ms, SMART 6.65 ms, gSMART 10.88 ms, grid 3.01 ms, random 2.87 ms. These match logs/compute_cost.json, which also verified the selected points against the saved trajectories.",
+      "evidence": [
+        "proposal/sections/cost_table.tex",
+        "proposal/logs/compute_cost.json summary (carr total 0.0758 s; smart 0.00665 s; gsmart 0.0109 s)",
+        "proposal/code/benchmark_cost.py:29-30 (selection assertion)"
+      ],
+      "status": "pass",
+      "outcome_gate": "G2"
+    },
+    {
+      "node_id": "compute_cost_analysis.tradeoff_explicit",
+      "rubric": "direction",
+      "assigned_gate": "G3",
+      "role": "required",
+      "value": "yes",
+      "applicable": true,
+      "rationale": "Required scientific validity, performance, or substantive analysis under the task.",
+      "judge_reason": "The trade-off is stated plainly. CARR costs about 11.4× SMART and 7.0× gSMART per decision. The overhead (a fraction of a second) is acceptable when physical measurements are slow but wasteful for cheap oracles. Where CARR does not beat the simple disagreement rule, its extra complexity 'lacks empirical justification'.",
+      "evidence": [
+        "proposal/sections/analysis.tex:57-59",
+        "proposal/logs/paper_macros.tex (CostRatioSmart 11.4, CostRatioGsmart 7.0)"
+      ],
+      "status": "pass",
+      "outcome_gate": "G3"
+    },
+    {
+      "node_id": "originality.related_work_cited",
+      "rubric": "direction",
+      "assigned_gate": "G2",
+      "role": "required",
+      "value": "yes",
+      "applicable": true,
+      "rationale": "Required completeness/coverage under the task.",
+      "judge_reason": "Section 2.4 and the introduction discuss prior work substantively. Of the 32 references, about 18 come from the relevant active-learning, design and surrogate literature: MacKay 1992, Cohn 1996, Bect 2019, Sacks 1989, Cressie 1990, Rasmussen 2006, MEPE (Liu 2017), SFCVT (Aute 2013), EIGF (Lam 2008), LOLA-Voronoi (Crombecq 2011), TEAD (Mo 2017), GUESS/GALE (Lämmle 2023), reviews by Liu 2018 and Fuhg 2021, Bachoc 2013, and the Noack 2019/2020/2021 papers.",
+      "evidence": [
+        "proposal/sections/methodology.tex:102-105",
+        "proposal/sections/introduction.tex:2-8",
+        "proposal/report.bbl (32 bibitems)"
+      ],
+      "status": "pass",
+      "outcome_gate": "G2"
+    },
+    {
+      "node_id": "originality.positioning_vs_prior_work",
+      "rubric": "direction",
+      "assigned_gate": "G3",
+      "role": "required",
+      "value": "satisfied",
+      "applicable": true,
+      "rationale": "Required scientific validity, performance, or substantive analysis under the task.",
+      "judge_reason": "The paper explains how CARR relates to the closest methods and what it adds. MEPE, SFCVT, EIGF, TEAD and LOLA use local residual or disagreement scores; CARR instead transports a signed innovation h_x(z)b(x) through the Kriging update and integrates its absolute risk. It differs from variance multipliers through its spatially varying error covariance. It concedes that stacking and CV-under-misspecification are not new. It shows that the zero-bias limit reduces to integrated SD reduction, compares directly with EIGF, IVR and ISR, and explicitly disclaims comparisons it did not run (MEPE, SFCVT, TEAD, GALE).",
+      "evidence": [
+        "proposal/sections/methodology.tex:68, :103-105",
+        "proposal/sections/introduction.tex:8",
+        "proposal/sections/ablation_table.tex (EIGF/IVR/ISR rows)"
+      ],
+      "status": "pass",
+      "outcome_gate": "G3"
+    },
+    {
+      "node_id": "writing_quality.rendered_pdf_clean",
+      "rubric": "direction",
+      "assigned_gate": "G3",
+      "role": "required",
+      "value": "yes",
+      "applicable": true,
+      "rationale": "Required scientific validity, performance, or substantive analysis under the task.",
+      "judge_reason": "report.log shows no overfull or underfull boxes and no undefined references or citations; the only warning is the supplied style's package-name mismatch. I could not rasterize the PDF myself (no pdftoppm, and no file writes allowed). Instead I inspected the solver's renders of all 22 pages, made after the final build; the PDF hash matches the completion record. Equations fit the margins, tables fit, figures display, and citations resolve. The only flaw is cosmetic: overlapping x-axis tick labels in Figure 1's 2D panels.",
+      "evidence": [
+        "proposal/report.log (no Overfull/Underfull/undefined entries)",
+        "proposal/logs/pdf_verification.json (overfull_boxes [], undefined_reference_or_citation false)",
+        "proposal/figures/qa/page_02.png, page_06.png, page_07.png, page_11.png; contact_01_06..19_22.png",
+        "Limitation: page images are solver-generated renders of report.pdf (sha256 1858813d…)"
+      ],
+      "status": "pass",
+      "outcome_gate": "G3"
+    },
+    {
+      "node_id": "writing_quality.neurips_style",
+      "rubric": "direction",
+      "assigned_gate": "G3",
+      "role": "required",
+      "value": "yes",
+      "applicable": true,
+      "rationale": "Required scientific validity, performance, or substantive analysis under the task.",
+      "judge_reason": "The preamble uses \\usepackage[preprint]{neurips}, and the supplied neurips.sty is copied unchanged (byte-identical per reuse_verification).",
+      "evidence": [
+        "proposal/report.tex:3",
+        "proposal/logs/reuse_verification.json: copied_style_identical true"
+      ],
+      "status": "pass",
+      "outcome_gate": "G3"
+    },
+    {
+      "node_id": "writing_quality.main_results_table_complete",
+      "rubric": "direction",
+      "assigned_gate": "G2",
+      "role": "required",
+      "value": "yes",
+      "applicable": true,
+      "rationale": "Required completeness/coverage under the task.",
+      "judge_reason": "Table 1 covers all 21 (function, budget) rows in the main paper, reports mean ± sample SD over ten seeds, and puts the methods (Grid, Random, SMART, gSMART, CARR) in columns.",
+      "evidence": [
+        "proposal/sections/main_table.tex:7-32"
+      ],
+      "status": "pass",
+      "outcome_gate": "G2"
+    },
+    {
+      "node_id": "writing_quality.convergence_curves_complete",
+      "rubric": "direction",
+      "assigned_gate": "G2",
+      "role": "required",
+      "value": "yes",
+      "applicable": true,
+      "rationale": "Required completeness/coverage under the task.",
+      "judge_reason": "Figure 1 has five panels (Piecewise I, Piecewise II, smooth oscillatory, non-differentiable, 3D diffusion). They show ten-seed mean lines with shaded ±1 sample-SD bands for all five methods.",
+      "evidence": [
+        "proposal/sections/results.tex:3-6 (caption: 'Lines are ten-seed means and bands are one sample standard deviation')",
+        "proposal/figures/qa/page_07.png"
+      ],
+      "status": "pass",
+      "outcome_gate": "G2"
+    },
+    {
+      "node_id": "writing_quality.scatter_plots",
+      "rubric": "direction",
+      "assigned_gate": "G3",
+      "role": "required",
+      "value": "yes",
+      "applicable": true,
+      "rationale": "Required scientific validity, performance, or substantive analysis under the task.",
+      "judge_reason": "Figure 4 overlays the measurement locations at n=200 (seed 0) on the true functions for all four 2D functions and all five methods. Figure 5 projects the diffusion sampling locations over a slice of the true function.",
+      "evidence": [
+        "proposal/sections/analysis.tex:15-24",
+        "proposal/figures/qa/page_11.png, page_12.png"
+      ],
+      "status": "pass",
+      "outcome_gate": "G3"
+    },
+    {
+      "node_id": "writing_quality.limitations_discussed",
+      "rubric": "direction",
+      "assigned_gate": "G3",
+      "role": "required",
+      "value": "yes",
+      "applicable": true,
+      "rationale": "Required scientific validity, performance, or substantive analysis under the task.",
+      "judge_reason": "Section 5.4, 'Limits of the evidence', is a dedicated limitations subsection. It covers few benchmark functions, development on the same benchmark, the guide library's favorable match to two functions, heuristic scale fitting, the candidate-pool approximation, no noisy or high-dimensional tests, and the unmet twofold target and baseline ranking. The Conclusion repeats the scope limits.",
+      "evidence": [
+        "proposal/sections/analysis.tex:61-62",
+        "proposal/report.tex:34-36"
+      ],
+      "status": "pass",
+      "outcome_gate": "G3"
+    },
+    {
+      "node_id": "writing_quality.independence_from_spec",
+      "rubric": "direction",
+      "assigned_gate": "G3",
+      "role": "required",
+      "value": "no",
+      "applicable": true,
+      "rationale": "Required scientific validity, performance, or substantive analysis under the task.",
+      "judge_reason": "Several elements are independent: the title states the contribution, the method has a substantive name (CARR), and the introduction motivates the work from the science. But spec terminology and contract criteria are transliterated in several places:\n- Results restate the spec's speedup gate almost verbatim: 'A substantial saving requires reaching that target by half that budget and … on a majority of tested budgets', and 'does not establish substantial savings on four of the five functions'.\n- The limitations say 'neither establishes twofold measurement savings on four functions'.\n- A paragraph heading and the appendix title use the spec's 'baseline reproduction' wording ('Unresolved aspects of baseline reproduction').\nA reader could reverse-engineer the 4-of-5, 2× contract from these passages, so the 'spec terminology not transliterated' component fails.",
+      "evidence": [
+        "proposal/sections/results.tex:27, :29",
+        "proposal/sections/analysis.tex:51, :62",
+        "proposal/sections/reproduction_limits.tex:1",
+        "task_spec.md:36,120,257 (contract gate and independence requirement)"
+      ],
+      "status": "fail",
+      "outcome_gate": "G3",
+      "finding": {
+        "node_id": "writing_quality.independence_from_spec",
+        "rubric": "direction",
+        "gate": "G3",
+        "code": "criterion_not_met",
+        "observed_value": "no",
+        "accepted_values": [
+          "yes"
+        ],
+        "question": "Does the paper read as a self-contained journal contribution rather than a transliteration of the task spec?",
+        "reason": "Title is structural ('Improving SMART for...'), section headers mirror the spec's structure, spec phrases appear verbatim, or the proposed method is referred to only as 'the proposed method' without a name.",
+        "judge_reason": "Several elements are independent: the title states the contribution, the method has a substantive name (CARR), and the introduction motivates the work from the science. But spec terminology and contract criteria are transliterated in several places:\n- Results restate the spec's speedup gate almost verbatim: 'A substantial saving requires reaching that target by half that budget and … on a majority of tested budgets', and 'does not establish substantial savings on four of the five functions'.\n- The limitations say 'neither establishes twofold measurement savings on four functions'.\n- A paragraph heading and the appendix title use the spec's 'baseline reproduction' wording ('Unresolved aspects of baseline reproduction').\nA reader could reverse-engineer the 4-of-5, 2× contract from these passages, so the 'spec terminology not transliterated' component fails.",
+        "evidence": [
+          "proposal/sections/results.tex:27, :29",
+          "proposal/sections/analysis.tex:51, :62",
+          "proposal/sections/reproduction_limits.tex:1",
+          "task_spec.md:36,120,257 (contract gate and independence requirement)"
+        ]
+      }
+    },
+    {
+      "node_id": "writing_quality.appendix_usage_minimized",
+      "rubric": "direction",
+      "assigned_gate": "G3",
+      "role": "required",
+      "value": "yes",
+      "applicable": true,
+      "rationale": "Required scientific validity, performance, or substantive analysis under the task.",
+      "judge_reason": "The main paper contains the methodology, the full 21-row results table, convergence and calibration figures, MAPE, and the mechanism, failure, cost and limitations analyses. The appendix holds only the unresolved baseline-reproduction attempts, which is permitted. The supplement holds benchmark equations, the full RMSE/CRPS/coverage table, coverage curves and control metrics, as the task allows for supplementary metrics.",
+      "evidence": [
+        "proposal/report.tex:28-44",
+        "proposal/sections/supplement.tex; proposal/sections/reproduction_limits.tex",
+        "task_spec.md:91 ('a supplementary metrics table and a calibration-curve figure are sufficient')"
+      ],
+      "status": "pass",
+      "outcome_gate": "G3"
+    },
+    {
+      "node_id": "writing_quality.prose_quality",
+      "rubric": "direction",
+      "assigned_gate": "G3",
+      "role": "required",
+      "value": "yes",
+      "applicable": true,
+      "rationale": "Required scientific validity, performance, or substantive analysis under the task.",
+      "judge_reason": "The main-body sections are written in full paragraphs with proper citations and a coherent narrative. The only list is an appropriate enumeration of the six guide experts in the Methodology.",
+      "evidence": [
+        "proposal/sections/introduction.tex, results.tex, analysis.tex (paragraph prose)",
+        "proposal/sections/methodology.tex:72-79 (single justified enumerate)"
+      ],
+      "status": "pass",
+      "outcome_gate": "G3"
+    },
+    {
+      "node_id": "supporting_quality.codebase_notes_substantive",
+      "rubric": "direction",
+      "assigned_gate": "G3",
+      "role": "required",
+      "value": "yes",
+      "applicable": true,
+      "rationale": "Required scientific validity, performance, or substantive analysis under the task.",
+      "judge_reason": "The notes reflect real inspection of all three codebases:\n- gpCAM: named files; the ask API taking a candidate list or bounds; the acquisition signature; the built-in 'variance' returning standard deviation; default kernel, mean and noise unsuitable; the missing _version.py; fvGP version pinning; what was reused.\n- Bluesky: RunEngine and plans.adaptive_scan inspected, not reused, with reasons.\n- SciAnalysis: Processor/Protocol and XSAnalysis protocols inspected; context only, with reasons.\nThe notes also cover provenance and source commits.",
+      "evidence": [
+        "proposal/codebase_notes.md:3-49, :61-104"
+      ],
+      "status": "pass",
+      "outcome_gate": "G3"
+    },
+    {
+      "node_id": "contract.experiment_completeness.all_methods_logged_per_config",
+      "rubric": "direction",
+      "assigned_gate": "G2",
+      "role": "required",
+      "value": "satisfied",
+      "applicable": true,
+      "rationale": "Required completeness/coverage under the task.",
+      "judge_reason": "Every method in the results table (grid, random, SMART, gSMART, CARR) has 10 logged, completed runs for each of the 21 configurations. The controls and ablations reported at maximum budget also have 10-seed logs for all five functions. All table values were recomputed from these logs.",
+      "evidence": [
+        "proposal/logs/main (410 trajectories), ablations (150), homogeneous (50), classical (150) — all with complete.json",
+        "proposal/logs/integrity_audit.json (groups_with_ten_seeds 252)"
+      ],
+      "status": "pass",
+      "outcome_gate": "G2"
+    },
+    {
+      "node_id": "contract.selective_reporting.per_function_curve_characterized",
+      "rubric": "direction",
+      "assigned_gate": "G2",
+      "role": "required",
+      "value": "satisfied",
+      "applicable": true,
+      "rationale": "Required completeness/coverage under the task.",
+      "judge_reason": "Results gives a named paragraph per function describing its curve pattern, not just win counts:\n- Piecewise I: 'a late crossover'.\n- Piecewise II: 'the same delayed separation'.\n- Smooth oscillatory: persistent mean improvement, with the grid lower at n=200.\n- Piecewise-linear: an initial investment, then separation.\n- Diffusion: below at all budgets, with a strong random baseline.\nA fixed-reference speedup table complements these.",
+      "evidence": [
+        "proposal/sections/results.tex:10-27",
+        "proposal/sections/speedup_table.tex"
+      ],
+      "status": "pass",
+      "outcome_gate": "G2"
+    },
+    {
+      "node_id": "contract.effort_evidence.attempts_log_when_partial_work_claimed",
+      "rubric": "direction",
+      "assigned_gate": "G2",
+      "role": "conditional",
+      "value": "satisfied",
+      "applicable": true,
+      "rationale": "Attempt records are required when failed/partial/unresolved work is claimed, not when no such work is claimed.",
+      "judge_reason": "The paper reports the four-function speedup target as unmet and the baseline ranking reproduction as unresolved. attempts_log.md documents multiple distinct attempts for both, each backed by logged two-seed suites:\n- Baseline: fixed gSMART coefficient c=0.1, analytic gradient with a normalized coefficient, variogram sill normalization, continuous DE optimizer.\n- Speedup: scalar guide, extended experts, spatial scale, signed/unsigned/zero-bias variants.\nEach entry gives observations and reasons for keeping or abandoning.",
+      "evidence": [
+        "proposal/attempts_log.md A05-A10, A11, A12, A15",
+        "proposal/logs/pilot (50), pilot_bounded (30), pilot_sill (30), pilot_guides (10), pilot_local (10), optimizer_check (20) — all complete"
+      ],
+      "status": "pass",
+      "outcome_gate": "G2"
+    },
+    {
+      "node_id": "evidence_completeness.quantitative_sources_documented",
+      "rubric": "direction",
+      "assigned_gate": "G2",
+      "role": "required",
+      "value": "satisfied",
+      "applicable": true,
+      "rationale": "Required completeness/coverage under the task.",
+      "judge_reason": "Each paper number traces to an identifiable log; I spot-checked the main table (exact recomputation), ablation and control MAEs and MAPEs, cost table, fit table, audit Spearman values, regional boundary errors and math-validation discrepancies. paper_claims.json maps every prose macro to a source path. No numerical values from the original paper are cited as substitutes.",
+      "evidence": [
+        "proposal/logs/paper_claims.json (macro→source mapping)",
+        "proposal/logs/compute_cost.json, fit_summary.json, counterfactual_summary.json, regional_summary.json, math_validation.json",
+        "Recomputed main/ablation tables from logs/*/metrics.json"
+      ],
+      "status": "pass",
+      "outcome_gate": "G2"
+    },
+    {
+      "node_id": "evidence_completeness.required_reporting_coverage",
+      "rubric": "direction",
+      "assigned_gate": "G2",
+      "role": "required",
+      "value": "satisfied",
+      "applicable": true,
+      "rationale": "Required completeness/coverage under the task.",
+      "judge_reason": "Reporting covers everything the task requires:\n- 21 configurations × 5 methods × 10 seeds, with mean ± SD.\n- MAE on dense held-out grids (10,000 points in 2D, 64,000 in 3D) and MAPE for diffusion.\n- RMSE, CRPS and coverage for every method and configuration, with coverage figures.\n- Convergence curves with bands; scatter plots.\n- Ablation logs; per-refresh hyperparameter-fit logs; per-step compute-cost logs; an attempts log for the unmet items.",
+      "evidence": [
+        "proposal/sections/main_table.tex; metrics_table.tex; mape_table.tex",
+        "proposal/sections/setup.tex:8,12",
+        "proposal/logs/main/*/fits.jsonl; logs/compute_cost.json; proposal/attempts_log.md"
+      ],
+      "status": "pass",
+      "outcome_gate": "G2"
+    }
+  ],
+  "composite_audit": [
+    {
+      "id": "four_of_five_substantial_speedups",
+      "type": "at_least",
+      "gate": "G3",
+      "members": [
+        "outperformance.speedup_on_piecewise_I",
+        "outperformance.speedup_on_piecewise_II",
+        "outperformance.speedup_on_smooth_oscillatory",
+        "outperformance.speedup_on_non_differentiable",
+        "outperformance.speedup_on_diffusion_3d"
+      ],
+      "minimum": 4,
+      "accepted_values": [
+        "substantial_speedup"
+      ],
+      "reject_values": [
+        "clear_regression"
+      ],
+      "reason": "Full success requires substantial speedup against both baselines on at least four of five functions, using the contract's budget and variability conditions.",
+      "reject_reason": "The task disallows clear regression on any function, even if four others improve.",
+      "issues_recorded": 1
+    },
+    {
+      "id": "justification_applicability_piecewise_I",
+      "type": "value_requires",
+      "gate": "G3",
+      "trigger": "justification.quality_on_piecewise_I",
+      "trigger_values": [
+        "not_applicable_speedup_shown"
+      ],
+      "prerequisite": "outperformance.speedup_on_piecewise_I",
+      "accepted_values": [
+        "substantial_speedup",
+        "modest_speedup"
+      ],
+      "members": [
+        "justification.quality_on_piecewise_I",
+        "outperformance.speedup_on_piecewise_I"
+      ],
+      "reason": "A no-justification-needed answer requires an actual substantial or modest speedup; matching/regressing functions need method-connected justification.",
+      "issues_recorded": 0
+    },
+    {
+      "id": "justification_applicability_piecewise_II",
+      "type": "value_requires",
+      "gate": "G3",
+      "trigger": "justification.quality_on_piecewise_II",
+      "trigger_values": [
+        "not_applicable_speedup_shown"
+      ],
+      "prerequisite": "outperformance.speedup_on_piecewise_II",
+      "accepted_values": [
+        "substantial_speedup",
+        "modest_speedup"
+      ],
+      "members": [
+        "justification.quality_on_piecewise_II",
+        "outperformance.speedup_on_piecewise_II"
+      ],
+      "reason": "A no-justification-needed answer requires an actual substantial or modest speedup; matching/regressing functions need method-connected justification.",
+      "issues_recorded": 0
+    },
+    {
+      "id": "justification_applicability_smooth_oscillatory",
+      "type": "value_requires",
+      "gate": "G3",
+      "trigger": "justification.quality_on_smooth_oscillatory",
+      "trigger_values": [
+        "not_applicable_speedup_shown"
+      ],
+      "prerequisite": "outperformance.speedup_on_smooth_oscillatory",
+      "accepted_values": [
+        "substantial_speedup",
+        "modest_speedup"
+      ],
+      "members": [
+        "justification.quality_on_smooth_oscillatory",
+        "outperformance.speedup_on_smooth_oscillatory"
+      ],
+      "reason": "A no-justification-needed answer requires an actual substantial or modest speedup; matching/regressing functions need method-connected justification.",
+      "issues_recorded": 0
+    },
+    {
+      "id": "justification_applicability_non_differentiable",
+      "type": "value_requires",
+      "gate": "G3",
+      "trigger": "justification.quality_on_non_differentiable",
+      "trigger_values": [
+        "not_applicable_speedup_shown"
+      ],
+      "prerequisite": "outperformance.speedup_on_non_differentiable",
+      "accepted_values": [
+        "substantial_speedup",
+        "modest_speedup"
+      ],
+      "members": [
+        "justification.quality_on_non_differentiable",
+        "outperformance.speedup_on_non_differentiable"
+      ],
+      "reason": "A no-justification-needed answer requires an actual substantial or modest speedup; matching/regressing functions need method-connected justification.",
+      "issues_recorded": 0
+    },
+    {
+      "id": "justification_applicability_diffusion_3d",
+      "type": "value_requires",
+      "gate": "G3",
+      "trigger": "justification.quality_on_diffusion_3d",
+      "trigger_values": [
+        "not_applicable_speedup_shown"
+      ],
+      "prerequisite": "outperformance.speedup_on_diffusion_3d",
+      "accepted_values": [
+        "substantial_speedup",
+        "modest_speedup"
+      ],
+      "members": [
+        "justification.quality_on_diffusion_3d",
+        "outperformance.speedup_on_diffusion_3d"
+      ],
+      "reason": "A no-justification-needed answer requires an actual substantial or modest speedup; matching/regressing functions need method-connected justification.",
+      "issues_recorded": 0
+    }
+  ]
+}

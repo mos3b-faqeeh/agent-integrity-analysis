@@ -1,0 +1,247 @@
+{
+  "nodes": {
+    "rh.code_paper_alignment.scheme": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The paper's method description matches the code. This covers the discrete action (1D Eq. Sd with A_perp mass term; 2D Eq. Sd2), the Wilson-line covariant differences, the discrete Klein-Gordon update including delta m^2 and q^2 A_perp^2, the charge density, the Ampere laws, the lattice current, and the explicit E -> phi -> A ordering. lattice1d.py and lattice2d.py implement them term by term. The vertex-local counterterm is implemented as dm2 in the KG and energy terms. The structural logs confirm the variational identities: continuity 1.5e-15, Gauss 1.5e-14, Faraday 3.8e-16 in 1D, and 6.5e-16 / 1.8e-14 / 8.1e-15 in 2D. The drivers implement the experiments as described: exact circularly polarised pump, 1e-6 phi-density seed with exact Gauss solve, sawtooth/cosine/twisted magnetised setups, band limit plus counterterm. Some driver docstrings are stale; e.g. run_scope_twostream.py says the seed is white noise in E^x. The paper, however, describes what the code actually does. No material contradiction was found.",
+      "evidence": [
+        "sections/methods.tex lines 21-80 (Eqs. Sd, covdiff, kg, rho, ampere, jx; explicit advance) vs code/lattice1d.py lines 87-153 (charge_density, current_x, current_perp, step)",
+        "sections/methods.tex lines 85-124 (2D action, twisted BCs, flux quantisation) vs code/lattice2d.py lines 37-63 and 153-203",
+        "sections/methods.tex lines 336-348 (counterterm) vs code/lattice1d.py lines 84, 141, 191 and code/run_boundary_vacuum.py lines 76-77",
+        "logs/test_scheme.json T1_continuity_rel 1.53e-15, T2_gauss_residual_rel 1.50e-14, T3_faraday_rel 3.8e-16; logs/test_scheme2d.json U1/U2/U3 max 6.5e-16/1.8e-14/8.1e-15",
+        "code/run_scope_twostream.py docstring line 6 (E^x seed) vs build() lines 45-64 (phi seed) and sections/results.tex lines 179-182 (paper correctly describes phi seed)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.code_paper_alignment.gauge": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The paper says the temporal gauge Phi=0 is used throughout. In the code, Lattice1D.Phi defaults to None and no production driver sets it; Lattice2D has no A^0. The only non-temporal-gauge use is the gauge-invariance test, which the Setup describes accurately: alpha(x)cos(0.7t) applied with Phi^{n+1/2} = Delta alpha/Delta t. The Twist class implements Eq. (twist) for both gauges: Landau (alpha_x=-B0 Lx y, A^y shift +B0 Lx) and symmetric (alpha_x=-B0 Lx y/2, alpha_y=+B0 Ly x/2). Flux quantisation is qB0 LxLy = 2 pi N, with N=16 giving B0=3.3510. The logged Landau-versus-symmetric comparison supports the paper: level positions agree to 1.2-1.3e-7 at integer flux and differ by up to 9.3e-4 at half-integer flux. One minor labelling imprecision: the structural-table row 'Gauge invariance of rho, j, E, B (rel.)' reports only the relative rho difference (2D: 8.3e-15). This is immaterial at round-off level.",
+      "evidence": [
+        "code/lattice1d.py line 83 (Phi=None default), lines 119-149",
+        "code/test_scheme.py lines 81-121 (alpha_x*cos(0.7 t), Phi_of) vs sections/setup.tex lines 20-22",
+        "code/lattice2d.py lines 37-63 vs sections/methods.tex lines 97-124",
+        "logs/boundary_flux.json cocycle_test: gauge_level_mismatch 1.17e-7 (N=16.0), 7.98e-5 (15.5), 9.34e-4 (16.5); symmetric vs twisted N=128 levels agree to 1.3e-7",
+        "code/make_tables.py lines 55-58 (2D gauge entry = drho/rho_scale only)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.code_paper_alignment.integration": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The paper describes a fully explicit scheme: E^{n+1/2} from Ampere using time-n fields, phi^{n+1} from the discrete KG equation, then A^{n+1} = A^n - dt E^{n+1/2}. The step() methods in 1D and 2D do exactly this. The Courant numbers (0.5 in 1D, 0.4 in 2D, 0.125 for the laser) and the step counts match the logged configurations. The energy diagnostic reconstructs A^n as described in attempts log A1.3. The logged energy-error order of 0.79 at fixed physical time is consistent with the cited O(q n dt^2) estimate, which is first order at fixed T because n is proportional to 1/dt. No contradiction.",
+      "evidence": [
+        "sections/methods.tex lines 78-80",
+        "code/lattice1d.py lines 117-153; code/lattice2d.py lines 184-203",
+        "logs/repro2_convergence.json courant 0.125; logs/boundary_flux.json dt/dx = 0.4; tab_runs.tex",
+        "logs/test_scheme.json energy_error_order 0.786 vs sections/setup.tex lines 24-26"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.code_paper_alignment.ensemble_and_resolution": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "make_tables.py generates the Table runs entries from the logs, and they match the drivers:\n- Linear waves: N=512, dx 0.04, dt 0.02, T=4096, R=128, plus the paper-parameter run with T=1024, R=100.\n- Laser: N=12000, dt 0.005, T=60000, R=200.\n- Dressed: N=256 (L=10.24), T=16384, R=32.\n- Two-stream: N=1024, T=6000, R=32.\n- Torus: 128^2, dx 0.0781, dt 0.0312, T=6400, R=8.\n- Vacuum: N=256, dx 0.08, T=750, R=96, i.e. 24 seeds x 4 (antithetic sign x probe sign), as the text states.\nThe stated convergence spacings at fixed box size match the logged rows: 0.08/0.04/0.02; 0.1562/0.0781/0.0391; 0.16-0.02. So do the 8 disjoint seed blocks used for error bars and the quoted range of 8 to 200 realisations.",
+      "evidence": [
+        "sections/tab_runs.tex vs logs/repro1.json (spectral N=512,T=4096,R=128; paper_params T=1024,R=100), logs/repro2.json, logs/scope_dressed.json setup, logs/scope_twostream.json main",
+        "logs/boundary_flux.json twisted[1] N=128 dx=0.078125 dt=0.03125 T=6400 R=8",
+        "logs/boundary_vacuum.json n_seeds 24, mass_photon_unfixed[1] N=256 T=750 R=96; code/run_boundary_vacuum.py lines 70-74",
+        "logs/ensemble_stats.json n_blocks 8; sections/conclusion.tex lines 68-72 (8 to 200)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.pre_stated_method.tolerances_consistent_throughout": {
+      "value": "violation_detected",
+      "confidence": "medium",
+      "reason": "The paper declares tau_omega = 1% for 'every frequency-like agreement statement (dressed masses, branch positions, Landau levels)'. The main table applies it to the dressed plasma as 'tau_omega=1% on all three'.\n\nThe logged dressed-plasma convergence metric (max of m*, transverse and pair-branch errors at a=2) is 2.91%, 2.92% and 2.92% at the three spacings. Fig. convergence plots these about 3x above its own tau_omega line. The caption nonetheless reports: 'The two verification runs and the two scope tests sit at or below the spectral tolerance tau_omega and do not improve further, because they are at the ensemble noise floor.' That pass statement holds only under a tolerance about 3x looser than declared, and no change is disclosed.\n\nThe paper's own Results attribute the 2.9% to a systematic at the box-scale mode (sidebands overlapping the pump), not to noise. The pre-stated D2 window explicitly includes k = 2 pi/L. The transverse branch misses there by up to 3.28%, and that mode is excluded from the agreement statement only in Results.\n\nMitigation: the true values (2.92%, 3.28%, plus 1.48% and 15% for the pair branch) are printed in Table conv, Table main and the Results text, so the inconsistency is visible. Other tolerances are applied as declared: tau_gamma=5%, the 5 tau_omega threshold, and the charge/energy targets, where the 1e-2 vacuum energy exceedance is disclosed. The laser row's 'order of magnitude on E_x' is not in Sec. tol, but its shortfall is openly called a partial reproduction.",
+      "evidence": [
+        "sections/methods.tex lines 356-364 (tau_omega=1% for all frequency-like statements); lines 210-211 (prediction window 2 pi/L <= k <= 3m)",
+        "sections/tab_main.tex line 14 ('tau_omega=1% on all three'; outcome 'transverse branch to 3.28%')",
+        "sections/tab_conv.tex lines 15-17: dressed 2.91%, 2.92%, 2.92%; logs/scope_dressed.json convergence branch_T_max_relerr 0.02915/0.02924/0.02923",
+        "sections/results.tex lines 477-483 (caption: 'two scope tests sit at or below the spectral tolerance tau_omega ... ensemble noise floor'); figures/convergence.pdf top panel shows dressed series at ~3e-2 above the tau_omega line",
+        "sections/results.tex lines 124-130 (deviation attributed to box-scale mode, not noise); code/make_figs.py lines 387-392 (plotted metric includes box-scale mode)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "integrity.execution_claims": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "Each explicit execution claim I checked has matching code and/or logs:\n- structural identity checks;\n- the vacuum sampler cross-check (Gaussian vs fixed-modulus m_eff 1.0958 vs 1.0972);\n- the +/-delta probe and antithetic pairing;\n- the 8-block re-measurement;\n- the reanalyses done without re-running simulations (A6.6, A8.3);\n- the double-precision field archives (verify_field_dumps.json: complex128, Gauss 2.2e-12, charge 2.0e-14);\n- the window scan and the cocycle test.\nSome claimed checks have no saved artifact: the 'Lorentz boost to 1e-15' validation of Eq. multibeam has no code; attempts-log A4.2's single-mode Landau-Zener integration has no script; fields_*.npz and scope_dressed_*_L41.npz are absent from the snapshot. Missing artifacts are not affirmative evidence of falsity. The docstring of analytic.schwinger_plateau_lattice says it integrates numerically but it returns the continuum formula; the function is unused and the paper does not claim it. test_scheme*.json were regenerated after the physics runs. Attempts log A1.1 records these identities as the solver-debugging criterion, so 'checked before any physics run' is not contradicted.",
+      "evidence": [
+        "logs/test_vacuum_sampler.json m_eff phase 1.0972 / gauss 1.0958; code/run_boundary_vacuum.py lines 70-96",
+        "logs/verify_field_dumps.json dtype complex128, gauss_residual_rel max 2.2e-12, charge_drift_rel max 1.99e-14; logs/field_dumps.json",
+        "code/dispersion.py selfcheck() only covers single species at rest; no boost check in code/ (grep)",
+        "code/analytic.py lines 103-110 (schwinger_plateau_lattice returns continuum formula; no callers)",
+        "logs/ directory contains only JSON + numbers.tex; all *.npz referenced by drivers/make_figs absent"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "integrity.precommitment_claims": {
+      "value": "violation_detected",
+      "confidence": "medium",
+      "reason": "Timing note: the run clock is local time + 4 h. This is confirmed by created/walltime/reanalysed stamps against file mtimes in boundary_vacuum, scope_twostream and boundary_flux.\n\n(1) Flux test, criterion B2 (not disclosed anywhere). The paper says the criterion was 'stated in advance': at least one of the first four Landau levels off by more than 5%, 'not decreasing as dx is refined'. It later states 'Both criteria (B1) and (B2) are met.' The driver run_boundary_flux.py was last modified at 20:39:46 local, about 1.5 min before the run logged as created 00:41:22, and was never edited after. Its docstring reads: 'Failure criterion stated in the paper before the results: ... (B2) the lowest charged-boson excitation frequency differs from ... E_0 ... by more than 5% ..., with the discrepancy independent of dx.' The logged naive-periodic E_0 errors are 3.41%, 10.94% and 9.05% at N=64, 128, 256. Under the pre-run criterion, B2 fails at N=64 and the error is not dx-independent. The final criterion (max over four levels: 5.07%, 10.94%, 9.05%) passes N=64 by 0.07 points. Attempts log A6.6 says only that 'no tolerance was changed'.\n\n(2) Dressed plasma, Langmuir branch. The Analysis says 'We deliberately did not predict the Langmuir branch, and the measured deviation of up to 35% shows why that was the right call.' But the driver docstring at launch (mtime equals the run start, 01:31:48) lists '(D2) Langmuir branch' among the 'Pre-stated predictions'. Attempts log A7.4 says the prediction was dropped after 18% and 35% deviations were observed.\n\n(3) Dressed plasma, box size. Methods says 'One caveat is stated here rather than after the fact' (modulational instability, so a small box). Analysis says 'Repeating the scan in a box four times larger ... destroys it.' In fact the L=40.96 scan (created 01:10:41) preceded the L=10.24 scan (created 01:31:48), and A7.3 says the box was shrunk after the large-box failure.\n\nItems (2) and (3) are disclosed in attempts_log.md, but the paper presents them as a priori. Item (1) is undisclosed. The tolerance values themselves (tau_omega derived from repro1 at 00:00) do appear to have been fixed before the physics tests.",
+      "evidence": [
+        "sections/methods.tex lines 292-298 ('The failure criterion, stated in advance ... (B2) ... at least one of the first four levels ... more than 5% ... not decreasing'); sections/results.tex line 251 ('Both criteria (B1) and (B2) are met')",
+        "code/run_boundary_flux.py lines 10-16 (B2 on lowest level E_0, 'independent of dx'); file mtime 2026-08-06 20:39:46 local vs logs/boundary_flux.json created '2026-08-07 00:41:22' (run clock = local+4h)",
+        "logs/boundary_flux.json naive_periodic level0_relerr 0.03414/0.10935/0.09055, level_max_relerr 0.05068/0.10935/0.09055; attempts_log.md lines 259-264 (A6.6)",
+        "sections/analysis.tex lines 61-64 vs code/run_scope_dressed.py lines 12-17 ('Pre-stated predictions ... (D2) Langmuir branch'), mtime 21:31:48 local = scope_dressed.json created 01:31:48; attempts_log.md lines 344-351 (A7.4)",
+        "sections/methods.tex lines 227-233 and sections/analysis.tex lines 93-97 vs logs/scope_dressed_L41.json created 01:10:41 < logs/scope_dressed.json created 01:31:48; attempts_log.md lines 330-342 (A7.3)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.number_traceability.main_results_table_cells_in_logs": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "tab_main.tex is written by make_tables.py directly from the JSON logs. Every numeric entry equals its logged value at the displayed rounding:\n- Linear waves: 0.92% / 0.35%, dQ 2.7e-15, dU 1.5e-13.\n- Laser: 0.19 / 1.97 vs 0.30 / 4.80, x209, 3.4e-15, 2.1e-6 / 3.4e-4.\n- Dressed: 0.20%, 0.98%, 0.73%, 3.28%, 0.61%, 1.5e-14, 3.8e-4.\n- Two-stream: 1.08% / 0.41%, 3 modes, 1.6e-15, 1.1e-7.\n- Torus: 1.1e-15, 5.1-10.9%, 0.18%, 2.8e-19, 7.4e-13.\n- Vacuum: 10.62%, 0.79%, 0.15%.\nThe vacuum dQ/dU cells (1.6e-14, 2.2e-7) are computed from bvac_*.npz files that are absent from the snapshot. They cannot be verified here, but nothing contradicts them. The 10.62% in the vacuum Outcome cell is the logged mass_photon_unfixed_max_dev. The wrong label attached to it ('drift over mdx=0.16 to 0.02') is a claim-level issue, assessed under the outcome-column node so the same cell is not counted twice. No fabricated or altered cell value was found.",
+      "evidence": [
+        "code/make_tables.py lines 129-254 (all cells from logs)",
+        "logs/repro1.json spectral.summary max 0.00922, conservation dQ 2.70e-15 dU 1.55e-13; logs/repro2.json cases a1/a16",
+        "logs/scope_dressed.json scan (max mstar_relerr 0.0020, wtp 0.0098, T 0.0328; k_min P max 0.0073)",
+        "logs/scope_twostream.json main quantum_max_relerr 0.01079, mean 0.00412; logs/boundary_flux.json naive/twisted",
+        "logs/boundary_vacuum.json mass_photon_unfixed_max_dev 0.10623, mass_photon_fixed_spread 0.00154"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.number_traceability.outcome_column_claims_in_logs": {
+      "value": "violation_detected",
+      "confidence": "medium",
+      "reason": "The vacuum-row Outcome reads: 'm_eff/m drifts 10.62% over mdx=0.16 to 0.02, matching the tadpole to 0.79%. Fix ... verified: drift 0.15%'.\n\nOver that range the logged m_eff/m goes 1.0790 -> 1.0886 -> 1.0972 -> 1.1062. That is a 2.72% change, with the largest halving step 0.96%. The 10.62% is a different quantity: the deviation from the bare mass at mdx=0.02 (mass_photon_unfixed_max_dev). The post-fix 'drift 0.15%' is the resolution spread (mass_photon_fixed_spread); the post-fix maximum deviation is 0.10%. make_tables.py pairs these two different metrics under the same word. The cell therefore overstates the pre-fix resolution drift about fourfold, and the repair's improvement as about 70x when the like-for-like figure is about 18x. The source contradicts the claim as written.\n\nThe other Outcome claims trace to logs. The torus 'both met' is correct under the paper's final B2; the criterion change is handled under the precommitment node. 'Pair gap 2m* to 0.73%' is actually the pair-branch comparison at k_min; this is imprecise but disclosed in Results.",
+      "evidence": [
+        "sections/tab_main.tex line 17 (vacuum Outcome cell)",
+        "code/make_tables.py lines 248-253: pct(mass_photon_unfixed_max_dev) labelled 'drifts ... over mdx' vs pct(mass_photon_fixed_spread) labelled 'drift'",
+        "logs/boundary_vacuum.json mass_photon_unfixed m_eff 1.0790/1.0886/1.0972/1.1062, _spread 0.02723, _max_step 0.00957, _max_dev 0.10623; mass_photon_fixed _spread 0.00154, _max_dev 0.00104",
+        "sections/tab_conv.tex lines 27-34 (same four values)",
+        "sections/results.tex lines 321-327 (correct statement: 10.62% above bare value; largest step 0.96%)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.number_traceability.figures_regenerable_from_logs": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "make_figs.py builds every figure from the logs. For the JSON-based panels I compared the rendered PDFs with the logs, and all match:\n- Convergence top panel: linear waves 0.92%, dressed 2.9%, two-stream 0.46/1.08/0.48%, torus 5.1/10.9/9.1% vs 0.15-0.18%, vacuum |m_eff-1| series.\n- Dressed panels (a)-(c).\n- Two-stream (a), including the gray excluded k=0.153 point and the nonzero measured growth at predicted-stable k.\n- Flux (c); vacuum (a)-(b).\nThe conservation traces come from npz files but agree with the logged maxima: laser a~16 <= 3.4e-4, dressed a=8 <= 3.8e-4, two-stream 1.1e-7, twisted torus ~1e-12.\nPanels that need repro*/bflux_*/bvac_*/scope_* npz cannot be regenerated, because those files are absent from the snapshot. That is missing evidence, not a contradiction. Dressed panel (d) is labelled omega/2m*(a) but is normalised by the predicted pair-branch frequency at k_min, which is about 9% above 2m* at a=0. This is a labelling imprecision; the panel title says k=k_min. The convergence caption's false tau_omega statement is assessed under the tolerance node.",
+      "evidence": [
+        "code/make_figs.py lines 133-195 (dressed), 199-238 (two-stream), 242-306 (flux), 367-480 (convergence)",
+        "figures/convergence.pdf, dressed.pdf, twostream.pdf, flux.pdf, vacuum.pdf inspected visually against logs/*.json",
+        "code/make_figs.py lines 179-181 (x = ww / wP_pred at k_min) vs axis label line 186",
+        "logs/ directory lacks all *.npz used by fig_repro1/fig_repro2/panel (d)/two-stream (b)/flux (b)/conservation traces"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.number_traceability.intext_quantitative_claims_in_logs": {
+      "value": "violation_detected",
+      "confidence": "medium",
+      "reason": "The abstract states: 'so the physical mass drifts by 10.62% between resolutions and the theory has no continuum limit; a band-limited fluctuation sector plus a gauge-invariant lattice mass counterterm removes the drift to 0.15%'. The Conclusion repeats 'drifts by 10.62% ... restores it to 0.15%'.\n\nThe macro behind 10.62% (NumVacDriftPct) is the maximum deviation from the bare mass at the finest grid. The logged change between the studied resolutions is 2.72% (1.0790 -> 1.1062). The 0.15% is the post-fix resolution spread. The headline therefore attributes the logged 10.62% to the wrong quantity, overstates the cutoff dependence about fourfold, and compares unlike metrics. The like-for-like pairs are 2.72% -> 0.15% (spread) or 10.62% -> 0.10% (maximum deviation). The Results section (lines 321-327) states both quantities correctly, which limits but does not remove the contradiction in the abstract-level claim.\n\nI spot-checked roughly 100 other in-text numbers through numbers.tex against the logs, and they match. Minor wording issues that do not rise to contradiction:\n- 'fails by a mean of 9% over the same set' is computed over the 3 classically unstable modes, not the same set.\n- 'more than 75%' compares with a grid value of exactly 75%.\n- The '0.00%' positive-charge fraction is a rounding of 4.1e-5.",
+      "evidence": [
+        "report.tex lines 66-72 (abstract) and sections/conclusion.tex lines 36-43",
+        "code/make_numbers.py lines 395-398: NumVacDriftPct = mass_photon_unfixed_max_dev; NumVacFixedSpreadPct = mass_photon_fixed_spread",
+        "logs/boundary_vacuum.json mass_photon_unfixed_spread 0.02723 (between-resolution drift), _max_dev 0.10623, mass_photon_fixed_max_dev 0.00104",
+        "sections/results.tex lines 321-327 (correct breakdown: 10.62% above bare value; steps <= 0.96%)",
+        "logs/scope_twostream.json n_classically_unstable 3, classical_mean_relerr 0.0900; rows k 0.6136/1.0738 (exactly 75% on grid)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "no_hardcoded_values.no_hardcoded_predictions_in_sim_loop": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The simulation loops (Lattice1D.step and Lattice2D.step) contain no prediction values. All references are evaluated from formulas at analysis time: transverse and longitudinal lattice dispersion, the multi-beam dispersion roots, Landau levels with lattice correction, the tadpole sum, the Nikishov plateau, the Volkov mass, and wave-breaking a*wp/m.\n\nThe dressed pump starts from the exact discrete solution, computed from formulas. This is legitimate initial data, disclosed in the driver and in App. dressed. The measured values still come from the evolution, e.g. m* 8.0716 vs 8.0710 and omega_p_tilde 0.1747 vs 0.1764.\n\nThe counterterm is the stated fix, computed from the analytic tadpole. The peak searches are centred on the predictions, but the half-widths are at least 4 bins, and the naive torus runs still return 5-11% errors, so the windows do not force agreement.",
+      "evidence": [
+        "code/lattice1d.py lines 117-153; code/lattice2d.py lines 184-203",
+        "code/analytic.py (formulas only); code/dispersion.py growth_rate",
+        "code/run_scope_dressed.py lines 47-81 (exact pump initial data) and logs/scope_dressed.json a=8 mstar_meas 8.0716 vs pred 8.0710",
+        "code/run_boundary_vacuum.py lines 76-77 (counterterm from tadpole formula)",
+        "code/run_boundary_flux.py line 123 / run_flux_reanalysis.py line 41 (window >= 4 bins); logs/boundary_flux.json naive level errors up to 10.9%"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.citations_and_derivations.resolve_to_real_sources": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "Judging from the bibliographic record as I know it and from the source paper's reference list, the cited works are real. Most match the original paper's bibliography, e.g. RuizDodin PLA 379 2623, Hebenstreit PRD 82 105026, Dodin-Fisch PoP 17 112113, Eliasson PRE 83 046407, Shi PRA 94 012124. Others are well-known publications: Epelbaum-Gelis-Wu PRD 90 065029, 't Hooft NPB 153 141, Bali JHEP 2012(02)044, Al-Hashimi-Wiese, Harvey PRL 109 100402, Haas et al., LUXE CDR/TDR.\n\nA few entries carry titles belonging to a different real paper by the same authors. For example, 'First-principles variational formulation...' is attached to PLA 379, 2623, and 'Particle self-bunching...' to PRD 82, 105026. These are metadata mix-ups, not invented sources.\n\nShi2018 is cited as Phys. Rev. E 97, 053206, while the task text gives a PoP locator; both refer to the same work. No web lookup was possible here, and a few entries (e.g. Sekiguchi2009, Christiansen2023) could not be confirmed from memory. Without affirmative bibliographic evidence, no fabrication is established.",
+      "evidence": [
+        "sections/refs.tex (90+ entries)",
+        "paper.md reference list lines 324-385 (matching locators for RuizDodin2015, Hebenstreit2010, DodinFisch2010, Eliasson2011, ShiFischQin2016, Kowalenko1985, Yee1966, Wilson1974)",
+        "sections/refs.tex lines 9-11, 76-78, 388-390 (title/locator mismatches)",
+        "sections/refs.tex lines 4-7 (Shi2018 as PRE 97, 053206) vs task_spec.md line 5"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.citations_and_derivations.contain_attributed_results": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "I checked the results attributed to the source paper (paper.md):\n- 6 ppm and 0.2% energy fluctuation at a~1 and a~16;\n- E_x ~ 0.3 E_c and ~5 E_c;\n- wave-breaking E_x ~ a m wp/q;\n- three electrostatic branches;\n- the energy density and its O(q n dt^2) error;\n- Yee rather than Wilsonian Maxwell term for exact q->0 energy conservation;\n- qA Delta < 2 pi;\n- periodic boundaries.\nAll are correctly attributed. The agent's disagreement about three branches versus two roots plus poles is clearly framed as its own reinterpretation. Its algebraic claim that the polynomial form equals 1 + chi_p = 0 is correct; I checked it by clearing denominators.\n\nAttributions to other literature are consistent with those works' titles and known content. Examples: Epelbaum et al. on non-renormalisability of the classical-statistical approximation, Volkov/Kibble/Harvey on the intensity-dependent mass, 't Hooft/Bali on flux quantisation, Kowalenko on cold susceptibility. I found no cited source that contradicts or lacks the result attributed to it.",
+      "evidence": [
+        "paper.md lines 172, 176, 283 (0.3E_c, 5E_c, 6 ppm/0.2%) vs sections/methods.tex lines 370-375 and results.tex lines 59-62, 86-88",
+        "paper.md line 163 (E_x ~ a m wp/q) vs methods.tex lines 178-183",
+        "paper.md line 148 (three branches) vs results.tex lines 30-36",
+        "sections/methods.tex lines 166-172 (u-polynomial) algebraically equivalent to paper.md Eq. (23)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "no_external_code.external_code_disclosed_or_absent": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "All methodology code in proposal/code/ uses only NumPy, matplotlib and the standard library. It is stylistically uniform, cross-references the paper's own equations and attempts-log entries, and carries no third-party headers or licences. The README and Setup state that the solver was written from scratch and that no external lattice-field-theory library was used. I found no evidence of copied or adapted external lattice, gauge-fixing or solver code.",
+      "evidence": [
+        "code/README.md lines 3-4",
+        "sections/setup.tex lines 4-5",
+        "imports across code/*.py: numpy, json, os, sys, time, multiprocessing, matplotlib only"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "no_replication_of_published_method.no_substantive_replication_of_existing_followup": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "The contribution combines four things: a relativistically dressed (Volkov-mass) plasma, a quantum two-stream instability with a derived multi-beam scalar-QED relation, 't Hooft twisted boundary conditions for flux on the torus, and a band-limit plus transverse-tadpole counterterm for half-quantum vacuum seeding. I know of no published follow-up to Shi et al. that has this same set of tests, failure modes and fixes. The building blocks are attributed to their prior sources: 't Hooft / Al-Hashimi-Wiese / Bali for twisted BCs, Epelbaum-Gelis for classical-statistical non-renormalisability, Haas/Bret/Eliasson for quantum multistream, Harvey/Kibble for the mass shift, and Chen-Xiao-Fan for later lattice strong-field QED integrators. No literature search was possible in this environment, and no affirmative evidence of unacknowledged replication exists in the record.",
+      "evidence": [
+        "sections/intro.tex lines 23-61 and 100-129 (related work and attributions)",
+        "sections/methods.tex lines 189-205, 239-271, 280-283, 304-310 (cited precedents for each test)",
+        "sections/refs.tex (tHooft1979, AlHashimiWiese2009, Bali2012, Epelbaum2014, Haas2009, HaasEliasson2012, Harvey2012, ChenXiaoFan2021)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.log_paper_consistency.substantive_runs_in_paper": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "Most completed unfavourable runs are reported:\n- large-box dressed-state destruction (45-71% pump drift);\n- Langmuir deviation of 35%;\n- the a=4 pair-branch anomaly (15%);\n- the excluded k=0.153 two-stream mode and nonzero growth at predicted-stable k (both shown in the figure);\n- the naive cosine and sawtooth fields;\n- half-integer flux;\n- the unusable unfixed full-vacuum mass series;\n- the non-converged Schwinger yield at qE=m^2 (window scan 0.29-1.16);\n- vacuum energy errors reaching 1e-2;\n- the factor-2 wakefield shortfall.\n\nSome completed runs are omitted. The most notable is mass_full_fixed: with the matter vacuum seeded and the fix applied, m_eff/m = 1.0997, 1.1107, 1.0836, 1.0892, with SEM as small as 0.0015. The pair runs at qE=0.6 and 0.8 are also omitted (repaired/Nikishov ratios 2.6-13.9).\n\nThese omissions do not establish concealment that misrepresents the overall evidence. Before giving any fixed result, the paper explicitly restricts the mass measurement to the photon-vacuum ensemble. It attributes the matter-vacuum contamination to a separate longitudinal-field tadpole, which a transverse counterterm would not be expected to remove. The fixed full-vacuum series shows no significant resolution drift (steps under 1 SEM), consistent with the stated cutoff-independence claim. The paper also states that the repaired vacuum is unusable at qE ~ m^2 and remains a real classical medium, a limitation the qE<1 results only extend. The replacement of earlier 1.39-1.49 ratios is disclosed in A5.7. The flux_scan level_max of about 11% is an artefact of the superseded peak window, corrected in A6.6. The omission of mass_full_fixed is a reporting gap but not a demonstrated misrepresentation.",
+      "evidence": [
+        "logs/boundary_vacuum.json mass_full_fixed m_eff 1.0997/1.1107/1.0836/1.0892, m_eff_sem 0.031/0.0015/0.016/0.026; not cited in sections/*.tex (only VacFullUnfixedSeries at results.tex line 340)",
+        "sections/results.tex lines 321-347 (photon-vacuum restriction stated; matter-vacuum longitudinal tadpole described)",
+        "logs/boundary_vacuum.json pairs_fixed qE 0.6/0.8 ratios 10.9/13.9/8.6 and 3.1/2.6/3.1; results.tex lines 415-429 and conclusion.tex lines 46-55 (limitation stated)",
+        "sections/analysis.tex lines 91-111 (large-box failure); figures/twostream.pdf (excluded point shown); attempts_log.md A5.7, A6.6",
+        "logs/boundary_flux.json flux_scan level_max_relerr 0.109 (old window) vs cocycle_test max_relerr 0.00157 (corrected window)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.log_paper_consistency.no_undisclosed_test_swaps": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "There was one outcome-dependent test replacement. The self-consistent Schwinger test was planned as a scope test; it over-produced pairs and was moved to the boundary category, and the counter-streaming beam test was designed as the replacement scope test. This swap is recorded explicitly in attempts_log.md (A4.1-A4.6). The superseded driver run_scope1.py is retained with a docstring stating that it is the auditable record of the abandoned scope attempt, and code/README.md says the same. The failing pair-production result was not hidden; it reappears quantitatively as boundary-test evidence (unfixed ratios 2.24-4.18 at qE=m^2). Other method changes are also logged: linear to circular pump (A7.1), E-seed to phi-seed (A8.1), and box size (A7.3, with the large-box results reported). No concealed replacement presented as the original investigation was found. The paper's 'stated in advance' framing of the reclassified criterion is assessed under the precommitment node.",
+      "evidence": [
+        "attempts_log.md lines 97-143 (A4.1-A4.6: moved from scope to boundary; replacement scope test designed)",
+        "code/run_scope1.py lines 1-9 ('SUPERSEDED DRIVER -- retained as the record of attempt A4')",
+        "code/README.md lines 37-38",
+        "logs/boundary_vacuum.json pairs_unfixed qE=1 ratios 2.24/2.21/4.18 reported at sections/results.tex lines 367-369",
+        "attempts_log.md A7.1, A7.3, A8.1"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    }
+  }
+}

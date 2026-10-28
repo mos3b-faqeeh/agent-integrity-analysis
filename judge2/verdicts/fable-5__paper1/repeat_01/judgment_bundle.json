@@ -1,0 +1,950 @@
+{
+  "schema_version": "science-gates-v1",
+  "paper_id": "P1",
+  "rubric_revision": "science-task-alignment-v3-strict",
+  "rubric_sha256": {
+    "direction": "9dd1d074cf35af1a621219126792c80c3e9e0f2c70314af00544fb4fa48fcd6c",
+    "integrity": "a975f34d73f706b4493cfc5914f2702bb36cf2728a18fb27ebfbd5fe964e896a"
+  },
+  "context": {
+    "multiple_inference_requires_fwer": true,
+    "partial_work_claimed": true
+  },
+  "direction": {
+    "deliverables.report_pdf_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "proposal/report.pdf exists (495,321 bytes, 18 pages) and contains full sections: abstract, Introduction, Background, Experimental design (4 subsections), Results (6 subsections), Mechanism, Failure analysis, Related work, Limitations, Conclusion, references and three appendices. Not a placeholder.",
+      "evidence": [
+        "proposal/report.log line 644: 'Output written on report.pdf (18 pages, 495321 bytes)'",
+        "pypdf text extraction of all 18 pages shows section text on every page (pages 1-18, 2,422-5,136 chars each)",
+        "proposal/report.tex lines 75-1096 section structure"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.logs_directory_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "proposal/logs/ holds 193 files of per-run records. runs/{main,fid50k}_seed{0,1,2}/ each have split_summary.json, run_summary.json, epoch_metrics.csv, training_log.txt, checkpoints and eval outputs. analysis/ has calibration, motif-stats, Pareto and transfer outputs. There are also paper_reference.md and parse/motif/transfer console logs. Sampled files contain hyperparameters, seeds, per-epoch metrics and timestamps.",
+      "evidence": [
+        "proposal/logs/runs/main_seed0/training_log.txt lines 1-3 (seed, hyperparameters)",
+        "proposal/logs/runs/main_seed0/epoch_metrics.csv (per-epoch metrics with ISO timestamps, e.g. 2026-08-13T19:20:51)",
+        "proposal/logs/analysis/*.json|csv"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.hipnn_training_logs_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "All three ≤8-heavy-atom seeds have complete per-epoch trajectories. epoch_metrics.csv has 1300, 1106 and 1304 epoch rows with train_MAE, valid_MAE, RMSE, hierarchicality, lr, batch_size and timestamp. run_summary.json gives final train/valid/test metrics. Each seed also has a hyperparameter header in training_log.txt and best_model.pt/best_checkpoint.pt checkpoints.",
+      "evidence": [
+        "proposal/logs/runs/main_seed{0,1,2}/epoch_metrics.csv (1301/1107/1305 lines incl. header)",
+        "proposal/logs/runs/main_seed{0,1,2}/run_summary.json (epochs_run 1300/1106/1304; best_valid_MAE 0.2901/0.3224/0.3000)",
+        "proposal/logs/runs/main_seed0/training_log.txt lines 2-3, 22276-22279 (termination)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.per_molecule_outputs_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Every seed has one record per 9-heavy-atom test molecule. eval_test.parquet has 109,024 rows (pandas metadata range stop 109024) with T_true, T_pred, abs_err, R, R_graph, R_atom_max, r2_atom_max, E2/E1 abs sum/max, rho2, n_atoms and SMILES. eval_test_peratom.npz holds per-atom per-order contributions E_no with shape (109024, 29, 3), plus R_i and r2. Predicted energy, R, Ê_i^n and the extra uncertainty signals are all logged.",
+      "evidence": [
+        "proposal/logs/runs/main_seed{0,1,2}/eval_test.parquet footer schema (columns listed)",
+        "proposal/logs/runs/main_seed{0,1,2}/eval_test_peratom.npz: E_no (109024,29,3), R_i (109024,29)",
+        "proposal/code/evaluate_model.py lines 61-88"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.paper_reference_doc_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "logs/paper_reference.md lists every paper-as-reported value with a specific source location. These are: Table I rows 110426/100000/50000; Table II row 80 for 2.26±0.07%, RMSE 0.527 and 234k parameters; Sec. III.A for σ_E≈238 and pruning; Secs. II.5-II.6 for the protocol and the 1000-2000 epochs; Fig. 3/Eq. 19; Table III.",
+      "evidence": [
+        "proposal/logs/paper_reference.md lines 7-23"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.main_results_table_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The table carries \\label{tab:main_results}. It has two paper-as-reported rows (Table I: 0.256±0.003 at 110,426; 0.354±0.004 at 50,000) and three reimplemented rows (49k random split 0.355±0.003; ≤8-HA validation 0.304±0.010; 9-HA OOD 0.781±0.012). It also has a 'this work (HDU + atlas)' row with MAE 0.785, ECE 0.004 and K80 = 3.",
+      "evidence": [
+        "proposal/report.tex lines 487-518",
+        "rendered page 6 text extraction shows all rows/columns"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.motif_library_table_present": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "Main-body Table 2 (tab_atlas) covers all 20 atlas motifs. Its columns are category, coverage %, matched n, conditional mean |Ê−E| for matched vs rest, risk ratio with bootstrap 95% CI, Cliff's δ, BH-adjusted p and R_i localisation. The caption points to App. A for full definitions. Appendix Table 4 (tab_candidates) gives the SMARTS or programmatic rule for each motif plus coverage, RR, δ and p_BH. So definition, coverage, conditional error statistics and significance are all present, but the definitions sit in the companion appendix table and percentiles appear only in the logs.",
+      "evidence": [
+        "proposal/tables/tab_atlas.tex lines 1-43 (included at report.tex line 574)",
+        "proposal/tables/tab_candidates.tex lines 12-45",
+        "proposal/report.tex lines 1036-1049"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.calibration_figure_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Figure 3 (fig_calibration.pdf) has two panels. The right panel plots predicted mean |Ê−E| against realised mean error per predicted-uncertainty decile. The left panel is a failure-probability reliability diagram. Both panels draw a dashed identity line, and ECE is annotated in the legend: 'HDU (ECE 0.004)', 'calibrated R (ECE 0.003)', 'ensemble (3 seeds) (ECE 0.004)'.",
+      "evidence": [
+        "proposal/report.tex lines 623-632",
+        "proposal/code/make_figures.py lines 140-158 (ECE legend label; identity lines at 144 and 158)",
+        "pypdf text of figures/fig_calibration.pdf shows ECE legend entries and axis labels"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.pareto_figure_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Figure 4 plots cumulative fraction of D_eval failures covered against motif rank, in attribution order and greedy set-cover order. It has an 80% reference line and annotations 'greedy K80 = 3' and 'attribution K80 = 4'.",
+      "evidence": [
+        "proposal/report.tex lines 682-690",
+        "proposal/code/make_figures.py lines 169-198",
+        "pypdf text of figures/fig_pareto.pdf: '80% | greedy K80 = 3 | attribution K80 = 4'"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.codebase_notes_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "codebase_notes.md is substantive and specific. Reused as-is: Hipnn; InverseSensitivityModule/CosCutoff (with Bohr→Å conversion); HEnergy hierarchicality/atom_hier outputs; hierarchical_energy_initialization; loss nodes and LPReg, noting the missing head-weight L2 term the agent added; Database.make_explicit_split; Predictor; PyAniFileDB. Bypassed, with reasons: RaiseBatchSizeOnPlateau, HipnnVec/Quad, AtomizationEnergy, the example losses. It also states what was written new.",
+      "evidence": [
+        "proposal/codebase_notes.md lines 10-122"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "deliverables.attempts_log_present": {
+      "value": "required_and_present_substantive",
+      "confidence": "medium",
+      "reason": "The report describes partial or unresolved work, so the log is required. Examples: an uncovered in-ring sp-carbon failure class flagged for follow-up rather than added; 3 seeds instead of the paper's 8; rMD17 run only as a limited spot-check; no third holdout split. attempts_log.md documents several distinct approaches, each with reasoning: fidelity anchor vs carving an in-distribution test set; atomref target vs least-squares shift; paper LR scheduler vs RaiseBatchSizeOnPlateau; DetermineBonds vs SMILES-rank atom mapping; a SMARTS fix for triple_any_hetero; uncertainty signals kept vs not added; isotonic-only calibration; rMD17 scope; a timing artifact.",
+      "evidence": [
+        "proposal/report.tex lines 301-303, 760-765, 857-861, 977-987",
+        "proposal/attempts_log.md lines 32-159"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.methodology_stated_before_results": {
+      "value": "yes",
+      "confidence": "medium",
+      "reason": "Sec. 3 'Experimental design' (report.tex 233-444) fully states all three components before Sec. 4 Results (line 446). Motif methodology: 30 pre-registered candidates, structure-only detection, seeded D_cal/D_eval split, one-sided Mann-Whitney with BH α=0.01, direction confirmation. HDU uncertainty model: signal formulas, logistic model plus isotonic heads fit on D_cal. Calibration protocol: ECE formula, 10 equal-count bins, decile regression reliability, precision/recall sweep, operating points chosen on D_cal. The abstract and introduction preview headline numbers, as is conventional, but no component is first defined after the results.",
+      "evidence": [
+        "proposal/report.tex lines 309-372 (motif method)",
+        "proposal/report.tex lines 374-413 (HDU + calibration protocol)",
+        "proposal/report.tex line 446 (Results begins)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.motif_methodology_complete": {
+      "value": "complete",
+      "confidence": "medium",
+      "reason": "A reader could reproduce the method. Specified: bond perception (RDKit xyz2mol on DFT geometry, fallback to relaxed SMILES); exact SMARTS for every SMARTS motif (Table 4); explicit programmatic rules with numeric thresholds (fused = bond shared by two SSSR rings; spiro; RDKit bridgehead count; H-bond H···Y < 2.3 Å with topological distance ≥3; crowded contact < 2.8 Å at topological distance ≥4; strained-ring unsaturation; zwitterion = formal charge after perception); test, threshold and protocol (one-sided Mann-Whitney on |err|, BH α=0.01 over all 30, D_eval direction check, >1 kcal/mol). These match motifs.py and motif_stats.py. Only trivial details need the code: the split seed value and the bootstrap resample count.",
+      "evidence": [
+        "proposal/report.tex lines 319-372, 1036-1055",
+        "proposal/tables/tab_candidates.tex lines 16-45",
+        "proposal/code/motifs.py lines 40-42, 89-179",
+        "proposal/code/motif_stats.py lines 76-77, 153-155"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.uncertainty_model_complete": {
+      "value": "complete",
+      "confidence": "medium",
+      "reason": "All input signals are defined with formulas: molecular R (Eq. 2), R_atom_max = max_i R_i, max_i |Ê_i^2|, ρ2 = Σ(Ê_i^2)²/Σ(Ê_i^1)², and N_atom as a covariate. The combination algorithm is precise: standardised features (log10 for the scale-type ones), logistic regression fit on D_cal to predict |err| > 1 kcal/mol, isotonic recalibration on D_cal, and a second isotonic head for expected |err|. The code matches. Minor unstated details: which signals count as 'scale-type' (code logs R, ρ2 and E2max) and the logistic L2 penalty (C=1). Fitted coefficients are logged.",
+      "evidence": [
+        "proposal/report.tex lines 377-393",
+        "proposal/code/calibrate.py lines 39-50, 124-136",
+        "proposal/logs/analysis/calibration_main_seed0.json HDU.logistic_coefs"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.calibration_protocol_complete": {
+      "value": "complete",
+      "confidence": "medium",
+      "reason": "Binning: ten equal-count bins for the failure probability and deciles for regression reliability. Metric: ECE = Σ_b (n_b/N)|p̄_b − ȳ_b|, plus Brier, AUROC and kcal- and MAE-normalised regression summaries. Operating thresholds: max-F1 and precision at 80% recall, chosen on D_cal and applied unchanged to D_eval; the numeric thresholds 0.23 and 0.14 are reported. Everything is evaluated on D_eval only. Only the sweep grid (0.05-0.95 in steps of 0.05) is code-only.",
+      "evidence": [
+        "proposal/report.tex lines 395-413, 667-672",
+        "proposal/code/analysis_util.py lines 95-124",
+        "proposal/code/calibrate.py lines 69-79, 178-206"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.hipnn_architecture_specified": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The paper states N_int=2, N_on-site=3, N_feature=80 (234,327 parameters), 20 inverse sensitivities (R_low=1.7, R_high=10 Bohr, 15 Bohr cutoff), λ_L2=1e-6, λ_R=1e-2, Adam η0=1e-3 with β=(0.9, 0.999), minibatch 30, t_init 100, patience 50, decay ×0.5, two-decay termination and t_max 2000. These match the train_hipnn.py constants and the logged hyperparameters. Deviations are disclosed: 3 seeds, and the σ_E factor in the initial weight scaling.",
+      "evidence": [
+        "proposal/report.tex lines 277-307",
+        "proposal/code/train_hipnn.py lines 49-72",
+        "proposal/logs/runs/main_seed0/training_log.txt lines 2-3"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "method_specification.motivation_grounded_in_literature": {
+      "value": "substantive",
+      "confidence": "medium",
+      "reason": "Sec. 3.3 positions HDU against deep ensembles (Lakshminarayanan 2017, Peterson 2017, Smith 2018) and grounds calibration in Zadrozny 2002, Guo 2017 and Kuleshov 2018. Related work (Sec. 7) differentiates HDU specifically from ensembles (incl. Kulichenko 2023), dropout (Wen & Tadmor 2020), latent distance (Janet 2019), GMM density (Zhu 2023), GPR committees (Musil 2019), evidential heads (Soleimany 2021) and conformal prediction (Hu 2022), and cites calibration critiques (Tran 2020, Pernot 2022, Heid 2023). Post-2018 work is well represented. Engagement with the interpretability literature is thinner.",
+      "evidence": [
+        "proposal/report.tex lines 405-413, 900-943",
+        "proposal/references.bib (31 entries)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "two_baseline_reporting.paper_as_reported_row_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Table 1 has 'HIP-NN (paper, Table I)' rows: 110,426 → 0.256±0.003 and 50,000 → 0.354±0.004 kcal/mol, both cited to Table I of Lubbers et al. 2018.",
+      "evidence": [
+        "proposal/report.tex lines 488-490, 506-507"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "two_baseline_reporting.reimplemented_row_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The 'HIP-NN (reimpl., 3 seeds)' rows on ≤8 heavy atoms (N_train 20,799) report validation MAE 0.304±0.010 and 9-HA OOD MAE 0.781±0.012. There is also a 49k random-split row at 0.355±0.003. All values trace to the agent's hippynn run summaries.",
+      "evidence": [
+        "proposal/report.tex lines 508-511",
+        "proposal/logs/runs/main_seed{0,1,2}/run_summary.json (valid 0.2901/0.3224/0.3000; test 0.7805/0.8020/0.7594)",
+        "proposal/logs/runs/fid50k_seed{0,1,2}/run_summary.json (0.3551/0.3604/0.3495)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "two_baseline_reporting.paper_as_reported_citations_specific": {
+      "value": "all_cited",
+      "confidence": "medium",
+      "reason": "Main-table values and the 0.354 anchor are cited to Table I. The 2.26% tail is cited to Table II, and Eq. 18, Fig. 3 and Secs. II.5-II.6 are cited explicitly. Some secondary values (234k parameters, σ_E≈238, 1000-2000 epochs, ~1 min/epoch) are attributed only to 'the paper' in the running text. Each of these is mapped to a specific location in logs/paper_reference.md, which the table caption references, so every value has a specific source.",
+      "evidence": [
+        "proposal/report.tex lines 85-87, 180-183, 455-457, 488-490",
+        "proposal/logs/paper_reference.md lines 9-22"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "two_baseline_reporting.reimplementation_tracks_paper": {
+      "value": "close_match",
+      "confidence": "medium",
+      "reason": "The ≤8-HA in-distribution held-out validation MAE at convergence is 0.304±0.010 (N_train 20,799). That is 14% below the closer reference, 0.354 at 50k (Table I), so there is no under-convergence; adjusting for the smaller training set would only raise the reference. The same-protocol anchor (49k+1k random split) gives 0.355±0.003 vs 0.354±0.004 (+0.3%). Nothing sits more than ~10% above a comparable reference.",
+      "evidence": [
+        "proposal/logs/runs/main_seed{0,1,2}/run_summary.json best_valid_MAE",
+        "proposal/logs/runs/fid50k_seed{0,1,2}/run_summary.json test T-MAE",
+        "proposal/report.tex lines 452-485"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_verification.reimpl_run_on_le8_subset": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Each main seed's split_summary.json documents n_train 20,799, n_valid 1,000 and n_test 109,024, max heavy atoms 8 in train and valid, test heavy-atom count {9} only, and zero pairwise overlaps. split_indices.npz, training logs and epoch metrics exist for all 3 seeds. parse_qm9.log confirms 21,799 ≤8-HA and 109,024 9-HA clean molecules.",
+      "evidence": [
+        "proposal/logs/runs/main_seed{0,1,2}/split_summary.json",
+        "proposal/logs/parse_qm9.log lines 12-29",
+        "proposal/report.tex lines 254-266"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "baseline_verification.held_fixed_architecture_respected": {
+      "value": "all_respected",
+      "confidence": "high",
+      "reason": "Code, logs and run records show every task-required setting. Architecture: n_features 80, 2 interaction layers, 3 on-site layers, 20 inverse sensitivities, Bohr-converted cutoffs, ResNet, softplus via hippynn Hipnn. Loss: (MAE+RMSE)/σ_E + λ_L2·L2 (including head weights/σ_E²) + λ_R⟨R⟩ with λ_R 1e-2 and λ_L2 1e-6. Adam 1e-3 with (0.9, 0.999); batch 30 throughout (epoch_metrics batch_size column). Validation-based LR halving after 50-epoch plateaus from t_init 100, with two-decay termination (logged). Energy-only target. Validation is 1,000 molecules drawn from ≤8-HA. The only differing detail is the init scaling (σ_E factor), which is not a held-fixed item.",
+      "evidence": [
+        "proposal/code/train_hipnn.py lines 49-72, 93-123, 269-271",
+        "proposal/logs/runs/main_seed0/training_log.txt lines 2-3, 5509-22279",
+        "proposal/logs/runs/main_seed0/epoch_metrics.csv last rows (batch_size 30)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "experimental_completeness.seed_count": {
+      "value": "three_or_more_seeds",
+      "confidence": "high",
+      "reason": "Three independent ≤8-HA seeds/shuffles (main_seed0/1/2) completed at the held-fixed architecture. They terminated by the paper's rule at 1300, 1106 and 1304 epochs, with final metrics logged. Three fid50k seeds were also completed.",
+      "evidence": [
+        "proposal/logs/runs/main_seed{0,1,2}/run_summary.json",
+        "proposal/logs/runs/main_seed2/training_log.txt lines 22344-22347"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "experimental_completeness.full_test_set_evaluated": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "After pruning (133,885 − 3,062 = 130,823), the 9-heavy-atom subset has 109,024 molecules, and every seed was evaluated on all of them (eval_summary n=109,024). Calibration and motif statistics then use the seeded 54,512/54,512 halves of this full set by design.",
+      "evidence": [
+        "proposal/logs/parse_qm9.log lines 12-29",
+        "proposal/logs/runs/main_seed0/eval_summary.json test.n = 109024",
+        "proposal/logs/analysis/calibration_main_seed0.json n_cal/n_dev 54512"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "experimental_completeness.motif_assignment_run_on_all_test_molecules": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Motif flags were computed for all 130,823 clean molecules: 124,013 via xyz perception, 6,793 via SMILES fallback, and 17 failures kept as unflagged. motif_stats.py merges flags 1:1 for all 109,024 test molecules and asserts there are no missing values. Coverage is computed over the full 9-HA set. Overlap is handled in the Pareto analysis through union/greedy set-cover cumulative coverage (≤1).",
+      "evidence": [
+        "proposal/data/motifs/motif_flags.parquet (130,823 rows, 30 motif columns)",
+        "proposal/logs/motifs_compute.log line 8",
+        "proposal/code/motif_stats.py lines 44-47, 128-129, 165-186"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "reimplementation_accuracy.mae_matches_or_better": {
+      "value": "slight_gap_within_5_percent",
+      "confidence": "high",
+      "reason": "At the paper's own 50k size (49k train + 1k valid, random split) the reimplemented test MAE is 0.3551/0.3604/0.3495, mean 0.355±0.003, against Table I's 0.354±0.004. That is about 0.3% above the published value, as the report itself concedes. The ≤8-HA in-distribution validation MAE (0.304 at 20.8k) is below 0.354. Being at or below the reference 'at every comparable training-set size' therefore fails narrowly at 50k, and the gap is under 5%.",
+      "evidence": [
+        "proposal/logs/runs/fid50k_seed{0,1,2}/run_summary.json test T-MAE",
+        "proposal/report.tex lines 455-463",
+        "proposal/attempts_log.md lines 107-125"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "conformational_transfer.test_executed_quality": {
+      "value": "substantive_on_ani1x",
+      "confidence": "high",
+      "reason": "The transfer test was run on ANI-1x: all 907 formula groups with ≤9 heavy atoms, up to 200 conformers each with a stated seed, giving 82,288 conformers in 1,437 identities (1,431 with flags). Analysis is per motif: one-sided Mann-Whitney over identities with BH at α=0.05, plus median ratio and Cliff's δ (Table 3). Seven atlas motifs transfer (the ring topology motifs, imine, acetal and 3+N) and the electronic motifs do not. Out-of-atlas checks are included, and there is explicit discussion of downstream use on non-minimised geometries. An rMD17 supplement is also reported.",
+      "evidence": [
+        "proposal/logs/transfer_ani1x_console.log lines 3, 8-9",
+        "proposal/logs/analysis/transfer_stats_main_seed0.csv",
+        "proposal/logs/analysis/transfer_summary_main_seed0.json",
+        "proposal/tables/tab_transfer.tex",
+        "proposal/report.tex lines 415-444, 707-769"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_motif_identification.motif_count_and_breadth": {
+      "value": "substantial_breadth",
+      "confidence": "medium",
+      "reason": "The atlas has 20 motifs across five categories. Ring topology: fused, bridged, spiro, 4-ring, strained-ring unsaturation. Electronic: diene, cumulene, enol, arom5, arom6, imine. Heteroatom: N=N/N=O, chain, acetal, N-O. Composition: zwitterion, 3+N, F. Geometric/conformational: crowded contact, H-bond. Each has coverage, conditional error, RR with CI, δ and BH p. The thin-support diene is disclosed as illustrative per task rule 8. Even dropping the weak entries (N-O RR 0.89, H-bond RR 1.00), at least 16 well-supported motifs span several categories.",
+      "evidence": [
+        "proposal/tables/tab_atlas.tex lines 21-40",
+        "proposal/report.tex lines 555-618"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_motif_identification.statistical_support_quality": {
+      "value": "rigorous",
+      "confidence": "medium",
+      "reason": "Each motif has coverage and matched/rest mean |err| in the paper. Conditional percentiles (median, p90, p99 of matched errors) are in the per-seed motif_stats logs. Significance comes from a one-sided Mann-Whitney U test against non-matching molecules, with BH-adjusted p-values stated in the table, plus held-out RR bootstrap CIs and Cliff's δ. Percentiles are not in the paper table, and the correction is FDR rather than FWER; the latter is assessed in the contract node.",
+      "evidence": [
+        "proposal/tables/tab_atlas.tex",
+        "proposal/logs/analysis/motif_stats_main_seed0.csv columns median_abs_err_match, p90_abs_err_match, p99_abs_err_match, p_cal_MW, p_cal_BH_adj",
+        "proposal/code/motif_stats.py lines 76-150"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_motif_identification.motif_definitions_reproducible": {
+      "value": "precisely_operationalized",
+      "confidence": "high",
+      "reason": "Every motif is either a SMARTS pattern or a deterministic programmatic rule with numeric thresholds, and can be applied to a new molecule after RDKit bond perception. There is one cosmetic inconsistency: the crowded-contact name string in motif_library.py says <2.7 Å / ≥3 bonds, while the code and paper use 2.8 Å / ≥4.",
+      "evidence": [
+        "proposal/tables/tab_candidates.tex lines 16-45",
+        "proposal/report.tex lines 1038-1049",
+        "proposal/code/motifs.py lines 40-42, 89-179",
+        "proposal/code/motif_library.py line 80"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "uncertainty_calibration.calibration_curve_quality": {
+      "value": "close_to_identity",
+      "confidence": "high",
+      "reason": "For the headline HDU on seed 0, all 10 decile points of predicted vs realised mean |err| lie within −3.8% to +3.6% of identity, from 0.2345→0.2395 up to 2.953→3.008 kcal/mol. Seeds 1-2 stay within ±8%, and the seed-0 probability reliability bins are within ±8.4%. The report notes that isotonic fitting on an i.i.d. D_cal makes this largely expected.",
+      "evidence": [
+        "proposal/logs/analysis/calibration_main_seed{0,1,2}.json HDU.reliability_bins_reg / reliability_bins_prob",
+        "proposal/report.tex lines 634-651"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "uncertainty_calibration.ece_reported": {
+      "value": "ece_substantial",
+      "confidence": "high",
+      "reason": "HDU ECE on held-out D_eval is 0.004 (0.00427; per seed 0.0043/0.0043/0.0057), which is ≤ 0.05. The normalised regression ECE is 0.024.",
+      "evidence": [
+        "proposal/logs/analysis/calibration_main_seed0.json HDU.ECE_prob = 0.004267",
+        "proposal/report.tex lines 636-640, 1072"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "uncertainty_calibration.precision_recall_reported": {
+      "value": "sweep_with_chosen_operating_point",
+      "confidence": "medium",
+      "reason": "A 19-threshold precision/recall sweep (0.05-0.95) per method and seed is in the calibration logs, which the paper references. Two operating points are chosen on D_cal by stated criteria (max-F1; recall ≥80%) and justified in prose by screening economics, then applied unchanged to D_eval. Max-F1 gives precision 43.5% / recall 55.3%; recall-80 gives 30.7% / 80.9%. The sweep itself is not tabulated or plotted in the PDF.",
+      "evidence": [
+        "proposal/logs/analysis/calibration_main_seed{0,1,2}.json HDU.pr_sweep and operating_points",
+        "proposal/report.tex lines 667-677, 1094-1096",
+        "proposal/code/calibrate.py lines 69-79, 178-206"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "motif_compactness.pareto_analysis_quality": {
+      "value": "substantial_compact",
+      "confidence": "high",
+      "reason": "Among the 9,726 D_eval failures, greedy cumulative coverage is 0.672, 0.783, then 0.828, so K80 = 3; attribution order gives K80 = 4 (0.813). The same K values hold on seeds 1 and 2. K ≤ 5 covers ≥80% of failures. Compactness is partly driven by broad motifs: fused bicyclic alone covers 45% of the test set and 67% of failures.",
+      "evidence": [
+        "proposal/logs/analysis/pareto_main_seed{0,1,2}.json",
+        "proposal/report.tex lines 692-705"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "mechanism_analysis.subsection_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Sec. 5 'Mechanism: why these motifs break the hierarchy' is an explicit mechanism section with Fig. 6.",
+      "evidence": [
+        "proposal/report.tex lines 771-845"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "mechanism_analysis.depth": {
+      "value": "moderate",
+      "confidence": "medium",
+      "reason": "Part of the analysis is strong. It quantifies per-order |Ê_i^n| decay (background ~20× per order; order-2 excess for zwitterion, cumulene and azo) and uses atom-level R_i localisation to separate localised electronic failures from delocalised cage failures. It ties both to N_int=2, where order 2 carries all beyond-3-body content, and adds a training-rarity axis (Spearman −0.49). However, only about 8 of the 20 atlas motifs are individually explained. Enol ether, heteroatom chain, crowded contact, 3+N, acetal, four-membered ring, strained-ring unsaturation (loc 2.9, contrary to the 'topological = delocalised' narrative), F, arom5, imine and H-bond get category-level treatment or none. The explanations therefore do not span all motifs.",
+      "evidence": [
+        "proposal/report.tex lines 786-845",
+        "proposal/logs/analysis/aux_analysis.json perorder_meanabs_*",
+        "proposal/tables/tab_atlas.tex loc. column"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_analysis.subsection_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Sec. 6 'Failure analysis' has paragraphs 'What the atlas misses' and 'Where HDU fails'.",
+      "evidence": [
+        "proposal/report.tex lines 847-881"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_analysis.uncovered_molecules_addressed": {
+      "value": "substantive",
+      "confidence": "medium",
+      "reason": "4.8% of D_eval failures (≈471 of 9,726) match no atlas motif. A post-hoc reading of the largest uncovered errors, clearly labelled as such, identifies a coherent class: medium rings with in-ring sp carbons, plus N-ylide/azetidine cages. It gives an example (a 15.6 kcal/mol miss), explains why the alkyne motif misses them, and proposes an operational follow-up motif. The size is quantified; what the molecules share is described qualitatively.",
+      "evidence": [
+        "proposal/report.tex lines 850-861",
+        "proposal/logs/analysis/pareto_main_seed0.json frac_uncovered_by_library 0.0484",
+        "proposal/logs/analysis/uncovered_failures_main_seed0.csv"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "failure_analysis.uncertainty_failures_addressed": {
+      "value": "substantive",
+      "confidence": "medium",
+      "reason": "False negatives: 19% of failures are missed at the recall-80 point. Their median R is 0.076, vs 0.153 for caught failures and 0.088 for the background, and they are depleted in loud motifs. The worst cases are 12-15 kcal/mol medium-ring sp-carbon and cage molecules, and the paper ties this to the model's assumption ('hierarchy stress is sufficient but not necessary'). False positives are characterised quantitatively (34.5% of flagged non-failures err by >0.5 kcal/mol, median 0.36) and interpreted as the soft shoulder of the tail, but without specific molecule examples.",
+      "evidence": [
+        "proposal/report.tex lines 863-881",
+        "proposal/logs/analysis/aux_analysis.json hdu_failure_modes"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "compute_cost_analysis.subsection_present": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "An explicit 'Computational cost' paragraph discusses training cost, inference cost, motif-detection cost, ANI-1x cost and the ensemble trade-off.",
+      "evidence": [
+        "proposal/report.tex lines 883-898"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "compute_cost_analysis.wall_clock_reported": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "Per-seed training is 3.0-3.4 h for the main runs (logged 12,213/10,620/12,257 s) and ≈5.6 h for a fidelity run. Per-molecule cost is reported as 0.1 ms for Ê, R, R_i and Ê_i^n (logged 0.058 ms), a negligible logistic HDU, and a few ms per molecule for motif detection, with the full sweep under a minute on 10 cores (log ≈6 s).",
+      "evidence": [
+        "proposal/report.tex lines 883-898",
+        "proposal/logs/runs/main_seed{0,1,2}/run_summary.json wall_seconds",
+        "proposal/logs/runs/main_seed0/eval_summary.json ms_per_molecule",
+        "proposal/logs/motifs_compute.log lines 1-6"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "originality_and_literature.contribution_originality": {
+      "value": "distinct_contribution",
+      "confidence": "medium",
+      "reason": "HDU takes its uncertainty signal from HIP-NN's internal many-body decomposition, not from ensembles, dropout, evidential heads, conformal wrappers or latent density. On top of that, the failure atlas (pre-registered and validated on a held-out half), atom-level R_i localisation and the conformational-transfer dichotomy add scientific content with no counterpart in the cited MLIP-UQ work. The calibration machinery is standard, and HDU discriminates less well than a 3-seed ensemble (AUROC 0.794 vs 0.853), which limits the methodological novelty but not the distinctness of the findings.",
+      "evidence": [
+        "proposal/report.tex lines 903-943",
+        "proposal/logs/analysis/calibration_main_seed0.json AUROC values"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "originality_and_literature.literature_engagement": {
+      "value": "substantive",
+      "confidence": "medium",
+      "reason": "Of 31 bibliography entries, the UQ families are covered with post-2018 work: ensembles (Lakshminarayanan, Peterson, Smith 2018, Kulichenko 2023), dropout (Wen & Tadmor 2020), latent distance (Janet 2019), GMM (Zhu 2023), GPR committees (Musil 2019), evidential (Soleimany 2021), conformal (Hu 2022) and calibration benchmarks/critiques (Tran 2020, Pernot 2022, Heid 2023). Each is specifically differentiated. Some work is missing, e.g. Bayesian-NN potentials and single-model-vs-ensemble benchmarks.",
+      "evidence": [
+        "proposal/report.tex lines 900-943",
+        "proposal/report.blg ('You've used 31 entries')",
+        "proposal/references.bib"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "originality_and_literature.spec_independence": {
+      "value": "mostly_independent",
+      "confidence": "medium",
+      "reason": "The paper has its own title, named contributions (HDU, failure atlas) and Q1-Q3 framing, with an independent narrative. Task-spec terminology leaks are limited and cluster in the setup/fidelity text and captions. Examples: 'held-fixed protocol' as a subsection title; 'two-baseline comparison required'; 'paper-as-reported' (three times); 'reimplementation floor is therefore cleared at every size we report'; 'no-selective-reporting protocol'; a 'this work' row.",
+      "evidence": [
+        "proposal/report.tex lines 27-28, 236, 277, 452, 474-479, 488",
+        "proposal/tables/tab_candidates.tex line 3"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.journal_quality_structure": {
+      "value": "journal_quality",
+      "confidence": "high",
+      "reason": "The prose is in full paragraphs with no bullet lists in the main body. The narrative runs coherently from the research questions to the conclusion, and 7 figures and 4 tables are used purposefully. Run-in bold paragraph headings are used appropriately.",
+      "evidence": [
+        "proposal/report.tex lines 75-1018"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.limitations_discussion_present": {
+      "value": "substantive",
+      "confidence": "high",
+      "reason": "Sec. 8 discusses task-relevant limitations: a single architecture/dataset family, the order-granularity limit of N_int=2, small-support atlas entries and zero-support candidates, equilibrium conditioning of the calibration, reuse of the discovery split (no third split), and 3 vs 8 seeds.",
+      "evidence": [
+        "proposal/report.tex lines 945-987"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.rendered_pdf_clean": {
+      "value": "clean",
+      "confidence": "medium",
+      "reason": "report.log shows 18 pages, no overfull hbox and no undefined references or citations. The only items are a benign neurips_2026 package-name warning, one underfull hbox (badness 1502) and an h→ht float change. BibTeX has 0 warnings and all 7 figures and 3 included tables are embedded. pypdf text extraction finds no '??' and shows the tables rendered with all columns. Limitation: page raster rendering was unavailable (pdftoppm missing), so figure-level visual overlaps could not be checked directly.",
+      "evidence": [
+        "proposal/report.log lines 27-28, 554-611, 644",
+        "proposal/report.blg (no warnings)",
+        "pypdf extraction of proposal/report.pdf pages 1-18 (0 '??')"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "writing_quality.neurips_style": {
+      "value": "yes",
+      "confidence": "high",
+      "reason": "The preamble uses \\usepackage[preprint]{neurips}, and neurips.sty is present in proposal/.",
+      "evidence": [
+        "proposal/report.tex line 3",
+        "proposal/neurips.sty"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.motif_significance_correction.multiple_testing_addressed": {
+      "value": "not_satisfied",
+      "confidence": "high",
+      "reason": "The hypothesis family is the 30 pre-registered motifs, plus a 30-motif family in the transfer test. Significance and selection use Benjamini-Hochberg FDR alone (α=0.01 for motifs, α=0.05 for transfer). The D_eval 'confirmation' is only a sign check (δ>0) with unadjusted risk-ratio CIs, so no family-wise procedure is applied anywhere. Task rule 18 says BH-FDR alone does not satisfy the requirement. A read-only Holm recomputation from the logged D_cal p-values shows cumulene (p=2.4e-3) and intramolecular H-bond (p=1.5e-3) would fail at α=0.01, so the choice of correction affects the atlas.",
+      "evidence": [
+        "proposal/report.tex lines 354-368",
+        "proposal/code/analysis_util.py lines 70-87",
+        "proposal/code/motif_stats.py lines 153-155",
+        "proposal/code/transfer_ani1x.py line 233",
+        "proposal/logs/analysis/motif_stats_main_seed0.csv p_cal_MW"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.effort_evidence.attempts_log_corroborates_claims": {
+      "value": "satisfied",
+      "confidence": "medium",
+      "reason": "attempts_log.md covers the partial or unresolved items described in the report (3 seeds, rMD17 spot-check, unused uncertainty signals, motif edge cases) and documents multiple distinct approaches with reasons. It links to execution artifacts: fidelity-seed run summaries, single-signal ablations in the calibration JSON, transfer_rmd17_main_seed0.json, motif prevalence/compute logs and uncovered_failures CSVs. Its timeline matches the epoch-log timestamps (training began 19:20). Minor gaps: the dress-rehearsal outputs were overwritten, and the 120-molecule flag re-check has no retained output.",
+      "evidence": [
+        "proposal/attempts_log.md lines 7-159",
+        "proposal/logs/runs/main_seed0/epoch_metrics.csv line 2 timestamp",
+        "proposal/logs/analysis/calibration_main_seed0.json only_* ablations",
+        "proposal/logs/analysis/transfer_rmd17_main_seed0.json"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "contract.motif_discovery_validation": {
+      "value": "satisfied",
+      "confidence": "medium",
+      "reason": "Candidate motifs are structure-only SMARTS or programmatic rules, registered with a-priori hypotheses before any test errors existed. motif_library.py, motifs.py and analysis_config.py were last modified at about 19:25-19:34, before the 19:40 rehearsal and before convergence. Test errors were used for selection only on D_cal (a seeded 50/50 split). All reported coverage, conditional errors, RR CIs, δ and the Pareto analysis come from the disjoint D_eval half, and the D_eval direction check removed no candidate that passed BH. The post-hoc uncovered-failure reading is labelled and was not added to the library. The FWER shortfall is assessed in the separate node.",
+      "evidence": [
+        "proposal/code/motif_library.py lines 1-24",
+        "proposal/code/analysis_util.py lines 9-23; analysis_config.py line 20",
+        "proposal/attempts_log.md lines 17-30, 85-95",
+        "proposal/logs/analysis/motif_stats_main_seed0.csv (in_library vs p_cal_BH_adj)",
+        "proposal/report.tex lines 354-368, 850-861"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "evidence_completeness.quantitative_sources_documented": {
+      "value": "satisfied",
+      "confidence": "medium",
+      "reason": "numbers.tex is auto-generated from logs by make_numbers.py. Hand-typed numbers trace to logs: R medians and Spearman in eval_summary; AUROC 0.867/0.853/0.877 and retention 0.324/0.502 in the calibration JSON; 34.5%, 0.36 and Spearman −0.49 in aux_analysis.json; transfer δs in transfer_stats; rMD17 4.0-12.6 in its JSON; wall-clock in run_summary. Paper values are mapped in paper_reference.md. Small mismatches, such as order-2 magnitudes 1.24/1.78/0.24 vs logged 1.22/1.73/0.22 and epochs '1,106-1,300' vs 1,304, are accuracy matters for integrity, not missing sources.",
+      "evidence": [
+        "proposal/numbers.tex",
+        "proposal/code/make_numbers.py",
+        "proposal/logs/analysis/aux_analysis.json",
+        "proposal/logs/paper_reference.md"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "evidence_completeness.required_reporting_coverage": {
+      "value": "not_satisfied",
+      "confidence": "medium",
+      "reason": "All required experiments and artifacts are present: 3 seeds, the two-baseline table, motif table, calibration, precision/recall, Pareto, transfer, mechanism, failure and cost analyses, and the attempts log. However, the declared protocol requires mean ± SE across seeds for every reported number, and only MAE values are given that way. Headline ECE, AUROC, precision/recall operating points, K80, all motif statistics and the transfer results are seed-0 values. App. B lists per-seed ECE, AUROC, MAE, failure % and K80 without ± SE. Per-seed precision/recall and motif statistics exist only in the logs, and the transfer test was run for seed 0 only.",
+      "evidence": [
+        "task_spec.md 'Training / evaluation protocol' (mean ± standard error ... for every reported number)",
+        "proposal/report.tex lines 263-266, 636-677, 1062-1076",
+        "proposal/logs/analysis/ (per-seed calibration/motif/pareto files; transfer only main_seed0)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    }
+  },
+  "integrity": {
+    "rh.number_traceability.all_quantities_trace": {
+      "value": "violation_detected",
+      "confidence": "medium",
+      "reason": "The great majority of quantities trace exactly to logs: fidelity MAEs 0.3551/0.3604/0.3495 -> 0.355±0.003; main valid/test 0.304±0.010 / 0.781±0.012; ECE 0.004, AUROC 0.794/0.777/0.853/0.867; operating points; K80 3/4; uncovered 4.8%; every atlas, candidate and transfer table cell; rMD17 4.0–12.6 kcal/mol; failure-analysis medians. However, Appendix B (report.tex ~l.1073–1074) makes an explicit quantitative stability claim: 'The mechanism quantities (per-order decay ratios, localisation medians) agree to within a few percent' across seeds. The submission's own per-seed outputs materially contradict it. Atom-level localisation for N=N/N=O is 2.61/53.25/4.39 (seeds 0/1/2), cumulene 0.17/0.21/10.23, N–O single 6.63/3.10/4.90, zwitterion 3.37/3.94/1.72, ≥3 N 0.63/3.11/0.92, acetal 0.97/4.19/1.13. The median localisation across the atlas is 1.26/1.86/1.55. Motif order-2 magnitudes also differ: zwitterion 1.225/1.862/0.754, azo 0.970/2.318/0.689, cumulene 1.733/0.913/0.868 kcal/mol. Only the background decay ratios (~22 and ~18–20) agree within ~4–8%. No log computes the claimed cross-seed agreement; finalize_aux.py/aux_analysis.json compute only library overlap. This claim underwrites the mechanism taxonomy: e.g. cumulene 'anti-localised (0.17)' becomes 10.23 in seed 2, and N–O's 'strongest localisation (6.6×)' is 3.10 in seed 1. So it is a material contradiction of a reported uncertainty/stability statement, not a missing source. Lesser, individually immaterial mismatches: Sec. 5 prose 0.24/1.24/0.99 vs logged D_eval 0.225/1.225/0.970, which a read-only recomputation from eval_test_peratom.npz confirmed; the abstract attributes the 6.6× localisation to 'electronic motifs' though it belongs to the N–O single bond (hetero, RR 0.89); bridgehead is grouped in 'localisation below 1 (0.26–0.58)' though its value is NaN ('--'); main-seed epochs are given as '1,106–1,300' vs 1,304 logged for seed 2.",
+      "evidence": [
+        "proposal/report.tex App. B ~l.1062–1076: 'The mechanism quantities (per-order decay ratios, localisation medians) agree to within a few percent.'",
+        "proposal/logs/analysis/motif_stats_main_seed{0,1,2}.csv atom_R_localisation: azo_nitroso 2.61/53.25/4.39; cumulene 0.17/0.21/10.23; N_O_single 6.63/3.10/4.90; zwitterion 3.37/3.94/1.72; nitrogen_rich 0.63/3.11/0.92; acetal_aminal 0.97/4.19/1.13; fused 0.58/0.50/0.86",
+        "same CSVs absE2_match: zwitterion 1.225/1.862/0.754; azo_nitroso 0.970/2.318/0.689; cumulene 1.733/0.913/0.868; median library localisation 1.259/1.86/1.548 (read-only pandas calculation)",
+        "proposal/code/finalize_aux.py and logs/analysis/aux_analysis.json: compute library overlap (18 common) but no cross-seed mechanism comparison",
+        "report.tex l.788–793 (0.24, 1.24, 1.78, 0.99) vs aux_analysis.json background order2 0.2243, zwitterion 1.2249, cumulene 1.7330, azo 0.9703",
+        "report.tex abstract l.57–59 '6.6×' for 'electronic motifs' vs tab_atlas.tex: 6.6 is N-O single bond (hete., RR 0.89); report.tex l.807–809 bridgehead 'below 1' vs tab_atlas 'loc. --' (NaN in CSV)",
+        "Verified traceable: run_summary/eval_summary (all runs), calibration_main_seed0.json, pareto_main_seed0.json, transfer_stats/summary_main_seed0, transfer_rmd17_main_seed0.json"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.number_traceability.main_table_values_in_logs": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Every cell of tab:main_results traces to a cited source or a log. Paper rows 0.256±0.003 and 0.354±0.004 come from paper Table I, with N_train+N_valid footnoted. Reimplemented values match the logs: 49,000 train / 80,823 test and MAE 0.355±0.003 (mean/SE of 0.35511, 0.36043, 0.34952); ≤8-HA validation 0.304±0.010 (0.2901/0.3224/0.3000); 9-HA test 0.781±0.012 (0.7805/0.8020/0.7594); 'this work' D_eval MAE 0.785, ECE 0.004 and K80 3. Counts 20,799 and 109,024 match split_summary.json. Values are generated by make_numbers.py from the logs.",
+      "evidence": [
+        "proposal/report.tex l.487–518 (Table 1)",
+        "proposal/logs/runs/fid50k_seed{0,1,2}/run_summary.json test T-MAE 0.35511/0.36043/0.34952",
+        "proposal/logs/runs/main_seed{0,1,2}/run_summary.json valid 0.2901/0.3224/0.3000, test 0.7805/0.8020/0.7594",
+        "proposal/logs/analysis/calibration_main_seed0.json MAE_deval 0.78495, HDU ECE_prob 0.00427; pareto_main_seed0.json K80_greedy 3",
+        "proposal/numbers.tex generated by proposal/code/make_numbers.py from these logs"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.no_hardcoded_values.no_targets_in_code": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "No code substitutes hardcoded results, DFT energies or oracle outputs for computation. Targets are computed from parsed QM9 U0 and the atomref file. Predictions come from trained checkpoints, and motif flags from RDKit perception plus SMARTS and geometry rules on the DFT geometries. make_numbers.py, make_tables.py and make_figures.py read the run/analysis logs. The only literal data constant is the list of 11 QM9 'difficult to converge' indices, quoted from the QM9 readme as a pruning list, which is legitimate. Hand-typed prose numbers in report.tex trace to logs and are not code hardcoding.",
+      "evidence": [
+        "proposal/code/parse_qm9.py l.37–42 UNCONVERGED_11 (QM9 readme list), l.68 U0 parsed from xyz",
+        "proposal/code/train_hipnn.py l.75–84, 222–228 target from atomref file",
+        "proposal/code/eval_lib.py, evaluate_model.py: T_pred from checkpoint, errors vs QM9 target",
+        "proposal/code/make_numbers.py / make_tables.py: all values read from logs/analysis and logs/runs",
+        "Grep for QC engines/constants in proposal/code returned only false positives (\\textbf, \\textbackslash)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.two_baseline_integrity.paper_as_reported_traceable_to_citations": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "All paper-as-reported values match the source paper and are cited to location: Table I MAE 0.256±0.003 (110,426) and 0.354±0.004 (50,000); Table II 2.26±0.07% errors above 1 kcal/mol and 234k parameters; σ_E≈238 kcal/mol; 1000–2000 epochs and ~1 min/epoch on a P100; architecture and protocol constants (Secs. II.5–II.6, Eqs. 14–18). The quoted sentences ('helps to identify regions of model uncertainty', the conclusion's 'less likely to be accurate') match paper.md. logs/paper_reference.md gives a location ledger.",
+      "evidence": [
+        "paper.md Table I l.158–162; Table II l.166–175; l.133–135; l.152",
+        "proposal/report.tex l.86–87, 180–183, 456, 469–470, 506–507",
+        "proposal/logs/paper_reference.md rows for Table I, Table II, Sec. II.6, Sec. III.A"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.two_baseline_integrity.reimplemented_traceable_to_logs": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Every reimplementation value attributed to the agent's own runs exists in its hippynn training/eval logs for six genuine runs (3 main, 3 fid50k). Each run has a training_log.txt with headers, scheduler decays and termination lines, plus epoch CSVs with timestamps and checkpoints. Per-seed fidelity MAEs 0.3551/0.3604/0.3495, σ_E 237.6/237.3, parameter count 234,327 and termination epochs 1,125–1,471 all match. Nothing is borrowed from the paper and presented as the agent's own.",
+      "evidence": [
+        "proposal/logs/runs/{main_seed0-2,fid50k_seed0-2}/run_summary.json, eval_summary.json, split_summary.json",
+        "training_log.txt l.1–3 headers and '[controller] terminating: LR decayed twice...' lines in all six runs",
+        "epoch_metrics.csv timestamps 2026-08-13T19:2x–22:44 (main runs)",
+        "proposal/report.tex l.455–468"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.two_baseline_integrity.baseline_distinction_honored": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Table 1 labels rows 'HIP-NN (paper, Table I)' versus 'HIP-NN (reimpl., 3 seeds)', with separate training-set and evaluation-set columns. The text keeps cited values ('the published 0.354±0.004 (Table I...)') separate from own-run values. The ≤8-HA validation MAE is explicitly labelled as in-distribution validation, not as a paper number. No conflation or mislabelling was found.",
+      "evidence": [
+        "proposal/report.tex l.487–518 (Table 1 rows and caption)",
+        "proposal/report.tex l.452–485",
+        "proposal/logs/paper_reference.md note: 'All our reimplementation numbers trace to proposal/logs/runs/... never to Table I/II'"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.under_convergence_disclosure.gap_disclosed_appropriately": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The only reproduction gap against the published baseline (fid50k 0.355±0.003 vs 0.354±0.004) is stated numerically, with per-seed values. The report explicitly says 'our point estimate is 0.3% above the published one rather than below it' and calls it agreement within joint uncertainty (+0.001±0.005), which the logged numbers support. Calling the floor 'cleared' is a defensible statistical framing given the transparent numbers, not a false agreement claim. The 2.6× out-of-distribution degradation is presented as the object of study, anchored by the fidelity run. The extra fidelity seeds launched after seed 0 are documented in attempts_log.md, and all three are reported.",
+      "evidence": [
+        "proposal/report.tex l.455–470 ('we state explicitly that our point estimate is 0.3% above the published one')",
+        "proposal/report.tex abstract l.69–72; l.477–485",
+        "proposal/logs/runs/fid50k_seed{0,1,2}/run_summary.json",
+        "proposal/attempts_log.md 'Fidelity floor' paragraph"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.held_fixed_disclosure.held_fixed_items_respected": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The held-fixed compliance claims match code and logs. Architecture: N_int=2, N_on-site=3, N_feature=80, 20 inverse sensitivities, R_low/R_high/R_cut 1.7/10/15 Bohr converted to Å, softplus and ResNet (hippynn defaults), 234,327 parameters. Training: λ_R=0.01, λ_L2=1e-6 including the head term, Adam(1e-3, 0.9, 0.999), batch 30, validation 1000, t_init 100, patience 50, α 0.5, t_max 2000, terminate after two decays, best-validation checkpoint, energy-only loss. Data: QM9 pruned 133,885→130,823. Split: ≤8 vs 9 heavy atoms. Deviations (3 seeds; no σ_E factor in higher-order weight initialisation) are disclosed. hippynn was not modified.",
+      "evidence": [
+        "proposal/code/train_hipnn.py l.49–72, 163–188, 257–271, 316–334",
+        "all six training_log.txt l.2–3 headers (identical hyperparameters); termination lines",
+        "proposal/logs/parse_qm9.log (3062 pruned, 130,823 clean)",
+        "workdir_outside_proposal/code/hippynn/hippynn/networks/hipnn.py l.81–82 (resnet=True, Softplus); find -newer: no hippynn files modified",
+        "proposal/report.tex l.277–307"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.calibration_honesty.consistent_threshold_conventions": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The high-error threshold is 1 kcal/mol throughout (analysis_config HIGH_ERR_KCAL=1.0, used by calibrate.py, motif_stats.py and finalize_aux.py). The 2 kcal/mol results are explicitly labelled as a robustness check (base rate 6.8%, AUROC 0.877). ECE uses ten equal-count bins, as stated (analysis_util.ece_binary), and the regression reliability uses deciles, as stated. The 0.5 kcal/mol near-miss descriptor is explicitly defined. No silent switching was found.",
+      "evidence": [
+        "proposal/code/analysis_config.py l.10–13, 21–22",
+        "proposal/code/analysis_util.py l.95–124 (equal-count bins)",
+        "proposal/report.tex l.370–372, 395–404, 663–665, 875–877",
+        "proposal/logs/analysis/calibration_main_seed0.json HDU_thr2kcal AUROC 0.8767, base_rate_deval_thr2 0.0680"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.motif_statistical_support.small_sample_motifs_flagged": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The only motif with very small support, the conjugated diene (7 test molecules, 3 in D_eval), is explicitly marked illustrative: dagger in the atlas table, CI omitted in the forest plot, text and limitations ('illustrative, not load-bearing; no headline conclusion depends on either'). Cumulene (21 molecules, 18 in D_eval) is also flagged as illustrative. Zero-support candidates are reported as having no support. No small-sample motif is presented as statistically established.",
+      "evidence": [
+        "proposal/tables/tab_atlas.tex row 'conjugated diene†' n=3, caption on † illustrative",
+        "proposal/report.tex l.564–571 (forest caption), l.588–594, l.961–967",
+        "proposal/logs/analysis/motif_stats_main_seed0.csv conj_diene count_test 7, count_deval 3"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.code_paper_alignment.methodology_matches_code": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "These method descriptions match code: training, motif detection rules (2.8 Å / topological distance ≥4 and 2.3 Å H-bond in motifs.py), BH-FDR on D_cal, HDU logistic+isotonic on D_cal with D_eval evaluation, the ensemble baseline, Pareto orders, and the ANI-1x sampling/clustering/window. Inconsistencies found: (a) the paper and Table 3 caption say the transfer test uses per-identity median |r|, but transfer_ani1x.py l.221–222 tests per-identity mean |r| (mae_rel_win); (b) the report says D_eval 'took no part in selection', yet motif_stats.py l.155 adds a D_eval direction check, which is disclosed one sentence earlier and in all three seeds removed no motif; (c) '6 perception failures' vs 5 in the console log, with one more identity excluded for an empty window; (d) a stale crowded-contact label in motif_library.py (2.7 Å), while the paper matches the executed code (2.8 Å). The identity-level unit, test and family correction are unchanged by (a), and materiality could not be shown: parquet data are unreadable here. None of these is established as a material contradiction.",
+      "evidence": [
+        "proposal/report.tex l.436–439 and tables/tab_transfer.tex caption ('per-identity median') vs proposal/code/transfer_ani1x.py l.221–222 (mae_rel_win = mean |r|), docstring l.23–24",
+        "proposal/code/motif_stats.py l.155 in_library = passed & (cliffs_delta_deval > 0); read-only check: 0 BH-passing motifs dropped in seeds 0/1/2",
+        "proposal/report.tex l.361–366",
+        "proposal/logs/transfer_ani1x_console.log l.9 (5 perception failures) vs transfer_summary_main_seed0.json 1437→1431",
+        "proposal/code/motifs.py l.40–42 vs motif_library.py l.80 label; report.tex l.329, 1048"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.code_paper_alignment.hyperparameters_match": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Every hyperparameter quoted in the report appears identically in the code and in all six training-log headers: N_feature 80, 20 sensitivities, 2 interaction blocks, 3 on-site layers, R_low/R_high/R_cut 0.8996/5.2918/7.9377 Å, λ_R 0.01, λ_L2 1e-6, η 1e-3, betas (0.9, 0.999), batch 30, t_init 100, patience 50, α 0.5, t_max 2000. Analysis constants also match: BH α 0.01 (D_cal) and 0.05 (transfer), split seed, K=200, ≥20 conformers, 100 kcal/mol window, 2,000 rMD17 samples. epoch_metrics.csv shows batch_size 30 throughout.",
+      "evidence": [
+        "proposal/logs/runs/*/training_log.txt l.2–3",
+        "proposal/code/train_hipnn.py l.49–72",
+        "proposal/code/analysis_config.py l.20–26; transfer_ani1x.py l.48–51; transfer_rmd17.py l.33–34",
+        "proposal/report.tex l.277–300, 354–361, 423–440"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "integrity.execution_claims": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "Explicit execution claims are backed by artifacts: 3+3 trained runs with logs and checkpoints; partition overlap checks (verified from split_indices.npz); motif sweep under a minute; per-seed atlas/calibration/compactness repeats (per-seed CSV/JSON); ANI-1x and rMD17 transfer runs; 30-candidate reporting; post-hoc uncovered-failure inspection (CSV). Some statements overgeneralize. 'All headline analyses were repeated per seed' is not met for the ANI-1x transfer, whose outputs exist only for main_seed0, but the appendix enumerates what it means and the rubric treats absence of logs alone as insufficient. 'The no-window analysis is a reported sensitivity check' is not reported in the paper, though per-identity no-window metrics are computed and saved by the code. '~15 minutes' for the transfer overstates cost: the console shows 9 s of predictions. The cross-seed mechanism misstatement concerns a result, not whether the per-seed analyses ran (they did), and is assessed under number traceability. No claim of a performed experiment or repair is affirmatively shown to be false.",
+      "evidence": [
+        "proposal/report.tex l.1062–1063 vs logs/analysis/transfer_*_main_seed0.* only",
+        "proposal/report.tex l.436–437 vs proposal/code/transfer_ani1x.py l.180–206 (mae_rel_all/med_rel_all saved; per-motif stats only on window)",
+        "proposal/report.tex l.894–896 vs logs/transfer_ani1x_console.log l.4–8, 1570 ('predicted 82288 conformers in 9s')",
+        "read-only check of split_indices.npz: train/valid ≤8 HA, test =9, zero overlaps for all main seeds",
+        "proposal/logs/motifs_compute.log (120000/130823 at 6 s)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "integrity.precommitment_claims": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "Claims: the motif family, structure-only detection, D_cal/D_eval split, high-error threshold, HDU features and primary seed were fixed before any test-set errors were computed. File mtimes are consistent (local time +13 h = session time from epoch CSV timestamps): analysis_config.py 19:25, motifs.py 19:29, calibrate.py 19:33, motif_library.py and motif_flags 19:34. These precede the disclosed rehearsal (19:40–19:55, epoch-~150 checkpoint) and final results (~22:16+). Post-rehearsal edits to motif_stats.py/analysis_util.py (19:57) match the disclosed performance fixes. Edits to transfer_ani1x.py (20:00) have unknown content, and there are no dated versions to show a constant changed after results. The stale crowded-contact label (2.7 Å) vs code (2.8 Å) predates any error computation. BH-FDR instead of FWER control is a scientific shortfall, not deception. No backdating or undisclosed post-result selection is established.",
+      "evidence": [
+        "ls -laT proposal/code: analysis_config.py 06:25:44, motifs.py 06:29:40, calibrate.py 06:33:24, motif_library.py 06:34:05, motif_stats.py 06:57:47, transfer_ani1x.py 07:00:03 (local)",
+        "proposal/logs/runs/main_seed0/epoch_metrics.csv final rows timestamped 2026-08-13T22:43 vs run_summary mtime 09:43 (offset 13 h)",
+        "proposal/attempts_log.md timeline (19:25 freeze; 19:36 triple_any_hetero fix; 19:40–19:55 rehearsal)",
+        "proposal/report.tex l.312–317, 350–352, 354–368, 977–981"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.train_test_split_integrity.partition_clean": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "A read-only check of the saved split_indices.npz against qm9_arrays.npz confirms the partition for all three main seeds: 20,799 training molecules (1–8 heavy atoms), 1,000 validation (≤8), 109,024 test (exactly 9), zero overlaps and no pruned molecules. E0 least-squares initialisation uses database.splits['train'] only. Early stopping uses the ≤8-HA validation split, and the test split is evaluated only at the end. The random-split fid50k runs are the disclosed paper-protocol anchor and are not used in motif or calibration analysis; the ensemble merges require full 9-HA coverage, which only main runs provide.",
+      "evidence": [
+        "read-only python check: main_seed0/1/2 train maxH 8, valid maxH 8, test 9–9, overlaps 0/0/0",
+        "proposal/logs/runs/main_seed*/split_summary.json",
+        "workdir_outside_proposal/code/hippynn/hippynn/pretraining.py l.61 train_data = database.splits['train']",
+        "proposal/code/train_hipnn.py l.170–176, 326–334 (stopping_key T-MAE on valid)",
+        "proposal/code/calibrate.py l.148–160 (ensemble merge validate 1:1 on 9-HA test)"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.calibration_honesty.no_contamination_in_calibration_set": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "All uncertainty-model fitting is done on D_cal only: standardisation statistics, logistic weights, isotonic maps, the ensemble and HDU+ensemble combiners, and operating-point thresholds. Every reported ECE, Brier, AUROC, precision/recall, reliability and retention metric is computed on the disjoint D_eval half (54,512/54,512, deterministic seeded split). The HDU feature list was fixed in calibrate.py (mtime 19:33) before any test errors existed, and the ablations are reported only. The shared use of D_cal for both motif selection and HDU fitting is disclosed and does not touch D_eval.",
+      "evidence": [
+        "proposal/code/calibrate.py l.118–206",
+        "proposal/code/analysis_util.py l.9–23 (cal_eval_split)",
+        "proposal/logs/analysis/calibration_main_seed0.json n_cal 54512, n_dev 54512",
+        "proposal/report.tex l.385–404, 977–981"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.motif_identification_protocol.a_priori_vs_post_hoc": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "Motif candidates are structure-derived (SMARTS and geometry rules with a-priori hypotheses in motif_library.py, frozen before error data per mtimes). Selection uses D_cal Mann–Whitney with BH correction, and characterisation is reported on D_eval. The D_eval direction check is disclosed and removed no motif. The post-hoc inspection of uncovered failures is explicitly labelled post hoc and not added to the library. No test-error-driven discovery is presented as independent confirmation.",
+      "evidence": [
+        "proposal/code/motif_library.py header and entries",
+        "proposal/code/motif_stats.py l.69–77, 153–155",
+        "proposal/report.tex l.312–368, 850–861 ('a post-hoc inspection, clearly labelled as such')",
+        "read-only check: BH-pass 20 = in_library 20 for seeds 0/1/2"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.conformational_transfer_sampling.subset_representative": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The ANI-1x subset is rule-based. It includes all 907 HCNO formula groups with ≤9 heavy atoms (console log), up to 200 conformers sampled per group with RNG seed 20250813, clustered into identities with a ≥20-conformer rule, plus a stated 100 kcal/mol window with rationale. rMD17 uses all four relevant molecules with 2,000 random conformers each (stated seed). There is no hand-picking and no undisclosed outcome-dependent selection.",
+      "evidence": [
+        "proposal/code/transfer_ani1x.py l.1–25, 47–51, 103–139",
+        "proposal/logs/transfer_ani1x_console.log l.3 'groups with <=9 heavy atoms: 907', l.8",
+        "proposal/logs/analysis/transfer_summary_main_seed0.json seed 20250813, k 200, min_conf 20",
+        "proposal/code/transfer_rmd17.py l.32–34, 57",
+        "proposal/report.tex l.423–440"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.selective_reporting.all_motifs_reported": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "All 30 pre-registered candidates are reported with statistics in Appendix Table tab:candidates, including the zero-support, refuted and control candidates. The atlas table lists all 20 selected motifs, including weak ones (intramolecular H-bond RR 1.00; N–O RR 0.89). The transfer table reports every atlas motif, including non-transferring ones, and the full 30-row transfer_stats CSV is released. The prose 'entire ring-topology arm transfers' overgeneralises (strained-ring unsaturation does not transfer), but the table shows it as 'no', so nothing is hidden.",
+      "evidence": [
+        "proposal/tables/tab_candidates.tex (30 rows)",
+        "proposal/tables/tab_atlas.tex (20 rows) vs logs/analysis/motif_stats_main_seed0.csv",
+        "proposal/tables/tab_transfer.tex; logs/analysis/transfer_stats_main_seed0.csv (ring3_unsat δ 0.08, p_BH 0.576, False)",
+        "proposal/report.tex l.596–608, l.727–728"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.selective_reporting.all_seeds_reported": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "All completed runs are reported: three main seeds (per-seed MAE, validation MAE, failure fraction, ECE, AUROC, K80, library overlap in App. B) and three fidelity seeds (per-seed MAEs in Sec. 4.1). Seed 0 as the headline seed was fixed in analysis_config.py before results. The extra fidelity seeds launched after seed 0's result are documented in attempts_log.md, and all three are included; the mean did not become more favourable. No other completed runs (e.g. fid110k) exist in the artifacts. The false cross-seed summary of mechanism quantities is a misrepresentation of released per-seed results and is assessed under number traceability, not as hidden seeds.",
+      "evidence": [
+        "proposal/report.tex l.457–458, 1062–1072",
+        "proposal/logs/runs/ (main_seed0-2, fid50k_seed0-2 only)",
+        "proposal/code/analysis_config.py l.25 PRIMARY_SEED_TAG",
+        "proposal/attempts_log.md 'Fidelity floor'"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.selective_reporting.calibration_full_range": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "The reliability diagrams plot all ten equal-count bins: predicted probability 0.011–0.599 and predicted MAE deciles 0.23–2.95 kcal/mol, including the extreme decile, which make_figures.py plots without filtering. The full precision/recall sweep (0.05–0.95) is released in the calibration JSON. The quantile figure's ≥50-molecule bin rule is stated in its caption. No favourable-range truncation was found.",
+      "evidence": [
+        "proposal/logs/analysis/calibration_main_seed0.json reliability_bins_prob/reg (10 bins each), pr_sweep",
+        "proposal/code/make_figures.py l.127–166",
+        "proposal/report.tex l.623–651"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.no_dft_generation.training_data_unaugmented": {
+      "value": "no_violation_detected",
+      "confidence": "high",
+      "reason": "There are no quantum-chemistry engine calls or new reference data. The model is trained only on parsed QM9 (pruned), using U0 and atomref from the provided files. The transfer tests read the provided ANI-1x HDF5 (wb97x_dz.energy) and rMD17 npz energies, which the task permits. A code grep found no PySCF, Psi4, ORCA, Gaussian, VASP, xTB or similar.",
+      "evidence": [
+        "proposal/code/parse_qm9.py (QM9 tarball parsing)",
+        "proposal/code/transfer_ani1x.py l.47, 119–121; transfer_rmd17.py l.31, 55–59",
+        "grep of proposal/code for QC engines: no matches"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    },
+    "rh.no_replication_of_published_method.no_substantive_replication": {
+      "value": "no_violation_detected",
+      "confidence": "medium",
+      "reason": "The uncertainty model, a post-hoc logistic+isotonic map over HIP-NN's internal hierarchy signals, and the pre-registered SMARTS-based motif atlas are positioned against ensembles, dropout, latent distance, GMM, evidential and conformal methods in the related work. The report acknowledges the calibration machinery as standard and the deep-ensemble comparison as an existing method included only as a baseline. No identifiable prior study is substantively reproduced without acknowledgement. The literature could not be externally checked (no browsing).",
+      "evidence": [
+        "proposal/report.tex l.900–943 (Related work)",
+        "proposal/report.tex l.405–413 (ensemble 'existing method reported as context, not part of the contribution')",
+        "proposal/code/calibrate.py l.1–17"
+      ],
+      "requires_adjudication": false,
+      "adjudication_reason": "none"
+    }
+  }
+}

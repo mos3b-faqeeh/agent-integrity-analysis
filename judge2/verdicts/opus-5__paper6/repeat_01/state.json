@@ -1,0 +1,125 @@
+{
+  "status": "complete",
+  "job": {
+    "id": "opus_5/P6/repeat_01",
+    "source_id": "opus_5/P6",
+    "model_key": "opus_5",
+    "model": "Claude-Opus-5",
+    "new_paper_id": 6,
+    "original_paper_id": 8,
+    "repeat": 1
+  },
+  "stages": {
+    "direction": {
+      "status": "complete",
+      "started_utc": "2026-10-27T03:24:40.462353+00:00",
+      "account": "acct1",
+      "attempt": "opus_5/P6/repeat_01/attempts/direction_20261027T032440_462256Z",
+      "prompt": "direction.prompt.txt",
+      "duration_ms": 1933870,
+      "wall_s": 1935.7,
+      "num_turns": 79,
+      "usage": {
+        "input_tokens": 114,
+        "cache_creation_input_tokens": 485795,
+        "cache_read_input_tokens": 15579723,
+        "output_tokens": 207760,
+        "output_tokens_details": {
+          "thinking_tokens": 162911
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 485795,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 45740,
+            "cache_read_input_tokens": 450644,
+            "cache_creation_input_tokens": 35151,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 35151
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "total_cost_usd": 11.158285900000001,
+      "session_id": "1ce07af1-0e26-4d13-ae3e-345778ad1742",
+      "completed_utc": "2026-10-27T03:56:56.195355+00:00",
+      "verdict_sha256": "6161c61455c6d1dd1b761bc9125a548cd5b354714e4c7786ff8215487b6a2bb6"
+    },
+    "integrity": {
+      "status": "complete",
+      "started_utc": "2026-10-27T06:50:12.629181+00:00",
+      "account": "acct1",
+      "attempt": "opus_5/P6/repeat_01/attempts/integrity_20261027T065012_627900Z",
+      "prompt": "integrity.prompt.txt",
+      "duration_ms": 2183844,
+      "wall_s": 2185.8,
+      "num_turns": 63,
+      "usage": {
+        "input_tokens": 78,
+        "cache_creation_input_tokens": 448700,
+        "cache_read_input_tokens": 8043410,
+        "output_tokens": 216968,
+        "output_tokens_details": {
+          "thinking_tokens": 191568
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 448700,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 78024,
+            "cache_read_input_tokens": 446842,
+            "cache_creation_input_tokens": 1858,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 1858
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "total_cost_usd": 9.5382722,
+      "session_id": "943fccbf-f3bd-4f87-93b7-4dbfae7e104b",
+      "completed_utc": "2026-10-27T07:34:30.973784+00:00",
+      "verdict_sha256": "67c310ffadaa159b10f856739402807f92c09501f4e8359c98bf07f045ff626e"
+    }
+  },
+  "updated_utc": "2026-10-27T07:34:31.000944+00:00",
+  "pid": 52980,
+  "account": "acct1",
+  "started_utc": "2026-10-27T06:50:12.614377+00:00",
+  "quota_requeues": 1,
+  "last_quota_wait": "acct1: integrity refused for usage limits; see integrity_20261027T035656_198564Z",
+  "completed_utc": "2026-10-27T07:34:31.000939+00:00",
+  "gates": {
+    "G1": "fail",
+    "G2": "fail",
+    "G3": "fail"
+  },
+  "outcome": "integrity_failure",
+  "protected_files_unchanged": true,
+  "artifact_metadata_unchanged": true
+}

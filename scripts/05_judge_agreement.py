@@ -1,0 +1,119 @@
+"""Agreement between the official GPT-6-Astra judge and a second judge (e.g. Claude-Opus-5.5) on the
+stratified sample. Both judge trees must have the layout artifacts/judge_results/<judge>/<agent>/paper<i>/
+(consensus.json or repeat_XX/grade.json) as produced by the benchmark's graders.
+
+usage: python scripts/05_judge_agreement.py <astra_root> <second_root> judge2/stratified_sample.csv
+"""
+import json, os, sys, collections, itertools
+import pandas as pd, numpy as np
+
+A, B, SAMPLE = sys.argv[1], sys.argv[2], sys.argv[3]
+VENDOR = {'astra-6': 'openai', 'sol-5.6': 'openai', 'opus-4.8': 'anthropic', 'opus-5': 'anthropic',
+          'opus-5.5': 'anthropic', 'fable-5': 'anthropic', 'kimi-k3': 'open', 'deepseek-v4-pro': 'open', 'glm-5.3': 'open'}
+COUNTED = ('required', 'conditional', 'composite_member')
+
+
+def load(root, model, paper):
+    """Return {node: status} and gates for a submission; prefer consensus.json, else majority over repeats."""
+    d = os.path.join(root, model, f'paper{paper}')
+    if not os.path.isdir(d): d = os.path.join(root, f'{model}__paper{paper}')
+    cp = os.path.join(d, 'consensus.json')
+    if os.path.exists(cp):
+        c = json.load(open(cp))
+        nodes = {k: v['status'] for k, v in c['nodes'].items() if v.get('role') in COUNTED}
+        gates = {g: c['gates'][g]['status'] for g in ('G1', 'G2', 'G3')}
+        return nodes, gates
+    reps = sorted(p for p in os.listdir(d) if p.startswith('repeat_'))
+    votes = collections.defaultdict(collections.Counter); gvotes = collections.defaultdict(collections.Counter)
+    for r in reps:
+        gp = os.path.join(d, r, 'grade.json')
+        if not os.path.exists(gp): continue
+        g = json.load(open(gp))
+        # released GPT tree: g['nodes'] = {"<rubric>:<id>": {...}}; raw grader output (our run): g['node_audit'] = [...]
+        if 'nodes' in g:
+            items = g['nodes'].items()
+        else:
+            items = ((f"{n['rubric']}:{n['node_id']}", n) for n in g.get('node_audit', []))
+        for k, v in items:
+            if v.get('role') in COUNTED: votes[k][v['status']] += 1
+        for gg in ('G1', 'G2', 'G3'):
+            x = g['gates'][gg]; gvotes[gg][x['status'] if isinstance(x, dict) else x] += 1
+    maj = lambda c: c.most_common(1)[0][0] if c and c.most_common(1)[0][1] > sum(c.values()) / 2 else 'fail'
+    return {k: maj(c) for k, c in votes.items()}, {g: maj(c) for g, c in gvotes.items()}
+
+
+
+def load_repeats(root, model, paper):
+    """List of {node: status}, one per repeat (raw grader output or released tree)."""
+    d = os.path.join(root, model, f'paper{paper}')
+    if not os.path.isdir(d): d = os.path.join(root, f'{model}__paper{paper}')
+    out = []
+    for r in sorted(p for p in os.listdir(d) if p.startswith('repeat_')):
+        gp = os.path.join(d, r, 'grade.json')
+        if not os.path.exists(gp): continue
+        g = json.load(open(gp))
+        items = g['nodes'].items() if 'nodes' in g else ((f"{n['rubric']}:{n['node_id']}", n) for n in g.get('node_audit', []))
+        out.append({k: v['status'] for k, v in items if v.get('role') in COUNTED})
+    return out
+
+def kappa(a, b):
+    a, b = np.array(a), np.array(b); po = (a == b).mean()
+    cats = set(a) | set(b); pe = sum((a == c).mean() * (b == c).mean() for c in cats)
+    return (po - pe) / (1 - pe) if pe < 1 else float('nan')
+
+
+sample = pd.read_csv(SAMPLE)
+rows, node_rows = [], []
+for m, p in sample[['model', 'paper']].values:
+    try:
+        na, ga = load(A, m, int(p)); nb, gb = load(B, m, int(p))
+    except FileNotFoundError:
+        print(f'skip {m}/paper{p}: missing in one judge tree'); continue
+    common = sorted(set(na) & set(nb))
+    for k in common:
+        node_rows.append(dict(model=m, paper=p, vendor=VENDOR[m], node=k, gate=k.split(':')[0], a=na[k], b=nb[k]))
+    rows.append(dict(model=m, paper=p, vendor=VENDOR[m], n_nodes=len(common),
+                     agree=np.mean([na[k] == nb[k] for k in common]) if common else np.nan,
+                     G1_a=ga['G1'], G1_b=gb['G1'], G2_a=ga['G2'], G2_b=gb['G2'], G3_a=ga['G3'], G3_b=gb['G3']))
+sub = pd.DataFrame(rows); nd = pd.DataFrame(node_rows)
+if nd.empty: sys.exit('no overlapping judgments found')
+
+print(f'=== {len(sub)} submissions, {len(nd)} shared counted nodes ===')
+# PRIMARY: each second-judge repeat vs the official consensus (fair for any number of repeats)
+pr = []
+for m, p in sub[['model', 'paper']].values:
+    na, _ = load(A, m, int(p))
+    for rep in load_repeats(B, m, int(p)):
+        for k in set(na) & set(rep):
+            pr.append(dict(model=m, vendor=VENDOR[m], g1=k.startswith('integrity'), a=na[k], b=rep[k]))
+pr = pd.DataFrame(pr)
+if not pr.empty:
+    g1r = pr[pr.g1]
+    print(f'PER-REPEAT agreement, all nodes: {(pr.a == pr.b).mean():.1%}  kappa={kappa(pr.a, pr.b):.3f}')
+    print(f'PER-REPEAT agreement, G1 nodes:  {(g1r.a == g1r.b).mean():.1%}  kappa={kappa(g1r.a, g1r.b):.3f}')
+    t = g1r.assign(af=g1r.a == 'fail', bf=g1r.b == 'fail', ag=g1r.a == g1r.b).groupby('vendor').agg(
+        n=('ag', 'size'), agree=('ag', 'mean'), astra_fail=('af', 'mean'), second_fail=('bf', 'mean'))
+    t['second_minus_astra'] = t.second_fail - t.astra_fail
+    print('PER-REPEAT G1 by vendor:'); print(t.round(3).to_string()); print()
+print('Majority-vote comparison (strict >half; with 2 repeats a split counts as fail -- secondary):')
+print(f'node-level agreement: {(nd.a == nd.b).mean():.1%}   kappa={kappa(nd.a, nd.b):.3f}')
+g1 = nd[nd.node.str.startswith('integrity')]
+print(f'G1 nodes only:        {(g1.a == g1.b).mean():.1%}   kappa={kappa(g1.a, g1.b):.3f}')
+for gate in ('G1', 'G2', 'G3'):
+    print(f'{gate} gate agreement: {(sub[gate + "_a"] == sub[gate + "_b"]).mean():.1%}')
+
+print('\n=== G1-node agreement and second-judge leniency by agent vendor ===')
+g1 = g1.assign(agree=(g1.a == g1.b), b_fail=(g1.b == 'fail'), a_fail=(g1.a == 'fail'))
+t = g1.groupby('vendor').agg(n=('agree', 'size'), agree=('agree', 'mean'), astra_fail=('a_fail', 'mean'), second_fail=('b_fail', 'mean'))
+t['second_minus_astra'] = t.second_fail - t.astra_fail
+print(t.round(3).to_string())
+print('\nInterpretation: a vendor interaction shows as second_minus_astra differing in sign/size across vendors '
+      '(e.g. negative for openai, positive elsewhere => Astra was lenient to OpenAI agents).')
+
+print('\n=== per-agent ===')
+print(g1.groupby('model').agg(n=('agree', 'size'), agree=('agree', 'mean'), astra_fail=('a_fail', 'mean'), second_fail=('b_fail', 'mean')).round(3).to_string())
+
+dis = nd[nd.a != nd.b]
+dis.to_csv('judge2/disagreements.csv', index=False)
+sub.to_csv('judge2/agreement_by_submission.csv', index=False)
+print(f'\n{len(dis)} disagreeing nodes written to judge2/disagreements.csv for human adjudication')
