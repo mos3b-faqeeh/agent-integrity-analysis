@@ -10,7 +10,7 @@ Code, data and paper source for the study *Beyond fabrication: Misattributed num
 
 ## Overview
 
-AI research agents can now run experiments and write complete papers. On the *Into the Unknown* benchmark (Kim et al., 2026), 114 of 135 agent-written papers fail the integrity check. However, the verdicts come from a single LLM judge, and they record *that* a paper failed, not *how*.
+AI research agents can now run experiments and write complete papers. Recent benchmarks show that many agent-written papers fail integrity checks. However, such verdicts usually come from a single LLM judge, and they record *that* a paper failed, not *how*.
 
 This repository provides four things:
 
@@ -103,9 +103,9 @@ Then run the steps below. Every script takes local paths as arguments; see each 
 
 GitHub's **"Cite this repository"** button gives the same reference.
 
-This work builds on the *Into the Unknown* benchmark:
+The benchmark data used in this study are from:
 
-> Kim, S., et al. (2026). Into the Unknown: Benchmarking AI agents on open scientific research problems. arXiv:2610.19159.
+> Kim, S., et al. (2026). arXiv:2610.19159.
 
 ## Contact
 
