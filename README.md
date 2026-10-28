@@ -15,7 +15,7 @@ AI research agents can now run experiments and write complete papers. Recent ben
 This repository provides four things:
 
 1. **A re-analysis of all 540 released judgments** (9 agents × 15 tasks × 4 repeats), at the level of individual rubric criteria.
-2. **256 human-labelled numerical claims** from 18 submissions. Each label distinguishes numbers with no source in the agent's files from numbers drawn from the wrong experiment, metric or run.
+2. **256 human-labelled numerical claims** from 17 submissions. Each label distinguishes numbers with no source in the agent's files from numbers drawn from the wrong experiment, metric or run.
 3. **A deterministic claim-to-evidence checker.** It traces each number in a paper back to the agent's own result files and certifies the claim only when the number *belongs to the result it claims to describe*.
 4. **A cross-vendor second-judge study** that re-grades 30 submissions with the benchmark's own grading pipeline.
 
