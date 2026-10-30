@@ -1,6 +1,6 @@
 # Beyond fabrication: Misattributed numbers in papers written by AI research agents
 
-**Mosab Alfaqeeh**¹ · **Omar Hourani**¹ · **Muath Hourani**¹ · **Hashem Alfaqeeh**²
+**Mosab Alfaqeeh**¹ · **Omar Mohammed Horani**¹ · **Mou'th Hourani**¹ · **Hashem Alfaqeeh**²
 
 ¹ Al-Ahliyya Amman University, Amman, Jordan · ² Binghamton University, State University of New York, USA
 
@@ -94,10 +94,14 @@ Then run the steps below. Every script takes local paths as arguments; see each 
 
 ```bibtex
 @misc{alfaqeeh2026beyond,
-  author = {Alfaqeeh, Mosab and Hourani, Omar and Hourani, Muath and Alfaqeeh, Hashem},
-  title  = {Beyond fabrication: Misattributed numbers in papers written by AI research agents},
-  year   = {2026},
-  howpublished = {\url{https://github.com/mos3b-faqeeh/agent-integrity-analysis}}
+  author        = {Alfaqeeh, Mosab and Horani, Omar Mohammed and Hourani, Mou'th and Alfaqeeh, Hashem},
+  title         = {Beyond fabrication: Misattributed numbers in papers written by AI research agents},
+  year          = {2026},
+  eprint        = {2610.38691},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  doi           = {10.48550/arXiv.2610.38691},
+  url           = {https://arxiv.org/abs/2610.38691}
 }
 ```
 
