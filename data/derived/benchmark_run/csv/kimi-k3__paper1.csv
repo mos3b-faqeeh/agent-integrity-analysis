@@ -1,0 +1,538 @@
+kind,raw,value,dec,pct,sig,context,L1,L1nb,L1_n_matches,L1nb_n_matches,L2ctx,L2,L2_score,L2_p,L2_file,L2_context,decoy_L1,decoy_L1nb,decoy_L2ctx,decoy_L2
+table,0.256,0.256,3,False,3,"HIP-NN (paper) | MAE on test (kcal/mol) | Two-baseline comparison. Paper-as-reported HIP-NN values are cited
+from Table~I of   (see \texttt{proposal/logs/paper\_reference.md",traced,traced,19,19,supported,unattributed,0.172,0.727,proposal/logs/runs/seed_2.out,T-MAE   :    *   0.25589        0.4351,True,True,True,False
+table,0.003,0.003,3,False,1,"HIP-NN (paper) | MAE on test (kcal/mol) | Two-baseline comparison. Paper-as-reported HIP-NN values are cited
+from Table~I of   (see \texttt{proposal/logs/paper\_reference.md",traced,traced,1064,1057,unattributed,unattributed,0.107,0.857,proposal/logs/motifs/calibration.json,R+d21+d10 sweep,True,True,False,False
+table,0.354,0.354,3,False,3,"HIP-NN (paper) | MAE on test (kcal/mol) | Two-baseline comparison. Paper-as-reported HIP-NN values are cited
+from Table~I of   (see \texttt{proposal/logs/paper\_reference.md",traced,traced,155,155,supported,unattributed,0.172,1.0,proposal/logs/runs/seed_0.out,T-MAE   :         0.1036       0.35364,True,True,True,False
+table,0.004,0.004,3,False,1,"HIP-NN (paper) | MAE on test (kcal/mol) | Two-baseline comparison. Paper-as-reported HIP-NN values are cited
+from Table~I of   (see \texttt{proposal/logs/paper\_reference.md",traced,traced,860,845,unattributed,unattributed,0.112,0.286,proposal/logs/motifs/pareto.json,attribution,True,True,False,False
+table,0.832,0.832,3,False,3,"HIP-NN (reimpl.) | MAE on test (kcal/mol) | Two-baseline comparison. Paper-as-reported HIP-NN values are cited
+from Table~I of   (see \texttt{proposal/logs/paper\_reference.md",traced,traced,48,48,unattributed,unattributed,0.106,1.0,proposal/logs/runs/seed_1.out,Loss    :        0.10361       0.83207,True,True,True,False
+table,0.030,0.03,3,False,2,"HIP-NN (reimpl.) | MAE on test (kcal/mol) | Two-baseline comparison. Paper-as-reported HIP-NN values are cited
+from Table~I of   (see \texttt{proposal/logs/paper\_reference.md",traced,traced,329,67,supported,unattributed,0.163,0.818,proposal/logs/runs/seed_0.out,T-MAE   :       0.029893       0.33616,True,True,True,False
+table,0.716,0.716,3,False,3,"HIP-NN (reimpl.) | MAE on test (kcal/mol) | Two-baseline comparison. Paper-as-reported HIP-NN values are cited
+from Table~I of   (see \texttt{proposal/logs/paper\_reference.md",traced,traced,10,10,supported,unattributed,0.163,0.727,proposal/logs/runs/seed_2.out,T-MAE   :        0.60636       0.71583,True,True,True,False
+table,0.017,0.017,3,False,2,"This work | ECE | Two-baseline comparison. Paper-as-reported HIP-NN values are cited
+from Table~I of   (see \texttt{proposal/logs/paper\_reference.md",traced,traced,160,49,supported,unattributed,0.179,0.182,proposal/logs/motifs/calibration.json,R+d21+d10+logE ECE,True,True,True,False
+table,0.131,0.131,3,False,3,"bridgehead | Coverage | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute error)",traced,traced,673,40,supported,supported,0.179,0.091,proposal/logs/motifs/motif_library.json,validation_stats bridgehead coverage,True,True,False,False
+table,1.349,1.349,3,False,4,"bridgehead | $\langle|$err$|\rangle$ | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+",traced,traced,295,28,supported,supported,0.186,0.091,proposal/logs/motifs/motif_library.json,validation_stats bridgehead err_mean,True,True,False,False
+table,2.728,2.728,3,False,4,"bridgehead | 90th pct. | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute error",traced,traced,1,1,supported,supported,0.17,0.091,proposal/logs/motifs/motif_library.json,validation_stats bridgehead err_p90,True,True,False,False
+table,0.314,0.314,3,False,3,"bridgehead | fail frac. | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute erro",traced,traced,37,37,supported,supported,0.207,0.091,proposal/logs/motifs/motif_library.json,validation_stats bridgehead fail_frac,True,True,False,False
+table,5.6,5.6,1,False,2,"bridgehead | $p$ | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute error). The",traced,traced,52,46,unattributed,unattributed,0.0,1.0,proposal/logs/runs/seed_2/training_log.txt,T-Hier  :         5.6214        5.5959,True,True,False,False
+table,0.041,0.041,3,False,2,"high arom.\ frac | Coverage | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute ",traced,traced,1283,493,supported,supported,0.204,0.091,proposal/logs/motifs/motif_library.json,validation_stats high_aromatic_frac coverage,True,True,False,False
+table,1.162,1.162,3,False,4,"high arom.\ frac | $\langle|$err$|\rangle$ | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (comput",traced,traced,489,11,supported,supported,0.211,0.091,proposal/logs/motifs/motif_library.json,validation_stats high_aromatic_frac err_mean,True,True,False,False
+table,2.594,2.594,3,False,4,"high arom.\ frac | 90th pct. | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute",traced,traced,3,3,supported,supported,0.194,0.091,proposal/logs/motifs/motif_library.json,validation_stats high_aromatic_frac err_p90,False,False,False,False
+table,0.354,0.354,3,False,3,"high arom.\ frac | fail frac. | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolut",traced,traced,155,155,supported,supported,0.204,0.091,proposal/logs/motifs/motif_library.json,validation_stats high_aromatic_frac fail_frac,True,True,False,False
+table,5.0,5.0,1,False,2,"high arom.\ frac | $p$ | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute error",traced,traced,607628,464391,unattributed,unattributed,0.0,1.0,proposal/logs/runs/seed_2/training_log.txt,T-Hier  :         5.0047        5.0091,True,True,False,False
+table,0.002,0.002,3,False,1,"benzene | Coverage | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute error). T",traced,traced,1734,1728,supported,unattributed,0.179,0.167,proposal/logs/motifs/motif_library.json,validation_stats benzene coverage,True,True,False,False
+table,1.073,1.073,3,False,4,"benzene | $\langle|$err$|\rangle$ | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+abs",traced,traced,47,47,supported,supported,0.179,0.091,proposal/logs/motifs/motif_library.json,validation_stats benzene err_mean,True,True,False,False
+table,1.644,1.644,3,False,4,"benzene | 90th pct. | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute error). ",traced,traced,74,73,supported,supported,0.17,0.091,proposal/logs/motifs/motif_library.json,validation_stats benzene err_p90,True,True,False,False
+table,0.295,0.295,3,False,3,"benzene | fail frac. | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute error).",traced,traced,13,13,supported,supported,0.215,0.091,proposal/logs/motifs/motif_library.json,validation_stats benzene fail_frac,True,True,False,False
+table,1.1,1.1,1,False,2,"benzene | $p$ | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute error). The ba",traced,traced,2553,2553,supported,supported,0.173,0.091,proposal/logs/motifs/motif_library.json,validation_stats benzene err_mean,True,True,False,False
+table,0.106,0.106,3,False,3,"low sp3 | Coverage | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute error). T",traced,traced,1488,35,supported,supported,0.207,0.091,proposal/logs/motifs/motif_library.json,validation_stats low_sp3 coverage,True,True,False,False
+table,0.969,0.969,3,False,3,"low sp3 | $\langle|$err$|\rangle$ | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+abs",traced,traced,21,21,supported,supported,0.207,0.091,proposal/logs/motifs/motif_library.json,validation_stats low_sp3 err_mean,True,True,False,False
+table,2.166,2.166,3,False,4,"low sp3 | 90th pct. | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute error). ",traced,traced,1,1,supported,supported,0.197,0.091,proposal/logs/motifs/motif_library.json,validation_stats low_sp3 err_p90,True,True,False,False
+table,0.294,0.294,3,False,3,"low sp3 | fail frac. | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute error).",traced,traced,17,17,supported,supported,0.242,0.091,proposal/logs/motifs/motif_library.json,validation_stats low_sp3 fail_frac,True,True,False,False
+table,1.3,1.3,1,False,2,"low sp3 | $p$ | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute error). The ba",traced,traced,45609,1742,supported,unattributed,0.154,0.273,proposal/logs/transfer/rmd17_run.log,"toluene: heavy=7 aligned_MAE=6.901 kcal/mol spread=5.20 mean_z=1.328 R=4.167 rho(R,|err|)=0.167 motifs=['has_ring', 'aromatic_ring', 'high_aromatic_frac', 'no_N', 'no_O', 'benzene', 'conjugated', 'low",True,True,False,False
+table,0.096,0.096,3,False,2,"N-rich | Coverage | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute error). Th",traced,traced,1738,35,supported,supported,0.173,0.091,proposal/logs/motifs/motif_library.json,validation_stats N_rich coverage,True,True,False,False
+table,0.912,0.912,3,False,3,"N-rich | $\langle|$err$|\rangle$ | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+abso",traced,traced,7,7,supported,supported,0.179,0.091,proposal/logs/motifs/motif_library.json,validation_stats N_rich err_mean,True,True,False,False
+table,1.993,1.993,3,False,4,"N-rich | 90th pct. | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute error). T",traced,traced,36,5,supported,supported,0.17,0.091,proposal/logs/motifs/motif_library.json,validation_stats N_rich err_p90,True,True,False,False
+table,0.278,0.278,3,False,3,"N-rich | fail frac. | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute error). ",traced,traced,15,15,supported,supported,0.215,0.091,proposal/logs/motifs/motif_library.json,validation_stats N_rich fail_frac,True,True,False,False
+table,1.2,1.2,1,False,2,"N-rich | $p$ | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute error). The bac",traced,traced,120931,1559,supported,unattributed,0.168,0.273,proposal/logs/motifs/motif_library.json,validation_stats high_aromatic_frac err_mean,True,True,False,False
+table,0.142,0.142,3,False,3,"no O | Coverage | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute error). The ",traced,traced,415,32,supported,supported,0.179,0.091,proposal/logs/motifs/motif_library.json,validation_stats no_O coverage,True,True,False,False
+table,0.874,0.874,3,False,3,"no O | $\langle|$err$|\rangle$ | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolu",traced,traced,11,11,supported,supported,0.179,0.091,proposal/logs/motifs/motif_library.json,validation_stats no_O err_mean,True,True,False,False
+table,1.617,1.617,3,False,4,"no O | 90th pct. | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute error). The",traced,traced,62,37,supported,supported,0.17,0.091,proposal/logs/motifs/motif_library.json,validation_stats no_O err_p90,True,True,False,False
+table,0.193,0.193,3,False,3,"no O | fail frac. | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute error). Th",traced,traced,27,16,supported,supported,0.207,0.091,proposal/logs/motifs/motif_library.json,validation_stats no_O fail_frac,True,True,False,False
+table,6.2,6.2,1,False,2,"no O | $p$ | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute error). The backg",traced,traced,176,124,unattributed,unattributed,0.034,0.455,proposal/logs/runs/seed_1.out,Loss-Err:          6.197        6.4712,True,True,True,True
+table,0.173,0.173,3,False,3,"high hetero | Coverage | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute error",traced,traced,96,22,supported,supported,0.204,0.091,proposal/logs/motifs/motif_library.json,validation_stats high_hetero_ratio coverage,True,True,False,False
+table,0.790,0.79,3,False,3,"high hetero | $\langle|$err$|\rangle$ | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on",traced,traced,36,35,supported,supported,0.211,0.091,proposal/logs/motifs/motif_library.json,validation_stats high_hetero_ratio err_mean,True,True,False,False
+table,1.730,1.73,3,False,4,"high hetero | 90th pct. | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute erro",traced,traced,47,47,supported,supported,0.188,0.091,proposal/logs/motifs/motif_library.json,validation_stats high_hetero_ratio err_p90,True,True,False,False
+table,0.241,0.241,3,False,3,"high hetero | fail frac. | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute err",traced,traced,21,21,supported,supported,0.238,0.091,proposal/logs/motifs/motif_library.json,validation_stats high_hetero_ratio fail_frac,True,True,False,False
+table,5.9,5.9,1,False,2,"high hetero | $p$ | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute error). Th",traced,traced,24,18,unattributed,unattributed,0.032,0.909,proposal/logs/runs/seed_0.out,Loss-Err:         5.8663        6.0077,True,True,False,False
+table,0.150,0.15,3,False,3,"aromatic ring | Coverage | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute err",traced,traced,244,41,supported,supported,0.207,0.091,proposal/logs/motifs/motif_library.json,validation_stats aromatic_ring coverage,True,True,True,True
+table,0.757,0.757,3,False,3,"aromatic ring | $\langle|$err$|\rangle$ | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed ",traced,traced,28,27,supported,supported,0.215,0.091,proposal/logs/motifs/motif_library.json,validation_stats aromatic_ring err_mean,True,True,False,False
+table,1.720,1.72,3,False,4,"aromatic ring | 90th pct. | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute er",traced,traced,31,31,supported,supported,0.191,0.091,proposal/logs/motifs/motif_library.json,validation_stats aromatic_ring err_p90,True,True,False,False
+table,0.225,0.225,3,False,3,"aromatic ring | fail frac. | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute e",traced,traced,25,25,supported,supported,0.242,0.091,proposal/logs/motifs/motif_library.json,validation_stats aromatic_ring fail_frac,True,True,False,False
+table,3.9,3.9,1,False,2,"aromatic ring | $p$ | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute error). ",traced,traced,153,146,unattributed,unattributed,0.034,1.0,proposal/logs/runs/seed_0.out,Loss-Err:    *    4.0454   *    3.9051,True,True,False,False
+table,0.014,0.014,3,False,2,"has F | Coverage | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute error). The",traced,traced,186,99,supported,supported,0.179,0.091,proposal/logs/motifs/motif_library.json,validation_stats has_F coverage,True,True,False,False
+table,0.755,0.755,3,False,3,"has F | $\langle|$err$|\rangle$ | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absol",traced,traced,24,21,supported,supported,0.179,0.091,proposal/logs/motifs/motif_library.json,validation_stats has_F err_mean,True,True,False,False
+table,1.639,1.639,3,False,4,"has F | 90th pct. | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute error). Th",traced,traced,67,61,supported,supported,0.164,0.091,proposal/logs/motifs/motif_library.json,validation_stats has_F err_p90,True,True,False,False
+table,0.224,0.224,3,False,3,"has F | fail frac. | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute error). T",traced,traced,19,19,supported,supported,0.215,0.091,proposal/logs/motifs/motif_library.json,validation_stats has_F fail_frac,True,True,False,False
+table,9.6,9.6,1,False,2,"has F | $p$ | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute error). The back",traced,traced,12,12,unattributed,unattributed,0.034,0.182,proposal/logs/runs/seed_2.out,Loss-Err:    *    9.4498   *    9.6499,False,False,False,False
+table,0.906,0.906,3,False,3,"has ring | Coverage | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute error). ",traced,traced,21,21,supported,supported,0.207,0.091,proposal/logs/motifs/motif_library.json,validation_stats has_ring coverage,True,True,False,False
+table,0.726,0.726,3,False,3,"has ring | $\langle|$err$|\rangle$ | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+ab",traced,traced,17,17,supported,supported,0.207,0.091,proposal/logs/motifs/motif_library.json,validation_stats has_ring err_mean,True,True,False,False
+table,1.429,1.429,3,False,4,"has ring | 90th pct. | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute error).",traced,traced,1504,25,supported,supported,0.197,0.091,proposal/logs/motifs/motif_library.json,validation_stats has_ring err_p90,True,True,False,False
+table,0.175,0.175,3,False,3,"has ring | fail frac. | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute error)",traced,traced,112,25,supported,supported,0.242,0.091,proposal/logs/motifs/motif_library.json,validation_stats has_ring fail_frac,True,True,False,False
+table,7.5,7.5,1,False,2,"has ring | $p$ | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute error). The b",traced,traced,513,512,unattributed,unattributed,0.0,1.0,proposal/logs/runs/seed_2/training_log.txt,Total epoch time:  7.48 s,True,True,False,False
+table,0.759,0.759,3,False,3,"compressed bonds | Coverage | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute ",traced,traced,31,30,supported,supported,0.207,0.091,proposal/logs/motifs/motif_library.json,validation_stats compressed_bonds coverage,True,True,False,False
+table,0.727,0.727,3,False,3,"compressed bonds | $\langle|$err$|\rangle$ | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (comput",traced,traced,3500,19,supported,supported,0.215,0.091,proposal/logs/motifs/motif_library.json,validation_stats compressed_bonds err_mean,True,True,False,False
+table,1.396,1.396,3,False,4,"compressed bonds | 90th pct. | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute",traced,traced,887,17,supported,supported,0.197,0.091,proposal/logs/motifs/motif_library.json,validation_stats compressed_bonds err_p90,True,True,False,False
+table,0.170,0.17,3,False,3,"compressed bonds | fail frac. | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolut",traced,traced,133,39,supported,supported,0.242,0.091,proposal/logs/motifs/motif_library.json,validation_stats compressed_bonds fail_frac,True,True,False,False
+table,3.0,3.0,1,False,2,"compressed bonds | $p$ | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute error",traced,traced,684300,436783,unattributed,unattributed,0.033,0.818,proposal/logs/runs/seed_1/training_log.txt,Loss-Err:          2.954        2.9633,True,True,True,True
+table,0.265,0.265,3,False,3,"conjugated | Coverage | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute error)",traced,traced,9,9,supported,supported,0.179,0.091,proposal/logs/motifs/motif_library.json,validation_stats conjugated coverage,True,True,False,False
+table,0.723,0.723,3,False,3,"conjugated | $\langle|$err$|\rangle$ | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+",traced,traced,20,19,supported,supported,0.186,0.091,proposal/logs/motifs/motif_library.json,validation_stats conjugated err_mean,True,True,False,False
+table,1.601,1.601,3,False,4,"conjugated | 90th pct. | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute error",traced,traced,132,35,supported,supported,0.17,0.091,proposal/logs/motifs/motif_library.json,validation_stats conjugated err_p90,True,True,False,False
+table,0.210,0.21,3,False,3,"conjugated | fail frac. | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute erro",traced,traced,25,24,supported,supported,0.207,0.091,proposal/logs/motifs/motif_library.json,validation_stats conjugated fail_frac,True,True,False,False
+table,1.5,1.5,1,False,2,"conjugated | $p$ | Failure-motif library. Coverage is the fraction of the $9$-heavy
+validation split matching the motif; $\langle|$err$|\rangle$ and the 90th
+percentile are the conditional error distribution; ``fail frac.'' is the
+fraction of matching molecules with error $>1\kcalmol$; $p$ is the one-sided
+Mann--Whitney $U$ $p$-value against non-matching molecules (computed on
+absolute error). The",traced,traced,122433,1555,unattributed,unattributed,0.035,1.0,proposal/logs/runs/seed_0.out,Loss-Err:         1.0343        1.4952,True,True,True,False
+table,1.20,1.2,2,False,3,"no O | Transfer ratio | Conformational transfer of the motif library to ANI-1x
+$\omega$B97X-DZ conformations of 9-heavy-atom molecules. ``Transfer ratio''
+is the mean per-molecule absolute error (after per-molecule mean alignment) of
+motif-matching molecules divided by that of non-matching molecules; $p$ is the
+one-sided Mann--Whitney $p$-value (alternative: motif $>$ non-motif). Ratios
+$<1$ mean ",traced,traced,44184,144,supported,supported,0.143,0.091,proposal/logs/transfer/ani1x_transfer.json,per_motif no_O transfer_ratio,True,True,False,False
+table,6.3,6.3,1,False,2,"no O | $p$ | Conformational transfer of the motif library to ANI-1x
+$\omega$B97X-DZ conformations of 9-heavy-atom molecules. ``Transfer ratio''
+is the mean per-molecule absolute error (after per-molecule mean alignment) of
+motif-matching molecules divided by that of non-matching molecules; $p$ is the
+one-sided Mann--Whitney $p$-value (alternative: motif $>$ non-motif). Ratios
+$<1$ mean motif membe",traced,traced,580,530,unattributed,unattributed,0.034,0.909,proposal/logs/runs/seed_1.out,Loss-Err:         6.3016         5.547,True,True,False,False
+table,0.95,0.95,2,False,2,"N-rich | Transfer ratio | Conformational transfer of the motif library to ANI-1x
+$\omega$B97X-DZ conformations of 9-heavy-atom molecules. ``Transfer ratio''
+is the mean per-molecule absolute error (after per-molecule mean alignment) of
+motif-matching molecules divided by that of non-matching molecules; $p$ is the
+one-sided Mann--Whitney $p$-value (alternative: motif $>$ non-motif). Ratios
+$<1$ mea",traced,traced,193,192,supported,unattributed,0.138,0.182,proposal/logs/transfer/ani1x_transfer.json,per_motif N_rich transfer_ratio,True,True,False,False
+table,2.5,2.5,1,False,2,"N-rich | $p$ | Conformational transfer of the motif library to ANI-1x
+$\omega$B97X-DZ conformations of 9-heavy-atom molecules. ``Transfer ratio''
+is the mean per-molecule absolute error (after per-molecule mean alignment) of
+motif-matching molecules divided by that of non-matching molecules; $p$ is the
+one-sided Mann--Whitney $p$-value (alternative: motif $>$ non-motif). Ratios
+$<1$ mean motif mem",traced,traced,205,205,unattributed,unattributed,0.034,0.909,proposal/logs/motifs/pareto.json,attribution,True,True,False,False
+table,0.84,0.84,2,False,2,"high hetero | Transfer ratio | Conformational transfer of the motif library to ANI-1x
+$\omega$B97X-DZ conformations of 9-heavy-atom molecules. ``Transfer ratio''
+is the mean per-molecule absolute error (after per-molecule mean alignment) of
+motif-matching molecules divided by that of non-matching molecules; $p$ is the
+one-sided Mann--Whitney $p$-value (alternative: motif $>$ non-motif). Ratios
+$<1",traced,traced,341,340,supported,supported,0.173,0.091,proposal/logs/transfer/ani1x_transfer.json,per_motif high_hetero_ratio transfer_ratio,True,True,False,False
+table,8.9,8.9,1,False,2,"high hetero | $p$ | Conformational transfer of the motif library to ANI-1x
+$\omega$B97X-DZ conformations of 9-heavy-atom molecules. ``Transfer ratio''
+is the mean per-molecule absolute error (after per-molecule mean alignment) of
+motif-matching molecules divided by that of non-matching molecules; $p$ is the
+one-sided Mann--Whitney $p$-value (alternative: motif $>$ non-motif). Ratios
+$<1$ mean moti",traced,traced,13,13,unattributed,unattributed,0.063,0.182,proposal/logs/transfer/rmd17_transfer.json,molecules toluene aligned_rmse_kcal,True,True,False,False
+table,0.78,0.78,2,False,2,"has ring | Transfer ratio | Conformational transfer of the motif library to ANI-1x
+$\omega$B97X-DZ conformations of 9-heavy-atom molecules. ``Transfer ratio''
+is the mean per-molecule absolute error (after per-molecule mean alignment) of
+motif-matching molecules divided by that of non-matching molecules; $p$ is the
+one-sided Mann--Whitney $p$-value (alternative: motif $>$ non-motif). Ratios
+$<1$ m",traced,traced,3792,178,supported,supported,0.173,0.091,proposal/logs/transfer/ani1x_transfer.json,per_motif has_ring transfer_ratio,True,True,False,False
+table,1.0,1.0,1,False,2,"has ring | $p$ | Conformational transfer of the motif library to ANI-1x
+$\omega$B97X-DZ conformations of 9-heavy-atom molecules. ``Transfer ratio''
+is the mean per-molecule absolute error (after per-molecule mean alignment) of
+motif-matching molecules divided by that of non-matching molecules; $p$ is the
+one-sided Mann--Whitney $p$-value (alternative: motif $>$ non-motif). Ratios
+$<1$ mean motif m",traced,traced,1523788,666016,unattributed,unattributed,0.034,0.9,proposal/logs/runs/seed_0.out,Loss-Err:         1.0343        1.4952,True,True,True,False
+table,0.77,0.77,2,False,2,"conjugated | Transfer ratio | Conformational transfer of the motif library to ANI-1x
+$\omega$B97X-DZ conformations of 9-heavy-atom molecules. ``Transfer ratio''
+is the mean per-molecule absolute error (after per-molecule mean alignment) of
+motif-matching molecules divided by that of non-matching molecules; $p$ is the
+one-sided Mann--Whitney $p$-value (alternative: motif $>$ non-motif). Ratios
+$<1$",traced,traced,214,211,supported,supported,0.143,0.091,proposal/logs/transfer/ani1x_transfer.json,per_motif conjugated transfer_ratio,True,True,False,False
+table,1.0,1.0,1,False,2,"conjugated | $p$ | Conformational transfer of the motif library to ANI-1x
+$\omega$B97X-DZ conformations of 9-heavy-atom molecules. ``Transfer ratio''
+is the mean per-molecule absolute error (after per-molecule mean alignment) of
+motif-matching molecules divided by that of non-matching molecules; $p$ is the
+one-sided Mann--Whitney $p$-value (alternative: motif $>$ non-motif). Ratios
+$<1$ mean motif",traced,traced,1523788,666016,unattributed,unattributed,0.035,0.9,proposal/logs/runs/seed_0.out,Loss-Err:         1.0343        1.4952,True,True,False,False
+table,0.75,0.75,2,False,2,"compressed bonds | Transfer ratio | Conformational transfer of the motif library to ANI-1x
+$\omega$B97X-DZ conformations of 9-heavy-atom molecules. ``Transfer ratio''
+is the mean per-molecule absolute error (after per-molecule mean alignment) of
+motif-matching molecules divided by that of non-matching molecules; $p$ is the
+one-sided Mann--Whitney $p$-value (alternative: motif $>$ non-motif). Ratio",traced,traced,6066,214,supported,supported,0.173,0.091,proposal/logs/transfer/ani1x_transfer.json,per_motif compressed_bonds transfer_ratio,True,True,False,False
+table,9.9,9.9,1,False,2,"compressed bonds | $p$ | Conformational transfer of the motif library to ANI-1x
+$\omega$B97X-DZ conformations of 9-heavy-atom molecules. ``Transfer ratio''
+is the mean per-molecule absolute error (after per-molecule mean alignment) of
+motif-matching molecules divided by that of non-matching molecules; $p$ is the
+one-sided Mann--Whitney $p$-value (alternative: motif $>$ non-motif). Ratios
+$<1$ mean",traced,traced,4,4,supported,supported,0.183,0.091,proposal/logs/transfer/rmd17_run.log,"uracil: heavy=8 aligned_MAE=9.898 kcal/mol spread=5.14 mean_z=1.927 R=3.749 rho(R,|err|)=-0.041 motifs=['has_ring', 'aromatic_ring', 'high_aromatic_frac', 'high_hetero_ratio', 'conjugated', 'low_sp3',",True,True,False,False
+table,0.68,0.68,2,False,2,"aromatic ring | Transfer ratio | Conformational transfer of the motif library to ANI-1x
+$\omega$B97X-DZ conformations of 9-heavy-atom molecules. ``Transfer ratio''
+is the mean per-molecule absolute error (after per-molecule mean alignment) of
+motif-matching molecules divided by that of non-matching molecules; $p$ is the
+one-sided Mann--Whitney $p$-value (alternative: motif $>$ non-motif). Ratios
+$",traced,traced,133,122,supported,supported,0.173,0.091,proposal/logs/transfer/ani1x_transfer.json,per_motif aromatic_ring transfer_ratio,True,True,False,False
+table,1.0,1.0,1,False,2,"aromatic ring | $p$ | Conformational transfer of the motif library to ANI-1x
+$\omega$B97X-DZ conformations of 9-heavy-atom molecules. ``Transfer ratio''
+is the mean per-molecule absolute error (after per-molecule mean alignment) of
+motif-matching molecules divided by that of non-matching molecules; $p$ is the
+one-sided Mann--Whitney $p$-value (alternative: motif $>$ non-motif). Ratios
+$<1$ mean mo",traced,traced,1523788,666016,unattributed,unattributed,0.032,0.9,proposal/logs/runs/seed_0.out,Loss-Err:         1.0343        1.4952,True,True,True,False
+table,0.66,0.66,2,False,2,"high arom.\ frac | Transfer ratio | Conformational transfer of the motif library to ANI-1x
+$\omega$B97X-DZ conformations of 9-heavy-atom molecules. ``Transfer ratio''
+is the mean per-molecule absolute error (after per-molecule mean alignment) of
+motif-matching molecules divided by that of non-matching molecules; $p$ is the
+one-sided Mann--Whitney $p$-value (alternative: motif $>$ non-motif). Ratio",traced,traced,111,107,supported,supported,0.164,0.091,proposal/logs/transfer/ani1x_transfer.json,per_motif high_aromatic_frac transfer_ratio,True,True,False,False
+table,1.0,1.0,1,False,2,"high arom.\ frac | $p$ | Conformational transfer of the motif library to ANI-1x
+$\omega$B97X-DZ conformations of 9-heavy-atom molecules. ``Transfer ratio''
+is the mean per-molecule absolute error (after per-molecule mean alignment) of
+motif-matching molecules divided by that of non-matching molecules; $p$ is the
+one-sided Mann--Whitney $p$-value (alternative: motif $>$ non-motif). Ratios
+$<1$ mean",traced,traced,1523788,666016,unattributed,unattributed,0.032,0.9,proposal/logs/runs/seed_0.out,Loss-Err:         1.0343        1.4952,True,True,False,False
+table,0.62,0.62,2,False,2,"low sp3 | Transfer ratio | Conformational transfer of the motif library to ANI-1x
+$\omega$B97X-DZ conformations of 9-heavy-atom molecules. ``Transfer ratio''
+is the mean per-molecule absolute error (after per-molecule mean alignment) of
+motif-matching molecules divided by that of non-matching molecules; $p$ is the
+one-sided Mann--Whitney $p$-value (alternative: motif $>$ non-motif). Ratios
+$<1$ me",traced,traced,1508,208,supported,supported,0.167,0.091,proposal/logs/transfer/ani1x_transfer.json,per_motif low_sp3 transfer_ratio,True,True,True,False
+table,1.0,1.0,1,False,2,"low sp3 | $p$ | Conformational transfer of the motif library to ANI-1x
+$\omega$B97X-DZ conformations of 9-heavy-atom molecules. ``Transfer ratio''
+is the mean per-molecule absolute error (after per-molecule mean alignment) of
+motif-matching molecules divided by that of non-matching molecules; $p$ is the
+one-sided Mann--Whitney $p$-value (alternative: motif $>$ non-motif). Ratios
+$<1$ mean motif me",traced,traced,1523788,666016,unattributed,unattributed,0.032,0.9,proposal/logs/runs/seed_0.out,Loss-Err:         1.0343        1.4952,True,True,False,False
+prose,0.256,0.256,3,False,3,The original HIP-NN study reports a mean absolute error of $0.256\kcalmol$ on QM9 while simultaneously reporting that roughly $2.3\%$ of molecules --- about one in fifty --- have prediction errors exceeding $1\kcalmol$.,traced,traced,19,19,unattributed,unattributed,0.046,0.818,proposal/logs/runs/seed_0.out,Loss-Err:        0.25593        1.0949,True,True,False,False
+prose,2.3\%,2.3,1,True,2,The original HIP-NN study reports a mean absolute error of $0.256\kcalmol$ on QM9 while simultaneously reporting that roughly $2.3\%$ of molecules --- about one in fifty --- have prediction errors exceeding $1\kcalmol$.,traced,traced,383,254,unattributed,unattributed,0.046,1.0,proposal/logs/runs/seed_0.out,Loss-Err:         1.9503        2.2507,True,True,False,False
+prose,3\times 10^{-2},0.03,2,False,1,"on error across the bulk of the data: the quantile function of the absolute error, conditioned on $\Rnh$, increases monotonically with $\Rnh$ for $\Rnh \gtrsim 3\times 10^{-2}$.",traced,traced,3284,554,unattributed,unattributed,0.086,0.714,proposal/logs/runs/seed_1.out,Loss-Err:       0.078415       0.78936       0.03125,True,True,False,False
+prose,1.7,1.7,1,False,2,"n-site layers per block, $N_{\mathrm{feature}}=80$ atomic features, $N_{\mathrm{sensitivity}}=20$ inverse-distance sensitivity functions with $R_{\mathrm{low}}=1.7$, $R_{\mathrm{high}}=10$, and $\Rcut=15$ Bohr (cosine cutoff), softplus activations, ResNet transformations, and energy-only training.",traced,traced,4643,4579,unattributed,unattributed,0.04,1.0,proposal/logs/runs/seed_2/training_log.txt,Loss    :         1.3795        1.6715,True,True,False,False
+prose,0.9,0.9,1,False,1,"We use Adam ($\eta_{\mathrm{init}}=10^{-3}$, $\beta_1=0.9$, $\beta_2=0.999$), minibatch size 30, and the paper's early-stopping schedule: a fixed learning rate for the first $t_{\mathrm{init}}=100$ epochs, then decay",traced,traced,26985,2123,unattributed,unattributed,0.051,0.2,proposal/logs/runs/seed_1.out,"lambda_L2=1e-06, lambda_R=0.01, batch=30, init_lr=0.001, betas=(0.9, 0.999)",True,True,False,False
+prose,0.999,0.999,3,False,3,"We use Adam ($\eta_{\mathrm{init}}=10^{-3}$, $\beta_1=0.9$, $\beta_2=0.999$), minibatch size 30, and the paper's early-stopping schedule: a fixed learning rate for the first $t_{\mathrm{init}}=100$ epochs, then decay by $\alpha_{\math",traced,traced,25,25,unattributed,unattributed,0.051,0.091,proposal/logs/runs/seed_0.out,"lambda_L2=1e-06, lambda_R=0.01, batch=30, init_lr=0.001, betas=(0.9, 0.999)",True,True,False,False
+prose,0.5,0.5,1,False,1,"ch size 30, and the paper's early-stopping schedule: a fixed learning rate for the first $t_{\mathrm{init}}=100$ epochs, then decay by $\alpha_{\mathrm{decay}}=0.5$ after a 50-epoch validation plateau, termination after 100 epochs without improvement, and $t_{\mathrm{max}}=2000$ epochs.",traced,traced,9775,3398,supported,unattributed,0.252,0.125,proposal/logs/runs/seed_0.out,"early stopping: t_init=100, patience=50, decay=0.5, termination_patience=100, t_max=2000",True,True,False,False
+prose,0.05,0.05,2,False,1,"ssociation with $\log_{10}\Rnh$ (the hierarchy-failure signal), using a one-sided Mann--Whitney $U$ test with Benjamini--Hochberg false-discovery control at $q=0.05$.",traced,traced,10255,1131,unattributed,unattributed,0.0,1.0,proposal/logs/runs/seed_2/training_log.txt,Loss-Reg:       0.057891      0.057385      0.047706,True,True,False,False
+prose,80\%,80.0,0,True,2,"mol$) whose molecule matches the motif --- sort motifs by attribution, and report the Pareto curve and the smallest $K$ such that the top-$K$ motifs cover $\ge 80\%$ of failures.",traced,traced,12535,763,unattributed,unattributed,0.06,0.545,proposal/logs/motifs/calibration.json,R+logE sweep,True,True,False,False
+prose,0.354,0.354,3,False,3,"The paper reports MAE $0.354\kcalmol$ at $N_{\mathrm{train+val}}=50{,}000$ and $0.256\kcalmol$ at $110{,}426$ (Table~I of ); extrapolating this trend to $\sim 21{,}000$ training molecules",traced,traced,155,155,supported,unattributed,0.172,1.0,proposal/logs/runs/seed_2/training_log.txt,T-MAE   :        0.08667       0.35389,True,True,True,False
+prose,0.256,0.256,3,False,3,"The paper reports MAE $0.354\kcalmol$ at $N_{\mathrm{train+val}}=50{,}000$ and $0.256\kcalmol$ at $110{,}426$ (Table~I of ); extrapolating this trend to $\sim 21{,}000$ training molecules yields an expected MAE of roughly $0.4$--$0.5\kcalmol$ in",traced,traced,19,19,supported,unattributed,0.136,0.727,proposal/logs/runs/seed_2/training_log.txt,T-MAE   :    *   0.25589        0.4351,True,True,True,False
+prose,0.4,0.4,1,False,1,"}=50{,}000$ and $0.256\kcalmol$ at $110{,}426$ (Table~I of ); extrapolating this trend to $\sim 21{,}000$ training molecules yields an expected MAE of roughly $0.4$--$0.5\kcalmol$ in-distribution.",traced,traced,27113,3691,supported,unattributed,0.172,0.857,proposal/logs/runs/seed_2/training_log.txt,T-MAE   :       0.062834       0.35228,True,True,True,False
+prose,0.5,0.5,1,False,1,"000$ and $0.256\kcalmol$ at $110{,}426$ (Table~I of ); extrapolating this trend to $\sim 21{,}000$ training molecules yields an expected MAE of roughly $0.4$--$0.5\kcalmol$ in-distribution.",traced,traced,9775,3398,supported,unattributed,0.172,1.0,proposal/logs/runs/seed_2/training_log.txt,T-MAE   :        0.52473       0.59712,True,True,True,False
+prose,0.327,0.327,3,False,3,"Our reimplementation reaches a best-validation MAE of $0.327\kcalmol$ (mean over 3 seeds), comfortably at or below this extrapolated floor, confirming a faithful baseline for the failure analysis.",traced,traced,17,17,unattributed,unattributed,0.112,1.0,proposal/logs/runs/seed_1.out,T-MAE   :        0.11708       0.32723,True,True,True,False
+prose,0.832,0.832,3,False,3,"On the unseen $9$-heavy-atom extrapolation set the reimplementation's error grows to $0.832\kcalmol$ (mean over 3 seeds; per-seed values in Table~ ), with a three-model ensemble MAE of $0.716\kcalmol$.",traced,traced,48,48,supported,unattributed,0.123,1.0,proposal/logs/runs/seed_1.out,Loss-Err:        0.26132       0.83223,True,True,True,False
+prose,0.716,0.716,3,False,3,"om extrapolation set the reimplementation's error grows to $0.832\kcalmol$ (mean over 3 seeds; per-seed values in Table~ ), with a three-model ensemble MAE of $0.716\kcalmol$.",traced,traced,10,10,supported,unattributed,0.144,0.727,proposal/logs/runs/seed_2.out,T-MAE   :        0.60636       0.71583,True,True,True,False
+prose,0.05,0.05,2,False,1,"Twelve motifs survive the false-discovery screen (Benjamini--Hochberg, $q=0.05$).",traced,traced,10255,1131,unattributed,unattributed,0.094,1.0,proposal/logs/motifs/calibration.json,R+logE sweep,True,True,False,False
+prose,0.017,0.017,3,False,2,"The model combining $\Rnh$ with the per-order decay ratios and total energy ($\Rnh+d_{21}+d_{10}+\log \hat E$) achieves ECE~$=$~$0.017$ on held-out chemistry, compared to $0.026$ for $\Rnh$ alone.",traced,traced,160,49,unattributed,unattributed,0.057,0.273,proposal/logs/transfer/ani1x_run.log,formal_charge: n=17 transfer_ratio=1.16 p=0.0165,True,True,False,False
+prose,0.026,0.026,3,False,2,"mbining $\Rnh$ with the per-order decay ratios and total energy ($\Rnh+d_{21}+d_{10}+\log \hat E$) achieves ECE~$=$~$0.017$ on held-out chemistry, compared to $0.026$ for $\Rnh$ alone.",traced,traced,254,94,unattributed,unattributed,0.065,0.727,proposal/logs/runs/seed_0.out,T-MAE   :       0.025525        0.3359,True,True,False,False
+prose,0.20,0.2,2,False,2,"At the operating point (threshold $0.20$, chosen to maximize $F_1$ on the calibration split) the model flags high-error predictions with precision $0.263$ and recall $0.534$ --- it surfaces $53\%$ of",traced,traced,2650,230,supported,unattributed,0.173,0.182,proposal/logs/motifs/calibration.json,R+logE operating_threshold,True,True,False,False
+prose,0.263,0.263,3,False,3,"At the operating point (threshold $0.20$, chosen to maximize $F_1$ on the calibration split) the model flags high-error predictions with precision $0.263$ and recall $0.534$ --- it surfaces $53\%$ of the failures while keeping the flagged set to roughly twice the failure base rate ($0.171$).",traced,traced,15,15,unattributed,unattributed,0.11,0.091,proposal/logs/motifs/calibration.json,R+d21+d10+logE precision_operating,True,True,False,False
+prose,0.534,0.534,3,False,3,"operating point (threshold $0.20$, chosen to maximize $F_1$ on the calibration split) the model flags high-error predictions with precision $0.263$ and recall $0.534$ --- it surfaces $53\%$ of the failures while keeping the flagged set to roughly twice the failure base rate ($0.171$).",traced,traced,36,35,unattributed,unattributed,0.11,0.182,proposal/logs/motifs/calibration.json,R+d21+d10+logE recall_operating,True,True,False,False
+prose,53\%,53.0,0,True,2,"ld $0.20$, chosen to maximize $F_1$ on the calibration split) the model flags high-error predictions with precision $0.263$ and recall $0.534$ --- it surfaces $53\%$ of the failures while keeping the flagged set to roughly twice the failure base rate ($0.171$).",traced,traced,2728,346,unattributed,unattributed,0.081,0.182,proposal/logs/motifs/calibration.json,R+d21 recall_operating,True,True,False,False
+prose,0.171,0.171,3,False,3,ictions with precision $0.263$ and recall $0.534$ --- it surfaces $53\%$ of the failures while keeping the flagged set to roughly twice the failure base rate ($0.171$).,traced,traced,114,26,unattributed,unattributed,0.0,1.0,proposal/logs/runs/seed_2/training_log.txt,Loss    :        0.17099       0.98629,True,True,False,False
+prose,80\%,80.0,0,True,2,"The top-$K$ motifs with $K=1$ cover $\ge 80\%$ of high-error predictions, indicating that the failure modes are compact and interpretable rather than diluted across the test set.",traced,traced,12535,763,unattributed,unattributed,0.06,1.0,proposal/logs/runs/seed_0.out,Loss-Err:        0.80069        1.2476,True,True,False,False
+prose,0.91,0.91,2,False,2,"The single broadest motif, \emph{has ring} (coverage $0.91$), alone accounts for $95\%$ of failures, reflecting the fact that the overwhelming majority of $9$-heavy QM9 molecules are cyclic; adding the more specific mo",traced,traced,5574,161,supported,supported,0.171,0.091,proposal/logs/motifs/candidates.csv,coverage_disc has_ring,True,True,False,False
+prose,95\%,95.0,0,True,2,"The single broadest motif, \emph{has ring} (coverage $0.91$), alone accounts for $95\%$ of failures, reflecting the fact that the overwhelming majority of $9$-heavy QM9 molecules are cyclic; adding the more specific motifs (compressed bonds, conj",traced,traced,336,252,unattributed,unattributed,0.039,0.364,proposal/logs/motifs/pareto.json,attribution,True,True,False,False
+prose,99.6\%,99.6,1,True,3,"ty of $9$-heavy QM9 molecules are cyclic; adding the more specific motifs (compressed bonds, conjugated, heteroatom-rich, bridgehead) raises union coverage to $99.6\%$.",traced,traced,62,40,unattributed,unattributed,0.0,1.0,proposal/logs/runs/seed_2/training_log.txt,Loss    :         0.1702       0.99564,True,True,False,False
+prose,80\%,80.0,0,True,2,The compactness $K$ is the smallest rank covering $\ge 80\%$ of failures.,traced,traced,12535,763,unattributed,unattributed,0.0,1.0,proposal/logs/runs/seed_2/training_log.txt,Epochs since last best: 80,True,True,False,False
+prose,0.22,0.22,2,False,2,"The monotone $\Rnh$--error correspondence survives extrapolation: the Spearman rank correlation between $\log_{10}\Rnh$ and absolute error is $0.22$ over the full test set, and the median absolute error rises from $0.29\kcalmol$ in the lowest-$\Rnh$ tercile to $0.51\kcalmol$ in the highest, while the fract",traced,traced,36140,183,unattributed,unattributed,0.044,1.0,proposal/logs/runs/seed_0.out,Loss-Err:         0.2246           1.1,True,True,False,False
+prose,0.29,0.29,2,False,2,"apolation: the Spearman rank correlation between $\log_{10}\Rnh$ and absolute error is $0.22$ over the full test set, and the median absolute error rises from $0.29\kcalmol$ in the lowest-$\Rnh$ tercile to $0.51\kcalmol$ in the highest, while the fraction of molecules exceeding $1\kcalmol$ rises from $0.10$ to $0.26$.",traced,traced,1317,124,unattributed,unattributed,0.046,1.0,proposal/logs/runs/seed_0.out,Loss-Err:        0.28846        1.1203,True,True,False,False
+prose,0.51,0.51,2,False,2,"n $\log_{10}\Rnh$ and absolute error is $0.22$ over the full test set, and the median absolute error rises from $0.29\kcalmol$ in the lowest-$\Rnh$ tercile to $0.51\kcalmol$ in the highest, while the fraction of molecules exceeding $1\kcalmol$ rises from $0.10$ to $0.26$.",traced,traced,360,356,unattributed,unattributed,0.06,1.0,proposal/logs/runs/seed_0.out,Loss-Err:        0.51005        1.1967,True,True,False,False
+prose,0.10,0.1,2,False,2,"rror rises from $0.29\kcalmol$ in the lowest-$\Rnh$ tercile to $0.51\kcalmol$ in the highest, while the fraction of molecules exceeding $1\kcalmol$ rises from $0.10$ to $0.26$.",traced,traced,16972,570,unattributed,unattributed,0.0,1.0,proposal/logs/runs/seed_2/training_log.txt,Loss-Err:       0.097208       0.92706       0.15625,True,True,False,False
+prose,0.26,0.26,2,False,2,"from $0.29\kcalmol$ in the lowest-$\Rnh$ tercile to $0.51\kcalmol$ in the highest, while the fraction of molecules exceeding $1\kcalmol$ rises from $0.10$ to $0.26$.",traced,traced,126,125,unattributed,unattributed,0.0,1.0,proposal/logs/runs/seed_2/training_log.txt,Loss    :        0.25572         1.001,True,True,False,False
+prose,1.20,1.2,2,False,3,"r ratio below one, meaning motif-matching molecules are \emph{not} disproportionately erroneous in the conformational set (the exception is \emph{no O}, ratio $1.20$, $p=6.3\times10^{-3}$).",traced,traced,44184,144,supported,supported,0.184,0.091,proposal/logs/transfer/ani1x_transfer.json,per_motif no_O transfer_ratio,True,True,False,False
+prose,6.3\times10^{-3},0.0063,4,False,2,"low one, meaning motif-matching molecules are \emph{not} disproportionately erroneous in the conformational set (the exception is \emph{no O}, ratio $1.20$, $p=6.3\times10^{-3}$).",traced,traced,14,13,unattributed,unattributed,0.12,0.091,proposal/logs/transfer/ani1x_run.log,no_O: n=57 transfer_ratio=1.20 p=0.0063,True,True,False,False
+prose,0.65,0.65,2,False,2,"This is largely a floor effect --- after per-molecule mean alignment the residual errors are small (mean $z=0.65$ of the conformational energy spread), so few molecules of any class fail badly, and the broad motifs no longer separate them.",traced,traced,165,161,unattributed,unattributed,0.076,0.182,proposal/logs/transfer/ani1x_transfer.json,per_motif no_N z_in,True,True,False,False
+prose,0.78,0.78,2,False,2,"contrast, transfers strongly: across the 210 ANI-1x molecules the per-molecule mean $\Rnh$ correlates with the mean aligned absolute error with Spearman $\rho=0.78$ ($p\approx10^{-44}$), and molecules in the high-$\Rnh$ half carry nearly twice the aligned error of the low-$\Rnh$ half ($50.7$ vs.\ $30.1\kcalmol$ before spr",traced,traced,3792,178,unattributed,unattributed,0.046,1.0,proposal/logs/runs/seed_0.out,Loss-Err:        0.78488   *    1.2392,True,True,False,False
+prose,50.7,50.7,1,False,3,"olute error with Spearman $\rho=0.78$ ($p\approx10^{-44}$), and molecules in the high-$\Rnh$ half carry nearly twice the aligned error of the low-$\Rnh$ half ($50.7$ vs.\ $30.1\kcalmol$ before spread-normalization).",traced,untraced,132,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+prose,30.1,30.1,1,False,3,"with Spearman $\rho=0.78$ ($p\approx10^{-44}$), and molecules in the high-$\Rnh$ half carry nearly twice the aligned error of the low-$\Rnh$ half ($50.7$ vs.\ $30.1\kcalmol$ before spread-normalization).",traced,untraced,1,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+prose,6.7,6.7,1,False,2,"Globally the hierarchy decays as intended: the median $|\hat E^{1}|$ is $6.7\kcalmol$ and the median $|\hat E^{2}|$ is $11.8\kcalmol$ against a total energy of magnitude $\sim 2.6\times10^{5}\kcalmol$, so the higher orders are small cor",traced,traced,309,308,unattributed,unattributed,0.062,0.636,proposal/logs/runs/seed_1.out,Total epoch time:  6.74 s,True,True,False,False
+prose,11.8,11.8,1,False,3,"Globally the hierarchy decays as intended: the median $|\hat E^{1}|$ is $6.7\kcalmol$ and the median $|\hat E^{2}|$ is $11.8\kcalmol$ against a total energy of magnitude $\sim 2.6\times10^{5}\kcalmol$, so the higher orders are small corrections.",traced,untraced,1,0,untraced,untraced,0.0,1.0,,,True,True,False,False
+prose,2.6\times10^{5},260000.0,-4,False,2,"rarchy decays as intended: the median $|\hat E^{1}|$ is $6.7\kcalmol$ and the median $|\hat E^{2}|$ is $11.8\kcalmol$ against a total energy of magnitude $\sim 2.6\times10^{5}\kcalmol$, so the higher orders are small corrections.",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+prose,1.35,1.35,2,False,3,"\emph{Bridgehead} systems (condensed/bridged polycycles, error $1.35\kcalmol$) place several heavy atoms in a strained, highly connected environment where three-body ($n=2$) terms are both large and cancellation-prone.",traced,traced,3297,213,unattributed,unattributed,0.079,0.091,proposal/logs/motifs/motif_library.json,validation_stats bridgehead err_mean,True,True,False,False
+prose,0.97,0.97,2,False,2,"\emph{Highly aromatic / low-sp3} frameworks (error $0.97$--$1.16\kcalmol$) delocalize electron density across many atoms, so the energy is carried by non-local, many-body correlations that a truncated $n\le 2$ hierar",traced,traced,146,145,supported,supported,0.129,0.091,proposal/logs/motifs/motif_library.json,validation_stats low_sp3 err_mean,True,True,False,False
+prose,1.16,1.16,2,False,3,"\emph{Highly aromatic / low-sp3} frameworks (error $0.97$--$1.16\kcalmol$) delocalize electron density across many atoms, so the energy is carried by non-local, many-body correlations that a truncated $n\le 2$ hierarchy cann",traced,traced,24637,169,unattributed,unattributed,0.08,0.091,proposal/logs/motifs/motif_library.json,validation_stats high_aromatic_frac err_mean,True,True,False,False
+prose,40.6,40.6,1,False,3,"\le 2$ hierarchy cannot capture; the per-order data show this directly --- for aromatic motifs the median $|\hat E^{2}|$ rises to $20$--$41\kcalmol$ (benzene: $40.6\kcalmol$), two to three times the global median, a clear signature that the second order is being forced to absorb correlation it cannot represent.",traced,untraced,4,0,untraced,untraced,0.0,1.0,,,True,True,False,False
+prose,0.87,0.87,2,False,2,"\emph{Nitrogen-rich, oxygen-poor} heterocycles (error $0.87$--$0.91\kcalmol$) stress the $n=0$ dressed-atom term: with many heteroatoms of a single type and few of the other, the per-element reference environment is sys",traced,traced,1785,237,unattributed,unattributed,0.044,1.0,proposal/logs/runs/seed_0.out,Loss-Err:        0.87356        1.4619,True,True,False,False
+prose,0.91,0.91,2,False,2,"\emph{Nitrogen-rich, oxygen-poor} heterocycles (error $0.87$--$0.91\kcalmol$) stress the $n=0$ dressed-atom term: with many heteroatoms of a single type and few of the other, the per-element reference environment is systematica",traced,traced,5574,161,unattributed,unattributed,0.086,0.091,proposal/logs/motifs/motif_library.json,validation_stats N_rich err_mean,True,True,False,False
+prose,0.76,0.76,2,False,2,"The broad, low-specificity motifs (\emph{has ring}, \emph{compressed bonds}, coverage $0.76$--$0.91$) have near-background per-order statistics; they capture the bulk composition of the test set rather than a distinct mechanistic failure.",traced,traced,194,183,supported,supported,0.152,0.091,proposal/logs/motifs/candidates.csv,coverage_disc compressed_bonds,True,True,False,False
+prose,0.91,0.91,2,False,2,"The broad, low-specificity motifs (\emph{has ring}, \emph{compressed bonds}, coverage $0.76$--$0.91$) have near-background per-order statistics; they capture the bulk composition of the test set rather than a distinct mechanistic failure.",traced,traced,5574,161,supported,supported,0.152,0.091,proposal/logs/motifs/candidates.csv,coverage_disc has_ring,True,True,False,False
+prose,0.3\%,0.3,1,True,1,"\paragraph{Uncaptured failures.} Only $0.3\%$ of high-error predictions (27 of $9{,}320$ on the validation split) are not captured by any motif in the library.",traced,traced,53065,5936,supported,unattributed,0.191,0.857,proposal/logs/motifs/motif_library.json,validation_stats conjugated coverage,True,True,False,False
+prose,91\%,91.0,0,True,2,"This very high capture rate is largely a consequence of the broad \emph{has ring} motif, which covers $91\%$ of the (mostly cyclic) test set; it should not be read as evidence that the library is mechanistically complete.",traced,traced,5718,225,supported,supported,0.155,0.091,proposal/logs/motifs/motif_library.json,validation_stats has_ring coverage,True,True,False,False
+prose,0.263,0.263,3,False,3,"At the operating point these make up $1-0.263=74\%$ of the flagged set; inspection shows they are dominated by molecules where a large $\hat E^{2}$ is \emph{correctly} predicted, so the hierarchy is stress",traced,traced,15,15,unattributed,unattributed,0.043,0.091,proposal/logs/motifs/calibration.json,R+d21+d10+logE precision_operating,True,True,False,False
+prose,74\%,74.0,0,True,2,"At the operating point these make up $1-0.263=74\%$ of the flagged set; inspection shows they are dominated by molecules where a large $\hat E^{2}$ is \emph{correctly} predicted, so the hierarchy is stressed bu",traced,traced,790,447,unattributed,unattributed,0.042,0.545,proposal/logs/runs/seed_2.out,Best T-MAE so far:  0.73509,True,True,False,False
+prose,47\%,47.0,0,True,2,"Second, \emph{false negatives}: the $47\%$ of failures the model misses at the operating point, i.e.\ low-$\Rnh$ molecules with large errors where the model is confidently wrong.",traced,traced,2312,402,unattributed,unattributed,0.056,1.0,proposal/logs/runs/seed_0.out,Loss-Err:        0.46955        1.1211,True,True,False,False
+prose,4.4,4.4,1,False,2,"Inference is cheap: prediction of energy plus $\Rnh$ on the full $109{,}024$-molecule test set takes $4.4$ s ($0.22$ ms/molecule) and the per-atom order decomposition adds $0.8$ s, so the uncertainty and motif signals are essentially free at deployment.",traced,traced,117,110,unattributed,unattributed,0.037,0.545,proposal/logs/evals/seed_2.log,predictor (E+R) wall time for 20000 mols: 4.4s (0.2195 ms/mol),True,True,False,False
+prose,0.22,0.22,2,False,2,"Inference is cheap: prediction of energy plus $\Rnh$ on the full $109{,}024$-molecule test set takes $4.4$ s ($0.22$ ms/molecule) and the per-atom order decomposition adds $0.8$ s, so the uncertainty and motif signals are essentially free at deployment.",traced,traced,36140,183,unattributed,unattributed,0.04,0.727,proposal/logs/motifs/calibration.json,R+logE bins,True,True,False,False
+prose,0.8,0.8,1,False,1,"cheap: prediction of energy plus $\Rnh$ on the full $109{,}024$-molecule test set takes $4.4$ s ($0.22$ ms/molecule) and the per-atom order decomposition adds $0.8$ s, so the uncertainty and motif signals are essentially free at deployment.",traced,traced,44858,2567,unattributed,unattributed,0.12,0.111,proposal/logs/evals/seed_2.log,per-atom per-order wall time: 0.8s (0.007 ms/mol),True,True,False,False

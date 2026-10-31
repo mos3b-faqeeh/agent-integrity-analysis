@@ -1,0 +1,531 @@
+kind,raw,value,dec,pct,sig,context,L1,L1nb,L1_n_matches,L1nb_n_matches,L2ctx,L2,L2_score,L2_p,L2_file,L2_context,decoy_L1,decoy_L1nb,decoy_L2ctx,decoy_L2
+table,0.9996,0.9996,4,False,4,"Unconstrained AVQDS | \multicolumn{3}{c}{MFIM $h_z{=}0$} | MFIM benchmark: final-time ($T=3$) state fidelity, CNOT count
+$\ncx$, and two-qubit depth.  ``Naive'' is the smart-embedding
+insert-and-revert routing of the unconstrained circuit; \tavqds{",traced,traced,20086,119,supported,unattributed,0.179,0.182,proposal/logs/unconstrained/mfim_hz0.0/summary.json,final_fidelity,True,False,False,False
+table,0.9992,0.9992,4,False,4,"Unconstrained AVQDS |  | MFIM benchmark: final-time ($T=3$) state fidelity, CNOT count
+$\ncx$, and two-qubit depth.  ``Naive'' is the smart-embedding
+insert-and-revert routing of the unconstrained circuit; \tavqds{",traced,traced,905,45,supported,unattributed,0.179,0.182,proposal/logs/unconstrained/mfim_hz0.5/summary.json,final_fidelity,True,False,False,False
+table,0.9996,0.9996,4,False,4,"Smart-embedding naive routing | \multicolumn{3}{c}{MFIM $h_z{=}0$} | MFIM benchmark: final-time ($T=3$) state fidelity, CNOT count
+$\ncx$, and two-qubit depth.  ``Naive'' is the smart-embedding
+insert-and-revert routing of the unconstrained circuit; \tavqds{",traced,traced,20086,119,supported,unattributed,0.187,0.182,proposal/logs/unconstrained/mfim_hz0.0/summary.json,final_fidelity,True,False,False,False
+table,0.9992,0.9992,4,False,4,"Smart-embedding naive routing |  | MFIM benchmark: final-time ($T=3$) state fidelity, CNOT count
+$\ncx$, and two-qubit depth.  ``Naive'' is the smart-embedding
+insert-and-revert routing of the unconstrained circuit; \tavqds{",traced,traced,905,45,supported,unattributed,0.187,0.182,proposal/logs/unconstrained/mfim_hz0.5/summary.json,final_fidelity,True,False,False,False
+table,0.9996,0.9996,4,False,4,"Smart-embedding naive routing | \multicolumn{3}{c}{MFIM $h_z{=}0$} | MFIM benchmark: final-time ($T=3$) state fidelity, CNOT count
+$\ncx$, and two-qubit depth.  ``Naive'' is the smart-embedding
+insert-and-revert routing of the unconstrained circuit; \tavqds{",traced,traced,20086,119,supported,unattributed,0.187,0.182,proposal/logs/unconstrained/mfim_hz0.0/summary.json,final_fidelity,True,False,False,False
+table,0.9992,0.9992,4,False,4,"Smart-embedding naive routing |  | MFIM benchmark: final-time ($T=3$) state fidelity, CNOT count
+$\ncx$, and two-qubit depth.  ``Naive'' is the smart-embedding
+insert-and-revert routing of the unconstrained circuit; \tavqds{",traced,traced,905,45,supported,unattributed,0.187,0.182,proposal/logs/unconstrained/mfim_hz0.5/summary.json,final_fidelity,True,False,False,False
+table,0.9996,0.9996,4,False,4,"TA-AVQDS (ours) | \multicolumn{3}{c}{MFIM $h_z{=}0$} | MFIM benchmark: final-time ($T=3$) state fidelity, CNOT count
+$\ncx$, and two-qubit depth.  ``Naive'' is the smart-embedding
+insert-and-revert routing of the unconstrained circuit; \tavqds{",traced,traced,20086,119,supported,unattributed,0.164,0.182,proposal/logs/unconstrained/mfim_hz0.0/summary.json,final_fidelity,True,False,False,False
+table,0.9992,0.9992,4,False,4,"TA-AVQDS (ours) |  | MFIM benchmark: final-time ($T=3$) state fidelity, CNOT count
+$\ncx$, and two-qubit depth.  ``Naive'' is the smart-embedding
+insert-and-revert routing of the unconstrained circuit; \tavqds{",traced,traced,905,45,supported,unattributed,0.164,0.182,proposal/logs/unconstrained/mfim_hz0.5/summary.json,final_fidelity,True,False,False,False
+table,0.9994,0.9994,4,False,4,"TA-AVQDS (ours) | \multicolumn{3}{c}{MFIM $h_z{=}0$} | MFIM benchmark: final-time ($T=3$) state fidelity, CNOT count
+$\ncx$, and two-qubit depth.  ``Naive'' is the smart-embedding
+insert-and-revert routing of the unconstrained circuit; \tavqds{",traced,traced,5026,11,supported,unattributed,0.158,0.273,proposal/logs/ta_tau1e-4/mfim_hz0.0_topoB/summary.json,final_fidelity,False,False,False,False
+table,0.9992,0.9992,4,False,4,"TA-AVQDS (ours) |  | MFIM benchmark: final-time ($T=3$) state fidelity, CNOT count
+$\ncx$, and two-qubit depth.  ``Naive'' is the smart-embedding
+insert-and-revert routing of the unconstrained circuit; \tavqds{",traced,traced,905,45,supported,unattributed,0.164,0.182,proposal/logs/unconstrained/mfim_hz0.5/summary.json,final_fidelity,True,False,False,False
+table,0.9996,0.9996,4,False,4,"Unconstrained AVQDS | \multicolumn{3}{c}{LSM $h_z{=}{-}0.7$} | LSM benchmark (ramp to $T=3$ plus post-ramp evolution to $2T=6$):
+same conventions as Table~ .",traced,traced,20086,119,supported,supported,0.142,0.091,proposal/logs/unconstrained/lsm_hz1.6/summary.json,final_fidelity,True,False,False,False
+table,0.9996,0.9996,4,False,4,"Unconstrained AVQDS |  | LSM benchmark (ramp to $T=3$ plus post-ramp evolution to $2T=6$):
+same conventions as Table~ .",traced,traced,20086,119,supported,supported,0.142,0.091,proposal/logs/unconstrained/lsm_hz1.6/summary.json,final_fidelity,True,False,False,False
+table,0.9996,0.9996,4,False,4,"Smart-embedding naive routing | \multicolumn{3}{c}{LSM $h_z{=}{-}0.7$} | LSM benchmark (ramp to $T=3$ plus post-ramp evolution to $2T=6$):
+same conventions as Table~ .",traced,traced,20086,119,supported,unattributed,0.121,0.182,proposal/logs/naive_topoC/lsm_hz-0.7_topoC/summary.json,final_fidelity,True,False,False,False
+table,0.9996,0.9996,4,False,4,"Smart-embedding naive routing |  | LSM benchmark (ramp to $T=3$ plus post-ramp evolution to $2T=6$):
+same conventions as Table~ .",traced,traced,20086,119,supported,unattributed,0.121,0.182,proposal/logs/naive_topoC/lsm_hz-0.7_topoC/summary.json,final_fidelity,True,False,False,False
+table,0.9996,0.9996,4,False,4,"Smart-embedding naive routing | \multicolumn{3}{c}{LSM $h_z{=}{-}0.7$} | LSM benchmark (ramp to $T=3$ plus post-ramp evolution to $2T=6$):
+same conventions as Table~ .",traced,traced,20086,119,supported,unattributed,0.121,0.182,proposal/logs/naive_topoC/lsm_hz-0.7_topoC/summary.json,final_fidelity,True,False,False,False
+table,0.9996,0.9996,4,False,4,"Smart-embedding naive routing |  | LSM benchmark (ramp to $T=3$ plus post-ramp evolution to $2T=6$):
+same conventions as Table~ .",traced,traced,20086,119,supported,unattributed,0.121,0.182,proposal/logs/naive_topoC/lsm_hz-0.7_topoC/summary.json,final_fidelity,True,False,False,False
+table,0.9996,0.9996,4,False,4,"TA-AVQDS (ours) | \multicolumn{3}{c}{LSM $h_z{=}{-}0.7$} | LSM benchmark (ramp to $T=3$ plus post-ramp evolution to $2T=6$):
+same conventions as Table~ .",traced,traced,20086,119,supported,unattributed,0.129,0.182,proposal/logs/ta_topoC/lsm_hz-0.7_topoC/summary.json,final_fidelity,True,False,False,False
+table,0.9996,0.9996,4,False,4,"TA-AVQDS (ours) |  | LSM benchmark (ramp to $T=3$ plus post-ramp evolution to $2T=6$):
+same conventions as Table~ .",traced,traced,20086,119,supported,unattributed,0.129,0.182,proposal/logs/ta_topoC/lsm_hz-0.7_topoC/summary.json,final_fidelity,True,False,False,False
+table,0.9994,0.9994,4,False,4,"TA-AVQDS (ours) | \multicolumn{3}{c}{LSM $h_z{=}{-}0.7$} | LSM benchmark (ramp to $T=3$ plus post-ramp evolution to $2T=6$):
+same conventions as Table~ .",traced,traced,5026,11,supported,unattributed,0.126,0.273,proposal/logs/ta_tau1e-4/lsm_hz-0.7_topoB/summary.json,final_fidelity,False,False,False,False
+table,0.9996,0.9996,4,False,4,"TA-AVQDS (ours) |  | LSM benchmark (ramp to $T=3$ plus post-ramp evolution to $2T=6$):
+same conventions as Table~ .",traced,traced,20086,119,supported,unattributed,0.129,0.182,proposal/logs/ta_topoC/lsm_hz-0.7_topoC/summary.json,final_fidelity,True,False,False,False
+table,1.00,1.0,2,False,3,"MFIM $h_z{=}0$ | \multicolumn{2}{c}{Naive routing} | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,312740,11541,supported,supported,0.121,0.091,proposal/logs/naive/mfim_hz0.5_topoB/summary.json,embedding,True,True,False,False
+table,1.00,1.0,2,False,3,"MFIM $h_z{=}0$ | \multicolumn{2}{c}{TA-AVQDS (ours)} | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,312740,11541,unattributed,unattributed,0.114,0.091,proposal/logs/ta_tau1e-4/mfim_hz0.0_topoB/summary.json,embedding,True,True,False,False
+table,1.00,1.0,2,False,3,"MFIM $h_z{=}0$ |  | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,312740,11541,unattributed,unattributed,0.089,0.091,proposal/logs/embeddings/embeddings.json,mfim_hz0.0_topoB embedding,True,True,False,False
+table,1.00,1.0,2,False,3,"MFIM $h_z{=}0$ |  | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,312740,11541,unattributed,unattributed,0.089,0.091,proposal/logs/embeddings/embeddings.json,mfim_hz0.0_topoB embedding,True,True,False,False
+table,3.29,3.29,2,False,3,"MFIM $h_z{=}0$ | \multicolumn{2}{c}{Naive routing} | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,392,62,unattributed,unattributed,0.079,0.091,proposal/logs/analysis/tables.json,overhead naive ncx_mult,True,True,False,False
+table,4.50,4.5,2,False,3,"MFIM $h_z{=}0$ | \multicolumn{2}{c}{TA-AVQDS (ours)} | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,251,27,unattributed,unattributed,0.037,0.182,proposal/logs/analysis/tables.json,overhead naive depth_mult,True,True,False,False
+table,2.08,2.08,2,False,3,"MFIM $h_z{=}0$ |  | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,728,163,unattributed,unattributed,0.045,0.182,proposal/logs/analysis/ablation.json,full,True,True,False,False
+table,2.66,2.66,2,False,3,"MFIM $h_z{=}0$ |  | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,753,81,unattributed,unattributed,0.042,0.091,proposal/logs/analysis/tables.json,overhead ta depth_mult,True,True,False,False
+table,0.5,0.5,1,False,1,"MFIM $h_z{=}0.5$ | Benchmark | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,115293,1757,unattributed,unattributed,0.039,1.0,proposal/logs/equivalence_check/mfim_hz0.0_slowexpm/run.log,one_step 0.55 s,True,True,False,False
+table,1.00,1.0,2,False,3,"MFIM $h_z{=}0.5$ | \multicolumn{2}{c}{Naive routing} | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,312740,11541,supported,supported,0.121,0.091,proposal/logs/naive/mfim_hz0.5_topoB/summary.json,embedding,True,True,False,False
+table,1.00,1.0,2,False,3,"MFIM $h_z{=}0.5$ | \multicolumn{2}{c}{TA-AVQDS (ours)} | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,312740,11541,unattributed,unattributed,0.114,0.091,proposal/logs/ta_tau1e-4/mfim_hz0.0_topoB/summary.json,embedding,True,True,False,False
+table,1.00,1.0,2,False,3,"MFIM $h_z{=}0.5$ |  | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,312740,11541,unattributed,unattributed,0.089,0.091,proposal/logs/embeddings/embeddings.json,mfim_hz0.0_topoB embedding,True,True,False,False
+table,1.00,1.0,2,False,3,"MFIM $h_z{=}0.5$ |  | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,312740,11541,unattributed,unattributed,0.089,0.091,proposal/logs/embeddings/embeddings.json,mfim_hz0.0_topoB embedding,True,True,False,False
+table,0.5,0.5,1,False,1,"MFIM $h_z{=}0.5$ | Benchmark | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,115293,1757,unattributed,unattributed,0.039,1.0,proposal/logs/equivalence_check/mfim_hz0.0_slowexpm/run.log,one_step 0.55 s,True,True,False,False
+table,3.22,3.22,2,False,3,"MFIM $h_z{=}0.5$ | \multicolumn{2}{c}{Naive routing} | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,336,39,unattributed,unattributed,0.079,0.091,proposal/logs/analysis/tables.json,overhead naive ncx_mult,True,True,False,False
+table,4.99,4.99,2,False,3,"MFIM $h_z{=}0.5$ | \multicolumn{2}{c}{TA-AVQDS (ours)} | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,198,63,unattributed,unattributed,0.037,0.091,proposal/logs/analysis/tables.json,overhead naive depth_mult,True,True,False,False
+table,2.25,2.25,2,False,3,"MFIM $h_z{=}0.5$ |  | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,618,75,unattributed,unattributed,0.045,0.091,proposal/logs/analysis/ablation.json,full,True,True,False,False
+table,3.09,3.09,2,False,3,"MFIM $h_z{=}0.5$ |  | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,277,29,unattributed,unattributed,0.042,0.091,proposal/logs/analysis/tables.json,overhead ta depth_mult,True,True,False,False
+table,0.7,0.7,1,False,1,"LSM $h_z{=}{-}0.7$ | Benchmark | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,105431,566,supported,unattributed,0.128,0.111,proposal/logs/unconstrained/lsm_hz-0.7/summary.json,benchmark,True,True,False,False
+table,1.00,1.0,2,False,3,"LSM $h_z{=}{-}0.7$ | \multicolumn{2}{c}{Naive routing} | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,312740,11541,supported,supported,0.121,0.091,proposal/logs/naive_topoC/lsm_hz-0.7_topoC/summary.json,embedding,True,True,False,False
+table,1.00,1.0,2,False,3,"LSM $h_z{=}{-}0.7$ | \multicolumn{2}{c}{TA-AVQDS (ours)} | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,312740,11541,unattributed,unattributed,0.114,0.091,proposal/logs/ta_tau1e-4/lsm_hz-0.7_topoA/summary.json,embedding,True,True,False,False
+table,1.00,1.0,2,False,3,"LSM $h_z{=}{-}0.7$ |  | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,312740,11541,unattributed,unattributed,0.089,0.091,proposal/logs/embeddings/embeddings.json,lsm_hz-0.7_topoA embedding,True,True,False,False
+table,1.00,1.0,2,False,3,"LSM $h_z{=}{-}0.7$ |  | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,312740,11541,unattributed,unattributed,0.089,0.091,proposal/logs/embeddings/embeddings.json,lsm_hz-0.7_topoA embedding,True,True,False,False
+table,0.7,0.7,1,False,1,"LSM $h_z{=}{-}0.7$ | Benchmark | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,105431,566,supported,unattributed,0.128,0.111,proposal/logs/unconstrained/lsm_hz-0.7/summary.json,benchmark,True,True,False,False
+table,1.72,1.72,2,False,3,"LSM $h_z{=}{-}0.7$ | \multicolumn{2}{c}{Naive routing} | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,537,37,unattributed,unattributed,0.079,0.182,proposal/logs/analysis/tables.json,overhead naive ncx_mult,True,True,False,False
+table,2.15,2.15,2,False,3,"LSM $h_z{=}{-}0.7$ | \multicolumn{2}{c}{TA-AVQDS (ours)} | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,660,67,unattributed,unattributed,0.037,0.273,proposal/logs/analysis/tables.json,overhead naive depth_mult,True,True,False,False
+table,1.12,1.12,2,False,3,"LSM $h_z{=}{-}0.7$ |  | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,801,21,unattributed,unattributed,0.045,0.182,proposal/logs/analysis/ablation.json,full,True,True,False,False
+table,1.11,1.11,2,False,3,"LSM $h_z{=}{-}0.7$ |  | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,856,56,unattributed,unattributed,0.042,0.091,proposal/logs/analysis/tables.json,overhead ta depth_mult,True,True,False,False
+table,1.6,1.6,1,False,2,"LSM $h_z{=}1.6$ | Benchmark | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,6526,245,unattributed,unattributed,0.039,1.0,proposal/logs/ablation_restrict/lsm_hz1.6_topoB/run.log,pth_max: 1.62e+00,True,True,False,False
+table,1.00,1.0,2,False,3,"LSM $h_z{=}1.6$ | \multicolumn{2}{c}{Naive routing} | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,312740,11541,supported,supported,0.121,0.091,proposal/logs/naive_topoC/lsm_hz-0.7_topoC/summary.json,embedding,True,True,False,False
+table,1.00,1.0,2,False,3,"LSM $h_z{=}1.6$ | \multicolumn{2}{c}{TA-AVQDS (ours)} | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,312740,11541,unattributed,unattributed,0.114,0.091,proposal/logs/ta_tau1e-4/lsm_hz-0.7_topoA/summary.json,embedding,True,True,False,False
+table,1.00,1.0,2,False,3,"LSM $h_z{=}1.6$ |  | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,312740,11541,unattributed,unattributed,0.089,0.091,proposal/logs/embeddings/embeddings.json,lsm_hz-0.7_topoA embedding,True,True,False,False
+table,1.00,1.0,2,False,3,"LSM $h_z{=}1.6$ |  | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,312740,11541,unattributed,unattributed,0.089,0.091,proposal/logs/embeddings/embeddings.json,lsm_hz-0.7_topoA embedding,True,True,False,False
+table,1.6,1.6,1,False,2,"LSM $h_z{=}1.6$ | Benchmark | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,6526,245,unattributed,unattributed,0.039,1.0,proposal/logs/ablation_restrict/lsm_hz1.6_topoB/run.log,pth_max: 1.62e+00,True,True,False,False
+table,1.69,1.69,2,False,3,"LSM $h_z{=}1.6$ | \multicolumn{2}{c}{Naive routing} | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,595,30,unattributed,unattributed,0.079,0.091,proposal/logs/analysis/tables.json,overhead naive ncx_mult,True,True,False,False
+table,1.82,1.82,2,False,3,"LSM $h_z{=}1.6$ | \multicolumn{2}{c}{TA-AVQDS (ours)} | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,588,20,unattributed,unattributed,0.037,0.182,proposal/logs/analysis/tables.json,overhead naive depth_mult,True,True,False,False
+table,1.08,1.08,2,False,3,"LSM $h_z{=}1.6$ |  | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,914,53,unattributed,unattributed,0.045,0.273,proposal/logs/analysis/ablation.json,full,True,True,False,False
+table,1.18,1.18,2,False,3,"LSM $h_z{=}1.6$ |  | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,944,56,unattributed,unattributed,0.042,0.364,proposal/logs/analysis/tables.json,overhead ta depth_mult,True,True,False,False
+table,1.00,1.0,2,False,3,"Average | \multicolumn{2}{c}{Naive routing} | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,312740,11541,unattributed,unattributed,0.082,0.091,proposal/logs/naive_topoC/lsm_hz-0.7_topoC/summary.json,embedding,True,True,False,False
+table,1.00,1.0,2,False,3,"Average | \multicolumn{2}{c}{TA-AVQDS (ours)} | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,312740,11541,unattributed,unattributed,0.079,0.182,proposal/logs/analysis/tables.json,overhead ta ncx_mult,True,True,False,False
+table,1.00,1.0,2,False,3,"Average |  | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,312740,11541,unattributed,unattributed,0.046,0.182,proposal/logs/embeddings/embeddings.json,lsm_hz-0.7_topoA embedding,True,True,False,False
+table,1.00,1.0,2,False,3,"Average |  | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,312740,11541,unattributed,unattributed,0.046,0.182,proposal/logs/embeddings/embeddings.json,lsm_hz-0.7_topoA embedding,True,True,False,False
+table,2.48,2.48,2,False,3,"Average | \multicolumn{2}{c}{Naive routing} | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,979,105,unattributed,unattributed,0.039,0.545,proposal/logs/naive_topoC/mfim_hz0.5_topoC/audit.log,t=2.483154 new logical gates=1,True,True,False,False
+table,3.36,3.36,2,False,3,"Average | \multicolumn{2}{c}{TA-AVQDS (ours)} | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,389,44,unattributed,unattributed,0.0,1.0,proposal/logs/equivalence_check/mfim_hz0.0_slowexpm/run.log,max element in p_params: 3.36,True,True,False,False
+table,1.63,1.63,2,False,3,"Average |  | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,581,12,unattributed,unattributed,0.0,1.0,proposal/logs/ta_tau1e-4/mfim_hz0.0_topoB/audit.log,t=1.630676 new_gates=1 cum: rot2=49 swap=44 ncx=230 depth=141 violations_total=0,True,True,False,False
+table,2.01,2.01,2,False,3,"Average |  | Overhead of topology compliance relative to the unconstrained
+baseline (per-configuration multipliers; lower is better), with
+per-topology averages.  Topology A admits full embeddings of both
+interaction graphs; Topology B does not.",traced,traced,766,28,unattributed,unattributed,0.0,1.0,proposal/logs/ta_tau1e-4/mfim_hz0.0_topoA/audit.log,t=2.006495 new_gates=1 cum: rot2=67 swap=0 ncx=134 depth=68 violations_total=0,True,True,False,False
+table,0.9996,0.9996,4,False,4,"MFIM $h_z{=}0$ |  | Linear-chain topology (Topology C): final fidelity of
+\tavqds{",traced,traced,20086,119,supported,unattributed,0.354,0.182,proposal/logs/unconstrained/mfim_hz0.0/summary.json,final_fidelity,True,False,False,False
+table,3.25,3.25,2,False,3,"MFIM $h_z{=}0$ | \multicolumn{2}{c}{TA-AVQDS} | Linear-chain topology (Topology C): final fidelity of
+\tavqds{",traced,traced,393,38,unattributed,unattributed,0.083,0.909,proposal/logs/equivalence_check/mfim_hz0.0_slowexpm/run.log,one_step 3.25 s,True,True,False,False
+table,1.86,1.86,2,False,3,"MFIM $h_z{=}0$ |  | Linear-chain topology (Topology C): final fidelity of
+\tavqds{",traced,traced,591,29,unattributed,unattributed,0.102,0.818,proposal/logs/equivalence_check/mfim_hz0.0_slowexpm/run.log,one_step 1.86 s,True,True,False,False
+table,0.5,0.5,1,False,1,"MFIM $h_z{=}0.5$ |  | Linear-chain topology (Topology C): final fidelity of
+\tavqds{",traced,traced,115293,1757,unattributed,unattributed,0.102,1.0,proposal/logs/equivalence_check/mfim_hz0.0_slowexpm/run.log,one_step 0.55 s,True,True,False,False
+table,0.9992,0.9992,4,False,4,"MFIM $h_z{=}0.5$ |  | Linear-chain topology (Topology C): final fidelity of
+\tavqds{",traced,traced,905,45,supported,unattributed,0.354,0.182,proposal/logs/unconstrained/mfim_hz0.5/summary.json,final_fidelity,True,False,False,False
+table,3.25,3.25,2,False,3,"MFIM $h_z{=}0.5$ | \multicolumn{2}{c}{TA-AVQDS} | Linear-chain topology (Topology C): final fidelity of
+\tavqds{",traced,traced,393,38,unattributed,unattributed,0.083,0.909,proposal/logs/equivalence_check/mfim_hz0.0_slowexpm/run.log,one_step 3.25 s,True,True,False,False
+table,2.41,2.41,2,False,3,"MFIM $h_z{=}0.5$ |  | Linear-chain topology (Topology C): final fidelity of
+\tavqds{",traced,traced,868,64,unattributed,unattributed,0.099,1.0,proposal/logs/equivalence_check/mfim_hz0.0_slowexpm/run.log,global phase contribution for v: 2.40632156349949,True,True,False,False
+table,0.7,0.7,1,False,1,"LSM $h_z{=}{-}0.7$ |  | Linear-chain topology (Topology C): final fidelity of
+\tavqds{",traced,traced,105431,566,unattributed,unattributed,0.113,0.222,proposal/logs/unconstrained/lsm_hz-0.7/summary.json,benchmark,True,True,False,False
+table,0.9996,0.9996,4,False,4,"LSM $h_z{=}{-}0.7$ |  | Linear-chain topology (Topology C): final fidelity of
+\tavqds{",traced,traced,20086,119,supported,supported,0.354,0.091,proposal/logs/unconstrained/lsm_hz1.6/summary.json,final_fidelity,True,False,False,False
+table,1.00,1.0,2,False,3,"LSM $h_z{=}{-}0.7$ | \multicolumn{2}{c}{TA-AVQDS} | Linear-chain topology (Topology C): final fidelity of
+\tavqds{",traced,traced,312740,11541,supported,supported,0.365,0.091,proposal/logs/ta_tau1e-4/lsm_hz1.6_topoB/summary.json,final_fidelity,True,True,False,False
+table,1.00,1.0,2,False,3,"LSM $h_z{=}{-}0.7$ |  | Linear-chain topology (Topology C): final fidelity of
+\tavqds{",traced,traced,312740,11541,supported,supported,0.354,0.091,proposal/logs/unconstrained/lsm_hz1.6/summary.json,final_fidelity,True,True,False,False
+table,1.6,1.6,1,False,2,"LSM $h_z{=}1.6$ |  | Linear-chain topology (Topology C): final fidelity of
+\tavqds{",traced,traced,6526,245,unattributed,unattributed,0.099,1.0,proposal/logs/ablation_restrict/lsm_hz1.6_topoB/run.log,pth_max: 1.62e+00,True,True,False,False
+table,0.9996,0.9996,4,False,4,"LSM $h_z{=}1.6$ |  | Linear-chain topology (Topology C): final fidelity of
+\tavqds{",traced,traced,20086,119,supported,supported,0.354,0.091,proposal/logs/unconstrained/lsm_hz1.6/summary.json,final_fidelity,True,False,False,False
+table,1.00,1.0,2,False,3,"LSM $h_z{=}1.6$ | \multicolumn{2}{c}{TA-AVQDS} | Linear-chain topology (Topology C): final fidelity of
+\tavqds{",traced,traced,312740,11541,supported,supported,0.365,0.091,proposal/logs/ta_tau1e-4/lsm_hz1.6_topoB/summary.json,final_fidelity,True,True,False,False
+table,1.00,1.0,2,False,3,"LSM $h_z{=}1.6$ |  | Linear-chain topology (Topology C): final fidelity of
+\tavqds{",traced,traced,312740,11541,supported,supported,0.354,0.091,proposal/logs/unconstrained/lsm_hz1.6/summary.json,final_fidelity,True,True,False,False
+table,1.00,1.0,2,False,3,"MFIM $h_z{=}0$ | \multicolumn{5}{c}{CNOT multiplier vs. unconstrained} | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,312740,11541,supported,supported,0.162,0.091,proposal/logs/ablation_nonpers/mfim_hz0.0_topoB/summary.json,embedding,True,True,True,False
+table,1.00,1.0,2,False,3,"MFIM $h_z{=}0$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,312740,11541,supported,supported,0.162,0.091,proposal/logs/ablation_nonpers/mfim_hz0.0_topoB/summary.json,embedding,True,True,True,False
+table,1.00,1.0,2,False,3,"MFIM $h_z{=}0$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,312740,11541,supported,supported,0.162,0.091,proposal/logs/ablation_nonpers/mfim_hz0.0_topoB/summary.json,embedding,True,True,True,False
+table,1.00,1.0,2,False,3,"MFIM $h_z{=}0$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,312740,11541,supported,supported,0.162,0.091,proposal/logs/ablation_nonpers/mfim_hz0.0_topoB/summary.json,embedding,True,True,True,False
+table,1.00,1.0,2,False,3,"MFIM $h_z{=}0$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,312740,11541,supported,supported,0.162,0.091,proposal/logs/ablation_nonpers/mfim_hz0.0_topoB/summary.json,embedding,True,True,True,False
+table,1.00,1.0,2,False,3,"MFIM $h_z{=}0$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,312740,11541,supported,supported,0.162,0.091,proposal/logs/ablation_nonpers/mfim_hz0.0_topoB/summary.json,embedding,True,True,True,False
+table,3.29,3.29,2,False,3,"MFIM $h_z{=}0$ | \multicolumn{5}{c}{CNOT multiplier vs. unconstrained} | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,392,62,unattributed,unattributed,0.089,0.091,proposal/logs/analysis/ablation.json,naive,True,True,False,False
+table,3.40,3.4,2,False,3,"MFIM $h_z{=}0$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,381,49,unattributed,unattributed,0.086,0.091,proposal/logs/analysis/ablation.json,naive_keep,True,True,False,False
+table,1.90,1.9,2,False,3,"MFIM $h_z{=}0$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,618,19,supported,unattributed,0.133,1.0,proposal/logs/ablation_nonpers/mfim_hz0.5_topoA/audit.log,t=1.895184 new_gates=1 cum: rot2=68 swap=0 ncx=136 depth=60 violations_total=0,True,True,True,False
+table,1.86,1.86,2,False,3,"MFIM $h_z{=}0$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,591,29,supported,unattributed,0.153,0.727,proposal/logs/ablation_restrict/mfim_hz0.0_topoB/run.log,pth_max: 1.86e+00,True,True,True,False
+table,2.19,2.19,2,False,3,"MFIM $h_z{=}0$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,730,139,unattributed,unattributed,0.089,0.909,proposal/logs/analysis/ablation.json,nonpers,True,True,True,False
+table,2.08,2.08,2,False,3,"MFIM $h_z{=}0$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,728,163,supported,unattributed,0.133,1.0,proposal/logs/ablation_nonpers/mfim_hz0.5_topoA/audit.log,t=2.083656 new_gates=1 cum: rot2=74 swap=0 ncx=148 depth=64 violations_total=0,True,True,True,False
+table,0.5,0.5,1,False,1,"MFIM $h_z{=}0.5$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,115293,1757,supported,unattributed,0.153,0.875,proposal/logs/ablation_restrict/mfim_hz0.5_topoB/run.log,pth_max: 4.52e-01,True,True,True,False
+table,1.00,1.0,2,False,3,"MFIM $h_z{=}0.5$ | \multicolumn{5}{c}{CNOT multiplier vs. unconstrained} | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,312740,11541,supported,supported,0.162,0.091,proposal/logs/ablation_nonpers/mfim_hz0.0_topoB/summary.json,embedding,True,True,True,False
+table,1.00,1.0,2,False,3,"MFIM $h_z{=}0.5$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,312740,11541,supported,supported,0.162,0.091,proposal/logs/ablation_nonpers/mfim_hz0.0_topoB/summary.json,embedding,True,True,True,False
+table,1.00,1.0,2,False,3,"MFIM $h_z{=}0.5$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,312740,11541,supported,supported,0.162,0.091,proposal/logs/ablation_nonpers/mfim_hz0.0_topoB/summary.json,embedding,True,True,True,False
+table,1.00,1.0,2,False,3,"MFIM $h_z{=}0.5$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,312740,11541,supported,supported,0.162,0.091,proposal/logs/ablation_nonpers/mfim_hz0.0_topoB/summary.json,embedding,True,True,True,False
+table,1.00,1.0,2,False,3,"MFIM $h_z{=}0.5$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,312740,11541,supported,supported,0.162,0.091,proposal/logs/ablation_nonpers/mfim_hz0.0_topoB/summary.json,embedding,True,True,True,False
+table,1.00,1.0,2,False,3,"MFIM $h_z{=}0.5$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,312740,11541,supported,supported,0.162,0.091,proposal/logs/ablation_nonpers/mfim_hz0.0_topoB/summary.json,embedding,True,True,True,False
+table,0.5,0.5,1,False,1,"MFIM $h_z{=}0.5$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,115293,1757,supported,unattributed,0.153,0.875,proposal/logs/ablation_restrict/mfim_hz0.5_topoB/run.log,pth_max: 4.52e-01,True,True,True,False
+table,3.22,3.22,2,False,3,"MFIM $h_z{=}0.5$ | \multicolumn{5}{c}{CNOT multiplier vs. unconstrained} | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,336,39,unattributed,unattributed,0.089,0.182,proposal/logs/analysis/ablation.json,naive,True,True,False,False
+table,3.52,3.52,2,False,3,"MFIM $h_z{=}0.5$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,277,48,unattributed,unattributed,0.086,0.091,proposal/logs/analysis/ablation.json,naive_keep,True,True,False,False
+table,2.62,2.62,2,False,3,"MFIM $h_z{=}0.5$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,948,139,supported,unattributed,0.133,0.818,proposal/logs/ablation_nonpers/mfim_hz0.5_topoB/audit.log,t=2.622537 new_gates=1 cum: rot2=93 swap=110 ncx=516 depth=294 violations_total=0,True,True,True,False
+table,2.22,2.22,2,False,3,"MFIM $h_z{=}0.5$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,599,75,supported,unattributed,0.133,1.0,proposal/logs/ablation_nonpers/mfim_hz0.5_topoB/audit.log,t=2.219092 new_gates=1 cum: rot2=78 swap=98 ncx=450 depth=256 violations_total=0,True,True,False,False
+table,2.75,2.75,2,False,3,"MFIM $h_z{=}0.5$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,798,81,supported,unattributed,0.133,0.818,proposal/logs/ablation_nonpers/mfim_hz0.5_topoA/audit.log,t=2.753787 new_gates=1 cum: rot2=96 swap=0 ncx=192 depth=88 violations_total=0,True,True,True,False
+table,2.25,2.25,2,False,3,"MFIM $h_z{=}0.5$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,618,75,supported,unattributed,0.133,0.818,proposal/logs/ablation_nonpers/mfim_hz0.5_topoB/audit.log,t=2.253188 new_gates=1 cum: rot2=78 swap=98 ncx=450 depth=256 violations_total=0,True,True,True,False
+table,0.7,0.7,1,False,1,"LSM $h_z{=}{-}0.7$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,105431,566,supported,unattributed,0.172,0.111,proposal/logs/unconstrained/lsm_hz-0.7/summary.json,benchmark,True,True,True,False
+table,1.00,1.0,2,False,3,"LSM $h_z{=}{-}0.7$ | \multicolumn{5}{c}{CNOT multiplier vs. unconstrained} | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,312740,11541,supported,supported,0.167,0.091,proposal/logs/unconstrained/lsm_hz1.6/summary.json,final_fidelity,True,True,True,False
+table,1.00,1.0,2,False,3,"LSM $h_z{=}{-}0.7$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,312740,11541,supported,supported,0.167,0.091,proposal/logs/unconstrained/lsm_hz1.6/summary.json,final_fidelity,True,True,True,False
+table,1.00,1.0,2,False,3,"LSM $h_z{=}{-}0.7$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,312740,11541,supported,supported,0.167,0.091,proposal/logs/unconstrained/lsm_hz1.6/summary.json,final_fidelity,True,True,True,False
+table,1.00,1.0,2,False,3,"LSM $h_z{=}{-}0.7$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,312740,11541,supported,supported,0.167,0.091,proposal/logs/unconstrained/lsm_hz1.6/summary.json,final_fidelity,True,True,True,False
+table,1.00,1.0,2,False,3,"LSM $h_z{=}{-}0.7$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,312740,11541,supported,supported,0.167,0.091,proposal/logs/unconstrained/lsm_hz1.6/summary.json,final_fidelity,True,True,True,False
+table,1.00,1.0,2,False,3,"LSM $h_z{=}{-}0.7$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,312740,11541,supported,supported,0.167,0.091,proposal/logs/unconstrained/lsm_hz1.6/summary.json,final_fidelity,True,True,True,False
+table,0.7,0.7,1,False,1,"LSM $h_z{=}{-}0.7$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,105431,566,supported,unattributed,0.172,0.111,proposal/logs/unconstrained/lsm_hz-0.7/summary.json,benchmark,True,True,True,False
+table,1.72,1.72,2,False,3,"LSM $h_z{=}{-}0.7$ | \multicolumn{5}{c}{CNOT multiplier vs. unconstrained} | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,537,37,supported,unattributed,0.153,0.273,proposal/logs/ablation_restrict/lsm_hz1.6_topoB/run.log,pth_max: 1.72e+00,True,True,True,True
+table,1.93,1.93,2,False,3,"LSM $h_z{=}{-}0.7$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,617,21,supported,unattributed,0.153,0.273,proposal/logs/ablation_restrict/lsm_hz1.6_topoB/run.log,max element in p_params: 1.93,True,True,True,True
+table,1.27,1.27,2,False,3,"LSM $h_z{=}{-}0.7$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,893,138,unattributed,unattributed,0.089,0.364,proposal/logs/analysis/ablation.json,tau0,True,True,False,False
+table,1.49,1.49,2,False,3,"LSM $h_z{=}{-}0.7$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,913,50,supported,unattributed,0.133,0.364,proposal/logs/ablation_noloc/lsm_hz-0.7_topoB/audit.log,t=1.488429 new_gates=1 cum: rot2=46 swap=25 ncx=167 depth=108 violations_total=0,True,True,False,False
+table,1.50,1.5,2,False,3,"LSM $h_z{=}{-}0.7$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,864,32,unattributed,unattributed,0.089,0.455,proposal/logs/analysis/ablation.json,nonpers,True,True,False,False
+table,1.12,1.12,2,False,3,"LSM $h_z{=}{-}0.7$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,801,21,unattributed,unattributed,0.089,0.545,proposal/logs/analysis/ablation.json,full,True,True,False,False
+table,1.6,1.6,1,False,2,"LSM $h_z{=}1.6$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,6526,245,supported,unattributed,0.153,0.818,proposal/logs/ablation_restrict/lsm_hz1.6_topoB/run.log,pth_max: 1.62e+00,True,True,True,False
+table,1.00,1.0,2,False,3,"LSM $h_z{=}1.6$ | \multicolumn{5}{c}{CNOT multiplier vs. unconstrained} | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,312740,11541,supported,supported,0.167,0.091,proposal/logs/unconstrained/lsm_hz1.6/summary.json,final_fidelity,True,True,True,False
+table,1.00,1.0,2,False,3,"LSM $h_z{=}1.6$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,312740,11541,supported,supported,0.167,0.091,proposal/logs/unconstrained/lsm_hz1.6/summary.json,final_fidelity,True,True,True,False
+table,1.00,1.0,2,False,3,"LSM $h_z{=}1.6$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,312740,11541,supported,supported,0.167,0.091,proposal/logs/unconstrained/lsm_hz1.6/summary.json,final_fidelity,True,True,True,False
+table,1.00,1.0,2,False,3,"LSM $h_z{=}1.6$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,312740,11541,supported,supported,0.167,0.091,proposal/logs/unconstrained/lsm_hz1.6/summary.json,final_fidelity,True,True,True,False
+table,1.00,1.0,2,False,3,"LSM $h_z{=}1.6$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,312740,11541,supported,supported,0.167,0.091,proposal/logs/unconstrained/lsm_hz1.6/summary.json,final_fidelity,True,True,True,False
+table,1.00,1.0,2,False,3,"LSM $h_z{=}1.6$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,312740,11541,supported,supported,0.167,0.091,proposal/logs/unconstrained/lsm_hz1.6/summary.json,final_fidelity,True,True,True,False
+table,1.6,1.6,1,False,2,"LSM $h_z{=}1.6$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,6526,245,supported,unattributed,0.153,0.818,proposal/logs/ablation_restrict/lsm_hz1.6_topoB/run.log,pth_max: 1.62e+00,True,True,True,False
+table,1.69,1.69,2,False,3,"LSM $h_z{=}1.6$ | \multicolumn{5}{c}{CNOT multiplier vs. unconstrained} | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,595,30,unattributed,unattributed,0.089,0.273,proposal/logs/analysis/ablation.json,naive,True,True,True,False
+table,2.16,2.16,2,False,3,"LSM $h_z{=}1.6$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,640,60,unattributed,unattributed,0.086,0.818,proposal/logs/analysis/ablation.json,naive_keep,True,True,True,False
+table,1.30,1.3,2,False,3,"LSM $h_z{=}1.6$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,788,30,unattributed,unattributed,0.089,0.364,proposal/logs/analysis/ablation.json,tau0,True,True,False,False
+table,1.58,1.58,2,False,3,"LSM $h_z{=}1.6$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,634,22,unattributed,unattributed,0.089,0.545,proposal/logs/analysis/ablation.json,noloc,True,True,False,False
+table,1.48,1.48,2,False,3,"LSM $h_z{=}1.6$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,883,27,unattributed,unattributed,0.089,0.364,proposal/logs/analysis/ablation.json,nonpers,True,True,False,False
+table,1.08,1.08,2,False,3,"LSM $h_z{=}1.6$ |  | Component ablations and routing baselines: CNOT multipliers
+relative to unconstrained \avqds{",traced,traced,914,53,unattributed,unattributed,0.089,0.636,proposal/logs/analysis/ablation.json,full,True,True,False,False
+table,37.1,37.1,1,False,3,"MFIM $h_z{=}0$ | Unconstrained | Wall-clock time (minutes, single core, including all
+record-keeping) of each simulation.  The naive runs duplicate the
+unconstrained dynamics plus per-step re-routing; the \tavqds{",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+table,36.7,36.7,1,False,3,"MFIM $h_z{=}0$ | Naive (A / B) | Wall-clock time (minutes, single core, including all
+record-keeping) of each simulation.  The naive runs duplicate the
+unconstrained dynamics plus per-step re-routing; the \tavqds{",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+table,36.2,36.2,1,False,3,"MFIM $h_z{=}0$ | Naive (A / B) | Wall-clock time (minutes, single core, including all
+record-keeping) of each simulation.  The naive runs duplicate the
+unconstrained dynamics plus per-step re-routing; the \tavqds{",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+table,50.2,50.2,1,False,3,"MFIM $h_z{=}0$ | TA-AVQDS (A / B) | Wall-clock time (minutes, single core, including all
+record-keeping) of each simulation.  The naive runs duplicate the
+unconstrained dynamics plus per-step re-routing; the \tavqds{",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+table,51.9,51.9,1,False,3,"MFIM $h_z{=}0$ | TA-AVQDS (A / B) | Wall-clock time (minutes, single core, including all
+record-keeping) of each simulation.  The naive runs duplicate the
+unconstrained dynamics plus per-step re-routing; the \tavqds{",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+table,0.5,0.5,1,False,1,"MFIM $h_z{=}0.5$ | Benchmark | Wall-clock time (minutes, single core, including all
+record-keeping) of each simulation.  The naive runs duplicate the
+unconstrained dynamics plus per-step re-routing; the \tavqds{",traced,traced,115293,1757,unattributed,unattributed,0.08,1.0,proposal/logs/equivalence_check/mfim_hz0.0_slowexpm/run.log,one_step 0.55 s,True,True,False,False
+table,63.0,63.0,1,False,3,"MFIM $h_z{=}0.5$ | Unconstrained | Wall-clock time (minutes, single core, including all
+record-keeping) of each simulation.  The naive runs duplicate the
+unconstrained dynamics plus per-step re-routing; the \tavqds{",traced,traced,4206,76,unattributed,unattributed,0.039,0.273,proposal/logs/ablation_restrict/mfim_hz0.0_topoB/run.log,"icyc = 63, dist = 1.17e-03, improving 7.57e-02",False,False,False,False
+table,60.1,60.1,1,False,3,"MFIM $h_z{=}0.5$ | Naive (A / B) | Wall-clock time (minutes, single core, including all
+record-keeping) of each simulation.  The naive runs duplicate the
+unconstrained dynamics plus per-step re-routing; the \tavqds{",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+table,61.0,61.0,1,False,3,"MFIM $h_z{=}0.5$ | Naive (A / B) | Wall-clock time (minutes, single core, including all
+record-keeping) of each simulation.  The naive runs duplicate the
+unconstrained dynamics plus per-step re-routing; the \tavqds{",traced,traced,8074,115,unattributed,unattributed,0.041,0.273,proposal/logs/ta_tau1e-6/mfim_hz0.0_topoB/summary.json,n_swap_gates,False,False,False,False
+table,80.8,80.8,1,False,3,"MFIM $h_z{=}0.5$ | TA-AVQDS (A / B) | Wall-clock time (minutes, single core, including all
+record-keeping) of each simulation.  The naive runs duplicate the
+unconstrained dynamics plus per-step re-routing; the \tavqds{",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+table,85.1,85.1,1,False,3,"MFIM $h_z{=}0.5$ | TA-AVQDS (A / B) | Wall-clock time (minutes, single core, including all
+record-keeping) of each simulation.  The naive runs duplicate the
+unconstrained dynamics plus per-step re-routing; the \tavqds{",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+table,0.7,0.7,1,False,1,"LSM $h_z{=}{-}0.7$ | Benchmark | Wall-clock time (minutes, single core, including all
+record-keeping) of each simulation.  The naive runs duplicate the
+unconstrained dynamics plus per-step re-routing; the \tavqds{",traced,traced,105431,566,supported,unattributed,0.128,0.111,proposal/logs/unconstrained/lsm_hz-0.7/summary.json,benchmark,True,True,False,False
+table,36.2,36.2,1,False,3,"LSM $h_z{=}{-}0.7$ | Unconstrained | Wall-clock time (minutes, single core, including all
+record-keeping) of each simulation.  The naive runs duplicate the
+unconstrained dynamics plus per-step re-routing; the \tavqds{",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+table,37.4,37.4,1,False,3,"LSM $h_z{=}{-}0.7$ | Naive (A / B) | Wall-clock time (minutes, single core, including all
+record-keeping) of each simulation.  The naive runs duplicate the
+unconstrained dynamics plus per-step re-routing; the \tavqds{",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+table,37.7,37.7,1,False,3,"LSM $h_z{=}{-}0.7$ | Naive (A / B) | Wall-clock time (minutes, single core, including all
+record-keeping) of each simulation.  The naive runs duplicate the
+unconstrained dynamics plus per-step re-routing; the \tavqds{",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+table,50.8,50.8,1,False,3,"LSM $h_z{=}{-}0.7$ | TA-AVQDS (A / B) | Wall-clock time (minutes, single core, including all
+record-keeping) of each simulation.  The naive runs duplicate the
+unconstrained dynamics plus per-step re-routing; the \tavqds{",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+table,47.1,47.1,1,False,3,"LSM $h_z{=}{-}0.7$ | TA-AVQDS (A / B) | Wall-clock time (minutes, single core, including all
+record-keeping) of each simulation.  The naive runs duplicate the
+unconstrained dynamics plus per-step re-routing; the \tavqds{",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+table,1.6,1.6,1,False,2,"LSM $h_z{=}1.6$ | Benchmark | Wall-clock time (minutes, single core, including all
+record-keeping) of each simulation.  The naive runs duplicate the
+unconstrained dynamics plus per-step re-routing; the \tavqds{",traced,traced,6526,245,unattributed,unattributed,0.039,1.0,proposal/logs/equivalence_check/mfim_hz0.0_slowexpm/run.log,one_step 1.64 s,True,True,False,False
+table,48.1,48.1,1,False,3,"LSM $h_z{=}1.6$ | Unconstrained | Wall-clock time (minutes, single core, including all
+record-keeping) of each simulation.  The naive runs duplicate the
+unconstrained dynamics plus per-step re-routing; the \tavqds{",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+table,49.4,49.4,1,False,3,"LSM $h_z{=}1.6$ | Naive (A / B) | Wall-clock time (minutes, single core, including all
+record-keeping) of each simulation.  The naive runs duplicate the
+unconstrained dynamics plus per-step re-routing; the \tavqds{",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+table,48.1,48.1,1,False,3,"LSM $h_z{=}1.6$ | Naive (A / B) | Wall-clock time (minutes, single core, including all
+record-keeping) of each simulation.  The naive runs duplicate the
+unconstrained dynamics plus per-step re-routing; the \tavqds{",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+table,62.2,62.2,1,False,3,"LSM $h_z{=}1.6$ | TA-AVQDS (A / B) | Wall-clock time (minutes, single core, including all
+record-keeping) of each simulation.  The naive runs duplicate the
+unconstrained dynamics plus per-step re-routing; the \tavqds{",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+table,56.9,56.9,1,False,3,"LSM $h_z{=}1.6$ | TA-AVQDS (A / B) | Wall-clock time (minutes, single core, including all
+record-keeping) of each simulation.  The naive runs duplicate the
+unconstrained dynamics plus per-step re-routing; the \tavqds{",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+prose,1.63,1.63,2,False,3,"unconstrained fidelities with zero routing overhead on the square lattice, whose Hamiltonian cycle embeds both interaction graphs, and a mean CNOT overhead of $1.63\times$ on the heavy-hex subgraph, which admits no Hamiltonian path, compared with $2.48\times$ for post-hoc shortest-path SWAP routing of the same unconstraine",traced,traced,581,12,unattributed,unattributed,0.027,1.0,proposal/logs/ta_tau1e-4/mfim_hz0.0_topoB/audit.log,t=1.630676 new_gates=1 cum: rot2=49 swap=44 ncx=230 depth=141 violations_total=0,True,True,False,False
+prose,2.48,2.48,2,False,3,"nian cycle embeds both interaction graphs, and a mean CNOT overhead of $1.63\times$ on the heavy-hex subgraph, which admits no Hamiltonian path, compared with $2.48\times$ for post-hoc shortest-path SWAP routing of the same unconstrained circuit under the same provably optimal embedding.",traced,traced,979,105,unattributed,unattributed,0.028,0.455,proposal/logs/ta_topoC/mfim_hz0.5_topoC/audit.log,t=2.475237 new_gates=1 cum: rot2=89 swap=78 ncx=412 depth=230 violations_total=0,True,True,False,False
+prose,0.5,0.5,1,False,1,"-qubit benchmarks of Ref.~ : sudden quenches of the mixed-field Ising model (MFIM) with periodic boundaries at longitudinal field $h_z=0$ (integrable) and $h_z=0.5$ (nonintegrable), and linear ramps through the ferromagnetic phase transition of the Lieb-Schultz-Mattis (LSM) chain~ with open boundaries at $h_z=-0.7$ and $h",traced,traced,115293,1757,unattributed,unattributed,0.032,1.0,proposal/logs/equivalence_check/mfim_hz0.0_slowexpm/run.log,one_step 0.55 s,True,True,False,False
+prose,-0.7,-0.7,1,False,1,"and $h_z=0.5$ (nonintegrable), and linear ramps through the ferromagnetic phase transition of the Lieb-Schultz-Mattis (LSM) chain~ with open boundaries at $h_z=-0.7$ and $h_z=1.6$, each followed by an equal period of post-ramp evolution.",traced,untraced,15887,0,untraced,untraced,0.0,1.0,,,True,True,False,False
+prose,1.6,1.6,1,False,2,"nonintegrable), and linear ramps through the ferromagnetic phase transition of the Lieb-Schultz-Mattis (LSM) chain~ with open boundaries at $h_z=-0.7$ and $h_z=1.6$, each followed by an equal period of post-ramp evolution.",traced,traced,6526,245,unattributed,unattributed,0.042,1.0,proposal/logs/ablation_restrict/lsm_hz1.6_topoB/run.log,pth_max: 1.62e+00,True,True,False,False
+prose,0.02,0.02,2,False,1,"\item \textbf{Accuracy preservation.} Across all eight (benchmark $\times$ topology) configurations, the final-time fidelity of \tavqds{} stays within 0.02 percentage points of the unconstrained baseline (Sec.~ ), well inside the $1\%$ target, with the same initial states, integrator settings, and final times.",traced,traced,48081,397,unattributed,unattributed,0.037,0.167,proposal/logs/stage2.log,set_par_states 0.02 s,True,True,False,False
+prose,1\%,1.0,0,True,1,"es$ topology) configurations, the final-time fidelity of \tavqds{} stays within 0.02 percentage points of the unconstrained baseline (Sec.~ ), well inside the $1\%$ target, with the same initial states, integrator settings, and final times.",traced,traced,942396,16604,unattributed,unattributed,0.087,0.167,proposal/logs/stage2.log,"""final_fidelity"": 0.9995642579084224,",True,True,False,False
+prose,1.00,1.0,2,False,3,"\item \textbf{Quantified overhead.} On the square lattice the overhead is exactly zero (multipliers $1.00$), because the Hamiltonian-cycle embedding makes every pool operator local and \tavqds{} then reproduces the unconstrained growth.",traced,traced,312740,11541,unattributed,unattributed,0.044,0.091,proposal/logs/embeddings/embeddings.json,lsm_hz-0.7_topoA embedding,True,True,False,False
+prose,1.63,1.63,2,False,3,"On the heavy-hex subgraph \tavqds{} incurs a mean CNOT multiplier of $1.63$ and depth multiplier $2.01$, versus $2.48$ and $3.36$ for the naive baseline—a $2$–$3\times$ reduction in routing overhead with no accuracy loss.",traced,traced,581,12,unattributed,unattributed,0.046,1.0,proposal/logs/ta_tau1e-4/mfim_hz0.0_topoB/audit.log,t=1.630676 new_gates=1 cum: rot2=49 swap=44 ncx=230 depth=141 violations_total=0,True,True,False,False
+prose,2.01,2.01,2,False,3,"On the heavy-hex subgraph \tavqds{} incurs a mean CNOT multiplier of $1.63$ and depth multiplier $2.01$, versus $2.48$ and $3.36$ for the naive baseline—a $2$–$3\times$ reduction in routing overhead with no accuracy loss.",traced,traced,766,28,unattributed,unattributed,0.052,0.818,proposal/logs/naive_topoC/mfim_hz0.0_topoC/audit.log,t=2.006495 new logical gates=1,True,True,False,False
+prose,2.48,2.48,2,False,3,"On the heavy-hex subgraph \tavqds{} incurs a mean CNOT multiplier of $1.63$ and depth multiplier $2.01$, versus $2.48$ and $3.36$ for the naive baseline—a $2$–$3\times$ reduction in routing overhead with no accuracy loss.",traced,traced,979,105,unattributed,unattributed,0.052,0.545,proposal/logs/naive_topoC/mfim_hz0.5_topoC/audit.log,t=2.483154 new logical gates=1,True,True,False,False
+prose,3.36,3.36,2,False,3,"On the heavy-hex subgraph \tavqds{} incurs a mean CNOT multiplier of $1.63$ and depth multiplier $2.01$, versus $2.48$ and $3.36$ for the naive baseline—a $2$–$3\times$ reduction in routing overhead with no accuracy loss.",traced,traced,389,44,unattributed,unattributed,0.0,1.0,proposal/logs/equivalence_check/mfim_hz0.0_slowexpm/run.log,max element in p_params: 3.36,True,True,False,False
+prose,0.5,0.5,1,False,1,"iZ_{i+1}+h_x\sum_i X_i+h_z\sum_i Z_i$ with $J=1$, $h_x=-2$, sudden quench from $|0\rangle^{\otimes 8}$, final time $T=3$, at $h_z=0$ (integrable TFIM) and $h_z=0.5$ (nonintegrable).",traced,traced,115293,1757,unattributed,unattributed,0.0,1.0,proposal/logs/ta_tau1e-4/mfim_hz0.0_topoA/audit.log,t=0.509278 new_gates=1 cum: rot2=30 swap=0 ncx=60 depth=38 violations_total=0,True,True,False,False
+prose,0.5,0.5,1,False,1,"Hamiltonian pools~ : 16 operators ($8\,X_i+8\,Z_iZ_{i+1}$) at $h_z=0$; 24 (adding $8\,Z_i$) at $h_z=0.5$. (ii) LSM, open boundaries: $\hat H=-\sum_i[(1{+}\gamma)X_iX_{i+1}+(1{-}\gamma)Y_iY_{i+1}] +h_z\sum_iZ_i$ with the linear ramp $\gamma(t)=1-2t/T$, $T=3$, foll",traced,traced,115293,1757,unattributed,unattributed,0.062,0.75,proposal/logs/ablation_restrict/lsm_hz-0.7_topoB/run.log,one_step 0.55 s,True,True,False,False
+prose,-0.7,-0.7,1,False,1,"X_iX_{i+1}+(1{-}\gamma)Y_iY_{i+1}] +h_z\sum_iZ_i$ with the linear ramp $\gamma(t)=1-2t/T$, $T=3$, followed by post-ramp evolution to total time $2T=6$, at $h_z=-0.7$ and $h_z=1.6$; the initial state is the exact ground state of $\hat H(0)$ (obtained by dense diagonalization and shared by all methods); pool of 22 operators",traced,untraced,15887,0,untraced,untraced,0.0,1.0,,,True,True,False,False
+prose,1.6,1.6,1,False,2,"}\gamma)Y_iY_{i+1}] +h_z\sum_iZ_i$ with the linear ramp $\gamma(t)=1-2t/T$, $T=3$, followed by post-ramp evolution to total time $2T=6$, at $h_z=-0.7$ and $h_z=1.6$; the initial state is the exact ground state of $\hat H(0)$ (obtained by dense diagonalization and shared by all methods); pool of 22 operators ($8\,Z_i$, $7\",traced,traced,6526,245,unattributed,unattributed,0.042,1.0,proposal/logs/equivalence_check/mfim_hz0.0_slowexpm/run.log,set_par_states 1.65 s,True,True,False,False
+prose,5\times10^{-4},0.0005,4,False,1,"Exact references: single eigendecomposition for the MFIM quenches; piecewise-constant propagation on a mesh of $5\times10^{-4}$ for the LSM ramps, as in Ref.~ ; operator construction uses QuTiP~ .",traced,traced,51012,1404,unattributed,unattributed,0.043,0.375,proposal/logs/ablation_restrict/mfim_hz0.0_topoB/run.log,"icyc = 0, dist = 4.93e-04, improving 3.93e-02",True,True,False,False
+prose,0.05,0.05,2,False,1,"All three use noiseless statevector simulation, the same initial states, the same integrator constants ($\delta t_{\max}=0.05$, $\delta\theta_{\max}=0.005$, $\distL_{\rm cut}=10^{-3}$, $\xi=10^{-6}$, $|\dot\theta|_{\rm cut}=7000$), and end exactly at the benchmark final time.",traced,traced,32432,589,unattributed,unattributed,0.058,0.5,proposal/logs/stage1.log,update_state 0.05 s,True,True,False,False
+prose,0.005,0.005,3,False,1,"All three use noiseless statevector simulation, the same initial states, the same integrator constants ($\delta t_{\max}=0.05$, $\delta\theta_{\max}=0.005$, $\distL_{\rm cut}=10^{-3}$, $\xi=10^{-6}$, $|\dot\theta|_{\rm cut}=7000$), and end exactly at the benchmark final time.",traced,traced,5386,207,unattributed,unattributed,0.048,0.875,proposal/logs/ablation_restrict/lsm_hz1.6_topoB/run.log,initial mcLachlan distance: 4.54e-03 pthmax: 2.90,True,False,False,False
+prose,0.9996,0.9996,4,False,4,"The unconstrained baseline reproduces the reference behavior of Ref.~ in our environment: final fidelities 0.9996 and 0.9992 (MFIM $h_z{=}0$, $0.5$) and 0.9996 and 0.9996 (LSM), all $\ge 99.9\%$, with $\ncx=144$, 208, 116, and 122 respectively (the paper's reference values",traced,traced,20086,119,supported,unattributed,0.191,0.182,proposal/logs/unconstrained/mfim_hz0.0/summary.json,final_fidelity,True,False,False,False
+prose,0.9992,0.9992,4,False,4,"The unconstrained baseline reproduces the reference behavior of Ref.~ in our environment: final fidelities 0.9996 and 0.9992 (MFIM $h_z{=}0$, $0.5$) and 0.9996 and 0.9996 (LSM), all $\ge 99.9\%$, with $\ncx=144$, 208, 116, and 122 respectively (the paper's reference values 134, 210,",traced,traced,905,45,supported,unattributed,0.191,0.182,proposal/logs/unconstrained/mfim_hz0.5/summary.json,final_fidelity,True,False,False,False
+prose,0.5,0.5,1,False,1,"The unconstrained baseline reproduces the reference behavior of Ref.~ in our environment: final fidelities 0.9996 and 0.9992 (MFIM $h_z{=}0$, $0.5$) and 0.9996 and 0.9996 (LSM), all $\ge 99.9\%$, with $\ncx=144$, 208, 116, and 122 respectively (the paper's reference values 134, 210, 100, 100 differ by the",traced,traced,115293,1757,unattributed,unattributed,0.055,1.0,proposal/logs/equivalence_check/mfim_hz0.0_slowexpm/run.log,one_step 0.55 s,True,True,False,False
+prose,0.9996,0.9996,4,False,4,"The unconstrained baseline reproduces the reference behavior of Ref.~ in our environment: final fidelities 0.9996 and 0.9992 (MFIM $h_z{=}0$, $0.5$) and 0.9996 and 0.9996 (LSM), all $\ge 99.9\%$, with $\ncx=144$, 208, 116, and 122 respectively (the paper's reference values 134, 210, 100, 100 differ by the known operat",traced,traced,20086,119,supported,unattributed,0.16,0.182,proposal/logs/unconstrained/mfim_hz0.0/summary.json,final_fidelity,True,False,False,False
+prose,0.9996,0.9996,4,False,4,"unconstrained baseline reproduces the reference behavior of Ref.~ in our environment: final fidelities 0.9996 and 0.9992 (MFIM $h_z{=}0$, $0.5$) and 0.9996 and 0.9996 (LSM), all $\ge 99.9\%$, with $\ncx=144$, 208, 116, and 122 respectively (the paper's reference values 134, 210, 100, 100 differ by the known operator-tie sens",traced,traced,20086,119,supported,unattributed,0.144,0.182,proposal/logs/unconstrained/mfim_hz0.0/summary.json,final_fidelity,True,False,False,False
+prose,99.9\%,99.9,1,True,3,"reproduces the reference behavior of Ref.~ in our environment: final fidelities 0.9996 and 0.9992 (MFIM $h_z{=}0$, $0.5$) and 0.9996 and 0.9996 (LSM), all $\ge 99.9\%$, with $\ncx=144$, 208, 116, and 122 respectively (the paper's reference values 134, 210, 100, 100 differ by the known operator-tie sensitivity of the growth l",traced,traced,14533,72,unattributed,unattributed,0.099,0.091,proposal/logs/unconstrained/mfim_hz0.5/summary.json,final_fidelity,True,True,False,False
+prose,1.00,1.0,2,False,3,"A}, the Hamiltonian-cycle embedding makes every pool operator local, \tavqds{} reduces exactly to unconstrained \avqds{}, and the multipliers are identically $1.00\times$: topology awareness costs nothing when the interaction graph fits the device.",traced,traced,312740,11541,unattributed,unattributed,0.04,0.091,proposal/logs/embeddings/embeddings.json,lsm_hz-0.7_topoA embedding,True,True,False,False
+prose,3.29,3.29,2,False,3,"The naive baseline pays $3.29\times$ (MFIM $h_z{=}0$), $3.22\times$ (MFIM $h_z{=}0.5$), $1.72\times$ (LSM $h_z{=}{-}0.7$), and $1.69\times$ (LSM $h_z{=}1.6$) in CNOTs—an average of $2.48\ti",traced,traced,392,62,unattributed,unattributed,0.109,0.091,proposal/logs/analysis/ablation.json,naive,True,True,False,False
+prose,3.22,3.22,2,False,3,"The naive baseline pays $3.29\times$ (MFIM $h_z{=}0$), $3.22\times$ (MFIM $h_z{=}0.5$), $1.72\times$ (LSM $h_z{=}{-}0.7$), and $1.69\times$ (LSM $h_z{=}1.6$) in CNOTs—an average of $2.48\times$—because every gate on a no",traced,traced,336,39,unattributed,unattributed,0.075,0.182,proposal/logs/analysis/ablation.json,naive,True,True,False,False
+prose,0.5,0.5,1,False,1,"The naive baseline pays $3.29\times$ (MFIM $h_z{=}0$), $3.22\times$ (MFIM $h_z{=}0.5$), $1.72\times$ (LSM $h_z{=}{-}0.7$), and $1.69\times$ (LSM $h_z{=}1.6$) in CNOTs—an average of $2.48\times$—because every gate on a non-embeddable bond drags",traced,traced,115293,1757,supported,unattributed,0.171,1.0,proposal/logs/naive_topoC/lsm_hz-0.7_topoC/audit.log,t=0.528617 new logical gates=1,True,True,True,False
+prose,1.72,1.72,2,False,3,"The naive baseline pays $3.29\times$ (MFIM $h_z{=}0$), $3.22\times$ (MFIM $h_z{=}0.5$), $1.72\times$ (LSM $h_z{=}{-}0.7$), and $1.69\times$ (LSM $h_z{=}1.6$) in CNOTs—an average of $2.48\times$—because every gate on a non-embeddable bond drags a shortes",traced,traced,537,37,unattributed,unattributed,0.094,0.636,proposal/logs/ta_topoC/mfim_hz0.5_topoC/audit.log,t=1.721872 new_gates=1 cum: rot2=63 swap=53 ncx=285 depth=161 violations_total=0,True,True,True,False
+prose,0.7,0.7,1,False,1,"The naive baseline pays $3.29\times$ (MFIM $h_z{=}0$), $3.22\times$ (MFIM $h_z{=}0.5$), $1.72\times$ (LSM $h_z{=}{-}0.7$), and $1.69\times$ (LSM $h_z{=}1.6$) in CNOTs—an average of $2.48\times$—because every gate on a non-embeddable bond drags a shortest-path SWAP chain across t",traced,traced,105431,566,supported,unattributed,0.139,1.0,proposal/logs/naive_topoC/lsm_hz-0.7_topoC/audit.log,t=0.725990 new logical gates=1,True,True,True,False
+prose,1.69,1.69,2,False,3,"The naive baseline pays $3.29\times$ (MFIM $h_z{=}0$), $3.22\times$ (MFIM $h_z{=}0.5$), $1.72\times$ (LSM $h_z{=}{-}0.7$), and $1.69\times$ (LSM $h_z{=}1.6$) in CNOTs—an average of $2.48\times$—because every gate on a non-embeddable bond drags a shortest-path SWAP chain across the device and",traced,traced,595,30,unattributed,unattributed,0.12,0.818,proposal/logs/ta_topoC/mfim_hz0.5_topoC/audit.log,t=1.688216 new_gates=1 cum: rot2=63 swap=53 ncx=285 depth=161 violations_total=0,True,True,True,False
+prose,1.6,1.6,1,False,2,"The naive baseline pays $3.29\times$ (MFIM $h_z{=}0$), $3.22\times$ (MFIM $h_z{=}0.5$), $1.72\times$ (LSM $h_z{=}{-}0.7$), and $1.69\times$ (LSM $h_z{=}1.6$) in CNOTs—an average of $2.48\times$—because every gate on a non-embeddable bond drags a shortest-path SWAP chain across the device and back.",traced,traced,6526,245,supported,unattributed,0.127,1.0,proposal/logs/naive_topoC/mfim_hz0.0_topoC/audit.log,t=1.572343 new logical gates=1,True,True,True,False
+prose,2.48,2.48,2,False,3,"s $3.29\times$ (MFIM $h_z{=}0$), $3.22\times$ (MFIM $h_z{=}0.5$), $1.72\times$ (LSM $h_z{=}{-}0.7$), and $1.69\times$ (LSM $h_z{=}1.6$) in CNOTs—an average of $2.48\times$—because every gate on a non-embeddable bond drags a shortest-path SWAP chain across the device and back.",traced,traced,979,105,supported,unattributed,0.131,0.455,proposal/logs/ta_topoC/mfim_hz0.5_topoC/audit.log,t=2.475237 new_gates=1 cum: rot2=89 swap=78 ncx=412 depth=230 violations_total=0,True,True,True,False
+prose,1.63,1.63,2,False,3,\tavqds{} cuts the average to $1.63\times$ (depth $2.01\times$) while keeping every final fidelity within 0.02 percentage points of the unconstrained value.,traced,traced,581,12,unattributed,unattributed,0.054,1.0,proposal/logs/ta_tau1e-4/mfim_hz0.0_topoB/audit.log,t=1.630676 new_gates=1 cum: rot2=49 swap=44 ncx=230 depth=141 violations_total=0,True,True,False,False
+prose,2.01,2.01,2,False,3,\tavqds{} cuts the average to $1.63\times$ (depth $2.01\times$) while keeping every final fidelity within 0.02 percentage points of the unconstrained value.,traced,traced,766,28,unattributed,unattributed,0.055,0.636,proposal/logs/ta_topoC/mfim_hz0.0_topoC/audit.log,t=2.007003 new_gates=1 cum: rot2=56 swap=48 ncx=256 depth=160 violations_total=0,True,True,False,False
+prose,0.02,0.02,2,False,1,\tavqds{} cuts the average to $1.63\times$ (depth $2.01\times$) while keeping every final fidelity within 0.02 percentage points of the unconstrained value.,traced,traced,48081,397,unattributed,unattributed,0.055,0.833,proposal/logs/ta_topoC/lsm_hz-0.7_topoC/audit.log,t=0.020000 new_gates=3 cum: rot2=3 swap=0 ncx=6 depth=4 violations_total=0,True,True,False,False
+prose,2.08,2.08,2,False,3,"The per-configuration detail is instructive: the MFIM overheads ($2.08\times$, $2.25\times$) exceed the LSM ones ($1.12\times$, $1.08\times$), consistent with the ring (8 bonds, of which at least 3 are non-local on Topology B) bei",traced,traced,728,163,unattributed,unattributed,0.049,0.182,proposal/logs/analysis/tables.json,overhead ta ncx_mult,True,True,False,False
+prose,2.25,2.25,2,False,3,"The per-configuration detail is instructive: the MFIM overheads ($2.08\times$, $2.25\times$) exceed the LSM ones ($1.12\times$, $1.08\times$), consistent with the ring (8 bonds, of which at least 3 are non-local on Topology B) being harder to r",traced,traced,618,75,unattributed,unattributed,0.046,0.182,proposal/logs/analysis/tables.json,overhead ta ncx_mult,True,True,False,False
+prose,1.12,1.12,2,False,3,"The per-configuration detail is instructive: the MFIM overheads ($2.08\times$, $2.25\times$) exceed the LSM ones ($1.12\times$, $1.08\times$), consistent with the ring (8 bonds, of which at least 3 are non-local on Topology B) being harder to route than the chain (7 bonds, at le",traced,traced,801,21,unattributed,unattributed,0.041,0.273,proposal/logs/analysis/tables.json,overhead ta ncx_mult,True,True,False,False
+prose,1.08,1.08,2,False,3,"The per-configuration detail is instructive: the MFIM overheads ($2.08\times$, $2.25\times$) exceed the LSM ones ($1.12\times$, $1.08\times$), consistent with the ring (8 bonds, of which at least 3 are non-local on Topology B) being harder to route than the chain (7 bonds, at least 2 non-loca",traced,traced,914,53,unattributed,unattributed,0.041,0.364,proposal/logs/analysis/tables.json,overhead ta ncx_mult,True,True,False,False
+prose,0.02,0.02,2,False,1,"The \tavqds{} curves track the unconstrained ones closely at all times, with transient dips bounded by the growth-loop tolerance; the final values are within 0.02 percentage points everywhere.",traced,traced,48081,397,unattributed,unattributed,0.0,1.0,proposal/logs/ta_tau1e-4/mfim_hz0.0_topoA/audit.log,t=0.021255 new_gates=1 cum: rot2=8 swap=0 ncx=16 depth=6 violations_total=0,True,True,False,False
+prose,0.999,0.999,3,False,3,All curves stay above $f=0.999$ at all times.,traced,traced,14533,72,unattributed,unattributed,0.0,1.0,proposal/logs/unconstrained/mfim_hz0.5/summary.json,final_fidelity,True,True,False,False
+prose,-0.7,-0.7,1,False,1,"ous energy (left) and the spin correlations $\langle X_0X_1\rangle$, $\langle X_0X_7\rangle$, $\langle Y_0Y_1\rangle$, $\langle Y_0Y_7\rangle$ (right) for $h_z=-0.7$ (top) and $h_z=1.6$ (bottom): exact reference (points), unconstrained \avqds{ \subsection{Hyperparameter selection} The tolerance $\tau$ was swept over $\{0,1",traced,untraced,15887,0,untraced,untraced,0.0,1.0,,,True,True,False,False
+prose,1.6,1.6,1,False,2,"the spin correlations $\langle X_0X_1\rangle$, $\langle X_0X_7\rangle$, $\langle Y_0Y_1\rangle$, $\langle Y_0Y_7\rangle$ (right) for $h_z=-0.7$ (top) and $h_z=1.6$ (bottom): exact reference (points), unconstrained \avqds{ \subsection{Hyperparameter selection} The tolerance $\tau$ was swept over $\{0,10^{-6},10^{-4},10^{-",traced,traced,6526,245,unattributed,unattributed,0.0,1.0,proposal/logs/ta_tau1e-4/mfim_hz0.0_topoA/audit.log,t=1.572343 new_gates=1 cum: rot2=61 swap=0 ncx=122 depth=62 violations_total=0,True,True,False,False
+prose,1\%,1.0,0,True,1,"ion rule, fixed before inspecting the sweep: among $\tau$ values whose runs (i) complete on all eight configurations and (ii) keep every final fidelity within $1\%$ absolute of the unconstrained baseline, choose the one minimizing the mean CNOT multiplier over the eight configurations, ties broken toward smaller $\tau$.",traced,traced,942396,16604,unattributed,unattributed,0.061,0.167,proposal/logs/stage2.log,"""final_fidelity"": 0.9995642579084224,",True,True,False,False
+prose,1e-4,0.0001,4,False,1,The rule selects $\tau=1e-4$.,traced,traced,39174,145,unattributed,unattributed,0.0,1.0,proposal/logs/ta_tau1e-4/mfim_hz0.0_topoA/summary.json,tau,True,True,False,False
+prose,0.5,0.5,1,False,1,"Two large-$\tau$ failure modes surfaced and are reported: at $\tau=10^{-3}$, MFIM $h_z{=}0.5$ on Topology B exceeds the per-event growth cap (the admission keeps accepting barely-improving local operators while the distance remains above threshold) and",traced,traced,115293,1757,unattributed,unattributed,0.035,1.0,proposal/logs/equivalence_check/mfim_hz0.0_slowexpm/run.log,one_step 0.55 s,True,True,False,False
+prose,0.5,0.5,1,False,1,"circuits use for two-qubit rotations (blue, width $\propto$ count) and SWAPs (red dotted), with the initial placement labeled on each node, for the MFIM $h_z{=}0.5$ and LSM $h_z{=}1.6$ configurations.",traced,traced,115293,1757,unattributed,unattributed,0.086,1.0,proposal/logs/ta_topoC/lsm_hz-0.7_topoC/audit.log,t=0.528617 new_gates=1 cum: rot2=48 swap=0 ncx=96 depth=54 violations_total=0,True,True,False,False
+prose,1.6,1.6,1,False,2,"-qubit rotations (blue, width $\propto$ count) and SWAPs (red dotted), with the initial placement labeled on each node, for the MFIM $h_z{=}0.5$ and LSM $h_z{=}1.6$ configurations.",traced,traced,6526,245,unattributed,unattributed,0.094,1.0,proposal/logs/ta_topoC/mfim_hz0.0_topoC/audit.log,t=1.579827 new_gates=1 cum: rot2=52 swap=41 ncx=227 depth=141 violations_total=0,True,True,False,False
+prose,1.00,1.0,2,False,3,"d topology: linear chain} On the linear chain (Topology C), the LSM chain embeds completely ($7/7$) and \tavqds{} again reduces to unconstrained \avqds{} with $1.00\times$ overhead, while the MFIM ring leaves exactly one bond non-local ($7/8$); the overheads and the naive comparison are reported in App.~ .",traced,traced,312740,11541,unattributed,unattributed,0.076,0.091,proposal/logs/unconstrained/lsm_hz1.6/summary.json,final_fidelity,True,True,False,False
+prose,2.48,2.48,2,False,3,"Their relative sizes, read off the ablation table (App.~ ) as mean CNOT multipliers over the four Topology B configurations, are: \emph{(1) Persistence} (from $2.48\times$ for naive to $1.98\times$ for the non-persistent in-loop variant, with locality targeting and $\tau$-admission active): the naive baseline pays $2\,(d-1",traced,traced,979,105,unattributed,unattributed,0.034,0.545,proposal/logs/naive_topoC/mfim_hz0.5_topoC/audit.log,t=2.483154 new logical gates=1,True,True,False,False
+prose,1.98,1.98,2,False,3,"off the ablation table (App.~ ) as mean CNOT multipliers over the four Topology B configurations, are: \emph{(1) Persistence} (from $2.48\times$ for naive to $1.98\times$ for the non-persistent in-loop variant, with locality targeting and $\tau$-admission active): the naive baseline pays $2\,(d-1)$ SWAPs per non-local gat",traced,traced,706,36,unattributed,unattributed,0.065,1.0,proposal/logs/ablation_nonpers/mfim_hz0.0_topoA/audit.log,t=1.975399 new_gates=1 cum: rot2=66 swap=0 ncx=132 depth=68 violations_total=0,True,True,False,False
+prose,1.98,1.98,2,False,3,"\emph{(2) Locality-aware migration} (from $1.98\times$ non-persistent and $1.79\times$ no-locality vs.\ $1.63\times$ full, i.e.\ a $\sim\!0.16$–$0.35$ contribution depending on the contrast): when migration",traced,traced,706,36,unattributed,unattributed,0.064,0.545,proposal/logs/ablation_restrict/mfim_hz0.5_topoB/run.log,global phase contribution for v: 1.9834666587967567,True,True,False,False
+prose,1.79,1.79,2,False,3,"\emph{(2) Locality-aware migration} (from $1.98\times$ non-persistent and $1.79\times$ no-locality vs.\ $1.63\times$ full, i.e.\ a $\sim\!0.16$–$0.35$ contribution depending on the contrast): when migration is unavoidable, the target assig",traced,traced,706,117,unattributed,unattributed,0.0,1.0,proposal/logs/ta_tau1e-4/mfim_hz0.5_topoA/audit.log,t=1.792191 new_gates=1 cum: rot2=65 swap=0 ncx=130 depth=60 violations_total=0,True,True,False,False
+prose,1.63,1.63,2,False,3,"\emph{(2) Locality-aware migration} (from $1.98\times$ non-persistent and $1.79\times$ no-locality vs.\ $1.63\times$ full, i.e.\ a $\sim\!0.16$–$0.35$ contribution depending on the contrast): when migration is unavoidable, the target assignment is chosen to maximize th",traced,traced,581,12,unattributed,unattributed,0.0,1.0,proposal/logs/ta_tau1e-4/mfim_hz0.0_topoB/audit.log,t=1.630676 new_gates=1 cum: rot2=49 swap=44 ncx=230 depth=141 violations_total=0,True,True,False,False
+prose,0.16,0.16,2,False,2,"\emph{(2) Locality-aware migration} (from $1.98\times$ non-persistent and $1.79\times$ no-locality vs.\ $1.63\times$ full, i.e.\ a $\sim\!0.16$–$0.35$ contribution depending on the contrast): when migration is unavoidable, the target assignment is chosen to maximize the number of local pool pairs (Sec",traced,traced,18349,176,unattributed,unattributed,0.039,0.909,proposal/logs/equivalence_check/mfim_hz0.0_slowexpm/run.log,global phase contribution for m: 0.1552244132988761,True,True,False,False
+prose,0.35,0.35,2,False,2,"\emph{(2) Locality-aware migration} (from $1.98\times$ non-persistent and $1.79\times$ no-locality vs.\ $1.63\times$ full, i.e.\ a $\sim\!0.16$–$0.35$ contribution depending on the contrast): when migration is unavoidable, the target assignment is chosen to maximize the number of local pool pairs (Sec.~ ); w",traced,traced,11484,127,unattributed,unattributed,0.0,1.0,proposal/logs/ta_tau1e-4/mfim_hz0.5_topoA/audit.log,t=0.348790 new_gates=1 cum: rot2=15 swap=0 ncx=30 depth=12 violations_total=0,True,True,False,False
+prose,1.77,1.77,2,False,3,\emph{(3) $\tau$-admission} (from $1.77\times$ at $\tau{=}0$ to $1.63\times$ at $\tau{=}10^{-4}$ on Topology B): the McLachlan near-degeneracy noted in Ref.~ —which that paper exploited to justify Ha,traced,traced,575,31,unattributed,unattributed,0.0,1.0,proposal/logs/ta_tau1e-4/mfim_hz0.0_topoA/audit.log,t=1.766755 new_gates=1 cum: rot2=63 swap=0 ncx=126 depth=64 violations_total=0,True,True,False,False
+prose,1.63,1.63,2,False,3,"\emph{(3) $\tau$-admission} (from $1.77\times$ at $\tau{=}0$ to $1.63\times$ at $\tau{=}10^{-4}$ on Topology B): the McLachlan near-degeneracy noted in Ref.~ —which that paper exploited to justify Hamiltonian pools—is, for us, a",traced,traced,581,12,unattributed,unattributed,0.0,1.0,proposal/logs/ta_tau1e-4/mfim_hz0.0_topoB/audit.log,t=1.630676 new_gates=1 cum: rot2=49 swap=44 ncx=230 depth=141 violations_total=0,True,True,False,False
+prose,1.27,1.27,2,False,3,"The gain is concentrated in the LSM runs ($1.27\to1.12$, $1.30\to1.08$); on MFIM $h_z{=}0$ it is slightly negative ($1.90\to2.08$), a trajectory-noise effect discussed in Sec.~ .",traced,traced,893,138,unattributed,unattributed,0.062,1.0,proposal/logs/naive_topoC/mfim_hz0.5_topoC/audit.log,t=1.274496 new logical gates=1,True,True,False,False
+prose,1.30,1.3,2,False,3,"The gain is concentrated in the LSM runs ($1.27\to1.12$, $1.30\to1.08$); on MFIM $h_z{=}0$ it is slightly negative ($1.90\to2.08$), a trajectory-noise effect discussed in Sec.~ .",traced,traced,788,30,unattributed,unattributed,0.062,0.909,proposal/logs/naive_topoC/mfim_hz0.0_topoC/audit.log,t=1.302993 new logical gates=1,True,True,False,False
+prose,1.90,1.9,2,False,3,"The gain is concentrated in the LSM runs ($1.27\to1.12$, $1.30\to1.08$); on MFIM $h_z{=}0$ it is slightly negative ($1.90\to2.08$), a trajectory-noise effect discussed in Sec.~ .",traced,traced,618,19,unattributed,unattributed,0.062,0.818,proposal/logs/equivalence_check/mfim_hz0.0_slowexpm/run.log,one_step 1.90 s,True,True,False,False
+prose,2.08,2.08,2,False,3,"Within Topology B, the MFIM ring carries the largest residual overhead ($2.08\times$, $2.25\times$) because at least three of its eight bonds are non-embeddable, versus at least two of seven for LSM; the ring's periodic bond in particula",traced,traced,728,163,unattributed,unattributed,0.042,0.182,proposal/logs/analysis/tables.json,overhead ta ncx_mult,True,True,False,False
+prose,2.25,2.25,2,False,3,"Within Topology B, the MFIM ring carries the largest residual overhead ($2.08\times$, $2.25\times$) because at least three of its eight bonds are non-embeddable, versus at least two of seven for LSM; the ring's periodic bond in particular sits at grap",traced,traced,618,75,unattributed,unattributed,0.039,0.182,proposal/logs/analysis/tables.json,overhead ta ncx_mult,True,True,False,False
+prose,0.5,0.5,1,False,1,"\textbf{Large-$\tau$ runaway.} At $\tau=10^{-3}$ the MFIM $h_z{=}0.5$ Topology B run exceeds the same per-event cap: the rule accepts admissible operators that improve the projected distance by less than $\tau$ each, and the loo",traced,traced,115293,1757,unattributed,unattributed,0.091,1.0,proposal/logs/equivalence_check/mfim_hz0.0_slowexpm/run.log,one_step 0.55 s,True,True,False,False
+prose,1.00,1.0,2,False,3,"We note the asymmetry: both LSM configurations complete at $\tau=10^{-3}$ (their admissible leaders are genuinely competitive—indeed one of them reaches $1.00\times$ overhead, while the other degrades to $1.39\times$), and the MFIM $h_z{=}0$ Topology B run completes at $2.46\times$, worse than $\tau{=}10^{-4}$'s $2.0",traced,traced,312740,11541,unattributed,unattributed,0.112,0.727,proposal/logs/equivalence_check/mfim_hz0.0_slowexpm/run.log,one_step 1.00 s,True,True,False,False
+prose,1.39,1.39,2,False,3,"s complete at $\tau=10^{-3}$ (their admissible leaders are genuinely competitive—indeed one of them reaches $1.00\times$ overhead, while the other degrades to $1.39\times$), and the MFIM $h_z{=}0$ Topology B run completes at $2.46\times$, worse than $\tau{=}10^{-4}$'s $2.08\times$; the nonintegrable MFIM's distance spectru",traced,traced,907,88,unattributed,unattributed,0.12,0.818,proposal/logs/equivalence_check/mfim_hz0.0_slowexpm_prefixcrash/run.log,one_step 1.39 s,True,True,True,False
+prose,2.46,2.46,2,False,3,"ly competitive—indeed one of them reaches $1.00\times$ overhead, while the other degrades to $1.39\times$), and the MFIM $h_z{=}0$ Topology B run completes at $2.46\times$, worse than $\tau{=}10^{-4}$'s $2.08\times$; the nonintegrable MFIM's distance spectrum is more spread out, so the same $\tau$ buys little substitution",traced,traced,933,98,unattributed,unattributed,0.099,1.0,proposal/logs/equivalence_check/mfim_hz0.0_slowexpm_prefixcrash/run.log,one_step 2.46 s,True,True,False,False
+prose,2.08,2.08,2,False,3,".00\times$ overhead, while the other degrades to $1.39\times$), and the MFIM $h_z{=}0$ Topology B run completes at $2.46\times$, worse than $\tau{=}10^{-4}$'s $2.08\times$; the nonintegrable MFIM's distance spectrum is more spread out, so the same $\tau$ buys little substitution and invites runaway.",traced,traced,728,163,unattributed,unattributed,0.075,1.0,proposal/logs/equivalence_check/mfim_hz0.0_slowexpm/run.log,global phase contribution for v: 2.084317551398225,True,True,False,False
+prose,2.08,2.08,2,False,3,"\textbf{Per-configuration exceptions.} On MFIM $h_z{=}0$/Topology B the full method ($2.08\times$) is not the best variant: $\tau{=}0$ ($1.90\times$) and the no-locality ablation ($1.86\times$) come in slightly lower, while $\tau{=}10^{-6}$ ($2.22\ti",traced,traced,728,163,unattributed,unattributed,0.112,0.091,proposal/logs/analysis/ablation.json,full,True,True,False,False
+prose,1.90,1.9,2,False,3,"\textbf{Per-configuration exceptions.} On MFIM $h_z{=}0$/Topology B the full method ($2.08\times$) is not the best variant: $\tau{=}0$ ($1.90\times$) and the no-locality ablation ($1.86\times$) come in slightly lower, while $\tau{=}10^{-6}$ ($2.22\times$) is higher.",traced,traced,618,19,unattributed,unattributed,0.084,1.0,proposal/logs/ablation_nonpers/mfim_hz0.5_topoA/audit.log,t=1.895184 new_gates=1 cum: rot2=68 swap=0 ncx=136 depth=60 violations_total=0,True,True,False,False
+prose,1.86,1.86,2,False,3,"tion exceptions.} On MFIM $h_z{=}0$/Topology B the full method ($2.08\times$) is not the best variant: $\tau{=}0$ ($1.90\times$) and the no-locality ablation ($1.86\times$) come in slightly lower, while $\tau{=}10^{-6}$ ($2.22\times$) is higher.",traced,traced,591,29,unattributed,unattributed,0.093,0.727,proposal/logs/ablation_restrict/mfim_hz0.0_topoB/run.log,pth_max: 1.86e+00,True,True,False,False
+prose,2.22,2.22,2,False,3,"($2.08\times$) is not the best variant: $\tau{=}0$ ($1.90\times$) and the no-locality ablation ($1.86\times$) come in slightly lower, while $\tau{=}10^{-6}$ ($2.22\times$) is higher.",traced,traced,599,75,unattributed,unattributed,0.075,0.091,proposal/logs/analysis/ablation.json,noloc,True,True,False,False
+prose,0.2,0.2,1,False,1,"on because each admission decision reshapes the subsequent trajectory, including its future migration demands; the effect is a trajectory-level noise of order $0.2$ in the multiplier, smaller than the naive-to-\tavqds{} gap ($1.3$) but not negligible.",traced,traced,209571,2909,unattributed,unattributed,0.04,0.333,proposal/logs/naive_topoC/mfim_hz0.5_topoC/summary.json,final_loschmidt,True,True,False,False
+prose,1.3,1.3,1,False,2,"ory, including its future migration demands; the effect is a trajectory-level noise of order $0.2$ in the multiplier, smaller than the naive-to-\tavqds{} gap ($1.3$) but not negligible.",traced,traced,8054,523,unattributed,unattributed,0.05,0.273,proposal/logs/analysis/tau_selection.json,table mean_ncx_multiplier,True,True,False,False
+prose,2.75,2.75,2,False,3,"The keep-permutation naive variant (a greedy persistent router applied post hoc) narrows the naive gap on some configurations; its Topology B mean is $2.75\times$ in CNOTs, still above \tavqds{}'s $1.63\times$, and it \emph{never} beats insert-and-revert on the mean—but per-configuration it occasionally comes clos",traced,traced,798,81,unattributed,unattributed,0.033,0.545,proposal/logs/naive_topoC/mfim_hz0.5_topoC/audit.log,t=2.753787 new logical gates=1,True,True,False,False
+prose,1.63,1.63,2,False,3,"greedy persistent router applied post hoc) narrows the naive gap on some configurations; its Topology B mean is $2.75\times$ in CNOTs, still above \tavqds{}'s $1.63\times$, and it \emph{never} beats insert-and-revert on the mean—but per-configuration it occasionally comes close (full numbers in App.~ ).",traced,traced,581,12,unattributed,unattributed,0.0,1.0,proposal/logs/ta_tau1e-4/mfim_hz0.0_topoB/audit.log,t=1.630676 new_gates=1 cum: rot2=49 swap=44 ncx=230 depth=141 violations_total=0,True,True,False,False
+prose,37.1,37.1,1,False,3,The unconstrained runs take 37.1–48.1~minutes each in our environment.,untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+prose,48.1,48.1,1,False,3,The unconstrained runs take 37.1–48.1~minutes each in our environment.,untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+prose,51.9,51.9,1,False,3,\tavqds{} runs within a small factor of that (e.g.\ 51.9~min vs.\ 37.1~min for MFIM $h_z{=}0$): the topology-aware additions are (i) one admissibility test per pool operator per growth event ($O(|\mathcal P|)$ intege,untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+prose,37.1,37.1,1,False,3,\tavqds{} runs within a small factor of that (e.g.\ 51.9~min vs.\ 37.1~min for MFIM $h_z{=}0$): the topology-aware additions are (i) one admissibility test per pool operator per growth event ($O(|\mathcal P|)$ integer comparisons),untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+prose,4\times10^{-14},4e-14,14,False,1,"Validation at three levels: (i) parameter traces of the first 60 steps of MFIM $h_z{=}0$ with and without the shim agree to $4\times10^{-14}$ until the first exactly degenerate operator tie, where the two code paths pick different (but mathematically equivalent) tied operators; (ii) a complete secon",traced,traced,2,2,supported,unattributed,0.181,0.143,proposal/logs/equivalence_check/end_to_end_report.txt,"4e-14 until the first exactly-degenerate tie at step 4), this validates",False,False,False,False
+prose,0.9995,0.9995,4,False,4,e second run of the same benchmark with the \emph{original} unshimmed code path was executed to completion (\texttt{logs/equivalence\_check/}): final fidelity $0.9995$ with $\ncx=138$ (69 two-qubit rotations) versus the shimmed baseline's $0.9996$ and $\ncx=144$—equal-quality circuits whose gate sequences diverge only at exa,traced,traced,7460,8,supported,supported,0.255,0.091,proposal/logs/equivalence_check/end_to_end_report.txt,"final fidelity 0.99954, N_cx = 138 (69 two-qubit rotations),",True,False,False,False
+prose,0.9996,0.9996,4,False,4,"was executed to completion (\texttt{logs/equivalence\_check/}): final fidelity $0.9995$ with $\ncx=138$ (69 two-qubit rotations) versus the shimmed baseline's $0.9996$ and $\ncx=144$—equal-quality circuits whose gate sequences diverge only at exactly-degenerate ties, with the $\sim\!4\%$ CNOT difference matching the tie-sens",traced,traced,20086,119,supported,supported,0.263,0.091,proposal/logs/equivalence_check/end_to_end_report.txt,"final fidelity 0.99960, N_cx = 144 (72 two-qubit rotations),",True,False,False,False
+prose,4\%,4.0,0,True,1,"ons) versus the shimmed baseline's $0.9996$ and $\ncx=144$—equal-quality circuits whose gate sequences diverge only at exactly-degenerate ties, with the $\sim\!4\%$ CNOT difference matching the tie-sensitivity scale that also separates our runs from the original paper's reference value of 134; (iii) on Topology A, where \",traced,traced,110130,8059,unattributed,unattributed,0.093,0.143,proposal/logs/equivalence_check/end_to_end_report.txt,"144, i.e. ~4%) is the same scale as the difference between our runs and",True,True,False,False
+prose,1.86,1.86,2,False,3,"The \tavqds{} overheads on the MFIM cases ($1.86\times$ and $2.41\times$) are close to the Topology B values even though only one bond is non-local, because on a chain that bond's operands sit at graph distan",traced,traced,591,29,unattributed,unattributed,0.091,0.727,proposal/logs/equivalence_check/mfim_hz0.0_slowexpm/run.log,one_step 1.86 s,True,True,False,False
+prose,2.41,2.41,2,False,3,"The \tavqds{} overheads on the MFIM cases ($1.86\times$ and $2.41\times$) are close to the Topology B values even though only one bond is non-local, because on a chain that bond's operands sit at graph distance up to 7, makin",traced,traced,868,64,unattributed,unattributed,0.078,1.0,proposal/logs/equivalence_check/mfim_hz0.0_slowexpm/run.log,initial mcLachlan distance: 2.74e-04 pthmax: 2.41,True,True,False,False
+prose,3.25,3.25,2,False,3,"n-local, because on a chain that bond's operands sit at graph distance up to 7, making each migration expensive; the naive baseline pays correspondingly more ($3.25\times$).",traced,traced,393,38,unattributed,unattributed,0.044,1.0,proposal/logs/equivalence_check/mfim_hz0.0_slowexpm/run.log,initial mcLachlan distance: 5.06e-04 pthmax: 3.25,True,True,False,False

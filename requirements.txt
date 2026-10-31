@@ -1,0 +1,8 @@
+# Python 3.13. Versions used for the reported results.
+pandas==3.0.5
+numpy==2.5.3
+scipy==1.18.1
+statsmodels==0.15.0
+matplotlib==3.11.2
+sentence-transformers==6.1.0   # embedding baseline only
+huggingface_hub==1.33.0        # downloading the benchmark release only

@@ -1,0 +1,135 @@
+kind,raw,value,dec,pct,sig,context,L1,L1nb,L1_n_matches,L1nb_n_matches,L2ctx,L2,L2_score,L2_p,L2_file,L2_context,decoy_L1,decoy_L1nb,decoy_L2ctx,decoy_L2
+table,0.5,0.5,1,False,1,Method |  | MFIM results. $f$ is final-time fidelity; $N_{\mathrm{cx,traced,traced,17702,5,unattributed,unattributed,0.118,0.125,proposal/logs/mfim_hz0.5_naive_B.json,hz,True,False,False,False
+table,0.9995,0.9995,4,False,4,Unconstrained AVQDS |  | MFIM results. $f$ is final-time fidelity; $N_{\mathrm{cx,traced,traced,3927,8,supported,supported,0.436,0.091,proposal/logs/mfim_hz0.0_unconstrained_alltoall.json,final_fidelity,True,False,False,False
+table,0.9992,0.9992,4,False,4,Unconstrained AVQDS |  | MFIM results. $f$ is final-time fidelity; $N_{\mathrm{cx,traced,traced,538,5,supported,supported,0.436,0.091,proposal/logs/mfim_hz0.5_unconstrained_alltoall.json,final_fidelity,True,False,False,False
+table,0.9995,0.9995,4,False,4,Smart-embedding naive |  | MFIM results. $f$ is final-time fidelity; $N_{\mathrm{cx,traced,traced,3927,8,supported,supported,0.408,0.091,proposal/logs/mfim_hz0.0_naive_A.json,final_fidelity,True,False,False,False
+table,0.9992,0.9992,4,False,4,Smart-embedding naive |  | MFIM results. $f$ is final-time fidelity; $N_{\mathrm{cx,traced,traced,538,5,supported,supported,0.408,0.091,proposal/logs/mfim_hz0.5_naive_B.json,final_fidelity,True,False,False,False
+table,0.9995,0.9995,4,False,4,Smart-embedding naive |  | MFIM results. $f$ is final-time fidelity; $N_{\mathrm{cx,traced,traced,3927,8,supported,supported,0.408,0.091,proposal/logs/mfim_hz0.0_naive_A.json,final_fidelity,True,False,False,False
+table,0.9992,0.9992,4,False,4,Smart-embedding naive |  | MFIM results. $f$ is final-time fidelity; $N_{\mathrm{cx,traced,traced,538,5,supported,supported,0.408,0.091,proposal/logs/mfim_hz0.5_naive_B.json,final_fidelity,True,False,False,False
+table,0.9995,0.9995,4,False,4,RA-AVQDS |  | MFIM results. $f$ is final-time fidelity; $N_{\mathrm{cx,traced,traced,3927,8,supported,unattributed,0.327,0.182,proposal/logs/mfim_hz0.0_naive_A.json,final_fidelity,True,False,False,False
+table,0.9992,0.9992,4,False,4,RA-AVQDS |  | MFIM results. $f$ is final-time fidelity; $N_{\mathrm{cx,traced,traced,538,5,supported,supported,0.327,0.091,proposal/logs/mfim_hz0.5_naive_B.json,final_fidelity,True,False,False,False
+table,0.9993,0.9993,4,False,4,RA-AVQDS |  | MFIM results. $f$ is final-time fidelity; $N_{\mathrm{cx,traced,traced,1106,5,supported,unattributed,0.327,0.182,proposal/logs/mfim_hz0.0_variant_B.json,final_fidelity,True,True,False,False
+table,0.9992,0.9992,4,False,4,RA-AVQDS |  | MFIM results. $f$ is final-time fidelity; $N_{\mathrm{cx,traced,traced,538,5,supported,supported,0.327,0.091,proposal/logs/mfim_hz0.5_naive_B.json,final_fidelity,True,False,False,False
+table,0.7,0.7,1,False,1,Method |  | LSM results (same column structure as Table~ ).,traced,untraced,17462,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+table,1.6,1.6,1,False,2,Method |  | LSM results (same column structure as Table~ ).,traced,traced,1604,5,supported,unattributed,0.158,0.273,proposal/logs/lsm_hz1.6_naive_B.json,hz,True,False,False,False
+table,0.9995,0.9995,4,False,4,Unconstrained AVQDS |  | LSM results (same column structure as Table~ ).,traced,traced,3927,8,supported,unattributed,0.258,0.182,proposal/logs/lsm_hz-0.7_unconstrained_alltoall.json,final_fidelity,True,False,False,False
+table,0.9993,0.9993,4,False,4,Unconstrained AVQDS |  | LSM results (same column structure as Table~ ).,traced,traced,1106,5,supported,unattributed,0.258,0.182,proposal/logs/lsm_hz1.6_unconstrained_alltoall.json,final_fidelity,True,True,True,True
+table,0.9995,0.9995,4,False,4,Smart-embedding naive |  | LSM results (same column structure as Table~ ).,traced,traced,3927,8,supported,unattributed,0.236,0.182,proposal/logs/lsm_hz-0.7_naive_A.json,final_fidelity,True,False,False,False
+table,0.9993,0.9993,4,False,4,Smart-embedding naive |  | LSM results (same column structure as Table~ ).,traced,traced,1106,5,supported,unattributed,0.236,0.182,proposal/logs/lsm_hz1.6_naive_B.json,final_fidelity,True,True,True,True
+table,0.9995,0.9995,4,False,4,Smart-embedding naive |  | LSM results (same column structure as Table~ ).,traced,traced,3927,8,supported,unattributed,0.236,0.182,proposal/logs/lsm_hz-0.7_naive_A.json,final_fidelity,True,False,False,False
+table,0.9993,0.9993,4,False,4,Smart-embedding naive |  | LSM results (same column structure as Table~ ).,traced,traced,1106,5,supported,unattributed,0.236,0.182,proposal/logs/lsm_hz1.6_naive_B.json,final_fidelity,True,True,True,True
+table,0.9995,0.9995,4,False,4,RA-AVQDS |  | LSM results (same column structure as Table~ ).,traced,traced,3927,8,supported,unattributed,0.129,0.182,proposal/logs/lsm_hz-0.7_naive_A.json,final_fidelity,True,False,False,False
+table,0.9993,0.9993,4,False,4,RA-AVQDS |  | LSM results (same column structure as Table~ ).,traced,traced,1106,5,supported,unattributed,0.129,0.182,proposal/logs/lsm_hz1.6_naive_B.json,final_fidelity,True,True,True,True
+table,0.9996,0.9996,4,False,4,RA-AVQDS |  | LSM results (same column structure as Table~ ).,traced,traced,10719,1,supported,unattributed,0.129,0.273,proposal/logs/lsm_hz-0.7_variant_B.json,final_fidelity,True,False,False,False
+table,0.9994,0.9994,4,False,4,RA-AVQDS |  | LSM results (same column structure as Table~ ).,traced,traced,1764,1,supported,unattributed,0.129,0.273,proposal/logs/lsm_hz1.6_variant_B.json,final_fidelity,True,False,False,False
+table,1.00,1.0,2,False,3,"Smart-embedding naive | \multicolumn{2}{c}{MFIM $h_z{=}0$} | Overhead multipliers (CNOT and depth) relative to unconstrained
+  AVQDS, for the smart-embedding naive baseline and RA-AVQDS, on all four
+  benchmarks and both topologies.",traced,traced,155625,36,unattributed,unattributed,0.103,0.091,proposal/logs/mfim_hz0.0_naive_A.json,perm,True,False,False,False
+table,1.00,1.0,2,False,3,"Smart-embedding naive | \multicolumn{2}{c}{MFIM $h_z{=}0.5$} | Overhead multipliers (CNOT and depth) relative to unconstrained
+  AVQDS, for the smart-embedding naive baseline and RA-AVQDS, on all four
+  benchmarks and both topologies.",traced,traced,155625,36,unattributed,unattributed,0.103,0.091,proposal/logs/mfim_hz0.0_naive_A.json,perm,True,False,False,False
+table,1.00,1.0,2,False,3,"Smart-embedding naive | \multicolumn{2}{c}{LSM $h_z{=}{-}0.7$} | Overhead multipliers (CNOT and depth) relative to unconstrained
+  AVQDS, for the smart-embedding naive baseline and RA-AVQDS, on all four
+  benchmarks and both topologies.",traced,traced,155625,36,unattributed,unattributed,0.103,0.091,proposal/logs/lsm_hz-0.7_naive_A.json,perm,True,False,False,False
+table,1.00,1.0,2,False,3,"Smart-embedding naive | \multicolumn{2}{c}{LSM $h_z{=}1.6$} | Overhead multipliers (CNOT and depth) relative to unconstrained
+  AVQDS, for the smart-embedding naive baseline and RA-AVQDS, on all four
+  benchmarks and both topologies.",traced,traced,155625,36,unattributed,unattributed,0.103,0.091,proposal/logs/lsm_hz-0.7_naive_A.json,perm,True,False,False,False
+table,1.00,1.0,2,False,3,"Smart-embedding naive |  | Overhead multipliers (CNOT and depth) relative to unconstrained
+  AVQDS, for the smart-embedding naive baseline and RA-AVQDS, on all four
+  benchmarks and both topologies.",traced,traced,155625,36,unattributed,unattributed,0.053,0.091,proposal/logs/lsm_hz-0.7_naive_A.json,perm,True,False,False,False
+table,1.00,1.0,2,False,3,"Smart-embedding naive |  | Overhead multipliers (CNOT and depth) relative to unconstrained
+  AVQDS, for the smart-embedding naive baseline and RA-AVQDS, on all four
+  benchmarks and both topologies.",traced,traced,155625,36,unattributed,unattributed,0.053,0.091,proposal/logs/lsm_hz-0.7_naive_A.json,perm,True,False,False,False
+table,1.00,1.0,2,False,3,"Smart-embedding naive |  | Overhead multipliers (CNOT and depth) relative to unconstrained
+  AVQDS, for the smart-embedding naive baseline and RA-AVQDS, on all four
+  benchmarks and both topologies.",traced,traced,155625,36,unattributed,unattributed,0.053,0.091,proposal/logs/lsm_hz-0.7_naive_A.json,perm,True,False,False,False
+table,1.00,1.0,2,False,3,"Smart-embedding naive |  | Overhead multipliers (CNOT and depth) relative to unconstrained
+  AVQDS, for the smart-embedding naive baseline and RA-AVQDS, on all four
+  benchmarks and both topologies.",traced,traced,155625,36,unattributed,unattributed,0.053,0.091,proposal/logs/lsm_hz-0.7_naive_A.json,perm,True,False,False,False
+table,3.22,3.22,2,False,3,"Smart-embedding naive | \multicolumn{2}{c}{MFIM $h_z{=}0$} | Overhead multipliers (CNOT and depth) relative to unconstrained
+  AVQDS, for the smart-embedding naive baseline and RA-AVQDS, on all four
+  benchmarks and both topologies.",traced,untraced,72,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+table,3.90,3.9,2,False,3,"Smart-embedding naive | \multicolumn{2}{c}{MFIM $h_z{=}0.5$} | Overhead multipliers (CNOT and depth) relative to unconstrained
+  AVQDS, for the smart-embedding naive baseline and RA-AVQDS, on all four
+  benchmarks and both topologies.",traced,untraced,60,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+table,3.25,3.25,2,False,3,"Smart-embedding naive | \multicolumn{2}{c}{LSM $h_z{=}{-}0.7$} | Overhead multipliers (CNOT and depth) relative to unconstrained
+  AVQDS, for the smart-embedding naive baseline and RA-AVQDS, on all four
+  benchmarks and both topologies.",traced,untraced,79,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+table,3.91,3.91,2,False,3,"Smart-embedding naive | \multicolumn{2}{c}{LSM $h_z{=}1.6$} | Overhead multipliers (CNOT and depth) relative to unconstrained
+  AVQDS, for the smart-embedding naive baseline and RA-AVQDS, on all four
+  benchmarks and both topologies.",traced,untraced,63,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+table,1.82,1.82,2,False,3,"Smart-embedding naive |  | Overhead multipliers (CNOT and depth) relative to unconstrained
+  AVQDS, for the smart-embedding naive baseline and RA-AVQDS, on all four
+  benchmarks and both topologies.",traced,untraced,141,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+table,2.32,2.32,2,False,3,"Smart-embedding naive |  | Overhead multipliers (CNOT and depth) relative to unconstrained
+  AVQDS, for the smart-embedding naive baseline and RA-AVQDS, on all four
+  benchmarks and both topologies.",traced,untraced,195,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+table,1.94,1.94,2,False,3,"Smart-embedding naive |  | Overhead multipliers (CNOT and depth) relative to unconstrained
+  AVQDS, for the smart-embedding naive baseline and RA-AVQDS, on all four
+  benchmarks and both topologies.",traced,untraced,170,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+table,2.32,2.32,2,False,3,"Smart-embedding naive |  | Overhead multipliers (CNOT and depth) relative to unconstrained
+  AVQDS, for the smart-embedding naive baseline and RA-AVQDS, on all four
+  benchmarks and both topologies.",traced,untraced,195,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+table,1.00,1.0,2,False,3,"RA-AVQDS | \multicolumn{2}{c}{MFIM $h_z{=}0$} | Overhead multipliers (CNOT and depth) relative to unconstrained
+  AVQDS, for the smart-embedding naive baseline and RA-AVQDS, on all four
+  benchmarks and both topologies.",traced,traced,155625,36,unattributed,unattributed,0.103,0.091,proposal/logs/mfim_hz0.0_naive_A.json,perm,True,False,False,False
+table,1.00,1.0,2,False,3,"RA-AVQDS | \multicolumn{2}{c}{MFIM $h_z{=}0.5$} | Overhead multipliers (CNOT and depth) relative to unconstrained
+  AVQDS, for the smart-embedding naive baseline and RA-AVQDS, on all four
+  benchmarks and both topologies.",traced,traced,155625,36,unattributed,unattributed,0.103,0.091,proposal/logs/mfim_hz0.0_naive_A.json,perm,True,False,False,False
+table,1.00,1.0,2,False,3,"RA-AVQDS | \multicolumn{2}{c}{LSM $h_z{=}{-}0.7$} | Overhead multipliers (CNOT and depth) relative to unconstrained
+  AVQDS, for the smart-embedding naive baseline and RA-AVQDS, on all four
+  benchmarks and both topologies.",traced,traced,155625,36,unattributed,unattributed,0.103,0.091,proposal/logs/lsm_hz-0.7_naive_A.json,perm,True,False,False,False
+table,1.00,1.0,2,False,3,"RA-AVQDS | \multicolumn{2}{c}{LSM $h_z{=}1.6$} | Overhead multipliers (CNOT and depth) relative to unconstrained
+  AVQDS, for the smart-embedding naive baseline and RA-AVQDS, on all four
+  benchmarks and both topologies.",traced,traced,155625,36,unattributed,unattributed,0.103,0.091,proposal/logs/lsm_hz-0.7_naive_A.json,perm,True,False,False,False
+table,1.00,1.0,2,False,3,"RA-AVQDS |  | Overhead multipliers (CNOT and depth) relative to unconstrained
+  AVQDS, for the smart-embedding naive baseline and RA-AVQDS, on all four
+  benchmarks and both topologies.",traced,traced,155625,36,unattributed,unattributed,0.053,0.091,proposal/logs/lsm_hz-0.7_naive_A.json,perm,True,False,False,False
+table,1.00,1.0,2,False,3,"RA-AVQDS |  | Overhead multipliers (CNOT and depth) relative to unconstrained
+  AVQDS, for the smart-embedding naive baseline and RA-AVQDS, on all four
+  benchmarks and both topologies.",traced,traced,155625,36,unattributed,unattributed,0.053,0.091,proposal/logs/lsm_hz-0.7_naive_A.json,perm,True,False,False,False
+table,1.00,1.0,2,False,3,"RA-AVQDS |  | Overhead multipliers (CNOT and depth) relative to unconstrained
+  AVQDS, for the smart-embedding naive baseline and RA-AVQDS, on all four
+  benchmarks and both topologies.",traced,traced,155625,36,unattributed,unattributed,0.053,0.091,proposal/logs/lsm_hz-0.7_naive_A.json,perm,True,False,False,False
+table,1.00,1.0,2,False,3,"RA-AVQDS |  | Overhead multipliers (CNOT and depth) relative to unconstrained
+  AVQDS, for the smart-embedding naive baseline and RA-AVQDS, on all four
+  benchmarks and both topologies.",traced,traced,155625,36,unattributed,unattributed,0.053,0.091,proposal/logs/lsm_hz-0.7_naive_A.json,perm,True,False,False,False
+table,2.45,2.45,2,False,3,"RA-AVQDS | \multicolumn{2}{c}{MFIM $h_z{=}0$} | Overhead multipliers (CNOT and depth) relative to unconstrained
+  AVQDS, for the smart-embedding naive baseline and RA-AVQDS, on all four
+  benchmarks and both topologies.",traced,untraced,176,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+table,2.95,2.95,2,False,3,"RA-AVQDS | \multicolumn{2}{c}{MFIM $h_z{=}0.5$} | Overhead multipliers (CNOT and depth) relative to unconstrained
+  AVQDS, for the smart-embedding naive baseline and RA-AVQDS, on all four
+  benchmarks and both topologies.",traced,untraced,214,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+table,2.48,2.48,2,False,3,"RA-AVQDS | \multicolumn{2}{c}{LSM $h_z{=}{-}0.7$} | Overhead multipliers (CNOT and depth) relative to unconstrained
+  AVQDS, for the smart-embedding naive baseline and RA-AVQDS, on all four
+  benchmarks and both topologies.",traced,untraced,179,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+table,3.00,3.0,2,False,3,"RA-AVQDS | \multicolumn{2}{c}{LSM $h_z{=}1.6$} | Overhead multipliers (CNOT and depth) relative to unconstrained
+  AVQDS, for the smart-embedding naive baseline and RA-AVQDS, on all four
+  benchmarks and both topologies.",traced,traced,4346,26,unattributed,unattributed,0.103,0.091,proposal/logs/lsm_hz-0.7_naive_A.json,perm,True,False,False,False
+table,1.47,1.47,2,False,3,"RA-AVQDS |  | Overhead multipliers (CNOT and depth) relative to unconstrained
+  AVQDS, for the smart-embedding naive baseline and RA-AVQDS, on all four
+  benchmarks and both topologies.",traced,untraced,229,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+table,1.84,1.84,2,False,3,"RA-AVQDS |  | Overhead multipliers (CNOT and depth) relative to unconstrained
+  AVQDS, for the smart-embedding naive baseline and RA-AVQDS, on all four
+  benchmarks and both topologies.",traced,untraced,144,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+table,1.72,1.72,2,False,3,"RA-AVQDS |  | Overhead multipliers (CNOT and depth) relative to unconstrained
+  AVQDS, for the smart-embedding naive baseline and RA-AVQDS, on all four
+  benchmarks and both topologies.",traced,untraced,175,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+table,1.89,1.89,2,False,3,"RA-AVQDS |  | Overhead multipliers (CNOT and depth) relative to unconstrained
+  AVQDS, for the smart-embedding naive baseline and RA-AVQDS, on all four
+  benchmarks and both topologies.",traced,untraced,176,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+prose,24\%,24.0,0,True,2,ity within a few $\times10^{-4}$ of unconstrained AVQDS (exactly on the topology that admits a Hamiltonian embedding) while reducing the SWAP overhead by up to 24\% relative to a smart-embedding post-hoc SWAP-routing baseline.,traced,untraced,5803,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+prose,5\times10^{-3},0.005,3,False,1,"The time step is adaptive: $\delta t=\min(\delta t_{\max},\delta\theta_{\max}/|\dot\theta|_{\max})$ with $\delta\theta_{\max}=5\times10^{-3}$, and parameters are updated by forward Euler.",traced,untraced,832,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+prose,0.5,0.5,1,False,1,"(MFIM), sudden quench:} $\hat H=-J\sum_i Z_iZ_{i+1}+h_x\sum_i X_i+h_z\sum_i Z_i$ on $n=8$ sites with periodic boundary conditions, $J=1$, $h_x=-2$, $h_z\in\{0,0.5\}$, initial state $|0\rangle^{\otimes8}$, total time $T=3$.",traced,traced,17702,5,unattributed,unattributed,0.073,0.125,proposal/logs/mfim_hz0.5_naive_B.json,hz,True,False,False,False
+prose,0.5,0.5,1,False,1,"The Hamiltonian pool is 16 operators for $h_z=0$ ($8$ $X_i$, $8$ $Z_iZ_{i+1}$) and 24 for $h_z=0.5$ (adding $8$ $Z_i$).",traced,traced,17702,5,unattributed,unattributed,0.0,1.0,proposal/logs/mfim_hz0.5_unconstrained_alltoall.json,hz,True,False,False,False
+prose,-0.7,-0.7,1,False,1,"um_i Z_i$ on $n=8$ sites with open boundaries, $\gamma(t)=1-2t/T$ for $0\le t\le T=3$, followed by post-ramp evolution for another $T$ (total $2T=6$), $h_z\in\{-0.7,1.6\}$, initial state the exact ground state of $\hat H(t{=}0)$ in the FM$_x$ phase (computed by exact diagonalization).",traced,traced,1789,5,unattributed,unattributed,0.0,1.0,proposal/logs/lsm_hz-0.7_naive_A.json,hz,True,True,False,False
+prose,1.6,1.6,1,False,2,"Z_i$ on $n=8$ sites with open boundaries, $\gamma(t)=1-2t/T$ for $0\le t\le T=3$, followed by post-ramp evolution for another $T$ (total $2T=6$), $h_z\in\{-0.7,1.6\}$, initial state the exact ground state of $\hat H(t{=}0)$ in the FM$_x$ phase (computed by exact diagonalization).",traced,traced,1604,5,unattributed,unattributed,0.0,1.0,proposal/logs/lsm_hz1.6_naive_B.json,hz,True,False,False,False
+prose,5\times10^{-3},0.005,3,False,1,"\paragraph{Hyperparameters.} $L^2_{\mathrm{cut}}=10^{-3}$, $\xi=10^{-6}$, $\delta\theta_{\max}=5\times10^{-3}$, $\delta t_{\max}=0.05$, $\varepsilon=10^{-8}$ (RA-AVQDS).",traced,untraced,832,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+prose,0.05,0.05,2,False,1,"\paragraph{Hyperparameters.} $L^2_{\mathrm{cut}}=10^{-3}$, $\xi=10^{-6}$, $\delta\theta_{\max}=5\times10^{-3}$, $\delta t_{\max}=0.05$, $\varepsilon=10^{-8}$ (RA-AVQDS).",traced,untraced,4074,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+prose,1.00,1.0,2,False,3,"MFIM) and Hamiltonian-path (LSM) embeddings make every pool bond adjacent, so both the naive baseline and RA-AVQDS reproduce the unconstrained ansatz exactly ($1.00\times$ overhead, zero SWAPs).",traced,traced,155625,36,unattributed,unattributed,0.079,0.091,proposal/logs/lsm_hz-0.7_naive_A.json,perm,True,False,False,False
+prose,3.22,3.22,2,False,3,"On Topology B routing is unavoidable and the variant reduces the CNOT multiplier relative to the naive baseline on every configuration (MFIM: $3.22\to2.45$ and $3.25\to2.48$; LSM: $1.82\to1.47$ and $1.94\to1.72$), with final-time fidelity within $3\times10^{-4}$ of unconstrained AVQDS.",traced,untraced,72,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+prose,3.25,3.25,2,False,3,"n Topology B routing is unavoidable and the variant reduces the CNOT multiplier relative to the naive baseline on every configuration (MFIM: $3.22\to2.45$ and $3.25\to2.48$; LSM: $1.82\to1.47$ and $1.94\to1.72$), with final-time fidelity within $3\times10^{-4}$ of unconstrained AVQDS.",traced,untraced,79,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+prose,1.82,1.82,2,False,3,"is unavoidable and the variant reduces the CNOT multiplier relative to the naive baseline on every configuration (MFIM: $3.22\to2.45$ and $3.25\to2.48$; LSM: $1.82\to1.47$ and $1.94\to1.72$), with final-time fidelity within $3\times10^{-4}$ of unconstrained AVQDS.",traced,untraced,141,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+prose,1.94,1.94,2,False,3,"d the variant reduces the CNOT multiplier relative to the naive baseline on every configuration (MFIM: $3.22\to2.45$ and $3.25\to2.48$; LSM: $1.82\to1.47$ and $1.94\to1.72$), with final-time fidelity within $3\times10^{-4}$ of unconstrained AVQDS.",traced,untraced,170,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+prose,3\times10^{-4},0.00030000000000000003,4,False,1,"ve to the naive baseline on every configuration (MFIM: $3.22\to2.45$ and $3.25\to2.48$; LSM: $1.82\to1.47$ and $1.94\to1.72$), with final-time fidelity within $3\times10^{-4}$ of unconstrained AVQDS.",traced,untraced,7086,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+prose,1.00,1.0,2,False,3,"ery pool bond adjacent, so $r_\mu=0$ for all operators, Pass~2 of Eq.~ is a no-op, and RA-AVQDS reproduces unconstrained AVQDS exactly: the CNOT multiplier is $1.00$ and the SWAP count is zero.",traced,traced,155625,36,unattributed,unattributed,0.044,0.091,proposal/logs/lsm_hz-0.7_unconstrained_alltoall.json,final_fidelity,True,False,False,False

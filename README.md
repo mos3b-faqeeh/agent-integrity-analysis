@@ -29,7 +29,7 @@ This repository provides four things:
 | Provenance checking certifies with high precision | 78 of 85 certified claims are traceable (92%, exact 95% CI 84–97%); 27 of 29 on held-out submissions; inter-annotator κ = 0.89 |
 | Non-verification is not evidence of falsehood | 57–72% of claims the checker does not certify are traceable |
 | Checker and LLM verifier are complementary | An LLM verifier recovers more traceable claims but accepts 36% of untraceable ones (checker: 13%); when both agree, 51 of 52 claims are traceable |
-| Rankings are robust to the judge; pass rates are not | A second judge from a different vendor preserves the agent ranking but passes 12 of 30 submissions where the official judge passes 6 |
+| Pass rates depend on the judge configuration | On a 30-submission sample, a second judge configuration (different model and harness) ranks the vendor groups of agents in the same order but passes 12 submissions where the official judge passes 6; the comparison cannot isolate vendor effects or establish benchmark-wide ranking stability |
 
 ## Repository structure
 
@@ -45,6 +45,8 @@ judge2/             Second-judge protocol, stratified sample, verdicts and agree
 labels/             Human labels (development, re-check, confirmation, second annotator) and labelling interface
 data/derived/       Tables derived from the public benchmark release
 paper/              LaTeX source of the manuscript and figures
+requirements.txt    Python package versions used for the reported results
+DATA_MANIFEST.md    Which script and file produce each table and figure
 ```
 
 ## Using the checker
@@ -73,12 +75,13 @@ huggingface-cli download prometheus-eval/into-the-unknown --repo-type dataset \
     --include "file_systems/*" --local-dir hfdata                       # agent working directories (large)
 ```
 
-Then run the steps below. Every script takes local paths as arguments; see each file's docstring.
+Then run the steps below. Every script takes local paths as arguments; see each file's docstring. Steps that use only the files in this repository (labels, derived data, checker outputs) run without the benchmark download. `DATA_MANIFEST.md` lists the script and data behind each table and figure.
 
 | Step | Command |
 |---|---|
 | Judge re-analysis | `scripts/01_gate_summary.py`, `scripts/02_extract_integrity_nodes.py`, `scripts/03_runtime_fixed_effects.py` |
-| Checker vs. human labels | `analysis/score_checker.py`, `analysis/score_confirm.py` |
+| Label distribution and weights (Table 4) | `analysis/label_distribution.py` |
+| Checker vs. human labels | `analysis/score_checker.py`, `analysis/score_confirm.py`, `analysis/tables_precision_ablation_baselines.py` |
 | Baselines | `analysis/embedding_baseline.py`, `baselines/llm_verifier/run_llm_verifier.py` |
 | Benchmark-wide run | `analysis/run_checker_all.py`, then `analysis/benchmark_traceability.py` |
 | Second judge | `judge2/run_second_judge.sh`, then `scripts/05_judge_agreement.py` and `scripts/06_vendor_test.py` |

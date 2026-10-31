@@ -1,0 +1,559 @@
+kind,raw,value,dec,pct,sig,context,L1,L1nb,L1_n_matches,L1nb_n_matches,L2ctx,L2,L2_score,L2_p,L2_file,L2_context,decoy_L1,decoy_L1nb,decoy_L2ctx,decoy_L2
+table,7.977,7.977,3,False,4,"Piecewise I | Grid | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,2,2,supported,supported,0.132,0.091,proposal/logs/runs/piecewise_I__grid__seed0.json,checkpoints 50 iae,True,False,False,False
+table,13.49,13.49,2,False,4,"Piecewise I | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,11,2,supported,unattributed,0.129,0.364,proposal/logs/runs/piecewise_II__random__seed8.json,checkpoints 250 iae,True,True,False,False
+table,1.70,1.7,2,False,3,"Piecewise I | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,86,72,supported,unattributed,0.129,1.0,proposal/logs/runs/piecewise_II__random__seed6.json,hps_hist,True,True,True,False
+table,8.140,8.14,3,False,4,"Piecewise I | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,4,2,supported,unattributed,0.129,0.182,proposal/logs/runs/piecewise_II__SMART__seed7.json,checkpoints 400 iae,True,True,False,False
+table,0.563,0.563,3,False,3,"Piecewise I | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,33,32,supported,unattributed,0.129,0.818,proposal/logs/runs/diffusion_3d__random__seed7.json,hps_hist,True,True,True,False
+table,15.33,15.33,2,False,4,"Piecewise I | gSMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,12,1,unattributed,unattributed,0.06,0.909,proposal/logs/runs/piecewise_II__RWV_ex_p3__seed0.json,checkpoints 200 crps,True,True,False,False
+table,15.62,15.62,2,False,4,"Piecewise I | gSMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,12,5,supported,unattributed,0.129,0.364,proposal/logs/runs/piecewise_II__gSMART__seed9.json,checkpoints 125 iae,True,True,False,False
+table,8.112,8.112,3,False,4,"Piecewise I | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,2,1,supported,supported,0.182,0.091,proposal/logs/runs_raw3d/diffusion_3d__RWV__seed9.json,hps_hist,True,True,True,True
+table,0.620,0.62,3,False,3,"Piecewise I | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,42,42,supported,unattributed,0.166,0.909,proposal/logs/runs_raw3d/diffusion_3d__RWV_ex_s050_p2__seed7.json,checkpoints 100 coverage_emp,True,True,True,False
+table,5.152,5.152,3,False,4," | Grid | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,2,1,unattributed,unattributed,0.069,0.182,proposal/logs/runs/piecewise_I__grid__seed0.json,checkpoints 100 iae,True,True,False,False
+table,8.085,8.085,3,False,4," | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+table,0.980,0.98,3,False,3," | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,776,776,supported,unattributed,0.208,0.636,proposal/logs/runs/diffusion_3d__random__seed0.json,checkpoints 400 coverage_emp,True,True,True,False
+table,5.611,5.611,3,False,4," | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+table,0.329,0.329,3,False,3," | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,56,54,supported,unattributed,0.284,0.909,proposal/logs/runs/diffusion_3d__SMART__seed2.json,checkpoints 750 cal_err,True,True,True,False
+table,8.327,8.327,3,False,4," | gSMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,untraced,4,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+table,7.238,7.238,3,False,4," | gSMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,untraced,1,0,untraced,untraced,0.0,1.0,,,True,True,True,False
+table,4.981,4.981,3,False,4," | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,3,1,supported,unattributed,0.185,0.273,proposal/logs/runs_raw3d/diffusion_3d__RWV_s050_p2__seed7.json,hps_hist,True,True,True,False
+table,0.255,0.255,3,False,3," | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,60,58,supported,unattributed,0.189,0.909,proposal/logs/runs/diffusion_3d__RWV_s033_p2__seed4.json,checkpoints 50 crps,True,True,True,False
+table,3.952,3.952,3,False,4," | Grid | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,5,5,supported,unattributed,0.129,0.545,proposal/logs/runs_raw3d/diffusion_3d__RWV_s025_p2__seed0.json,hps_hist,False,False,False,False
+table,5.200,5.2,3,False,4," | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,1,1,unattributed,unattributed,0.0,1.0,proposal/logs/runs/nondiff__RWV_ex_p2__seed5.json,checkpoints 150 rmse,True,False,False,False
+table,0.404,0.404,3,False,3," | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,91,89,supported,unattributed,0.277,0.727,proposal/logs/runs_raw3d/diffusion_3d__random__seed8.json,checkpoints 750 cal_err,True,True,True,False
+table,3.928,3.928,3,False,4," | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,2,2,unattributed,unattributed,0.0,1.0,proposal/logs/runs/nondiff__RWV__seed6.json,checkpoints 300 rmse,True,True,True,False
+table,0.204,0.204,3,False,3," | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,48,47,supported,supported,0.284,0.091,proposal/logs/runs/diffusion_3d__gSMART__seed4.json,checkpoints 50 cal_err,True,True,True,False
+table,4.166,4.166,3,False,4," | gSMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,untraced,1,0,untraced,untraced,0.0,1.0,,,True,True,False,False
+table,0.230,0.23,3,False,3," | gSMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,38,37,supported,unattributed,0.197,0.909,proposal/logs/runs/diffusion_3d__RWV_s033_p2__seed3.json,checkpoints 100 cal_err,True,True,True,False
+table,3.190,3.19,3,False,4," | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,1,1,unattributed,unattributed,0.06,0.545,proposal/logs/runs/smooth_osc__RWV_ex_p3__seed4.json,hps_hist,True,True,True,True
+table,0.213,0.213,3,False,3," | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,33,33,supported,unattributed,0.194,0.909,proposal/logs/runs_raw3d/diffusion_3d__RWV__seed1.json,acq_time_mean,True,True,True,False
+table,2.213,2.213,3,False,4," | Grid | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,3,3,unattributed,unattributed,0.069,0.545,proposal/logs/runs/piecewise_I__grid__seed0.json,checkpoints 500 iae,True,True,False,False
+table,3.086,3.086,3,False,4," | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,2,2,supported,unattributed,0.132,0.273,proposal/logs/runs_raw3d/diffusion_3d__RWVrgp_p2__seed2.json,hps_hist,True,True,True,False
+table,0.182,0.182,3,False,3," | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,43,43,supported,unattributed,0.138,1.0,proposal/logs/runs/nondiff__random__seed4.json,checkpoints 50 cal_err,True,True,True,False
+table,2.394,2.394,3,False,4," | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,7,5,supported,supported,0.142,0.091,proposal/logs/runs/diffusion_3d__grid__seed0.json,hps 50,True,True,True,False
+table,0.109,0.109,3,False,3," | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,35,33,supported,unattributed,0.138,1.0,proposal/logs/runs/diffusion_3d__random__seed1.json,checkpoints 100 crps,True,True,True,False
+table,2.622,2.622,3,False,4," | gSMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,3,3,unattributed,unattributed,0.0,1.0,proposal/logs/runs/nondiff__RWVrgp_s1__seed2.json,checkpoints 500 rmse,True,True,True,False
+table,0.101,0.101,3,False,3," | gSMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,58,58,supported,unattributed,0.213,0.636,proposal/logs/runs/diffusion_3d__SMART__seed3.json,checkpoints 400 crps,True,True,True,False
+table,1.908,1.908,3,False,4," | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,6,5,supported,unattributed,0.126,0.636,proposal/logs/runs_raw3d/diffusion_3d__RWVGrad__seed8.json,hps_hist,True,True,True,False
+table,0.093,0.093,3,False,2," | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,50,49,supported,unattributed,0.199,0.818,proposal/logs/runs/diffusion_3d__RWV__seed8.json,checkpoints 500 mape,True,True,True,False
+table,23.20,23.2,2,False,4,"Piecewise II | Grid | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,11,4,supported,supported,0.186,0.091,proposal/logs/runs/piecewise_II__grid__seed0.json,checkpoints 50 iae,True,True,True,False
+table,41.19,41.19,2,False,4,"Piecewise II | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,untraced,14,0,untraced,untraced,0.0,1.0,,,True,True,False,False
+table,25.60,25.6,2,False,4,"Piecewise II | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,12,3,supported,unattributed,0.121,0.636,proposal/logs/runs/piecewise_II__RWVGrad__seed5.json,checkpoints 150 crps,True,True,False,False
+table,23.66,23.66,2,False,4,"Piecewise II | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,16,3,supported,unattributed,0.121,0.545,proposal/logs/runs/piecewise_II__random__seed1.json,checkpoints 75 iae,True,True,True,True
+table,1.38,1.38,2,False,3,"Piecewise II | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,93,77,supported,unattributed,0.186,1.0,proposal/logs/runs/diffusion_3d__SMART__seed8.json,hps_hist,True,True,True,False
+table,63.25,63.25,2,False,4,"Piecewise II | gSMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,untraced,4,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+table,35.67,35.67,2,False,4,"Piecewise II | gSMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,6,1,unattributed,unattributed,0.0,1.0,proposal/logs/runs/nondiff__RWV__seed2.json,wall,True,True,False,False
+table,23.68,23.68,2,False,4,"Piecewise II | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,untraced,8,0,untraced,untraced,0.0,1.0,,,True,True,True,False
+table,1.70,1.7,2,False,3,"Piecewise II | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,86,72,supported,unattributed,0.171,0.636,proposal/logs/runs_raw3d/diffusion_3d__RWV__seed3.json,checkpoints 100 mape,True,True,True,False
+table,15.74,15.74,2,False,4," | Grid | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,13,4,supported,unattributed,0.129,0.182,proposal/logs/runs_raw3d/diffusion_3d__RWV_s033_p2__seed1.json,checkpoints 100 mape,True,True,False,False
+table,21.71,21.71,2,False,4," | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,17,2,unattributed,unattributed,0.0,1.0,proposal/logs/runs/piecewise_II__RWV_s025_p2__seed7.json,checkpoints 300 crps,True,False,False,False
+table,1.59,1.59,2,False,3," | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,62,48,supported,unattributed,0.135,1.0,proposal/logs/runs_raw3d/diffusion_3d__SMART__seed2.json,checkpoints 100 mape,True,True,True,False
+table,17.08,17.08,2,False,4," | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,untraced,16,0,untraced,untraced,0.0,1.0,,,True,True,False,False
+table,0.68,0.68,2,False,2," | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,525,515,supported,unattributed,0.208,1.0,proposal/logs/runs/diffusion_3d__gSMART__seed2.json,checkpoints 400 coverage_emp,True,True,True,False
+table,31.31,31.31,2,False,4," | gSMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,8,1,unattributed,unattributed,0.0,1.0,proposal/logs/runs/piecewise_II__RWVGrad__seed7.json,checkpoints 200 crps,True,True,False,False
+table,26.84,26.84,2,False,4," | gSMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,7,2,unattributed,unattributed,0.0,1.0,proposal/logs/runs/piecewise_I__RWVrgp__seed5.json,acq_time_total,True,True,False,False
+table,14.91,14.91,2,False,4," | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,16,5,supported,supported,0.189,0.091,proposal/logs/runs_raw3d/diffusion_3d__RWV_p15__seed8.json,checkpoints 50 mape,True,True,False,False
+table,0.56,0.56,2,False,2," | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,330,325,supported,unattributed,0.194,1.0,proposal/logs/runs/diffusion_3d__RWV__seed4.json,checkpoints 50 coverage_emp,True,True,True,False
+table,12.52,12.52,2,False,4," | Grid | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,17,3,unattributed,unattributed,0.067,0.364,proposal/logs/runs/piecewise_II__grid__seed0.json,checkpoints 200 iae,True,True,False,False
+table,15.22,15.22,2,False,4," | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,11,3,unattributed,unattributed,0.067,0.273,proposal/logs/runs/piecewise_II__random__seed8.json,checkpoints 250 crps,True,True,True,True
+table,0.90,0.9,2,False,2," | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,12253,12245,supported,unattributed,0.208,1.0,proposal/logs/runs/diffusion_3d__random__seed1.json,checkpoints 750 coverage_levels,True,True,True,False
+table,12.21,12.21,2,False,4," | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,22,6,unattributed,unattributed,0.067,0.364,proposal/logs/runs/piecewise_II__SMART__seed2.json,checkpoints 300 crps,True,True,False,False
+table,0.53,0.53,2,False,2," | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,426,414,supported,unattributed,0.208,1.0,proposal/logs/runs/diffusion_3d__gSMART__seed3.json,checkpoints 50 coverage_emp,True,True,True,False
+table,13.29,13.29,2,False,4," | gSMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,19,9,supported,supported,0.208,0.091,proposal/logs/runs_raw3d/diffusion_3d__gSMART__seed3.json,hps_hist,True,True,False,False
+table,3.05,3.05,2,False,3," | gSMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,35,24,supported,unattributed,0.213,0.727,proposal/logs/runs/diffusion_3d__SMART__seed0.json,hps_hist,True,True,True,False
+table,9.733,9.733,3,False,4," | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,2,1,unattributed,unattributed,0.0,1.0,proposal/logs/runs/piecewise_I__random__seed3.json,checkpoints 100 iae,True,True,False,False
+table,0.261,0.261,3,False,3," | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,53,53,supported,unattributed,0.189,1.0,proposal/logs/runs_raw3d/diffusion_3d__RWV_p15__seed4.json,checkpoints 1000 mape,True,True,True,False
+table,6.807,6.807,3,False,4," | Grid | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,4,3,unattributed,unattributed,0.067,0.091,proposal/logs/runs/piecewise_II__grid__seed0.json,checkpoints 500 iae,True,True,False,False
+table,9.445,9.445,3,False,4," | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,2,1,unattributed,unattributed,0.0,1.0,proposal/logs/runs/piecewise_I__RWVrgp_p2__seed2.json,checkpoints 500 rmse,True,False,False,False
+table,0.443,0.443,3,False,3," | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,35,35,supported,unattributed,0.213,0.273,proposal/logs/runs/diffusion_3d__random__seed7.json,hps_hist,True,True,True,False
+table,7.393,7.393,3,False,4," | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+table,0.250,0.25,3,False,3," | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,59,58,supported,unattributed,0.284,0.273,proposal/logs/runs/diffusion_3d__gSMART__seed0.json,checkpoints 50 cal_err,True,True,True,False
+table,7.962,7.962,3,False,4," | gSMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,1,1,unattributed,unattributed,0.0,1.0,proposal/logs/runs/piecewise_II__RWV_s033_p2__seed0.json,checkpoints 250 iae,True,True,True,False
+table,0.366,0.366,3,False,3," | gSMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,100,99,supported,unattributed,0.202,1.0,proposal/logs/runs_raw3d/diffusion_3d__grid__seed0.json,checkpoints 1000 cal_err,True,True,True,False
+table,5.469,5.469,3,False,4," | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,untraced,1,0,untraced,untraced,0.0,1.0,,,True,True,False,False
+table,0.154,0.154,3,False,3," | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,39,38,supported,unattributed,0.189,0.545,proposal/logs/runs/diffusion_3d__RWV_s050_p2__seed9.json,checkpoints 200 mape,True,True,True,False
+table,1.068,1.068,3,False,4,"Smooth Osc. | Grid | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,29,28,supported,supported,0.186,0.091,proposal/logs/runs/smooth_osc__grid__seed0.json,checkpoints 50 iae,True,True,True,False
+table,0.948,0.948,3,False,3,"Smooth Osc. | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,621,619,supported,unattributed,0.182,1.0,proposal/logs/runs/smooth_osc__random__seed5.json,checkpoints 350 coverage_emp,True,True,True,False
+table,0.017,0.017,3,False,2,"Smooth Osc. | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,16,14,supported,unattributed,0.248,0.727,proposal/logs/runs/smooth_osc__random__seed7.json,checkpoints 150 cal_err,True,True,True,False
+table,1.010,1.01,3,False,4,"Smooth Osc. | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,23,22,supported,unattributed,0.186,0.636,proposal/logs/runs/diffusion_3d__gSMART__seed6.json,hps_hist,True,True,True,False
+table,0.041,0.041,3,False,2,"Smooth Osc. | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,21,21,supported,unattributed,0.248,0.727,proposal/logs/runs/smooth_osc__SMART__seed7.json,checkpoints 150 cal_err,True,True,True,False
+table,0.983,0.983,3,False,3,"Smooth Osc. | gSMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,742,742,supported,unattributed,0.186,0.727,proposal/logs/runs/smooth_osc__gSMART__seed2.json,checkpoints 150 rmse,True,True,True,False
+table,0.046,0.046,3,False,2,"Smooth Osc. | gSMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,42,41,supported,unattributed,0.182,1.0,proposal/logs/runs/smooth_osc__RWV__seed1.json,checkpoints 125 cal_err,True,True,True,False
+table,1.010,1.01,3,False,4,"Smooth Osc. | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,23,22,supported,unattributed,0.171,0.909,proposal/logs/runs/smooth_osc__RWV_s050__seed9.json,hps_hist,True,True,True,False
+table,0.038,0.038,3,False,2,"Smooth Osc. | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,13,13,supported,unattributed,0.228,0.636,proposal/logs/runs/smooth_osc__RWV_p15__seed7.json,checkpoints 150 cal_err,True,True,True,False
+table,1.018,1.018,3,False,4," | Grid | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,18,18,supported,unattributed,0.129,1.0,proposal/logs/runs_raw3d/diffusion_3d__RWV_s025_p2__seed5.json,hps_hist,True,True,True,False
+table,0.857,0.857,3,False,3," | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,185,185,supported,unattributed,0.208,1.0,proposal/logs/runs/diffusion_3d__random__seed2.json,checkpoints 100 coverage_emp,True,True,True,False
+table,0.026,0.026,3,False,2," | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,27,27,supported,unattributed,0.213,0.636,proposal/logs/runs/diffusion_3d__random__seed2.json,checkpoints 1000 mape,True,True,True,False
+table,0.857,0.857,3,False,3," | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,185,185,supported,unattributed,0.208,1.0,proposal/logs/runs/diffusion_3d__SMART__seed1.json,checkpoints 400 coverage_emp,True,True,True,False
+table,0.014,0.014,3,False,2," | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,22,19,supported,unattributed,0.202,0.818,proposal/logs/runs_raw3d/diffusion_3d__gSMART__seed8.json,checkpoints 100 coverage_emp,True,True,True,False
+table,0.884,0.884,3,False,3," | gSMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,284,284,supported,unattributed,0.208,1.0,proposal/logs/runs/diffusion_3d__SMART__seed5.json,checkpoints 1000 coverage_emp,True,True,True,False
+table,0.026,0.026,3,False,2," | gSMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,27,27,supported,unattributed,0.208,0.273,proposal/logs/runs_raw3d/diffusion_3d__gSMART__seed2.json,hps_hist,True,True,True,False
+table,0.866,0.866,3,False,3," | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,234,233,supported,unattributed,0.194,1.0,proposal/logs/runs/diffusion_3d__RWV__seed3.json,checkpoints 400 coverage_emp,True,True,True,False
+table,0.033,0.033,3,False,2," | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,40,40,supported,unattributed,0.129,1.0,proposal/logs/runs/diffusion_3d__random__seed2.json,checkpoints 600 mape,True,True,True,False
+table,0.301,0.301,3,False,3," | Grid | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,59,58,supported,unattributed,0.208,0.909,proposal/logs/runs/diffusion_3d__RWV__seed3.json,checkpoints 300 cal_err,True,True,True,False
+table,0.672,0.672,3,False,3," | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,52,52,supported,unattributed,0.135,0.909,proposal/logs/runs/diffusion_3d__RWV__seed2.json,checkpoints 300 coverage_emp,True,True,True,False
+table,0.021,0.021,3,False,2," | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,28,24,supported,unattributed,0.132,0.909,proposal/logs/runs_raw3d/diffusion_3d__RWVGrad__seed3.json,checkpoints 50 coverage_emp,True,True,True,False
+table,0.515,0.515,3,False,3," | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,37,37,supported,unattributed,0.208,0.455,proposal/logs/runs/diffusion_3d__SMART__seed4.json,checkpoints 50 coverage_emp,True,True,True,False
+table,0.014,0.014,3,False,2," | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,22,19,supported,unattributed,0.202,0.818,proposal/logs/runs_raw3d/diffusion_3d__gSMART__seed8.json,checkpoints 100 coverage_emp,True,True,True,False
+table,0.620,0.62,3,False,3," | gSMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,42,42,supported,unattributed,0.208,0.636,proposal/logs/runs/diffusion_3d__gSMART__seed4.json,checkpoints 100 coverage_emp,True,True,True,False
+table,0.020,0.02,3,False,2," | gSMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,23,22,supported,unattributed,0.132,0.909,proposal/logs/runs_raw3d/diffusion_3d__RWVGrad__seed3.json,checkpoints 50 coverage_emp,True,True,True,False
+table,0.532,0.532,3,False,3," | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,52,50,supported,unattributed,0.189,0.636,proposal/logs/runs_raw3d/diffusion_3d__RWV_s050__seed0.json,hps_hist,True,True,True,False
+table,0.014,0.014,3,False,2," | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,22,19,supported,unattributed,0.123,1.0,proposal/logs/runs_raw3d/diffusion_3d__gSMART__seed8.json,checkpoints 100 coverage_emp,True,True,True,False
+table,0.183,0.183,3,False,3," | Grid | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,67,67,supported,unattributed,0.202,0.636,proposal/logs/runs_raw3d/diffusion_3d__RWVGrad__seed9.json,checkpoints 50 cal_err,True,True,True,False
+table,0.358,0.358,3,False,3," | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,90,90,supported,unattributed,0.208,0.909,proposal/logs/runs/diffusion_3d__gSMART__seed3.json,checkpoints 1000 cal_err,True,True,True,False
+table,0.018,0.018,3,False,2," | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,16,16,supported,unattributed,0.135,0.818,proposal/logs/runs/smooth_osc__random__seed3.json,checkpoints 250 cal_err,True,True,True,False
+table,0.188,0.188,3,False,3," | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,60,59,supported,unattributed,0.213,0.636,proposal/logs/runs/diffusion_3d__gSMART__seed0.json,checkpoints 100 mape,True,True,True,False
+table,0.002,0.002,3,False,1," | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,2,1,supported,unattributed,0.202,1.0,proposal/logs/runs_raw3d/diffusion_3d__gSMART__seed7.json,checkpoints 50 coverage_emp,True,True,True,False
+table,0.233,0.233,3,False,3," | gSMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,52,50,supported,unattributed,0.213,0.636,proposal/logs/runs/diffusion_3d__gSMART__seed2.json,checkpoints 50 crps,True,True,True,False
+table,0.005,0.005,3,False,1," | gSMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,9,7,supported,unattributed,0.202,0.625,proposal/logs/runs_raw3d/diffusion_3d__gSMART__seed8.json,checkpoints 100 coverage_emp,True,True,True,False
+table,0.188,0.188,3,False,3," | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,60,59,supported,unattributed,0.252,0.364,proposal/logs/runs/diffusion_3d__RWV_s050_p2__seed4.json,checkpoints 50 cal_err,True,True,True,False
+table,0.003,0.003,3,False,1," | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,5,3,supported,unattributed,0.123,0.714,proposal/logs/runs_raw3d/diffusion_3d__gSMART__seed8.json,checkpoints 50 coverage_emp,True,True,True,False
+table,4.184,4.184,3,False,4,"Non-diff. | Grid | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,7,7,unattributed,unattributed,0.116,0.364,proposal/logs/runs_raw3d/diffusion_3d__RWV_p15__seed5.json,hps_hist,False,False,False,False
+table,4.588,4.588,3,False,4,"Non-diff. | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,2,1,unattributed,unattributed,0.061,0.727,proposal/logs/runs/nondiff__random__seed5.json,checkpoints 50 iae,True,True,True,True
+table,0.627,0.627,3,False,3,"Non-diff. | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,55,53,unattributed,unattributed,0.116,0.909,proposal/logs/runs_raw3d/diffusion_3d__RWV_p15__seed8.json,hps_hist,True,True,True,False
+table,3.441,3.441,3,False,4,"Non-diff. | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,5,2,unattributed,unattributed,0.0,1.0,proposal/logs/runs/nondiff__RWV_p15__seed8.json,checkpoints 50 crps,True,True,False,False
+table,0.240,0.24,3,False,3,"Non-diff. | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,66,66,supported,unattributed,0.186,0.818,proposal/logs/runs/diffusion_3d__SMART__seed6.json,checkpoints 50 crps,True,True,True,False
+table,3.607,3.607,3,False,4,"Non-diff. | gSMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,4,3,unattributed,unattributed,0.0,1.0,proposal/logs/runs/nondiff__RWV_s050__seed2.json,checkpoints 500 rmse,True,True,False,False
+table,0.737,0.737,3,False,3,"Non-diff. | gSMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,79,79,supported,unattributed,0.186,0.182,proposal/logs/runs/diffusion_3d__SMART__seed4.json,hps_hist,True,True,True,False
+table,3.227,3.227,3,False,4,"Non-diff. | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,5,3,unattributed,unattributed,0.114,0.273,proposal/logs/runs/diffusion_3d__random__seed8.json,hps_hist,True,True,False,False
+table,0.217,0.217,3,False,3,"Non-diff. | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,53,49,supported,unattributed,0.171,1.0,proposal/logs/runs/diffusion_3d__grid__seed0.json,checkpoints 200 cal_err,True,True,True,False
+table,2.352,2.352,3,False,4," | Grid | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,5,4,unattributed,unattributed,0.069,0.364,proposal/logs/runs/nondiff__grid__seed0.json,checkpoints 100 iae,True,True,True,False
+table,2.918,2.918,3,False,4," | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,4,2,unattributed,unattributed,0.0,1.0,proposal/logs/runs/nondiff__RWV_p15__seed0.json,checkpoints 75 iae,True,True,False,False
+table,0.181,0.181,3,False,3," | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,46,44,supported,unattributed,0.208,0.909,proposal/logs/runs/diffusion_3d__SMART__seed3.json,checkpoints 50 cal_err,True,True,True,False
+table,2.471,2.471,3,False,4," | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,6,5,supported,unattributed,0.135,0.455,proposal/logs/runs_raw3d/diffusion_3d__random__seed7.json,hps_hist,True,True,True,False
+table,0.082,0.082,3,False,2," | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,66,64,supported,unattributed,0.213,0.909,proposal/logs/runs/diffusion_3d__SMART__seed5.json,checkpoints 600 crps,True,True,True,False
+table,2.422,2.422,3,False,4," | gSMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,9,6,supported,supported,0.213,0.091,proposal/logs/runs/diffusion_3d__gSMART__seed3.json,hps_hist,True,True,False,False
+table,0.173,0.173,3,False,3," | gSMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,55,54,supported,unattributed,0.197,0.818,proposal/logs/runs/diffusion_3d__RWV_s033_p2__seed3.json,checkpoints 50 cal_err,True,True,True,False
+table,2.182,2.182,3,False,4," | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,5,2,supported,unattributed,0.185,0.273,proposal/logs/runs_raw3d/diffusion_3d__RWV_ex_p3__seed2.json,hps_hist,True,True,False,False
+table,0.153,0.153,3,False,3," | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,22,20,supported,unattributed,0.129,1.0,proposal/logs/runs/diffusion_3d__random__seed6.json,checkpoints 50 crps,True,True,True,False
+table,1.429,1.429,3,False,4," | Grid | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,10,9,supported,unattributed,0.138,0.182,proposal/logs/runs/diffusion_3d__RWV__seed8.json,hps_hist,True,True,True,False
+table,1.985,1.985,3,False,4," | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,5,3,supported,unattributed,0.135,0.545,proposal/logs/runs_raw3d/diffusion_3d__SMART__seed6.json,hps_hist,True,True,True,False
+table,0.092,0.092,3,False,2," | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,48,46,supported,unattributed,0.213,0.455,proposal/logs/runs/diffusion_3d__random__seed5.json,checkpoints 100 mape,True,True,True,False
+table,1.597,1.597,3,False,4," | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,14,13,supported,supported,0.213,0.091,proposal/logs/runs/diffusion_3d__SMART__seed4.json,hps_hist,True,True,False,False
+table,0.058,0.058,3,False,2," | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,49,49,supported,unattributed,0.213,0.818,proposal/logs/runs/diffusion_3d__gSMART__seed7.json,checkpoints 500 mape,True,True,True,False
+table,1.645,1.645,3,False,4," | gSMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,2,2,unattributed,unattributed,0.0,1.0,proposal/logs/runs/smooth_osc__RWV_ex_p3__seed9.json,hps_hist,True,True,False,False
+table,0.038,0.038,3,False,2," | gSMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,13,13,supported,unattributed,0.202,0.727,proposal/logs/runs_raw3d/diffusion_3d__gSMART__seed1.json,checkpoints 50 coverage_emp,True,True,True,False
+table,1.448,1.448,3,False,4," | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,6,5,supported,unattributed,0.185,0.455,proposal/logs/runs_raw3d/diffusion_3d__RWV_s025_p2__seed4.json,hps_hist,True,True,False,False
+table,0.080,0.08,3,False,2," | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,67,65,supported,unattributed,0.199,0.909,proposal/logs/runs/diffusion_3d__RWV__seed7.json,checkpoints 600 mape,True,True,True,False
+table,0.967,0.967,3,False,3," | Grid | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,836,833,supported,unattributed,0.135,1.0,proposal/logs/runs/diffusion_3d__SMART__seed5.json,checkpoints 50 coverage_emp,True,True,True,False
+table,1.241,1.241,3,False,4," | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,14,12,supported,unattributed,0.132,0.727,proposal/logs/runs_raw3d/diffusion_3d__RWVrgp_p2__seed7.json,hps_hist,True,True,True,False
+table,0.067,0.067,3,False,2," | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,46,45,supported,unattributed,0.213,0.909,proposal/logs/runs/diffusion_3d__random__seed9.json,checkpoints 200 mape,True,True,True,False
+table,0.985,0.985,3,False,3," | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,788,787,supported,unattributed,0.213,0.273,proposal/logs/runs/diffusion_3d__SMART__seed4.json,hps_hist,True,True,True,False
+table,0.028,0.028,3,False,2," | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,38,36,supported,unattributed,0.138,0.818,proposal/logs/runs/diffusion_3d__random__seed4.json,checkpoints 750 mape,True,True,True,False
+table,1.052,1.052,3,False,4," | gSMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,18,17,supported,unattributed,0.129,0.818,proposal/logs/runs_raw3d/diffusion_3d__RWV_s033_p2__seed2.json,hps_hist,True,True,True,False
+table,0.027,0.027,3,False,2," | gSMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,24,23,supported,unattributed,0.202,0.455,proposal/logs/runs_raw3d/diffusion_3d__gSMART__seed8.json,checkpoints 300 coverage_emp,True,True,True,False
+table,0.855,0.855,3,False,3," | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,209,209,supported,unattributed,0.194,1.0,proposal/logs/runs/diffusion_3d__RWV__seed9.json,checkpoints 300 coverage_emp,True,True,True,False
+table,0.028,0.028,3,False,2," | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,38,36,supported,unattributed,0.129,0.727,proposal/logs/runs/diffusion_3d__random__seed4.json,checkpoints 750 mape,True,True,True,False
+table,0.84,0.84,2,False,2,"3D Diffusion | Grid | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,1585,1575,supported,unattributed,0.208,0.818,proposal/logs/runs/diffusion_3d__grid__seed0.json,checkpoints 400 coverage_emp,True,True,True,False
+table,0.24,0.24,2,False,2,"3D Diffusion | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,565,559,supported,unattributed,0.284,0.545,proposal/logs/runs/diffusion_3d__random__seed0.json,checkpoints 50 cal_err,True,True,True,False
+table,0.04,0.04,2,False,1,"3D Diffusion | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,246,238,supported,unattributed,0.213,1.0,proposal/logs/runs/diffusion_3d__random__seed1.json,checkpoints 1000 crps,True,True,True,False
+table,0.54,0.54,2,False,2,"3D Diffusion | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,410,404,supported,unattributed,0.213,0.182,proposal/logs/runs/diffusion_3d__SMART__seed2.json,checkpoints 50 mape,True,True,True,False
+table,0.08,0.08,2,False,1,"3D Diffusion | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,498,486,supported,unattributed,0.213,0.778,proposal/logs/runs/diffusion_3d__SMART__seed5.json,checkpoints 600 crps,True,True,True,False
+table,0.35,0.35,2,False,2,"3D Diffusion | gSMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,849,838,supported,unattributed,0.284,0.545,proposal/logs/runs/diffusion_3d__gSMART__seed8.json,checkpoints 750 cal_err,True,True,True,False
+table,0.07,0.07,2,False,1,"3D Diffusion | gSMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,498,491,supported,unattributed,0.213,0.778,proposal/logs/runs/diffusion_3d__SMART__seed5.json,checkpoints 750 crps,True,True,True,False
+table,0.55,0.55,2,False,2,"3D Diffusion | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,414,407,supported,unattributed,0.199,0.273,proposal/logs/runs/diffusion_3d__RWV__seed2.json,checkpoints 50 mape,True,True,True,False
+table,0.11,0.11,2,False,2,"3D Diffusion | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,373,363,supported,unattributed,0.199,0.818,proposal/logs/runs/diffusion_3d__RWV__seed2.json,checkpoints 300 crps,True,True,True,False
+table,0.68,0.68,2,False,2," | Grid | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,525,515,supported,unattributed,0.208,0.727,proposal/logs/runs/diffusion_3d__grid__seed0.json,checkpoints 50 coverage_emp,True,True,True,False
+table,0.18,0.18,2,False,2," | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,516,506,supported,unattributed,0.284,0.364,proposal/logs/runs/diffusion_3d__random__seed3.json,checkpoints 50 cal_err,True,True,True,False
+table,0.02,0.02,2,False,1," | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,202,187,supported,unattributed,0.213,1.0,proposal/logs/runs/diffusion_3d__random__seed0.json,checkpoints 1000 mape,True,True,True,False
+table,0.43,0.43,2,False,2," | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,872,859,supported,unattributed,0.277,0.455,proposal/logs/runs_raw3d/diffusion_3d__gSMART__seed8.json,checkpoints 1000 cal_err,True,True,True,False
+table,0.06,0.06,2,False,1," | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,540,534,supported,unattributed,0.213,0.75,proposal/logs/runs/diffusion_3d__SMART__seed5.json,checkpoints 1000 crps,True,True,True,False
+table,0.26,0.26,2,False,2," | gSMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,518,506,supported,unattributed,0.284,0.818,proposal/logs/runs/diffusion_3d__SMART__seed1.json,checkpoints 100 cal_err,True,True,True,False
+table,0.03,0.03,2,False,1," | gSMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,346,333,supported,unattributed,0.208,1.0,proposal/logs/runs_raw3d/diffusion_3d__gSMART__seed2.json,hps_hist,True,True,True,False
+table,0.45,0.45,2,False,2," | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,399,393,supported,unattributed,0.199,0.727,proposal/logs/runs/diffusion_3d__RWV__seed0.json,checkpoints 50 mape,True,True,True,False
+table,0.07,0.07,2,False,1," | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,498,491,supported,unattributed,0.199,0.778,proposal/logs/runs/diffusion_3d__RWV__seed2.json,checkpoints 750 crps,True,True,True,False
+table,0.50,0.5,2,False,2," | Grid | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,9476,9471,supported,unattributed,0.208,0.364,proposal/logs/runs/diffusion_3d__grid__seed0.json,checkpoints 400 coverage_levels,True,True,True,False
+table,0.15,0.15,2,False,2," | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,397,383,supported,unattributed,0.213,0.909,proposal/logs/runs/diffusion_3d__random__seed1.json,checkpoints 50 crps,True,True,True,False
+table,0.01,0.01,2,False,1," | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,404,382,supported,unattributed,0.135,1.0,proposal/logs/runs/smooth_osc__random__seed9.json,checkpoints 150 cal_err,True,True,True,False
+table,0.31,0.31,2,False,2," | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,583,576,supported,unattributed,0.284,0.727,proposal/logs/runs/diffusion_3d__SMART__seed5.json,checkpoints 400 cal_err,True,True,True,False
+table,0.04,0.04,2,False,1," | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,246,238,supported,unattributed,0.213,0.857,proposal/logs/runs/diffusion_3d__gSMART__seed8.json,checkpoints 1000 mape,True,True,True,False
+table,0.19,0.19,2,False,2," | gSMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,503,495,supported,unattributed,0.213,1.0,proposal/logs/runs/diffusion_3d__SMART__seed5.json,checkpoints 200 mape,True,True,True,False
+table,0.01,0.01,2,False,1," | gSMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,404,382,supported,unattributed,0.208,1.0,proposal/logs/runs_raw3d/diffusion_3d__gSMART__seed0.json,hps_hist,True,True,True,False
+table,0.30,0.3,2,False,2," | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,9589,9583,supported,unattributed,0.265,0.636,proposal/logs/runs/diffusion_3d__RWV__seed9.json,checkpoints 300 cal_err,True,True,True,False
+table,0.02,0.02,2,False,1," | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,202,187,supported,unattributed,0.129,1.0,proposal/logs/runs/diffusion_3d__random__seed0.json,checkpoints 1000 mape,True,True,True,False
+table,0.31,0.31,2,False,2," | Grid | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,583,576,supported,unattributed,0.284,0.273,proposal/logs/runs/diffusion_3d__grid__seed0.json,checkpoints 750 cal_err,True,True,True,False
+table,0.11,0.11,2,False,2," | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,373,363,supported,unattributed,0.213,0.818,proposal/logs/runs/diffusion_3d__random__seed1.json,checkpoints 100 crps,True,True,True,False
+table,0.01,0.01,2,False,1," | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,404,382,supported,unattributed,0.135,1.0,proposal/logs/runs/smooth_osc__random__seed9.json,checkpoints 150 cal_err,True,True,True,False
+table,0.21,0.21,2,False,2," | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,348,344,supported,unattributed,0.284,0.636,proposal/logs/runs/diffusion_3d__SMART__seed5.json,checkpoints 50 cal_err,True,True,True,False
+table,0.01,0.01,2,False,1," | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,404,382,supported,unattributed,0.208,1.0,proposal/logs/runs_raw3d/diffusion_3d__gSMART__seed0.json,hps_hist,True,True,True,False
+table,0.12,0.12,2,False,2," | gSMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,373,362,supported,unattributed,0.213,0.818,proposal/logs/runs/diffusion_3d__SMART__seed5.json,checkpoints 300 mape,True,True,True,False
+table,0.20,0.2,2,False,2," | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,9578,9563,supported,unattributed,0.265,0.545,proposal/logs/runs/diffusion_3d__RWV__seed9.json,checkpoints 50 cal_err,True,True,True,False
+table,0.01,0.01,2,False,1," | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,404,382,supported,unattributed,0.126,1.0,proposal/logs/runs_raw3d/diffusion_3d__gSMART__seed0.json,hps_hist,True,True,True,False
+table,0.21,0.21,2,False,2," | Grid | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,348,344,supported,unattributed,0.208,0.909,proposal/logs/runs/diffusion_3d__SMART__seed5.json,checkpoints 50 cal_err,True,True,True,False
+table,0.09,0.09,2,False,1," | Random | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,523,516,supported,unattributed,0.213,0.8,proposal/logs/runs/diffusion_3d__random__seed1.json,checkpoints 100 mape,True,True,True,False
+table,0.15,0.15,2,False,2," | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,397,383,supported,unattributed,0.213,1.0,proposal/logs/runs/diffusion_3d__SMART__seed5.json,checkpoints 200 crps,True,True,True,False
+table,0.01,0.01,2,False,1," | SMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,404,382,supported,unattributed,0.208,1.0,proposal/logs/runs_raw3d/diffusion_3d__gSMART__seed0.json,hps_hist,True,True,True,False
+table,0.08,0.08,2,False,1," | gSMART | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,498,486,supported,unattributed,0.213,0.778,proposal/logs/runs/diffusion_3d__SMART__seed5.json,checkpoints 600 crps,True,True,True,False
+table,0.13,0.13,2,False,2," | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,445,431,supported,unattributed,0.199,0.909,proposal/logs/runs/diffusion_3d__RWV__seed2.json,acq_time_mean,True,True,True,False
+table,0.01,0.01,2,False,1," | RWV (ours) | Normalized integrated absolute error (mean~$\pm$~std over 10 seeds) at
+each headline budget. 3D-diffusion values are $\times 10^{-11",traced,traced,404,382,supported,unattributed,0.126,1.0,proposal/logs/runs_raw3d/diffusion_3d__gSMART__seed0.json,hps_hist,True,True,True,False
+table,9.939,9.939,3,False,4,"Piecewise I | Grid | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,2,1,supported,supported,0.191,0.091,proposal/logs/runs/piecewise_I__grid__seed0.json,checkpoints 500 rmse,True,False,False,False
+table,11.746,11.746,3,False,5,"Piecewise I | Random | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+table,10.856,10.856,3,False,5,"Piecewise I | SMART | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,3,1,unattributed,unattributed,0.059,0.364,proposal/logs/runs/piecewise_II__RWV__seed8.json,checkpoints 500 crps,True,False,False,False
+table,9.171,9.171,3,False,4,"Piecewise I | gSMART | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,5,1,unattributed,unattributed,0.118,0.182,proposal/logs/runs_raw3d/diffusion_3d__grid__seed0.json,checkpoints 50 mape,True,False,False,False
+table,9.152,9.152,3,False,4,"Piecewise I | RWV | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,2,1,supported,unattributed,0.177,0.182,proposal/logs/runs_raw3d/diffusion_3d__RWV_p15__seed0.json,hps_hist,True,False,False,False
+table,3.807,3.807,3,False,4," | Grid | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,5,5,unattributed,unattributed,0.065,0.455,proposal/logs/runs/nondiff__RWV__seed9.json,checkpoints 350 rmse,True,True,False,False
+table,4.657,4.657,3,False,4," | Random | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,3,1,unattributed,unattributed,0.0,1.0,proposal/logs/runs/nondiff__RWVrgp_s1__seed8.json,checkpoints 200 crps,True,True,True,False
+table,3.933,3.933,3,False,4," | SMART | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,3,2,unattributed,unattributed,0.065,0.545,proposal/logs/runs/nondiff__random__seed7.json,checkpoints 400 rmse,True,True,False,False
+table,8.474,8.474,3,False,4," | gSMART | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,3,3,supported,supported,0.194,0.091,proposal/logs/runs_raw3d/diffusion_3d__SMART__seed0.json,hps_hist,False,False,False,False
+table,4.643,4.643,3,False,4," | RWV | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,3,2,supported,unattributed,0.129,0.545,proposal/logs/runs/nondiff__RWV_p15__seed1.json,checkpoints 125 rmse,True,True,True,False
+table,0.395,0.395,3,False,3," | Grid | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,93,93,supported,unattributed,0.123,1.0,proposal/logs/runs_raw3d/diffusion_3d__RWV__seed9.json,checkpoints 1000 cal_err,True,True,True,False
+table,0.378,0.378,3,False,3," | Random | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,112,110,supported,unattributed,0.189,0.909,proposal/logs/runs_raw3d/diffusion_3d__random__seed3.json,checkpoints 600 cal_err,True,True,True,False
+table,0.393,0.393,3,False,3," | SMART | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,126,125,supported,unattributed,0.194,0.273,proposal/logs/runs_raw3d/diffusion_3d__SMART__seed5.json,checkpoints 600 mape,True,True,True,False
+table,0.418,0.418,3,False,3," | gSMART | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,78,78,supported,unattributed,0.194,0.545,proposal/logs/runs/diffusion_3d__SMART__seed8.json,checkpoints 100 coverage_emp,True,True,True,False
+table,0.413,0.413,3,False,3," | RWV | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,83,82,supported,unattributed,0.185,1.0,proposal/logs/runs_raw3d/diffusion_3d__RWV_p15__seed4.json,checkpoints 100 cal_err,True,True,True,False
+table,24.649,24.649,3,False,5,"Piecewise II | Grid | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,3,2,supported,supported,0.239,0.091,proposal/logs/runs/piecewise_II__grid__seed0.json,checkpoints 500 rmse,True,False,False,False
+table,29.889,29.889,3,False,5,"Piecewise II | Random | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+table,27.216,27.216,3,False,5,"Piecewise II | SMART | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,True,True,True,False
+table,24.053,24.053,3,False,5,"Piecewise II | gSMART | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,untraced,1,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+table,21.371,21.371,3,False,5,"Piecewise II | RWV | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,2,1,supported,unattributed,0.167,0.182,proposal/logs/runs/piecewise_II__RWV_s025_p2__seed4.json,checkpoints 350 crps,True,False,False,False
+table,9.934,9.934,3,False,4," | Grid | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,2,2,unattributed,unattributed,0.063,0.091,proposal/logs/runs/piecewise_II__grid__seed0.json,checkpoints 500 crps,True,True,True,False
+table,12.378,12.378,3,False,5," | Random | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+table,10.622,10.622,3,False,5," | SMART | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,1,1,unattributed,unattributed,0.0,1.0,proposal/logs/runs/piecewise_II__random__seed2.json,checkpoints 400 iae,False,False,False,False
+table,19.814,19.814,3,False,5," | gSMART | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,untraced,1,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+table,14.271,14.271,3,False,5," | RWV | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,1,1,unattributed,unattributed,0.0,1.0,proposal/logs/runs/piecewise_I__gSMART__seed7.json,checkpoints 50 crps,True,True,False,False
+table,0.368,0.368,3,False,3," | Grid | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,98,96,supported,unattributed,0.129,0.455,proposal/logs/runs/diffusion_3d__gSMART__seed4.json,checkpoints 50 mape,True,True,True,False
+table,0.352,0.352,3,False,3," | Random | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,94,94,supported,unattributed,0.189,0.909,proposal/logs/runs_raw3d/diffusion_3d__random__seed6.json,checkpoints 300 cal_err,True,True,True,False
+table,0.369,0.369,3,False,3," | SMART | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,97,96,supported,unattributed,0.129,0.909,proposal/logs/runs/smooth_osc__SMART__seed1.json,checkpoints 350 rmse,True,True,True,False
+table,0.405,0.405,3,False,3," | gSMART | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,102,100,supported,unattributed,0.126,0.727,proposal/logs/runs/diffusion_3d__random__seed8.json,checkpoints 100 coverage_emp,True,True,True,True
+table,0.407,0.407,3,False,3," | RWV | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,82,82,supported,unattributed,0.185,1.0,proposal/logs/runs/diffusion_3d__RWV_s050_p2__seed8.json,checkpoints 50 coverage_emp,True,True,True,False
+table,0.232,0.232,3,False,3,"Smooth Osc. | Grid | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,49,49,supported,supported,0.239,0.091,proposal/logs/runs/smooth_osc__grid__seed0.json,checkpoints 500 rmse,True,True,True,False
+table,0.518,0.518,3,False,3,"Smooth Osc. | Random | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,49,47,supported,unattributed,0.171,0.909,proposal/logs/runs/smooth_osc__RWV_p15__seed9.json,checkpoints 250 rmse,True,True,True,False
+table,0.245,0.245,3,False,3,"Smooth Osc. | SMART | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,55,55,supported,unattributed,0.239,0.364,proposal/logs/runs/smooth_osc__SMART__seed6.json,checkpoints 500 rmse,True,True,True,False
+table,0.318,0.318,3,False,3,"Smooth Osc. | gSMART | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,76,75,supported,unattributed,0.239,0.727,proposal/logs/runs/smooth_osc__SMART__seed5.json,checkpoints 400 rmse,True,True,True,False
+table,0.244,0.244,3,False,3,"Smooth Osc. | RWV | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,62,61,supported,unattributed,0.233,0.545,proposal/logs/runs/smooth_osc__RWV_p15__seed3.json,checkpoints 500 rmse,True,True,True,False
+table,0.173,0.173,3,False,3," | Grid | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,55,54,supported,unattributed,0.129,0.818,proposal/logs/runs/diffusion_3d__random__seed3.json,checkpoints 50 crps,True,True,True,False
+table,0.266,0.266,3,False,3," | Random | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,62,61,supported,unattributed,0.129,0.909,proposal/logs/runs/diffusion_3d__RWV__seed6.json,checkpoints 100 mape,True,True,True,False
+table,0.175,0.175,3,False,3," | SMART | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,90,90,supported,unattributed,0.199,0.545,proposal/logs/runs/diffusion_3d__gSMART__seed0.json,checkpoints 100 crps,True,True,True,False
+table,0.195,0.195,3,False,3," | gSMART | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,42,40,supported,unattributed,0.199,0.636,proposal/logs/runs/diffusion_3d__gSMART__seed8.json,checkpoints 100 mape,True,True,True,False
+table,0.175,0.175,3,False,3," | RWV | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,90,90,supported,unattributed,0.181,0.909,proposal/logs/runs_raw3d/diffusion_3d__RWV_ex_s050_p2__seed9.json,hps_hist,True,True,True,False
+table,0.272,0.272,3,False,3," | Grid | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,76,75,supported,unattributed,0.129,0.727,proposal/logs/runs/diffusion_3d__SMART__seed4.json,checkpoints 50 crps,True,True,True,False
+table,0.124,0.124,3,False,3," | Random | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,31,31,supported,unattributed,0.123,1.0,proposal/logs/runs/diffusion_3d__RWV_s033_p2__seed6.json,checkpoints 200 crps,True,True,True,False
+table,0.269,0.269,3,False,3," | SMART | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,76,76,supported,unattributed,0.194,0.818,proposal/logs/runs_raw3d/diffusion_3d__SMART__seed7.json,checkpoints 1000 mape,True,True,True,False
+table,0.224,0.224,3,False,3," | gSMART | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,62,60,supported,unattributed,0.126,0.909,proposal/logs/runs/diffusion_3d__RWV__seed4.json,checkpoints 100 cal_err,True,True,True,False
+table,0.269,0.269,3,False,3," | RWV | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,76,76,supported,unattributed,0.194,0.636,proposal/logs/runs/diffusion_3d__RWV__seed7.json,checkpoints 200 cal_err,True,True,True,False
+table,3.891,3.891,3,False,4,"Non-diff. | Grid | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,5,5,unattributed,unattributed,0.117,0.091,proposal/logs/runs/nondiff__grid__seed0.json,checkpoints 500 rmse,True,True,False,False
+table,4.085,4.085,3,False,4,"Non-diff. | Random | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,3,3,unattributed,unattributed,0.0,1.0,proposal/logs/runs/nondiff__RWVrgp_p2__seed9.json,checkpoints 350 crps,True,True,False,False
+table,3.687,3.687,3,False,4,"Non-diff. | SMART | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,2,2,unattributed,unattributed,0.117,0.364,proposal/logs/runs/nondiff__SMART__seed8.json,checkpoints 500 rmse,True,True,False,False
+table,3.270,3.27,3,False,4,"Non-diff. | gSMART | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,5,3,unattributed,unattributed,0.109,0.364,proposal/logs/runs_raw3d/diffusion_3d__RWV_s050__seed1.json,hps_hist,True,True,True,True
+table,3.331,3.331,3,False,4,"Non-diff. | RWV | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,6,5,unattributed,unattributed,0.111,0.455,proposal/logs/runs/nondiff__RWV_s050_p2__seed4.json,checkpoints 500 rmse,True,True,False,False
+table,1.605,1.605,3,False,4," | Grid | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,9,7,unattributed,unattributed,0.065,0.636,proposal/logs/runs/nondiff__grid__seed0.json,checkpoints 500 crps,True,True,True,False
+table,1.767,1.767,3,False,4," | Random | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,6,6,supported,unattributed,0.129,0.273,proposal/logs/runs/diffusion_3d__gSMART__seed9.json,hps_hist,True,True,True,True
+table,1.525,1.525,3,False,4," | SMART | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,6,3,unattributed,unattributed,0.063,0.818,proposal/logs/runs/smooth_osc__gSMART__seed1.json,hps_hist,True,True,False,False
+table,2.840,2.84,3,False,4," | gSMART | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,5,4,unattributed,unattributed,0.065,0.545,proposal/logs/runs/piecewise_I__SMART__seed4.json,checkpoints 400 iae,True,True,True,False
+table,1.550,1.55,3,False,4," | RWV | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,7,5,unattributed,unattributed,0.063,0.818,proposal/logs/runs/smooth_osc__RWV__seed2.json,hps_hist,True,True,True,False
+table,0.378,0.378,3,False,3," | Grid | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,112,110,supported,unattributed,0.126,0.636,proposal/logs/runs_raw3d/diffusion_3d__SMART__seed9.json,checkpoints 600 mape,True,True,True,False
+table,0.351,0.351,3,False,3," | Random | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,94,93,supported,unattributed,0.194,0.545,proposal/logs/runs/diffusion_3d__random__seed1.json,checkpoints 500 cal_err,True,True,True,False
+table,0.364,0.364,3,False,3," | SMART | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,102,101,supported,unattributed,0.194,0.636,proposal/logs/runs/diffusion_3d__gSMART__seed1.json,checkpoints 1000 cal_err,True,True,True,False
+table,0.401,0.401,3,False,3," | gSMART | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,88,87,supported,unattributed,0.129,0.636,proposal/logs/runs/smooth_osc__gSMART__seed2.json,checkpoints 400 rmse,True,True,True,False
+table,0.379,0.379,3,False,3," | RWV | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,100,99,supported,unattributed,0.189,1.0,proposal/logs/runs_raw3d/diffusion_3d__RWV__seed4.json,checkpoints 100 cal_err,True,True,True,False
+table,1.15,1.15,2,False,3,"3D Diffusion | Grid | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,169,155,supported,unattributed,0.129,0.909,proposal/logs/runs/diffusion_3d__RWV__seed3.json,hps_hist,True,True,True,False
+table,0.82,0.82,2,False,2,"3D Diffusion | Random | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,1230,1220,supported,unattributed,0.194,1.0,proposal/logs/runs/diffusion_3d__random__seed1.json,checkpoints 300 coverage_emp,True,True,True,False
+table,0.84,0.84,2,False,2,"3D Diffusion | SMART | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,1585,1575,supported,unattributed,0.194,1.0,proposal/logs/runs/diffusion_3d__SMART__seed5.json,checkpoints 750 coverage_emp,True,True,True,False
+table,0.50,0.5,2,False,2,"3D Diffusion | gSMART | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,9476,9471,supported,unattributed,0.194,1.0,proposal/logs/runs/diffusion_3d__SMART__seed5.json,checkpoints 600 coverage_levels,True,True,True,False
+table,0.79,0.79,2,False,2,"3D Diffusion | RWV | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,966,956,supported,unattributed,0.194,1.0,proposal/logs/runs/diffusion_3d__RWV__seed2.json,checkpoints 600 coverage_emp,True,True,True,False
+table,0.078,0.078,3,False,2," | Grid | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,59,58,supported,supported,0.199,0.091,proposal/logs/runs/diffusion_3d__grid__seed0.json,checkpoints 1000 crps,True,True,True,False
+table,0.039,0.039,3,False,2," | Random | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,28,25,supported,unattributed,0.199,1.0,proposal/logs/runs/diffusion_3d__random__seed1.json,checkpoints 1000 crps,True,True,True,False
+table,0.064,0.064,3,False,2," | SMART | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,51,51,supported,unattributed,0.199,1.0,proposal/logs/runs/diffusion_3d__SMART__seed8.json,checkpoints 1000 crps,True,True,True,False
+table,0.066,0.066,3,False,2," | gSMART | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,50,50,supported,unattributed,0.199,1.0,proposal/logs/runs/diffusion_3d__gSMART__seed8.json,checkpoints 1000 crps,True,True,True,False
+table,0.062,0.062,3,False,2," | RWV | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,55,55,supported,unattributed,0.199,0.818,proposal/logs/runs/diffusion_3d__RWV__seed9.json,checkpoints 1000 crps,True,True,True,False
+table,0.304,0.304,3,False,3," | Grid | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,42,42,supported,unattributed,0.194,0.364,proposal/logs/runs/diffusion_3d__grid__seed0.json,checkpoints 1000 cal_err,True,True,True,False
+table,0.359,0.359,3,False,3," | Random | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,83,82,supported,unattributed,0.194,0.636,proposal/logs/runs/diffusion_3d__random__seed1.json,checkpoints 750 cal_err,True,True,True,False
+table,0.339,0.339,3,False,3," | SMART | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,100,98,supported,unattributed,0.194,0.909,proposal/logs/runs/diffusion_3d__gSMART__seed4.json,checkpoints 500 cal_err,True,True,True,False
+table,0.361,0.361,3,False,3," | gSMART | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,81,80,supported,unattributed,0.194,0.364,proposal/logs/runs/diffusion_3d__gSMART__seed8.json,checkpoints 1000 cal_err,True,True,True,True
+table,0.349,0.349,3,False,3," | RWV | Predictive-distribution metrics at the maximum budget (mean over 10
+seeds). 3D-diffusion RMSE is in $D$-units ($\times 10^{-11",traced,traced,98,98,supported,unattributed,0.185,0.909,proposal/logs/runs/diffusion_3d__RWV_s050_p2__seed6.json,checkpoints 1000 cal_err,True,True,True,False
+table,36.7,36.7,1,False,3,"36.7 | SMART | Mean acquisition wall-clock per step (ms) on Piecewise~II (10 seeds, 32-core node, one core per run). RWV costs about the same as SMART; gSMART is far more expensive.",traced,traced,74,12,supported,unattributed,0.175,0.455,proposal/logs/runs/piecewise_II__RWV_p15__seed9.json,wall,True,True,True,False
+table,650.5,650.5,1,False,4,"36.7 | gSMART | Mean acquisition wall-clock per step (ms) on Piecewise~II (10 seeds, 32-core node, one core per run). RWV costs about the same as SMART; gSMART is far more expensive.",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+table,29.0,29.0,1,False,3,"36.7 | RWV (ours) | Mean acquisition wall-clock per step (ms) on Piecewise~II (10 seeds, 32-core node, one core per run). RWV costs about the same as SMART; gSMART is far more expensive.",traced,traced,104,21,supported,unattributed,0.124,0.818,proposal/logs/runs/piecewise_II__RWV__seed9.json,checkpoints 350 rmse,True,True,True,False
+table,0.1,0.1,1,False,1,"36.7 | Random | Mean acquisition wall-clock per step (ms) on Piecewise~II (10 seeds, 32-core node, one core per run). RWV costs about the same as SMART; gSMART is far more expensive.",traced,traced,13687,13589,supported,unattributed,0.124,1.0,proposal/logs/runs/piecewise_II__RWV__seed1.json,acq_time_mean,True,True,True,False
+prose,37\%,37.0,0,True,2,an uncertainty sampling on every function that carries localized reconstruction error---reaching the uncertainty-sampling baseline's final accuracy with $20$--$37\%$ fewer measurements on the feature-rich fields---while correctly reducing to the baseline on the globally smooth field where no better allocation exists.,traced,traced,1823,1077,unattributed,unattributed,0.033,0.636,proposal/logs/runs/smooth_osc__RWV__seed5.json,wall,True,True,False,False
+prose,0.2,0.2,1,False,1,ly demonstrate the mechanism: on non-stationary fields the posterior standard deviation ranks true reconstruction error only weakly (Spearman $\rho_s\!\approx\!0.2$) whereas the leave-one-out residual field ranks it well ($0.4$--$0.8$).,traced,traced,13746,13646,unattributed,unattributed,0.081,0.5,proposal/logs/mechanism.json,piecewise_II spearman_sigma,True,True,False,False
+prose,0.4,0.4,1,False,1,erior standard deviation ranks true reconstruction error only weakly (Spearman $\rho_s\!\approx\!0.2$) whereas the leave-one-out residual field ranks it well ($0.4$--$0.8$).,traced,traced,17576,17485,unattributed,unattributed,0.051,0.143,proposal/logs/mechanism.json,piecewise_I spearman_wfield,True,True,False,False
+prose,0.8,0.8,1,False,1,tandard deviation ranks true reconstruction error only weakly (Spearman $\rho_s\!\approx\!0.2$) whereas the leave-one-out residual field ranks it well ($0.4$--$0.8$).,traced,traced,20134,20049,unattributed,unattributed,0.0,1.0,proposal/logs/runs/smooth_osc__RWV_ex_p2__seed7.json,checkpoints 350 coverage_emp,True,True,False,False
+prose,37\%,37.0,0,True,2,"\item A head-to-head evaluation on all five benchmarks and all budgets over ten seeds, showing consistent, regression-free speedup---$20$--$37\%$ fewer measurements---on every field that carries localized error, a mechanism-connected \emph{non-improvement} on the globally smooth field, and an honest cei",traced,traced,1823,1077,unattributed,unattributed,0.031,0.727,proposal/logs/runs/smooth_osc__RWV__seed5.json,wall,True,True,False,False
+prose,0.5,0.5,1,False,1,"w_0^{\gamma} + w(\mathbf{p})^{\gamma}\big)\,\sigma^2(\mathbf{p})\;} \end{equation} with two fixed dimensionless design constants, the bandwidth fraction $\beta=0.5$ and the concentration exponent $\gamma=2$, held constant across all five functions (sensitivity to both in Section~ ).",traced,traced,12948,12868,unattributed,unattributed,0.0,1.0,proposal/logs/runs/smooth_osc__RWV_ex_p2__seed7.json,checkpoints 500 coverage_emp,True,True,False,False
+prose,46\%,46.0,0,True,2,", on the 3-D field, maximum-variance sampling over-samples the domain boundary (a known property of variance-only active learning that worsens with dimension: $46\%$ of SMART's 3-D points touch a boundary), so uniform sampling is competitive there; we treat this as part of the analysis rather than hiding it.",traced,traced,1143,392,unattributed,unattributed,0.033,0.818,proposal/logs/runs/nondiff__gSMART__seed7.json,acq_time_mean,True,True,False,False
+prose,0.3,0.3,1,False,1,"The gradient-weighted gSMART, in its saturated, per-function-optimized form (weight $c{=}0.3$), beats random at the higher budgets on all four 2-D functions (and at every budget on Non-differentiable), but its edge-seeking makes it \emph{unstable} at t",traced,traced,15240,15143,unattributed,unattributed,0.041,1.0,proposal/logs/runs/nondiff__gSMART__seed0.json,hps_hist,True,True,False,False
+prose,1.47,1.47,2,False,3,"RWV reaches SMART's maximum-budget error at 1.47$\times$ the sample efficiency on Piecewise~I ($t\!\approx\!339$ vs.\ $500$), 1.56$\times$ on Piecewise~II, and 1.26$\times$ on Non-differentiable---a consisten",traced,traced,85,73,supported,unattributed,0.124,1.0,proposal/logs/runs/piecewise_I__RWV__seed1.json,hps_hist,True,True,True,False
+prose,1.56,1.56,2,False,3,"RWV reaches SMART's maximum-budget error at 1.47$\times$ the sample efficiency on Piecewise~I ($t\!\approx\!339$ vs.\ $500$), 1.56$\times$ on Piecewise~II, and 1.26$\times$ on Non-differentiable---a consistent $20$--$37\%$ reduction in the measurement budget.",traced,traced,67,52,unattributed,unattributed,0.11,1.0,proposal/logs/runs/piecewise_I__RWV__seed9.json,hps_hist,True,True,False,False
+prose,1.26,1.26,2,False,3,"RWV reaches SMART's maximum-budget error at 1.47$\times$ the sample efficiency on Piecewise~I ($t\!\approx\!339$ vs.\ $500$), 1.56$\times$ on Piecewise~II, and 1.26$\times$ on Non-differentiable---a consistent $20$--$37\%$ reduction in the measurement budget.",traced,traced,103,93,supported,unattributed,0.165,0.909,proposal/logs/runs/piecewise_II__gSMART__seed1.json,hps_hist,True,True,False,False
+prose,37\%,37.0,0,True,2,"the sample efficiency on Piecewise~I ($t\!\approx\!339$ vs.\ $500$), 1.56$\times$ on Piecewise~II, and 1.26$\times$ on Non-differentiable---a consistent $20$--$37\%$ reduction in the measurement budget.",traced,traced,1823,1077,supported,unattributed,0.153,0.545,proposal/logs/runs/piecewise_II__RWV__seed9.json,wall,True,True,True,False
+prose,1.16,1.16,2,False,3,"On this footing RWV converges slightly faster than SMART on \emph{both} the integrated absolute error and the mean absolute percentage error (Table~ ), by 1.16$\times$.",traced,traced,165,147,unattributed,unattributed,0.069,1.0,proposal/logs/runs/nondiff__RWV__seed7.json,hps_hist,True,True,False,False
+prose,0.22,0.22,2,False,2,"On the three \emph{feature-rich, non-stationary} functions the posterior std is a poor predictor of error (Spearman $\rho_s\!=\!0.22,0.20,0.16$ on Piecewise~I/II and Non-differentiable): the variance is large in every under-sampled region regardless of whether the surrogate is accurate there",traced,traced,523,501,unattributed,unattributed,0.104,0.909,proposal/logs/runs/piecewise_II__RWVGrad__seed2.json,checkpoints 125 cal_err,True,True,False,False
+prose,0.20,0.2,2,False,2,"On the three \emph{feature-rich, non-stationary} functions the posterior std is a poor predictor of error (Spearman $\rho_s\!=\!0.22,0.20,0.16$ on Piecewise~I/II and Non-differentiable): the variance is large in every under-sampled region regardless of whether the surrogate is accurate there, so",traced,traced,9578,9563,unattributed,unattributed,0.101,0.909,proposal/logs/runs/piecewise_II__RWVGrad__seed6.json,checkpoints 250 cal_err,True,True,False,False
+prose,0.16,0.16,2,False,2,"On the three \emph{feature-rich, non-stationary} functions the posterior std is a poor predictor of error (Spearman $\rho_s\!=\!0.22,0.20,0.16$ on Piecewise~I/II and Non-differentiable): the variance is large in every under-sampled region regardless of whether the surrogate is accurate there, so it ra",traced,traced,374,368,unattributed,unattributed,0.098,0.909,proposal/logs/runs/piecewise_II__RWVGrad__seed6.json,checkpoints 75 cal_err,True,True,False,False
+prose,0.41,0.41,2,False,2,"The leave-one-out field ranks the true error far better on the same functions ($\rho_s\!=\!0.41,0.60,0.51$), because it is computed from the surrogate's actual held-out mistakes.",traced,traced,850,841,unattributed,unattributed,0.048,0.636,proposal/logs/runs/piecewise_I__RWVrgp__seed5.json,checkpoints 150 cal_err,True,True,False,False
+prose,0.60,0.6,2,False,2,"The leave-one-out field ranks the true error far better on the same functions ($\rho_s\!=\!0.41,0.60,0.51$), because it is computed from the surrogate's actual held-out mistakes.",traced,traced,9495,9482,unattributed,unattributed,0.0,1.0,proposal/logs/runs/smooth_osc__RWV_ex_p2__seed7.json,checkpoints 500 coverage_levels,True,True,False,False
+prose,0.51,0.51,2,False,2,"The leave-one-out field ranks the true error far better on the same functions ($\rho_s\!=\!0.41,0.60,0.51$), because it is computed from the surrogate's actual held-out mistakes.",traced,traced,354,347,unattributed,unattributed,0.0,1.0,proposal/logs/runs/diffusion_3d__random__seed1.json,checkpoints 100 coverage_emp,True,True,False,False
+prose,-0.11,-0.11,2,False,2,"On the 2-D smooth-oscillatory field the residual field is \emph{uninformative} ($\rho_s\!=\!-0.11$, essentially noise) because the well-specified surrogate's residuals are spatially uniform, while the posterior variance tracks error better than on the featu",traced,traced,9,1,unattributed,unattributed,0.043,0.091,proposal/logs/mechanism.json,smooth_osc spearman_wfield,True,False,False,False
+prose,0.40,0.4,2,False,2,"ecause the well-specified surrogate's residuals are spatially uniform, while the posterior variance tracks error better than on the feature fields ($\rho_s\!=\!0.40$)---for a well-specified smooth model, reconstruction error \emph{is} governed by geometry.",traced,traced,10024,10018,unattributed,unattributed,0.043,0.182,proposal/logs/mechanism.json,smooth_osc spearman_sigma,True,True,False,False
+prose,0.77,0.77,2,False,2,"On the log-modeled 3-D field, also smooth, \emph{both} signals rank error well ($\sigma$: 0.77, field: 0.80); this is precisely why RWV cannot beat space-filling there (failure analysis below)---knowing where the error is does not help when the variance",traced,traced,828,824,unattributed,unattributed,0.065,1.0,proposal/logs/runs/smooth_osc__RWV__seed8.json,checkpoints 125 iae,True,True,False,False
+prose,0.80,0.8,2,False,2,"On the log-modeled 3-D field, also smooth, \emph{both} signals rank error well ($\sigma$: 0.77, field: 0.80); this is precisely why RWV cannot beat space-filling there (failure analysis below)---knowing where the error is does not help when the variance already knows",traced,traced,10087,10079,unattributed,unattributed,0.06,1.0,proposal/logs/runs/smooth_osc__RWV__seed1.json,checkpoints 200 coverage_levels,True,True,False,False
+prose,0.5,0.5,1,False,1,"ce. (iv) Sharpening the bandwidth (smaller $\beta$) and (v) the exponent ($\gamma$) each trade a little low-budget robustness for higher-budget speedup; $\beta=0.5$, $\gamma=2$ (selected once on development seeds $\{0,1,2\}$) sits at the balance and is held across all five functions.",traced,traced,12948,12868,unattributed,unattributed,0.0,1.0,proposal/logs/runs/smooth_osc__RWV_ex_p2__seed7.json,checkpoints 500 coverage_emp,True,True,False,False
+prose,-0.11,-0.11,2,False,2,"mooth at one scale the stationary surrogate is \emph{well}-specified, its leave-one-out residuals are spatially uniform (Section~ : $\rho_s(w,\text{error})\!=\!-0.11$, uninformative), the field is flat, and RWV reduces to SMART by construction.",traced,traced,9,1,unattributed,unattributed,0.0,1.0,proposal/logs/mechanism.json,smooth_osc spearman_wfield,True,False,False,False
+prose,1.47,1.47,2,False,3,\textbf{The $2\times$ ceiling on the 2-D feature fields.} RWV's speedup on the piecewise fields is a solid but sub-$2\times$ \emph{modest} one ($1.47$--$1.56\times$).,traced,traced,85,73,supported,unattributed,0.142,0.818,proposal/logs/runs/piecewise_I__RWV__seed1.json,hps_hist,True,True,True,False
+prose,1.56,1.56,2,False,3,\textbf{The $2\times$ ceiling on the 2-D feature fields.} RWV's speedup on the piecewise fields is a solid but sub-$2\times$ \emph{modest} one ($1.47$--$1.56\times$).,traced,traced,67,52,supported,unattributed,0.142,0.909,proposal/logs/runs/piecewise_I__RWV__seed9.json,hps_hist,True,True,True,False
+prose,1.16,1.16,2,False,3,"te and relative metrics point in opposite directions; we log-model $D$, which dissolves the artifact---after it, RWV improves both metrics, but only slightly ($1.16\times$). (2) \emph{Identifying error $\ne$ concentrating being optimal.} Even in log space, where the residual field ranks true error \emph{very well} ($\rho_s",traced,traced,165,147,unattributed,unattributed,0.028,1.0,proposal/logs/runs/nondiff__RWV__seed7.json,hps_hist,True,True,False,False
+prose,0.80,0.8,2,False,2,"s$). (2) \emph{Identifying error $\ne$ concentrating being optimal.} Even in log space, where the residual field ranks true error \emph{very well} ($\rho_s\!=\!0.80$; Section~ ), RWV does not beat uniform random sampling, which is best on this field.",traced,traced,10087,10079,unattributed,unattributed,0.036,0.909,proposal/logs/runs/nondiff__random__seed0.json,hps_hist,True,True,False,False
+prose,0.33,0.33,2,False,2,"Consistent with this, the sharpest RWV variant ($\beta{=}0.33$) over-concentrates here and regresses, whereas the headline $\beta{=}0.5$ stays at a match-to-slight-gain vs.\ SMART (Table~ ); this is the concrete cost of t",traced,traced,718,707,unattributed,unattributed,0.049,0.909,proposal/logs/runs/piecewise_I__SMART__seed7.json,hps_hist,True,True,False,False
+prose,0.5,0.5,1,False,1,"Consistent with this, the sharpest RWV variant ($\beta{=}0.33$) over-concentrates here and regresses, whereas the headline $\beta{=}0.5$ stays at a match-to-slight-gain vs.\ SMART (Table~ ); this is the concrete cost of the robustness/concentration trade-off documented in \texttt{attempts\_log.",traced,traced,12948,12868,unattributed,unattributed,0.036,1.0,proposal/logs/runs/nondiff__RWV__seed6.json,hps_hist,True,True,False,False
+prose,37\%,37.0,0,True,2,"On the standard five-function autonomous-scattering benchmark it reaches the uncertainty-sampling baseline's final accuracy with $20$--$37\%$ fewer measurements on the fields that carry localized error, at matched compute, and gracefully reduces to the baseline where no better allocation exists.",traced,traced,1823,1077,unattributed,unattributed,0.032,0.818,proposal/logs/runs/nondiff__RWV__seed6.json,checkpoints 500 cal_err,True,True,False,False

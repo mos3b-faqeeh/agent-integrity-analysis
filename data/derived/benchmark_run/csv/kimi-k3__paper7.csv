@@ -1,0 +1,564 @@
+kind,raw,value,dec,pct,sig,context,L1,L1nb,L1_n_matches,L1nb_n_matches,L2ctx,L2,L2_score,L2_p,L2_file,L2_context,decoy_L1,decoy_L1nb,decoy_L2ctx,decoy_L2
+table,-0.0058,-0.0058,4,False,2,"M1$-$M0 held-out NLL (spline $f$) | Estimate | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-na",traced,traced,11,7,unattributed,unattributed,0.0,1.0,proposal/logs/02_fits_helm_vk.json,lch:M2 theta,True,True,False,False
+table,-0.0063,-0.0063,4,False,2,"M1$-$M0 held-out NLL (spline $f$) | 95\% CI | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-nam",traced,traced,5,4,unattributed,unattributed,0.021,0.273,proposal/logs/02_fits_ekman_mm.json,coarse_cones:M2-1ax:ax0 nll,True,True,False,False
+table,-0.0053,-0.0053,4,False,2,"M1$-$M0 held-out NLL (spline $f$) | 95\% CI | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-nam",traced,traced,4,2,unattributed,unattributed,0.0,1.0,proposal/logs/00_stimulus_coordinates.csv,S_vk ekman,True,True,False,False
+table,0.5,0.5,1,False,1,"$f(0.5\Delta\psi_{\max})/f(\Delta\psi_{\max})$ (spline) | Quantity | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta valu",traced,traced,53991,531,unattributed,unattributed,0.023,1.0,proposal/logs/02_fits_helm_vk.json,cielab:M2 nll,True,True,False,False
+table,0.678,0.678,3,False,3,"$f(0.5\Delta\psi_{\max})/f(\Delta\psi_{\max})$ (spline) | Estimate | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta valu",traced,traced,470,6,unattributed,unattributed,0.046,0.091,proposal/logs/05_summary.json,gray mle P compression_ratio_half_over_full spline f(0.5)/f(1.0)_mean,True,True,False,False
+table,0.673,0.673,3,False,3,"$f(0.5\Delta\psi_{\max})/f(\Delta\psi_{\max})$ (spline) | 95\% CI | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta value",traced,traced,419,18,unattributed,unattributed,0.047,0.182,proposal/logs/05_summary.json,gray mle P compression_ratio_half_over_full spline ci95,True,True,False,False
+table,0.683,0.683,3,False,3,"$f(0.5\Delta\psi_{\max})/f(\Delta\psi_{\max})$ (spline) | 95\% CI | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta value",traced,traced,425,6,unattributed,unattributed,0.047,0.182,proposal/logs/05_summary.json,gray mle P compression_ratio_half_over_full spline ci95,True,True,False,False
+table,1.36,1.36,2,False,3,"$f(0.5\Delta\psi_{\max})/f(\Delta\psi_{\max})$ (spline) | Comparison | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta va",traced,traced,968,11,unattributed,unattributed,0.0,1.0,proposal/logs/02_fits_helm_vk.json,coarse_lab:M2-1ax:ax0 theta,True,True,False,False
+table,2.06,2.06,2,False,3,"$f(0.5\Delta\psi_{\max})/f(\Delta\psi_{\max})$ (spline) | Comparison | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta va",traced,traced,1118,6,unattributed,unattributed,0.0,1.0,proposal/logs/02_fits_helm_vk.json,cielab:M1 theta,True,True,False,False
+table,0.66,0.66,2,False,2,"$f(0.5\Delta\psi_{\max})/f(\Delta\psi_{\max})$ (spline) | Comparison | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta va",traced,traced,3292,82,unattributed,unattributed,0.023,1.0,proposal/logs/02_fits_helm_vk.json,ciergb:M1 nll,True,True,False,False
+table,-0.0070,-0.007,4,False,2,"Wiebel MLDS: M1$-$M0 (plain context) | Estimate | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second",traced,traced,7,5,unattributed,unattributed,0.0,1.0,proposal/logs/02_fits_ekman_mm.json,srgb:M2-1ax:ax0 theta,True,True,False,False
+table,-0.0093,-0.0093,4,False,2,"Wiebel MLDS: M1$-$M0 (plain context) | 95\% CI | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-",traced,traced,11,7,unattributed,unattributed,0.021,0.545,proposal/logs/02_fits_helm_vk.json,cielab:M2-1ax:ax1 nll,True,True,False,False
+table,-0.0048,-0.0048,4,False,2,"Wiebel MLDS: M1$-$M0 (plain context) | 95\% CI | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-",traced,traced,17,13,unattributed,unattributed,0.021,0.182,proposal/logs/03_run.log,"""mean_margin_M1_minus_M2"": -0.004816285972442609,",True,True,False,False
+table,0.341,0.341,3,False,3,"Wiebel MLDS: M1$-$M0 (plain context) | Notes | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-na",traced,traced,696,15,unattributed,unattributed,0.062,0.091,proposal/logs/05_summary.json,wiebel contexts plain exponent_a_mean,True,True,False,False
+table,0.330,0.33,3,False,3,"Wiebel MLDS: M1$-$M0 (plain context) | Notes | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-na",traced,traced,350,26,unattributed,unattributed,0.061,0.091,proposal/logs/05_summary.json,wiebel contexts plain exponent_a_ci95,True,True,False,False
+table,0.352,0.352,3,False,3,"Wiebel MLDS: M1$-$M0 (plain context) | Notes | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-na",traced,traced,996,29,unattributed,unattributed,0.061,0.091,proposal/logs/05_summary.json,wiebel contexts plain exponent_a_ci95,True,True,False,False
+table,1.3274,1.3274,4,False,5,"M0 (additive) | Estimate | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-named (comparison) mod",traced,traced,7,4,unattributed,unattributed,0.062,0.182,proposal/logs/05_summary.json,main datasets helm_mm mean_heldout_nll cones:M0,True,False,False,False
+table,0.0067,0.0067,4,False,2,"M0 (additive) | 95\% CI | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-named (comparison) mode",traced,traced,81,15,supported,supported,0.125,0.091,proposal/logs/02b_bootstrap_ekman_mm.json,summary delta_bestM3_minus_M2_selection_aware frac_positive,True,True,False,False
+table,0.2441,0.2441,4,False,4,"M1 (isotropic DR) | Estimate | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-named (comparison)",traced,traced,57,13,unattributed,unattributed,0.062,0.091,proposal/logs/05_summary.json,main datasets helm_mm mean_heldout_nll cones:M1,True,True,False,False
+table,0.1724,0.1724,4,False,4,"M1 (isotropic DR) | 95\% CI | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-named (comparison) ",traced,traced,59,3,unattributed,unattributed,0.021,0.364,proposal/logs/02_fits_ekman_vk.json,cones:M1 rmse,True,True,False,False
+table,0.2717,0.2717,4,False,4,"M2 (per-cone DR) | Estimate | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-named (comparison) ",traced,traced,358,12,unattributed,unattributed,0.084,0.091,proposal/logs/05_summary.json,main datasets helm_mm mean_heldout_nll cones:M2,True,True,False,False
+table,0.1697,0.1697,4,False,4,"M2 (per-cone DR) | 95\% CI | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-named (comparison) m",traced,traced,78,2,unattributed,unattributed,0.043,0.182,proposal/logs/06_paper_numbers.json,cv_helm_mm cones:M2,True,True,False,False
+table,0.2703,0.2703,4,False,4,"M3 opponent | Estimate | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-named (comparison) model",traced,traced,63,9,unattributed,unattributed,0.063,0.091,proposal/logs/05_summary.json,main datasets helm_vk mean_heldout_nll opponent:M2,True,True,False,False
+table,0.1710,0.171,4,False,4,"M3 opponent | 95\% CI | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-named (comparison) model.",traced,traced,67,4,unattributed,unattributed,0.022,0.182,proposal/logs/06_paper_numbers.json,cv_helm_vk opponent:M2,True,True,False,False
+table,0.0635,0.0635,4,False,3,"M3 sRGB | Estimate | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-named (comparison) model.",traced,traced,158,5,unattributed,unattributed,0.042,0.091,proposal/logs/05_summary.json,main datasets helm_mm mean_heldout_nll srgb:M2,True,True,False,False
+table,0.1454,0.1454,4,False,4,"M3 sRGB | 95\% CI | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-named (comparison) model.",traced,traced,92,7,unattributed,unattributed,0.022,0.182,proposal/logs/02_fits_helm_vk.json,coarse_lab:M2 nll,True,True,False,False
+table,0.1816,0.1816,4,False,4,"M3 CIE RGB | Estimate | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-named (comparison) model.",traced,traced,55,9,unattributed,unattributed,0.041,0.091,proposal/logs/05_summary.json,main datasets helm_vk mean_heldout_nll ciergb:M2,True,True,False,False
+table,0.1520,0.152,4,False,4,"M3 CIE RGB | 95\% CI | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-named (comparison) model.",traced,traced,86,4,unattributed,unattributed,0.021,0.273,proposal/logs/02_fits_helm_vk.json,srgb:M1 nll,True,True,False,False
+table,0.1518,0.1518,4,False,4,"M3 CIELAB | Estimate | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-named (comparison) model.",traced,traced,80,10,unattributed,unattributed,0.063,0.091,proposal/logs/05_summary.json,main datasets helm_mm mean_heldout_nll cielab:M2,True,True,False,False
+table,0.1870,0.187,4,False,4,"M3 CIELAB | 95\% CI | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-named (comparison) model.",traced,traced,54,2,unattributed,unattributed,0.022,0.273,proposal/logs/06_paper_numbers.json,cv_helm_mm cielab:M2,True,False,False,False
+table,-0.1008,-0.1008,4,False,4,"M3 CIE LCh | Estimate | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-named (comparison) model.",traced,traced,14,9,unattributed,unattributed,0.062,0.091,proposal/logs/05_summary.json,main datasets helm_vk mean_heldout_nll lch:M2,True,False,False,False
+table,0.2086,0.2086,4,False,4,"M3 CIE LCh | 95\% CI | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-named (comparison) model.",traced,traced,56,5,unattributed,unattributed,0.062,0.091,proposal/logs/02b_bootstrap_ekman_mm.json,summary per_control_delta_ctrl_minus_M2 cielab mean,True,True,False,False
+table,0.3949,0.3949,4,False,4,"M0 (additive) | Estimate | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-named (comparison) mod",traced,traced,68,5,unattributed,unattributed,0.062,0.091,proposal/logs/05_summary.json,main datasets ekman_mm mean_heldout_nll cones:M0,True,True,False,False
+table,0.1102,0.1102,4,False,4,"M0 (additive) | 95\% CI | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-named (comparison) mode",traced,traced,99,1,unattributed,unattributed,0.021,0.091,proposal/logs/06_paper_numbers.json,cv_ekman_mm cones:M0,True,True,False,False
+table,-0.4531,-0.4531,4,False,4,"M1 (isotropic DR) | Estimate | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-named (comparison)",traced,traced,7,7,unattributed,unattributed,0.062,0.091,proposal/logs/05_summary.json,main datasets ekman_mm mean_heldout_nll cones:M1,True,False,False,False
+table,0.0920,0.092,4,False,3,"M1 (isotropic DR) | 95\% CI | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-named (comparison) ",traced,traced,115,3,unattributed,unattributed,0.021,0.455,proposal/logs/02_fits_helm_vk.json,coarse_lab:M2 nll,True,True,False,False
+table,-0.3948,-0.3948,4,False,4,"M2 (per-cone DR) | Estimate | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-named (comparison) ",traced,traced,9,7,unattributed,unattributed,0.084,0.091,proposal/logs/05_summary.json,main datasets ekman_mm mean_heldout_nll cones:M2,False,False,False,False
+table,0.0981,0.0981,4,False,3,"M2 (per-cone DR) | 95\% CI | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-named (comparison) m",traced,traced,106,5,unattributed,unattributed,0.043,0.273,proposal/logs/06_paper_numbers.json,cv_ekman_mm cones:M2,True,True,False,False
+table,-0.1505,-0.1505,4,False,4,"M3 opponent | Estimate | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-named (comparison) model",traced,traced,11,5,unattributed,unattributed,0.063,0.091,proposal/logs/05_summary.json,main datasets ekman_mm mean_heldout_nll opponent:M2,True,False,False,False
+table,0.1478,0.1478,4,False,4,"M3 opponent | 95\% CI | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-named (comparison) model.",traced,traced,90,3,unattributed,unattributed,0.022,0.091,proposal/logs/02_fits_ekman_vk.json,coarse_cones:M2 nll,True,True,False,False
+table,-0.2367,-0.2367,4,False,4,"M3 sRGB | Estimate | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-named (comparison) model.",traced,traced,4,4,unattributed,unattributed,0.042,0.091,proposal/logs/05_summary.json,main datasets ekman_mm mean_heldout_nll srgb:M2,False,False,False,False
+table,0.2458,0.2458,4,False,4,"M3 sRGB | 95\% CI | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-named (comparison) model.",traced,traced,47,1,unattributed,unattributed,0.0,1.0,proposal/logs/06_paper_numbers.json,cv_ekman_mm srgb:M2,True,True,False,False
+table,-0.5343,-0.5343,4,False,4,"M3 CIE RGB | Estimate | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-named (comparison) model.",traced,traced,4,4,unattributed,unattributed,0.041,0.091,proposal/logs/05_summary.json,main datasets ekman_mm mean_heldout_nll ciergb:M2,False,False,False,False
+table,0.3158,0.3158,4,False,4,"M3 CIE RGB | 95\% CI | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-named (comparison) model.",traced,traced,41,8,unattributed,unattributed,0.0,1.0,proposal/logs/02_fits_helm_vk.json,cones:M2-1ax:ax1 sigma,True,True,False,False
+table,0.1227,0.1227,4,False,4,"M3 CIELAB | Estimate | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-named (comparison) model.",traced,traced,101,7,unattributed,unattributed,0.063,0.091,proposal/logs/05_summary.json,main datasets ekman_mm mean_heldout_nll cielab:M2,True,True,False,False
+table,0.2266,0.2266,4,False,4,"M3 CIELAB | 95\% CI | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-named (comparison) model.",traced,traced,42,1,unattributed,unattributed,0.022,0.091,proposal/logs/06_paper_numbers.json,cv_ekman_mm cielab:M2,True,False,False,False
+table,-0.3792,-0.3792,4,False,4,"M3 CIE LCh | Estimate | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-named (comparison) model.",traced,traced,6,4,unattributed,unattributed,0.062,0.091,proposal/logs/05_summary.json,main datasets ekman_mm mean_heldout_nll lch:M2,True,False,False,False
+table,0.1603,0.1603,4,False,4,"M3 CIE LCh | 95\% CI | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-named (comparison) model.",traced,traced,70,3,unattributed,unattributed,0.021,0.364,proposal/logs/02_fits_helm_mm.json,cones:M1 nll,True,True,False,False
+table,-0.0638,-0.0638,4,False,3,"M2 $-$ M1 (anisotropy), Helm | Estimate | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-named (",traced,traced,9,5,unattributed,unattributed,0.106,0.091,proposal/logs/02b_bootstrap_helm_mm.json,summary delta_M2_minus_M1 mean,True,True,False,False
+table,-0.0674,-0.0674,4,False,3,"M2 $-$ M1 (anisotropy), Helm | 95\% CI | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-named (c",traced,traced,8,4,unattributed,unattributed,0.107,0.091,proposal/logs/02b_bootstrap_helm_mm.json,summary delta_M2_minus_M1 ci95,True,False,False,False
+table,-0.0592,-0.0592,4,False,3,"M2 $-$ M1 (anisotropy), Helm | 95\% CI | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-named (c",traced,traced,10,4,unattributed,unattributed,0.107,0.091,proposal/logs/02b_bootstrap_helm_mm.json,summary delta_M2_minus_M1 ci95,True,True,False,False
+table,-0.0291,-0.0291,4,False,3,"M2 $-$ M1 (anisotropy), Ekman | Estimate | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-named ",traced,traced,14,10,unattributed,unattributed,0.106,0.091,proposal/logs/02b_bootstrap_ekman_mm.json,summary delta_M2_minus_M1 mean,True,True,False,False
+table,-0.0670,-0.067,4,False,3,"M2 $-$ M1 (anisotropy), Ekman | 95\% CI | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-named (",traced,traced,10,3,unattributed,unattributed,0.107,0.091,proposal/logs/02b_bootstrap_ekman_mm.json,summary delta_M2_minus_M1 ci95,True,True,False,False
+table,0.0143,0.0143,4,False,3,"M2 $-$ M1 (anisotropy), Ekman | 95\% CI | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-named (",traced,traced,123,4,unattributed,unattributed,0.107,0.091,proposal/logs/02b_bootstrap_ekman_mm.json,summary delta_M2_minus_M1 ci95,True,True,False,False
+table,8.3\%,8.3,1,True,2,"M2 $-$ M1 (anisotropy), Ekman | Notes | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-named (co",traced,traced,1730,24,unattributed,unattributed,0.101,0.091,proposal/logs/02b_bootstrap_ekman_mm.json,summary delta_M2_minus_M1 frac_positive,True,True,False,False
+table,-0.1550,-0.155,4,False,4,"M2 $-$ best M3, Helm (\textbf{headline}) | Estimate | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the se",traced,traced,18,10,supported,supported,0.18,0.091,proposal/logs/02b_bootstrap_helm_mm.json,summary delta_bestM3_minus_M2_selection_aware mean,True,True,False,False
+table,-0.1621,-0.1621,4,False,4,"M2 $-$ best M3, Helm (\textbf{headline}) | 95\% CI | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the sec",traced,traced,12,10,supported,supported,0.183,0.091,proposal/logs/02b_bootstrap_helm_mm.json,summary delta_bestM3_minus_M2_selection_aware ci95,True,False,False,False
+table,-0.1468,-0.1468,4,False,4,"M2 $-$ best M3, Helm (\textbf{headline}) | 95\% CI | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the sec",traced,traced,16,9,supported,supported,0.183,0.091,proposal/logs/02b_bootstrap_helm_mm.json,summary delta_bestM3_minus_M2_selection_aware ci95,True,False,False,False
+table,-0.1308,-0.1308,4,False,4,"M2 $-$ best M3, Ekman (\textbf{headline}) | Estimate | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the s",traced,traced,10,7,supported,supported,0.185,0.091,proposal/logs/02b_bootstrap_ekman_mm.json,summary delta_bestM3_minus_M2_selection_aware mean,True,False,False,False
+table,-0.2333,-0.2333,4,False,4,"M2 $-$ best M3, Ekman (\textbf{headline}) | 95\% CI | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the se",traced,traced,10,9,supported,supported,0.183,0.091,proposal/logs/02b_bootstrap_ekman_mm.json,summary delta_bestM3_minus_M2_selection_aware ci95,False,False,False,False
+table,-0.0325,-0.0325,4,False,3,"M2 $-$ best M3, Ekman (\textbf{headline}) | 95\% CI | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the se",traced,traced,17,7,supported,supported,0.183,0.091,proposal/logs/02b_bootstrap_ekman_mm.json,summary delta_bestM3_minus_M2_selection_aware ci95,True,True,False,False
+table,0.41,0.41,2,False,2,"corr($|\Delta L|, |\Delta M|$), Helm / Ekman | Estimate | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor th",traced,traced,5441,115,unattributed,unattributed,0.045,0.273,proposal/logs/03_identifiability.json,collinearity helm corr_dL_dM,True,True,False,False
+table,0.52,0.52,2,False,2,"corr($|\Delta L|, |\Delta M|$), Helm / Ekman | Estimate | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor th",traced,traced,4784,62,unattributed,unattributed,0.045,0.182,proposal/logs/03_identifiability.json,collinearity ekman corr_dL_dM,True,True,False,False
+table,2.5,2.5,1,False,2,"corr($|\Delta L|, |\Delta M|$), Helm / Ekman | Notes | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the s",traced,traced,10223,113,unattributed,unattributed,0.023,0.364,proposal/logs/00_stimulus_coordinates.csv,Lab_a helm E,True,True,False,False
+table,98\%,98.0,0,True,2,"Synthetic: M2 beats best M3 $|$ truth=M2 | Estimate | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the se",traced,traced,10323,67,unattributed,unattributed,0.107,0.091,proposal/logs/05_summary.json,ident synthetic helm_M2cones summary rate_M2_beats_bestM3,True,True,False,False
+table,87\%,87.0,0,True,2,"Synthetic: M2 beats best M3 $|$ truth=M2 | Estimate | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the se",traced,traced,21396,53,unattributed,unattributed,0.107,0.091,proposal/logs/05_summary.json,ident synthetic ekman_M2cones summary rate_M2_beats_bestM3,True,True,False,False
+table,13\%,13.0,0,True,2,"Synthetic: cone wins $|$ truth=opponent | Estimate | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the sec",traced,traced,38857,311,unattributed,unattributed,0.062,0.727,proposal/logs/05_summary.json,ident synthetic ekman_M3opp summary rate_M2_beats_bestM3,True,True,False,False
+table,-0.0199,-0.0199,4,False,3,"Coarse M2c $-$ M3c-opp, Helm / Ekman | Estimate | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second",traced,traced,7,6,unattributed,unattributed,0.102,0.091,proposal/logs/02b_bootstrap_helm_mm.json,summary coarse delta_coarse_opp_minus_cones mean,True,True,False,False
+table,-0.0020,-0.002,4,False,2,"Coarse M2c $-$ M3c-opp, Helm / Ekman | Estimate | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second",traced,traced,14,13,unattributed,unattributed,0.102,0.091,proposal/logs/02b_bootstrap_ekman_mm.json,summary coarse delta_coarse_opp_minus_cones mean,True,True,False,False
+table,-0.0236,-0.0236,4,False,3,"Coarse M2c $-$ M3c-opp, Helm / Ekman | 95\% CI | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-",traced,traced,12,6,unattributed,unattributed,0.104,0.091,proposal/logs/02b_bootstrap_helm_mm.json,summary coarse delta_coarse_opp_minus_cones ci95,True,True,False,False
+table,-0.0159,-0.0159,4,False,3,"Coarse M2c $-$ M3c-opp, Helm / Ekman | 95\% CI | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-",traced,traced,14,10,unattributed,unattributed,0.104,0.182,proposal/logs/02b_bootstrap_helm_mm.json,summary coarse delta_coarse_opp_minus_cones ci95,True,True,False,False
+table,-0.0596,-0.0596,4,False,3,"Coarse M2c $-$ M3c-opp, Helm / Ekman | 95\% CI | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-",traced,traced,10,5,unattributed,unattributed,0.104,0.091,proposal/logs/02b_bootstrap_ekman_mm.json,summary coarse delta_coarse_opp_minus_cones ci95,True,True,False,False
+table,0.0598,0.0598,4,False,3,"Coarse M2c $-$ M3c-opp, Helm / Ekman | 95\% CI | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the second-",traced,traced,185,6,unattributed,unattributed,0.104,0.091,proposal/logs/02b_bootstrap_ekman_mm.json,summary coarse delta_coarse_opp_minus_cones ci95,True,True,False,False
+table,1.1,1.1,1,False,2,"Sensitivity ratio $r > 1.1$, Helm / Ekman | Quantity | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the s",traced,traced,19315,637,unattributed,unattributed,0.045,0.727,proposal/logs/02_fits_helm_vk.json,srgb:M0 nll,True,True,False,False
+table,78\%,78.0,0,True,2,"Sensitivity ratio $r > 1.1$, Helm / Ekman | Estimate | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the s",traced,traced,29717,50,unattributed,unattributed,0.068,0.091,proposal/logs/04_curvature.json,datasets helm sensitivity_ratio_r frac_r_gt_1.1,True,True,False,False
+table,85\%,85.0,0,True,2,"Sensitivity ratio $r > 1.1$, Helm / Ekman | Estimate | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the s",traced,traced,22558,41,unattributed,unattributed,0.068,0.091,proposal/logs/04_curvature.json,datasets ekman sensitivity_ratio_r frac_r_gt_1.1,True,True,False,False
+table,2.37,2.37,2,False,3,"Sensitivity ratio $r > 1.1$, Helm / Ekman | Comparison | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the",traced,traced,976,16,unattributed,unattributed,0.069,0.091,proposal/logs/04_curvature.json,datasets helm sensitivity_ratio_r median,True,True,False,False
+table,2.97,2.97,2,False,3,"Sensitivity ratio $r > 1.1$, Helm / Ekman | Comparison | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the",traced,traced,88,4,unattributed,unattributed,0.069,0.091,proposal/logs/04_curvature.json,datasets ekman sensitivity_ratio_r median,True,True,False,False
+table,0.0062,0.0062,4,False,2,"Arc-length baseline NLL, Helm / Ekman | Estimate | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the secon",traced,traced,87,21,unattributed,unattributed,0.085,0.091,proposal/logs/04_curvature.json,datasets helm arc_baseline_heldout_nll,True,True,False,False
+table,-0.1389,-0.1389,4,False,4,"Arc-length baseline NLL, Helm / Ekman | Estimate | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the secon",traced,traced,9,6,unattributed,unattributed,0.085,0.091,proposal/logs/04_curvature.json,datasets ekman arc_baseline_heldout_nll,True,False,False,False
+table,0.2441,0.2441,4,False,4,"Arc-length baseline NLL, Helm / Ekman | Comparison | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the sec",traced,traced,57,13,unattributed,unattributed,0.062,0.091,proposal/logs/05_summary.json,main datasets helm_mm mean_heldout_nll cones:M1,True,True,False,False
+table,-0.4531,-0.4531,4,False,4,"Arc-length baseline NLL, Helm / Ekman | Comparison | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the sec",traced,traced,7,7,unattributed,unattributed,0.062,0.091,proposal/logs/05_summary.json,main datasets ekman_mm mean_heldout_nll cones:M1,True,False,False,False
+table,0.0005,0.0005,4,False,1,"$S$-axis-only DR $-$ M1, Helm / Ekman | Estimate | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the secon",traced,traced,40,17,unattributed,unattributed,0.106,0.125,proposal/logs/04_curvature.json,s_only_dr_vs_M1_from_02 helm delta_S-only_vs_M1,True,True,False,False
+table,-0.0618,-0.0618,4,False,3,"$S$-axis-only DR $-$ M1, Helm / Ekman | Estimate | Main results. Held-out NLL (nats/obs; lower is better) from the full
+cross-validation; deltas are paired, with 95\% bootstrap CIs (selection-aware for the
+headline: the best M3 control is re-picked inside every resample). Primary
+(Michaelis--Menten) normalization; von Kries sensitivity agrees on every verdict.
+Negative delta values favor the secon",traced,traced,8,5,unattributed,unattributed,0.106,0.091,proposal/logs/04_curvature.json,s_only_dr_vs_M1_from_02 ekman delta_S-only_vs_M1,True,True,False,False
+prose,-98\%,-98.0,0,True,2,"Synthetic recovery shows the comparison \emph{is} capable of detecting cone alignment at these sample sizes were it present (correct cone-verdict rate 87--98\%), so the null is earned, not merely underpowered.",traced,traced,13,13,unattributed,unattributed,0.0,1.0,proposal/logs/02_fits_helm_vk.json,lch:M2-1ax:ax0 theta,True,True,False,False
+prose,1.9\%,1.9,1,True,2,"The fitted matrix reproduces the fundamentals of a monochromatic 555\,nm light to 1.9\% relative error (max over $L,M$) and has condition number 3.35; the reference white is CIE Illuminant C ($x{=}0.31006$, $y{=}0.31616$, $Y_n{=}100$), the white o",traced,traced,13361,106,unattributed,unattributed,0.092,0.182,proposal/logs/00_cone_conversion.json,verification mono555_rel_err_LM,True,True,False,False
+prose,3.35,3.35,2,False,3,"The fitted matrix reproduces the fundamentals of a monochromatic 555\,nm light to 1.9\% relative error (max over $L,M$) and has condition number 3.35; the reference white is CIE Illuminant C ($x{=}0.31006$, $y{=}0.31616$, $Y_n{=}100$), the white of the Helm colorimetry.",traced,traced,65,1,unattributed,unattributed,0.043,0.091,proposal/logs/00_cone_conversion.json,verification matrix cond_M,True,True,False,False
+prose,0.31006,0.31006,5,False,5,"amentals of a monochromatic 555\,nm light to 1.9\% relative error (max over $L,M$) and has condition number 3.35; the reference white is CIE Illuminant C ($x{=}0.31006$, $y{=}0.31616$, $Y_n{=}100$), the white of the Helm colorimetry.",traced,traced,45,41,unattributed,unattributed,0.103,0.091,proposal/logs/00_cone_conversion.json,reference_white x,True,True,False,False
+prose,0.31616,0.31616,5,False,5,"onochromatic 555\,nm light to 1.9\% relative error (max over $L,M$) and has condition number 3.35; the reference white is CIE Illuminant C ($x{=}0.31006$, $y{=}0.31616$, $Y_n{=}100$), the white of the Helm colorimetry.",traced,traced,193,41,unattributed,unattributed,0.109,0.091,proposal/logs/00_cone_conversion.json,reference_white y,True,False,False,False
+prose,0.5,0.5,1,False,1,"Verification: the white maps to $(0.5,0.5,0.5)$ under the primary normalization, and the CIE RGB control basis derived from the provided CMFs recovers the known luminance coefficients $(1, 4.589, 0",traced,traced,53991,531,unattributed,unattributed,0.101,0.125,proposal/logs/00_cone_conversion.json,verification white_mm,True,True,False,False
+prose,0.5,0.5,1,False,1,"Verification: the white maps to $(0.5,0.5,0.5)$ under the primary normalization, and the CIE RGB control basis derived from the provided CMFs recovers the known luminance coefficients $(1, 4.589, 0.060",traced,traced,53991,531,unattributed,unattributed,0.101,0.125,proposal/logs/00_cone_conversion.json,verification white_mm,True,True,False,False
+prose,0.5,0.5,1,False,1,"Verification: the white maps to $(0.5,0.5,0.5)$ under the primary normalization, and the CIE RGB control basis derived from the provided CMFs recovers the known luminance coefficients $(1, 4.589, 0.060)$ v",traced,traced,53991,531,unattributed,unattributed,0.101,0.125,proposal/logs/00_cone_conversion.json,verification white_mm,True,True,False,False
+prose,4.589,4.589,3,False,4,"to $(0.5,0.5,0.5)$ under the primary normalization, and the CIE RGB control basis derived from the provided CMFs recovers the known luminance coefficients $(1, 4.589, 0.060)$ vs.\ the reference $(1, 4.5907, 0.0601)$.",traced,traced,3,1,unattributed,unattributed,0.054,0.182,proposal/logs/00_cone_conversion.json,verification ciergb_luminance_coeffs,True,False,False,False
+prose,0.060,0.06,3,False,2,"5,0.5,0.5)$ under the primary normalization, and the CIE RGB control basis derived from the provided CMFs recovers the known luminance coefficients $(1, 4.589, 0.060)$ vs.\ the reference $(1, 4.5907, 0.0601)$.",traced,traced,1639,35,unattributed,unattributed,0.108,0.091,proposal/logs/00_cone_conversion.json,verification ciergb_luminance_coeffs_reference,True,True,False,False
+prose,4.5907,4.5907,4,False,5,"rmalization, and the CIE RGB control basis derived from the provided CMFs recovers the known luminance coefficients $(1, 4.589, 0.060)$ vs.\ the reference $(1, 4.5907, 0.0601)$.",traced,traced,2,1,supported,supported,0.121,0.091,proposal/logs/00_cone_conversion.json,verification ciergb_luminance_coeffs_reference,False,False,False,False
+prose,0.0601,0.0601,4,False,3,"ion, and the CIE RGB control basis derived from the provided CMFs recovers the known luminance coefficients $(1, 4.589, 0.060)$ vs.\ the reference $(1, 4.5907, 0.0601)$.",traced,traced,158,7,supported,supported,0.121,0.091,proposal/logs/00_cone_conversion.json,verification ciergb_luminance_coeffs_reference,True,True,False,False
+prose,0.5,0.5,1,False,1,"n cone scaling).} Primary: per-cone Michaelis--Menten on white-referred responses, $c = r/(1+r)$ with $r = R/R_w$ for $R \in \{L,M,S\}$, so the white maps to $(0.5,0.5,0.5)$ and all coordinates lie in $[0,1)$; this is the physiological analog of the CIELAB cube-root and regularizes the large raw $S$ dynamic range.",traced,traced,53991,531,unattributed,unattributed,0.081,0.875,proposal/logs/00_stimulus_coordinates.csv,S_raw gray L7.5,True,True,False,False
+prose,0.5,0.5,1,False,1,"ne scaling).} Primary: per-cone Michaelis--Menten on white-referred responses, $c = r/(1+r)$ with $r = R/R_w$ for $R \in \{L,M,S\}$, so the white maps to $(0.5,0.5,0.5)$ and all coordinates lie in $[0,1)$; this is the physiological analog of the CIELAB cube-root and regularizes the large raw $S$ dynamic range.",traced,traced,53991,531,unattributed,unattributed,0.077,0.875,proposal/logs/00_stimulus_coordinates.csv,S_raw gray L7.5,True,True,False,False
+prose,0.5,0.5,1,False,1,"caling).} Primary: per-cone Michaelis--Menten on white-referred responses, $c = r/(1+r)$ with $r = R/R_w$ for $R \in \{L,M,S\}$, so the white maps to $(0.5,0.5,0.5)$ and all coordinates lie in $[0,1)$; this is the physiological analog of the CIELAB cube-root and regularizes the large raw $S$ dynamic range.",traced,traced,53991,531,unattributed,unattributed,0.081,0.875,proposal/logs/00_stimulus_coordinates.csv,S_raw gray L7.5,True,True,False,False
+prose,100\%,100.0,0,True,3,"Fitting, cross-validation, and comparison protocol} All models are fit by Nelder--Mead maximum likelihood with multiple restarts (seeds logged); convergence is 100\% across all reported fits.",traced,traced,326860,914,unattributed,unattributed,0.048,0.091,proposal/logs/02_fits_helm_vk.json,fold,True,True,False,False
+prose,4.0,4.0,1,False,2,"triads spanning the neutral $L^*$ axis , public release from the authors' repository (BSD-3) . (ii) Wiebel, Aguilar \& Maertens MLDS lightness data (OSF, CC BY 4.0 ): 10 observers $\times$ 5 viewing contexts $\times$ 120 triads $\times$ 10 repeats over 10 reflectances. (iii) Helm (1964) : 10 Munsell tiles (Value 6.0, Illu",traced,traced,33992,28,supported,unattributed,0.12,0.182,workdir_outside_proposal/data/gray/wiebel_mlds/README.txt,License: CC-BY Attribution 4.0 International,True,True,False,False
+prose,6.0,6.0,1,False,2,"CC BY 4.0 ): 10 observers $\times$ 5 viewing contexts $\times$ 120 triads $\times$ 10 repeats over 10 reflectances. (iii) Helm (1964) : 10 Munsell tiles (Value 6.0, Illuminant C colorimetry transcribed from Table I), 45 dissimilarity pairs $\times$ 16 subjects (11 color-normal sessions used; 4 color-deficient subjects exc",traced,traced,33750,19,unattributed,unattributed,0.075,0.455,workdir_outside_proposal/data/chromatic/helm_stimuli_cie.csv,munsell_value C,True,True,False,False
+prose,0.98,0.98,2,False,2,"``pair $(s_2,s_3)$ more different'') was determined from the data by an order-consistency check on positional extreme triads (fraction choosing the wide pair = 0.98, $n = 499$; reflectance-space correlation 0.58) and logged.",traced,traced,1889,63,supported,supported,0.136,0.091,proposal/logs/05_summary.json,wiebel coding_check extreme_positional_trials_frac_Response1,True,True,False,False
+prose,0.58,0.58,2,False,2,"ined from the data by an order-consistency check on positional extreme triads (fraction choosing the wide pair = 0.98, $n = 499$; reflectance-space correlation 0.58) and logged.",traced,traced,5389,73,unattributed,unattributed,0.052,0.273,workdir_outside_proposal/data/chromatic/ekman_dissimilarities.csv,434 ,True,True,False,False
+prose,-0.0061,-0.0061,4,False,2,"The consensus regression (their Eq.~10) gives $\beta_{\bar d} = -0.0061$ ($t(28) = -5.73$, $p < 10^{-5}$, $R^2 = 0.73$; their Table 1: $-0.005$, $t = -5.57$).",traced,traced,18,12,supported,supported,0.302,0.091,proposal/logs/05_summary.json,gray consensus_regression beta dbar,True,True,False,False
+prose,-5.73,-5.73,2,False,3,"The consensus regression (their Eq.~10) gives $\beta_{\bar d} = -0.0061$ ($t(28) = -5.73$, $p < 10^{-5}$, $R^2 = 0.73$; their Table 1: $-0.005$, $t = -5.57$).",traced,traced,7,7,supported,supported,0.316,0.091,proposal/logs/05_summary.json,gray consensus_regression t dbar,True,True,False,False
+prose,0.73,0.73,2,False,2,"The consensus regression (their Eq.~10) gives $\beta_{\bar d} = -0.0061$ ($t(28) = -5.73$, $p < 10^{-5}$, $R^2 = 0.73$; their Table 1: $-0.005$, $t = -5.57$).",traced,traced,2825,38,supported,supported,0.316,0.091,proposal/logs/05_summary.json,gray consensus_regression R2,True,True,False,False
+prose,-0.005,-0.005,3,False,1,"The consensus regression (their Eq.~10) gives $\beta_{\bar d} = -0.0061$ ($t(28) = -5.73$, $p < 10^{-5}$, $R^2 = 0.73$; their Table 1: $-0.005$, $t = -5.57$).",traced,traced,78,59,unattributed,unattributed,0.0,1.0,proposal/logs/03_run.log,"""mean_margin_M1_minus_M2"": -0.004816285972442609,",True,True,False,False
+prose,-5.57,-5.57,2,False,3,"The consensus regression (their Eq.~10) gives $\beta_{\bar d} = -0.0061$ ($t(28) = -5.73$, $p < 10^{-5}$, $R^2 = 0.73$; their Table 1: $-0.005$, $t = -5.57$).",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+prose,0.0044,0.0044,4,False,2,"Under the scale-matched convention (P), every concave-$f$ model beats the identity-$f$ M0 on held-out NLL (per-response reduction: power $0.0044$ [0.0039, 0.0049], log $0.0056$ [0.0050, 0.0061], sin $0.0042$ [0.0037, 0.0047], spline $0.0058$ [0.0053, 0.0063]; 95\% CIs across folds), and under the refere",traced,traced,64,15,supported,unattributed,0.158,0.182,proposal/logs/05_summary.json,gray mle P deltas_vs_M0 power mean_nll_reduction,True,True,False,False
+prose,0.0039,0.0039,4,False,2,"Under the scale-matched convention (P), every concave-$f$ model beats the identity-$f$ M0 on held-out NLL (per-response reduction: power $0.0044$ [0.0039, 0.0049], log $0.0056$ [0.0050, 0.0061], sin $0.0042$ [0.0037, 0.0047], spline $0.0058$ [0.0053, 0.0063]; 95\% CIs across folds), and under the reference conve",traced,traced,50,19,unattributed,unattributed,0.075,0.364,proposal/logs/05_summary.json,gray mle P deltas_vs_M0 power ci95_t,True,True,False,False
+prose,0.0049,0.0049,4,False,2,"Under the scale-matched convention (P), every concave-$f$ model beats the identity-$f$ M0 on held-out NLL (per-response reduction: power $0.0044$ [0.0039, 0.0049], log $0.0056$ [0.0050, 0.0061], sin $0.0042$ [0.0037, 0.0047], spline $0.0058$ [0.0053, 0.0063]; 95\% CIs across folds), and under the reference convention (R",traced,traced,51,7,unattributed,unattributed,0.078,0.364,proposal/logs/05_summary.json,gray mle P deltas_vs_M0 power ci95_t,True,True,True,False
+prose,0.0056,0.0056,4,False,2,"scale-matched convention (P), every concave-$f$ model beats the identity-$f$ M0 on held-out NLL (per-response reduction: power $0.0044$ [0.0039, 0.0049], log $0.0056$ [0.0050, 0.0061], sin $0.0042$ [0.0037, 0.0047], spline $0.0058$ [0.0053, 0.0063]; 95\% CIs across folds), and under the reference convention (R) the ordering",traced,traced,63,13,supported,unattributed,0.152,0.182,proposal/logs/05_summary.json,gray mle P deltas_vs_M0 log mean_nll_reduction,True,True,False,False
+prose,0.0050,0.005,4,False,2,"tched convention (P), every concave-$f$ model beats the identity-$f$ M0 on held-out NLL (per-response reduction: power $0.0044$ [0.0039, 0.0049], log $0.0056$ [0.0050, 0.0061], sin $0.0042$ [0.0037, 0.0047], spline $0.0058$ [0.0053, 0.0063]; 95\% CIs across folds), and under the reference convention (R) the ordering baseline",traced,traced,50,6,unattributed,unattributed,0.075,0.636,proposal/logs/05_summary.json,gray mle P deltas_vs_M0 log ci95_t,True,True,False,False
+prose,0.0061,0.0061,4,False,2,"nvention (P), every concave-$f$ model beats the identity-$f$ M0 on held-out NLL (per-response reduction: power $0.0044$ [0.0039, 0.0049], log $0.0056$ [0.0050, 0.0061], sin $0.0042$ [0.0037, 0.0047], spline $0.0058$ [0.0053, 0.0063]; 95\% CIs across folds), and under the reference convention (R) the ordering baseline $>$ $g$",traced,traced,62,4,unattributed,unattributed,0.075,0.273,proposal/logs/05_summary.json,gray mle P deltas_vs_M0 log ci95_t,True,True,False,False
+prose,0.0042,0.0042,4,False,2,"every concave-$f$ model beats the identity-$f$ M0 on held-out NLL (per-response reduction: power $0.0044$ [0.0039, 0.0049], log $0.0056$ [0.0050, 0.0061], sin $0.0042$ [0.0037, 0.0047], spline $0.0058$ [0.0053, 0.0063]; 95\% CIs across folds), and under the reference convention (R) the ordering baseline $>$ $g$-only $>$ $g{+",traced,traced,50,15,supported,unattributed,0.152,0.182,proposal/logs/05_summary.json,gray mle P deltas_vs_M0 sin mean_nll_reduction,True,True,False,False
+prose,0.0037,0.0037,4,False,2,"cave-$f$ model beats the identity-$f$ M0 on held-out NLL (per-response reduction: power $0.0044$ [0.0039, 0.0049], log $0.0056$ [0.0050, 0.0061], sin $0.0042$ [0.0037, 0.0047], spline $0.0058$ [0.0053, 0.0063]; 95\% CIs across folds), and under the reference convention (R) the ordering baseline $>$ $g$-only $>$ $g{+}f$ repro",traced,traced,50,15,unattributed,unattributed,0.075,0.273,proposal/logs/05_summary.json,gray mle P deltas_vs_M0 sin ci95_t,True,True,True,False
+prose,0.0047,0.0047,4,False,2,"model beats the identity-$f$ M0 on held-out NLL (per-response reduction: power $0.0044$ [0.0039, 0.0049], log $0.0056$ [0.0050, 0.0061], sin $0.0042$ [0.0037, 0.0047], spline $0.0058$ [0.0053, 0.0063]; 95\% CIs across folds), and under the reference convention (R) the ordering baseline $>$ $g$-only $>$ $g{+}f$ reproduces wi",traced,traced,48,7,unattributed,unattributed,0.075,0.455,proposal/logs/05_summary.json,gray mle P deltas_vs_M0 sin ci95_t,True,True,False,False
+prose,0.0058,0.0058,4,False,2,"identity-$f$ M0 on held-out NLL (per-response reduction: power $0.0044$ [0.0039, 0.0049], log $0.0056$ [0.0050, 0.0061], sin $0.0042$ [0.0037, 0.0047], spline $0.0058$ [0.0053, 0.0063]; 95\% CIs across folds), and under the reference convention (R) the ordering baseline $>$ $g$-only $>$ $g{+}f$ reproduces with bootstrap CIs",traced,traced,70,17,supported,unattributed,0.165,0.182,proposal/logs/05_summary.json,gray mle P deltas_vs_M0 spline mean_nll_reduction,True,True,False,False
+prose,0.0053,0.0053,4,False,2,"$f$ M0 on held-out NLL (per-response reduction: power $0.0044$ [0.0039, 0.0049], log $0.0056$ [0.0050, 0.0061], sin $0.0042$ [0.0037, 0.0047], spline $0.0058$ [0.0053, 0.0063]; 95\% CIs across folds), and under the reference convention (R) the ordering baseline $>$ $g$-only $>$ $g{+}f$ reproduces with bootstrap CIs excluding",traced,traced,71,16,unattributed,unattributed,0.082,0.091,proposal/logs/01b_run.log,"""delta_M0_minus_M1_mean"": 0.005253400162182948,",True,True,False,False
+prose,0.0063,0.0063,4,False,2,"n held-out NLL (per-response reduction: power $0.0044$ [0.0039, 0.0049], log $0.0056$ [0.0050, 0.0061], sin $0.0042$ [0.0037, 0.0047], spline $0.0058$ [0.0053, 0.0063]; 95\% CIs across folds), and under the reference convention (R) the ordering baseline $>$ $g$-only $>$ $g{+}f$ reproduces with bootstrap CIs excluding zero (e",traced,traced,74,10,unattributed,unattributed,0.044,0.273,proposal/logs/01b_run.log,0.0062831839214228195,True,True,False,False
+prose,95\%,95.0,0,True,2,"t NLL (per-response reduction: power $0.0044$ [0.0039, 0.0049], log $0.0056$ [0.0050, 0.0061], sin $0.0042$ [0.0037, 0.0047], spline $0.0058$ [0.0053, 0.0063]; 95\% CIs across folds), and under the reference convention (R) the ordering baseline $>$ $g$-only $>$ $g{+}f$ reproduces with bootstrap CIs excluding zero (e.g.\ sp",traced,traced,12444,28,unattributed,unattributed,0.042,0.818,proposal/logs/02_fits_helm_vk.json,cielab:M0 nll,True,True,False,False
+prose,0.0058,0.0058,4,False,2,"der the reference convention (R) the ordering baseline $>$ $g$-only $>$ $g{+}f$ reproduces with bootstrap CIs excluding zero (e.g.\ spline $g{+}f$ improvement $0.0058$ [0.0044, 0.0076] nats/response).",traced,traced,70,17,unattributed,unattributed,0.053,0.182,proposal/logs/05_summary.json,gray mle R deltas_vs_gonly famp_spline mean,True,True,False,False
+prose,0.0044,0.0044,4,False,2,"eference convention (R) the ordering baseline $>$ $g$-only $>$ $g{+}f$ reproduces with bootstrap CIs excluding zero (e.g.\ spline $g{+}f$ improvement $0.0058$ [0.0044, 0.0076] nats/response).",traced,traced,64,15,unattributed,unattributed,0.053,0.091,proposal/logs/05_summary.json,gray mle R deltas_vs_gonly famp_spline ci95_percentile,True,True,False,False
+prose,0.0076,0.0076,4,False,2,"convention (R) the ordering baseline $>$ $g$-only $>$ $g{+}f$ reproduces with bootstrap CIs excluding zero (e.g.\ spline $g{+}f$ improvement $0.0058$ [0.0044, 0.0076] nats/response).",traced,traced,76,10,unattributed,unattributed,0.057,0.091,proposal/logs/05_summary.json,gray mle R deltas_vs_gonly famp_spline ci95_percentile,True,True,False,False
+prose,0.5,0.5,1,False,1,"The fitted scaling is concave with compression ratio $f(0.5\Delta\psi_{\max}) / f(\Delta\psi_{\max}) = 0.68$ (spline; 0.63 power; 0.68 log), against the paper's $1.36/2.06 = 0.66$; the fitted log shape parameter $\hat a",traced,traced,53991,531,unattributed,unattributed,0.066,0.75,proposal/logs/03_run.log,"""rate_coarse_beats_opp"": 0.5,",True,True,False,False
+prose,0.68,0.68,2,False,2,"The fitted scaling is concave with compression ratio $f(0.5\Delta\psi_{\max}) / f(\Delta\psi_{\max}) = 0.68$ (spline; 0.63 power; 0.68 log), against the paper's $1.36/2.06 = 0.66$; the fitted log shape parameter $\hat a = 3.87$ (their highest-likelihood $a = 5.34$) a",traced,traced,3335,77,supported,supported,0.211,0.091,proposal/logs/06_paper_numbers.json,gray_mle_P compression_ratio_half_over_full spline f(0.5)/f(1.0)_mean,True,True,True,False
+prose,0.63,0.63,2,False,2,"The fitted scaling is concave with compression ratio $f(0.5\Delta\psi_{\max}) / f(\Delta\psi_{\max}) = 0.68$ (spline; 0.63 power; 0.68 log), against the paper's $1.36/2.06 = 0.66$; the fitted log shape parameter $\hat a = 3.87$ (their highest-likelihood $a = 5.34$) and power expone",traced,traced,4266,60,supported,unattributed,0.2,0.182,proposal/logs/06_paper_numbers.json,gray_mle_P compression_ratio_half_over_full power f(0.5)/f(1.0)_mean,True,True,False,False
+prose,0.68,0.68,2,False,2,"The fitted scaling is concave with compression ratio $f(0.5\Delta\psi_{\max}) / f(\Delta\psi_{\max}) = 0.68$ (spline; 0.63 power; 0.68 log), against the paper's $1.36/2.06 = 0.66$; the fitted log shape parameter $\hat a = 3.87$ (their highest-likelihood $a = 5.34$) and power exponent $\hat a =",traced,traced,3335,77,supported,supported,0.2,0.091,proposal/logs/06_paper_numbers.json,gray_mle_P compression_ratio_half_over_full spline f(0.5)/f(1.0)_mean,True,True,True,False
+prose,1.36,1.36,2,False,3,"e fitted scaling is concave with compression ratio $f(0.5\Delta\psi_{\max}) / f(\Delta\psi_{\max}) = 0.68$ (spline; 0.63 power; 0.68 log), against the paper's $1.36/2.06 = 0.66$; the fitted log shape parameter $\hat a = 3.87$ (their highest-likelihood $a = 5.34$) and power exponent $\hat a = 0.67$.",traced,traced,968,11,unattributed,unattributed,0.0,1.0,proposal/logs/02_fits_helm_vk.json,coarse_lab:M2-1ax:ax0 theta,True,True,False,False
+prose,2.06,2.06,2,False,3,"ted scaling is concave with compression ratio $f(0.5\Delta\psi_{\max}) / f(\Delta\psi_{\max}) = 0.68$ (spline; 0.63 power; 0.68 log), against the paper's $1.36/2.06 = 0.66$; the fitted log shape parameter $\hat a = 3.87$ (their highest-likelihood $a = 5.34$) and power exponent $\hat a = 0.67$.",traced,traced,1118,6,unattributed,unattributed,0.0,1.0,proposal/logs/02_fits_helm_vk.json,cielab:M1 theta,True,True,False,False
+prose,0.66,0.66,2,False,2,"ling is concave with compression ratio $f(0.5\Delta\psi_{\max}) / f(\Delta\psi_{\max}) = 0.68$ (spline; 0.63 power; 0.68 log), against the paper's $1.36/2.06 = 0.66$; the fitted log shape parameter $\hat a = 3.87$ (their highest-likelihood $a = 5.34$) and power exponent $\hat a = 0.67$.",traced,traced,3292,82,unattributed,unattributed,0.052,0.727,proposal/logs/05_summary.json,gray mle reference_2022 ratio,True,True,False,False
+prose,3.87,3.87,2,False,3,"lta\psi_{\max}) / f(\Delta\psi_{\max}) = 0.68$ (spline; 0.63 power; 0.68 log), against the paper's $1.36/2.06 = 0.66$; the fitted log shape parameter $\hat a = 3.87$ (their highest-likelihood $a = 5.34$) and power exponent $\hat a = 0.67$.",traced,traced,37,3,supported,supported,0.255,0.091,proposal/logs/06_paper_numbers.json,gray_mle_P log_shape_params_mean,True,True,False,False
+prose,5.34,5.34,2,False,3,") = 0.68$ (spline; 0.63 power; 0.68 log), against the paper's $1.36/2.06 = 0.66$; the fitted log shape parameter $\hat a = 3.87$ (their highest-likelihood $a = 5.34$) and power exponent $\hat a = 0.67$.",traced,traced,14,3,unattributed,unattributed,0.066,0.091,proposal/logs/05_summary.json,gray mle reference_2022 log_a,True,False,False,False
+prose,0.67,0.67,2,False,2,"log), against the paper's $1.36/2.06 = 0.66$; the fitted log shape parameter $\hat a = 3.87$ (their highest-likelihood $a = 5.34$) and power exponent $\hat a = 0.67$.",traced,traced,3908,87,supported,supported,0.293,0.091,proposal/logs/06_paper_numbers.json,gray_mle_P power_shape_params_mean,True,True,False,False
+prose,0.32,0.32,2,False,2,"hreshold reflectance axis), the concave-power model beats the identity model on held-out NLL in \emph{all five} viewing contexts, with fitted exponents $a \in [0.32, 0.41]$ (all 95\% CIs excluding 1; e.g.\ plain context $a = 0.341$ [0.330, 0.352], NLL improvement $0.0070$ [0.0048, 0.0093] nats/judgment).",traced,traced,6536,327,unattributed,unattributed,0.079,0.364,proposal/logs/05_summary.json,wiebel contexts transp.dark exponent_a_mean,True,True,False,False
+prose,0.41,0.41,2,False,2,"ld reflectance axis), the concave-power model beats the identity model on held-out NLL in \emph{all five} viewing contexts, with fitted exponents $a \in [0.32, 0.41]$ (all 95\% CIs excluding 1; e.g.\ plain context $a = 0.341$ [0.330, 0.352], NLL improvement $0.0070$ [0.0048, 0.0093] nats/judgment).",traced,traced,5441,115,supported,unattributed,0.121,0.273,proposal/logs/05_summary.json,wiebel contexts plain M1_nll_mean,True,True,False,False
+prose,95\%,95.0,0,True,2,"ce axis), the concave-power model beats the identity model on held-out NLL in \emph{all five} viewing contexts, with fitted exponents $a \in [0.32, 0.41]$ (all 95\% CIs excluding 1; e.g.\ plain context $a = 0.341$ [0.330, 0.352], NLL improvement $0.0070$ [0.0048, 0.0093] nats/judgment).",traced,traced,12444,28,unattributed,unattributed,0.041,0.909,proposal/logs/02_fits_helm_vk.json,cielab:M0 nll,True,True,False,False
+prose,0.341,0.341,3,False,3,"ntity model on held-out NLL in \emph{all five} viewing contexts, with fitted exponents $a \in [0.32, 0.41]$ (all 95\% CIs excluding 1; e.g.\ plain context $a = 0.341$ [0.330, 0.352], NLL improvement $0.0070$ [0.0048, 0.0093] nats/judgment).",traced,traced,696,15,supported,supported,0.164,0.091,proposal/logs/05_summary.json,wiebel contexts plain exponent_a_mean,True,True,False,False
+prose,0.330,0.33,3,False,3,"del on held-out NLL in \emph{all five} viewing contexts, with fitted exponents $a \in [0.32, 0.41]$ (all 95\% CIs excluding 1; e.g.\ plain context $a = 0.341$ [0.330, 0.352], NLL improvement $0.0070$ [0.0048, 0.0093] nats/judgment).",traced,traced,350,26,supported,supported,0.169,0.091,proposal/logs/05_summary.json,wiebel contexts plain exponent_a_ci95,True,True,False,False
+prose,0.352,0.352,3,False,3,"held-out NLL in \emph{all five} viewing contexts, with fitted exponents $a \in [0.32, 0.41]$ (all 95\% CIs excluding 1; e.g.\ plain context $a = 0.341$ [0.330, 0.352], NLL improvement $0.0070$ [0.0048, 0.0093] nats/judgment).",traced,traced,996,29,supported,supported,0.179,0.091,proposal/logs/05_summary.json,wiebel contexts plain exponent_a_ci95,True,True,False,False
+prose,0.0070,0.007,4,False,2,"five} viewing contexts, with fitted exponents $a \in [0.32, 0.41]$ (all 95\% CIs excluding 1; e.g.\ plain context $a = 0.341$ [0.330, 0.352], NLL improvement $0.0070$ [0.0048, 0.0093] nats/judgment).",traced,traced,70,9,supported,supported,0.126,0.091,proposal/logs/05_summary.json,wiebel contexts plain delta_M0_minus_M1_mean,True,True,False,False
+prose,0.0048,0.0048,4,False,2,"ewing contexts, with fitted exponents $a \in [0.32, 0.41]$ (all 95\% CIs excluding 1; e.g.\ plain context $a = 0.341$ [0.330, 0.352], NLL improvement $0.0070$ [0.0048, 0.0093] nats/judgment).",traced,traced,62,15,supported,supported,0.142,0.091,proposal/logs/05_summary.json,wiebel contexts plain delta_ci95_t,True,True,False,False
+prose,0.0093,0.0093,4,False,2,"ntexts, with fitted exponents $a \in [0.32, 0.41]$ (all 95\% CIs excluding 1; e.g.\ plain context $a = 0.341$ [0.330, 0.352], NLL improvement $0.0070$ [0.0048, 0.0093] nats/judgment).",traced,traced,389,6,supported,supported,0.142,0.091,proposal/logs/05_summary.json,wiebel contexts plain delta_ci95_t,True,True,False,False
+prose,95\%,95.0,0,True,2,"Gray-axis replication. (a) Perceptual map $g(L^*)$ (normalized to unit max), mean and 95\% band over splits. (b) Difference-scaling $f(\Delta\psi)$ (normalized to unit secant), spline/log/power forms with 95\% bands; curves above the diagonal are con",traced,traced,12444,28,unattributed,unattributed,0.04,1.0,proposal/logs/00_stimulus_coordinates.csv,LCh_L gray L95,True,True,False,False
+prose,95\%,95.0,0,True,2,"L^*)$ (normalized to unit max), mean and 95\% band over splits. (b) Difference-scaling $f(\Delta\psi)$ (normalized to unit secant), spline/log/power forms with 95\% bands; curves above the diagonal are concave, i.e.\ diminishing returns.",traced,traced,12444,28,unattributed,unattributed,0.0,1.0,workdir_outside_proposal/data/chromatic/ekman_dissimilarities.csv,465 ,True,True,False,False
+prose,-0.0638,-0.0638,4,False,3,"On Helm, M2 is \emph{worse} than M1 on held-out data: paired bootstrap delta $\Delta_{\mathrm{M2}-\mathrm{M1}} = -0.0638$ nats/obs (95\% CI $[-0.0674, -0.0592]$; M2 better in 0/300 resamples).",traced,traced,9,5,supported,supported,0.292,0.091,proposal/logs/02b_bootstrap_helm_mm.json,summary delta_M2_minus_M1 mean,True,True,False,False
+prose,95\%,95.0,0,True,2,"On Helm, M2 is \emph{worse} than M1 on held-out data: paired bootstrap delta $\Delta_{\mathrm{M2}-\mathrm{M1}} = -0.0638$ nats/obs (95\% CI $[-0.0674, -0.0592]$; M2 better in 0/300 resamples).",traced,traced,12444,28,unattributed,unattributed,0.117,1.0,proposal/logs/02_fits_helm_vk.json,ciergb:M2 theta,True,True,False,False
+prose,-0.0674,-0.0674,4,False,3,"On Helm, M2 is \emph{worse} than M1 on held-out data: paired bootstrap delta $\Delta_{\mathrm{M2}-\mathrm{M1}} = -0.0638$ nats/obs (95\% CI $[-0.0674, -0.0592]$; M2 better in 0/300 resamples).",traced,traced,8,4,supported,supported,0.285,0.091,proposal/logs/02b_bootstrap_helm_mm.json,summary delta_M2_minus_M1 ci95,True,False,False,False
+prose,-0.0592,-0.0592,4,False,3,"On Helm, M2 is \emph{worse} than M1 on held-out data: paired bootstrap delta $\Delta_{\mathrm{M2}-\mathrm{M1}} = -0.0638$ nats/obs (95\% CI $[-0.0674, -0.0592]$; M2 better in 0/300 resamples).",traced,traced,10,4,supported,supported,0.285,0.091,proposal/logs/02b_bootstrap_helm_mm.json,summary delta_M2_minus_M1 ci95,True,True,False,False
+prose,-0.0291,-0.0291,4,False,3,"On Ekman the point estimate also favors M1, $-0.0291$ $[-0.0670, +0.0143]$, with M2 better in only 8.3\% of resamples.",traced,traced,14,10,supported,supported,0.243,0.091,proposal/logs/05_summary.json,boot_ekman_mm delta_M2_minus_M1 mean,True,True,True,False
+prose,-0.0670,-0.067,4,False,3,"On Ekman the point estimate also favors M1, $-0.0291$ $[-0.0670, +0.0143]$, with M2 better in only 8.3\% of resamples.",traced,traced,10,3,supported,supported,0.236,0.091,proposal/logs/05_summary.json,boot_ekman_mm delta_M2_minus_M1 ci95,True,True,True,False
+prose,0.0143,0.0143,4,False,3,"On Ekman the point estimate also favors M1, $-0.0291$ $[-0.0670, +0.0143]$, with M2 better in only 8.3\% of resamples.",traced,traced,123,4,supported,supported,0.236,0.091,proposal/logs/05_summary.json,boot_ekman_mm delta_M2_minus_M1 ci95,True,True,True,False
+prose,8.3\%,8.3,1,True,2,"On Ekman the point estimate also favors M1, $-0.0291$ $[-0.0670, +0.0143]$, with M2 better in only 8.3\% of resamples.",traced,traced,1730,24,supported,supported,0.229,0.091,proposal/logs/05_summary.json,boot_ekman_mm delta_M2_minus_M1 frac_positive,True,True,True,False
+prose,-0.0797,-0.0797,4,False,3,"Both normalizations agree (von Kries: Helm $-0.0797$ $[-0.0831, -0.0753]$; Ekman $-0.0633$ $[-0.0927, -0.0361]$).",traced,traced,19,6,unattributed,unattributed,0.098,0.273,proposal/logs/02_fits_ekman_vk.json,lch:M2 theta,True,True,False,False
+prose,-0.0831,-0.0831,4,False,3,"Both normalizations agree (von Kries: Helm $-0.0797$ $[-0.0831, -0.0753]$; Ekman $-0.0633$ $[-0.0927, -0.0361]$).",traced,traced,13,3,unattributed,unattributed,0.089,0.636,proposal/logs/05_summary.json,boot_helm_vk delta_M2_minus_M1 ci95,True,False,False,False
+prose,-0.0753,-0.0753,4,False,3,"Both normalizations agree (von Kries: Helm $-0.0797$ $[-0.0831, -0.0753]$; Ekman $-0.0633$ $[-0.0927, -0.0361]$).",traced,traced,4,3,unattributed,unattributed,0.089,0.636,proposal/logs/05_summary.json,boot_helm_vk delta_M2_minus_M1 ci95,True,True,False,False
+prose,-0.0633,-0.0633,4,False,3,"Both normalizations agree (von Kries: Helm $-0.0797$ $[-0.0831, -0.0753]$; Ekman $-0.0633$ $[-0.0927, -0.0361]$).",traced,traced,17,5,unattributed,unattributed,0.092,0.727,proposal/logs/02b_run.log,ekman vk done 2715s dM2M1 -0.0633 dBest -0.3106,True,False,False,False
+prose,-0.0927,-0.0927,4,False,3,"Both normalizations agree (von Kries: Helm $-0.0797$ $[-0.0831, -0.0753]$; Ekman $-0.0633$ $[-0.0927, -0.0361]$).",traced,traced,9,3,unattributed,unattributed,0.089,0.364,proposal/logs/05_summary.json,boot_ekman_vk delta_M2_minus_M1 ci95,True,True,False,False
+prose,-0.0361,-0.0361,4,False,3,"Both normalizations agree (von Kries: Helm $-0.0797$ $[-0.0831, -0.0753]$; Ekman $-0.0633$ $[-0.0927, -0.0361]$).",traced,traced,20,13,unattributed,unattributed,0.105,0.091,proposal/logs/03_identifiability.json,collinearity helm corr_dM_dS,True,True,False,False
+prose,-0.1732,-0.1732,4,False,4,"Meanwhile M1 beats M0 decisively on both datasets (Helm: M0$-$M1 $= -0.1732$ i.e.\ M1 better by 0.17 nats/obs, CI $[-0.1987, -0.1384]$; Ekman: $-0.7834$ $[-0.8866, -0.6498]$), so DR itself is present and strong.",traced,untraced,3,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+prose,0.17,0.17,2,False,2,"Meanwhile M1 beats M0 decisively on both datasets (Helm: M0$-$M1 $= -0.1732$ i.e.\ M1 better by 0.17 nats/obs, CI $[-0.1987, -0.1384]$; Ekman: $-0.7834$ $[-0.8866, -0.6498]$), so DR itself is present and strong.",traced,traced,8811,220,unattributed,unattributed,0.099,1.0,proposal/logs/02_fits_helm_vk.json,lch:M1 rmse,True,True,True,True
+prose,-0.1987,-0.1987,4,False,4,"Meanwhile M1 beats M0 decisively on both datasets (Helm: M0$-$M1 $= -0.1732$ i.e.\ M1 better by 0.17 nats/obs, CI $[-0.1987, -0.1384]$; Ekman: $-0.7834$ $[-0.8866, -0.6498]$), so DR itself is present and strong.",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,True,True,False,False
+prose,-0.1384,-0.1384,4,False,4,"Meanwhile M1 beats M0 decisively on both datasets (Helm: M0$-$M1 $= -0.1732$ i.e.\ M1 better by 0.17 nats/obs, CI $[-0.1987, -0.1384]$; Ekman: $-0.7834$ $[-0.8866, -0.6498]$), so DR itself is present and strong.",traced,traced,6,1,unattributed,unattributed,0.047,0.364,proposal/logs/02_fits_helm_mm.json,lch:M2-1ax:ax1 theta,True,True,False,False
+prose,-0.7834,-0.7834,4,False,4,"Meanwhile M1 beats M0 decisively on both datasets (Helm: M0$-$M1 $= -0.1732$ i.e.\ M1 better by 0.17 nats/obs, CI $[-0.1987, -0.1384]$; Ekman: $-0.7834$ $[-0.8866, -0.6498]$), so DR itself is present and strong.",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+prose,-0.8866,-0.8866,4,False,4,"Meanwhile M1 beats M0 decisively on both datasets (Helm: M0$-$M1 $= -0.1732$ i.e.\ M1 better by 0.17 nats/obs, CI $[-0.1987, -0.1384]$; Ekman: $-0.7834$ $[-0.8866, -0.6498]$), so DR itself is present and strong.",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+prose,-0.6498,-0.6498,4,False,4,"while M1 beats M0 decisively on both datasets (Helm: M0$-$M1 $= -0.1732$ i.e.\ M1 better by 0.17 nats/obs, CI $[-0.1987, -0.1384]$; Ekman: $-0.7834$ $[-0.8866, -0.6498]$), so DR itself is present and strong.",traced,traced,1,1,unattributed,unattributed,0.047,0.273,proposal/logs/02_fits_helm_mm.json,srgb:M2-1ax:ax0 theta,False,False,False,False
+prose,-0.155,-0.155,3,False,3,"lection-aware headline delta is negative under every specification: Helm (MM) best control is LCh in 300/300 resamples, $\Delta_{\mathrm{bestM3}-\mathrm{M2}} = -0.155$ $[-0.162, -0.147]$; Ekman (MM) best control is opponent in 297/300 resamples, $-0.131$ $[-0.233, -0.033]$.",traced,traced,94,17,supported,supported,0.33,0.091,proposal/logs/05_summary.json,boot_helm_mm delta_bestM3_minus_M2_selection_aware mean,True,True,True,False
+prose,-0.162,-0.162,3,False,3,"are headline delta is negative under every specification: Helm (MM) best control is LCh in 300/300 resamples, $\Delta_{\mathrm{bestM3}-\mathrm{M2}} = -0.155$ $[-0.162, -0.147]$; Ekman (MM) best control is opponent in 297/300 resamples, $-0.131$ $[-0.233, -0.033]$.",traced,traced,51,15,supported,supported,0.306,0.091,proposal/logs/05_summary.json,boot_helm_mm per_control_delta_ctrl_minus_M2 lch ci95,True,True,True,True
+prose,-0.147,-0.147,3,False,3,"line delta is negative under every specification: Helm (MM) best control is LCh in 300/300 resamples, $\Delta_{\mathrm{bestM3}-\mathrm{M2}} = -0.155$ $[-0.162, -0.147]$; Ekman (MM) best control is opponent in 297/300 resamples, $-0.131$ $[-0.233, -0.033]$.",traced,traced,47,13,supported,unattributed,0.306,0.182,proposal/logs/05_summary.json,boot_helm_mm per_control_delta_ctrl_minus_M2 lch ci95,True,True,True,False
+prose,-0.131,-0.131,3,False,3,"rol is LCh in 300/300 resamples, $\Delta_{\mathrm{bestM3}-\mathrm{M2}} = -0.155$ $[-0.162, -0.147]$; Ekman (MM) best control is opponent in 297/300 resamples, $-0.131$ $[-0.233, -0.033]$.",traced,traced,57,12,supported,supported,0.363,0.091,proposal/logs/05_summary.json,boot_ekman_mm delta_bestM3_minus_M2_selection_aware mean,True,True,True,False
+prose,-0.233,-0.233,3,False,3,"in 300/300 resamples, $\Delta_{\mathrm{bestM3}-\mathrm{M2}} = -0.155$ $[-0.162, -0.147]$; Ekman (MM) best control is opponent in 297/300 resamples, $-0.131$ $[-0.233, -0.033]$.",traced,traced,24,14,supported,supported,0.429,0.091,proposal/logs/05_summary.json,boot_ekman_mm per_control_delta_ctrl_minus_M2 opponent ci95,True,True,True,False
+prose,-0.033,-0.033,3,False,2,"300 resamples, $\Delta_{\mathrm{bestM3}-\mathrm{M2}} = -0.155$ $[-0.162, -0.147]$; Ekman (MM) best control is opponent in 297/300 resamples, $-0.131$ $[-0.233, -0.033]$.",traced,traced,80,32,supported,unattributed,0.417,0.182,proposal/logs/05_summary.json,boot_ekman_mm delta_bestM3_minus_M2_selection_aware ci95,True,True,True,False
+prose,-0.180,-0.18,3,False,3,"Under von Kries: Helm $-0.180$ (LCh, 300/300), Ekman $-0.311$ (opponent, 296/300).",traced,traced,101,13,supported,unattributed,0.189,0.727,proposal/logs/02_fits_ekman_mm.json,opponent:M2-1ax:ax1 nll,True,True,False,False
+prose,-0.311,-0.311,3,False,3,"Under von Kries: Helm $-0.180$ (LCh, 300/300), Ekman $-0.311$ (opponent, 296/300).",traced,traced,19,8,unattributed,unattributed,0.094,0.909,proposal/logs/02_fits_ekman_vk.json,coarse_lab:M1 theta,True,True,True,False
+prose,-0.0199,-0.0199,4,False,3,"rity.} The coarse achromatic-vs-$S$ model (M2c) does not beat its matched opponent control either: Helm $\Delta_{\mathrm{coarse\ opp}-\mathrm{coarse\ cones}} = -0.0199$ $[-0.0236, -0.0159]$; Ekman $-0.0020$ $[-0.0596, +0.0598]$ (indistinguishable).",traced,traced,7,6,supported,supported,0.194,0.091,proposal/logs/05_summary.json,boot_helm_mm coarse delta_coarse_opp_minus_cones mean,True,True,True,False
+prose,-0.0236,-0.0236,4,False,3,"coarse achromatic-vs-$S$ model (M2c) does not beat its matched opponent control either: Helm $\Delta_{\mathrm{coarse\ opp}-\mathrm{coarse\ cones}} = -0.0199$ $[-0.0236, -0.0159]$; Ekman $-0.0020$ $[-0.0596, +0.0598]$ (indistinguishable).",traced,traced,12,6,supported,supported,0.2,0.091,proposal/logs/05_summary.json,boot_helm_mm coarse delta_coarse_opp_minus_cones ci95,True,True,True,False
+prose,-0.0159,-0.0159,4,False,3,"hromatic-vs-$S$ model (M2c) does not beat its matched opponent control either: Helm $\Delta_{\mathrm{coarse\ opp}-\mathrm{coarse\ cones}} = -0.0199$ $[-0.0236, -0.0159]$; Ekman $-0.0020$ $[-0.0596, +0.0598]$ (indistinguishable).",traced,traced,14,10,supported,unattributed,0.2,0.182,proposal/logs/05_summary.json,boot_helm_mm coarse delta_coarse_opp_minus_cones ci95,True,True,False,False
+prose,-0.0020,-0.002,4,False,2,"del (M2c) does not beat its matched opponent control either: Helm $\Delta_{\mathrm{coarse\ opp}-\mathrm{coarse\ cones}} = -0.0199$ $[-0.0236, -0.0159]$; Ekman $-0.0020$ $[-0.0596, +0.0598]$ (indistinguishable).",traced,traced,14,13,supported,supported,0.215,0.091,proposal/logs/05_summary.json,boot_ekman_mm coarse delta_coarse_opp_minus_cones mean,True,True,True,False
+prose,-0.0596,-0.0596,4,False,3,"oes not beat its matched opponent control either: Helm $\Delta_{\mathrm{coarse\ opp}-\mathrm{coarse\ cones}} = -0.0199$ $[-0.0236, -0.0159]$; Ekman $-0.0020$ $[-0.0596, +0.0598]$ (indistinguishable).",traced,traced,10,5,supported,supported,0.237,0.091,proposal/logs/05_summary.json,boot_ekman_mm coarse delta_coarse_opp_minus_cones ci95,True,True,True,False
+prose,0.0598,0.0598,4,False,3,"at its matched opponent control either: Helm $\Delta_{\mathrm{coarse\ opp}-\mathrm{coarse\ cones}} = -0.0199$ $[-0.0236, -0.0159]$; Ekman $-0.0020$ $[-0.0596, +0.0598]$ (indistinguishable).",traced,traced,185,6,supported,supported,0.29,0.091,proposal/logs/05_summary.json,boot_ekman_mm coarse delta_coarse_opp_minus_cones ci95,True,True,False,False
+prose,0.5,0.5,1,False,1,"\paragraph{Per-cone distinctness.} The fitted M2 inner functions (Figure ) are concave and non-degenerate: half-difference compression ratios $f_c(0.5\,x_{\rm ref})/f_c(x_{\rm ref})$ on Helm: $f_L = 0.591$ [0.516, 0.722], $f_M = 0.580$ [0.523, 0.732], $f_S = 0.515$ [0.501, 0.549]; on Ekman: $f_L = 0.676$ [0.5",traced,traced,53991,531,supported,unattributed,0.16,1.0,proposal/logs/02_fits_helm_vk.json,cones:M2 theta,True,True,True,False
+prose,0.591,0.591,3,False,3,"fitted M2 inner functions (Figure ) are concave and non-degenerate: half-difference compression ratios $f_c(0.5\,x_{\rm ref})/f_c(x_{\rm ref})$ on Helm: $f_L = 0.591$ [0.516, 0.722], $f_M = 0.580$ [0.523, 0.732], $f_S = 0.515$ [0.501, 0.549]; on Ekman: $f_L = 0.676$ [0.512, 0.814], $f_M = 0.526$ [0.505, 0.585], $f_S = 0.623",traced,traced,840,6,unattributed,unattributed,0.117,0.545,proposal/logs/02_fits_ekman_mm.json,ciergb:M2 theta,True,True,False,False
+prose,0.516,0.516,3,False,3,"2 inner functions (Figure ) are concave and non-degenerate: half-difference compression ratios $f_c(0.5\,x_{\rm ref})/f_c(x_{\rm ref})$ on Helm: $f_L = 0.591$ [0.516, 0.722], $f_M = 0.580$ [0.523, 0.732], $f_S = 0.515$ [0.501, 0.549]; on Ekman: $f_L = 0.676$ [0.512, 0.814], $f_M = 0.526$ [0.505, 0.585], $f_S = 0.623$ [0.523",traced,traced,619,12,unattributed,unattributed,0.065,0.636,proposal/logs/02_fits_ekman_mm.json,opponent:M0 nll,True,True,False,False
+prose,0.722,0.722,3,False,3,"functions (Figure ) are concave and non-degenerate: half-difference compression ratios $f_c(0.5\,x_{\rm ref})/f_c(x_{\rm ref})$ on Helm: $f_L = 0.591$ [0.516, 0.722], $f_M = 0.580$ [0.523, 0.732], $f_S = 0.515$ [0.501, 0.549]; on Ekman: $f_L = 0.676$ [0.512, 0.814], $f_M = 0.526$ [0.505, 0.585], $f_S = 0.623$ [0.523, 0.791",traced,traced,101,1,unattributed,unattributed,0.069,1.0,proposal/logs/02_fits_helm_vk.json,opponent:M1 theta,True,True,False,False
+prose,0.580,0.58,3,False,3,"ure ) are concave and non-degenerate: half-difference compression ratios $f_c(0.5\,x_{\rm ref})/f_c(x_{\rm ref})$ on Helm: $f_L = 0.591$ [0.516, 0.722], $f_M = 0.580$ [0.523, 0.732], $f_S = 0.515$ [0.501, 0.549]; on Ekman: $f_L = 0.676$ [0.512, 0.814], $f_M = 0.526$ [0.505, 0.585], $f_S = 0.623$ [0.523, 0.791] (bootstrap CI",traced,traced,1151,15,unattributed,unattributed,0.066,0.273,workdir_outside_proposal/data/chromatic/ekman_dissimilarities.csv,434 ,True,True,False,False
+prose,0.523,0.523,3,False,3,"e concave and non-degenerate: half-difference compression ratios $f_c(0.5\,x_{\rm ref})/f_c(x_{\rm ref})$ on Helm: $f_L = 0.591$ [0.516, 0.722], $f_M = 0.580$ [0.523, 0.732], $f_S = 0.515$ [0.501, 0.549]; on Ekman: $f_L = 0.676$ [0.512, 0.814], $f_M = 0.526$ [0.505, 0.585], $f_S = 0.623$ [0.523, 0.791] (bootstrap CIs).",traced,traced,619,3,unattributed,unattributed,0.065,0.636,proposal/logs/02_fits_ekman_vk.json,cones:M0 rmse,True,True,False,False
+prose,0.732,0.732,3,False,3,"ve and non-degenerate: half-difference compression ratios $f_c(0.5\,x_{\rm ref})/f_c(x_{\rm ref})$ on Helm: $f_L = 0.591$ [0.516, 0.722], $f_M = 0.580$ [0.523, 0.732], $f_S = 0.515$ [0.501, 0.549]; on Ekman: $f_L = 0.676$ [0.512, 0.814], $f_M = 0.526$ [0.505, 0.585], $f_S = 0.623$ [0.523, 0.791] (bootstrap CIs).",traced,traced,84,2,unattributed,unattributed,0.065,1.0,proposal/logs/02_fits_ekman_mm.json,cones:M0 theta,True,True,False,False
+prose,0.515,0.515,3,False,3,"nerate: half-difference compression ratios $f_c(0.5\,x_{\rm ref})/f_c(x_{\rm ref})$ on Helm: $f_L = 0.591$ [0.516, 0.722], $f_M = 0.580$ [0.523, 0.732], $f_S = 0.515$ [0.501, 0.549]; on Ekman: $f_L = 0.676$ [0.512, 0.814], $f_M = 0.526$ [0.505, 0.585], $f_S = 0.623$ [0.523, 0.791] (bootstrap CIs).",traced,traced,332,15,unattributed,unattributed,0.075,0.727,proposal/logs/02_fits_helm_vk.json,cones:M2 theta,True,True,False,False
+prose,0.501,0.501,3,False,3,"half-difference compression ratios $f_c(0.5\,x_{\rm ref})/f_c(x_{\rm ref})$ on Helm: $f_L = 0.591$ [0.516, 0.722], $f_M = 0.580$ [0.523, 0.732], $f_S = 0.515$ [0.501, 0.549]; on Ekman: $f_L = 0.676$ [0.512, 0.814], $f_M = 0.526$ [0.505, 0.585], $f_S = 0.623$ [0.523, 0.791] (bootstrap CIs).",traced,traced,658,6,unattributed,unattributed,0.081,0.727,proposal/logs/02_fits_helm_vk.json,srgb:M1 theta,True,True,False,False
+prose,0.549,0.549,3,False,3,"fference compression ratios $f_c(0.5\,x_{\rm ref})/f_c(x_{\rm ref})$ on Helm: $f_L = 0.591$ [0.516, 0.722], $f_M = 0.580$ [0.523, 0.732], $f_S = 0.515$ [0.501, 0.549]; on Ekman: $f_L = 0.676$ [0.512, 0.814], $f_M = 0.526$ [0.505, 0.585], $f_S = 0.623$ [0.523, 0.791] (bootstrap CIs).",traced,untraced,785,0,untraced,untraced,0.0,1.0,,,True,True,False,False
+prose,0.676,0.676,3,False,3,"os $f_c(0.5\,x_{\rm ref})/f_c(x_{\rm ref})$ on Helm: $f_L = 0.591$ [0.516, 0.722], $f_M = 0.580$ [0.523, 0.732], $f_S = 0.515$ [0.501, 0.549]; on Ekman: $f_L = 0.676$ [0.512, 0.814], $f_M = 0.526$ [0.505, 0.585], $f_S = 0.623$ [0.523, 0.791] (bootstrap CIs).",traced,traced,184,18,unattributed,unattributed,0.109,0.818,proposal/logs/02_fits_helm_vk.json,srgb:M0 sigma,True,True,False,False
+prose,0.512,0.512,3,False,3,"0.5\,x_{\rm ref})/f_c(x_{\rm ref})$ on Helm: $f_L = 0.591$ [0.516, 0.722], $f_M = 0.580$ [0.523, 0.732], $f_S = 0.515$ [0.501, 0.549]; on Ekman: $f_L = 0.676$ [0.512, 0.814], $f_M = 0.526$ [0.505, 0.585], $f_S = 0.623$ [0.523, 0.791] (bootstrap CIs).",traced,traced,318,10,supported,unattributed,0.124,0.727,proposal/logs/02_fits_ekman_mm.json,lch:M2 theta,True,True,True,True
+prose,0.814,0.814,3,False,3,"{\rm ref})/f_c(x_{\rm ref})$ on Helm: $f_L = 0.591$ [0.516, 0.722], $f_M = 0.580$ [0.523, 0.732], $f_S = 0.515$ [0.501, 0.549]; on Ekman: $f_L = 0.676$ [0.512, 0.814], $f_M = 0.526$ [0.505, 0.585], $f_S = 0.623$ [0.523, 0.791] (bootstrap CIs).",traced,traced,85,1,unattributed,unattributed,0.0,1.0,proposal/logs/00_stimulus_coordinates.csv,X gray L7.5,True,True,True,False
+prose,0.526,0.526,3,False,3,"x_{\rm ref})$ on Helm: $f_L = 0.591$ [0.516, 0.722], $f_M = 0.580$ [0.523, 0.732], $f_S = 0.515$ [0.501, 0.549]; on Ekman: $f_L = 0.676$ [0.512, 0.814], $f_M = 0.526$ [0.505, 0.585], $f_S = 0.623$ [0.523, 0.791] (bootstrap CIs).",traced,traced,712,4,unattributed,unattributed,0.115,1.0,proposal/logs/02_fits_helm_vk.json,cones:M2-1ax:ax1 theta,True,True,True,False
+prose,0.505,0.505,3,False,3,"ef})$ on Helm: $f_L = 0.591$ [0.516, 0.722], $f_M = 0.580$ [0.523, 0.732], $f_S = 0.515$ [0.501, 0.549]; on Ekman: $f_L = 0.676$ [0.512, 0.814], $f_M = 0.526$ [0.505, 0.585], $f_S = 0.623$ [0.523, 0.791] (bootstrap CIs).",traced,traced,317,3,supported,unattributed,0.124,0.727,proposal/logs/02_fits_ekman_mm.json,cielab:M1 nll,True,True,True,False
+prose,0.585,0.585,3,False,3,"n Helm: $f_L = 0.591$ [0.516, 0.722], $f_M = 0.580$ [0.523, 0.732], $f_S = 0.515$ [0.501, 0.549]; on Ekman: $f_L = 0.676$ [0.512, 0.814], $f_M = 0.526$ [0.505, 0.585], $f_S = 0.623$ [0.523, 0.791] (bootstrap CIs).",traced,traced,528,5,supported,unattributed,0.144,0.909,proposal/logs/02_fits_ekman_vk.json,cones:M1 theta,True,True,True,False
+prose,0.623,0.623,3,False,3,"0.591$ [0.516, 0.722], $f_M = 0.580$ [0.523, 0.732], $f_S = 0.515$ [0.501, 0.549]; on Ekman: $f_L = 0.676$ [0.512, 0.814], $f_M = 0.526$ [0.505, 0.585], $f_S = 0.623$ [0.523, 0.791] (bootstrap CIs).",traced,traced,351,2,supported,unattributed,0.174,0.727,proposal/logs/02_fits_ekman_mm.json,ciergb:M2 theta,True,True,True,True
+prose,0.523,0.523,3,False,3,"0.516, 0.722], $f_M = 0.580$ [0.523, 0.732], $f_S = 0.515$ [0.501, 0.549]; on Ekman: $f_L = 0.676$ [0.512, 0.814], $f_M = 0.526$ [0.505, 0.585], $f_S = 0.623$ [0.523, 0.791] (bootstrap CIs).",traced,traced,619,3,supported,unattributed,0.174,0.455,proposal/logs/02_fits_ekman_vk.json,cones:M0 rmse,True,True,True,False
+prose,0.791,0.791,3,False,3,"0.722], $f_M = 0.580$ [0.523, 0.732], $f_S = 0.515$ [0.501, 0.549]; on Ekman: $f_L = 0.676$ [0.512, 0.814], $f_M = 0.526$ [0.505, 0.585], $f_S = 0.623$ [0.523, 0.791] (bootstrap CIs).",traced,traced,260,10,unattributed,unattributed,0.0,1.0,proposal/logs/02_fits_helm_vk.json,opponent:M0 sigma,True,True,False,False
+prose,95\%,95.0,0,True,2,"Fitted per-cone inner functions $f_L, f_M, f_S$ (normalized to unit value at the axis reference difference) with 95\% bootstrap bands. (a) Helm; (b) Ekman.",traced,traced,12444,28,supported,unattributed,0.121,1.0,proposal/logs/02_fits_ekman_vk.json,coarse_cones:M0 nll,True,True,False,False
+prose,0.41,0.41,2,False,2,"\subsection{Identifiability: is the null earned?} \emph{Collinearity} on the sampled directions is moderate, not extreme: corr($|\Delta L|,|\Delta M|$) $= 0.41$ (Helm), $0.52$ (Ekman); VIFs $\le 2.5$; design condition numbers 3.8 (Helm), 5.5 (Ekman).",traced,traced,5441,115,supported,supported,0.229,0.091,proposal/logs/03_identifiability.json,collinearity helm corr_dL_dM,True,True,False,False
+prose,0.52,0.52,2,False,2,"n{Identifiability: is the null earned?} \emph{Collinearity} on the sampled directions is moderate, not extreme: corr($|\Delta L|,|\Delta M|$) $= 0.41$ (Helm), $0.52$ (Ekman); VIFs $\le 2.5$; design condition numbers 3.8 (Helm), 5.5 (Ekman).",traced,traced,4784,62,supported,supported,0.229,0.091,proposal/logs/03_identifiability.json,collinearity ekman corr_dL_dM,True,True,False,False
+prose,2.5,2.5,1,False,2,"null earned?} \emph{Collinearity} on the sampled directions is moderate, not extreme: corr($|\Delta L|,|\Delta M|$) $= 0.41$ (Helm), $0.52$ (Ekman); VIFs $\le 2.5$; design condition numbers 3.8 (Helm), 5.5 (Ekman).",traced,traced,10223,113,unattributed,unattributed,0.115,0.182,proposal/logs/03_identifiability.json,collinearity ekman VIF M,True,True,False,False
+prose,3.8,3.8,1,False,2,"ty} on the sampled directions is moderate, not extreme: corr($|\Delta L|,|\Delta M|$) $= 0.41$ (Helm), $0.52$ (Ekman); VIFs $\le 2.5$; design condition numbers 3.8 (Helm), 5.5 (Ekman).",traced,traced,421,24,supported,supported,0.261,0.091,proposal/logs/03_identifiability.json,collinearity helm design_condition_number,True,True,True,False
+prose,5.5,5.5,1,False,2,"ampled directions is moderate, not extreme: corr($|\Delta L|,|\Delta M|$) $= 0.41$ (Helm), $0.52$ (Ekman); VIFs $\le 2.5$; design condition numbers 3.8 (Helm), 5.5 (Ekman).",traced,traced,132,7,supported,supported,0.28,0.091,proposal/logs/03_identifiability.json,collinearity ekman design_condition_number,True,True,False,False
+prose,81\%,81.0,0,True,2,"\emph{Synthetic recovery} confirms the comparison is powered (Figure ): with M2-cones as ground truth at the real coordinates and noise, M2 beats M1 in 81\% (Helm) / 62\% (Ekman) of simulations and beats the best non-cone control in 98\% / 87\%; with opponent-M3 as ground truth, the opponent basis is correctly sele",traced,traced,4843,42,supported,unattributed,0.177,0.182,proposal/logs/05_summary.json,ident synthetic helm_M2cones summary rate_M2_beats_M1,True,True,False,False
+prose,62\%,62.0,0,True,2,"Synthetic recovery} confirms the comparison is powered (Figure ): with M2-cones as ground truth at the real coordinates and noise, M2 beats M1 in 81\% (Helm) / 62\% (Ekman) of simulations and beats the best non-cone control in 98\% / 87\%; with opponent-M3 as ground truth, the opponent basis is correctly selected in 100/10",traced,traced,47473,37,supported,supported,0.177,0.091,proposal/logs/05_summary.json,ident synthetic ekman_M2cones summary rate_M2_beats_M1,True,True,False,False
+prose,98\%,98.0,0,True,2,"ith M2-cones as ground truth at the real coordinates and noise, M2 beats M1 in 81\% (Helm) / 62\% (Ekman) of simulations and beats the best non-cone control in 98\% / 87\%; with opponent-M3 as ground truth, the opponent basis is correctly selected in 100/100 simulations on both datasets and the cone model almost never wins",traced,traced,10323,67,supported,supported,0.163,0.091,proposal/logs/05_summary.json,ident synthetic helm_M2cones summary rate_M2_beats_bestM3,True,True,False,False
+prose,87\%,87.0,0,True,2,"cones as ground truth at the real coordinates and noise, M2 beats M1 in 81\% (Helm) / 62\% (Ekman) of simulations and beats the best non-cone control in 98\% / 87\%; with opponent-M3 as ground truth, the opponent basis is correctly selected in 100/100 simulations on both datasets and the cone model almost never wins spurio",traced,traced,21396,53,supported,supported,0.163,0.091,proposal/logs/05_summary.json,ident synthetic ekman_M2cones summary rate_M2_beats_bestM3,True,True,False,False
+prose,13\%,13.0,0,True,2,"sis is correctly selected in 100/100 simulations on both datasets and the cone model almost never wins spuriously (cone-alignment false-positive rate 0\% Helm, 13\% Ekman).",traced,traced,38857,311,unattributed,unattributed,0.094,1.0,proposal/logs/02_fits_helm_vk.json,cones:M2 nll,True,True,False,False
+prose,1.1,1.1,1,False,2,ture confound control} The sensitivity-ratio decomposition confirms the alias is real and must be controlled: within-axis-metric arc-to-chord ratios $r$ exceed 1.1 for 78\% (Helm) / 85\% (Ekman) of pairs (median $r = 2.37$ / $2.97$).,traced,traced,19315,637,unattributed,unattributed,0.044,0.818,proposal/logs/00_stimulus_coordinates.csv,S_raw ekman,True,True,False,False
+prose,78\%,78.0,0,True,2,found control} The sensitivity-ratio decomposition confirms the alias is real and must be controlled: within-axis-metric arc-to-chord ratios $r$ exceed 1.1 for 78\% (Helm) / 85\% (Ekman) of pairs (median $r = 2.37$ / $2.97$).,traced,traced,29717,50,supported,supported,0.135,0.091,proposal/logs/04_curvature.json,datasets helm sensitivity_ratio_r frac_r_gt_1.1,True,True,True,False
+prose,85\%,85.0,0,True,2,The sensitivity-ratio decomposition confirms the alias is real and must be controlled: within-axis-metric arc-to-chord ratios $r$ exceed 1.1 for 78\% (Helm) / 85\% (Ekman) of pairs (median $r = 2.37$ / $2.97$).,traced,traced,22558,41,supported,unattributed,0.149,0.182,proposal/logs/04_curvature.json,datasets ekman sensitivity_ratio_r frac_r_gt_1.1,True,True,False,False
+prose,2.37,2.37,2,False,3,n confirms the alias is real and must be controlled: within-axis-metric arc-to-chord ratios $r$ exceed 1.1 for 78\% (Helm) / 85\% (Ekman) of pairs (median $r = 2.37$ / $2.97$).,traced,traced,976,16,unattributed,unattributed,0.113,0.091,proposal/logs/04_curvature.json,datasets helm sensitivity_ratio_r median,True,True,False,False
+prose,2.97,2.97,2,False,3,s the alias is real and must be controlled: within-axis-metric arc-to-chord ratios $r$ exceed 1.1 for 78\% (Helm) / 85\% (Ekman) of pairs (median $r = 2.37$ / $2.97$).,traced,traced,88,4,unattributed,unattributed,0.12,0.091,proposal/logs/04_curvature.json,datasets ekman sensitivity_ratio_r median,True,True,False,False
+prose,0.0062,0.0062,4,False,2,"However: (i) the two-parameter arc-length baseline is far worse than M1 on held-out NLL (Helm $0.0062$ vs.\ M1 $0.2441$ --- note lower NLL is better, and the arc baseline is beaten by M1 on Ekman too, $-0.1389$ vs.\ $-0.4531$), so curvature alone cannot explain",traced,traced,87,21,supported,supported,0.19,0.091,proposal/logs/04_curvature.json,datasets helm arc_baseline_heldout_nll,True,True,False,False
+prose,0.2441,0.2441,4,False,4,"However: (i) the two-parameter arc-length baseline is far worse than M1 on held-out NLL (Helm $0.0062$ vs.\ M1 $0.2441$ --- note lower NLL is better, and the arc baseline is beaten by M1 on Ekman too, $-0.1389$ vs.\ $-0.4531$), so curvature alone cannot explain the DR signal; (",traced,traced,57,13,supported,supported,0.141,0.091,proposal/logs/04_curvature.json,s_only_dr_vs_M1_from_02 helm cones:M1,True,True,False,False
+prose,-0.1389,-0.1389,4,False,4,"baseline is far worse than M1 on held-out NLL (Helm $0.0062$ vs.\ M1 $0.2441$ --- note lower NLL is better, and the arc baseline is beaten by M1 on Ekman too, $-0.1389$ vs.\ $-0.4531$), so curvature alone cannot explain the DR signal; (ii) the $S$-axis-only DR model (the only component curvature can mimic) does not beat M1 ei",traced,traced,9,6,supported,supported,0.141,0.091,proposal/logs/04_curvature.json,datasets ekman arc_baseline_heldout_nll,True,False,False,False
+prose,-0.4531,-0.4531,4,False,4,"worse than M1 on held-out NLL (Helm $0.0062$ vs.\ M1 $0.2441$ --- note lower NLL is better, and the arc baseline is beaten by M1 on Ekman too, $-0.1389$ vs.\ $-0.4531$), so curvature alone cannot explain the DR signal; (ii) the $S$-axis-only DR model (the only component curvature can mimic) does not beat M1 either (Helm $\De",traced,traced,7,7,supported,supported,0.147,0.091,proposal/logs/04_curvature.json,s_only_dr_vs_M1_from_02 ekman cones:M1,True,False,False,False
+prose,0.0005,0.0005,4,False,1,"curvature alone cannot explain the DR signal; (ii) the $S$-axis-only DR model (the only component curvature can mimic) does not beat M1 either (Helm $\Delta = +0.0005$; Ekman $\Delta = -0.0618$, i.e.\ worse); and (iii) the headline M2/M3 verdict is \emph{unchanged} before and after restricting to the component free of the co",traced,traced,40,17,supported,unattributed,0.147,0.125,proposal/logs/04_curvature.json,s_only_dr_vs_M1_from_02 helm delta_S-only_vs_M1,True,True,False,False
+prose,-0.0618,-0.0618,4,False,3,"plain the DR signal; (ii) the $S$-axis-only DR model (the only component curvature can mimic) does not beat M1 either (Helm $\Delta = +0.0005$; Ekman $\Delta = -0.0618$, i.e.\ worse); and (iii) the headline M2/M3 verdict is \emph{unchanged} before and after restricting to the component free of the confound.",traced,traced,8,5,supported,supported,0.157,0.091,proposal/logs/04_curvature.json,s_only_dr_vs_M1_from_02 ekman delta_S-only_vs_M1,True,True,False,False
+prose,-98\%,-98.0,0,True,2,"ntrol in every cell (selection-aware CIs exclude zero in all four), and the synthetic discrimination check shows the test would have detected cone alignment 87--98\% of the time were it present at the modeled effect size. (c) \emph{Granularity:} the finest split the data can support is \emph{no channel split at all} --- iso",traced,traced,13,13,unattributed,unattributed,0.0,1.0,proposal/logs/02_fits_helm_vk.json,lch:M2-1ax:ax0 theta,True,True,False,False
+prose,-0.233,-0.233,3,False,3,"\paragraph{Failure analysis.} Three regimes resist clean conclusions. (i) Ekman under MM normalization has the widest headline CI ($[-0.233, -0.033]$); the verdict is still negative but the margin is less stable, and the Ekman matrix is an aggregate over subjects with no per-subject uncertainty. (i",traced,traced,24,14,unattributed,unattributed,0.064,0.545,proposal/logs/02_fits_ekman_mm.json,srgb:M2-1ax:ax2 theta,True,True,False,False
+prose,-0.033,-0.033,3,False,2,"\paragraph{Failure analysis.} Three regimes resist clean conclusions. (i) Ekman under MM normalization has the widest headline CI ($[-0.233, -0.033]$); the verdict is still negative but the margin is less stable, and the Ekman matrix is an aggregate over subjects with no per-subject uncertainty. (ii) The n",traced,traced,80,32,unattributed,unattributed,0.064,1.0,proposal/logs/02_fits_ekman_mm.json,ciergb:M2 theta,True,True,False,False
+prose,0.016,0.016,3,False,2,"gh powered at the modeled effect sizes, has finite sensitivity: a per-cone effect much weaker than the synthetic ground truth could hide (the synthetic margin, 0.016--0.05 nats/obs, is the scale the design resolves). (iii) On Helm, the achromatic within-axis fit for the curvature control rests on few achromatic-dominated pa",traced,traced,1387,46,unattributed,unattributed,0.078,0.091,proposal/logs/05_summary.json,ident synthetic helm_M2cones summary mean_margin_bestM3_minus_M2,True,True,False,False
+prose,-0.05,-0.05,2,False,1,"ered at the modeled effect sizes, has finite sensitivity: a per-cone effect much weaker than the synthetic ground truth could hide (the synthetic margin, 0.016--0.05 nats/obs, is the scale the design resolves). (iii) On Helm, the achromatic within-axis fit for the curvature control rests on few achromatic-dominated pairs (1",traced,traced,674,232,unattributed,unattributed,0.055,0.875,proposal/logs/02_fits_helm_vk.json,cones:M2 theta,True,True,False,False

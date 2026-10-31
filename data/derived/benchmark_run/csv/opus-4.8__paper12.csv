@@ -1,0 +1,410 @@
+kind,raw,value,dec,pct,sig,context,L1,L1nb,L1_n_matches,L1nb_n_matches,L2ctx,L2,L2_score,L2_p,L2_file,L2_context,decoy_L1,decoy_L1nb,decoy_L2ctx,decoy_L2
+table,4.600,4.6,3,False,4,"\textbf{Exact GP (ours)} | RMSE | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselin",traced,traced,2,2,unattributed,unattributed,0.023,0.091,proposal/logs/taw_full.json,metrics rmse,False,False,False,False
+table,2.383,2.383,3,False,4,"\textbf{Exact GP (ours)} | CRPS | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselin",traced,traced,1,1,unattributed,unattributed,0.023,0.091,proposal/logs/taw_full.json,metrics crps,True,True,False,False
+table,0.940,0.94,3,False,3,"\textbf{Exact GP (ours)} | Cov.\ | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baseli",traced,traced,38,1,unattributed,unattributed,0.0,1.0,proposal/logs/taw_full.json,metrics cov95,True,True,False,False
+table,3.46,3.46,2,False,3,"\textbf{Exact GP (ours)} | Wall (h) | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate bas",traced,traced,2,2,unattributed,unattributed,0.023,0.273,proposal/logs/region_breakdown.json,chordal rmse,True,True,False,False
+table,17.5,17.5,1,False,3,"\textbf{Exact GP (ours)} | Peak (GB) | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate ba",traced,traced,2,2,unattributed,unattributed,0.046,0.273,proposal/logs/back_transformed.json,af rmse_kcal,False,False,False,False
+table,4.958,4.958,3,False,4,"Exact GP | RMSE | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselines are mean\,$\p",traced,traced,2,2,unattributed,unattributed,0.024,0.091,proposal/logs/we_full.json,metrics rmse,False,False,False,False
+table,2.574,2.574,3,False,4,"Exact GP | CRPS | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselines are mean\,$\p",traced,traced,2,2,unattributed,unattributed,0.049,0.273,proposal/logs/baseline_select.json,select crps,False,False,False,False
+table,0.931,0.931,3,False,3,"Exact GP | Cov.\ | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselines are mean\,$\",traced,traced,6,3,unattributed,unattributed,0.0,1.0,proposal/logs/chordal_full.json,metrics_latent cov95,True,True,False,False
+table,3.24,3.24,2,False,3,"Exact GP | Wall (h) | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselines are mean\",traced,untraced,16,0,untraced,untraced,0.0,1.0,,,True,True,False,False
+table,12.0,12.0,1,False,3,"Exact GP | Peak (GB) | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselines are mean",traced,traced,65,65,unattributed,unattributed,0.047,0.182,proposal/logs/we_full.json,pred_peak_gb,True,True,False,False
+table,4.966,4.966,3,False,4,"Exact GP | RMSE | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselines are mean\,$\p",traced,traced,4,4,unattributed,unattributed,0.024,0.182,proposal/logs/bump_full.json,metrics rmse,False,False,False,False
+table,2.572,2.572,3,False,4,"Exact GP | CRPS | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselines are mean\,$\p",traced,traced,1,1,unattributed,unattributed,0.024,0.273,proposal/logs/nswe_full.json,metrics crps,False,False,False,False
+table,0.930,0.93,3,False,3,"Exact GP | Cov.\ | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselines are mean\,$\",traced,traced,11,2,unattributed,unattributed,0.0,1.0,proposal/logs/pilot_taw_M10_3.json,support_halfwidths_rad,True,True,False,False
+table,3.23,3.23,2,False,3,"Exact GP | Wall (h) | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselines are mean\",traced,traced,1,1,unattributed,unattributed,0.024,0.091,proposal/logs/baselines.json,svgp mae,True,True,False,False
+table,12.2,12.2,1,False,3,"Exact GP | Peak (GB) | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselines are mean",traced,traced,1,1,unattributed,unattributed,0.047,0.273,proposal/logs/nswe_full.json,pred_peak_gb,True,True,False,False
+table,4.966,4.966,3,False,4,"Exact GP | RMSE | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselines are mean\,$\p",traced,traced,4,4,unattributed,unattributed,0.024,0.182,proposal/logs/bump_full.json,metrics rmse,False,False,False,False
+table,2.563,2.563,3,False,4,"Exact GP | CRPS | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselines are mean\,$\p",traced,traced,1,1,unattributed,unattributed,0.024,0.273,proposal/logs/bump_full.json,metrics crps,False,False,False,False
+table,0.926,0.926,3,False,3,"Exact GP | Cov.\ | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselines are mean\,$\",traced,traced,6,2,unattributed,unattributed,0.0,1.0,proposal/logs/tw_full.json,metrics_latent cov95,True,False,False,False
+table,3.54,3.54,2,False,3,"Exact GP | Wall (h) | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselines are mean\",traced,traced,1,1,unattributed,unattributed,0.024,0.545,proposal/logs/pilot_tw_o3.json,metrics crps,True,True,False,False
+table,12.7,12.7,1,False,3,"Exact GP | Peak (GB) | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselines are mean",traced,traced,1,1,unattributed,unattributed,0.047,0.182,proposal/logs/bump_full.json,pred_peak_gb,True,True,False,False
+table,5.459,5.459,3,False,4,"Exact GP | RMSE | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselines are mean\,$\p",traced,traced,2,2,unattributed,unattributed,0.024,0.091,proposal/logs/chordal_full.json,metrics rmse,False,False,False,False
+table,2.920,2.92,3,False,4,"Exact GP | CRPS | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselines are mean\,$\p",traced,traced,2,2,unattributed,unattributed,0.024,0.091,proposal/logs/chordal_full.json,metrics crps,True,True,False,False
+table,0.931,0.931,3,False,3,"Exact GP | Cov.\ | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselines are mean\,$\",traced,traced,6,3,unattributed,unattributed,0.0,1.0,proposal/logs/chordal_full.json,metrics_latent cov95,True,True,False,False
+table,2.57,2.57,2,False,3,"Exact GP | Wall (h) | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselines are mean\",traced,traced,4,4,unattributed,unattributed,0.049,0.091,proposal/logs/baseline_select.json,select crps,False,False,False,False
+table,8.4,8.4,1,False,2,"Exact GP | Peak (GB) | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselines are mean",traced,traced,3,3,unattributed,unattributed,0.047,0.273,proposal/logs/chordal_full.json,pred_peak_gb,True,True,False,False
+table,5.395,5.395,3,False,4,"Exact GP | RMSE | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselines are mean\,$\p",traced,traced,2,2,unattributed,unattributed,0.024,0.091,proposal/logs/tw_full.json,metrics rmse,False,False,False,False
+table,2.878,2.878,3,False,4,"Exact GP | CRPS | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselines are mean\,$\p",traced,traced,2,2,unattributed,unattributed,0.024,0.091,proposal/logs/tw_full.json,metrics crps,False,False,False,False
+table,0.928,0.928,3,False,3,"Exact GP | Cov.\ | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselines are mean\,$\",traced,traced,3,1,unattributed,unattributed,0.0,1.0,proposal/logs/tw_full.json,metrics cov95,False,False,False,False
+table,2.97,2.97,2,False,3,"Exact GP | Wall (h) | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselines are mean\",traced,traced,19,2,unattributed,unattributed,0.0,1.0,proposal/logs/nswe_full.json,hyperparameters log_sig2,True,False,False,False
+table,13.8,13.8,1,False,3,"Exact GP | Peak (GB) | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselines are mean",traced,traced,1,1,unattributed,unattributed,0.047,0.182,proposal/logs/tw_full.json,pred_peak_gb,True,True,False,False
+table,4.648,4.648,3,False,4,"Exact GP | RMSE | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselines are mean\,$\p",traced,traced,2,2,unattributed,unattributed,0.024,0.091,proposal/logs/af_full.json,metrics rmse,False,False,False,False
+table,2.413,2.413,3,False,4,"Exact GP | CRPS | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselines are mean\,$\p",traced,traced,1,1,unattributed,unattributed,0.024,0.091,proposal/logs/af_full.json,metrics crps,False,False,False,False
+table,0.942,0.942,3,False,3,"Exact GP | Cov.\ | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselines are mean\,$\",traced,traced,3,2,unattributed,unattributed,0.0,1.0,proposal/logs/synthetic_repro.json,base cov95,True,False,False,False
+table,0.37,0.37,2,False,2,"Exact GP | Wall (h) | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselines are mean\",traced,traced,173,30,unattributed,unattributed,0.0,1.0,proposal/logs/af_full_chain.jsonl,step,True,True,False,False
+table,10.0,10.0,1,False,3,"Exact GP | Peak (GB) | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselines are mean",traced,traced,77,77,unattributed,unattributed,0.047,0.364,proposal/logs/af_full.json,pred_peak_gb,True,True,False,False
+table,4.781,4.781,3,False,4,"SVGP | RMSE | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselines are mean\,$\pm$\,",traced,traced,1,1,unattributed,unattributed,0.076,0.273,proposal/logs/baselines.json,svgp rmse,False,False,False,False
+table,2.562,2.562,3,False,4,"SVGP | CRPS | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselines are mean\,$\pm$\,",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+table,0.709,0.709,3,False,3,"SVGP | Cov.\ | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselines are mean\,$\pm$\",traced,traced,20,1,unattributed,unattributed,0.0,1.0,proposal/logs/taw_full.json,hyperparameters log_tau_4,True,True,False,False
+table,0.04,0.04,2,False,1,"SVGP | Wall (h) | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselines are mean\,$\p",traced,traced,108,34,unattributed,unattributed,0.0,1.0,proposal/logs/tw_full_chain.jsonl,step,True,True,False,False
+table,0.5,0.5,1,False,1,"SVGP | Peak (GB) | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselines are mean\,$\",traced,traced,1522,315,unattributed,unattributed,0.099,0.125,proposal/logs/baselines.json,svgp peak_gb,True,True,False,False
+table,5.103,5.103,3,False,4,"VNNGP | RMSE | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselines are mean\,$\pm$\",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,True,True,False,False
+table,2.721,2.721,3,False,4,"VNNGP | CRPS | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselines are mean\,$\pm$\",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,True,True,False,False
+table,0.937,0.937,3,False,3,"VNNGP | Cov.\ | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselines are mean\,$\pm$",traced,traced,4,2,unattributed,unattributed,0.049,0.091,proposal/logs/baselines.json,vnngp cov95,False,False,False,False
+table,0.01,0.01,2,False,1,"VNNGP | Wall (h) | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselines are mean\,$\",traced,traced,182,43,unattributed,unattributed,0.025,0.333,proposal/logs/baselines.json,config lr,True,True,False,False
+table,1.1,1.1,1,False,2,"VNNGP | Peak (GB) | Held-out performance on 10,000 conformations never seen during
+assembly, MCMC or configuration selection. RMSE and CRPS are in compressed
+kcal/mol (Eq.~ ); ``Coverage'' is the empirical coverage of the
+nominal $95\%$ central credible interval; wall-clock is training plus
+prediction; peak memory is the maximum resident set over the process tree.
+Approximate baselines are mean\,$",traced,traced,25,16,unattributed,unattributed,0.099,0.182,proposal/logs/baselines.json,vnngp peak_gb,True,True,False,False
+table,95\%,95.0,0,True,2,"\cmidrule(lr){2-4}\cmidrule(lr){5-7}
+Stratum |  | Test set stratified by relative energy $E-E_{\mathrm{ref",traced,traced,30,19,unattributed,unattributed,0.0,1.0,proposal/logs/pilot_taw_M10_3.json,config l_init,False,False,False,False
+table,95\%,95.0,0,True,2,"\cmidrule(lr){2-4}\cmidrule(lr){5-7}
+Stratum |  | Test set stratified by relative energy $E-E_{\mathrm{ref",traced,traced,30,19,unattributed,unattributed,0.0,1.0,proposal/logs/pilot_taw_M10_3.json,config l_init,False,False,False,False
+table,5.433,5.433,3,False,4,$<10$ (basin) | \multicolumn{3}{c}{\TAW} | Test set stratified by relative energy $E-E_{\mathrm{ref,traced,traced,1,1,unattributed,unattributed,0.0,1.0,proposal/logs/region_breakdown.json,taw rmse,False,False,False,False
+table,4.544,4.544,3,False,4,"$<10$ (basin) | \multicolumn{3}{c}{Wendland, Eq.\,(3)} | Test set stratified by relative energy $E-E_{\mathrm{ref",traced,traced,1,1,unattributed,unattributed,0.0,1.0,proposal/logs/region_breakdown.json,taw mean_sd,False,False,False,False
+table,0.952,0.952,3,False,3,$<10$ (basin) |  | Test set stratified by relative energy $E-E_{\mathrm{ref,traced,traced,3,2,unattributed,unattributed,0.0,1.0,proposal/logs/region_breakdown.json,taw cov95,True,False,False,False
+table,7.542,7.542,3,False,4,$<10$ (basin) |  | Test set stratified by relative energy $E-E_{\mathrm{ref,traced,traced,1,1,unattributed,unattributed,0.0,1.0,proposal/logs/region_breakdown.json,we rmse,False,False,False,False
+table,4.942,4.942,3,False,4,$<10$ (basin) |  | Test set stratified by relative energy $E-E_{\mathrm{ref,traced,traced,2,2,unattributed,unattributed,0.0,1.0,proposal/logs/region_breakdown.json,we mean_sd,False,False,False,False
+table,0.857,0.857,3,False,3,$<10$ (basin) |  | Test set stratified by relative energy $E-E_{\mathrm{ref,traced,traced,22,1,unattributed,unattributed,0.0,1.0,proposal/logs/region_breakdown.json,we cov95,True,False,False,False
+table,4.815,4.815,3,False,4,$10$--$20$ | \multicolumn{3}{c}{\TAW} | Test set stratified by relative energy $E-E_{\mathrm{ref,traced,traced,1,1,unattributed,unattributed,0.0,1.0,proposal/logs/region_breakdown.json,taw rmse,False,False,False,False
+table,4.533,4.533,3,False,4,"$10$--$20$ | \multicolumn{3}{c}{Wendland, Eq.\,(3)} | Test set stratified by relative energy $E-E_{\mathrm{ref",traced,traced,1,1,unattributed,unattributed,0.0,1.0,proposal/logs/region_breakdown.json,taw mean_sd,False,False,False,False
+table,0.977,0.977,3,False,3,$10$--$20$ |  | Test set stratified by relative energy $E-E_{\mathrm{ref,traced,traced,1,1,unattributed,unattributed,0.0,1.0,proposal/logs/region_breakdown.json,taw cov95,False,False,False,False
+table,6.055,6.055,3,False,4,$10$--$20$ |  | Test set stratified by relative energy $E-E_{\mathrm{ref,traced,traced,1,1,unattributed,unattributed,0.0,1.0,proposal/logs/region_breakdown.json,we rmse,False,False,False,False
+table,4.956,4.956,3,False,4,$10$--$20$ |  | Test set stratified by relative energy $E-E_{\mathrm{ref,traced,traced,1,1,unattributed,unattributed,0.0,1.0,proposal/logs/region_breakdown.json,we mean_sd,False,False,False,False
+table,0.932,0.932,3,False,3,$10$--$20$ |  | Test set stratified by relative energy $E-E_{\mathrm{ref,traced,traced,4,4,unattributed,unattributed,0.0,1.0,proposal/logs/synth_smoke.json,nsw cov95,True,False,False,False
+table,3.428,3.428,3,False,4,$20$--$50$ | \multicolumn{3}{c}{\TAW} | Test set stratified by relative energy $E-E_{\mathrm{ref,traced,traced,1,1,unattributed,unattributed,0.0,1.0,proposal/logs/region_breakdown.json,taw rmse,False,False,False,False
+table,4.539,4.539,3,False,4,"$20$--$50$ | \multicolumn{3}{c}{Wendland, Eq.\,(3)} | Test set stratified by relative energy $E-E_{\mathrm{ref",traced,traced,1,1,unattributed,unattributed,0.0,1.0,proposal/logs/region_breakdown.json,taw mean_sd,False,False,False,False
+table,0.987,0.987,3,False,3,$20$--$50$ |  | Test set stratified by relative energy $E-E_{\mathrm{ref,traced,traced,1,1,unattributed,unattributed,0.0,1.0,proposal/logs/region_breakdown.json,taw cov95,False,False,False,False
+table,3.525,3.525,3,False,4,$20$--$50$ |  | Test set stratified by relative energy $E-E_{\mathrm{ref,traced,traced,1,1,unattributed,unattributed,0.0,1.0,proposal/logs/region_breakdown.json,we rmse,False,False,False,False
+table,4.942,4.942,3,False,4,$20$--$50$ |  | Test set stratified by relative energy $E-E_{\mathrm{ref,traced,traced,2,2,unattributed,unattributed,0.0,1.0,proposal/logs/region_breakdown.json,we mean_sd,False,False,False,False
+table,0.979,0.979,3,False,3,$20$--$50$ |  | Test set stratified by relative energy $E-E_{\mathrm{ref,traced,traced,8,2,unattributed,unattributed,0.0,1.0,proposal/logs/chordal_full.json,support_halfwidths_rad,False,False,False,False
+table,5.661,5.661,3,False,4,$>50$ (steric) | \multicolumn{3}{c}{\TAW} | Test set stratified by relative energy $E-E_{\mathrm{ref,traced,traced,1,1,unattributed,unattributed,0.0,1.0,proposal/logs/region_breakdown.json,taw rmse,False,False,False,False
+table,4.537,4.537,3,False,4,"$>50$ (steric) | \multicolumn{3}{c}{Wendland, Eq.\,(3)} | Test set stratified by relative energy $E-E_{\mathrm{ref",traced,traced,1,1,unattributed,unattributed,0.0,1.0,proposal/logs/region_breakdown.json,taw mean_sd,True,True,False,False
+table,0.892,0.892,3,False,3,$>50$ (steric) |  | Test set stratified by relative energy $E-E_{\mathrm{ref,traced,traced,5,1,unattributed,unattributed,0.0,1.0,proposal/logs/region_breakdown.json,taw cov95,True,False,False,False
+table,6.104,6.104,3,False,4,$>50$ (steric) |  | Test set stratified by relative energy $E-E_{\mathrm{ref,traced,traced,1,1,unattributed,unattributed,0.0,1.0,proposal/logs/region_breakdown.json,we rmse,False,False,False,False
+table,4.929,4.929,3,False,4,$>50$ (steric) |  | Test set stratified by relative energy $E-E_{\mathrm{ref,traced,traced,1,1,unattributed,unattributed,0.0,1.0,proposal/logs/region_breakdown.json,we mean_sd,False,False,False,False
+table,0.888,0.888,3,False,3,$>50$ (steric) |  | Test set stratified by relative energy $E-E_{\mathrm{ref,traced,traced,4,3,unattributed,unattributed,0.0,1.0,proposal/logs/bump_full.json,metrics_latent cov95,False,False,False,False
+prose,2.383,2.383,3,False,4,"On a frozen 10,000-point test set the construction reaches CRPS 2.383 against 2.563 for the best compactly supported kernel of the original framework (Eq.\,(9)) and 2.562 for a tuned SVGP, with near-nominal $95\%$ credible-interv",traced,traced,1,1,unattributed,unattributed,0.044,0.091,proposal/logs/taw_full.json,metrics crps,True,True,False,False
+prose,2.563,2.563,3,False,4,"On a frozen 10,000-point test set the construction reaches CRPS 2.383 against 2.563 for the best compactly supported kernel of the original framework (Eq.\,(9)) and 2.562 for a tuned SVGP, with near-nominal $95\%$ credible-interval coverage 0.",traced,traced,1,1,unattributed,unattributed,0.042,0.273,proposal/logs/bump_full.json,metrics crps,False,False,False,False
+prose,2.562,2.562,3,False,4,"frozen 10,000-point test set the construction reaches CRPS 2.383 against 2.563 for the best compactly supported kernel of the original framework (Eq.\,(9)) and 2.562 for a tuned SVGP, with near-nominal $95\%$ credible-interval coverage 0.940 that the strongest approximate baseline (SVGP, 0.709) badly misses.",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+prose,95\%,95.0,0,True,2,"on reaches CRPS 2.383 against 2.563 for the best compactly supported kernel of the original framework (Eq.\,(9)) and 2.562 for a tuned SVGP, with near-nominal $95\%$ credible-interval coverage 0.940 that the strongest approximate baseline (SVGP, 0.709) badly misses.",traced,traced,30,19,unattributed,unattributed,0.0,1.0,proposal/logs/pilot_taw_M10_3.json,config l_init,False,False,False,False
+prose,0.940,0.94,3,False,3,"63 for the best compactly supported kernel of the original framework (Eq.\,(9)) and 2.562 for a tuned SVGP, with near-nominal $95\%$ credible-interval coverage 0.940 that the strongest approximate baseline (SVGP, 0.709) badly misses.",traced,traced,38,1,unattributed,unattributed,0.0,1.0,proposal/logs/taw_full.json,metrics cov95,True,True,False,False
+prose,0.709,0.709,3,False,3,"ginal framework (Eq.\,(9)) and 2.562 for a tuned SVGP, with near-nominal $95\%$ credible-interval coverage 0.940 that the strongest approximate baseline (SVGP, 0.709) badly misses.",traced,traced,20,1,unattributed,unattributed,0.0,1.0,proposal/logs/taw_full.json,hyperparameters log_tau_4,True,True,False,False
+prose,60.7\%,60.7,1,True,3,"The learned amplitudes show that the surface is strongly \emph{non-additive} --- two-body torsion--torsion terms carry 60.7\% of the prior variance against 17.2\% for the one-body terms --- so a separable model is structurally inadequate, and the dominant couplings are between same-ty",traced,traced,6,4,unattributed,unattributed,0.0,1.0,proposal/logs/pilot_we_o1_chain.jsonl,elapsed_s,True,True,False,False
+prose,17.2\%,17.2,1,True,3,"The learned amplitudes show that the surface is strongly \emph{non-additive} --- two-body torsion--torsion terms carry 60.7\% of the prior variance against 17.2\% for the one-body terms --- so a separable model is structurally inadequate, and the dominant couplings are between same-type backbone torsions on different res",traced,traced,112,85,unattributed,unattributed,0.0,1.0,proposal/logs/chordal_full_chain.jsonl,theta,True,True,False,False
+prose,4.0\%,4.0,1,True,2,"And a direct measurement shows that 4.0\% of conformation space sits on a genuine discontinuity of the adiabatic surface, a property of relaxed torsional scans that sets a noise floor of 2.03 against a",traced,traced,130,90,unattributed,unattributed,0.047,0.545,proposal/logs/tw_full.json,accepted_counts noise,True,True,False,False
+prose,2.03,2.03,2,False,3,"ows that 4.0\% of conformation space sits on a genuine discontinuity of the adiabatic surface, a property of relaxed torsional scans that sets a noise floor of 2.03 against a total spread of 5.65 and bounds what any regression of such data can achieve.",traced,traced,4,4,unattributed,unattributed,0.035,0.091,proposal/logs/roughness.json,eps 0.01 implied_noise_std,True,True,False,False
+prose,5.65,5.65,2,False,3,"space sits on a genuine discontinuity of the adiabatic surface, a property of relaxed torsional scans that sets a noise floor of 2.03 against a total spread of 5.65 and bounds what any regression of such data can achieve.",traced,traced,1,1,unattributed,unattributed,0.0,1.0,proposal/logs/roughness.json,y_base_std,False,False,False,False
+prose,3.1,3.1,1,False,2,"ume of that box is a $10^{-4}$ fraction of the domain, and the Wendland profile decays so fast across it that the median surviving off-diagonal entry is nearly 3.1 orders of magnitude below the diagonal, with 52\% of them below one part in a thousand (Fig.~ c).",traced,traced,99,16,unattributed,unattributed,0.0,1.0,proposal/logs/pilot_we_o1.json,metrics_latent crps,True,True,False,False
+prose,52\%,52.0,0,True,2,"main, and the Wendland profile decays so fast across it that the median surviving off-diagonal entry is nearly 3.1 orders of magnitude below the diagonal, with 52\% of them below one part in a thousand (Fig.~ c).",traced,traced,225,26,unattributed,unattributed,0.047,0.091,proposal/logs/sparsity_stats.json,we frac_below_1e3,True,True,False,False
+prose,60.7\%,60.7,1,True,3,"fitted model.} The learned amplitudes decompose the surface by interaction order, and the decomposition is lopsided: the two-body torsion--torsion terms carry 60.7\% of the prior variance against 17.2\% for the one-body terms and 19.7\% for the compactly supported remainder.",traced,traced,6,4,unattributed,unattributed,0.0,1.0,proposal/logs/pilot_we_o1_chain.jsonl,elapsed_s,True,True,False,False
+prose,17.2\%,17.2,1,True,3,"s decompose the surface by interaction order, and the decomposition is lopsided: the two-body torsion--torsion terms carry 60.7\% of the prior variance against 17.2\% for the one-body terms and 19.7\% for the compactly supported remainder.",traced,traced,112,85,unattributed,unattributed,0.0,1.0,proposal/logs/chordal_full_chain.jsonl,theta,True,True,False,False
+prose,19.7\%,19.7,1,True,3,"tion order, and the decomposition is lopsided: the two-body torsion--torsion terms carry 60.7\% of the prior variance against 17.2\% for the one-body terms and 19.7\% for the compactly supported remainder.",traced,untraced,3,0,untraced,untraced,0.0,1.0,,,True,True,False,False
+prose,68\%,68.0,0,True,2,"upling is concentrated not on the intra-residue $(\phi_i,\psi_i)$ pair we pre-registered as our expectation but on same-type backbone torsions across residues (68\% of the two-body variance), a signature of cooperative backbone relaxation that we report and dissect honestly against that expectation.",traced,traced,120,69,unattributed,unattributed,0.0,1.0,proposal/logs/pilot_taw_M10_3.json,support_halfwidths_rad,True,True,False,False
+prose,4.0\%,4.0,1,True,2,And a direct measurement of the surface shows that 4.0\% of conformations sit on a discontinuity of the adiabatic surface: displacing all six torsions by $0.01$~rad changes the energy by more than three compressed kc,traced,traced,130,90,unattributed,unattributed,0.0,1.0,proposal/logs/tw_full_chain.jsonl,sweep,True,True,False,False
+prose,0.01,0.01,2,False,1,"And a direct measurement of the surface shows that 4.0\% of conformations sit on a discontinuity of the adiabatic surface: displacing all six torsions by $0.01$~rad changes the energy by more than three compressed kcal/mol, because the constrained minimisation of the other 36 degrees of freedom changes basin.",traced,traced,182,43,unattributed,unattributed,0.0,1.0,proposal/logs/pilot_taw_M10_3.json,hyperparameters ns3_b1,True,True,False,False
+prose,2.03,2.03,2,False,3,"This sets a noise floor of 2.03 against a total spread of 5.65, explains why point metrics saturate, and is exactly the kind of statement a calibrated exact posterior can make and a variation",traced,traced,4,4,unattributed,unattributed,0.044,0.091,proposal/logs/roughness.json,eps 0.01 implied_noise_std,True,True,False,False
+prose,5.65,5.65,2,False,3,"This sets a noise floor of 2.03 against a total spread of 5.65, explains why point metrics saturate, and is exactly the kind of statement a calibrated exact posterior can make and a variational one cannot.",traced,traced,1,1,unattributed,unattributed,0.0,1.0,proposal/logs/roughness.json,y_base_std,False,False,False,False
+prose,46.0,46.0,1,False,3,"Because a uniform draw on $\T^6$ is usually a strained conformation --- the median relative energy is 46.0~kcal/mol and the $99$th percentile is 377~kcal/mol --- we regress the monotone compression \begin{equation} y \;=\; E_0\,\log\!\Big(1+\frac{E-E_{\mathrm{ref}}}",traced,traced,8,8,unattributed,unattributed,0.051,0.182,proposal/logs/split_meta.json,energy_quantiles 0.5,False,False,False,False
+prose,-0.0106,-0.0106,4,False,3,"ompression \begin{equation} y \;=\; E_0\,\log\!\Big(1+\frac{E-E_{\mathrm{ref}}}{E_0}\Big), \qquad E_0=10~\text{kcal/mol}, \end{equation} with $E_{\mathrm{ref}}=-0.0106$~kcal/mol the global MMFF94s minimum.",traced,traced,14,8,supported,supported,0.53,0.091,proposal/logs/regen_data.log,multi-start MMFF94s global minimum  E_ref = -0.010624 kcal/mol (300 starts); pool minimum = 0.271702,False,False,False,False
+prose,5\times10^5,500000.0,-5,False,1,"nal framework's kernels) before evaluating anything, so that only candidate pairs inside the support are ever touched --- the aggressive locality that makes a $5\times10^5$ assembly affordable on one node: a single distributed assembly of the sparse covariance at $N=500,000$ takes 23.6~s at the reconnaissance setting of $108$ non",traced,traced,45,45,unattributed,unattributed,0.0,1.0,proposal/logs/tw_full.json,final_stats quad,True,True,False,False
+prose,23.6,23.6,1,False,3,"the aggressive locality that makes a $5\times10^5$ assembly affordable on one node: a single distributed assembly of the sparse covariance at $N=500,000$ takes 23.6~s at the reconnaissance setting of $108$ non-zeros per row (\texttt{logs/recon.json}), and is repeated only when a proposal changes the support.",traced,traced,1,1,supported,supported,0.196,0.091,proposal/logs/recon.json,scaling assembly_s,True,True,True,False
+prose,0.25,0.25,2,False,2,"al amplitude; local support scales; non-stationarity coefficients; noise), with a Gaussian random-walk proposal whose per-block step size is adapted towards a $0.25$ acceptance rate during burn-in and \emph{frozen} afterwards.",traced,traced,308,9,unattributed,unattributed,0.073,0.909,proposal/logs/warm_taw_chain.jsonl,step,True,True,False,False
+prose,2026.03,2026.03,2,False,6,"p} \paragraph{Data.} A pool of 530,000 conformations was drawn uniformly on $\T^6$ with seed 20260724 and evaluated with the relaxed-scan protocol above (RDKit 2026.03.4 , MMFF94s, restraint force constant $10^4$, achieved torsion deviation $<0.01^\circ$, $2000$ minimiser iterations, 21.8\% of samples reaching the iteration c",traced,traced,5,5,unattributed,unattributed,0.079,0.091,proposal/logs/regen_data.log,"""rdkit_version"": ""2026.03.4"",",False,False,False,False
+prose,0.01,0.01,2,False,1,"with seed 20260724 and evaluated with the relaxed-scan protocol above (RDKit 2026.03.4 , MMFF94s, restraint force constant $10^4$, achieved torsion deviation $<0.01^\circ$, $2000$ minimiser iterations, 21.8\% of samples reaching the iteration cap without formal convergence).",traced,traced,182,43,unattributed,unattributed,0.0,1.0,proposal/logs/pilot_taw_M10_3.json,hyperparameters ns3_b1,True,True,False,False
+prose,21.8\%,21.8,1,True,3,"relaxed-scan protocol above (RDKit 2026.03.4 , MMFF94s, restraint force constant $10^4$, achieved torsion deviation $<0.01^\circ$, $2000$ minimiser iterations, 21.8\% of samples reaching the iteration cap without formal convergence).",traced,traced,8,3,unattributed,unattributed,0.042,0.091,proposal/logs/regen_data.log,"""frac_minimiser_not_converged"": 0.2181,",True,False,False,False
+prose,5.9\%,5.9,1,True,2,"Only 5.9\% of uniform draws lie within $20$~kcal/mol of the global minimum, which is what makes the compression necessary.",traced,traced,15,5,unattributed,unattributed,0.058,0.091,proposal/logs/regen_data.log,"""frac_within_20kcal"": 0.05945849056603773",True,True,False,False
+prose,1.5,1.5,1,False,2,"ity budget of $300$ non-zeros per row, the same solver tolerances, the same pre-MCMC grid scan over seven support scales and three amplitude offsets, the same $1.5$-hour wall-clock limit on the chain and the same $40$-sweep cap.",traced,traced,63,17,unattributed,unattributed,0.073,0.182,proposal/logs/we_full.json,config wall_limit_h,True,True,False,False
+prose,5.1,5.1,1,False,2,"Second, on one of the paper's own benchmarks: we reproduce their 1-D synthetic experiment (Sec.~5.1), $f(x)=\sin 5x+\cos 20x+2(x-0.4)^2\cos 400x$ at $2000$ points, with the non-stationary Wendland kernel of their Eq.~(6) --- the same kernel our existing-kerne",traced,traced,3,3,unattributed,unattributed,0.0,1.0,proposal/logs/baselines.json,vnngp rmse,True,True,False,False
+prose,0.4,0.4,1,False,1,"Second, on one of the paper's own benchmarks: we reproduce their 1-D synthetic experiment (Sec.~5.1), $f(x)=\sin 5x+\cos 20x+2(x-0.4)^2\cos 400x$ at $2000$ points, with the non-stationary Wendland kernel of their Eq.~(6) --- the same kernel our existing-kernel comparison uses --- and an exac",traced,traced,1658,273,unattributed,unattributed,0.0,1.0,proposal/logs/tw_full_chain.jsonl,step,True,True,False,False
+prose,0.108,0.108,3,False,3,"Over 5 seeds our build gives, for gp2Scale w/(6), RMSE $0.108$ and CRPS $0.061$ against the paper's $0.107$ / $0.06$, and for the base GP RMSE $0.106$ / CRPS $0.060$ against $0.109$ / $0.07$ --- inside a stated tolerance",traced,traced,44,7,unattributed,unattributed,0.058,0.364,proposal/logs/synth_smoke.json,nsw_summary rmse_mean,True,True,False,False
+prose,0.061,0.061,3,False,2,"Over 5 seeds our build gives, for gp2Scale w/(6), RMSE $0.108$ and CRPS $0.061$ against the paper's $0.107$ / $0.06$, and for the base GP RMSE $0.106$ / CRPS $0.060$ against $0.109$ / $0.07$ --- inside a stated tolerance of $0.02$.",traced,traced,10,6,unattributed,unattributed,0.06,0.273,proposal/logs/synth_smoke.json,nsw crps,True,False,False,False
+prose,0.107,0.107,3,False,3,"Over 5 seeds our build gives, for gp2Scale w/(6), RMSE $0.108$ and CRPS $0.061$ against the paper's $0.107$ / $0.06$, and for the base GP RMSE $0.106$ / CRPS $0.060$ against $0.109$ / $0.07$ --- inside a stated tolerance of $0.02$.",traced,traced,12,9,supported,unattributed,0.179,0.182,proposal/logs/synth_smoke.json,paper gp2scale_eq6 rmse,True,False,False,False
+prose,0.06,0.06,2,False,1,"Over 5 seeds our build gives, for gp2Scale w/(6), RMSE $0.108$ and CRPS $0.061$ against the paper's $0.107$ / $0.06$, and for the base GP RMSE $0.106$ / CRPS $0.060$ against $0.109$ / $0.07$ --- inside a stated tolerance of $0.02$.",traced,traced,207,70,supported,unattributed,0.179,0.125,proposal/logs/synth_smoke.json,paper gp2scale_eq6 crps,True,True,False,False
+prose,0.106,0.106,3,False,3,"Over 5 seeds our build gives, for gp2Scale w/(6), RMSE $0.108$ and CRPS $0.061$ against the paper's $0.107$ / $0.06$, and for the base GP RMSE $0.106$ / CRPS $0.060$ against $0.109$ / $0.07$ --- inside a stated tolerance of $0.02$.",traced,traced,9,6,supported,unattributed,0.123,0.182,proposal/logs/synth_smoke.json,base rmse,True,True,False,False
+prose,0.060,0.06,3,False,2,"Over 5 seeds our build gives, for gp2Scale w/(6), RMSE $0.108$ and CRPS $0.061$ against the paper's $0.107$ / $0.06$, and for the base GP RMSE $0.106$ / CRPS $0.060$ against $0.109$ / $0.07$ --- inside a stated tolerance of $0.02$.",traced,traced,65,14,supported,unattributed,0.179,0.182,proposal/logs/synth_smoke.json,paper gp2scale_eq6 crps,True,False,False,False
+prose,0.109,0.109,3,False,3,"r build gives, for gp2Scale w/(6), RMSE $0.108$ and CRPS $0.061$ against the paper's $0.107$ / $0.06$, and for the base GP RMSE $0.106$ / CRPS $0.060$ against $0.109$ / $0.07$ --- inside a stated tolerance of $0.02$.",traced,traced,17,7,supported,supported,0.28,0.091,proposal/logs/synth_smoke.json,paper base_gp rmse,True,True,False,False
+prose,0.07,0.07,2,False,1,"ves, for gp2Scale w/(6), RMSE $0.108$ and CRPS $0.061$ against the paper's $0.107$ / $0.06$, and for the base GP RMSE $0.106$ / CRPS $0.060$ against $0.109$ / $0.07$ --- inside a stated tolerance of $0.02$.",traced,traced,138,74,supported,unattributed,0.302,0.222,proposal/logs/synth_smoke.json,paper base_gp crps,True,True,False,False
+prose,0.02,0.02,2,False,1,"d CRPS $0.061$ against the paper's $0.107$ / $0.06$, and for the base GP RMSE $0.106$ / CRPS $0.060$ against $0.109$ / $0.07$ --- inside a stated tolerance of $0.02$.",traced,traced,219,78,unattributed,unattributed,0.086,0.667,proposal/logs/mnist_smoke2.json,paper_reported,True,True,False,False
+prose,4.958,4.958,3,False,4,"\emph{The original framework's kernels do not work on this domain.} Under the common sparsity budget, Eq.~(3) reaches RMSE 4.958 and CRPS 2.574 against a test-set standard deviation of 5.784; the non-stationary Eq.~(6) and the bump kernel of Eq.~(9), which adds a far-field rank-$16$ term",traced,traced,2,2,unattributed,unattributed,0.033,0.182,proposal/logs/we_full.json,metrics rmse,False,False,False,False
+prose,2.574,2.574,3,False,4,"\emph{The original framework's kernels do not work on this domain.} Under the common sparsity budget, Eq.~(3) reaches RMSE 4.958 and CRPS 2.574 against a test-set standard deviation of 5.784; the non-stationary Eq.~(6) and the bump kernel of Eq.~(9), which adds a far-field rank-$16$ term, do not change",traced,traced,2,2,unattributed,unattributed,0.032,0.273,proposal/logs/we_full.json,metrics crps,False,False,False,False
+prose,5.784,5.784,3,False,4,"ork's kernels do not work on this domain.} Under the common sparsity budget, Eq.~(3) reaches RMSE 4.958 and CRPS 2.574 against a test-set standard deviation of 5.784; the non-stationary Eq.~(6) and the bump kernel of Eq.~(9), which adds a far-field rank-$16$ term, do not change this materially.",traced,traced,3,3,unattributed,unattributed,0.032,0.091,proposal/logs/regen_data.log,"""y_test_std"": 5.783980120145699,",False,False,False,False
+prose,95\%,95.0,0,True,2,Their $95\%$ credible intervals cover 0.931 of the test set.,traced,traced,30,19,unattributed,unattributed,0.0,1.0,proposal/logs/pilot_taw_M10_3.json,config l_init,False,False,False,False
+prose,0.931,0.931,3,False,3,Their $95\%$ credible intervals cover 0.931 of the test set.,traced,traced,6,3,unattributed,unattributed,0.0,1.0,proposal/logs/chordal_full.json,metrics_latent cov95,True,True,False,False
+prose,2.920,2.92,3,False,4,"Periodicity alone does not fix it.} The chordal-ball control --- the literal periodisation of Eq.~(3), same ball support, same sparsity budget --- reaches CRPS 2.920.",traced,traced,2,2,unattributed,unattributed,0.109,0.091,proposal/logs/chordal_full.json,metrics crps,True,True,False,False
+prose,2.878,2.878,3,False,4,"\kTW$ alone --- a periodic, non-stationary, compactly supported kernel, everything this paper adds \emph{except} the global low-rank term --- reaches only CRPS 2.878, no better than (indeed slightly worse than) the original framework's Euclidean kernels: a compactly supported kernel on $\T^6$ is starved whether or not it is",traced,traced,2,2,unattributed,unattributed,0.031,0.091,proposal/logs/tw_full.json,metrics crps,False,False,False,False
+prose,2.413,2.413,3,False,4,"Adding the global ANOVA term transforms the fit: $\kAF$ alone already reaches CRPS 2.413, and the full kernel 2.383.",traced,traced,1,1,supported,supported,0.14,0.091,proposal/logs/af_full.json,metrics crps,False,False,False,False
+prose,2.383,2.383,3,False,4,"Adding the global ANOVA term transforms the fit: $\kAF$ alone already reaches CRPS 2.413, and the full kernel 2.383.",traced,traced,1,1,supported,supported,0.14,0.091,proposal/logs/taw_full.json,metrics crps,True,True,False,False
+prose,2.413,2.413,3,False,4,"The local term is a genuine but modest refinement (2.413${\to}$2.383 in CRPS, 4.648${\to}$4.600 in RMSE); the global low-rank structure is the essential ingredient, which is precisely the sense in which compact suppo",traced,traced,1,1,unattributed,unattributed,0.046,0.091,proposal/logs/af_full.json,metrics crps,False,False,False,False
+prose,2.383,2.383,3,False,4,"The local term is a genuine but modest refinement (2.413${\to}$2.383 in CRPS, 4.648${\to}$4.600 in RMSE); the global low-rank structure is the essential ingredient, which is precisely the sense in which compact support alone is",traced,traced,1,1,unattributed,unattributed,0.044,0.091,proposal/logs/taw_full.json,metrics crps,True,True,False,False
+prose,4.648,4.648,3,False,4,"The local term is a genuine but modest refinement (2.413${\to}$2.383 in CRPS, 4.648${\to}$4.600 in RMSE); the global low-rank structure is the essential ingredient, which is precisely the sense in which compact support alone is not enough.",traced,traced,2,2,unattributed,unattributed,0.04,0.091,proposal/logs/af_full.json,metrics rmse,False,False,False,False
+prose,4.600,4.6,3,False,4,"The local term is a genuine but modest refinement (2.413${\to}$2.383 in CRPS, 4.648${\to}$4.600 in RMSE); the global low-rank structure is the essential ingredient, which is precisely the sense in which compact support alone is not enough.",traced,traced,2,2,unattributed,unattributed,0.04,0.091,proposal/logs/taw_full.json,metrics rmse,False,False,False,False
+prose,95\%,95.0,0,True,2,"The two baselines fail in opposite ways: SVGP, the more accurate of them, is sharply \emph{overconfident} --- its $95\%$ interval covers only 0.709 of the test set --- while VNNGP is well calibrated ($95\%$ coverage 0.937) but pays for it in accuracy (CRPS 2.721 against SVGP's 2",traced,traced,30,19,unattributed,unattributed,0.0,1.0,proposal/logs/pilot_taw_M10_3.json,config l_init,False,False,False,False
+prose,0.709,0.709,3,False,3,"The two baselines fail in opposite ways: SVGP, the more accurate of them, is sharply \emph{overconfident} --- its $95\%$ interval covers only 0.709 of the test set --- while VNNGP is well calibrated ($95\%$ coverage 0.937) but pays for it in accuracy (CRPS 2.721 against SVGP's 2.562).",traced,traced,20,1,unattributed,unattributed,0.0,1.0,proposal/logs/taw_full.json,hyperparameters log_tau_4,True,True,False,False
+prose,95\%,95.0,0,True,2,"SVGP, the more accurate of them, is sharply \emph{overconfident} --- its $95\%$ interval covers only 0.709 of the test set --- while VNNGP is well calibrated ($95\%$ coverage 0.937) but pays for it in accuracy (CRPS 2.721 against SVGP's 2.562).",traced,traced,30,19,unattributed,unattributed,0.0,1.0,proposal/logs/pilot_taw_M10_3.json,config l_init,False,False,False,False
+prose,0.937,0.937,3,False,3,"accurate of them, is sharply \emph{overconfident} --- its $95\%$ interval covers only 0.709 of the test set --- while VNNGP is well calibrated ($95\%$ coverage 0.937) but pays for it in accuracy (CRPS 2.721 against SVGP's 2.562).",traced,traced,4,2,unattributed,unattributed,0.045,0.091,proposal/logs/baselines.json,vnngp cov95,False,False,False,False
+prose,2.721,2.721,3,False,4,nfident} --- its $95\%$ interval covers only 0.709 of the test set --- while VNNGP is well calibrated ($95\%$ coverage 0.937) but pays for it in accuracy (CRPS 2.721 against SVGP's 2.562).,untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,True,True,False,False
+prose,2.562,2.562,3,False,4,%$ interval covers only 0.709 of the test set --- while VNNGP is well calibrated ($95\%$ coverage 0.937) but pays for it in accuracy (CRPS 2.721 against SVGP's 2.562).,untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+prose,95\%,95.0,0,True,2,"The exact GPs are near-nominal at $95\%$ (\TAW{} 0.940, Eq.~(3) 0.931) but \emph{over-cover} the bulk, so their mean absolute calibration error over all levels (\TAW{} 0.128) is higher than either ba",traced,traced,30,19,unattributed,unattributed,0.0,1.0,proposal/logs/pilot_taw_M10_3.json,config l_init,False,False,False,False
+prose,0.940,0.94,3,False,3,"The exact GPs are near-nominal at $95\%$ (\TAW{} 0.940, Eq.~(3) 0.931) but \emph{over-cover} the bulk, so their mean absolute calibration error over all levels (\TAW{} 0.128) is higher than either baseline's (0.082",traced,traced,38,1,unattributed,unattributed,0.0,1.0,proposal/logs/taw_full.json,metrics cov95,True,True,False,False
+prose,0.931,0.931,3,False,3,"The exact GPs are near-nominal at $95\%$ (\TAW{} 0.940, Eq.~(3) 0.931) but \emph{over-cover} the bulk, so their mean absolute calibration error over all levels (\TAW{} 0.128) is higher than either baseline's (0.082, 0.076).",traced,traced,6,3,unattributed,unattributed,0.0,1.0,proposal/logs/chordal_full.json,metrics_latent cov95,True,True,False,False
+prose,0.128,0.128,3,False,3,"t GPs are near-nominal at $95\%$ (\TAW{} 0.940, Eq.~(3) 0.931) but \emph{over-cover} the bulk, so their mean absolute calibration error over all levels (\TAW{} 0.128) is higher than either baseline's (0.082, 0.076).",traced,traced,9,3,unattributed,unattributed,0.052,0.273,proposal/logs/taw_full.json,metrics cal_err,True,True,False,False
+prose,0.082,0.082,3,False,2,"0.940, Eq.~(3) 0.931) but \emph{over-cover} the bulk, so their mean absolute calibration error over all levels (\TAW{} 0.128) is higher than either baseline's (0.082, 0.076).",traced,traced,41,6,supported,unattributed,0.131,0.182,proposal/logs/baselines.json,svgp cal_err,True,True,False,False
+prose,0.076,0.076,3,False,2,"Eq.~(3) 0.931) but \emph{over-cover} the bulk, so their mean absolute calibration error over all levels (\TAW{} 0.128) is higher than either baseline's (0.082, 0.076).",traced,traced,2,2,supported,unattributed,0.131,0.182,proposal/logs/baselines.json,vnngp cal_err,True,True,False,False
+prose,95\%,95.0,0,True,2,"What distinguishes \TAW{} is that it is the only method that is simultaneously the most accurate (RMSE, CRPS) and near-nominal at the $95\%$ level a modeller would actually use; Sec.~ traces the shared heavy tail to the physical discontinuities of the surface rather than to a defect of the models.",traced,traced,30,19,unattributed,unattributed,0.034,0.091,proposal/logs/af_full.json,final_stats lml_seconds,False,False,False,False
+prose,1.80,1.8,2,False,3,"inant and its hyperparameter updates on the complete 500,000-point covariance; \TAW{} completed 13 sweeps (74 marginal-likelihood evaluations at full scale) in 1.80~h with a peak resident set of 17.5~GB, at a covariance sparsity of \TawSparsity{} (\TawNnz{} non-zeros, 288 per row).",traced,untraced,1,0,untraced,untraced,0.0,1.0,,,True,True,False,False
+prose,17.5,17.5,1,False,3,"s on the complete 500,000-point covariance; \TAW{} completed 13 sweeps (74 marginal-likelihood evaluations at full scale) in 1.80~h with a peak resident set of 17.5~GB, at a covariance sparsity of \TawSparsity{} (\TawNnz{} non-zeros, 288 per row).",traced,traced,2,2,supported,supported,0.155,0.091,proposal/logs/taw_full.json,pred_peak_gb,False,False,False,False
+prose,0.38,0.38,2,False,2,"Per-block acceptance rates over the chain range from 0.00 (the non-stationarity coefficients, which barely moved) to 0.38 (the global two-body amplitudes).",traced,traced,246,54,unattributed,unattributed,0.055,0.727,proposal/logs/we_full_chain.jsonl,step,True,True,False,False
+prose,3.1,3.1,1,False,2,"ers the compactly supported kernels place their non-zeros where says they must, but the \emph{values} there are tiny: the median off-diagonal entry sits nearly 3.1 orders of magnitude below the diagonal.",traced,traced,99,16,unattributed,unattributed,0.0,1.0,proposal/logs/pilot_we_o1.json,metrics_latent crps,True,True,False,False
+prose,0.5\times10^{5},50000.0,-4,False,1,"ominated model occupies, whereas the two kernels that carry the global low-rank term, $\kAF$ and \TAW, separate upward together and by a wide margin (a gap of $0.5\times10^{5}$ in log marginal likelihood over the best compactly supported kernel).",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,True,True,False,False
+prose,2.413,2.413,3,False,4,"Removing it moves CRPS only from $2.413$ to $2.383$ and RMSE from $4.648$ to $4.600$ --- real, but an order of magnitude smaller than the jump from a compact-support-only kernel ($\kTW$, CRPS $2.878$",traced,traced,1,1,unattributed,unattributed,0.06,0.091,proposal/logs/af_full.json,metrics crps,False,False,False,False
+prose,2.383,2.383,3,False,4,"Removing it moves CRPS only from $2.413$ to $2.383$ and RMSE from $4.648$ to $4.600$ --- real, but an order of magnitude smaller than the jump from a compact-support-only kernel ($\kTW$, CRPS $2.878$) to the gl",traced,traced,1,1,unattributed,unattributed,0.056,0.091,proposal/logs/taw_full.json,metrics crps,True,True,False,False
+prose,4.648,4.648,3,False,4,"Removing it moves CRPS only from $2.413$ to $2.383$ and RMSE from $4.648$ to $4.600$ --- real, but an order of magnitude smaller than the jump from a compact-support-only kernel ($\kTW$, CRPS $2.878$) to the global term.",traced,traced,2,2,unattributed,unattributed,0.053,0.091,proposal/logs/af_full.json,metrics rmse,False,False,False,False
+prose,4.600,4.6,3,False,4,"Removing it moves CRPS only from $2.413$ to $2.383$ and RMSE from $4.648$ to $4.600$ --- real, but an order of magnitude smaller than the jump from a compact-support-only kernel ($\kTW$, CRPS $2.878$) to the global term.",traced,traced,2,2,unattributed,unattributed,0.053,0.091,proposal/logs/taw_full.json,metrics rmse,False,False,False,False
+prose,2.878,2.878,3,False,4,"$2.413$ to $2.383$ and RMSE from $4.648$ to $4.600$ --- real, but an order of magnitude smaller than the jump from a compact-support-only kernel ($\kTW$, CRPS $2.878$) to the global term.",traced,traced,2,2,unattributed,unattributed,0.06,0.091,proposal/logs/tw_full.json,metrics crps,False,False,False,False
+prose,15.988,15.988,3,False,5,"What the local term buys is the representation of structure at scales below the finest Fourier harmonic we retain: the fitted local amplitude is $\sigma_L^2=15.988$ against a total prior variance of 81.0 (19.7\% of the prior), and its fitted support half-widths span 37--100$^\circ$ across the six torsions --- the kernel s",traced,traced,1,1,unattributed,unattributed,0.072,0.091,proposal/logs/taw_full.json,variance_decomposition local,False,False,False,False
+prose,81.0,81.0,1,False,3,"ntation of structure at scales below the finest Fourier harmonic we retain: the fitted local amplitude is $\sigma_L^2=15.988$ against a total prior variance of 81.0 (19.7\% of the prior), and its fitted support half-widths span 37--100$^\circ$ across the six torsions --- the kernel screens tightly on some and barely at all",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+prose,19.7\%,19.7,1,True,3,"n of structure at scales below the finest Fourier harmonic we retain: the fitted local amplitude is $\sigma_L^2=15.988$ against a total prior variance of 81.0 (19.7\% of the prior), and its fitted support half-widths span 37--100$^\circ$ across the six torsions --- the kernel screens tightly on some and barely at all on othe",traced,untraced,3,0,untraced,untraced,0.0,1.0,,,True,True,False,False
+prose,21.2,21.2,1,False,3,"is stable across the second half of the chain, but the largest single amplitude, $(\psi_2,\psi_3)$, is still growing at the cut-off (from its initialisation to 21.2 units), so the precise partition among individual pairs, and the exact rank order below the top two or three, should be read as provisional.",traced,traced,1,1,unattributed,unattributed,0.0,1.0,proposal/logs/taw_full.json,variance_decomposition 2b_35,False,False,False,False
+prose,21.2,21.2,1,False,3,"wo-body dominance, and same-type cross-residue coupling over intra-residue coupling --- survive this caveat; a specific number like ``$(\psi_2,\psi_3)$ carries 21.2 units'' does not, and we do not build on it.",traced,traced,1,1,unattributed,unattributed,0.0,1.0,proposal/logs/taw_full.json,variance_decomposition 2b_35,False,False,False,False
+prose,5.433,5.433,3,False,4,"\TAW{} is accurate and well calibrated in the thermally accessible basin ($E-E_{\mathrm{ref}}<10$~kcal/mol: RMSE 5.433, $95\%$ coverage 0.952) and much better there than Eq.~(3) (RMSE 7.542, coverage 0.857).",traced,traced,1,1,unattributed,unattributed,0.06,0.091,proposal/logs/region_breakdown.json,taw rmse,False,False,False,False
+prose,95\%,95.0,0,True,2,"\TAW{} is accurate and well calibrated in the thermally accessible basin ($E-E_{\mathrm{ref}}<10$~kcal/mol: RMSE 5.433, $95\%$ coverage 0.952) and much better there than Eq.~(3) (RMSE 7.542, coverage 0.857).",traced,traced,30,19,unattributed,unattributed,0.0,1.0,proposal/logs/pilot_taw_M10_3.json,config l_init,False,False,False,False
+prose,0.952,0.952,3,False,3,"\TAW{} is accurate and well calibrated in the thermally accessible basin ($E-E_{\mathrm{ref}}<10$~kcal/mol: RMSE 5.433, $95\%$ coverage 0.952) and much better there than Eq.~(3) (RMSE 7.542, coverage 0.857).",traced,traced,3,2,unattributed,unattributed,0.0,1.0,proposal/logs/region_breakdown.json,taw cov95,True,False,False,False
+prose,7.542,7.542,3,False,4,"ell calibrated in the thermally accessible basin ($E-E_{\mathrm{ref}}<10$~kcal/mol: RMSE 5.433, $95\%$ coverage 0.952) and much better there than Eq.~(3) (RMSE 7.542, coverage 0.857).",traced,traced,1,1,unattributed,unattributed,0.065,0.091,proposal/logs/region_breakdown.json,we rmse,False,False,False,False
+prose,0.857,0.857,3,False,3,"n the thermally accessible basin ($E-E_{\mathrm{ref}}<10$~kcal/mol: RMSE 5.433, $95\%$ coverage 0.952) and much better there than Eq.~(3) (RMSE 7.542, coverage 0.857).",traced,traced,22,1,unattributed,unattributed,0.0,1.0,proposal/logs/region_breakdown.json,we cov95,True,False,False,False
+prose,4.544,4.544,3,False,4,"But its posterior standard deviation is essentially \emph{flat} across strata (4.544 in the basin, 4.537 on the steric wall, a ratio of 1.0): with a single nugget and a training set that is uniform on $\T^6$, the model has no mechanism to be mo",traced,traced,1,1,unattributed,unattributed,0.0,1.0,proposal/logs/region_breakdown.json,taw mean_sd,False,False,False,False
+prose,4.537,4.537,3,False,4,"But its posterior standard deviation is essentially \emph{flat} across strata (4.544 in the basin, 4.537 on the steric wall, a ratio of 1.0): with a single nugget and a training set that is uniform on $\T^6$, the model has no mechanism to be more uncertain where t",traced,traced,1,1,unattributed,unattributed,0.0,1.0,proposal/logs/region_breakdown.json,taw mean_sd,True,True,False,False
+prose,1.0,1.0,1,False,2,"But its posterior standard deviation is essentially \emph{flat} across strata (4.544 in the basin, 4.537 on the steric wall, a ratio of 1.0): with a single nugget and a training set that is uniform on $\T^6$, the model has no mechanism to be more uncertain where the surface is harder.",traced,traced,398,189,unattributed,unattributed,0.0,1.0,proposal/logs/tw_full_chain.jsonl,sweep,True,True,False,False
+prose,0.987,0.987,3,False,3,"The error is not flat --- it is larger on the steric wall, where the surface is steepest and most discontinuous --- so coverage falls from 0.987 in the mid-range, where the constant width \emph{over}-covers, to 0.892 on the wall, where the same width is too narrow.",traced,traced,1,1,unattributed,unattributed,0.0,1.0,proposal/logs/region_breakdown.json,taw cov95,False,False,False,False
+prose,0.892,0.892,3,False,3,"c wall, where the surface is steepest and most discontinuous --- so coverage falls from 0.987 in the mid-range, where the constant width \emph{over}-covers, to 0.892 on the wall, where the same width is too narrow.",traced,traced,5,1,unattributed,unattributed,0.0,1.0,proposal/logs/region_breakdown.json,taw cov95,True,False,False,False
+prose,60.7\%,60.7,1,True,3,"It spends 60.7\% on the two-body terms and only 17.2\% on the one-body terms, with the compactly supported local term taking the remaining 19.7\%.",traced,traced,6,4,unattributed,unattributed,0.0,1.0,proposal/logs/pilot_we_o1_chain.jsonl,elapsed_s,True,True,False,False
+prose,17.2\%,17.2,1,True,3,"It spends 60.7\% on the two-body terms and only 17.2\% on the one-body terms, with the compactly supported local term taking the remaining 19.7\%.",traced,traced,112,85,unattributed,unattributed,0.0,1.0,proposal/logs/chordal_full_chain.jsonl,theta,True,True,False,False
+prose,19.7\%,19.7,1,True,3,"It spends 60.7\% on the two-body terms and only 17.2\% on the one-body terms, with the compactly supported local term taking the remaining 19.7\%.",traced,untraced,3,0,untraced,untraced,0.0,1.0,,,True,True,False,False
+prose,2.878,2.878,3,False,4,"are --- puts essentially no prior mass on two-body structure, so it cannot represent a surface that lives there, and this is why $\kTW$ alone reaches only CRPS 2.878.",traced,traced,2,2,unattributed,unattributed,0.046,0.091,proposal/logs/tw_full.json,metrics crps,False,False,False,False
+prose,16\%,16.0,0,True,2,"The intra-residue pairs carry only 16\% of the two-body variance; 68\% of it sits on \emph{same-type} torsions across different residues ($\phi$ with $\phi$, $\psi$ with $\psi$), and the single large",traced,traced,232,61,unattributed,unattributed,0.055,0.364,proposal/logs/taw_full.json,variance_decomposition local,True,True,False,False
+prose,68\%,68.0,0,True,2,"The intra-residue pairs carry only 16\% of the two-body variance; 68\% of it sits on \emph{same-type} torsions across different residues ($\phi$ with $\phi$, $\psi$ with $\psi$), and the single largest term is $(\psi_2,\psi_3)$ at",traced,traced,120,69,unattributed,unattributed,0.0,1.0,proposal/logs/pilot_taw_M10_3.json,support_halfwidths_rad,True,True,False,False
+prose,21.2,21.2,1,False,3,"of it sits on \emph{same-type} torsions across different residues ($\phi$ with $\phi$, $\psi$ with $\psi$), and the single largest term is $(\psi_2,\psi_3)$ at 21.2 units of prior variance, followed by $(\phi_1,\phi_2)$ and $(\psi_1,\psi_2)$.",traced,traced,1,1,unattributed,unattributed,0.062,0.091,proposal/logs/taw_full.json,variance_decomposition 2b_35,False,False,False,False
+prose,0.01,0.01,2,False,1,"\paragraph{The adiabatic surface is discontinuous, and the posterior finds it.} The measurement in Fig.~ b is independent of any model: at $\epsilon=0.01$~rad the median energy change is 0.027 but 4.0\% of conformations change by more than three compressed kcal/mol, because the constrained minimisation of the ot",traced,traced,182,43,unattributed,unattributed,0.0,1.0,proposal/logs/pilot_taw_M10_3.json,hyperparameters ns3_b1,True,True,False,False
+prose,0.027,0.027,3,False,2,"rface is discontinuous, and the posterior finds it.} The measurement in Fig.~ b is independent of any model: at $\epsilon=0.01$~rad the median energy change is 0.027 but 4.0\% of conformations change by more than three compressed kcal/mol, because the constrained minimisation of the other $36$ degrees of freedom falls into",traced,traced,29,5,unattributed,unattributed,0.0,1.0,proposal/logs/tw_full_chain.jsonl,step,True,False,False,False
+prose,4.0\%,4.0,1,True,2,"iscontinuous, and the posterior finds it.} The measurement in Fig.~ b is independent of any model: at $\epsilon=0.01$~rad the median energy change is 0.027 but 4.0\% of conformations change by more than three compressed kcal/mol, because the constrained minimisation of the other $36$ degrees of freedom falls into a differen",traced,traced,130,90,unattributed,unattributed,0.0,1.0,proposal/logs/tw_full_chain.jsonl,sweep,True,True,False,False
+prose,2.03,2.03,2,False,3,"The implied irreducible noise standard deviation is 2.03 against a total spread of 5.65, so no regression of a relaxed torsional scan --- ours, the original framework's, or a neural network's --- can have RMSE below",traced,traced,4,4,unattributed,unattributed,0.079,0.091,proposal/logs/roughness.json,eps 0.01 implied_noise_std,True,True,False,False
+prose,5.65,5.65,2,False,3,"The implied irreducible noise standard deviation is 2.03 against a total spread of 5.65, so no regression of a relaxed torsional scan --- ours, the original framework's, or a neural network's --- can have RMSE below about 2.03 on uniformly sampled",traced,traced,1,1,unattributed,unattributed,0.0,1.0,proposal/logs/roughness.json,y_base_std,False,False,False,False
+prose,2.03,2.03,2,False,3,"st a total spread of 5.65, so no regression of a relaxed torsional scan --- ours, the original framework's, or a neural network's --- can have RMSE below about 2.03 on uniformly sampled data, and 87\% is the ceiling on explainable variance.",traced,traced,4,4,unattributed,unattributed,0.0,1.0,proposal/logs/pilot_we_o1.json,support_radii,True,True,False,False
+prose,87\%,87.0,0,True,2,"ression of a relaxed torsional scan --- ours, the original framework's, or a neural network's --- can have RMSE below about 2.03 on uniformly sampled data, and 87\% is the ceiling on explainable variance.",traced,traced,29,4,unattributed,unattributed,0.0,1.0,proposal/logs/pilot_taw_M10_3.json,support_halfwidths_deg,True,True,False,False
+prose,5.000,5.0,3,False,4,"The fitted \TAW{} nugget is $\nu=5.000$, i.e.\ a noise standard deviation of 2.236, agreeing with the independently measured floor to within $10\%$.",traced,traced,77,77,unattributed,unattributed,0.077,0.091,proposal/logs/warm_chordal.json,accepted_counts noise,False,False,False,False
+prose,2.236,2.236,3,False,4,"The fitted \TAW{} nugget is $\nu=5.000$, i.e.\ a noise standard deviation of 2.236, agreeing with the independently measured floor to within $10\%$.",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+prose,10\%,10.0,0,True,2,"The fitted \TAW{} nugget is $\nu=5.000$, i.e.\ a noise standard deviation of 2.236, agreeing with the independently measured floor to within $10\%$.",traced,traced,329,209,unattributed,unattributed,0.077,0.5,proposal/logs/chordal_full.json,accepted_counts noise,True,True,False,False
+prose,2.2,2.2,1,False,2,"would be able to buy a larger $h$, though Eq.~ shows the return is only $\bar m^{1/6}$ and a hundredfold increase in budget widens the support by a factor of $2.2$.",traced,traced,66,2,unattributed,unattributed,0.0,1.0,proposal/logs/nswe_full.json,hyperparameters log_noise,True,True,False,False

@@ -1,0 +1,220 @@
+kind,raw,value,dec,pct,sig,context,L1,L1nb,L1_n_matches,L1nb_n_matches,L2ctx,L2,L2_score,L2_p,L2_file,L2_context,decoy_L1,decoy_L1nb,decoy_L2ctx,decoy_L2
+table,13.3,13.3,1,False,3,"PHL (paper as reported) | Per-epoch | Primary results. Every ``paper as reported'' value is cited from Rodriguez et
+al.~ : per-epoch wall-clock from Fig.~4/\S5 (A6000 GPU); per-cell RMSEs are
+digitized from the randomized-vector bars of their Fig.~3(a) ($\dagger$; the paper gives absolute
+RMSEs only as bar charts, so these are approximate, $\pm0.3$ kcal/mol for energy/force and $\pm1$--$2$
+for Hes",traced,untraced,37,0,untraced,untraced,0.0,1.0,,,True,True,False,False
+table,4.0,4.0,1,False,2,"PHL (paper as reported) | \multicolumn{3}{c}{Test RMSE} | Primary results. Every ``paper as reported'' value is cited from Rodriguez et
+al.~ : per-epoch wall-clock from Fig.~4/\S5 (A6000 GPU); per-cell RMSEs are
+digitized from the randomized-vector bars of their Fig.~3(a) ($\dagger$; the paper gives absolute
+RMSEs only as bar charts, so these are approximate, $\pm0.3$ kcal/mol for energy/force and",traced,traced,11635,3,unattributed,unattributed,0.027,0.273,proposal/logs/smoke/phl_seed0.jsonl,step,True,False,False,False
+table,5.5,5.5,1,False,2,"PHL (paper as reported) | \multicolumn{3}{c}{IRC RMSE} | Primary results. Every ``paper as reported'' value is cited from Rodriguez et
+al.~ : per-epoch wall-clock from Fig.~4/\S5 (A6000 GPU); per-cell RMSEs are
+digitized from the randomized-vector bars of their Fig.~3(a) ($\dagger$; the paper gives absolute
+RMSEs only as bar charts, so these are approximate, $\pm0.3$ kcal/mol for energy/force and ",traced,traced,149,2,unattributed,unattributed,0.106,0.636,proposal/logs/phl400/eval_s2.log,"test {'energy_rmse': 5.4608, 'force_rmse': 6.5237, 'hessian_rmse': 14.6761, 'n_mol': 3510, 'n_hessian': 2000}",True,True,True,False
+table,12.9,12.9,1,False,3,"PHL (paper as reported) | \multicolumn{3}{c}{NMS RMSE} | Primary results. Every ``paper as reported'' value is cited from Rodriguez et
+al.~ : per-epoch wall-clock from Fig.~4/\S5 (A6000 GPU); per-cell RMSEs are
+digitized from the randomized-vector bars of their Fig.~3(a) ($\dagger$; the paper gives absolute
+RMSEs only as bar charts, so these are approximate, $\pm0.3$ kcal/mol for energy/force and ",traced,untraced,51,0,untraced,untraced,0.0,1.0,,,True,True,True,False
+table,7.0,7.0,1,False,2,"PHL (paper as reported) | $t$-test vs.\ | Primary results. Every ``paper as reported'' value is cited from Rodriguez et
+al.~ : per-epoch wall-clock from Fig.~4/\S5 (A6000 GPU); per-cell RMSEs are
+digitized from the randomized-vector bars of their Fig.~3(a) ($\dagger$; the paper gives absolute
+RMSEs only as bar charts, so these are approximate, $\pm0.3$ kcal/mol for energy/force and $\pm1$--$2$
+for",traced,traced,11949,5,supported,unattributed,0.134,0.818,proposal/logs/share80/eval_s3.log,"test {'energy_rmse': 6.5243, 'force_rmse': 7.0468, 'hessian_rmse': 15.9942, 'n_mol': 3510, 'n_hessian': 2000}",True,True,False,False
+table,6.8,6.8,1,False,2,"PHL (paper as reported) | Grad-var | Primary results. Every ``paper as reported'' value is cited from Rodriguez et
+al.~ : per-epoch wall-clock from Fig.~4/\S5 (A6000 GPU); per-cell RMSEs are
+digitized from the randomized-vector bars of their Fig.~3(a) ($\dagger$; the paper gives absolute
+RMSEs only as bar charts, so these are approximate, $\pm0.3$ kcal/mol for energy/force and $\pm1$--$2$
+for Hess",traced,untraced,428,0,untraced,untraced,0.0,1.0,,,True,True,False,False
+table,14.8,14.8,1,False,3,"PHL (paper as reported) |  | Primary results. Every ``paper as reported'' value is cited from Rodriguez et
+al.~ : per-epoch wall-clock from Fig.~4/\S5 (A6000 GPU); per-cell RMSEs are
+digitized from the randomized-vector bars of their Fig.~3(a) ($\dagger$; the paper gives absolute
+RMSEs only as bar charts, so these are approximate, $\pm0.3$ kcal/mol for energy/force and $\pm1$--$2$
+for Hessian --- ",traced,traced,136,1,unattributed,unattributed,0.081,0.818,proposal/logs/results/psphl_vs_phl.json,test_hessian_rmse meth_mean,True,False,False,False
+table,13.5,13.5,1,False,3,"PHL (paper as reported) |  | Primary results. Every ``paper as reported'' value is cited from Rodriguez et
+al.~ : per-epoch wall-clock from Fig.~4/\S5 (A6000 GPU); per-cell RMSEs are
+digitized from the randomized-vector bars of their Fig.~3(a) ($\dagger$; the paper gives absolute
+RMSEs only as bar charts, so these are approximate, $\pm0.3$ kcal/mol for energy/force and $\pm1$--$2$
+for Hessian --- ",traced,traced,37,2,supported,unattributed,0.134,0.545,proposal/logs/share80/eval_s0.log,"nms {'energy_rmse': 47.0789, 'force_rmse': 13.5378, 'hessian_rmse': 31.7519, 'n_mol': 62527, 'n_hessian': 2000}",True,True,True,False
+table,12.5,12.5,1,False,3,"PHL (paper as reported) |  | Primary results. Every ``paper as reported'' value is cited from Rodriguez et
+al.~ : per-epoch wall-clock from Fig.~4/\S5 (A6000 GPU); per-cell RMSEs are
+digitized from the randomized-vector bars of their Fig.~3(a) ($\dagger$; the paper gives absolute
+RMSEs only as bar charts, so these are approximate, $\pm0.3$ kcal/mol for energy/force and $\pm1$--$2$
+for Hessian --- ",traced,untraced,51,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+table,395.3,395.3,1,False,4,"PHL (reimplemented) | Probes / | Primary results. Every ``paper as reported'' value is cited from Rodriguez et
+al.~ : per-epoch wall-clock from Fig.~4/\S5 (A6000 GPU); per-cell RMSEs are
+digitized from the randomized-vector bars of their Fig.~3(a) ($\dagger$; the paper gives absolute
+RMSEs only as bar charts, so these are approximate, $\pm0.3$ kcal/mol for energy/force and $\pm1$--$2$
+for Hessian ",traced,traced,27,15,unattributed,unattributed,0.052,0.091,proposal/logs/results/psphl_vs_phl.json,probes base,True,False,False,False
+table,2.72,2.72,2,False,3,"PHL (reimplemented) | Per-epoch | Primary results. Every ``paper as reported'' value is cited from Rodriguez et
+al.~ : per-epoch wall-clock from Fig.~4/\S5 (A6000 GPU); per-cell RMSEs are
+digitized from the randomized-vector bars of their Fig.~3(a) ($\dagger$; the paper gives absolute
+RMSEs only as bar charts, so these are approximate, $\pm0.3$ kcal/mol for energy/force and $\pm1$--$2$
+for Hessian",traced,traced,219,1,unattributed,unattributed,0.053,0.273,proposal/logs/results/psphl_vs_phl.json,epoch_time base,True,False,False,False
+table,5.87,5.87,2,False,3,"PHL (reimplemented) | \multicolumn{3}{c}{Test RMSE} | Primary results. Every ``paper as reported'' value is cited from Rodriguez et
+al.~ : per-epoch wall-clock from Fig.~4/\S5 (A6000 GPU); per-cell RMSEs are
+digitized from the randomized-vector bars of their Fig.~3(a) ($\dagger$; the paper gives absolute
+RMSEs only as bar charts, so these are approximate, $\pm0.3$ kcal/mol for energy/force and $\p",traced,traced,22,1,unattributed,unattributed,0.107,0.182,proposal/logs/results/psphl_vs_phl.json,test_energy_rmse base_mean,True,False,False,False
+table,6.60,6.6,2,False,3,"PHL (reimplemented) | \multicolumn{3}{c}{IRC RMSE} | Primary results. Every ``paper as reported'' value is cited from Rodriguez et
+al.~ : per-epoch wall-clock from Fig.~4/\S5 (A6000 GPU); per-cell RMSEs are
+digitized from the randomized-vector bars of their Fig.~3(a) ($\dagger$; the paper gives absolute
+RMSEs only as bar charts, so these are approximate, $\pm0.3$ kcal/mol for energy/force and $\pm",traced,traced,47,2,unattributed,unattributed,0.103,0.545,proposal/logs/phl400/eval_s1.log,"test {'energy_rmse': 5.2851, 'force_rmse': 6.5982, 'hessian_rmse': 14.5394, 'n_mol': 3510, 'n_hessian': 2000}",True,False,False,False
+table,14.64,14.64,2,False,4,"PHL (reimplemented) | \multicolumn{3}{c}{NMS RMSE} | Primary results. Every ``paper as reported'' value is cited from Rodriguez et
+al.~ : per-epoch wall-clock from Fig.~4/\S5 (A6000 GPU); per-cell RMSEs are
+digitized from the randomized-vector bars of their Fig.~3(a) ($\dagger$; the paper gives absolute
+RMSEs only as bar charts, so these are approximate, $\pm0.3$ kcal/mol for energy/force and $\pm",traced,traced,9,1,unattributed,unattributed,0.052,0.455,proposal/logs/results/psphl_vs_phl.json,test_hessian_rmse base_mean,True,False,False,False
+table,8.38,8.38,2,False,3,"PHL (reimplemented) | $t$-test vs.\ | Primary results. Every ``paper as reported'' value is cited from Rodriguez et
+al.~ : per-epoch wall-clock from Fig.~4/\S5 (A6000 GPU); per-cell RMSEs are
+digitized from the randomized-vector bars of their Fig.~3(a) ($\dagger$; the paper gives absolute
+RMSEs only as bar charts, so these are approximate, $\pm0.3$ kcal/mol for energy/force and $\pm1$--$2$
+for Hes",traced,traced,30,3,unattributed,unattributed,0.101,0.182,proposal/logs/phl400/eval_s1.log,"irc {'energy_rmse': 8.3839, 'force_rmse': 8.2583, 'hessian_rmse': 15.9612, 'n_mol': 34248, 'n_hessian': 2000}",True,False,False,False
+table,8.15,8.15,2,False,3,"PHL (reimplemented) | Grad-var | Primary results. Every ``paper as reported'' value is cited from Rodriguez et
+al.~ : per-epoch wall-clock from Fig.~4/\S5 (A6000 GPU); per-cell RMSEs are
+digitized from the randomized-vector bars of their Fig.~3(a) ($\dagger$; the paper gives absolute
+RMSEs only as bar charts, so these are approximate, $\pm0.3$ kcal/mol for energy/force and $\pm1$--$2$
+for Hessian ",traced,traced,43,1,unattributed,unattributed,0.075,0.364,proposal/logs/results/psphl_vs_phl.json,irc_force_rmse base_mean,True,True,False,False
+table,15.99,15.99,2,False,4,"PHL (reimplemented) |  | Primary results. Every ``paper as reported'' value is cited from Rodriguez et
+al.~ : per-epoch wall-clock from Fig.~4/\S5 (A6000 GPU); per-cell RMSEs are
+digitized from the randomized-vector bars of their Fig.~3(a) ($\dagger$; the paper gives absolute
+RMSEs only as bar charts, so these are approximate, $\pm0.3$ kcal/mol for energy/force and $\pm1$--$2$
+for Hessian --- see ",traced,traced,18,3,supported,unattributed,0.13,0.273,proposal/logs/share80/eval_s3.log,"test {'energy_rmse': 6.5243, 'force_rmse': 7.0468, 'hessian_rmse': 15.9942, 'n_mol': 3510, 'n_hessian': 2000}",True,True,True,False
+table,48.14,48.14,2,False,4,"PHL (reimplemented) |  | Primary results. Every ``paper as reported'' value is cited from Rodriguez et
+al.~ : per-epoch wall-clock from Fig.~4/\S5 (A6000 GPU); per-cell RMSEs are
+digitized from the randomized-vector bars of their Fig.~3(a) ($\dagger$; the paper gives absolute
+RMSEs only as bar charts, so these are approximate, $\pm0.3$ kcal/mol for energy/force and $\pm1$--$2$
+for Hessian --- see ",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+table,14.03,14.03,2,False,4,"PHL (reimplemented) |  | Primary results. Every ``paper as reported'' value is cited from Rodriguez et
+al.~ : per-epoch wall-clock from Fig.~4/\S5 (A6000 GPU); per-cell RMSEs are
+digitized from the randomized-vector bars of their Fig.~3(a) ($\dagger$; the paper gives absolute
+RMSEs only as bar charts, so these are approximate, $\pm0.3$ kcal/mol for energy/force and $\pm1$--$2$
+for Hessian --- see ",traced,traced,7,1,unattributed,unattributed,0.079,0.273,proposal/logs/results/psphl_vs_phl.json,nms_force_rmse base_mean,True,False,False,False
+table,35.85,35.85,2,False,4,"PHL (reimplemented) |  | Primary results. Every ``paper as reported'' value is cited from Rodriguez et
+al.~ : per-epoch wall-clock from Fig.~4/\S5 (A6000 GPU); per-cell RMSEs are
+digitized from the randomized-vector bars of their Fig.~3(a) ($\dagger$; the paper gives absolute
+RMSEs only as bar charts, so these are approximate, $\pm0.3$ kcal/mol for energy/force and $\pm1$--$2$
+for Hessian --- see ",traced,traced,1,1,unattributed,unattributed,0.079,0.091,proposal/logs/results/psphl_vs_phl.json,nms_hessian_rmse base_mean,False,False,False,False
+table,1.00,1.0,2,False,3,"PHL (reimplemented) |  | Primary results. Every ``paper as reported'' value is cited from Rodriguez et
+al.~ : per-epoch wall-clock from Fig.~4/\S5 (A6000 GPU); per-cell RMSEs are
+digitized from the randomized-vector bars of their Fig.~3(a) ($\dagger$; the paper gives absolute
+RMSEs only as bar charts, so these are approximate, $\pm0.3$ kcal/mol for energy/force and $\pm1$--$2$
+for Hessian --- see ",traced,traced,19807,164,unattributed,unattributed,0.053,0.273,proposal/logs/smoke/phl_seed0.jsonl,epoch,True,False,False,False
+table,80.0,80.0,1,False,3,"\textbf{PS-PHL ($K{=}80$)} | Probes / | Primary results. Every ``paper as reported'' value is cited from Rodriguez et
+al.~ : per-epoch wall-clock from Fig.~4/\S5 (A6000 GPU); per-cell RMSEs are
+digitized from the randomized-vector bars of their Fig.~3(a) ($\dagger$; the paper gives absolute
+RMSEs only as bar charts, so these are approximate, $\pm0.3$ kcal/mol for energy/force and $\pm1$--$2$
+for H",traced,traced,143661,12,unattributed,unattributed,0.053,0.091,proposal/logs/results/psphl_vs_phl.json,probes method,False,False,False,False
+table,1.96,1.96,2,False,3,"\textbf{PS-PHL ($K{=}80$)} | Per-epoch | Primary results. Every ``paper as reported'' value is cited from Rodriguez et
+al.~ : per-epoch wall-clock from Fig.~4/\S5 (A6000 GPU); per-cell RMSEs are
+digitized from the randomized-vector bars of their Fig.~3(a) ($\dagger$; the paper gives absolute
+RMSEs only as bar charts, so these are approximate, $\pm0.3$ kcal/mol for energy/force and $\pm1$--$2$
+for ",traced,traced,260,2,unattributed,unattributed,0.082,0.091,proposal/logs/results/psphl_vs_phl.json,irc_force_rmse t,True,False,False,False
+table,5.83,5.83,2,False,3,"\textbf{PS-PHL ($K{=}80$)} | \multicolumn{3}{c}{Test RMSE} | Primary results. Every ``paper as reported'' value is cited from Rodriguez et
+al.~ : per-epoch wall-clock from Fig.~4/\S5 (A6000 GPU); per-cell RMSEs are
+digitized from the randomized-vector bars of their Fig.~3(a) ($\dagger$; the paper gives absolute
+RMSEs only as bar charts, so these are approximate, $\pm0.3$ kcal/mol for energy/force ",traced,traced,20,1,unattributed,unattributed,0.107,0.182,proposal/logs/results/psphl_vs_phl.json,test_energy_rmse meth_mean,True,False,False,False
+table,6.65,6.65,2,False,3,"\textbf{PS-PHL ($K{=}80$)} | \multicolumn{3}{c}{IRC RMSE} | Primary results. Every ``paper as reported'' value is cited from Rodriguez et
+al.~ : per-epoch wall-clock from Fig.~4/\S5 (A6000 GPU); per-cell RMSEs are
+digitized from the randomized-vector bars of their Fig.~3(a) ($\dagger$; the paper gives absolute
+RMSEs only as bar charts, so these are approximate, $\pm0.3$ kcal/mol for energy/force a",traced,traced,50,1,unattributed,unattributed,0.079,0.273,proposal/logs/results/psphl_vs_phl.json,test_force_rmse meth_mean,True,False,False,False
+table,14.82,14.82,2,False,4,"\textbf{PS-PHL ($K{=}80$)} | \multicolumn{3}{c}{NMS RMSE} | Primary results. Every ``paper as reported'' value is cited from Rodriguez et
+al.~ : per-epoch wall-clock from Fig.~4/\S5 (A6000 GPU); per-cell RMSEs are
+digitized from the randomized-vector bars of their Fig.~3(a) ($\dagger$; the paper gives absolute
+RMSEs only as bar charts, so these are approximate, $\pm0.3$ kcal/mol for energy/force a",traced,traced,20,1,unattributed,unattributed,0.052,0.182,proposal/logs/results/psphl_vs_phl.json,test_hessian_rmse meth_mean,True,False,False,False
+table,8.61,8.61,2,False,3,"\textbf{PS-PHL ($K{=}80$)} | $t$-test vs.\ | Primary results. Every ``paper as reported'' value is cited from Rodriguez et
+al.~ : per-epoch wall-clock from Fig.~4/\S5 (A6000 GPU); per-cell RMSEs are
+digitized from the randomized-vector bars of their Fig.~3(a) ($\dagger$; the paper gives absolute
+RMSEs only as bar charts, so these are approximate, $\pm0.3$ kcal/mol for energy/force and $\pm1$--$2$
+",traced,traced,36,1,unattributed,unattributed,0.079,0.273,proposal/logs/results/psphl_vs_phl.json,irc_energy_rmse meth_mean,True,False,False,False
+table,8.22,8.22,2,False,3,"\textbf{PS-PHL ($K{=}80$)} | Grad-var | Primary results. Every ``paper as reported'' value is cited from Rodriguez et
+al.~ : per-epoch wall-clock from Fig.~4/\S5 (A6000 GPU); per-cell RMSEs are
+digitized from the randomized-vector bars of their Fig.~3(a) ($\dagger$; the paper gives absolute
+RMSEs only as bar charts, so these are approximate, $\pm0.3$ kcal/mol for energy/force and $\pm1$--$2$
+for H",traced,traced,41,1,unattributed,unattributed,0.077,0.364,proposal/logs/results/psphl_vs_phl.json,irc_force_rmse meth_mean,True,False,False,False
+table,16.22,16.22,2,False,4,"\textbf{PS-PHL ($K{=}80$)} |  | Primary results. Every ``paper as reported'' value is cited from Rodriguez et
+al.~ : per-epoch wall-clock from Fig.~4/\S5 (A6000 GPU); per-cell RMSEs are
+digitized from the randomized-vector bars of their Fig.~3(a) ($\dagger$; the paper gives absolute
+RMSEs only as bar charts, so these are approximate, $\pm0.3$ kcal/mol for energy/force and $\pm1$--$2$
+for Hessian -",traced,traced,15,3,supported,unattributed,0.13,0.182,proposal/logs/phl400/eval_s4.log,"irc {'energy_rmse': 7.0812, 'force_rmse': 8.1044, 'hessian_rmse': 16.2245, 'n_mol': 34248, 'n_hessian': 2000}",True,False,False,False
+table,48.22,48.22,2,False,4,"\textbf{PS-PHL ($K{=}80$)} |  | Primary results. Every ``paper as reported'' value is cited from Rodriguez et
+al.~ : per-epoch wall-clock from Fig.~4/\S5 (A6000 GPU); per-cell RMSEs are
+digitized from the randomized-vector bars of their Fig.~3(a) ($\dagger$; the paper gives absolute
+RMSEs only as bar charts, so these are approximate, $\pm0.3$ kcal/mol for energy/force and $\pm1$--$2$
+for Hessian -",traced,traced,1,1,unattributed,unattributed,0.079,0.091,proposal/logs/results/psphl_vs_phl.json,nms_energy_rmse meth_mean,False,False,False,False
+table,14.10,14.1,2,False,4,"\textbf{PS-PHL ($K{=}80$)} |  | Primary results. Every ``paper as reported'' value is cited from Rodriguez et
+al.~ : per-epoch wall-clock from Fig.~4/\S5 (A6000 GPU); per-cell RMSEs are
+digitized from the randomized-vector bars of their Fig.~3(a) ($\dagger$; the paper gives absolute
+RMSEs only as bar charts, so these are approximate, $\pm0.3$ kcal/mol for energy/force and $\pm1$--$2$
+for Hessian -",traced,untraced,4,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+table,36.09,36.09,2,False,4,"\textbf{PS-PHL ($K{=}80$)} |  | Primary results. Every ``paper as reported'' value is cited from Rodriguez et
+al.~ : per-epoch wall-clock from Fig.~4/\S5 (A6000 GPU); per-cell RMSEs are
+digitized from the randomized-vector bars of their Fig.~3(a) ($\dagger$; the paper gives absolute
+RMSEs only as bar charts, so these are approximate, $\pm0.3$ kcal/mol for energy/force and $\pm1$--$2$
+for Hessian -",traced,traced,1,1,unattributed,unattributed,0.079,0.091,proposal/logs/results/psphl_vs_phl.json,nms_hessian_rmse meth_mean,False,False,False,False
+table,0.935,0.935,3,False,3,"\textbf{PS-PHL ($K{=}80$)} |  | Primary results. Every ``paper as reported'' value is cited from Rodriguez et
+al.~ : per-epoch wall-clock from Fig.~4/\S5 (A6000 GPU); per-cell RMSEs are
+digitized from the randomized-vector bars of their Fig.~3(a) ($\dagger$; the paper gives absolute
+RMSEs only as bar charts, so these are approximate, $\pm0.3$ kcal/mol for energy/force and $\pm1$--$2$
+for Hessian -",traced,traced,2,2,unattributed,unattributed,0.08,0.091,proposal/logs/results/psphl_vs_phl.json,test_energy_rmse p,False,False,False,False
+table,1.11,1.11,2,False,3,"\textbf{PS-PHL ($K{=}80$)} |  | Primary results. Every ``paper as reported'' value is cited from Rodriguez et
+al.~ : per-epoch wall-clock from Fig.~4/\S5 (A6000 GPU); per-cell RMSEs are
+digitized from the randomized-vector bars of their Fig.~3(a) ($\dagger$; the paper gives absolute
+RMSEs only as bar charts, so these are approximate, $\pm0.3$ kcal/mol for energy/force and $\pm1$--$2$
+for Hessian -",traced,traced,1,1,unattributed,unattributed,0.0,1.0,proposal/logs/audit_K40.json,irc var_ratio,False,False,False,False
+table,-0.09,-0.09,2,False,1,Test | \multicolumn{3}{c}{Energy} | Paired two-sided $t$-tests (PS-PHL $K{=,traced,traced,1,1,supported,supported,0.327,0.1,proposal/logs/results/psphl_vs_phl.json,test_energy_rmse t,False,False,False,False
+table,0.935,0.935,3,False,3,Test | \multicolumn{3}{c}{Force} | Paired two-sided $t$-tests (PS-PHL $K{=,traced,traced,2,2,supported,supported,0.21,0.091,proposal/logs/results/psphl_vs_phl.json,test_energy_rmse p,False,False,False,False
+table,1.42,1.42,2,False,3,Test |  | Paired two-sided $t$-tests (PS-PHL $K{=,traced,traced,1,1,supported,supported,0.236,0.091,proposal/logs/results/psphl_vs_phl.json,test_force_rmse t,True,True,False,False
+table,0.230,0.23,3,False,3,Test |  | Paired two-sided $t$-tests (PS-PHL $K{=,traced,traced,1,1,supported,supported,0.236,0.091,proposal/logs/results/psphl_vs_phl.json,test_force_rmse p,False,False,False,False
+table,0.99,0.99,2,False,2,Test |  | Paired two-sided $t$-tests (PS-PHL $K{=,traced,traced,1,1,supported,unattributed,0.236,0.182,proposal/logs/results/psphl_vs_phl.json,test_hessian_rmse t,False,False,False,False
+table,0.377,0.377,3,False,3,Test |  | Paired two-sided $t$-tests (PS-PHL $K{=,traced,traced,1,1,supported,supported,0.236,0.091,proposal/logs/results/psphl_vs_phl.json,test_hessian_rmse p,False,False,False,False
+table,0.27,0.27,2,False,2,IRC | \multicolumn{3}{c}{Energy} | Paired two-sided $t$-tests (PS-PHL $K{=,traced,traced,1,1,supported,supported,0.294,0.091,proposal/logs/results/psphl_vs_phl.json,irc_energy_rmse t,False,False,False,False
+table,0.800,0.8,3,False,3,IRC | \multicolumn{3}{c}{Force} | Paired two-sided $t$-tests (PS-PHL $K{=,traced,traced,31,3,supported,supported,0.189,0.091,proposal/logs/results/psphl_vs_phl.json,irc_energy_rmse p,False,False,False,False
+table,1.96,1.96,2,False,3,IRC |  | Paired two-sided $t$-tests (PS-PHL $K{=,traced,traced,260,2,supported,supported,0.21,0.091,proposal/logs/results/psphl_vs_phl.json,irc_force_rmse t,True,False,False,False
+table,0.121,0.121,3,False,3,IRC |  | Paired two-sided $t$-tests (PS-PHL $K{=,traced,traced,1,1,supported,supported,0.21,0.091,proposal/logs/results/psphl_vs_phl.json,irc_force_rmse p,False,False,False,False
+table,1.04,1.04,2,False,3,IRC |  | Paired two-sided $t$-tests (PS-PHL $K{=,traced,traced,1,1,supported,supported,0.21,0.091,proposal/logs/results/psphl_vs_phl.json,irc_hessian_rmse t,True,True,False,False
+table,0.356,0.356,3,False,3,IRC |  | Paired two-sided $t$-tests (PS-PHL $K{=,traced,traced,1,1,supported,supported,0.21,0.091,proposal/logs/results/psphl_vs_phl.json,irc_hessian_rmse p,False,False,False,False
+table,0.04,0.04,2,False,1,NMS | \multicolumn{3}{c}{Energy} | Paired two-sided $t$-tests (PS-PHL $K{=,traced,traced,3,3,supported,unattributed,0.294,0.143,proposal/logs/results/psphl_vs_phl.json,nms_energy_rmse t,False,False,False,False
+table,0.973,0.973,3,False,3,NMS | \multicolumn{3}{c}{Force} | Paired two-sided $t$-tests (PS-PHL $K{=,traced,traced,1,1,supported,supported,0.189,0.091,proposal/logs/results/psphl_vs_phl.json,nms_energy_rmse p,False,False,False,False
+table,0.63,0.63,2,False,2,NMS |  | Paired two-sided $t$-tests (PS-PHL $K{=,traced,traced,2,2,supported,supported,0.21,0.091,proposal/logs/results/psphl_vs_phl.json,nms_force_rmse t,True,False,False,False
+table,0.565,0.565,3,False,3,NMS |  | Paired two-sided $t$-tests (PS-PHL $K{=,traced,traced,1,1,supported,supported,0.21,0.091,proposal/logs/results/psphl_vs_phl.json,nms_force_rmse p,False,False,False,False
+table,0.14,0.14,2,False,2,NMS |  | Paired two-sided $t$-tests (PS-PHL $K{=,traced,traced,5,5,supported,unattributed,0.21,0.182,proposal/logs/results/psphl_vs_phl.json,nms_hessian_rmse t,False,False,False,False
+table,0.894,0.894,3,False,3,NMS |  | Paired two-sided $t$-tests (PS-PHL $K{=,traced,traced,1,1,supported,supported,0.21,0.091,proposal/logs/results/psphl_vs_phl.json,nms_hessian_rmse p,True,True,False,False
+table,1.00,1.0,2,False,3,Test | Grad-var ratio (mean$\pm$std) | Per-dataset gradient-variance audit for PS-PHL($K{=,traced,traced,19807,164,supported,unattributed,0.245,0.273,proposal/logs/audit_K20.json,irc var_ratio,True,False,False,False
+table,0.76,0.76,2,False,2,Test | stage range | Per-dataset gradient-variance audit for PS-PHL($K{=,untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+table,1.50,1.5,2,False,3,Test | stage range | Per-dataset gradient-variance audit for PS-PHL($K{=,untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+table,0.94,0.94,2,False,2,IRC | Grad-var ratio (mean$\pm$std) | Per-dataset gradient-variance audit for PS-PHL($K{=,traced,traced,4,4,supported,unattributed,0.245,0.364,proposal/logs/audit_K40.json,test var_ratio,True,False,False,False
+table,0.71,0.71,2,False,2,IRC | stage range | Per-dataset gradient-variance audit for PS-PHL($K{=,traced,traced,1,1,unattributed,unattributed,0.081,0.182,proposal/logs/results/psphl_vs_phl.json,test_energy_rmse base_std,True,False,False,False
+table,1.33,1.33,2,False,3,IRC | stage range | Per-dataset gradient-variance audit for PS-PHL($K{=,untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+table,0.91,0.91,2,False,2,NMS | Grad-var ratio (mean$\pm$std) | Per-dataset gradient-variance audit for PS-PHL($K{=,traced,traced,1,1,supported,unattributed,0.175,0.455,proposal/logs/audit_ci.json,nms,False,False,False,False
+table,0.72,0.72,2,False,2,NMS | stage range | Per-dataset gradient-variance audit for PS-PHL($K{=,traced,traced,1,1,unattributed,unattributed,0.0,1.0,proposal/logs/results_partial.json,irc_energy_rmse base_std,True,True,False,False
+table,1.28,1.28,2,False,3,NMS | stage range | Per-dataset gradient-variance audit for PS-PHL($K{=,untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+prose,1.11,1.11,2,False,3,"REACT reactive-chemistry benchmark, PS-PHL with $K{=}80$ reduces the probe count by $5\times$ (80 vs.\ 395 probes/step) with per-step gradient variance within $1.11\times$ of PHL on all three evaluation datasets and downstream energy/force/Hessian RMSEs statistically indistinguishable from PHL on every dataset (paired $t$-",traced,traced,1,1,unattributed,unattributed,0.0,1.0,proposal/logs/audit_K40.json,irc var_ratio,False,False,False,False
+prose,6.8,6.8,1,False,2,"--Thompson subsampler whose variance scales as $1/q$ in the kept fraction $q$; our measurements (Section~ ) show it inflates the per-step gradient variance by $6.8\times$ at a $5\times$ probe cut, far outside a $2\times$ tolerance.",traced,untraced,428,0,untraced,untraced,0.0,1.0,,,True,True,False,False
+prose,0.03,0.03,2,False,1,"overned by the trace coherence $(\tr D)^2/(3N\,\lVert D\rVert_F^2)$ of the per-molecule Hessian error $D$; on reactive-chemistry data this quantity is $\approx 0.03$, i.e.\ sharing a probe across molecules is nearly free. (ii) We introduce Probe-Sharing PHL (PS-PHL), prove it unbiased for any $K\ge1$, and give a variance b",traced,traced,2,2,unattributed,unattributed,0.0,1.0,proposal/logs/audit_ci.json,nms,True,True,False,False
+prose,0.30,0.3,2,False,2,"The training objective is $\mathcal L_{\mathrm{HVP}}=\mathcal L_E+\lambda_F\mathcal L_F+\lambda_H\LHh$ with $\lambda_F=0.30$, $\lambda_H=0.09$.",traced,traced,1,1,unattributed,unattributed,0.0,1.0,proposal/logs/results/psphl_vs_phl.json,irc_hessian_rmse base_std,False,False,False,False
+prose,0.09,0.09,2,False,1,"The training objective is $\mathcal L_{\mathrm{HVP}}=\mathcal L_E+\lambda_F\mathcal L_F+\lambda_H\LHh$ with $\lambda_F=0.30$, $\lambda_H=0.09$.",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,True,True,False,False
+prose,80\%,80.0,0,True,2,"Following PHL, we train on 80\% of RTP and use the held-out 10\% RTP test set plus the full IRC and NMS sets as the three evaluation datasets; the 80/10/10 split uses the same seeded shuffle",traced,traced,143662,13,unattributed,unattributed,0.084,0.091,proposal/logs/results/psphl_vs_phl.json,irc_energy_rmse p,True,True,False,False
+prose,10\%,10.0,0,True,2,"Following PHL, we train on 80\% of RTP and use the held-out 10\% RTP test set plus the full IRC and NMS sets as the three evaluation datasets; the 80/10/10 split uses the same seeded shuffle as the authors' reference code.",traced,traced,13332,16,unattributed,unattributed,0.072,1.0,proposal/logs/phl400/eval_phl_seed3.json,irc energy_rmse,True,True,False,False
+prose,0.30,0.3,2,False,2,"items.} We reuse the authors' ANI-style HIP-NN-like architecture (per-species MLPs on AEV descriptors), the patched TorchANI data/Hessian pipeline, $\lambda_F=0.30$, $\lambda_H=0.09$, minibatch size $B=400$, and the AdamW+SGD optimizer pair with ReduceLROnPlateau scheduling from the authors' notebook~ .",traced,traced,1,1,unattributed,unattributed,0.031,0.273,proposal/logs/results/psphl_vs_phl.json,irc_hessian_rmse base_std,False,False,False,False
+prose,0.09,0.09,2,False,1,"the authors' ANI-style HIP-NN-like architecture (per-species MLPs on AEV descriptors), the patched TorchANI data/Hessian pipeline, $\lambda_F=0.30$, $\lambda_H=0.09$, minibatch size $B=400$, and the AdamW+SGD optimizer pair with ReduceLROnPlateau scheduling from the authors' notebook~ .",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,True,True,False,False
+prose,0.05,0.05,2,False,1,"Paired two-sided $t$-tests compare PS-PHL to reimplemented PHL on each dataset$\times$property cell ($n=5$, significance $\alpha=0.05$; accuracy parity requires $p>0.05$ on \emph{every} cell, not an aggregate).",traced,traced,1,1,unattributed,unattributed,0.0,1.0,proposal/report.out,\BOOKMARK [2][-]{subsection.3.2}{\376\377\000W\000h\000y\000\040\000m\000a\000s\000k\000i\000n\000g\000\040\000f\000a\000i\000l\000s\000\040\000a\000n\000d\000\040\000p\000r\000o\000b\000e\000\040\000,True,True,False,False
+prose,0.05,0.05,2,False,1,"ed two-sided $t$-tests compare PS-PHL to reimplemented PHL on each dataset$\times$property cell ($n=5$, significance $\alpha=0.05$; accuracy parity requires $p>0.05$ on \emph{every} cell, not an aggregate).",traced,traced,1,1,unattributed,unattributed,0.0,1.0,proposal/report.out,\BOOKMARK [2][-]{subsection.3.2}{\376\377\000W\000h\000y\000\040\000m\000a\000s\000k\000i\000n\000g\000\040\000f\000a\000i\000l\000s\000\040\000a\000n\000d\000\040\000p\000r\000o\000b\000e\000\040\000,True,True,False,False
+prose,2.04,2.04,2,False,3,"per dataset at matched checkpoints; we pre-state that a ratio is classified as passing if its point estimate is $\le 2\times$, and near-boundary values (e.g.\ $2.04\pm0.1$) are classified by the point estimate against $2\times$.",traced,untraced,10,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+prose,80.0,80.0,1,False,3,"PS-PHL with $K{=}80$ uses \textbf{80.0 probes/step} versus 395.3 for reimplemented PHL (the mean is below $B{=}400$ because the final 69-molecule minibatch lowers the time average), a \textbf{4.9$\t",traced,traced,143661,12,supported,supported,0.123,0.091,proposal/logs/results/psphl_vs_phl.json,probes method,False,False,False,False
+prose,395.3,395.3,1,False,4,"PS-PHL with $K{=}80$ uses \textbf{80.0 probes/step} versus 395.3 for reimplemented PHL (the mean is below $B{=}400$ because the final 69-molecule minibatch lowers the time average), a \textbf{4.9$\times$ time-averaged reduct",traced,traced,27,15,supported,supported,0.16,0.091,proposal/logs/smoke/phl_seed0.jsonl,avg_probes_per_step,True,False,False,False
+prose,4.9,4.9,1,False,2,"f{80.0 probes/step} versus 395.3 for reimplemented PHL (the mean is below $B{=}400$ because the final 69-molecule minibatch lowers the time average), a \textbf{4.9$\times$ time-averaged reduction}.",traced,traced,42,2,supported,supported,0.189,0.091,proposal/logs/results/psphl_vs_phl.json,probes reduction,True,False,False,False
+prose,0.05,0.05,2,False,1,"Downstream RMSEs on all nine dataset$\times$property cells are statistically indistinguishable from reimplemented PHL (paired $t$-tests, all $p>0.05$), and the gradient-variance ratio is $\le1.11\times$ on all three datasets (per-dataset values in Table~ ).",traced,traced,1,1,unattributed,unattributed,0.0,1.0,proposal/report.out,\BOOKMARK [2][-]{subsection.3.2}{\376\377\000W\000h\000y\000\040\000m\000a\000s\000k\000i\000n\000g\000\040\000f\000a\000i\000l\000s\000\040\000a\000n\000d\000\040\000p\000r\000o\000b\000e\000\040\000,True,True,False,False
+prose,2.72,2.72,2,False,3,"Per-epoch wall-clock drops from 2.72\,s to 1.96\,s ($1.38\times$) on an NVIDIA H200.",traced,traced,219,1,unattributed,unattributed,0.113,0.091,proposal/logs/results/psphl_vs_phl.json,epoch_time base,True,False,False,False
+prose,1.96,1.96,2,False,3,"Per-epoch wall-clock drops from 2.72\,s to 1.96\,s ($1.38\times$) on an NVIDIA H200.",traced,traced,260,2,unattributed,unattributed,0.113,0.182,proposal/logs/results/psphl_vs_phl.json,epoch_time method,True,False,False,False
+prose,1.38,1.38,2,False,3,"Per-epoch wall-clock drops from 2.72\,s to 1.96\,s ($1.38\times$) on an NVIDIA H200.",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+prose,1.21,1.21,2,False,3,"The ratio stays near or below $1\times$ for $K=80,40,20$ (max $1.21\times$) and rises only at $K=10$ (IRC $1.53\times$), confirming that probe sharing preserves variance far beyond the $5\times$ operating point.",traced,traced,1,1,unattributed,unattributed,0.05,0.182,proposal/logs/audit_K20.json,test var_ratio,False,False,False,False
+prose,1.53,1.53,2,False,3,"The ratio stays near or below $1\times$ for $K=80,40,20$ (max $1.21\times$) and rises only at $K=10$ (IRC $1.53\times$), confirming that probe sharing preserves variance far beyond the $5\times$ operating point.",traced,traced,1,1,unattributed,unattributed,0.101,0.091,proposal/logs/audit_K10.json,irc var_ratio,False,False,False,False
+prose,6.8,6.8,1,False,2,"For contrast, the mask-based alternative at the same $5\times$ cut measures $6.8\times$ (off the scale of Fig.~ ) --- it is not competitive.",traced,untraced,428,0,untraced,untraced,0.0,1.0,,,True,True,False,False
+prose,1.07,1.07,2,False,3,"ing control experiment (Rao--Blackwellization: average $M$ independent probes per molecule) leaves the per-step gradient variance essentially unchanged (ratio $1.07$--$1.10$ for $M=3,5$), so the variance is dominated by molecule sampling, not probe draws.",traced,untraced,2,0,untraced,untraced,0.0,1.0,,,True,True,False,False
+prose,1.10,1.1,2,False,3,"rol experiment (Rao--Blackwellization: average $M$ independent probes per molecule) leaves the per-step gradient variance essentially unchanged (ratio $1.07$--$1.10$ for $M=3,5$), so the variance is dominated by molecule sampling, not probe draws.",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+prose,6.8,6.8,1,False,2,"This is why the mask-based subsampler --- which cuts molecules --- explodes ($6.8\times$ at a $5\times$ cut), while probe sharing --- which keeps all molecules --- does not.",traced,untraced,428,0,untraced,untraced,0.0,1.0,,,True,True,False,False
+prose,7.59,7.59,2,False,3,"Empirically: at $K=20$ ($20\times$), the gradient-variance ratio is still $\le1.21\times$ but one of three seeds shows degraded Test-energy (7.59 vs $\approx5.3$) and NMS-Hessian (47.3 vs $\approx36$) RMSE --- per-seed accuracy variance grows; at $K=10$ ($40\times$) the IRC variance ratio reaches $1.53\t",traced,traced,28,2,supported,supported,0.169,0.091,proposal/logs/share20/eval_s12.log,"test {'energy_rmse': 7.5931, 'force_rmse': 8.5903, 'hessian_rmse': 19.2179, 'n_mol': 3510, 'n_hessian': 2000}",True,False,False,False
+prose,47.3,47.3,1,False,3,"0$ ($20\times$), the gradient-variance ratio is still $\le1.21\times$ but one of three seeds shows degraded Test-energy (7.59 vs $\approx5.3$) and NMS-Hessian (47.3 vs $\approx36$) RMSE --- per-seed accuracy variance grows; at $K=10$ ($40\times$) the IRC variance ratio reaches $1.53\times$, approaching the gate.",traced,traced,2,2,supported,unattributed,0.162,0.364,proposal/logs/share20/eval_s12.log,"nms {'energy_rmse': 46.0044, 'force_rmse': 16.8451, 'hessian_rmse': 47.3047, 'n_mol': 62527, 'n_hessian': 2000}",True,True,True,True
+prose,1.53,1.53,2,False,3,"(7.59 vs $\approx5.3$) and NMS-Hessian (47.3 vs $\approx36$) RMSE --- per-seed accuracy variance grows; at $K=10$ ($40\times$) the IRC variance ratio reaches $1.53\times$, approaching the gate.",traced,traced,1,1,supported,unattributed,0.136,0.182,proposal/logs/audit_K10.json,irc var_ratio,False,False,False,False
+prose,1.38,1.38,2,False,3,"\subsection{Computational cost trade-off} PS-PHL reduces the distinct-HVP count by $B/K$ and lowers the per-epoch wall-clock by $1.38\times$ (2.72\,s$\to$1.96\,s) at the testbed scale, where non-HVP overhead (energy/force gradients, AEV computation, parameter updates) dominates the step.",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+prose,2.72,2.72,2,False,3,"\subsection{Computational cost trade-off} PS-PHL reduces the distinct-HVP count by $B/K$ and lowers the per-epoch wall-clock by $1.38\times$ (2.72\,s$\to$1.96\,s) at the testbed scale, where non-HVP overhead (energy/force gradients, AEV computation, parameter updates) dominates the step.",traced,traced,219,1,unattributed,unattributed,0.065,0.091,proposal/logs/results/psphl_vs_phl.json,epoch_time base,True,False,False,False
+prose,1.96,1.96,2,False,3,"\subsection{Computational cost trade-off} PS-PHL reduces the distinct-HVP count by $B/K$ and lowers the per-epoch wall-clock by $1.38\times$ (2.72\,s$\to$1.96\,s) at the testbed scale, where non-HVP overhead (energy/force gradients, AEV computation, parameter updates) dominates the step.",traced,traced,260,2,unattributed,unattributed,0.065,0.182,proposal/logs/results/psphl_vs_phl.json,epoch_time method,True,False,False,False

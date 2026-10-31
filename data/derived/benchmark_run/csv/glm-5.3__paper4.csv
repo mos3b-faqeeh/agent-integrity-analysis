@@ -1,0 +1,1216 @@
+kind,raw,value,dec,pct,sig,context,L1,L1nb,L1_n_matches,L1nb_n_matches,L2ctx,L2,L2_score,L2_p,L2_file,L2_context,decoy_L1,decoy_L1nb,decoy_L2ctx,decoy_L2
+table,16.33,16.33,2,False,4,"Piecewise I | Grid | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,132,3,unattributed,unattributed,0.055,0.636,proposal/logs/main_2d/grid_piecewise1_b500_s3.json,evals rmse,True,True,False,False
+table,0.95,0.95,2,False,2,"Piecewise I | Grid | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,3987,3747,unattributed,unattributed,0.111,0.182,proposal/logs/main_3d/grid_diffusion3d_b1000_s4.json,evals mape,True,True,False,False
+table,19.93,19.93,2,False,4,"Piecewise I | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,untraced,100,0,untraced,untraced,0.0,1.0,,,True,True,False,False
+table,2.53,2.53,2,False,3,"Piecewise I | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,199,2,unattributed,unattributed,0.055,0.818,proposal/logs/main_2d/bvs4_nondiff_b500_s8.json,evals iae,True,True,False,False
+table,15.25,15.25,2,False,4,"Piecewise I | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,115,2,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/bvs1_piecewise1_b500_s0.json,evals rmse,True,False,False,False
+table,0.89,0.89,2,False,2,"Piecewise I | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,415,196,unattributed,unattributed,0.109,0.636,proposal/logs/main_2d/smart_smooth_osc_b500_s2.json,evals iae,True,True,False,False
+table,40.00,40.0,2,False,4,"Piecewise I | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,542,50,unattributed,unattributed,0.053,0.364,proposal/logs/main_2d/smart_smooth_osc_b500_s1.json,timestamp_start,True,False,False,False
+table,8.55,8.55,2,False,3,"Piecewise I | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,122,2,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/gsmartn_nondiff_b500_s8.json,evals rmse,True,False,False,False
+table,14.71,14.71,2,False,4,"Piecewise I | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,untraced,111,0,untraced,untraced,0.0,1.0,,,True,True,False,False
+table,0.71,0.71,2,False,2,"Piecewise I | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,327,88,unattributed,unattributed,0.055,0.818,proposal/logs/main_3d/bvs1_diffusion3d_b1000_s1.json,evals mape,True,True,False,False
+table,9.57,9.57,2,False,3," | Grid | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,158,10,unattributed,unattributed,0.118,0.182,proposal/logs/main_2d/grid_piecewise1_b500_s6.json,evals iae,True,True,False,False
+table,13.59,13.59,2,False,4," | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,109,1,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/bvs2_smooth_osc_b500_s8.json,evals sill,True,True,False,False
+table,1.30,1.3,2,False,3," | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,246,6,unattributed,unattributed,0.057,0.909,proposal/logs/main_2d/gsmart_smooth_osc_b500_s0.json,evals iae,True,True,False,False
+table,10.60,10.6,2,False,4," | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,316,4,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/maximin_smooth_osc_b500_s3.json,evals sill,True,True,False,False
+table,0.72,0.72,2,False,2," | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,290,51,supported,unattributed,0.121,0.182,proposal/logs/diagnostics.json,error_by_region_3d bvs4 r<10 error_mass_fraction,True,True,False,False
+table,39.89,39.89,2,False,4," | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,untraced,86,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+table,9.12,9.12,2,False,3," | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,133,1,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/maximin_nondiff_b500_s4.json,timestamp_end,True,True,False,False
+table,10.35,10.35,2,False,4," | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,239,5,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/grid_smooth_osc_b500_s5.json,evals sill,True,True,False,False
+table,0.25,0.25,2,False,2," | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,1145,37,unattributed,unattributed,0.058,1.0,proposal/logs/main_3d/bvs05_diffusion3d_b1000_s8.json,evals mape,True,True,True,False
+table,6.85,6.85,2,False,3," | Grid | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,213,6,unattributed,unattributed,0.058,0.727,proposal/logs/main_2d/bvs05_piecewise1_b500_s3.json,evals iae,True,True,False,False
+table,0.21,0.21,2,False,2," | Grid | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,1654,47,unattributed,unattributed,0.058,1.0,proposal/logs/main_3d/bvs05_diffusion3d_b1000_s5.json,evals mape,True,True,False,False
+table,9.67,9.67,2,False,3," | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,177,12,unattributed,unattributed,0.058,0.636,proposal/logs/main_2d/random_smooth_osc_b500_s9.json,init_x,True,False,False,False
+table,0.70,0.7,2,False,2," | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,3095,2773,unattributed,unattributed,0.116,0.727,proposal/logs/main_3d/random_diffusion3d_b1000_s3.json,evals coverage_levels,True,True,True,True
+table,7.35,7.35,2,False,3," | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,139,2,unattributed,unattributed,0.058,0.636,proposal/logs/main_2d/bvs2_piecewise1_b500_s8.json,evals iae,True,True,False,False
+table,0.32,0.32,2,False,2," | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,429,30,supported,unattributed,0.186,0.182,proposal/logs/diagnostics.json,error_by_region_3d smart 10<=r<40 volume_fraction,True,True,False,False
+table,41.07,41.07,2,False,4," | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,70,1,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/random_piecewise2_b500_s1.json,evals rmse,True,False,False,False
+table,8.99,8.99,2,False,3," | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,untraced,132,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+table,7.05,7.05,2,False,3," | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,116,2,unattributed,unattributed,0.058,0.727,proposal/logs/main_2d/bvs4_piecewise1_b500_s6.json,evals iae,True,True,False,False
+table,0.28,0.28,2,False,2," | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,588,53,unattributed,unattributed,0.058,1.0,proposal/logs/main_3d/bvs2_diffusion3d_b1000_s9.json,evals mape,True,True,False,False
+table,4.73,4.73,2,False,3," | Grid | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,133,6,unattributed,unattributed,0.118,0.364,proposal/logs/main_2d/grid_piecewise1_b500_s4.json,evals iae,True,True,False,False
+table,0.06,0.06,2,False,1," | Grid | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,27884,124,unattributed,unattributed,0.058,1.0,proposal/logs/main_3d/bvs4_diffusion3d_b1000_s3.json,evals mape,True,True,False,False
+table,6.02,6.02,2,False,3," | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,143,2,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/bvs1_nondiff_b500_s9.json,evals rmse,True,True,False,False
+table,0.27,0.27,2,False,2," | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,766,42,supported,unattributed,0.121,0.182,proposal/logs/main_3d/random_diffusion3d_b1000_s0.json,init_x,True,True,False,False
+table,4.55,4.55,2,False,3," | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,1865,7,supported,supported,0.127,0.091,proposal/logs/speedup.json,piecewise1 smart target_iae,True,True,False,False
+table,0.12,0.12,2,False,2," | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,7979,90,supported,unattributed,0.124,0.182,proposal/logs/diagnostics.json,design_diagnostics_3d smart frac_r_lt_10,True,True,True,False
+table,43.29,43.29,2,False,4," | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,79,1,unattributed,unattributed,0.062,0.273,proposal/logs/speedup.json,piecewise1 gsmart target_iae,True,True,False,False
+table,9.76,9.76,2,False,3," | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,untraced,139,0,untraced,untraced,0.0,1.0,,,True,True,False,False
+table,4.51,4.51,2,False,3," | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,156,9,unattributed,unattributed,0.061,0.273,proposal/logs/diagnostics.json,grid_alignment_sweep piecewise1 iae,True,True,False,False
+table,0.12,0.12,2,False,2," | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,7979,90,unattributed,unattributed,0.061,0.273,proposal/logs/diagnostics.json,design_diagnostics_3d gsmart frac_r_lt_10,True,True,False,False
+table,27.74,27.74,2,False,4,"Piecewise II | Grid | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,untraced,73,0,untraced,untraced,0.0,1.0,,,True,True,False,False
+table,1.72,1.72,2,False,3,"Piecewise II | Grid | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,260,1,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/maximin_smooth_osc_b500_s9.json,evals mape,True,True,False,False
+table,33.30,33.3,2,False,4,"Piecewise II | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,untraced,75,0,untraced,untraced,0.0,1.0,,,True,True,False,False
+table,4.61,4.61,2,False,3,"Piecewise II | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,127,8,unattributed,unattributed,0.052,0.909,proposal/logs/main_2d/maximin_piecewise1_b500_s8.json,evals iae,True,True,False,False
+table,27.15,27.15,2,False,4,"Piecewise II | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,untraced,74,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+table,1.52,1.52,2,False,3,"Piecewise II | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,257,22,unattributed,unattributed,0.108,0.182,proposal/logs/main_3d/smart_diffusion3d_b1000_s7.json,init_x,True,True,False,False
+table,62.72,62.72,2,False,4,"Piecewise II | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,untraced,25,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+table,14.44,14.44,2,False,4,"Piecewise II | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,107,3,unattributed,unattributed,0.052,0.636,proposal/logs/main_2d/bvs4_piecewise1_b500_s9.json,evals iae,True,True,False,False
+table,26.09,26.09,2,False,4,"Piecewise II | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,70,1,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/gsmartn_piecewise1_b500_s4.json,evals crps,True,True,False,False
+table,1.17,1.17,2,False,3,"Piecewise II | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,353,13,unattributed,unattributed,0.051,1.0,proposal/logs/main_2d/gsmart_smooth_osc_b500_s7.json,evals iae,True,True,False,False
+table,16.96,16.96,2,False,4," | Grid | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,112,11,unattributed,unattributed,0.118,0.273,proposal/logs/main_2d/grid_piecewise2_b500_s2.json,evals iae,True,True,False,False
+table,22.97,22.97,2,False,4," | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,62,1,unattributed,unattributed,0.118,0.182,proposal/logs/main_2d/random_piecewise1_b500_s6.json,evals iae,True,True,False,False
+table,2.58,2.58,2,False,3," | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,202,1,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/gsmart_piecewise1_b500_s3.json,timestamp_end,True,True,False,False
+table,18.40,18.4,2,False,4," | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,108,2,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/gsmart_nondiff_b500_s4.json,evals rmse,True,True,False,False
+table,0.81,0.81,2,False,2," | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,335,72,unattributed,unattributed,0.058,1.0,proposal/logs/main_2d/smart_piecewise2_b500_s4.json,evals mape,True,True,False,False
+table,63.01,63.01,2,False,4," | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,untraced,39,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+table,15.23,15.23,2,False,4," | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,116,1,unattributed,unattributed,0.058,0.364,proposal/logs/main_2d/bvs1_piecewise1_b500_s9.json,evals iae,True,False,False,False
+table,18.34,18.34,2,False,4," | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,127,2,unattributed,unattributed,0.058,0.455,proposal/logs/main_2d/maximin_piecewise2_b500_s6.json,evals iae,True,True,False,False
+table,0.68,0.68,2,False,2," | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,338,80,unattributed,unattributed,0.058,1.0,proposal/logs/main_3d/grid_diffusion3d_b1000_s4.json,evals mape,True,True,False,False
+table,12.14,12.14,2,False,4," | Grid | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,150,1,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/bvs1_piecewise1_b500_s9.json,evals crps,True,True,False,False
+table,0.45,0.45,2,False,2," | Grid | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,307,25,unattributed,unattributed,0.058,1.0,proposal/logs/main_3d/random_diffusion3d_b1000_s5.json,evals mape,True,True,False,False
+table,16.66,16.66,2,False,4," | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,untraced,105,0,untraced,untraced,0.0,1.0,,,True,True,False,False
+table,1.20,1.2,2,False,3," | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,285,14,unattributed,unattributed,0.061,0.091,proposal/logs/diagnostics.json,grid_alignment_sweep nondiff iae,True,True,False,False
+table,13.04,13.04,2,False,4," | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,136,5,unattributed,unattributed,0.058,0.727,proposal/logs/main_3d/grid_diffusion3d_b1000_s6.json,timestamp_end,True,True,True,False
+table,0.40,0.4,2,False,2," | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,378,51,unattributed,unattributed,0.116,0.636,proposal/logs/main_2d/smart_smooth_osc_b500_s0.json,evals iae,True,True,True,True
+table,65.11,65.11,2,False,4," | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,untraced,35,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+table,14.62,14.62,2,False,4," | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,untraced,112,0,untraced,untraced,0.0,1.0,,,True,True,False,False
+table,12.52,12.52,2,False,4," | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,100,4,unattributed,unattributed,0.058,0.273,proposal/logs/main_2d/maximin_piecewise2_b500_s6.json,evals iae,True,True,False,False
+table,0.37,0.37,2,False,2," | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,306,28,unattributed,unattributed,0.058,1.0,proposal/logs/main_3d/bvs1_diffusion3d_b1000_s5.json,evals mape,True,True,False,False
+table,8.16,8.16,2,False,3," | Grid | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,156,5,unattributed,unattributed,0.118,0.364,proposal/logs/main_2d/grid_piecewise2_b500_s1.json,evals iae,True,True,False,False
+table,0.12,0.12,2,False,2," | Grid | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,7979,90,unattributed,unattributed,0.061,0.455,proposal/logs/diagnostics.json,design_diagnostics_3d gsmart frac_r_lt_10,True,True,False,False
+table,10.46,10.46,2,False,4," | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,292,3,unattributed,unattributed,0.058,0.545,proposal/logs/main_2d/maximin_piecewise1_b500_s6.json,evals iae,True,True,False,False
+table,0.41,0.41,2,False,2," | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,365,64,unattributed,unattributed,0.058,1.0,proposal/logs/main_3d/bvs05_diffusion3d_b1000_s5.json,evals mape,True,True,False,False
+table,8.03,8.03,2,False,3," | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,156,2,supported,supported,0.127,0.091,proposal/logs/speedup.json,piecewise2 smart target_iae,True,True,False,False
+table,0.26,0.26,2,False,2," | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,1024,67,unattributed,unattributed,0.118,0.636,proposal/logs/main_3d/smart_diffusion3d_b1000_s7.json,evals mape,True,True,False,False
+table,71.37,71.37,2,False,4," | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,38,1,unattributed,unattributed,0.062,0.091,proposal/logs/speedup.json,piecewise2 gsmart target_iae,True,False,False,False
+table,16.05,16.05,2,False,4," | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,108,1,unattributed,unattributed,0.058,0.455,proposal/logs/main_2d/gsmart_nondiff_b500_s0.json,evals iae,True,True,False,False
+table,7.87,7.87,2,False,3," | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,126,4,unattributed,unattributed,0.058,0.636,proposal/logs/main_2d/bvs05_piecewise2_b500_s5.json,evals iae,True,True,False,False
+table,0.24,0.24,2,False,2," | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,1237,81,unattributed,unattributed,0.058,1.0,proposal/logs/main_3d/gsmart_diffusion3d_b1000_s3.json,evals mape,True,True,False,False
+table,1.21,1.21,2,False,3,"Smooth osc. | Grid | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,302,35,supported,unattributed,0.215,0.273,proposal/logs/main_2d/grid_smooth_osc_b500_s8.json,evals iae,True,True,False,False
+table,0.01,0.01,2,False,1,"Smooth osc. | Grid | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,36388,426,supported,unattributed,0.162,0.5,proposal/logs/main_2d/grid_smooth_osc_b500_s7.json,init_y,True,True,True,False
+table,0.95,0.95,2,False,2,"Smooth osc. | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,3987,3747,supported,unattributed,0.215,0.636,proposal/logs/main_2d/random_smooth_osc_b500_s5.json,evals iae,True,True,True,False
+table,0.05,0.05,2,False,1,"Smooth osc. | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,48008,356,unattributed,unattributed,0.105,1.0,proposal/logs/main_3d/random_diffusion3d_b1000_s3.json,evals mape,True,True,True,False
+table,1.03,1.03,2,False,3,"Smooth osc. | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,343,29,supported,unattributed,0.215,0.273,proposal/logs/main_2d/smart_smooth_osc_b500_s7.json,evals iae,True,True,True,False
+table,0.06,0.06,2,False,1,"Smooth osc. | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,27884,124,unattributed,unattributed,0.11,0.75,proposal/logs/compute_cost.json,smooth_osc maximin mean_step_s,True,True,True,False
+table,1.25,1.25,2,False,3,"Smooth osc. | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,322,33,supported,unattributed,0.162,0.364,proposal/logs/main_2d/smart_smooth_osc_b500_s2.json,init_x,True,True,True,False
+table,0.18,0.18,2,False,2,"Smooth osc. | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,3749,105,supported,unattributed,0.215,0.182,proposal/logs/main_2d/smart_smooth_osc_b500_s6.json,evals iae,True,True,True,False
+table,1.01,1.01,2,False,3,"Smooth osc. | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,347,22,supported,supported,0.169,0.091,proposal/logs/speedup.json,smooth_osc gsmart target_iae,True,True,True,False
+table,0.04,0.04,2,False,1,"Smooth osc. | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,66831,612,unattributed,unattributed,0.105,1.0,proposal/logs/main_2d/gsmartn_smooth_osc_b500_s3.json,evals a,True,True,False,False
+table,1.02,1.02,2,False,3," | Grid | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,332,30,unattributed,unattributed,0.118,0.636,proposal/logs/main_3d/grid_diffusion3d_b1000_s1.json,evals mape,True,True,False,False
+table,0.85,0.85,2,False,2," | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,340,101,unattributed,unattributed,0.116,0.636,proposal/logs/main_2d/random_smooth_osc_b500_s6.json,evals iae,True,True,False,False
+table,0.01,0.01,2,False,1," | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,36388,426,supported,unattributed,0.186,0.333,proposal/logs/diagnostics.json,error_by_region_3d random r>=40 error_mass_fraction,True,True,False,False
+table,0.86,0.86,2,False,2," | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,346,114,unattributed,unattributed,0.116,0.818,proposal/logs/main_2d/smart_smooth_osc_b500_s1.json,evals iae,True,True,False,False
+table,0.03,0.03,2,False,1," | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,84202,836,unattributed,unattributed,0.059,0.857,proposal/logs/main_2d/smart_piecewise1_b500_s7.json,evals a,True,True,False,False
+table,1.17,1.17,2,False,3," | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,353,13,unattributed,unattributed,0.057,1.0,proposal/logs/main_2d/gsmart_smooth_osc_b500_s7.json,evals iae,True,True,False,False
+table,0.12,0.12,2,False,2," | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,7979,90,supported,unattributed,0.124,0.182,proposal/logs/diagnostics.json,design_diagnostics_3d smart frac_r_lt_10,True,True,True,False
+table,0.83,0.83,2,False,2," | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,431,153,unattributed,unattributed,0.058,0.818,proposal/logs/main_3d/bvs05_diffusion3d_b1000_s0.json,evals mape,True,True,False,False
+table,0.02,0.02,2,False,1," | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,21847,339,unattributed,unattributed,0.059,0.5,proposal/logs/main_3d/random_diffusion3d_b1000_s8.json,evals a,True,True,False,False
+table,0.53,0.53,2,False,2," | Grid | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,329,65,unattributed,unattributed,0.116,0.636,proposal/logs/main_2d/grid_smooth_osc_b500_s4.json,evals iae,True,True,True,True
+table,0.02,0.02,2,False,1," | Grid | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,21847,339,unattributed,unattributed,0.059,0.667,proposal/logs/main_3d/random_diffusion3d_b1000_s8.json,evals a,True,True,False,False
+table,0.68,0.68,2,False,2," | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,338,80,unattributed,unattributed,0.116,0.727,proposal/logs/main_2d/random_smooth_osc_b500_s8.json,evals iae,True,True,False,False
+table,0.02,0.02,2,False,1," | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,21847,339,supported,unattributed,0.121,0.167,proposal/logs/main_3d/random_diffusion3d_b1000_s8.json,evals a,True,True,True,False
+table,0.53,0.53,2,False,2," | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,329,65,unattributed,unattributed,0.116,0.727,proposal/logs/main_2d/smart_smooth_osc_b500_s1.json,evals iae,True,True,True,True
+table,0.02,0.02,2,False,1," | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,21847,339,unattributed,unattributed,0.062,0.667,proposal/logs/compute_cost.json,piecewise1 smart std_step_s,True,True,False,False
+table,1.14,1.14,2,False,3," | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,299,7,unattributed,unattributed,0.058,1.0,proposal/logs/main_3d/gsmartn_diffusion3d_b1000_s5.json,evals mape,True,True,False,False
+table,0.14,0.14,2,False,2," | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,6527,107,unattributed,unattributed,0.059,0.909,proposal/logs/main_2d/smart_piecewise1_b500_s0.json,init_x,True,True,False,False
+table,0.52,0.52,2,False,2," | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,361,70,unattributed,unattributed,0.058,1.0,proposal/logs/main_3d/bvs05_diffusion3d_b1000_s5.json,evals mape,True,True,False,False
+table,0.01,0.01,2,False,1," | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,36388,426,supported,unattributed,0.121,0.333,proposal/logs/diagnostics.json,error_by_region_3d bvs4 r>=40 error_mass_fraction,True,True,False,False
+table,0.19,0.19,2,False,2," | Grid | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,2294,70,unattributed,unattributed,0.116,0.364,proposal/logs/main_2d/grid_smooth_osc_b500_s5.json,evals iae,True,True,False,False
+table,0.01,0.01,2,False,1," | Grid | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,36388,426,supported,unattributed,0.121,0.333,proposal/logs/main_3d/grid_diffusion3d_b1000_s3.json,evals a,True,True,False,False
+table,0.36,0.36,2,False,2," | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,373,35,unattributed,unattributed,0.118,0.364,proposal/logs/main_3d/random_diffusion3d_b1000_s6.json,evals mape,True,True,False,False
+table,0.01,0.01,2,False,1," | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,36388,426,supported,unattributed,0.186,0.333,proposal/logs/diagnostics.json,error_by_region_3d random r>=40 error_mass_fraction,True,True,False,False
+table,0.19,0.19,2,False,2," | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,2294,70,supported,unattributed,0.124,0.182,proposal/logs/speedup.json,smooth_osc smart target_iae,True,True,False,False
+table,1.01,1.01,2,False,3," | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,347,22,unattributed,unattributed,0.118,0.545,proposal/logs/main_2d/smart_nondiff_b500_s5.json,evals iae,True,True,False,False
+table,0.10,0.1,2,False,2," | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,13685,74,unattributed,unattributed,0.118,0.3,proposal/logs/main_3d/smart_diffusion3d_b1000_s3.json,evals mape,True,True,False,False
+table,0.18,0.18,2,False,2," | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,3749,105,unattributed,unattributed,0.058,1.0,proposal/logs/main_3d/bvs1_diffusion3d_b1000_s5.json,evals mape,True,True,False,False
+table,3.50,3.5,2,False,3,"Non-differentiable | Grid | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,138,4,unattributed,unattributed,0.105,0.273,proposal/logs/main_2d/grid_nondiff_b500_s0.json,evals iae,True,True,False,False
+table,0.29,0.29,2,False,2,"Non-differentiable | Grid | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,475,33,unattributed,unattributed,0.055,0.455,proposal/logs/diagnostics.json,design_diagnostics_3d bvs4 frac_r_10_40,True,True,False,False
+table,4.27,4.27,2,False,3,"Non-differentiable | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,141,1,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/bvs05_smooth_osc_b500_s5.json,evals mape,True,True,False,False
+table,0.60,0.6,2,False,2,"Non-differentiable | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,3022,2761,unattributed,unattributed,0.103,0.727,proposal/logs/main_3d/random_diffusion3d_b1000_s3.json,evals coverage_levels,True,True,False,False
+table,3.45,3.45,2,False,3,"Non-differentiable | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,162,4,unattributed,unattributed,0.052,0.818,proposal/logs/main_2d/bvs2_nondiff_b500_s3.json,evals iae,True,True,False,False
+table,0.27,0.27,2,False,2,"Non-differentiable | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,766,42,unattributed,unattributed,0.108,0.364,proposal/logs/main_3d/smart_diffusion3d_b1000_s0.json,init_x,True,True,False,False
+table,10.37,10.37,2,False,4,"Non-differentiable | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,256,33,unattributed,unattributed,0.053,0.273,proposal/logs/main_2d/smart_nondiff_b500_s6.json,init_x,True,True,False,False
+table,2.50,2.5,2,False,3,"Non-differentiable | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,195,11,unattributed,unattributed,0.052,0.727,proposal/logs/main_2d/smart_nondiff_b500_s2.json,evals crps,True,True,False,False
+table,3.43,3.43,2,False,3,"Non-differentiable | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,177,5,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/grid_nondiff_b500_s8.json,evals crps,True,True,False,False
+table,0.23,0.23,2,False,2,"Non-differentiable | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,1275,57,unattributed,unattributed,0.108,0.182,proposal/logs/diagnostics.json,error_by_region_3d random 10<=r<40 error_mass_fraction,True,True,False,False
+table,2.35,2.35,2,False,3," | Grid | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,237,17,unattributed,unattributed,0.118,0.091,proposal/logs/main_2d/grid_nondiff_b500_s4.json,evals iae,True,True,False,False
+table,3.06,3.06,2,False,3," | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,144,1,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/bvs4_nondiff_b500_s1.json,evals crps,True,True,False,False
+table,0.22,0.22,2,False,2," | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,1456,98,supported,unattributed,0.121,0.273,proposal/logs/diagnostics.json,error_by_region_3d smart 10<=r<40 error_mass_fraction,True,True,False,False
+table,2.37,2.37,2,False,3," | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,232,9,unattributed,unattributed,0.118,0.273,proposal/logs/main_2d/smart_nondiff_b500_s2.json,evals iae,True,True,False,False
+table,0.11,0.11,2,False,2," | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,9851,81,unattributed,unattributed,0.061,0.727,proposal/logs/diagnostics.json,design_diagnostics_3d maximin frac_r_lt_10,True,True,False,False
+table,10.41,10.41,2,False,4," | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,284,6,unattributed,unattributed,0.118,0.182,proposal/logs/main_2d/smart_piecewise1_b500_s0.json,evals iae,True,True,False,False
+table,2.69,2.69,2,False,3," | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,174,1,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/gsmart_smooth_osc_b500_s6.json,evals mape,True,True,False,False
+table,2.35,2.35,2,False,3," | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,237,17,unattributed,unattributed,0.058,0.818,proposal/logs/main_2d/grid_nondiff_b500_s4.json,evals iae,True,True,False,False
+table,0.14,0.14,2,False,2," | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,6527,107,unattributed,unattributed,0.058,1.0,proposal/logs/main_3d/bvs05_diffusion3d_b1000_s5.json,evals mape,True,True,False,False
+table,2.04,2.04,2,False,3," | Grid | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,untraced,209,0,untraced,untraced,0.0,1.0,,,True,True,False,False
+table,0.05,0.05,2,False,1," | Grid | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,48008,356,unattributed,unattributed,0.059,0.875,proposal/logs/main_2d/grid_nondiff_b500_s4.json,evals a,True,True,False,False
+table,2.16,2.16,2,False,3," | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,186,2,unattributed,unattributed,0.058,0.909,proposal/logs/main_2d/maximin_nondiff_b500_s2.json,evals iae,True,True,False,False
+table,0.21,0.21,2,False,2," | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,1654,47,unattributed,unattributed,0.118,0.727,proposal/logs/main_3d/random_diffusion3d_b1000_s6.json,evals mape,True,True,False,False
+table,1.62,1.62,2,False,3," | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,247,4,unattributed,unattributed,0.058,0.909,proposal/logs/main_2d/bvs4_nondiff_b500_s8.json,evals iae,True,True,False,False
+table,0.07,0.07,2,False,1," | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,24301,83,supported,unattributed,0.186,0.222,proposal/logs/diagnostics.json,error_by_region_3d smart r<10 volume_fraction,True,True,False,False
+table,10.71,10.71,2,False,4," | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,285,5,unattributed,unattributed,0.058,0.818,proposal/logs/main_2d/bvs2_piecewise1_b500_s4.json,evals iae,True,True,False,False
+table,2.54,2.54,2,False,3," | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,172,3,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/gsmartn_smooth_osc_b500_s5.json,evals mape,True,False,False,False
+table,1.58,1.58,2,False,3," | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,271,10,unattributed,unattributed,0.058,1.0,proposal/logs/main_2d/smart_nondiff_b500_s3.json,evals iae,True,True,False,False
+table,0.07,0.07,2,False,1," | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,24301,83,supported,unattributed,0.121,0.222,proposal/logs/diagnostics.json,error_by_region_3d bvs4 r<10 volume_fraction,True,True,False,False
+table,1.22,1.22,2,False,3," | Grid | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,271,13,unattributed,unattributed,0.118,0.545,proposal/logs/main_2d/grid_nondiff_b500_s1.json,evals iae,True,True,False,False
+table,0.02,0.02,2,False,1," | Grid | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,21847,339,unattributed,unattributed,0.059,0.667,proposal/logs/main_3d/random_diffusion3d_b1000_s8.json,evals a,True,True,False,False
+table,1.28,1.28,2,False,3," | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,234,10,unattributed,unattributed,0.058,0.727,proposal/logs/main_2d/random_piecewise2_b500_s8.json,timestamp_end,True,True,False,False
+table,0.08,0.08,2,False,1," | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,20578,81,unattributed,unattributed,0.118,1.0,proposal/logs/main_3d/random_diffusion3d_b1000_s0.json,evals mape,True,True,True,False
+table,1.00,1.0,2,False,3," | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,8942,7609,supported,supported,0.121,0.091,proposal/logs/main_3d/maximin_diffusion3d_b1000_s1.json,seed,True,True,False,False
+table,0.02,0.02,2,False,1," | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,21847,339,unattributed,unattributed,0.062,0.667,proposal/logs/compute_cost.json,piecewise1 smart std_step_s,True,True,False,False
+table,10.76,10.76,2,False,4," | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,301,9,unattributed,unattributed,0.062,0.273,proposal/logs/speedup.json,nondiff gsmart target_iae,True,True,False,False
+table,2.28,2.28,2,False,3," | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,221,3,unattributed,unattributed,0.118,0.364,proposal/logs/main_2d/smart_nondiff_b500_s3.json,evals iae,True,True,False,False
+table,0.99,0.99,2,False,2," | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,5225,4984,unattributed,unattributed,0.058,0.818,proposal/logs/main_2d/bvs4_nondiff_b500_s8.json,evals iae,True,True,False,False
+table,0.03,0.03,2,False,1," | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,84202,836,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/grid_piecewise2_b500_s2.json,evals a,True,True,False,False
+table,24.87,24.87,2,False,4,"Diffusion (3D) | Grid | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,119,3,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/bvs4_smooth_osc_b500_s9.json,timestamp_start,True,True,False,False
+table,2.38,2.38,2,False,3,"Diffusion (3D) | Grid | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,188,1,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/smart_smooth_osc_b500_s7.json,evals mape,True,True,False,False
+table,3.19,3.19,2,False,3,"Diffusion (3D) | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,151,5,unattributed,unattributed,0.058,0.636,proposal/logs/main_2d/bvs1_nondiff_b500_s0.json,evals iae,True,True,False,False
+table,0.51,0.51,2,False,2,"Diffusion (3D) | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,316,49,unattributed,unattributed,0.058,1.0,proposal/logs/main_3d/bvs2_diffusion3d_b1000_s9.json,evals mape,True,True,False,False
+table,12.24,12.24,2,False,4,"Diffusion (3D) | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,117,2,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/bvs2_piecewise1_b500_s9.json,evals crps,True,True,False,False
+table,2.83,2.83,2,False,3,"Diffusion (3D) | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,178,12,supported,supported,0.121,0.091,proposal/logs/main_3d/smart_diffusion3d_b1000_s0.json,init_x,True,True,False,False
+table,12.24,12.24,2,False,4,"Diffusion (3D) | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,117,2,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/bvs2_piecewise1_b500_s9.json,evals crps,True,True,False,False
+table,2.83,2.83,2,False,3,"Diffusion (3D) | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,178,12,supported,supported,0.121,0.091,proposal/logs/main_3d/smart_diffusion3d_b1000_s0.json,init_x,True,True,False,False
+table,7.74,7.74,2,False,3,"Diffusion (3D) | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,159,2,unattributed,unattributed,0.058,0.727,proposal/logs/main_2d/bvs05_piecewise2_b500_s0.json,evals iae,True,True,False,False
+table,2.14,2.14,2,False,3,"Diffusion (3D) | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,237,4,unattributed,unattributed,0.058,0.727,proposal/logs/main_3d/grid_diffusion3d_b1000_s2.json,evals mape,True,True,False,False
+table,15.44,15.44,2,False,4," | Grid | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,107,3,unattributed,unattributed,0.118,0.182,proposal/logs/main_2d/grid_piecewise1_b500_s1.json,evals iae,True,False,False,False
+table,0.77,0.77,2,False,2," | Grid | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,255,60,supported,supported,0.121,0.091,proposal/logs/diagnostics.json,error_by_region_3d smart r<10 error_mass_fraction,True,True,False,False
+table,2.66,2.66,2,False,3," | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,237,43,supported,unattributed,0.121,0.182,proposal/logs/main_3d/random_diffusion3d_b1000_s8.json,init_x,True,True,False,False
+table,0.62,0.62,2,False,2," | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,295,40,unattributed,unattributed,0.116,0.727,proposal/logs/main_2d/random_smooth_osc_b500_s5.json,evals iae,True,True,False,False
+table,8.22,8.22,2,False,3," | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,139,2,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/gsmart_nondiff_b500_s7.json,evals crps,True,True,False,False
+table,0.87,0.87,2,False,2," | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,381,164,unattributed,unattributed,0.058,1.0,proposal/logs/main_3d/bvs2_diffusion3d_b1000_s1.json,evals mape,True,True,False,False
+table,8.22,8.22,2,False,3," | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,139,2,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/gsmart_nondiff_b500_s7.json,evals crps,True,True,False,False
+table,0.87,0.87,2,False,2," | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,381,164,unattributed,unattributed,0.058,1.0,proposal/logs/main_3d/bvs2_diffusion3d_b1000_s1.json,evals mape,True,True,False,False
+table,4.58,4.58,2,False,3," | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,128,6,unattributed,unattributed,0.058,0.909,proposal/logs/main_2d/bvs2_piecewise1_b500_s2.json,evals iae,True,True,False,False
+table,0.63,0.63,2,False,2," | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,349,45,unattributed,unattributed,0.058,0.909,proposal/logs/main_3d/bvs2_diffusion3d_b1000_s5.json,evals mape,True,True,False,False
+table,11.02,11.02,2,False,4," | Grid | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,255,1,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/random_smooth_osc_b500_s0.json,evals sill,True,True,False,False
+table,0.39,0.39,2,False,2," | Grid | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,346,48,unattributed,unattributed,0.059,0.636,proposal/logs/diagnostics.json,design_diagnostics_3d maximin boundary_frac_5pct,True,True,False,False
+table,2.15,2.15,2,False,3," | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,235,12,unattributed,unattributed,0.058,0.727,proposal/logs/main_2d/random_smooth_osc_b500_s4.json,init_x,True,True,False,False
+table,0.38,0.38,2,False,2," | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,314,26,unattributed,unattributed,0.116,0.545,proposal/logs/main_2d/random_smooth_osc_b500_s5.json,evals iae,True,True,False,False
+table,5.15,5.15,2,False,3," | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,123,2,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/gsmartn_piecewise2_b500_s5.json,evals mape,True,True,False,False
+table,0.32,0.32,2,False,2," | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,429,30,supported,unattributed,0.186,0.182,proposal/logs/diagnostics.json,error_by_region_3d smart 10<=r<40 volume_fraction,True,True,False,False
+table,5.15,5.15,2,False,3," | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,123,2,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/gsmartn_piecewise2_b500_s5.json,evals mape,True,True,False,False
+table,0.32,0.32,2,False,2," | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,429,30,supported,unattributed,0.186,0.182,proposal/logs/diagnostics.json,error_by_region_3d smart 10<=r<40 volume_fraction,True,True,False,False
+table,3.21,3.21,2,False,3," | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,148,6,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/bvs2_nondiff_b500_s0.json,evals crps,True,True,False,False
+table,0.42,0.42,2,False,2," | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,370,46,unattributed,unattributed,0.058,1.0,proposal/logs/main_3d/bvs05_diffusion3d_b1000_s8.json,evals mape,True,True,False,False
+table,7.05,7.05,2,False,3," | Grid | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,116,2,unattributed,unattributed,0.058,0.727,proposal/logs/main_2d/bvs4_piecewise1_b500_s6.json,evals iae,True,True,False,False
+table,0.07,0.07,2,False,1," | Grid | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,24301,83,supported,unattributed,0.121,0.333,proposal/logs/diagnostics.json,error_by_region_3d bvs4 r<10 volume_fraction,True,True,False,False
+table,1.49,1.49,2,False,3," | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,246,8,unattributed,unattributed,0.058,0.909,proposal/logs/main_2d/smart_nondiff_b500_s7.json,evals iae,True,True,True,False
+table,0.23,0.23,2,False,2," | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,1275,57,supported,supported,0.186,0.091,proposal/logs/diagnostics.json,error_by_region_3d random 10<=r<40 error_mass_fraction,True,True,True,False
+table,3.17,3.17,2,False,3," | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,157,8,unattributed,unattributed,0.058,0.818,proposal/logs/main_2d/smart_nondiff_b500_s7.json,evals crps,True,True,False,False
+table,0.28,0.28,2,False,2," | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,588,53,unattributed,unattributed,0.118,0.545,proposal/logs/main_3d/smart_diffusion3d_b1000_s1.json,evals mape,True,True,False,False
+table,3.17,3.17,2,False,3," | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,157,8,unattributed,unattributed,0.058,0.818,proposal/logs/main_2d/smart_nondiff_b500_s7.json,evals crps,True,True,False,False
+table,0.28,0.28,2,False,2," | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,588,53,unattributed,unattributed,0.118,0.545,proposal/logs/main_3d/smart_diffusion3d_b1000_s1.json,evals mape,True,True,False,False
+table,2.16,2.16,2,False,3," | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,186,2,unattributed,unattributed,0.058,0.818,proposal/logs/main_2d/maximin_nondiff_b500_s2.json,evals iae,True,True,False,False
+table,0.17,0.17,2,False,2," | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,10720,121,unattributed,unattributed,0.058,1.0,proposal/logs/main_3d/gsmart_diffusion3d_b1000_s3.json,evals mape,True,True,False,False
+table,5.03,5.03,2,False,3," | Grid | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,127,4,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/bvs1_nondiff_b500_s0.json,evals rmse,True,False,False,False
+table,1.14,1.14,2,False,3," | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,299,7,unattributed,unattributed,0.058,0.818,proposal/logs/main_3d/gsmartn_diffusion3d_b1000_s5.json,evals mape,True,True,False,False
+table,0.10,0.1,2,False,2," | Random | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,13685,74,unattributed,unattributed,0.118,0.9,proposal/logs/main_3d/random_diffusion3d_b1000_s3.json,evals mape,True,True,False,False
+table,2.26,2.26,2,False,3," | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,273,31,unattributed,unattributed,0.059,0.545,proposal/logs/main_2d/smart_piecewise1_b500_s5.json,init_x,True,True,False,False
+table,0.14,0.14,2,False,2," | SMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,6527,107,unattributed,unattributed,0.059,0.909,proposal/logs/main_2d/smart_piecewise1_b500_s0.json,init_x,True,True,False,False
+table,2.26,2.26,2,False,3," | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,273,31,unattributed,unattributed,0.059,0.545,proposal/logs/main_2d/smart_piecewise1_b500_s5.json,init_x,True,True,False,False
+table,0.14,0.14,2,False,2," | gSMART | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,6527,107,unattributed,unattributed,0.059,0.909,proposal/logs/main_2d/smart_piecewise1_b500_s0.json,init_x,True,True,False,False
+table,1.60,1.6,2,False,3," | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,245,10,unattributed,unattributed,0.058,1.0,proposal/logs/main_2d/bvs4_nondiff_b500_s1.json,evals iae,True,True,False,False
+table,0.17,0.17,2,False,2," | BVS | Reconstruction error (IAE, mean~$\pm$~std over 10 seeds) at every
+(function, budget) configuration.  The 3D diffusion errors are in units of
+$10^{-12",traced,traced,10720,121,unattributed,unattributed,0.058,1.0,proposal/logs/main_3d/gsmart_diffusion3d_b1000_s3.json,evals mape,True,True,False,False
+table,16.3,16.3,1,False,3,"Piecewise I | Grid R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,1172,45,supported,unattributed,0.153,0.636,proposal/logs/main_2d/grid_piecewise1_b500_s4.json,evals rmse,True,True,False,False
+table,10.4,10.4,1,False,3,"Piecewise I | Grid R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,2610,71,supported,supported,0.153,0.091,proposal/logs/main_2d/grid_piecewise1_b500_s6.json,evals crps,True,True,False,False
+table,0.97,0.97,2,False,2,"Piecewise I | Grid R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,1467,1261,unattributed,unattributed,0.1,0.818,proposal/logs/main_2d/grid_piecewise2_b500_s2.json,evals coverage,True,True,False,False
+table,17.4,17.4,1,False,3,"Piecewise I | Random R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,1001,8,supported,unattributed,0.153,0.727,proposal/logs/main_2d/random_piecewise1_b500_s1.json,evals crps,True,True,True,False
+table,11.7,11.7,1,False,3,"Piecewise I | Random R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,1600,46,supported,unattributed,0.153,0.273,proposal/logs/main_2d/random_piecewise1_b500_s6.json,evals crps,True,True,True,False
+table,0.97,0.97,2,False,2,"Piecewise I | Random R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,1467,1261,unattributed,unattributed,0.1,0.818,proposal/logs/main_2d/random_piecewise1_b500_s1.json,evals coverage,True,True,False,False
+table,15.3,15.3,1,False,3,"Piecewise I | SMART R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,1176,6,unattributed,unattributed,0.1,1.0,proposal/logs/main_2d/random_piecewise1_b500_s1.json,evals crps,True,True,True,False
+table,10.3,10.3,1,False,3,"Piecewise I | SMART R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,1998,52,supported,unattributed,0.153,0.182,proposal/logs/main_2d/smart_piecewise1_b500_s7.json,evals crps,True,True,False,False
+table,0.97,0.97,2,False,2,"Piecewise I | SMART R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,1467,1261,unattributed,unattributed,0.1,1.0,proposal/logs/main_3d/smart_diffusion3d_b1000_s5.json,evals mape,True,True,True,False
+table,59.9,59.9,1,False,3,"Piecewise I | gSMART R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,335,3,unattributed,unattributed,0.049,0.909,proposal/logs/main_2d/gsmartn_nondiff_b500_s5.json,timestamp_start,True,True,False,False
+table,37.5,37.5,1,False,3,"Piecewise I | gSMART R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,804,4,unattributed,unattributed,0.1,1.0,proposal/logs/main_2d/maximin_piecewise2_b500_s2.json,evals crps,True,False,False,False
+table,0.92,0.92,2,False,2,"Piecewise I | gSMART R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,677,464,unattributed,unattributed,0.1,0.727,proposal/logs/main_2d/smart_piecewise1_b500_s7.json,evals coverage,True,True,False,False
+table,15.3,15.3,1,False,3,"Piecewise I | BVS R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,1176,6,unattributed,unattributed,0.1,1.0,proposal/logs/main_2d/random_piecewise1_b500_s1.json,evals crps,True,True,False,False
+table,10.4,10.4,1,False,3,"Piecewise I | BVS R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,2610,71,unattributed,unattributed,0.1,0.909,proposal/logs/main_2d/gsmart_nondiff_b500_s8.json,evals crps,True,True,False,False
+table,0.97,0.97,2,False,2,"Piecewise I | BVS R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,1467,1261,unattributed,unattributed,0.098,0.909,proposal/logs/main_2d/gsmart_smooth_osc_b500_s6.json,evals crps,True,True,False,False
+table,28.6,28.6,1,False,3,"Piecewise II | Grid R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,627,13,supported,unattributed,0.146,0.455,proposal/logs/main_2d/grid_piecewise2_b500_s4.json,evals rmse,True,True,True,False
+table,18.4,18.4,1,False,3,"Piecewise II | Grid R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,1014,38,supported,unattributed,0.146,0.364,proposal/logs/main_2d/grid_piecewise2_b500_s9.json,evals crps,True,True,False,False
+table,0.97,0.97,2,False,2,"Piecewise II | Grid R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,1467,1261,unattributed,unattributed,0.095,0.818,proposal/logs/main_2d/grid_piecewise2_b500_s2.json,evals coverage,True,True,False,False
+table,31.9,31.9,1,False,3,"Piecewise II | Random R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,703,15,unattributed,unattributed,0.097,0.909,proposal/logs/main_3d/random_diffusion3d_b1000_s8.json,init_x,True,True,False,False
+table,20.7,20.7,1,False,3,"Piecewise II | Random R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,754,17,supported,unattributed,0.146,0.364,proposal/logs/main_2d/random_piecewise2_b500_s3.json,evals crps,True,True,False,False
+table,0.97,0.97,2,False,2,"Piecewise II | Random R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,1467,1261,unattributed,unattributed,0.095,0.818,proposal/logs/main_2d/random_piecewise1_b500_s1.json,evals coverage,True,True,False,False
+table,28.4,28.4,1,False,3,"Piecewise II | SMART R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,706,26,unattributed,unattributed,0.097,0.818,proposal/logs/main_3d/smart_diffusion3d_b1000_s3.json,init_x,True,True,False,False
+table,18.5,18.5,1,False,3,"Piecewise II | SMART R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,1111,87,supported,unattributed,0.146,0.727,proposal/logs/main_2d/smart_piecewise1_b500_s3.json,evals rmse,True,True,True,False
+table,0.97,0.97,2,False,2,"Piecewise II | SMART R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,1467,1261,unattributed,unattributed,0.095,1.0,proposal/logs/main_3d/smart_diffusion3d_b1000_s5.json,evals mape,True,True,True,False
+table,112.1,112.1,1,False,4,"Piecewise II | gSMART R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,untraced,47,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+table,70.6,70.6,1,False,3,"Piecewise II | gSMART R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,336,21,unattributed,unattributed,0.097,0.273,proposal/logs/main_2d/smart_nondiff_b500_s8.json,init_y,True,True,False,False
+table,0.93,0.93,2,False,2,"Piecewise II | gSMART R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,924,703,unattributed,unattributed,0.095,0.909,proposal/logs/main_3d/smart_diffusion3d_b1000_s2.json,evals mape,True,True,True,True
+table,28.0,28.0,1,False,3,"Piecewise II | BVS R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,1094,21,unattributed,unattributed,0.095,1.0,proposal/logs/main_2d/bvs05_piecewise2_b500_s2.json,evals crps,True,True,False,False
+table,18.5,18.5,1,False,3,"Piecewise II | BVS R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,1111,87,unattributed,unattributed,0.095,1.0,proposal/logs/main_2d/grid_piecewise2_b500_s2.json,evals crps,True,True,False,False
+table,0.97,0.97,2,False,2,"Piecewise II | BVS R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,1467,1261,unattributed,unattributed,0.093,0.909,proposal/logs/main_2d/gsmart_smooth_osc_b500_s6.json,evals crps,True,True,False,False
+table,0.3,0.3,1,False,1,"Smooth osc. | Grid R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,5860,437,supported,unattributed,0.248,0.714,proposal/logs/main_2d/grid_smooth_osc_b500_s8.json,evals crps,True,True,True,False
+table,0.2,0.2,1,False,1,"Smooth osc. | Grid R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,44534,902,supported,unattributed,0.248,0.667,proposal/logs/main_2d/grid_smooth_osc_b500_s8.json,evals crps,True,True,True,False
+table,1.00,1.0,2,False,3,"Smooth osc. | Grid R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,8942,7609,supported,supported,0.253,0.091,proposal/logs/main_2d/grid_smooth_osc_b500_s1.json,seed,True,True,True,False
+table,0.5,0.5,1,False,1,"Smooth osc. | Random R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,5884,3156,supported,unattributed,0.248,0.75,proposal/logs/main_2d/random_smooth_osc_b500_s6.json,evals crps,True,True,True,False
+table,0.3,0.3,1,False,1,"Smooth osc. | Random R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,5860,437,supported,unattributed,0.248,0.857,proposal/logs/main_2d/random_smooth_osc_b500_s6.json,evals crps,True,True,True,False
+table,0.99,0.99,2,False,2,"Smooth osc. | Random R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,5225,4984,supported,unattributed,0.194,1.0,proposal/logs/main_2d/random_smooth_osc_b500_s6.json,evals coverage,True,True,True,False
+table,0.2,0.2,1,False,1,"Smooth osc. | SMART R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,44534,902,supported,unattributed,0.248,0.833,proposal/logs/main_2d/smart_smooth_osc_b500_s1.json,evals crps,True,True,True,False
+table,0.2,0.2,1,False,1,"Smooth osc. | SMART R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,44534,902,supported,unattributed,0.248,0.833,proposal/logs/main_2d/smart_smooth_osc_b500_s1.json,evals crps,True,True,True,False
+table,1.00,1.0,2,False,3,"Smooth osc. | SMART R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,8942,7609,supported,unattributed,0.198,0.455,proposal/logs/main_2d/gsmart_smooth_osc_b500_s1.json,seed,True,True,True,False
+table,1.3,1.3,1,False,2,"Smooth osc. | gSMART R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,2764,138,supported,unattributed,0.248,0.455,proposal/logs/main_2d/smart_smooth_osc_b500_s7.json,evals rmse,True,True,True,False
+table,0.7,0.7,1,False,1,"Smooth osc. | gSMART R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,5801,3313,supported,unattributed,0.248,0.556,proposal/logs/main_2d/smart_smooth_osc_b500_s1.json,evals rmse,True,True,True,False
+table,0.72,0.72,2,False,2,"Smooth osc. | gSMART R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,290,51,supported,unattributed,0.248,0.727,proposal/logs/main_2d/smart_smooth_osc_b500_s7.json,evals crps,True,True,True,False
+table,0.2,0.2,1,False,1,"Smooth osc. | BVS R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,44534,902,supported,unattributed,0.194,1.0,proposal/logs/main_2d/grid_smooth_osc_b500_s8.json,evals crps,True,True,True,False
+table,0.2,0.2,1,False,1,"Smooth osc. | BVS R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,44534,902,supported,unattributed,0.194,1.0,proposal/logs/main_2d/grid_smooth_osc_b500_s8.json,evals crps,True,True,True,False
+table,1.00,1.0,2,False,3,"Smooth osc. | BVS R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,8942,7609,supported,supported,0.198,0.091,proposal/logs/main_2d/gsmart_smooth_osc_b500_s1.json,seed,True,True,True,False
+table,4.8,4.8,1,False,2,"Non-differentiable | Grid R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,1517,95,supported,unattributed,0.146,0.455,proposal/logs/main_2d/grid_nondiff_b500_s4.json,evals crps,True,True,False,False
+table,2.6,2.6,1,False,2,"Non-differentiable | Grid R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,1981,117,supported,unattributed,0.146,0.545,proposal/logs/main_2d/grid_nondiff_b500_s4.json,evals crps,True,True,False,False
+table,0.97,0.97,2,False,2,"Non-differentiable | Grid R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,1467,1261,unattributed,unattributed,0.095,0.818,proposal/logs/main_2d/grid_piecewise2_b500_s2.json,evals coverage,True,True,False,False
+table,4.2,4.2,1,False,2,"Non-differentiable | Random R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,1390,29,supported,unattributed,0.146,0.909,proposal/logs/main_2d/random_nondiff_b500_s8.json,evals rmse,True,True,True,False
+table,2.7,2.7,1,False,2,"Non-differentiable | Random R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,2345,116,supported,unattributed,0.146,0.455,proposal/logs/main_2d/random_nondiff_b500_s6.json,evals crps,True,True,True,False
+table,0.97,0.97,2,False,2,"Non-differentiable | Random R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,1467,1261,unattributed,unattributed,0.095,0.818,proposal/logs/main_2d/random_piecewise1_b500_s1.json,evals coverage,True,True,False,False
+table,3.8,3.8,1,False,2,"Non-differentiable | SMART R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,1357,54,supported,unattributed,0.146,0.727,proposal/logs/main_2d/smart_nondiff_b500_s7.json,evals rmse,True,True,True,False
+table,2.4,2.4,1,False,2,"Non-differentiable | SMART R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,2151,163,supported,unattributed,0.146,0.364,proposal/logs/main_2d/smart_nondiff_b500_s7.json,evals crps,True,True,True,False
+table,0.97,0.97,2,False,2,"Non-differentiable | SMART R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,1467,1261,unattributed,unattributed,0.095,1.0,proposal/logs/main_3d/smart_diffusion3d_b1000_s5.json,evals mape,True,True,True,False
+table,15.4,15.4,1,False,3,"Non-differentiable | gSMART R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,1227,14,unattributed,unattributed,0.095,1.0,proposal/logs/main_2d/gsmart_nondiff_b500_s3.json,evals rmse,True,True,False,False
+table,9.1,9.1,1,False,2,"Non-differentiable | gSMART R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,3334,17,unattributed,unattributed,0.095,1.0,proposal/logs/main_2d/gsmartn_nondiff_b500_s8.json,evals rmse,True,True,False,False
+table,0.92,0.92,2,False,2,"Non-differentiable | gSMART R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,677,464,unattributed,unattributed,0.095,0.727,proposal/logs/main_2d/smart_piecewise1_b500_s7.json,evals coverage,True,True,False,False
+table,3.7,3.7,1,False,2,"Non-differentiable | BVS R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,1531,102,unattributed,unattributed,0.095,1.0,proposal/logs/main_2d/bvs05_nondiff_b500_s9.json,evals rmse,True,True,False,False
+table,2.4,2.4,1,False,2,"Non-differentiable | BVS R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,2151,163,unattributed,unattributed,0.095,0.636,proposal/logs/main_2d/bvs4_nondiff_b500_s1.json,evals crps,True,True,False,False
+table,0.97,0.97,2,False,2,"Non-differentiable | BVS R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,1467,1261,unattributed,unattributed,0.093,0.909,proposal/logs/main_2d/gsmart_smooth_osc_b500_s6.json,evals crps,True,True,False,False
+table,23.4,23.4,1,False,3,"Diffusion (3D) | Grid R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,790,41,supported,unattributed,0.153,0.364,proposal/logs/main_2d/grid_piecewise2_b500_s6.json,evals crps,True,True,False,False
+table,31718.4,31718.4,1,False,6,"Diffusion (3D) | Grid R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+table,1.00,1.0,2,False,3,"Diffusion (3D) | Grid R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,8942,7609,supported,supported,0.156,0.091,proposal/logs/main_2d/grid_nondiff_b500_s1.json,seed,True,True,False,False
+table,6.5,6.5,1,False,2,"Diffusion (3D) | Random R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,1448,45,unattributed,unattributed,0.102,0.909,proposal/logs/main_3d/random_diffusion3d_b1000_s9.json,init_x,True,True,True,False
+table,40087.0,40087.0,1,False,6,"Diffusion (3D) | Random R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+table,1.00,1.0,2,False,3,"Diffusion (3D) | Random R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,8942,7609,supported,supported,0.156,0.091,proposal/logs/main_2d/random_nondiff_b500_s1.json,seed,True,True,True,False
+table,11.1,11.1,1,False,3,"Diffusion (3D) | SMART R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,4498,19,unattributed,unattributed,0.098,1.0,proposal/logs/main_2d/smart_smooth_osc_b500_s2.json,hyperparams_final,True,True,False,False
+table,33907.7,33907.7,1,False,6,"Diffusion (3D) | SMART R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,untraced,1,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+table,1.00,1.0,2,False,3,"Diffusion (3D) | SMART R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,8942,7609,supported,supported,0.156,0.091,proposal/logs/main_2d/smart_piecewise2_b500_s1.json,seed,True,True,True,False
+table,11.1,11.1,1,False,3,"Diffusion (3D) | gSMART R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,4498,19,unattributed,unattributed,0.098,1.0,proposal/logs/main_2d/smart_smooth_osc_b500_s2.json,hyperparams_final,True,True,False,False
+table,33907.7,33907.7,1,False,6,"Diffusion (3D) | gSMART R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,untraced,1,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+table,1.00,1.0,2,False,3,"Diffusion (3D) | gSMART R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,8942,7609,supported,supported,0.156,0.091,proposal/logs/main_2d/smart_piecewise2_b500_s1.json,seed,True,True,True,False
+table,8.6,8.6,1,False,2,"Diffusion (3D) | BVS R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,1306,16,unattributed,unattributed,0.1,0.909,proposal/logs/main_2d/gsmart_nondiff_b500_s3.json,evals crps,True,True,False,False
+table,31779.5,31779.5,1,False,6,"Diffusion (3D) | BVS R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",untraced,untraced,0,0,untraced,untraced,0.0,1.0,,,False,False,False,False
+table,1.00,1.0,2,False,3,"Diffusion (3D) | BVS R/C/Cov | Predictive-quality metrics at the maximum budget per function
+(500 for 2D, 1000 for 3D), mean over 10 seeds: RMSE / CRPS (3D: units of
+$10^{-12",traced,traced,8942,7609,unattributed,unattributed,0.102,0.091,proposal/logs/main_3d/maximin_diffusion3d_b1000_s1.json,seed,True,True,False,False
+table,8.03,8.03,2,False,3,"Piecewise I | Grid | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-duplica",traced,traced,156,2,unattributed,unattributed,0.047,0.455,proposal/logs/main_2d/grid_piecewise1_b500_s7.json,evals iae,True,True,False,False
+table,6.35,6.35,2,False,3,"Piecewise I | CVT | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-duplicat",traced,traced,174,1,unattributed,unattributed,0.023,0.818,proposal/logs/main_2d/grid_nondiff_b500_s6.json,evals rmse,True,True,False,False
+table,6.00,6.0,2,False,3,"Piecewise I | CVT+lines | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-du",traced,traced,185,55,unattributed,unattributed,0.097,0.091,proposal/logs/main_2d/grid_smooth_osc_b500_s6.json,seed,True,True,False,False
+table,6.38,6.38,2,False,3,"Piecewise I | \smart{} | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-dup",traced,traced,158,4,unattributed,unattributed,0.023,0.909,proposal/logs/main_2d/bvs4_piecewise1_b500_s3.json,evals iae,True,True,False,False
+table,6.41,6.41,2,False,3,"Piecewise I | BVS | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-duplicat",traced,traced,145,2,unattributed,unattributed,0.047,0.636,proposal/logs/main_2d/bvs05_smooth_osc_b500_s6.json,evals mape,True,False,False,False
+table,4.73,4.73,2,False,3," | Grid | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-duplicates of cove",traced,traced,133,6,unattributed,unattributed,0.047,0.364,proposal/logs/main_2d/grid_piecewise1_b500_s4.json,evals iae,True,True,False,False
+table,4.47,4.47,2,False,3," | CVT | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-duplicates of cover",traced,traced,126,6,unattributed,unattributed,0.047,0.636,proposal/logs/main_2d/random_smooth_osc_b500_s0.json,timestamp_end,True,True,False,False
+table,3.99,3.99,2,False,3," | CVT+lines | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-duplicates of",traced,untraced,150,0,untraced,untraced,0.0,1.0,,,True,True,False,False
+table,4.55,4.55,2,False,3," | \smart{} | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-duplicates of ",traced,traced,1865,7,unattributed,unattributed,0.048,0.818,proposal/logs/main_2d/maximin_smooth_osc_b500_s4.json,evals mape,True,True,False,False
+table,4.51,4.51,2,False,3," | BVS | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-duplicates of cover",traced,traced,156,9,unattributed,unattributed,0.048,0.364,proposal/logs/diagnostics.json,grid_alignment_sweep piecewise1 iae,True,True,False,False
+table,13.7,13.7,1,False,3,"Piecewise II | Grid | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-duplic",traced,traced,1238,46,unattributed,unattributed,0.047,0.273,proposal/logs/diagnostics.json,grid_alignment_sweep piecewise1 iae,True,True,False,False
+table,11.0,11.0,1,False,3,"Piecewise II | CVT | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-duplica",traced,traced,3059,30,unattributed,unattributed,0.069,0.818,proposal/logs/main_2d/grid_smooth_osc_b500_s3.json,evals sill,True,True,False,False
+table,10.3,10.3,1,False,3,"Piecewise II | CVT+lines | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-d",traced,traced,1998,52,unattributed,unattributed,0.047,1.0,proposal/logs/main_2d/gsmart_smooth_osc_b500_s5.json,evals sill,True,True,False,False
+table,11.4,11.4,1,False,3,"Piecewise II | \smart{} | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-du",traced,traced,3319,33,unattributed,unattributed,0.069,0.909,proposal/logs/main_2d/grid_smooth_osc_b500_s7.json,evals sill,True,True,False,False
+table,11.4,11.4,1,False,3,"Piecewise II | BVS | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-duplica",traced,traced,3319,33,unattributed,unattributed,0.069,0.909,proposal/logs/main_2d/grid_smooth_osc_b500_s7.json,evals sill,True,True,False,False
+table,8.15,8.15,2,False,3," | Grid | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-duplicates of cove",traced,traced,127,5,unattributed,unattributed,0.047,0.364,proposal/logs/main_2d/grid_piecewise2_b500_s2.json,evals iae,True,True,False,False
+table,7.82,7.82,2,False,3," | CVT | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-duplicates of cover",traced,traced,136,3,unattributed,unattributed,0.023,0.727,proposal/logs/main_2d/bvs05_piecewise2_b500_s3.json,evals iae,True,True,False,False
+table,6.91,6.91,2,False,3," | CVT+lines | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-duplicates of",traced,traced,191,1,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/bvs1_nondiff_b500_s6.json,evals rmse,True,True,False,False
+table,8.03,8.03,2,False,3," | \smart{} | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-duplicates of ",traced,traced,156,2,unattributed,unattributed,0.048,0.455,proposal/logs/main_2d/grid_piecewise1_b500_s7.json,evals iae,True,True,False,False
+table,7.87,7.87,2,False,3," | BVS | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-duplicates of cover",traced,traced,126,4,unattributed,unattributed,0.047,0.364,proposal/logs/main_2d/gsmart_smooth_osc_b500_s6.json,timestamp_start,True,True,False,False
+table,0.425,0.425,3,False,3,"Smooth osc. | Grid | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-duplica",traced,traced,44,3,unattributed,unattributed,0.098,0.182,proposal/logs/main_2d/grid_smooth_osc_b500_s7.json,evals iae,True,True,False,False
+table,0.411,0.411,3,False,3,"Smooth osc. | CVT | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-duplicat",traced,traced,33,7,unattributed,unattributed,0.073,1.0,proposal/logs/main_2d/bvs1_smooth_osc_b500_s5.json,evals iae,True,True,False,False
+table,0.567,0.567,3,False,3,"Smooth osc. | CVT+lines | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-du",traced,traced,33,4,unattributed,unattributed,0.048,1.0,proposal/logs/main_2d/bvs2_smooth_osc_b500_s4.json,evals crps,True,True,False,False
+table,0.412,0.412,3,False,3,"Smooth osc. | \smart{} | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-dup",traced,traced,40,14,unattributed,unattributed,0.098,0.182,proposal/logs/main_2d/grid_smooth_osc_b500_s8.json,evals iae,True,True,False,False
+table,0.415,0.415,3,False,3,"Smooth osc. | BVS | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-duplicat",traced,traced,41,4,unattributed,unattributed,0.073,1.0,proposal/logs/main_2d/smart_smooth_osc_b500_s4.json,evals iae,True,True,False,False
+table,0.192,0.192,3,False,3," | Grid | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-duplicates of cove",traced,traced,220,1,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/gsmart_nondiff_b500_s0.json,evals mape,True,True,False,False
+table,0.180,0.18,3,False,3," | CVT | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-duplicates of cover",traced,traced,350,5,unattributed,unattributed,0.071,0.909,proposal/logs/main_2d/bvs1_smooth_osc_b500_s7.json,evals iae,True,True,False,False
+table,0.267,0.267,3,False,3," | CVT+lines | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-duplicates of",traced,traced,88,6,unattributed,unattributed,0.073,0.091,proposal/logs/main_2d/grid_smooth_osc_b500_s2.json,evals rmse,True,True,False,False
+table,0.188,0.188,3,False,3," | \smart{} | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-duplicates of ",traced,traced,250,10,unattributed,unattributed,0.075,0.364,proposal/logs/speedup.json,smooth_osc smart target_iae,True,True,False,False
+table,0.184,0.184,3,False,3," | BVS | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-duplicates of cover",traced,traced,297,12,unattributed,unattributed,0.096,0.182,proposal/logs/main_2d/grid_smooth_osc_b500_s4.json,evals iae,True,True,False,False
+table,1.24,1.24,2,False,3,"Non-diff. | Grid | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-duplicate",traced,traced,269,16,unattributed,unattributed,0.069,0.636,proposal/logs/main_2d/gsmartn_smooth_osc_b500_s8.json,evals iae,True,True,False,False
+table,1.37,1.37,2,False,3,"Non-diff. | CVT | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-duplicates",traced,traced,251,19,unattributed,unattributed,0.07,0.364,proposal/logs/main_2d/grid_smooth_osc_b500_s5.json,init_y,True,True,False,False
+table,1.48,1.48,2,False,3,"Non-diff. | CVT+lines | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-dupl",traced,traced,230,7,unattributed,unattributed,0.069,0.545,proposal/logs/main_2d/grid_smooth_osc_b500_s5.json,evals rmse,True,True,False,False
+table,1.44,1.44,2,False,3,"Non-diff. | \smart{} | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-dupli",traced,traced,266,10,unattributed,unattributed,0.069,0.727,proposal/logs/main_2d/gsmart_smooth_osc_b500_s2.json,evals iae,True,True,False,False
+table,1.40,1.4,2,False,3,"Non-diff. | BVS | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-duplicates",traced,traced,240,14,unattributed,unattributed,0.069,0.727,proposal/logs/main_2d/grid_smooth_osc_b500_s3.json,evals mape,True,True,False,False
+table,1.22,1.22,2,False,3," | Grid | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-duplicates of cove",traced,traced,271,13,unattributed,unattributed,0.047,0.727,proposal/logs/main_2d/grid_nondiff_b500_s1.json,evals iae,True,True,False,False
+table,0.956,0.956,3,False,3," | CVT | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-duplicates of cover",traced,traced,124,97,unattributed,unattributed,0.071,0.727,proposal/logs/main_2d/grid_smooth_osc_b500_s3.json,evals coverage,True,True,False,False
+table,0.957,0.957,3,False,3," | CVT+lines | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-duplicates of",traced,traced,143,130,unattributed,unattributed,0.048,1.0,proposal/logs/main_2d/bvs4_smooth_osc_b500_s7.json,evals coverage,True,True,False,False
+table,1.00,1.0,2,False,3," | \smart{} | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-duplicates of ",traced,traced,8942,7609,unattributed,unattributed,0.099,0.091,proposal/logs/main_2d/grid_smooth_osc_b500_s1.json,seed,True,True,False,False
+table,0.985,0.985,3,False,3," | BVS | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-duplicates of cover",traced,traced,226,194,unattributed,unattributed,0.071,1.0,proposal/logs/main_2d/grid_smooth_osc_b500_s8.json,evals coverage,True,True,False,False
+table,7.02,7.02,2,False,3,"3D diffusion | Grid | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-duplic",traced,traced,128,1,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/bvs4_nondiff_b500_s4.json,evals rmse,True,True,False,False
+table,1.34,1.34,2,False,3,"3D diffusion | CVT | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-duplica",traced,traced,308,7,unattributed,unattributed,0.069,0.727,proposal/logs/main_2d/grid_smooth_osc_b500_s1.json,evals mape,True,True,False,False
+table,1.75,1.75,2,False,3,"3D diffusion | CVT+lines | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-d",traced,traced,226,8,unattributed,unattributed,0.047,0.455,proposal/logs/main_3d/grid_diffusion3d_b1000_s1.json,evals mape,True,True,False,False
+table,3.17,3.17,2,False,3,"3D diffusion | \smart{} | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-du",traced,traced,157,8,unattributed,unattributed,0.046,0.727,proposal/logs/main_2d/maximin_smooth_osc_b500_s4.json,evals mape,True,True,False,False
+table,2.16,2.16,2,False,3,"3D diffusion | BVS | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-duplica",traced,traced,186,2,unattributed,unattributed,0.023,1.0,proposal/logs/main_2d/maximin_nondiff_b500_s2.json,evals iae,True,True,False,False
+table,4.97,4.97,2,False,3," | Grid | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-duplicates of cove",traced,traced,105,3,unattributed,unattributed,0.047,0.364,proposal/logs/main_2d/bvs1_smooth_osc_b500_s5.json,evals mape,True,True,False,False
+table,1.04,1.04,2,False,3," | CVT | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-duplicates of cover",traced,traced,293,19,unattributed,unattributed,0.071,0.909,proposal/logs/main_2d/gsmart_smooth_osc_b500_s5.json,evals iae,True,True,False,False
+table,1.19,1.19,2,False,3," | CVT+lines | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-duplicates of",traced,traced,266,11,unattributed,unattributed,0.098,0.273,proposal/logs/main_2d/grid_smooth_osc_b500_s1.json,evals iae,True,True,False,False
+table,2.26,2.26,2,False,3," | \smart{} | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-duplicates of ",traced,traced,273,31,unattributed,unattributed,0.024,0.636,proposal/logs/main_2d/grid_piecewise1_b500_s5.json,init_x,True,True,False,False
+table,1.60,1.6,2,False,3," | BVS | Oracle-design bounds (IAE, mean over 5 seeds) under the shared
+surrogate: uniform CVT designs and CVT plus oracle straddling pairs along
+the true discontinuity lines, against the grid baseline and the best
+adaptive method (BVS, 10 seeds).  Smooth osc.\ has no feature lines; for
+it, the ``+lines'' column is a control in which 30\% of the budget is
+spent on jittered near-duplicates of cover",traced,traced,245,10,unattributed,unattributed,0.047,1.0,proposal/logs/main_2d/bvs2_smooth_osc_b500_s9.json,evals mape,True,True,False,False
+prose,47\%,47.0,0,True,2,"On the three-dimensional Stokes--Einstein diffusion benchmark, a physically motivated surface spanning four decades in $D$, \smart{} places $47\%$ of its measurements within $5\%$ of the domain boundary (a volume-proportional design places $27\%$) and ends up a factor of two worse than \emph{random} samp",traced,traced,8761,239,unattributed,unattributed,0.065,0.273,proposal/logs/diagnostics.json,design_diagnostics_3d gsmart boundary_frac_5pct,True,True,False,False
+prose,5\%,5.0,0,True,1,"mensional Stokes--Einstein diffusion benchmark, a physically motivated surface spanning four decades in $D$, \smart{} places $47\%$ of its measurements within $5\%$ of the domain boundary (a volume-proportional design places $27\%$) and ends up a factor of two worse than \emph{random} sampling at every tested budget; the",traced,traced,63906,1010,unattributed,unattributed,0.03,1.0,proposal/logs/main_3d/random_diffusion3d_b1000_s5.json,init_x,True,True,False,False
+prose,27\%,27.0,0,True,2,"ated surface spanning four decades in $D$, \smart{} places $47\%$ of its measurements within $5\%$ of the domain boundary (a volume-proportional design places $27\%$) and ends up a factor of two worse than \emph{random} sampling at every tested budget; the original paper's three-dimensional advantage over grid scans surviv",traced,traced,9758,367,unattributed,unattributed,0.085,0.091,proposal/logs/diagnostics.json,design_diagnostics_3d random boundary_frac_5pct,True,True,False,False
+prose,5\times10^{-12},5e-12,12,False,1,"rical coverage of central credible intervals (calibration curves), and, for the 3D function, mean absolute percentage error (MAPE) with a denominator floor of $5\times10^{-12}$ ($\approx0.1\%$ of the median $|D|$; without a floor the near-zero-$D$ corner dominates the metric).",traced,traced,3905,136,unattributed,unattributed,0.04,0.75,proposal/logs/main_3d/gsmart_diffusion3d_b1000_s3.json,init_y,True,True,False,False
+prose,4.7,4.7,1,False,2,"\paragraph{Software and hardware.} Implementation on gpCAM (git commit \texttt{4acdc39}) over fvGP~4.7.9, NumPy/SciPy; single-core per run, 30--60 parallel workers on a 192-core CPU node.",traced,traced,1560,93,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/bvs4_nondiff_b500_s9.json,evals rmse,True,True,False,False
+prose,-6\%,-6.0,0,True,1,"On the four 2D functions the margin is consistent but small (1--6\%); on the 3D diffusion function it is 36--47\% at every budget, and the mean curve sits at least one standard deviation below \smart's at \emph{all seven} teste",traced,traced,5770,80,unattributed,unattributed,0.041,0.75,proposal/logs/main_2d/grid_smooth_osc_b500_s8.json,init_x,True,True,False,False
+prose,-47\%,-47.0,0,True,2,"On the four 2D functions the margin is consistent but small (1--6\%); on the 3D diffusion function it is 36--47\% at every budget, and the mean curve sits at least one standard deviation below \smart's at \emph{all seven} tested budgets.",traced,untraced,134,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+prose,2.16,2.16,2,False,3,"\textbf{(ii) The margin corresponds to a $2\times$ measurement saving on the 3D benchmark.} BVS at 500 measurements reaches IAE $=2.16\pm0.17\times10^{-12}$\,m$^2$/s, already below \smart's budget-1000 value of $2.26\pm0.14\times10^{-12}$; interpolating the mean curves on a log--log axis, BVS",traced,traced,186,2,unattributed,unattributed,0.047,0.818,proposal/logs/main_2d/maximin_nondiff_b500_s2.json,evals iae,True,True,False,False
+prose,2.26,2.26,2,False,3,"easurement saving on the 3D benchmark.} BVS at 500 measurements reaches IAE $=2.16\pm0.17\times10^{-12}$\,m$^2$/s, already below \smart's budget-1000 value of $2.26\pm0.14\times10^{-12}$; interpolating the mean curves on a log--log axis, BVS needs $\approx450$ measurements to reach the error \smart{} reaches at 1000---a $2",traced,traced,273,31,unattributed,unattributed,0.045,0.818,proposal/logs/main_2d/random_nondiff_b500_s8.json,evals iae,True,True,False,False
+prose,2.2,2.2,1,False,2,"6\pm0.14\times10^{-12}$; interpolating the mean curves on a log--log axis, BVS needs $\approx450$ measurements to reach the error \smart{} reaches at 1000---a $2.2\times$ sample-efficiency gain (2.0$\times$ at the fixed half-budget checkpoint).",traced,traced,1983,42,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/bvs2_smooth_osc_b500_s4.json,init_x,True,True,False,False
+prose,2.0,2.0,1,False,2,"ing the mean curves on a log--log axis, BVS needs $\approx450$ measurements to reach the error \smart{} reaches at 1000---a $2.2\times$ sample-efficiency gain (2.0$\times$ at the fixed half-budget checkpoint).",traced,traced,2971,666,unattributed,unattributed,0.046,0.182,proposal/logs/sweep_stdout2.log,[2/81] smart diffusion3d b1000 s4: ok (106s elapsed),True,True,False,False
+prose,-5\%,-5.0,0,True,1,"On the four 2D functions the corresponding interpolated savings are 2--5\%, i.e.\ statistical ties; the oracle analysis of Section~ shows this is a property of the benchmark-and-surrogate combination, not a weakness of the criterion.",traced,traced,6236,110,unattributed,unattributed,0.045,0.625,proposal/logs/main_2d/grid_smooth_osc_b500_s8.json,init_x,True,True,False,False
+prose,3.17,3.17,2,False,3,"\textbf{(iii) Uncertainty sampling can hurt.} On the diffusion benchmark, \smart{}/$\gsmart$ are \emph{worse than random sampling} at every budget (e.g.\ $3.17$ vs.\ $1.49\times10^{-12}$ at 500), and the grid baseline is worst of all.",traced,traced,157,8,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/smart_nondiff_b500_s7.json,evals crps,True,True,False,False
+prose,1.49\times10^{-12},1.49e-12,14,False,3,"{(iii) Uncertainty sampling can hurt.} On the diffusion benchmark, \smart{}/$\gsmart$ are \emph{worse than random sampling} at every budget (e.g.\ $3.17$ vs.\ $1.49\times10^{-12}$ at 500), and the grid baseline is worst of all.",traced,untraced,147,0,untraced,untraced,0.0,1.0,,,True,True,False,False
+prose,-47\%,-47.0,0,True,2,"isibly different exactly where the functions are heterogeneous: on the 3D benchmark, \smart{} concentrates measurements on the boundary of the parameter cube ---47\% of its points within 5\% of a domain face, versus 40\% for BVS and 27\% for random---while 77\% of its reconstruction-error mass lies in the small-radius inter",traced,untraced,134,0,untraced,untraced,0.0,1.0,,,True,False,False,False
+prose,5\%,5.0,0,True,1,"ere the functions are heterogeneous: on the 3D benchmark, \smart{} concentrates measurements on the boundary of the parameter cube ---47\% of its points within 5\% of a domain face, versus 40\% for BVS and 27\% for random---while 77\% of its reconstruction-error mass lies in the small-radius interior region $r<10$\,nm (7\",traced,traced,63906,1010,unattributed,unattributed,0.067,1.0,proposal/logs/main_3d/random_diffusion3d_b1000_s5.json,init_x,True,True,False,False
+prose,40\%,40.0,0,True,2,"eneous: on the 3D benchmark, \smart{} concentrates measurements on the boundary of the parameter cube ---47\% of its points within 5\% of a domain face, versus 40\% for BVS and 27\% for random---while 77\% of its reconstruction-error mass lies in the small-radius interior region $r<10$\,nm (7\% of the domain volume) where",traced,traced,10752,381,unattributed,unattributed,0.067,0.909,proposal/logs/main_3d/random_diffusion3d_b1000_s1.json,init_x,True,True,False,False
+prose,27\%,27.0,0,True,2,"benchmark, \smart{} concentrates measurements on the boundary of the parameter cube ---47\% of its points within 5\% of a domain face, versus 40\% for BVS and 27\% for random---while 77\% of its reconstruction-error mass lies in the small-radius interior region $r<10$\,nm (7\% of the domain volume) where $D$ is largest; B",traced,traced,9758,367,unattributed,unattributed,0.106,0.182,proposal/logs/diagnostics.json,error_by_region_3d bvs4 10<=r<40 error_mass_fraction,True,True,False,False
+prose,77\%,77.0,0,True,2,"centrates measurements on the boundary of the parameter cube ---47\% of its points within 5\% of a domain face, versus 40\% for BVS and 27\% for random---while 77\% of its reconstruction-error mass lies in the small-radius interior region $r<10$\,nm (7\% of the domain volume) where $D$ is largest; BVS restores interior cov",traced,traced,3781,64,unattributed,unattributed,0.102,0.091,proposal/logs/diagnostics.json,error_by_region_3d smart r<10 error_mass_fraction,True,True,False,False
+prose,7\%,7.0,0,True,1,"\% of a domain face, versus 40\% for BVS and 27\% for random---while 77\% of its reconstruction-error mass lies in the small-radius interior region $r<10$\,nm (7\% of the domain volume) where $D$ is largest; BVS restores interior coverage while still thickening where the variance is high.",traced,traced,40050,561,supported,unattributed,0.155,0.111,proposal/logs/diagnostics.json,error_by_region_3d random r<10 volume_fraction,True,True,False,False
+prose,90\%,90.0,0,True,2,"surement locations (white) of \smart{ \subsection{Predictive quality: RMSE, CRPS, calibration} Table~ reports RMSE, CRPS, and the empirical coverage of nominal 90\% central intervals at the maximum budget; the full calibration curves are in Fig.~ .",traced,traced,7304,3020,unattributed,unattributed,0.045,1.0,proposal/logs/main_2d/bvs4_nondiff_b500_s9.json,evals coverage,True,True,False,False
+prose,90\%,90.0,0,True,2,"The noiseless Kriging with a max-difference sill is conservative everywhere (90\% intervals cover 96--100\% of test points), with the interesting exception of literal \gsmart{} on Smooth osc., where its degenerate variogram fit (Section~ ) p",traced,traced,7304,3020,unattributed,unattributed,0.082,1.0,proposal/logs/main_2d/grid_smooth_osc_b500_s8.json,evals coverage,True,True,False,False
+prose,-100\%,-100.0,0,True,3,"The noiseless Kriging with a max-difference sill is conservative everywhere (90\% intervals cover 96--100\% of test points), with the interesting exception of literal \gsmart{} on Smooth osc., where its degenerate variogram fit (Section~ ) produces the only under-cov",traced,traced,132,10,unattributed,unattributed,0.071,0.364,proposal/logs/main_2d/random_smooth_osc_b500_s0.json,init_y,True,True,False,False
+prose,72\%,72.0,0,True,2,"eresting exception of literal \gsmart{} on Smooth osc., where its degenerate variogram fit (Section~ ) produces the only under-covering surrogate in the study (72\% at nominal 90\%).",traced,traced,3495,77,unattributed,unattributed,0.098,1.0,proposal/logs/main_2d/bvs1_smooth_osc_b500_s9.json,evals rmse,True,True,False,False
+prose,90\%,90.0,0,True,2,"on of literal \gsmart{} on Smooth osc., where its degenerate variogram fit (Section~ ) produces the only under-covering surrogate in the study (72\% at nominal 90\%).",traced,traced,7304,3020,unattributed,unattributed,0.109,1.0,proposal/logs/main_2d/grid_smooth_osc_b500_s8.json,evals coverage,True,True,False,False
+prose,9.6\%,9.6,1,True,2,"ence sill; \gsmart{ \subsection{MAPE on the 3D benchmark} For the diffusion function the percentage view sharpens the mechanism: at 1000 measurements, MAPE is $9.6\%$ (\smart), $20.2\%$ (grid), $5.2\%$ (random), and $7.0\%$ (BVS).",traced,traced,3020,42,unattributed,unattributed,0.105,0.909,proposal/logs/main_3d/gsmart_diffusion3d_b1000_s3.json,evals mape,True,True,False,False
+prose,20.2\%,20.2,1,True,3,"{ \subsection{MAPE on the 3D benchmark} For the diffusion function the percentage view sharpens the mechanism: at 1000 measurements, MAPE is $9.6\%$ (\smart), $20.2\%$ (grid), $5.2\%$ (random), and $7.0\%$ (BVS).",traced,traced,1044,50,supported,supported,0.182,0.091,proposal/logs/main_3d/grid_diffusion3d_b1000_s3.json,evals mape,True,True,False,False
+prose,5.2\%,5.2,1,True,2,"E on the 3D benchmark} For the diffusion function the percentage view sharpens the mechanism: at 1000 measurements, MAPE is $9.6\%$ (\smart), $20.2\%$ (grid), $5.2\%$ (random), and $7.0\%$ (BVS).",traced,traced,4438,36,supported,unattributed,0.121,0.727,proposal/logs/main_3d/random_diffusion3d_b1000_s6.json,init_x,True,True,False,False
+prose,7.0\%,7.0,1,True,2,"For the diffusion function the percentage view sharpens the mechanism: at 1000 measurements, MAPE is $9.6\%$ (\smart), $20.2\%$ (grid), $5.2\%$ (random), and $7.0\%$ (BVS).",traced,traced,3791,103,supported,unattributed,0.135,0.636,proposal/logs/main_3d/random_diffusion3d_b1000_s4.json,evals mape,True,True,True,False
+prose,47\%,47.0,0,True,2,"The production runs quantify this: \smart{} places $47\%$ of its 1000 measurements within $5\%$ of a domain face, versus $27\%$ for the volume-proportional random design (BVS: $40\%$).",traced,traced,8761,239,unattributed,unattributed,0.059,1.0,proposal/logs/main_3d/random_diffusion3d_b1000_s3.json,init_x,True,True,False,False
+prose,5\%,5.0,0,True,1,"The production runs quantify this: \smart{} places $47\%$ of its 1000 measurements within $5\%$ of a domain face, versus $27\%$ for the volume-proportional random design (BVS: $40\%$).",traced,traced,63906,1010,unattributed,unattributed,0.059,1.0,proposal/logs/main_3d/random_diffusion3d_b1000_s5.json,init_x,True,True,False,False
+prose,27\%,27.0,0,True,2,"The production runs quantify this: \smart{} places $47\%$ of its 1000 measurements within $5\%$ of a domain face, versus $27\%$ for the volume-proportional random design (BVS: $40\%$).",traced,traced,9758,367,supported,supported,0.121,0.091,proposal/logs/diagnostics.json,design_diagnostics_3d random boundary_frac_5pct,True,True,False,False
+prose,40\%,40.0,0,True,2,"ns quantify this: \smart{} places $47\%$ of its 1000 measurements within $5\%$ of a domain face, versus $27\%$ for the volume-proportional random design (BVS: $40\%$).",traced,traced,10752,381,unattributed,unattributed,0.063,1.0,proposal/logs/main_3d/random_diffusion3d_b1000_s1.json,init_x,True,True,False,False
+prose,77\%,77.0,0,True,2,"The cost is asymmetric, because the error mass is not: $77\%$ of \smart's final IAE lies in the small-radius region $r<10$\,nm---only $7\%$ of the domain volume, but the region where $D$ is largest and varies fastest---a",traced,traced,3781,64,supported,supported,0.124,0.091,proposal/logs/diagnostics.json,error_by_region_3d smart r<10 error_mass_fraction,True,True,False,False
+prose,7\%,7.0,0,True,1,"The cost is asymmetric, because the error mass is not: $77\%$ of \smart's final IAE lies in the small-radius region $r<10$\,nm---only $7\%$ of the domain volume, but the region where $D$ is largest and varies fastest---and every measurement spent on a remote face is one not spent there.",traced,traced,40050,561,unattributed,unattributed,0.096,0.111,proposal/logs/diagnostics.json,error_by_region_3d bvs4 r<10 volume_fraction,True,True,False,False
+prose,30\%,30.0,0,True,2,"igns with oracle knowledge of each function's structure under the same surrogate and metric: uniform centroidal-Voronoi (CVT) designs, and CVT designs in which 30\% of the budget is spent on \emph{straddling pairs} along the known discontinuity lines (the ideal outcome of any step-detecting adaptive strategy).",traced,traced,12719,352,unattributed,unattributed,0.03,0.091,proposal/logs/diagnostics.json,design_diagnostics_3d grid frac_r_10_40,True,True,False,False
+prose,-12\%,-12.0,0,True,2,"\textbf{(a)} On the four 2D functions, BVS already sits within 3--12\% of the best oracle design at every budget, and \emph{no} design---including perfect step knowledge---reaches \smart's max-budget error at half the budget (e.g.",traced,untraced,177,0,untraced,untraced,0.0,1.0,,,True,True,False,False
+prose,6.0,6.0,1,False,2,"luding perfect step knowledge---reaches \smart's max-budget error at half the budget (e.g.\ on Piecewise~I, the best oracle design at 250 measurements has IAE $6.0$, versus \smart's budget-500 value of $4.55$).",traced,traced,1344,93,unattributed,unattributed,0.049,1.0,proposal/logs/main_2d/bvs2_piecewise1_b500_s9.json,evals iae,True,True,False,False
+prose,4.55,4.55,2,False,3,"art's max-budget error at half the budget (e.g.\ on Piecewise~I, the best oracle design at 250 measurements has IAE $6.0$, versus \smart's budget-500 value of $4.55$).",traced,traced,1865,7,unattributed,unattributed,0.066,0.091,proposal/logs/speedup.json,piecewise1 smart target_iae,True,True,False,False
+prose,3.99,3.99,2,False,3,"\textbf{(b)} Step-aware oracle densification does not help the 2D functions at low budgets and only mildly at 500 (Piecewise~I: $3.99$ vs.\ $4.47$ for plain CVT): with a global length scale, straddling pairs sharpen a transition band whose width is bounded below by the length scale itself, so",traced,untraced,150,0,untraced,untraced,0.0,1.0,,,True,True,False,False
+prose,4.47,4.47,2,False,3,"\textbf{(b)} Step-aware oracle densification does not help the 2D functions at low budgets and only mildly at 500 (Piecewise~I: $3.99$ vs.\ $4.47$ for plain CVT): with a global length scale, straddling pairs sharpen a transition band whose width is bounded below by the length scale itself, so the absolut",traced,traced,126,6,unattributed,unattributed,0.028,1.0,proposal/logs/main_2d/bvs1_nondiff_b500_s0.json,evals crps,True,True,False,False
+prose,7.0\times10^{-12},7e-12,13,False,2,"\textbf{(c)} On the 3D function the oracle spread is large (grid $7.0\times10^{-12}$ vs.\ CVT $1.3\times10^{-12}$ at 500), i.e.\ the benchmark genuinely rewards good design.",traced,traced,233,10,supported,unattributed,0.126,0.545,proposal/logs/main_3d/grid_diffusion3d_b1000_s9.json,evals iae,True,True,True,False
+prose,1.3\times10^{-12},1.3000000000000001e-12,13,False,2,"\textbf{(c)} On the 3D function the oracle spread is large (grid $7.0\times10^{-12}$ vs.\ CVT $1.3\times10^{-12}$ at 500), i.e.\ the benchmark genuinely rewards good design.",traced,traced,1702,18,supported,unattributed,0.129,0.636,proposal/logs/main_3d/grid_diffusion3d_b1000_s2.json,init_y,True,True,True,False
+prose,2.16\times10^{-12},2.16e-12,14,False,3,"BVS ($2.16\times10^{-12}$) recovers most of the gap between \smart{} ($3.17$) and the uniform oracle ($1.34$); the residual headroom ($\approx$\,1.6$\times$) is a target for future, no",traced,traced,105,3,unattributed,unattributed,0.0,1.0,proposal/logs/main_3d/gsmartn_diffusion3d_b1000_s5.json,evals iae,True,True,False,False
+prose,3.17,3.17,2,False,3,"BVS ($2.16\times10^{-12}$) recovers most of the gap between \smart{} ($3.17$) and the uniform oracle ($1.34$); the residual headroom ($\approx$\,1.6$\times$) is a target for future, non-stationary surrogates.",traced,traced,157,8,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/smart_nondiff_b500_s7.json,evals crps,True,True,False,False
+prose,1.34,1.34,2,False,3,"BVS ($2.16\times10^{-12}$) recovers most of the gap between \smart{} ($3.17$) and the uniform oracle ($1.34$); the residual headroom ($\approx$\,1.6$\times$) is a target for future, non-stationary surrogates.",traced,traced,308,7,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/smart_nondiff_b500_s4.json,evals iae,True,True,False,False
+prose,1.6,1.6,1,False,2,"BVS ($2.16\times10^{-12}$) recovers most of the gap between \smart{} ($3.17$) and the uniform oracle ($1.34$); the residual headroom ($\approx$\,1.6$\times$) is a target for future, non-stationary surrogates.",traced,traced,2550,93,unattributed,unattributed,0.0,1.0,proposal/logs/main_3d/bvs2_diffusion3d_b1000_s9.json,init_x,True,True,False,False
+prose,-6\%,-6.0,0,True,1,"\subsection{Failure analysis: where BVS does not help, and why} \paragraph{The four 2D functions.} BVS's margins over \smart{} there are 1--6\%---far short of a $2\times$ efficiency gain.",traced,traced,5770,80,unattributed,unattributed,0.045,0.75,proposal/logs/main_2d/grid_smooth_osc_b500_s8.json,init_x,True,True,False,False
+prose,92\%,92.0,0,True,2,"The structural reason is concrete: on Piecewise~I, $92\%$ of \smart's budget-500 error mass lies in the $\pm3$-unit bands around the two steps (mean error $21.2$ inside the bands, which cover $20\%$ of the domain, ve",traced,traced,4100,527,supported,supported,0.141,0.091,proposal/logs/diagnostics.json,piecewise1_error_decomposition band_error_mass_fraction,True,True,False,False
+prose,21.2,21.2,1,False,3,"The structural reason is concrete: on Piecewise~I, $92\%$ of \smart's budget-500 error mass lies in the $\pm3$-unit bands around the two steps (mean error $21.2$ inside the bands, which cover $20\%$ of the domain, versus $0.5$ elsewhere), and the width of the Kriging transition across a step is bounded below by the fit",traced,traced,731,33,unattributed,unattributed,0.075,0.091,proposal/logs/diagnostics.json,piecewise1_error_decomposition band_mean_err,True,True,False,False
+prose,20\%,20.0,0,True,2,": on Piecewise~I, $92\%$ of \smart's budget-500 error mass lies in the $\pm3$-unit bands around the two steps (mean error $21.2$ inside the bands, which cover $20\%$ of the domain, versus $0.5$ elsewhere), and the width of the Kriging transition across a step is bounded below by the fitted length scale ($\approx28$ units),",traced,traced,13036,364,unattributed,unattributed,0.0,1.0,proposal/logs/main_3d/bvs05_diffusion3d_b1000_s1.json,evals mape,True,True,False,False
+prose,0.5,0.5,1,False,1,"smart's budget-500 error mass lies in the $\pm3$-unit bands around the two steps (mean error $21.2$ inside the bands, which cover $20\%$ of the domain, versus $0.5$ elsewhere), and the width of the Kriging transition across a step is bounded below by the fitted length scale ($\approx28$ units), which the discontinuity dat",traced,traced,5884,3156,unattributed,unattributed,0.034,1.0,proposal/logs/diagnostics.json,design_diagnostics_3d smart boundary_frac_5pct,True,True,False,False
+prose,80\%,80.0,0,True,2,"e variance by up to three orders of magnitude on functions whose data-unit gradients are $O(10)$, so the criterion degenerates to edge-chasing: on Piecewise~I, 80\% of the first 50 measurements (mean over seeds) land within two units of one of the two steps.",traced,traced,6679,2818,unattributed,unattributed,0.034,0.091,proposal/logs/diagnostics.json,gsmart_clustering_piecewise1 gsmart frac_first50_near_step,True,True,False,False
+prose,1.4,1.4,1,False,2,"ep pairs at all lags inflate the fitted range (final $1/a$ averages 42 units across seeds, range 30--63, versus a stable 29 for \smart) and the sill (a factor $1.4$), so the surrogate over-smooths exactly where the criterion keeps sampling, and the reconstruction degrades globally.",traced,traced,2550,147,unattributed,unattributed,0.069,0.273,proposal/logs/diagnostics.json,gsmart_clustering_piecewise1 sill_ratio_gsmart_over_smart,True,True,False,False
+prose,43.5,43.5,1,False,3,"The scale-normalized variant (\gsmartn) repairs the units problem but not the structure: it still underperforms \smart{} on the discontinuous functions (e.g.\ $43.5$ vs.\ $8.03$ on Piecewise~II at 500), because \emph{any} multiplicative reward for gradient magnitude is a permanent attractor at discontinuities that no amoun",traced,traced,868,63,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/bvs4_nondiff_b500_s9.json,init_x,True,True,False,False
+prose,8.03,8.03,2,False,3,"rmalized variant (\gsmartn) repairs the units problem but not the structure: it still underperforms \smart{} on the discontinuous functions (e.g.\ $43.5$ vs.\ $8.03$ on Piecewise~II at 500), because \emph{any} multiplicative reward for gradient magnitude is a permanent attractor at discontinuities that no amount of samplin",traced,traced,156,2,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/grid_piecewise1_b500_s7.json,evals iae,True,True,False,False
+prose,8\%,8.0,0,True,1,"., Smooth osc., and Piecewise~I/II at the largest budgets; at the intermediate 2D budgets ($N{=}100$, $200$) the grid wins on the piecewise functions by up to $8\%$.",traced,traced,36762,1467,supported,unattributed,0.265,1.0,proposal/logs/main_2d/grid_smooth_osc_b500_s8.json,seed,True,True,True,False
+prose,7.9,7.9,1,False,2,"ird worse than nearby misaligned ones with \emph{fewer} points (Piecewise~I: the $16\times16$ lattice, with a column exactly on the $x{=}30$ step, reaches IAE $7.9$ versus $6.1$ for the $15\times15$ without one; Non-diff.: $1.9$ for the $15\times15$, with a row on the $y{=}25$ jump, versus $1.2$ for the $16\times16$).",traced,traced,1429,33,unattributed,unattributed,0.045,1.0,proposal/logs/main_2d/bvs05_piecewise2_b500_s7.json,evals iae,True,True,False,False
+prose,6.1,6.1,1,False,2,"n nearby misaligned ones with \emph{fewer} points (Piecewise~I: the $16\times16$ lattice, with a column exactly on the $x{=}30$ step, reaches IAE $7.9$ versus $6.1$ for the $15\times15$ without one; Non-diff.: $1.9$ for the $15\times15$, with a row on the $y{=}25$ jump, versus $1.2$ for the $16\times16$).",traced,traced,1411,92,unattributed,unattributed,0.051,0.182,proposal/logs/diagnostics.json,grid_alignment_sweep piecewise1 iae,True,True,False,False
+prose,1.9,1.9,1,False,2,"Piecewise~I: the $16\times16$ lattice, with a column exactly on the $x{=}30$ step, reaches IAE $7.9$ versus $6.1$ for the $15\times15$ without one; Non-diff.: $1.9$ for the $15\times15$, with a row on the $y{=}25$ jump, versus $1.2$ for the $16\times16$).",traced,traced,2522,53,unattributed,unattributed,0.069,0.273,proposal/logs/diagnostics.json,grid_alignment_sweep nondiff iae,True,True,False,False
+prose,1.2,1.2,1,False,2,"$x{=}30$ step, reaches IAE $7.9$ versus $6.1$ for the $15\times15$ without one; Non-diff.: $1.9$ for the $15\times15$, with a row on the $y{=}25$ jump, versus $1.2$ for the $16\times16$).",traced,traced,2936,167,unattributed,unattributed,0.088,0.364,proposal/logs/diagnostics.json,grid_alignment_sweep nondiff iae,True,True,False,False
+prose,0.5,0.5,1,False,1,"\subsection{Sensitivity and ablation} Figure~ (left four panels) sweeps $\beta$ across $\{0.5,1,2,4\}$ with everything else fixed.",traced,traced,5884,3156,unattributed,unattributed,0.0,1.0,proposal/logs/main_3d/gsmart_diffusion3d_b1000_s3.json,evals coverage_levels,True,True,False,False
+prose,0.5,0.5,1,False,1,"The optimum is flat: $\beta\in[1,4]$ is within seed noise on every function, with $\beta=4$ best on the 3D benchmark at every budget; $\beta=0.5$ (weak boost) leaves most of \smart's 3D pathology in place.",traced,traced,5884,3156,unattributed,unattributed,0.048,0.625,proposal/logs/diagnostics.json,design_diagnostics_3d grid boundary_frac_5pct,True,True,False,False
+prose,3.23,3.23,2,False,3,"odel-free extreme, sequential maximin, matches BVS on the 2D functions but is consistently worse than BVS on the 3D function through the mid-to-large budgets ($3.23$ vs.\ $2.89\times10^{-12}$ at 250, a $12\%$ gap; $2.27$ vs.\ $2.16$ at 500, $5\%$; the two converge at 1000): with a purely geometric criterion the design beco",traced,traced,146,7,unattributed,unattributed,0.034,1.0,proposal/logs/main_2d/bvs2_nondiff_b500_s0.json,evals iae,True,True,False,False
+prose,2.89\times10^{-12},2.89e-12,14,False,3,"treme, sequential maximin, matches BVS on the 2D functions but is consistently worse than BVS on the 3D function through the mid-to-large budgets ($3.23$ vs.\ $2.89\times10^{-12}$ at 250, a $12\%$ gap; $2.27$ vs.\ $2.16$ at 500, $5\%$; the two converge at 1000): with a purely geometric criterion the design becomes uniform, losing the va",traced,traced,81,1,unattributed,unattributed,0.033,0.727,proposal/logs/main_3d/bvs05_diffusion3d_b1000_s6.json,evals iae,True,False,False,False
+prose,12\%,12.0,0,True,2,"hes BVS on the 2D functions but is consistently worse than BVS on the 3D function through the mid-to-large budgets ($3.23$ vs.\ $2.89\times10^{-12}$ at 250, a $12\%$ gap; $2.27$ vs.\ $2.16$ at 500, $5\%$; the two converge at 1000): with a purely geometric criterion the design becomes uniform, losing the variance's useful p",traced,traced,24172,441,unattributed,unattributed,0.073,0.182,proposal/logs/diagnostics.json,design_diagnostics_3d gsmart frac_r_lt_10,True,True,False,False
+prose,2.27,2.27,2,False,3,"he 2D functions but is consistently worse than BVS on the 3D function through the mid-to-large budgets ($3.23$ vs.\ $2.89\times10^{-12}$ at 250, a $12\%$ gap; $2.27$ vs.\ $2.16$ at 500, $5\%$; the two converge at 1000): with a purely geometric criterion the design becomes uniform, losing the variance's useful preference fo",traced,traced,1484,4,unattributed,unattributed,0.033,0.909,proposal/logs/main_2d/maximin_nondiff_b500_s7.json,evals iae,True,True,False,False
+prose,2.16,2.16,2,False,3,"ons but is consistently worse than BVS on the 3D function through the mid-to-large budgets ($3.23$ vs.\ $2.89\times10^{-12}$ at 250, a $12\%$ gap; $2.27$ vs.\ $2.16$ at 500, $5\%$; the two converge at 1000): with a purely geometric criterion the design becomes uniform, losing the variance's useful preference for genuinely",traced,traced,186,2,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/maximin_nondiff_b500_s2.json,evals iae,True,True,False,False
+prose,5\%,5.0,0,True,1,"istently worse than BVS on the 3D function through the mid-to-large budgets ($3.23$ vs.\ $2.89\times10^{-12}$ at 250, a $12\%$ gap; $2.27$ vs.\ $2.16$ at 500, $5\%$; the two converge at 1000): with a purely geometric criterion the design becomes uniform, losing the variance's useful preference for genuinely unresolved str",traced,traced,63906,1010,unattributed,unattributed,0.034,1.0,proposal/logs/main_3d/bvs05_diffusion3d_b1000_s5.json,init_x,True,True,False,False
+prose,0.052,0.052,3,False,2,"Averaged over each run (mean per-step wall time, single core, 10 runs per method): \smart{} $0.052$--$0.069$\,s, \gsmart{} $0.066$--$0.083$\,s, BVS $0.059$--$0.092$\,s across the five functions, and maximin $0.034$--$0.061$\,s.",traced,traced,3138,10,unattributed,unattributed,0.058,0.273,proposal/logs/compute_cost.json,piecewise2 smart mean_step_s,True,True,False,False
+prose,0.069,0.069,3,False,2,"Averaged over each run (mean per-step wall time, single core, 10 runs per method): \smart{} $0.052$--$0.069$\,s, \gsmart{} $0.066$--$0.083$\,s, BVS $0.059$--$0.092$\,s across the five functions, and maximin $0.034$--$0.061$\,s.",traced,traced,2297,6,unattributed,unattributed,0.057,0.364,proposal/logs/compute_cost.json,smooth_osc smart mean_step_s,True,True,False,False
+prose,0.066,0.066,3,False,2,"Averaged over each run (mean per-step wall time, single core, 10 runs per method): \smart{} $0.052$--$0.069$\,s, \gsmart{} $0.066$--$0.083$\,s, BVS $0.059$--$0.092$\,s across the five functions, and maximin $0.034$--$0.061$\,s.",traced,traced,2558,14,unattributed,unattributed,0.058,0.364,proposal/logs/compute_cost.json,piecewise1 gsmart mean_step_s,True,True,False,False
+prose,0.083,0.083,3,False,2,"Averaged over each run (mean per-step wall time, single core, 10 runs per method): \smart{} $0.052$--$0.069$\,s, \gsmart{} $0.066$--$0.083$\,s, BVS $0.059$--$0.092$\,s across the five functions, and maximin $0.034$--$0.061$\,s.",traced,traced,1995,11,unattributed,unattributed,0.057,0.182,proposal/logs/compute_cost.json,smooth_osc gsmart mean_step_s,True,True,False,False
+prose,0.059,0.059,3,False,2,"Averaged over each run (mean per-step wall time, single core, 10 runs per method): \smart{} $0.052$--$0.069$\,s, \gsmart{} $0.066$--$0.083$\,s, BVS $0.059$--$0.092$\,s across the five functions, and maximin $0.034$--$0.061$\,s.",traced,traced,2671,16,unattributed,unattributed,0.058,0.273,proposal/logs/compute_cost.json,piecewise1 bvs4 mean_step_s,True,True,False,False
+prose,0.092,0.092,3,False,2,"Averaged over each run (mean per-step wall time, single core, 10 runs per method): \smart{} $0.052$--$0.069$\,s, \gsmart{} $0.066$--$0.083$\,s, BVS $0.059$--$0.092$\,s across the five functions, and maximin $0.034$--$0.061$\,s.",traced,traced,1693,9,unattributed,unattributed,0.057,0.091,proposal/logs/compute_cost.json,smooth_osc bvs4 mean_step_s,True,True,False,False
+prose,0.034,0.034,3,False,2,"single core, 10 runs per method): \smart{} $0.052$--$0.069$\,s, \gsmart{} $0.066$--$0.083$\,s, BVS $0.059$--$0.092$\,s across the five functions, and maximin $0.034$--$0.061$\,s.",traced,traced,10893,104,unattributed,unattributed,0.091,0.091,proposal/logs/compute_cost.json,nondiff maximin mean_step_s,True,True,False,False
+prose,0.061,0.061,3,False,2,"ore, 10 runs per method): \smart{} $0.052$--$0.069$\,s, \gsmart{} $0.066$--$0.083$\,s, BVS $0.059$--$0.092$\,s across the five functions, and maximin $0.034$--$0.061$\,s.",traced,traced,2721,16,unattributed,unattributed,0.098,0.091,proposal/logs/compute_cost.json,smooth_osc maximin mean_step_s,True,True,False,False
+prose,34\%,34.0,0,True,2,BVS's per-step cost is at most $34\%$ above \smart's (one extra $t\times V$ distance computation and a median per evaluation) and slightly \emph{below} it on one function; total run times are $0.8,traced,traced,10143,291,unattributed,unattributed,0.0,1.0,proposal/logs/main_3d/bvs05_diffusion3d_b1000_s1.json,init_x,True,True,False,False
+prose,0.8,0.8,1,False,1,4\%$ above \smart's (one extra $t\times V$ distance computation and a median per evaluation) and slightly \emph{below} it on one function; total run times are $0.8$--$1.15\times$ \smart's---negligible relative to the seconds-to-minutes cost of a real scattering measurement.,traced,traced,5899,3516,unattributed,unattributed,0.0,1.0,proposal/logs/main_3d/gsmart_diffusion3d_b1000_s3.json,evals coverage_levels,True,True,False,False
+prose,1.15,1.15,2,False,3,ove \smart's (one extra $t\times V$ distance computation and a median per evaluation) and slightly \emph{below} it on one function; total run times are $0.8$--$1.15\times$ \smart's---negligible relative to the seconds-to-minutes cost of a real scattering measurement.,traced,traced,290,7,unattributed,unattributed,0.0,1.0,proposal/logs/main_2d/bvs2_smooth_osc_b500_s9.json,evals rmse,True,True,False,False
+prose,1.6,1.6,1,False,2,"ition---is the binding constraint, with at most a few percent of headroom for any adaptive strategy, while the heterogeneous function leaves a further $\approx$1.6$\times$ that calls for non-stationary surrogates rather than cleverer criteria.",traced,traced,2550,93,unattributed,unattributed,0.0,1.0,proposal/logs/main_3d/bvs2_diffusion3d_b1000_s9.json,init_x,True,True,False,False

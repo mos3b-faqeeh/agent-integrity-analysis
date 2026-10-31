@@ -1,6 +1,6 @@
 # Second judge
 
-This folder re-grades a stratified sample of 30 submissions with a judge from a different vendor (Claude Opus 5.5). It uses the benchmark's own runner (`src/grader/run_claude_code_judge.py`), which reuses the official prompt, rubric, evidence protocol and grading code, so the judge model is the only difference from the official GPT-6-Astra verdicts.
+This folder re-grades a stratified sample of 30 submissions with a second judge configuration: Claude Opus 5.5 running in the benchmark's Claude Code judge runner (`src/grader/run_claude_code_judge.py`). That runner reuses the official prompt, rubric, output schema, validator and deterministic grader. The judge model, the execution harness (a Claude Code session rather than a Codex thread) and the file-access restrictions all differ from the official GPT-6-Astra verdicts, so the comparison is between judge configurations, not an isolated test of vendor effects.
 
 ## Contents
 

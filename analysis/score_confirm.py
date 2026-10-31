@@ -1,6 +1,6 @@
 """Final evaluation of the frozen operating points on the fresh confirmation sample.
 Reference: Mosab's labels (72 claims); also annotator B (48) and A=B consensus. Population weights = N_stratum/n_stratum.
-usage: python analysis/score_confirm.py <scratch_dir_with_ccc_and_confirm_ordered_all.csv>"""
+usage: python analysis/score_confirm.py data/derived/confirmation_run"""
 import sys, json, glob, os, numpy as np, pandas as pd
 S = sys.argv[1]
 sheet = pd.read_csv(f'{S}/confirm_ordered_all.csv', dtype={'claim': str})
