@@ -1,8 +1,5 @@
 # Beyond fabrication: Misattributed numbers in papers written by AI research agents
 
-**Mosab Alfaqeeh**¹ · **Omar Mohammed Horani**¹ · **Mou'th Hourani**¹ · **Hashem Alfaqeeh**²
-
-¹ Al-Ahliyya Amman University, Amman, Jordan · ² Binghamton University, State University of New York, USA
 
 Code, data and paper source for the study *Beyond fabrication: Misattributed numbers in papers written by AI research agents*.
 
@@ -101,7 +98,6 @@ The Hugging Face revision is the one recorded by our downloads; the only later c
 
 ```bibtex
 @misc{alfaqeeh2026beyond,
-  author        = {Alfaqeeh, Mosab and Horani, Omar Mohammed and Hourani, Mou'th and Alfaqeeh, Hashem},
   title         = {Beyond fabrication: Misattributed numbers in papers written by AI research agents},
   year          = {2026},
   eprint        = {2610.38691},
@@ -118,6 +114,4 @@ The benchmark data used in this study are from:
 
 > Kim, S., et al. (2026). arXiv:2610.19159.
 
-## Contact
 
-Mosab Alfaqeeh — m.alfaqeeh@ammanu.edu.jo
